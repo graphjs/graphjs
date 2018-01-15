@@ -14,4 +14,6 @@ api.getFounder(callback);
 
 Please note, the javascript API library is from: https://github.com/pho-clients/js
 
+The list of API can be found at https://github.com/pho-clients/js/blob/master/docs/DefaultApi.md
+
 Feel free to fork and edit it.
