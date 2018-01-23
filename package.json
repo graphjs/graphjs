@@ -1,5 +1,12 @@
 {
-"dependencies": {
-    "pho-js-client": "1.1.2"
-  }
+	"name": "graphpress",
+	"dependencies": {
+	"pho-js-client": "1.1.2"
+	},
+	"devDependencies": {
+	"http-server": "^0.11.1"
+	},
+	"scripts": {
+		"demo": "http-server -p 3000 -c-1"
+	}
 }
