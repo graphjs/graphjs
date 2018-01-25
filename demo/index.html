@@ -19,18 +19,23 @@
 	        <a class="nav-link" href="#" onclick="">Log In <span class="sr-only">(current)</span></a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Sign Up</a>
+	        <a class="nav-link" href="#" onclick="signup()">Sign Up</a>
 	      </li>
 	    </ul>
 	   
 	  </div>
 	</nav>
-	<div id="pho-container"></div>
+	<div id="pho-container">
+	</div>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 	<script src="/index.js"></script>	
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-form/0.3.1/vue-form.min.js"></script>
 	<script>
 		var pho = Pho('#pho-container');
 		pho.load('4EFC1D13-7619-44CE-B83D-085AA81CE759');
+		function signup() {
+			pho.signup();
+		}
 	</script>
 </body>
 </html>
