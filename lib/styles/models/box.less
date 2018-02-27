@@ -1,0 +1,63 @@
+.box {
+    overflow: hidden;
+    .border-radius(@border-radius-large);
+    border: 1px solid fade(@secondary-color, 3%);
+    background-color: @shade-color;
+    .box-shadow(e("0 0 15px 0 fade(@secondary-color, 7.5%), 0 2px 1px 0px fade(@secondary-color, 15%)"));
+    .header {
+        position: relative;
+        width: 100%;
+        height: 3.5em;
+        .medium-font;
+        line-height: 3.5em;
+        letter-spacing: -.005em;
+        text-align: center;
+        border-bottom: 2px solid fade(@secondary-color, 10%);
+        background-color: @contrast-color;
+        .title {
+            position: absolute;
+            top: 0;
+            right: 2.5em;
+            bottom: 0;
+            left: 2.5em;
+            width: auto;
+            color: @primary-color;
+            font-size: 1.25em;
+            .single-line-text;
+        }
+        .option {
+            display: inline-block;
+            width: 3.5em;
+            height: 3.5em;
+            text-align: center;
+            .icon-color-states(@primary-color);
+            &.left {
+                float: left;
+            }
+            &.right {
+                float: right;
+            }
+            svg {
+                position: relative;
+                top: -1px;
+                width: 1.75em;
+                height: 1.75em;
+                vertical-align: middle;
+                path {
+                    fill: @primary-color;
+                    .transition(fill .35s ease);
+                }
+            }
+        }
+    }
+    .content {
+        width: 100%;
+        padding: 2.5em;
+        background-color: @shade-color;
+        p {
+            margin: 0;
+            font-size: @font-size-default;
+            line-height: 150%;
+        }
+    }
+}

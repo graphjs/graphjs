@@ -1,0 +1,55 @@
+// Typography
+
+.regular-font() {
+    font-family: "Rubik";
+    font-weight: 400;
+}
+
+.medium-font() {
+    font-family: "Rubik";
+    font-weight: 500;
+}
+
+.bold-font() {
+    font-family: "Rubik";
+    font-weight: 700;
+}
+
+.heavy-font() {
+    font-family: "Rubik";
+    font-weight: 800;
+}
+
+.single-line-text() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// Shortcuts
+
+.no-margin() {
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+    margin: 0;
+}
+
+.no-padding() {
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 0;
+    padding: 0;
+}
+
+// Fixes
+
+.clearfix() {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}

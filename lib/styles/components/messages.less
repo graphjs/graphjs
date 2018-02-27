@@ -1,0 +1,145 @@
+graphjs-messages {
+    display: block;
+    width: 800px;
+    .regular-font;
+    .content {
+        height: 33.5em;
+        max-height: 33.5em;
+        .no-padding !important;
+        & > * {
+            float: left;
+        }
+        .sidebar {
+            overflow-y: scroll;
+            width: 15em;
+            height: 100%;
+            .item {
+                display: table;
+                width: 100%;
+                height: 4.5em;
+                padding: calc(.75em - 1px);
+                padding-bottom: calc(.75em + 1px);
+                border-right: 1px solid fade(@secondary-color, 15%);
+                border-bottom: 1px solid fade(@secondary-color, 15%);
+                &:hover {
+                    background-color: fade(@primary-color, 5%);
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+                &.unread {
+                    background-color: fade(@primary-color, 5%);
+                    div {
+                        b {
+                            color: @primary-color;
+                        }
+                    }
+                }
+                &.active {
+                    border-right: none;
+                    background-color: @contrast-color !important;
+                }
+                img {
+                    width: calc(3em + 1px);
+                    height: calc(3em + 1px);
+                    .border-radius(@border-radius-full);
+                }
+                div {
+                    display: inline-block;
+                    overflow: hidden;
+                    width: 10em / .9;
+                    height: 3em / .9;
+                    margin-left: calc(.5em / .9);
+                    color: @text-color-normal;
+                    font-size: .9em;
+                    line-height: 1em / .9;
+                    b {
+                        display: block;
+                        margin-bottom: .05em / .9;
+                        color: @text-color-strong;
+                        font-size: .95em / .9;
+                        line-height: .95em / .9;
+                        .bold-font;
+                    }
+                }
+            }
+        }
+        .main {
+            overflow-y: scroll;
+            position: relative;
+            width: calc(100% - 15em);
+            height: 100%;
+            background-color: @contrast-color;
+            .conversation {
+                overflow: scroll;
+                width: 100%;
+                height: 100%;
+                padding: 2em;
+                padding-bottom: 5.5em;
+                .item {
+                    width: 90%;
+                    height: auto;
+                    margin-bottom: 1em;
+                    &.inbound {
+                        margin-right: 10%;
+                        div {
+                            text-align: left;
+                        }
+                        p {
+                            color: @text-color-normal;
+                            background-color: @shade-color;
+                        }
+                        time {
+                            text-align: left;
+                        }
+                    }
+                    &.outbound {
+                        margin-left: 10%;
+                        div {
+                            text-align: right;
+                        }
+                        p {
+                            color: @contrast-color;
+                            background-color: @primary-color;
+                            .border-radius(@border-radius-medium);
+                        }
+                        time {
+                            text-align: right;
+                        }
+                    }
+                    div {
+                        & + div {
+                            margin-top: .5em;
+                        }
+                    }
+                    p {
+                        display: inline-block;
+                        width: auto;
+                        padding: .75em 1em;
+                        .border-radius(@border-radius-medium);
+
+                    }
+                    time {
+                        display: inline-block;
+                        width: 100%;
+                        padding: .5em;
+                        color: @text-color-weak;
+                        font-size: .85em;
+                        line-height: .85em;
+                    }
+                }
+            }
+            textarea {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                height: 5.5em;
+                .border-radius(0);
+                border-right: none;
+                border-bottom: none;
+                border-left: none;
+            }
+        }
+    }
+}

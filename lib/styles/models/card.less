@@ -1,0 +1,59 @@
+.card {
+    width: 15em;
+    text-align: center;
+    background-color: @contrast-color;
+    .information {
+        height: 15em;
+        a {
+            display: inline-block;
+            overflow: hidden;
+            width: 90%;
+            max-height: 2.5em;
+            margin: 0 5%;
+            margin-top: .5em;
+            color: @primary-color;
+            font-size: 1.2em;
+            line-height: 1.25em;
+            .heavy-font;
+            .text-color-states(@primary-color);
+        }
+        p {
+            display: inline-block;
+            overflow: hidden;
+            width: 90%;
+            max-height: 2.5em;
+            margin: 0 5%;
+            margin-top: .75em;
+            color: @text-color-normal;
+            font-size: .95em;
+            line-height: 1.25em;
+        }
+    }
+    button {
+        width: 100%;
+        height: 3em;
+        .border-radius(0);
+    }
+    &.color {
+        background-color: @primary-color;
+        .option {
+            svg {
+                path {
+                    fill: @contrast-color;
+                }
+            }
+        }
+        .information {
+            a {
+                .text-color-states(@contrast-color);
+            }
+            p {
+                color: fade(@contrast-color, 65%);
+            }
+        }
+        button {
+            color: @primary-color;
+            background-color: @contrast-color;
+        }
+    }
+}

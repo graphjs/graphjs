@@ -1,0 +1,8 @@
+pho.js
+node_modules
+logs
+*.log
+npm-debug.log*
+
+list.md
+.DS_Store

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  	<title>GraphJS</title>
+    <style>
+        /* TEMPORARY */
+        body {
+            font-family: sans-serif;
+            background-color: whitesmoke;
+        }
+        h1 {
+            color: orangered;
+        }
+        h2 {
+            color: lightslategray;
+            margin: 2em 0 1em;
+        }
+    </style>
+</head>
+<body>
+    <div id="pho-container"></div>
+    <h1>GraphJS Tags</h1>
+    <h2>Auth (Multifunctional)</h2>
+	<graphjs-auth type="register" header="disabled"></graphjs-auth>
+    <h2>Auth (Login)</h2>
+	<graphjs-auth-login></graphjs-auth-login>
+    <h2>Auth (Register)</h2>
+	<graphjs-auth-register></graphjs-auth-register>
+    <h2>Auth (Reset)</h2>
+	<graphjs-auth-reset></graphjs-auth-reset>
+    <h2>Forum (Multifunctional)</h2>
+    <graphjs-forum></graphjs-forum>
+    <h2>Forum (List)</h2>
+    <graphjs-forum-list></graphjs-forum-list>
+    <h2>Forum (Entry)</h2>
+    <graphjs-forum-entry></graphjs-forum-entry>
+    <h2>Forum (Compose)</h2>
+    <graphjs-forum-compose></graphjs-forum-compose>
+    <h2>State</h2>
+    <graphjs-state></graphjs-state>
+    <graphjs-state theme="color"></graphjs-state>
+    <h2>Profile Card</h2>
+    <graphjs-profile-card></graphjs-profile-card>
+    <graphjs-profile-card theme="color"></graphjs-profile-card>
+    <h2>Group Card</h2>
+    <graphjs-group-card> </graphjs-group-card>
+    <graphjs-group-card theme="color"> </graphjs-group-card>
+    <h2>Messages</h2>
+    <graphjs-messages></graphjs-messages>
+    <h2>Alert</h2>
+    <graphjs-alert header="disabled" text="You added Ozan İlbey Yılmaz."></graphjs-alert>
+    <graphjs-alert title="Profile Created" text="Your profile has been created." option="Go to Profile"></graphjs-alert>
+    <graphjs-alert title="Login Required" text="You need to login to view the group details." option="Login" negativeoption="Cancel"></graphjs-alert>
+
+    <script src="pho.js" charset="utf-8"></script>
+    <script>
+        //import app from './app';
+        /*
+        console.log("emre");
+        var appInstance = Pho();
+        console.log(appInstance.visibleFormName + "...");
+        appInstance.showSignup();
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+.credit {
+    & > * {
+        float: left;
+        height: 100%;
+    }
+    img {
+        width: auto;
+        height: inherit;
+        border-radius: @border-radius-full;
+    }
+    span {
+        .box-sizing(border-box);
+        display: inline-block;
+        height: inherit;
+        color: @primary-color;
+        .bold-font;
+        small, time {
+            width: 100%;
+            color: @text-color-weak;
+            font-size: .85em;
+            .regular-font;
+        }
+    }
+}

@@ -1,0 +1,99 @@
+graphjs-state {
+    display: inline-block;
+    height: @bar-height;
+    font-size: 1.2em;
+    .bold-font;
+    border: none;
+    background-color: @contrast-color;
+    a {
+        float: left;
+        border-right: 1px dotted fade(@secondary-color, 20%);
+        background-color: transparent;
+        &:last-of-type {
+            border-right: none;
+        }
+        &:hover {
+            background-color: fade(black, 5%);
+        }
+    }
+    .not-logged {
+        height: @bar-height;
+        line-height: @bar-height;
+        text-align: center;
+        a {
+            display: inline-block;
+            padding: 0 15px;
+            line-height: @bar-height;
+
+        }
+    }
+    .logged {
+        height: @bar-height;
+        a {
+            display: inline-block;
+            color: @primary-color;
+            line-height: @bar-height;
+            .transition(background-color .35s ease);
+        }
+        .details {
+            float: left;
+            height: @bar-height;
+            padding: 5px;
+            & > * {
+                float: left;
+            }
+            img {
+                width: calc(@bar-height - 10px);
+                height: calc(@bar-height - 10px);
+                .border-radius(@border-radius-medium);
+            }
+            span {
+                height: 100%;
+                max-width: 150px;
+                margin-left: 5px;
+                padding: 0 10px;
+                line-height: calc(@bar-height - 10px);
+                .single-line-text;
+                vertical-align: middle;
+            }
+        }
+        .exit {
+            float: right;
+            width: @bar-height;
+            height: @bar-height;
+            text-align: center;
+            svg {
+                position: relative;
+                width: auto;
+                height: @bar-height * .36;
+                margin: (@bar-height * .32) 0;
+                path {
+                    fill: @text-color-weak;
+                    .transition(fill .35s ease);
+                }
+            }
+        }
+    }
+    &.color {
+        background-color: @primary-color;
+        a {
+            color: @contrast-color;
+            border-right: 1px dotted fade(@contrast-color, 35%);
+            &:last-of-type {
+                border-right: none;
+            }
+            &:hover {
+                background-color: fade(black, 5%);
+            }
+        }
+        .logged {
+            .exit {
+                svg {
+                    path {
+                        fill: fade(@contrast-color, 50%);
+                    }
+                }
+            }
+        }
+    }
+}

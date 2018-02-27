@@ -1,0 +1,126 @@
+graphjs-forum-list {
+    display: block;
+    .content {
+        .no-padding !important;
+        .bar {
+            display: table;
+            width: 100%;
+            height: auto;
+            & > * {
+                float: left;
+                border-radius: 0;
+            }
+            .search {
+                width: 80%;
+                border-right: 2px solid @contrast-color;
+                background-color: fade(@secondary-color, 50%);
+                & > * {
+                    float: left;
+                    border-radius: 0;
+                }
+                .icon {
+                    width: 3.5em;
+                    height: 3.5em;
+                    svg {
+                        position: relative;
+                        width: 1.3em;
+                        height: 1.3em;
+                        margin: 1.1em;
+                        vertical-align: middle;
+                        path {
+                            fill: @contrast-color;
+                            .transition(fill .35s ease);
+                        }
+                    }
+                }
+                input {
+                    width: calc(100% - 3.5em);
+                    height: 3.5em;
+                    .no-padding;
+                    color: @contrast-color;
+                    line-height: 3.5em;
+                    border: none;
+                    background-color: transparent;
+                    .placeholder-color(tint(@secondary-color, 75%));
+                }
+            }
+            button {
+                width: 20%;
+                height: 3.5em / 1.1;
+                padding-left: 0;
+                padding-right: 0;
+                .regular-font;
+                text-transform: none;
+                .background-color-states(fade(@secondary-color, 75%));
+                svg {
+                    position: relative;
+                    width: auto;
+                    height: 1.2em;
+                    margin-right: .2em;
+                    vertical-align: middle;
+                    path {
+                        fill: @contrast-color;
+                        .transition(fill .35s ease);
+                    }
+                }
+            }
+        }
+        .list {
+            display: inline-block;
+            width: 100%;
+            height: auto;
+            .item {
+                display: table;
+                width: 100%;
+                color: @text-color-normal;
+                line-height: 3.5em;
+                border-bottom: 1px solid tint(@secondary-color, 75%);
+                &:last-child {
+                    border-bottom: none;
+                }
+                &:hover {
+                    background-color: fade(@primary-color, 5%);
+                }
+                & > * {
+                    float: left;
+                    &:first-child {
+                        border-left: none;
+                    }
+                }
+                .title {
+                    width: 60%;
+                    padding: 0 1.5em;
+                    color: @text-color-strong;
+                    .single-line-text;
+                }
+                .views {
+                    width: 10%;
+                    font-size: .9em;
+                    svg {
+                        width: auto;
+                        height: .75em;
+                        margin-right: .25em;
+                        path {
+                            fill: @text-color-normal;
+                        }
+                    }
+                }
+                time {
+                    width: 10%;
+                    font-size: .9em;
+                }
+                .contributors {
+                    width: 20%;
+                    height: 3.5em;
+                    padding: .75em 0;
+                    img {
+                        width: 2em;
+                        height: 2em;
+                        margin-right: .1em;
+                        .border-radius(@border-radius-full);
+                    }
+                }
+            }
+        }
+    }
+}

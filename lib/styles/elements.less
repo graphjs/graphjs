@@ -1,0 +1,99 @@
+/* ### Elements ### */
+
+* {
+    .box-sizing(border-box);
+    .placeholder-color(tint(@secondary-color, 65%));
+}
+
+body {
+    font-size: @font-size-default;
+    line-height: @font-size-default;
+    color: fade(@secondary-color, 65%);
+    .regular-font;
+    letter-spacing: -.005em;
+}
+
+a {
+    cursor: pointer;
+    color: @primary-color;
+    text-decoration: none;
+}
+
+b {
+    .bold-font;
+}
+
+svg {
+    pointer-events: none;
+}
+
+input, textarea, button {
+    width: 100%;
+    padding: .75em 1em;
+    border: none;
+    .border-radius(@border-radius-small);
+    outline: none;
+}
+
+input, textarea {
+    color: fade(@secondary-color, 75%);
+    .regular-font;
+    font-size: @font-size-default;
+    line-height: @font-size-default;
+    border: 1px solid fade(@secondary-color, 15%);
+}
+
+textarea {
+    resize: none;
+}
+
+button {
+    cursor: pointer;
+    font-size: @font-size-default * 1.1;
+    color: @contrast-color;
+    .heavy-font;
+    .single-line-text;
+    text-transform: uppercase;
+    .transition(background-color .35s ease);
+    .background-color-states(@primary-color);
+    &.danger {
+        .background-color-states(@danger-color);
+    }
+}
+
+form {
+    input, textarea {
+        margin-bottom: .5em;
+        & + button {
+            margin-top: .25em;
+        }
+    }
+    .option {
+        display: block;
+        height: 3.3em;
+        margin-bottom: -2em;
+        a {
+            display: inline-block;
+            float: left;
+            opacity: 1;
+            color: @text-color-normal;
+            font-size: .9em;
+            line-height: 3.3em / .9;
+            text-align: center;
+            .transition(opacity .35s ease);
+            &:hover {
+                opacity: .75;
+            }
+        }
+        &.single {
+            a {
+                width: 100%;
+            }
+        }
+        &.double {
+            a {
+                width: 50%;
+            }
+        }
+    }
+}

@@ -1,0 +1,50 @@
+graphjs-profile-card {
+    display: block;
+    .option {
+        display: inline-block;
+        width: 3.75em;
+        height: 3.75em;
+        padding: 1em;
+        text-align: center;
+        .icon-color-states(@primary-color);
+        &.left {
+            float: left;
+        }
+        &.right {
+            float: right;
+        }
+        svg {
+            position: relative;
+            max-width: 1.5em;
+            max-height: auto;
+            vertical-align: middle;
+            path {
+                fill: @primary-color;
+                .transition(fill .35s ease);
+            }
+        }
+    }
+    .information {
+        padding-top: 2em;
+        img {
+            width: 6.5em;
+            height: 6.5em;
+            border: 4px solid fade(@secondary-color, 15%);
+            .border-radius(@border-radius-full);
+        }
+    }
+    &.color {
+        .option {
+            svg {
+                path {
+                    fill: @contrast-color;
+                }
+            }
+        }
+        .information {
+            img {
+                border: 4px solid @contrast-color;
+            }
+        }
+    }
+}

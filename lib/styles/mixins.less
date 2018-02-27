@@ -1,0 +1,114 @@
+// Parametric Mixins
+
+.box-shadow (@string) {
+	-webkit-box-shadow: @string;
+	-moz-box-shadow:    @string;
+	box-shadow:         @string;
+}
+
+.box-sizing (@type: border-box) {
+	-webkit-box-sizing: @type;
+	-moz-box-sizing:    @type;
+	box-sizing:         @type;
+}
+
+.border-radius (@radius) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius:    @radius;
+	border-radius:         @radius;
+    .clip;
+}
+
+.opacity (@opacity) {
+	-webkit-opacity: @opacity;
+	-moz-opacity: 	 @opacity;
+	opacity: 		 @opacity;
+}
+
+.transition (@property) {
+	-webkit-transition: @property;
+	-moz-transition:    @property;
+	-ms-transition:     @property;
+	-o-transition:      @property;
+}
+
+.clip {
+    -moz-background-clip:    padding;
+    -webkit-background-clip: padding-box;
+    background-clip:         padding-box;
+}
+
+// Interactions
+
+.icon-color-states(@color) {
+    svg {
+        path {
+            fill: @color;
+        }
+    }
+    &:hover {
+        svg {
+            path {
+                fill: tint(@color, 10%);
+            }
+        }
+    }
+    &:active {
+        svg {
+            path {
+                fill: shade(@color, 10%);
+            }
+        }
+    }
+}
+
+.text-color-states(@color) {
+    color: @color;
+    &:hover {
+        color: tint(@color, 10%);
+    }
+    &:active {
+        color: shade(@color, 10%);
+    }
+}
+
+.background-color-states(@color) {
+    background-color: @color;
+    &:hover {
+        background-color: tint(@color, 10%);
+    }
+    &:active {
+        background-color: shade(@color, 10%);
+    }
+}
+
+.placeholder-color(@color) {
+    &::-webkit-input-placeholder, &::placeholder {
+        color: @color;
+    }
+    &::-moz-placeholder, &:-ms-input-placeholder, &:-moz-placeholder { //Temporary bug fix: Placeholders for other browsers had to be separated from webkit version
+        color: @color;
+    }
+}
+
+// Measurements
+
+.credit-metrics(@height) {
+    height: @height;
+    img {
+        width: @height;
+        height: @height;
+    }
+    span {
+        height: @height;
+        margin-left: @height * .2;
+        padding: @height * .125 0;
+        font-size: @height * .375;
+        line-height: @height * .425;
+        height: @height;
+        small, time {
+            font-size: @height * .325;
+            line-height: @height * .325;
+        }
+    }
+}
