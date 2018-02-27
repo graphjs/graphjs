@@ -1,48 +1,19 @@
-# Webpack
+# GraphJS
 
-This is a simple example of using webpack with riot. It uses webpack loader [riot-tag-loader](https://www.npmjs.com/package/riot-tag-loader).
+1. ```npm install```
+2. edit ```node_modules/pho-js-client/src/ApiClient.js``` and change ```this.basePath``` url to ```http://83.149.67.212:1337```
+3. type ```node```
+4. The following code should get you a proper result:
 
-## Run locally
-
-Download or clone this repo.
-
-Install packages.
-
-```bash
-$ npm install
-```
-And then run the server using `webpack-dev-server` or any possible way you know
-
-```bash
-$ npm start
+```javascript
+var phonetworks = require('pho-js-client');
+var api = new phonetworks.DefaultApi();
+var callback = function(error, data, response) { console.log("Works! Founder id is: " + data.id); };
+api.getFounder(callback);
 ```
 
-- Open [http://localhost:3000/](http://localhost:3000/)
-- Open [http://localhost:3000/webpack-dev-server/](http://localhost:3000/webpack-dev-server/) for dev server with hot reloading.
+Please note, the javascript API library is from: https://github.com/pho-clients/js
 
-## ES6 using Babel
+The list of API can be found at https://github.com/pho-clients/js/blob/master/docs/DefaultApi.md
 
-You can add ES6 support as shown in riot-tag-loader's example. All you have to do is edit `webpack.config.js` and change webpack's modules to
-
-```js
-module: {
-    preLoaders: [
-      { test: /\.tag$/, exclude: /node_modules/, loader: 'riot-tag-loader', query: { type: 'none' } }
-    ],
-    loaders: [
-      { test: /\.js$|\.tag$/, exclude: /node_modules/, loader: 'babel-loader', query: { presets: ['es2015'] } }
-    ]
-}
-```
-
-As explained in [riot-examples/es6](https://github.com/riot/examples/blob/gh-pages/es6), you will lose riot's shorthand syntax. So this:
-
-```js
-getMessage() { ... }
-```
-
-becomes (using ES6):
-
-```js
-this.getMessage = () => { ... }
-```
+Feel free to fork and edit it.
