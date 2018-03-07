@@ -16,10 +16,10 @@
     </style>
     <script>
         this.on('mount', function() {
-            let buttonList = this.root.getElementsByTagName('button')
-            let buttonClass = buttonList.length > 1 ? 'half' : 'full'
+            let buttonList = this.root.getElementsByTagName('button');
+            let buttonClass = buttonList.length > 1 ? 'half' : 'full';
             for(let i=0; i<buttonList.length; i++) {
-                buttonList[i].classList.add(buttonClass)
+                buttonList[i].classList.add(buttonClass);
             }
         })
     </script>

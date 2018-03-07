@@ -8,7 +8,7 @@
             <img src="lib/data/sample/user-avatar.png" />
             <span>Ozan Y.</span>
         </a>
-        <a class="exit" onclick={logout}>
+        <a class="exit" onclick={exit}>
             <svg viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g transform="translate(-17.000000, -16.000000)" fill="black" fill-rule="nonzero">
@@ -25,10 +25,12 @@
         @import '../styles/components/state.less';
     </style>
     <script>
-        this.logged = true
-        this.root.classList.add(opts.theme || 'light')
-        this.logout = () => {
-            this.logged = false
+        import logout from '../scripts/logout.js'
+        this.logged = true;
+        this.root.classList.add(opts.theme || 'light');
+        this.exit = () => {
+            logout();
+            this.logged = false;
         }
     </script>
 </graphjs-state>

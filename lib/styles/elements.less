@@ -10,7 +10,7 @@ body {
     line-height: @font-size-default;
     color: fade(@secondary-color, 65%);
     .regular-font;
-    letter-spacing: -.005em;
+    letter-spacing: -.0075em;
 }
 
 a {
@@ -64,8 +64,14 @@ button {
 form {
     input, textarea {
         margin-bottom: .5em;
+        &.error {
+            border-color: @danger-color;
+        }
         & + button {
             margin-top: .25em;
+            &[disabled] {
+                opacity: .5;
+            }
         }
     }
     .option {

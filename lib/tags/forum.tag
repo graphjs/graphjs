@@ -25,10 +25,10 @@
         import './forum-entry.tag'
         import './forum-compose.tag'
 
-        this.active = 'list'
+        this.active = 'list';
         this.changeActiveItem = (e) => {
-            this.active = e.currentTarget.dataset.link
-            this.update()
+            this.active = e.currentTarget.dataset.link;
+            this.update();
         }
     </script>
 </graphjs-forum>

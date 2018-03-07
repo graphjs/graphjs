@@ -12,6 +12,6 @@
         @import '../styles/components/group-card.less';
     </style>
     <script>
-        this.root.classList.add(opts.theme || 'light')
+        this.root.classList.add(opts.theme || 'light');
     </script>
 </graphjs-group-card>

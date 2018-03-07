@@ -28,6 +28,6 @@
         @import '../styles/components/profile-card.less';
     </style>
     <script>
-        this.root.classList.add(opts.theme || 'light')
+        this.root.classList.add(opts.theme || 'light');
     </script>
 </graphjs-profile-card>

@@ -10,7 +10,6 @@
         height: 3.5em;
         .medium-font;
         line-height: 3.5em;
-        letter-spacing: -.005em;
         text-align: center;
         border-bottom: 2px solid fade(@secondary-color, 10%);
         background-color: @contrast-color;
@@ -49,6 +48,19 @@
                 }
             }
         }
+        + .warning {
+            color: @contrast-color;
+            border-bottom: none;
+            background-color: @danger-color;
+        }
+    }
+    .warning {
+        display: inline-block;
+        width: 100%;
+        padding: 0 5%;
+        color: @danger-color;
+        text-align: center;
+        border-bottom: 1px solid fade(@secondary-color, 15%);
     }
     .content {
         width: 100%;

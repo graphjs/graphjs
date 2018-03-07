@@ -24,14 +24,14 @@
         @import '../styles/components/auth.less';
     </style>
     <script>
-        import './auth-login.tag'
-        import './auth-register.tag'
-        import './auth-reset.tag'
+        import './auth-login.tag';
+        import './auth-register.tag';
+        import './auth-reset.tag';
 
-        this.active = opts.type || 'login'
+        this.active = opts.type || 'login';
         this.changeActiveItem = (e) => {
-            this.active = e.currentTarget.dataset.link
-            this.update()
+            this.active = e.currentTarget.dataset.link;
+            this.update();
         }
     </script>
 </graphjs-auth>
