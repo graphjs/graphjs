@@ -61,6 +61,16 @@
         color: @danger-color;
         text-align: center;
         border-bottom: 1px solid fade(@secondary-color, 15%);
+        ul {
+            list-style: none;
+            padding: 0;
+            li {
+                margin-bottom: .1em;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
     }
     .content {
         width: 100%;
