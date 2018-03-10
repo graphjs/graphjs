@@ -9,14 +9,19 @@
             </svg>
         </a>
     </div>
+    <div class="warning" if={warningMessages.length > 0}>
+        <ul>
+            <li each={warningMessage in warningMessages}>{warningMessage}</li>
+        </ul>
+    </div>
     <div class="content">
         <form>
-            <input type="text" placeholder="Enter your post title here..." />
-            <textarea placeholder="Compose your post here..."></textarea>
+            <input ref="title" type="text" placeholder="Enter your post title here..." />
+            <textarea ref="body" placeholder="Compose your post here..."></textarea>
             <span>
                 <b>Supported formats:</b> Markdown
             </span>
-            <button data-link="entry" onclick={opts.minor ? opts.callback : ''}>Publish</button>
+            <button data-link="entry" onclick={handleSubmit}>Publish</button>
             <button data-link="list" onclick={opts.minor ? opts.callback : ''} class="danger">Cancel</button>
         </form>
     </div>
@@ -26,4 +31,47 @@
         @import '../styles/options.less';
         @import '../styles/components/forum-compose.less';
     </style>
+    <script>
+        import startThread from '../scripts/startThread.js';
+        this.warningMessages = [];
+        this.checkTitle = () => {
+            let warningMessage = 'Title is too short.';
+            if(this.refs.title.value.length >= 10) {
+                this.refs.title.classList.remove('error');
+                this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
+                return true;
+            } else {
+                this.refs.title.classList.add('error');
+                this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
+                return false;
+            }
+        }
+        this.checkTextBody = () => {
+            let warningMessage = 'Text body is too short.';
+            if(this.refs.body.value.length >= 10) {
+                this.refs.body.classList.remove('error');
+                this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
+                return true;
+            } else {
+                this.refs.body.classList.add('error');
+                this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
+                return false;
+            }
+        }
+        this.validateForm = () => {
+            let validTitle = this.checkTitle();
+            let validTextBody = this.checkTextBody();
+            return (
+                validTitle &&
+                validTextBody
+            ) ? true : false;
+        }
+        this.handleSubmit = (event) => {
+            event.preventDefault();
+            this.validateForm() && startThread(
+                this.refs.title.value,
+                this.refs.body.value
+            );
+        }
+    </script>
 </graphjs-forum-compose>

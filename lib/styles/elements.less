@@ -56,6 +56,9 @@ button {
     text-transform: uppercase;
     .transition(background-color .35s ease);
     .background-color-states(@primary-color);
+    &[disabled] {
+        opacity: .5;
+    }
     &.danger {
         .background-color-states(@danger-color);
     }
@@ -70,9 +73,6 @@ form {
         }
         & + button {
             margin-top: .25em;
-            &[disabled] {
-                opacity: .5;
-            }
         }
     }
     .option {

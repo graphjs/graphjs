@@ -8,9 +8,9 @@
         </ul>
     </div>
     <div class="content">
-        <form onkeyup={validateForm}>
-            <input ref="email" onkeyup={checkEmail} type="text" placeholder="Your email address"/>
-            <button onclick={handleReset} disabled={!isFormReady}>Reset</button>
+        <form>
+            <input ref="email" type="text" placeholder="Your email address"/>
+            <button onclick={handleSubmit}>Reset</button>
             <div class="option single">
                 <a data-link="register" onclick={opts.minor ? opts.callback : ''}>Not registered?</a>
             </div>
@@ -25,30 +25,28 @@
     <script>
         import reset from '../scripts/reset.js';
         this.warningMessages = [];
-        this.validEmail = false;
-        this.checkEmail = () => {
+        this.checkEmailPattern = () => {
             let warningMessage = 'Email is invalid.';
             let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
             if(emailPattern.test(this.refs.email.value)) {
                 this.refs.email.classList.remove('error');
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
-                this.validEmail = true;
+                return true;
             } else {
                 this.refs.email.classList.add('error');
                 this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
-                this.validEmail = false;
+                return false;
             }
         }
         this.validateForm = () => {
-            if(this.refs.email.value.length > 0 && this.validEmail) {
-                this.isFormReady = true;
-            } else {
-                this.isFormReady = false;
-            }
+            let validEmailPattern = this.checkEmailPattern();
+            return (
+                validEmailPattern
+            ) ? true : false;
         }
         this.handleSubmit = (event) => {
             event.preventDefault();
-            this.isFormReady && reset(
+            this.validateForm() && reset(
                 this.refs.email.value
             );
         }

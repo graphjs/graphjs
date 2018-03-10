@@ -8,12 +8,12 @@
         </ul>
     </div>
     <div class="content">
-        <form onkeyup={validateForm}>
-            <input ref="username" onkeyup={checkUsername} type="text" placeholder="Choose a nickname"/>
-            <input ref="email" onkeyup={checkEmail} type="text" placeholder="Enter email address"/>
-            <input ref="password" onkeyup={checkPassword} type="password" placeholder="Set password"/>
-            <input ref="confirmation" onkeyup={checkPassword} type="password" placeholder="Confirm password"/>
-            <button ref="submit" onclick={handleSubmit} disabled={!isFormReady}>Register</button>
+        <form>
+            <input ref="username" type="text" placeholder="Choose a nickname"/>
+            <input ref="email" type="text" placeholder="Enter email address"/>
+            <input ref="password" type="password" placeholder="Set password"/>
+            <input ref="confirmation" type="password" placeholder="Confirm password"/>
+            <button ref="submit" onclick={handleSubmit}>Register</button>
             <div class="option single">
                 <a data-link="login" onclick={opts.minor ? opts.callback : ''}>Already a member?</a>
             </div>
@@ -28,63 +28,87 @@
     <script>
         import register from '../scripts/register.js';
         this.warningMessages = [];
-        this.validUsername = false;
-        this.validEmail = false;
-        this.validPassword = false;
-        this.checkUsername = () => {
-            let warningMessage = 'Username is invalid.';
-            let usernamePattern = /^[a-z\d\-_\s]+$/i;
-            if(usernamePattern.test(this.refs.username.value) && this.refs.username.value.length > 1) {
+        this.checkUsernameLength = () => {
+            let warningMessage = 'Username is too short.';
+            let usernameLength = 4;
+            if(this.refs.username.value.length >= usernameLength) {
                 this.refs.username.classList.remove('error');
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
-                this.validUsername = true;
+                return true;
             } else {
                 this.refs.username.classList.add('error');
                 this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
-                this.validUsername = false;
+                return false;
             }
         }
-        this.checkEmail = () => {
+        this.checkUsernamePattern = () => {
+            let warningMessage = 'Username is invalid. Valid characters are letters, numbers, hyphens, underscores, and spaces.';
+            let usernamePattern = /^[a-z\d\-_\s]+$/i;
+            if(usernamePattern.test(this.refs.username.value)) {
+                this.refs.username.classList.remove('error');
+                this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
+                return true;
+            } else {
+                this.refs.username.classList.add('error');
+                this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
+                return false;
+            }
+        }
+        this.checkEmailPattern = () => {
             let warningMessage = 'Email is invalid.';
             let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
             if(emailPattern.test(this.refs.email.value)) {
                 this.refs.email.classList.remove('error');
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
-                this.validEmail = true;
+                return true;
             } else {
                 this.refs.email.classList.add('error');
                 this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
-                this.validEmail = false;
+                return false;
             }
         }
-        this.checkPassword = () => {
-            let warningMessage = 'Passwords do not match.';
-            if(this.refs.password.value == this.refs.confirmation.value) {
+        this.checkPasswordLength = () => {
+            let warningMessage = 'Password is too short.';
+            let passwordLength = 4;
+            if(this.refs.password.value.length >= passwordLength) {
                 this.refs.password.classList.remove('error');
-                this.refs.confirmation.classList.remove('error');
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
-                this.validPassword = true;
+                return true;
             } else {
                 this.refs.password.classList.add('error');
+                this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
+                return false;
+            }
+        }
+        this.checkPasswordMatch = () => {
+            let warningMessage = 'Passwords do not match.';
+            if(this.refs.password.value == this.refs.confirmation.value) {
+                this.refs.confirmation.classList.remove('error');
+                this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
+                return true;
+            } else {
                 this.refs.confirmation.classList.add('error');
                 this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
-                this.validPassword = false;
+                return false;
             }
         }
         this.validateForm = () => {
-            if(
-                this.refs.username.value.length > 0 && this.validUsername &&
-                this.refs.email.value.length > 0 && this.validEmail &&
-                this.refs.password.value.length > 0 && this.refs.confirmation.value.length > 0 && this.validPassword
-            ) {
-                this.isFormReady = true;
-            } else {
-                this.isFormReady = false;
-            }
+            let validUsernameLength = this.checkUsernameLength();
+            let validUsernamePattern = this.checkUsernamePattern();
+            let validEmailPattern = this.checkEmailPattern();
+            let validPasswordLength = this.checkPasswordLength();
+            let validPasswordMatch = this.checkPasswordMatch();
+            return (
+                validUsernameLength &&
+                validUsernamePattern &&
+                validEmailPattern &&
+                validPasswordLength &&
+                validPasswordMatch
+            ) ? true : false;
         }
         this.handleSubmit = (event) => {
             event.preventDefault();
-        	this.isFormReady && register(
+        	this.validateForm() && register(
         		this.refs.username.value,
         		this.refs.email.value,
         		this.refs.password.value
