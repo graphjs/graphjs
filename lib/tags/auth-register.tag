@@ -28,6 +28,7 @@
     <script>
         import register from '../scripts/register.js';
         this.warningMessages = [];
+        /*
         this.checkUsernameLength = () => {
             let warningMessage = 'Username is too short.';
             let usernameLength = 4;
@@ -41,9 +42,10 @@
                 return false;
             }
         }
+        */
         this.checkUsernamePattern = () => {
             let warningMessage = 'Username is invalid. Valid characters are letters, numbers, hyphens, underscores, and spaces.';
-            let usernamePattern = /^[a-z\d\-_\s]+$/i;
+            let usernamePattern = /^[a-zA-Z0-9-_]+$/;
             if(usernamePattern.test(this.refs.username.value)) {
                 this.refs.username.classList.remove('error');
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
@@ -67,6 +69,7 @@
                 return false;
             }
         }
+        /*
         this.checkPasswordLength = () => {
             let warningMessage = 'Password is too short.';
             let passwordLength = 4;
@@ -80,6 +83,7 @@
                 return false;
             }
         }
+        */
         this.checkPasswordMatch = () => {
             let warningMessage = 'Passwords do not match.';
             if(this.refs.password.value == this.refs.confirmation.value) {
@@ -93,16 +97,16 @@
             }
         }
         this.validateForm = () => {
-            let validUsernameLength = this.checkUsernameLength();
+            //let validUsernameLength = this.checkUsernameLength();
             let validUsernamePattern = this.checkUsernamePattern();
             let validEmailPattern = this.checkEmailPattern();
-            let validPasswordLength = this.checkPasswordLength();
+            //let validPasswordLength = this.checkPasswordLength();
             let validPasswordMatch = this.checkPasswordMatch();
             return (
-                validUsernameLength &&
+                //validUsernameLength &&
                 validUsernamePattern &&
                 validEmailPattern &&
-                validPasswordLength &&
+                //validPasswordLength &&
                 validPasswordMatch
             ) ? true : false;
         }

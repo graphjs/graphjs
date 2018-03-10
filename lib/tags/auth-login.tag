@@ -9,7 +9,7 @@
     </div>
     <div class="content">
         <form>
-            <input ref="email" type="text" placeholder="Enter your email" />
+            <input ref="username" type="text" placeholder="Enter your username" />
             <input ref="password" type="password" placeholder="Enter your password" />
             <button onclick={handleSubmit}>Login</button>
             <div class="option double">
@@ -27,29 +27,29 @@
     <script>
         import login from '../scripts/login.js';
         this.warningMessages = [];
-        this.checkEmailPattern = () => {
-            let warningMessage = 'Email is invalid.';
-            let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            if(emailPattern.test(this.refs.email.value)) {
-                this.refs.email.classList.remove('error');
+        this.checkUsernamePattern = () => {
+            let warningMessage = 'Username is invalid. Valid characters are letters, numbers, hyphens, underscores, and spaces.';
+            let usernamePattern = /^[a-zA-Z0-9-_]+$/;
+            if(usernamePattern.test(this.refs.username.value)) {
+                this.refs.username.classList.remove('error');
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
                 return true;
             } else {
-                this.refs.email.classList.add('error');
+                this.refs.username.classList.add('error');
                 this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
                 return false;
             }
         }
         this.validateForm = () => {
-            let validEmailPattern = this.checkEmailPattern();
+            let validUsernamePattern = this.checkUsernamePattern();
             return (
-                validEmailPattern
+                validUsernamePattern
             ) ? true : false;
         }
         this.handleSubmit = (event) => {
             event.preventDefault();
             this.validateForm() && login(
-                this.refs.email.value,
+                this.refs.username.value,
                 this.refs.password.value
             );
         }

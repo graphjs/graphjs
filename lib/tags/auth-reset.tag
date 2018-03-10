@@ -9,7 +9,7 @@
     </div>
     <div class="content">
         <form>
-            <input ref="email" type="text" placeholder="Your email address"/>
+            <input ref="email" type="text" placeholder="Enter your email address"/>
             <button onclick={handleSubmit}>Reset</button>
             <div class="option single">
                 <a data-link="register" onclick={opts.minor ? opts.callback : ''}>Not registered?</a>
