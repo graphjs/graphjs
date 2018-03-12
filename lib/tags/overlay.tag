@@ -1,4 +1,4 @@
-<graphjs-overlay>
+<graphjs-overlay onclick={handleExit} if={overlayActive}>
     <div ref="container"></div>
     <style type="less">
         @import '../styles/variables.less';
@@ -16,6 +16,13 @@
             attribute.value = opts[key];
             tag.setAttributeNode(attribute);
         }
+        tag.onclick = function(event) {
+            event.stopPropagation();
+        }
+        this.overlayActive = true;
+        this.handleExit = (event) => {
+            this.unmount();
+        }
         // Mount & append tag on mount
         this.on('mount', function() {
             riot.mount(tag);
@@ -23,7 +30,6 @@
             document.body.style.overflow = 'hidden';
         });
         this.on('unmount', function() {
-            riot.unmount(tag);
             document.body.style.overflow = 'auto';
         });
     </script>

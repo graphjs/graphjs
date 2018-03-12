@@ -119,7 +119,6 @@
     </style>
     <script>
         import getInbox from '../scripts/getInbox.js';
-        /*
         this.on('mount', function() {
             fetch(getInbox())
             .then(response => {
@@ -130,6 +129,5 @@
                 }
             })
         });
-        */
     </script>
 </graphjs-messages>
