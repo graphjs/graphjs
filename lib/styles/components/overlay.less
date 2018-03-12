@@ -1,0 +1,24 @@
+graphjs-overlay {
+    display: table;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: fade(black, 85%);
+    & > div {
+        display: table-cell;
+        width: 100%;
+        height: auto;
+        min-height: 100%;
+        padding: 5%;
+        text-align: center;
+        vertical-align: middle;
+        & > * {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}

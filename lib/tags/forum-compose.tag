@@ -21,7 +21,7 @@
             <span>
                 <b>Supported formats:</b> Markdown
             </span>
-            <button data-link="entry" onclick={handleSubmit}>Publish</button>
+            <button data-link="thread" onclick={handleSubmit}>Publish</button>
             <button data-link="list" onclick={opts.minor ? opts.callback : ''} class="danger">Cancel</button>
         </form>
     </div>

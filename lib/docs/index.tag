@@ -130,7 +130,7 @@
             {"label": "Forum (Multifunctional)", "component": "forum"},
             {"label": "Forum: List", "component": "forum-list"},
             {"label": "Forum: Compose", "component": "forum-compose"},
-            {"label": "Forum: Entry", "component": "forum-entry"},
+            {"label": "Forum: Thread", "component": "forum-thread"},
             {"label": "Profile Card", "component": "profile-card"},
             {"label": "Group Card", "component": "group-card"},
             {"label": "State", "component": "state"},
@@ -139,7 +139,7 @@
         this.createTag = (itemComponent, itemLabel) => {
             let currentElement = document.createElement('docs-' + itemComponent);
             let component = document.createAttribute('component');
-            component.value = itemComponent;
+            component.value = 'graphjs-' + itemComponent;
             currentElement.setAttributeNode(component);
             let title = document.createAttribute('title');
             title.value = itemLabel;

@@ -15,7 +15,7 @@
             <input ref="confirmation" type="password" placeholder="Confirm password"/>
             <button ref="submit" onclick={handleSubmit}>Register</button>
             <div class="option single">
-                <a data-link="login" onclick={opts.minor ? opts.callback : ''}>Already a member?</a>
+                <a data-link="login" onclick={opts.minor ? opts.callback : handleLoginBox}>Already a member?</a>
             </div>
         </form>
     </div>
@@ -27,6 +27,10 @@
     </style>
     <script>
         import register from '../scripts/register.js';
+
+        import showLoginBox from '../scripts/showLoginBox.js';
+        this.handleLoginBox = () => showLoginBox();
+
         this.warningMessages = [];
         /*
         this.checkUsernameLength = () => {

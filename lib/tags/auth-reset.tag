@@ -12,7 +12,7 @@
             <input ref="email" type="text" placeholder="Enter your email address"/>
             <button onclick={handleSubmit}>Reset</button>
             <div class="option single">
-                <a data-link="register" onclick={opts.minor ? opts.callback : ''}>Not registered?</a>
+                <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>Not registered?</a>
             </div>
         </form>
     </div>
@@ -24,6 +24,10 @@
     </style>
     <script>
         import reset from '../scripts/reset.js';
+
+        import showRegisterBox from '../scripts/showRegisterBox.js';
+        this.handleRegisterBox = () => showRegisterBox();
+        
         this.warningMessages = [];
         this.checkEmailPattern = () => {
             let warningMessage = 'Email is invalid.';

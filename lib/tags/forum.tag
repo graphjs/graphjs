@@ -5,11 +5,11 @@
         callback={changeActiveItem}
         if={this.active == 'list'}
     />
-    <graphjs-forum-entry
+    <graphjs-forum-thread
         minor={true}
         title={opts.title}
         callback={changeActiveItem}
-        if={this.active == 'entry'}
+        if={this.active == 'thread'}
     />
     <graphjs-forum-compose
         minor={true}
@@ -25,7 +25,7 @@
     </style>
     <script>
         import './forum-list.tag'
-        import './forum-entry.tag'
+        import './forum-thread.tag'
         import './forum-compose.tag'
 
         this.active = 'list';

@@ -1,7 +1,7 @@
 <graphjs-state class="box">
     <div class="not-logged" if={!this.id}>
-        <a href="">Login</a>
-        <a href="">Register</a>
+        <a onclick={handleLoginBox}>Login</a>
+        <a onclick={handleRegisterBox}>Register</a>
     </div>
     <div class="logged" if={this.id}>
         <a href="" class="details">
@@ -25,6 +25,12 @@
         @import '../styles/components/state.less';
     </style>
     <script>
+        import showLoginBox from '../scripts/showLoginBox.js';
+        this.handleLoginBox = () => showLoginBox();
+
+        import showRegisterBox from '../scripts/showRegisterBox.js';
+        this.handleRegisterBox = () => showRegisterBox();
+
         this.id = opts.id;
         import logout from '../scripts/logout.js'
         this.root.classList.add(opts.theme || 'light');

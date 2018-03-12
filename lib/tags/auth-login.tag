@@ -13,8 +13,8 @@
             <input ref="password" type="password" placeholder="Enter your password" />
             <button onclick={handleSubmit}>Login</button>
             <div class="option double">
-                <a data-link="register" onclick={opts.minor ? opts.callback : ''}>Not registered?</a>
-                <a data-link="reset" onclick={opts.minor ? opts.callback : ''}>Forgot Password</a>
+                <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>Not registered?</a>
+                <a data-link="reset" onclick={opts.minor ? opts.callback : handleResetBox}>Forgot Password</a>
             </div>
         </form>
     </div>
@@ -26,6 +26,13 @@
     </style>
     <script>
         import login from '../scripts/login.js';
+
+        import showRegisterBox from '../scripts/showRegisterBox.js';
+        this.handleRegisterBox = () => showRegisterBox();
+
+        import showResetBox from '../scripts/showResetBox.js';
+        this.handleResetBox = () => showResetBox();
+
         this.warningMessages = [];
         this.checkUsernamePattern = () => {
             let warningMessage = 'Username is invalid. Valid characters are letters, numbers, hyphens, and underscores.';

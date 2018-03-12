@@ -1,4 +1,4 @@
-<graphjs-forum-entry class={opts.minor != true && 'box'}>
+<graphjs-forum-thread class={opts.minor != true && 'box'}>
     <div class="header">
         <a class="option left" data-link="list" onclick={opts.minor ? opts.callback : ''}>
             <svg fill="blue" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -76,6 +76,6 @@
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
         @import '../styles/options.less';
-        @import '../styles/components/forum-entry.less';
+        @import '../styles/components/forum-thread.less';
     </style>
-</graphjs-forum-entry>
+</graphjs-forum-thread>

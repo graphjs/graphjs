@@ -6,7 +6,7 @@
         <form>
             <fieldset name="title">
                 <legend>Title</legend>
-                <input onkeyup={updateText} type="text" value={specs.title} placeholder="Multiple Entries (by default)" />
+                <input onkeyup={updateText} type="text" value={specs.title} placeholder="Multiple Titles (by default)" />
             </fieldset>
             <fieldset name="theme">
                 <legend>Theme</legend>

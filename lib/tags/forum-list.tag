@@ -25,7 +25,7 @@
             </button>
         </div>
         <div class="list">
-            <a class="item" data-link="entry" onclick={opts.minor ? opts.callback : ''}>
+            <a class="item" data-link="thread" onclick={opts.minor ? opts.callback : ''}>
                 <div class="title">
                     The title of the thread
                 </div>
