@@ -1,6 +1,6 @@
 <graphjs-messages class="box">
-    <div class="header">
-        <div class="title">Messages</div>
+    <div class="header" if={opts.title}>
+        <div class="title">{opts.title || 'Messages'}</div>
     </div>
     <div class="content">
         <div class="sidebar">
@@ -117,4 +117,19 @@
         @import '../styles/options.less';
         @import '../styles/components/messages.less';
     </style>
+    <script>
+        import getInbox from '../scripts/getInbox.js';
+        /*
+        this.on('mount', function() {
+            fetch(getInbox())
+            .then(response => {
+                if (response.success) {
+                    console.log('success');
+                } else {
+                    console.log('fail')
+                }
+            })
+        });
+        */
+    </script>
 </graphjs-messages>

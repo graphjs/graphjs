@@ -1,9 +1,9 @@
 <graphjs-state class="box">
-    <div class="not-logged" if={!this.logged}>
+    <div class="not-logged" if={!this.id}>
         <a href="">Login</a>
         <a href="">Register</a>
     </div>
-    <div class="logged" if={this.logged}>
+    <div class="logged" if={this.id}>
         <a href="" class="details">
             <img src="lib/data/sample/user-avatar.png" />
             <span>Ozan Y.</span>
@@ -25,12 +25,12 @@
         @import '../styles/components/state.less';
     </style>
     <script>
+        this.id = opts.id;
         import logout from '../scripts/logout.js'
-        this.logged = true;
         this.root.classList.add(opts.theme || 'light');
         this.exit = () => {
             logout();
-            this.logged = false;
+            this.id = undefined;
         }
     </script>
 </graphjs-state>

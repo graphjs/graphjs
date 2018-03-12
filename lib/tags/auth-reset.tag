@@ -1,6 +1,6 @@
 <graphjs-auth-reset class={opts.minor != true && 'box'}>
-    <div class="header" if={opts.header != 'disabled'}>
-        <div class="title">{opts.label || 'Reset Password'}</div>
+    <div class="header" if={opts.title}>
+        <div class="title">{opts.title || 'Reset Password'}</div>
     </div>
     <div class="warning" if={warningMessages.length > 0}>
         <ul>

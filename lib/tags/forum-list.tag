@@ -1,6 +1,6 @@
 <graphjs-forum-list class={opts.minor != true && 'box'}>
     <div class="header">
-        <div class="title">{opts.label || 'Community Forum'}</div>
+        <div class="title">{opts.title || 'Community Forum'}</div>
     </div>
     <div class="content">
         <div class="bar">

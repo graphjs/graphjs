@@ -7,7 +7,7 @@
                 </g>
             </svg>
         </a>
-        <div class="title">{opts.label || 'Thread by Ozan İlbey Yılmaz'}</div>
+        <div class="title">{opts.title || 'Thread by Ozan İlbey Yılmaz'}</div>
     </div>
     <div class="content">
         <div class="entry">

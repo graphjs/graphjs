@@ -1,16 +1,19 @@
 <graphjs-forum class="box">
     <graphjs-forum-list
         minor={true}
+        title={opts.title}
         callback={changeActiveItem}
         if={this.active == 'list'}
     />
     <graphjs-forum-entry
         minor={true}
+        title={opts.title}
         callback={changeActiveItem}
         if={this.active == 'entry'}
     />
     <graphjs-forum-compose
         minor={true}
+        title={opts.title}
         callback={changeActiveItem}
         if={this.active == 'compose'}
     />

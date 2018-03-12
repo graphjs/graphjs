@@ -1,13 +1,13 @@
 <graphjs-alert class="box">
-    <div class="header" if={opts.header != 'disabled'}>
+    <div class="header" if={opts.title}>
         <div class="title">{opts.title}</div>
     </div>
     <div class="content">
-        <p>{opts.text}</p>
+        <p>{opts.message}</p>
     </div>
-    <button if={opts.option == undefined && opts.negativeOption == undefined}>Done</button>
-    <button if={opts.option}>{opts.option}</button>
-    <button if={opts.negativeoption} class="danger">{opts.negativeoption}</button>
+    <button if={opts.customoption == undefined || opts.customoption == ''}>Done</button>
+    <button if={opts.customoption}>{opts.customoption}</button>
+    <button if={opts.customoption && opts.negativeoption} class="danger">{opts.negativeoption}</button>
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
@@ -21,6 +21,6 @@
             for(let i=0; i<buttonList.length; i++) {
                 buttonList[i].classList.add(buttonClass);
             }
-        })
+        });
     </script>
 </graphjs-alert>

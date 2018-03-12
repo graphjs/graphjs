@@ -1,6 +1,6 @@
 <graphjs-auth-login class={opts.minor != true && 'box'}>
-    <div class="header" if={opts.header != 'disabled'}>
-        <div class="title">{opts.label || 'Login'}</div>
+    <div class="header" if={opts.title}>
+        <div class="title">{opts.title || 'Login'}</div>
     </div>
     <div class="warning" if={warningMessages.length > 0}>
         <ul>
@@ -28,7 +28,7 @@
         import login from '../scripts/login.js';
         this.warningMessages = [];
         this.checkUsernamePattern = () => {
-            let warningMessage = 'Username is invalid. Valid characters are letters, numbers, hyphens, underscores, and spaces.';
+            let warningMessage = 'Username is invalid. Valid characters are letters, numbers, hyphens, and underscores.';
             let usernamePattern = /^[a-zA-Z0-9-_]+$/;
             if(usernamePattern.test(this.refs.username.value)) {
                 this.refs.username.classList.remove('error');

@@ -1,19 +1,19 @@
 <graphjs-auth class="box">
     <graphjs-auth-login
         minor={true}
-        header={opts.header}
+        title={opts.title}
         callback={changeActiveItem}
         if={this.active == 'login'}
     />
     <graphjs-auth-register
         minor={true}
-        header={opts.header}
+        title={opts.title}
         callback={changeActiveItem}
         if={this.active == 'register'}
     />
     <graphjs-auth-reset
         minor={true}
-        header={opts.header}
+        title={opts.title}
         callback={changeActiveItem}
         if={this.active == 'reset'}
     />
@@ -28,7 +28,7 @@
         import './auth-register.tag';
         import './auth-reset.tag';
 
-        this.active = opts.type || 'login';
+        this.active = opts.default || 'login';
         this.changeActiveItem = (e) => {
             this.active = e.currentTarget.dataset.link;
             this.update();
