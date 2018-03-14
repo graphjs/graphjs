@@ -26,6 +26,7 @@
     </style>
     <script>
         import login from '../scripts/login.js';
+        import showAlertBox from '../scripts/showAlertBox.js';
 
         import showRegisterBox from '../scripts/showRegisterBox.js';
         this.handleRegisterBox = () => showRegisterBox();
@@ -57,7 +58,25 @@
             event.preventDefault();
             this.validateForm() && login(
                 this.refs.username.value,
-                this.refs.password.value
+                this.refs.password.value,
+                function(response) {
+                    if(response.success) {
+                        showAlertBox({
+                            title: 'Login Succeeded!',
+                            message: 'You are successfully logged in.',
+                            customoption: 'Go to Profile',
+                            to: '/profile'
+                        });
+                    } else {
+                        showAlertBox({
+                            title: 'Login Failed!',
+                            message: response.reason || 'Please try logging in again.',
+                            customoption: 'Retry',
+                            show: 'login',
+                            negativeoption: 'Cancel'
+                        });
+                    }
+                }
             );
         }
     </script>

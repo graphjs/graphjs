@@ -27,7 +27,7 @@
 
         import showRegisterBox from '../scripts/showRegisterBox.js';
         this.handleRegisterBox = () => showRegisterBox();
-        
+
         this.warningMessages = [];
         this.checkEmailPattern = () => {
             let warningMessage = 'Email is invalid.';
@@ -51,7 +51,23 @@
         this.handleSubmit = (event) => {
             event.preventDefault();
             this.validateForm() && reset(
-                this.refs.email.value
+                this.refs.email.value,
+                function(response) {
+                    if(response.success) {
+                        showAlertBox({
+                            title: 'Email Sent!',
+                            message: 'An email sent to your email address.'
+                        });
+                    } else {
+                        showAlertBox({
+                            title: 'Reset Failed!',
+                            message: response.reason || 'Please try entering your email again.',
+                            customoption: 'Retry',
+                            show: 'reset',
+                            negativeoption: 'Cancel'
+                        });
+                    }
+                }
             );
         }
     </script>

@@ -27,6 +27,7 @@
     </style>
     <script>
         import register from '../scripts/register.js';
+        import showAlertBox from '../scripts/showAlertBox.js';
 
         import showLoginBox from '../scripts/showLoginBox.js';
         this.handleLoginBox = () => showLoginBox();
@@ -119,7 +120,26 @@
         	this.validateForm() && register(
         		this.refs.username.value,
         		this.refs.email.value,
-        		this.refs.password.value
+        		this.refs.password.value,
+                function(response) {
+                    if(response.success) {
+                        showAlertBox({
+                            title: 'Register Succeeded!',
+                            message: 'You are successfully registered.',
+                            customoption: 'Login',
+                            show: 'login',
+                            negativeoption: 'Cancel'
+                        });
+                    } else {
+                        showAlertBox({
+                            title: 'Register Failed!',
+                            message: response.reason || 'Please try registering again.',
+                            customoption: 'Retry',
+                            show: 'register',
+                            negativeoption: 'Cancel'
+                        });
+                    }
+                }
         	);
         }
     </script>

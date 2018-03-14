@@ -5,9 +5,9 @@
     <div class="content">
         <p>{opts.message}</p>
     </div>
-    <button if={opts.customoption == undefined || opts.customoption == ''}>Done</button>
-    <button if={opts.customoption}>{opts.customoption}</button>
-    <button if={opts.customoption && opts.negativeoption} class="danger">{opts.negativeoption}</button>
+    <button if={opts.customoption == undefined || opts.customoption == ''} onclick={handleButton}>Done</button>
+    <button ref="custom" if={opts.customoption} onclick={handleButton}>{opts.customoption}</button>
+    <button if={opts.customoption && opts.negativeoption} onclick={handleButton} class="danger">{opts.negativeoption}</button>
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
@@ -15,12 +15,42 @@
         @import '../styles/components/alert.less';
     </style>
     <script>
+        import hideOverlay from '../scripts/hideOverlay.js';
+        import showAuthBox from '../scripts/showAuthBox.js';
+        import showLoginBox from '../scripts/showLoginBox.js';
+        import showRegisterBox from '../scripts/showRegisterBox.js';
+        import showResetBox from '../scripts/showResetBox.js';
+        import showCommentsBox from '../scripts/showCommentsBox.js';
+        import showForumBox from '../scripts/showForumBox.js';
+        import showMessagesBox from '../scripts/showMessagesBox.js';
+        this.showFunctions = {
+            auth: showAuthBox,
+            login: showLoginBox,
+            register: showRegisterBox,
+            reset: showResetBox,
+            comments: showCommentsBox,
+            forum: showForumBox,
+            message: showMessagesBox
+        }
+        this.handleButton = (event) => {
+            console.log(event.target)
+            if(event.target.hasAttribute('to')) {
+                //Needs improvement
+                window.location.href = window.location.href + opts.to;
+            } else if(event.target.hasAttribute('show')) {
+                this.showFunctions.hasOwnProperty(opts.show) ? this.showFunctions[opts.show]() : hideOverlay();
+            } else {
+                hideOverlay();
+            }
+        }
         this.on('mount', function() {
             let buttonList = this.root.getElementsByTagName('button');
             let buttonClass = buttonList.length > 1 ? 'half' : 'full';
             for(let i=0; i<buttonList.length; i++) {
                 buttonList[i].classList.add(buttonClass);
             }
+            opts.show && this.refs.custom.setAttribute('show', opts.show);
+            opts.to && this.refs.custom.setAttribute('to', opts.to);
         });
     </script>
 </graphjs-alert>
