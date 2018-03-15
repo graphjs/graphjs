@@ -1,5 +1,6 @@
 graphjs-forum-list {
     display: block;
+    color: fade(@text-color-strong, 65%);
     .content {
         .no-padding !important;
         .bar {
@@ -28,7 +29,7 @@ graphjs-forum-list {
                         margin: 1.1em;
                         vertical-align: middle;
                         path {
-                            fill: @contrast-color;
+                            fill: white;
                             .transition(fill .35s ease);
                         }
                     }
@@ -37,11 +38,11 @@ graphjs-forum-list {
                     width: calc(100% - 3.5em);
                     height: 3.5em;
                     .no-padding;
-                    color: @contrast-color;
+                    color: white;
                     line-height: 3.5em;
                     border: none;
                     background-color: transparent;
-                    .placeholder-color(tint(@secondary-color, 75%));
+                    .placeholder-color(fade(white, 75%));
                 }
             }
             button {
@@ -59,7 +60,7 @@ graphjs-forum-list {
                     margin-right: .2em;
                     vertical-align: middle;
                     path {
-                        fill: @contrast-color;
+                        fill: white;
                         .transition(fill .35s ease);
                     }
                 }
@@ -74,7 +75,7 @@ graphjs-forum-list {
                 width: 100%;
                 color: @text-color-normal;
                 line-height: 3.5em;
-                border-bottom: 1px solid tint(@secondary-color, 75%);
+                border-bottom: 1px solid fade(black, 10%);
                 &:last-child {
                     border-bottom: none;
                 }

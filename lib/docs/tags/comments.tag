@@ -1,4 +1,4 @@
-<docs-forum-compose>
+<docs-comments>
     <h1>{opts.title}</h1>
     <h2><{opts.component}></h2>
     <section class="demo" ref="liveDemo"></section>
@@ -6,7 +6,8 @@
         <form>
             <fieldset name="title">
                 <legend>Title</legend>
-                <input onkeyup={updateText} type="text" value={specs.title} placeholder="New Thread" />
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.title} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.title} />
             </fieldset>
             <xmp ref="inputCode" class="code">{input}</xmp>
             <button onclick={handleSubmit}>Apply</button>
@@ -15,9 +16,15 @@
     <script>
         this.input = '';
         this.specs = {}
-        this.updateText = (event) => {
+        this.updateTextWithCheckbox = (event) => {
             let target = event.target.parentNode.name;
-            this.specs[target] = event.target.value;
+            if(event.target.type == 'checkbox') {
+                let sibling = event.target.parentNode.children[2];
+                event.target.checked ? this.specs[target] = sibling.value : delete this.specs[target];
+            } else {
+                let sibling = event.target.parentNode.children[1];
+                this.specs[target] = event.target.value;
+            }
             this.handleCode();
         }
         import updateCode from '../scripts/updateCode.js';
@@ -34,4 +41,4 @@
             updateTag(opts.component, this.specs, this.refs.liveDemo);
         })
     </script>
-</docs-forum-compose>
+</docs-comments>

@@ -1,6 +1,7 @@
 graphjs-state {
     display: inline-block;
     height: @bar-height;
+    color: fade(@text-color-strong, 65%);
     font-size: 1.2em;
     .bold-font;
     border: none;
@@ -77,8 +78,8 @@ graphjs-state {
     &.color {
         background-color: @primary-color;
         a {
-            color: @contrast-color;
-            border-right: 1px dotted fade(@contrast-color, 35%);
+            color: white;
+            border-right: 1px dotted fade(white, 35%);
             &:last-of-type {
                 border-right: none;
             }
@@ -90,7 +91,7 @@ graphjs-state {
             .exit {
                 svg {
                     path {
-                        fill: fade(@contrast-color, 50%);
+                        fill: fade(white, 50%);
                     }
                 }
             }

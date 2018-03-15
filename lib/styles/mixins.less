@@ -89,6 +89,12 @@
     &::-moz-placeholder, &:-ms-input-placeholder, &:-moz-placeholder { //Temporary bug fix: Placeholders for other browsers had to be separated from webkit version
         color: @color;
     }
+	&:focus::-webkit-input-placeholder, &:focus::placeholder {
+        opacity: .5;
+    }
+    &:focus::-moz-placeholder, &:focus:-ms-input-placeholder, &:focus:-moz-placeholder { //Temporary bug fix: Placeholders for other browsers had to be separated from webkit version
+        opacity: .5;
+    }
 }
 
 // Measurements

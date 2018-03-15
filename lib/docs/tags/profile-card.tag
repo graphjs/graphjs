@@ -12,15 +12,13 @@
             <fieldset name="theme">
                 <legend>Theme</legend>
                 <div class="radiobutton">
-                    <input onclick={updateRadio} type="radio" name="theme" id="light" checked={specs.theme == 'light'} />
-                    <label for="light">Light</label>
-                    <input onclick={updateRadio} type="radio" name="theme" id="dark" checked={specs.theme == 'dark'} />
-                    <label for="dark">Dark</label>
+                    <input onclick={updateRadio} type="radio" name="theme" id="default" checked={specs.theme == 'default'} />
+                    <label for="default">Default</label>
                     <input onclick={updateRadio} type="radio" name="theme" id="color" checked={specs.theme == 'color'} />
                     <label for="color">Color</label>
                 <div>
             </fieldset>
-            <xmp ref="inputCode" onclick={handleCode} class="code">{input}</xmp>
+            <xmp ref="inputCode" class="code">{input}</xmp>
             <button onclick={handleSubmit}>Apply</button>
         </form>
     </section>
@@ -28,7 +26,7 @@
         this.input = '';
         this.specs = {
             "id": "1234567890",
-            "theme": "color"
+            "theme": "default"
         }
         this.updateTextWithCheckbox = (event) => {
             let target = event.target.parentNode.name;

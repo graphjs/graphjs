@@ -8,22 +8,26 @@
         /* TEMPORARY */
         body {
             font-family: sans-serif;
-            background-color: antiquewhite;
             margin: 0;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
             -webkit-text-size-adjust: 100%;
+            background-color: rgb(240, 243, 245);
         }
-        h1 {
-            color: orangered;
+        body.graphjs-theme-light {
+            color: @text-color-normal;
+            background-color: rgb(240, 243, 245);
+        }
+        body.graphjs-theme-dark {
+            color: rgba(255, 255, 255, .5);
+            background-color: rgb(47, 47, 47);
         }
         h2 {
-            color: lightslategray;
             margin: 2em 0 1em;
         }
     </style>
 </head>
-<body>
+<body class="graphjs-theme-light">
 	<docs-index></docs-index>
     <script src="pho.js" charset="utf-8"></script>
 </body>

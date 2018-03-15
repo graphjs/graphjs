@@ -2,13 +2,13 @@
 
 * {
     .box-sizing(border-box);
-    .placeholder-color(tint(@secondary-color, 65%));
+    .placeholder-color(tint(@secondary-color, 50%));
 }
 
 body {
     font-size: @font-size-default;
     line-height: @font-size-default;
-    color: fade(@secondary-color, 65%);
+    color: fade(@text-color-strong, 65%);
     .regular-font;
     letter-spacing: -.0075em;
 }
@@ -36,11 +36,12 @@ input, textarea, button {
 }
 
 input, textarea {
-    color: fade(@secondary-color, 75%);
+    color: tint(@secondary-color, 50%);
     .regular-font;
     font-size: @font-size-default;
     line-height: @font-size-default;
     border: 1px solid fade(@secondary-color, 15%);
+    background-color: @contrast-color;
 }
 
 textarea {
@@ -50,7 +51,7 @@ textarea {
 button {
     cursor: pointer;
     font-size: @font-size-default * 1.1;
-    color: @contrast-color;
+    color: white;
     .heavy-font;
     .single-line-text;
     text-transform: uppercase;

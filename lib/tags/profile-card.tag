@@ -28,7 +28,7 @@
         @import '../styles/components/profile-card.less';
     </style>
     <script>
-        this.root.classList.add(opts.theme || 'light');
+        opts.theme == 'color' && this.root.classList.add(opts.theme);
 
         import showMessagesBox from '../scripts/showMessagesBox.js';
         this.handleMessagesBox = () => showMessagesBox();

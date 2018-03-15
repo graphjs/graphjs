@@ -23,16 +23,7 @@
                 <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.negativeoption} />
                 <input onkeyup={updateTextWithCheckbox} type="text" value={specs.negativeoption} />
             </fieldset>
-            <fieldset name="theme">
-                <legend>Theme</legend>
-                <div class="radiobutton">
-                    <input onclick={updateRadio} type="radio" name="theme" id="light" checked={specs.theme == 'light'} />
-                    <label for="light">Light</label>
-                    <input onclick={updateRadio} type="radio" name="theme" id="dark" checked={specs.theme == 'dark'} />
-                    <label for="dark">Dark</label>
-                <div>
-            </fieldset>
-            <xmp ref="inputCode" onclick={handleCode} class="code">{input}</xmp>
+            <xmp ref="inputCode" class="code">{input}</xmp>
             <button onclick={handleSubmit}>Apply</button>
         </form>
     </section>
@@ -42,13 +33,7 @@
             "title": "Login Required",
             "message": "You need to login to view the group details.",
             "customoption": "Login",
-            "negativeoption": "Cancel",
-            "theme": "light"
-        }
-        this.updateRadio = (event) => {
-            let target = event.target.parentNode.parentNode.name;
-            this.specs[target] = event.target.id;
-            this.handleCode();
+            "negativeoption": "Cancel"
         }
         this.updateText = (event) => {
             let target = event.target.parentNode.name;

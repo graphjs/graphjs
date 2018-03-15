@@ -12,21 +12,45 @@
             display: inline-block;
             width: 100%;
             aside {
+                overflow-y: scroll;
                 position: fixed;
-                width: 17.5%;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                width: 20%;
                 height: auto;
-                margin: 2.5%;
-                background-color: @contrast-color;
+                background: linear-gradient(rgb(93, 60, 246), rgb(158, 119, 255));
                 .menu {
+                    color: white;
                     display: inline-block;
-                    padding: 5%;
+                    padding: 10%;
+                    img {
+                        width: 85%;
+                        height: auto;
+                        margin: 7.5%;
+                    }
+                    form {
+                        fieldset {
+                            border: none;
+                            input[type="radio"] {
+                                display: inline-block;
+                                width: auto;
+                                margin-left: 10%;
+                                &:first-of-type {
+                                    margin-left: 0;
+                                }
+                            }
+                        }
+                    }
                     h2 {
+                        color: white;
                         display: inline-block;
                         width: 100%;
                         margin: 1em 0;
                         padding: 0 5%;
                     }
                     a {
+                        color: white;
                         display: inline-block;
                         width: 100%;
                         padding: 5%;
@@ -126,6 +150,7 @@
             {"label": "Auth: Register", "component": "auth-register"},
             {"label": "Auth: Login", "component": "auth-login"},
             {"label": "Auth: Reset Password", "component": "auth-reset"},
+            {"label": "Comments", "component": "comments"},
             {"label": "Messages", "component": "messages"},
             {"label": "Forum (Multifunctional)", "component": "forum"},
             {"label": "Forum: List", "component": "forum-list"},

@@ -33,7 +33,6 @@
             message: showMessagesBox
         }
         this.handleButton = (event) => {
-            console.log(event.target)
             if(event.target.hasAttribute('to')) {
                 //Needs improvement
                 window.location.href = window.location.href + opts.to;
