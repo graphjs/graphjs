@@ -65,7 +65,12 @@
                 width: 70%;
                 margin: 2.5% 5% 2.5% 25%;
                 h1 {
-                    color: @primary-color;
+                    color: rgb(93, 60, 246);
+                    margin: 1em 0;
+                }
+                h2 {
+                    color: rgb(158, 119, 255);
+                    margin: 2em 0;
                 }
                 .demo {
                     width: 100%;
@@ -157,6 +162,7 @@
             {"label": "Auth: Register", "component": "auth-register"},
             {"label": "Auth: Login", "component": "auth-login"},
             {"label": "Auth: Reset Password", "component": "auth-reset"},
+            {"label": "Bookmark: Button", "component": "bookmark-button"},
             {"label": "Comments", "component": "comments"},
             {"label": "Messages", "component": "messages"},
             {"label": "Forum (Multifunctional)", "component": "forum"},

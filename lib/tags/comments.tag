@@ -4,10 +4,8 @@
     </div>
     <div class="content">
         <div class="synopsis">
-            243 views
-            &middot;
-            3 replies
-            <button>Write a reply</button>
+            3 comments
+            <button>Add a Comment</button>
         </div>
         <div class="item">
             <div class="credit">
@@ -44,7 +42,7 @@
         </div>
         <div class="reply">
             <textarea placeholder="Write your reply here..."></textarea>
-            <button>Send Reply</button>
+            <button>Send Comment</button>
             <button class="danger">Clear</button>
         </div>
     </div>
