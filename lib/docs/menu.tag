@@ -22,5 +22,8 @@
             document.body.classList.remove('graphjs-theme-dark');
             document.body.classList.add(className);
         }
+        this.on('mount', function() {
+            document.querySelectorAll('docs-menu a:first-of-type')[0].click();
+        });
     </script>
 </docs-menu>

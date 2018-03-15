@@ -54,6 +54,9 @@
                         display: inline-block;
                         width: 100%;
                         padding: 5%;
+                        &.active {
+                            color: yellow;
+                        }
                     }
                 }
             }
@@ -140,6 +143,10 @@
         import './menu.tag';
         this.activeItem = 'introduction';
         this.changeActiveItem = (event) => {
+            for(let element of event.target.parentNode.children) {
+                element.className == 'active' && element.classList.remove('active');
+            }
+            event.target.classList.add('active');
             this.activeItem = event.target.dataset.id;
             this.update();
             this.refs.main.innerHTML = '';
