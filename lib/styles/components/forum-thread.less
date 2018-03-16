@@ -31,35 +31,10 @@ graphjs-forum-thread {
         .replies {
             padding: 2.5em;
             background-color: @shade-color;
-            .synopsis {
-                display: inline-block;
-                width: 100%;
-                margin-bottom: 1em;
-                button {
-                    float: right;
-                    width: auto;
-                    font-size: .75em;
-                }
-            }
-            .item {
-                margin-bottom: 1.25em;
-                .credit {
-                    .credit-metrics(40px);
-                    margin-bottom: .25em;
-                    span {
-                        color: @text-color-normal;
-                    }
-                }
-                p {
-                    margin-left: 40px * 1.2;
-                    .regular-font;
-                    font-size: .95em;
-                    line-height: 150%;
-                }
-            }
             .reply {
                 display: inline-block;
                 width: 100%;
+                margin-bottom: 1.25em;
                 textarea {
                     width: 100%;
                     height: 7.5em;
@@ -74,6 +49,35 @@ graphjs-forum-thread {
                     margin-top: .5em;
                     margin-left: .5em;
                     font-size: .9em;
+                }
+            }
+            .synopsis {
+                display: inline-block;
+                width: 100%;
+                margin-bottom: 1.25em;
+                button {
+                    float: right;
+                    width: auto;
+                    font-size: .75em;
+                }
+            }
+            .item {
+                margin-bottom: 1.25em;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                .credit {
+                    .credit-metrics(40px);
+                    margin-bottom: .25em;
+                    span {
+                        color: @text-color-normal;
+                    }
+                }
+                p {
+                    margin-left: 40px * 1.2 !important;
+                    .regular-font;
+                    font-size: .95em;
+                    line-height: 150%;
                 }
             }
         }

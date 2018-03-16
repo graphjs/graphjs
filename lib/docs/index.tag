@@ -139,6 +139,9 @@
                             word-wrap: break-word;
                             white-space: pre-wrap;
                         }
+                        button {
+                            .background-color-states(rgb(158, 119, 255));
+                        }
                     }
                 }
             }

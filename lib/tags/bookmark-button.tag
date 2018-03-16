@@ -24,8 +24,8 @@
                 </g>
             </svg>
         </div>
-        <p class="text">
-            173
+        <p if={count && count > 0} class="text">
+            {count}
         </p>
     </a>
     <style type="less">
@@ -35,9 +35,14 @@
         @import '../styles/components/bookmark-button.less';
     </style>
     <script>
+        import bookmark from '../scripts/bookmark.js';
+        import getBookmarks from '../scripts/getBookmarks.js';
         this.type = opts.type || 'favorite';
+        this.on('before-mount', function() {
+            //isStarred
+            this.count = 173; //Temporary
+        });
         this.active = false;
-        import bookmark from '../scripts/bookmark.js'
         this.handleBookmark = (event) => {
             event.preventDefault();
             let self = this;

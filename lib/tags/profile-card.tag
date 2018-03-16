@@ -1,5 +1,5 @@
-<graphjs-profile-card class="card box">
-    <a class="left option" href="">
+<graphjs-profile-card class={opts.theme ? opts.theme + ' card box' : 'card box'}>
+    <a class="left option" href="" if={profile}>
         <svg viewBox="0 0 24 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g transform="translate(-22.000000, -20.000000)" fill="black" fill-rule="nonzero">
@@ -8,19 +8,25 @@
             </g>
         </svg>
     </a>
-    <a class="right option" onclick={handleMessagesBox}>
+    <a class="right option" onclick={handleMessagesBox} if={profile}>
         <svg viewBox="0 0 50 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <path d="M34.8236776,11.6342064 L4.78589421,11.6342064 C2.14105793,11.6342064 0,13.7752644 0,16.4201006 L0,36.0044835 C0,38.6493198 2.14105793,40.7903777 4.78589421,40.7903777 L19.5843829,40.7903777 L31.3602015,47.7803022 L30.7934509,40.7903777 L34.8866499,40.7903777 C37.5314861,40.7903777 39.6725441,38.6493198 39.6725441,36.0044835 L39.6725441,16.4201006 C39.6725441,13.7752644 37.4685139,11.6342064 34.8236776,11.6342064 Z M10.5478586,29.1405026 C9.22544054,29.1405026 8.12342545,28.0384875 8.12342545,26.7160694 C8.12342545,25.3936513 9.22544054,24.2916362 10.5478586,24.2916362 C11.8702767,24.2916362 12.9722918,25.3936513 12.9722918,26.7160694 C12.9722918,28.0384875 11.8702767,29.1405026 10.5478586,29.1405026 Z M19.8677586,29.1405026 C18.5453405,29.1405026 17.4433254,28.0384875 17.4433254,26.7160694 C17.4433254,25.3936513 18.5453405,24.2916362 19.8677586,24.2916362 C21.1901767,24.2916362 22.2921918,25.3936513 22.2921918,26.7160694 C22.2187241,28.0384875 21.1901767,29.1405026 19.8677586,29.1405026 Z M29.124686,29.1405026 C27.8022679,29.1405026 26.7002529,28.0384875 26.7002529,26.7160694 C26.7002529,25.3936513 27.8022679,24.2916362 29.124686,24.2916362 C30.4471041,24.2916362 31.5491192,25.3936513 31.5491192,26.7160694 C31.5491192,28.0384875 30.4471041,29.1405026 29.124686,29.1405026 Z M45.2141058,0.779999733 C47.8589421,0.779999733 50,2.9210577 50,5.56589402 L50,25.0873049 C50,27.7321412 47.8589421,29.8731992 45.2141058,29.8731992 L42.3803526,29.8731992 L42.4433249,16.523073 C42.4433249,12.3039294 39.0428212,8.90342556 34.8236776,8.90342556 L10.3904282,8.90342556 L10.3904282,5.56589402 C10.3904282,2.9210577 12.5314861,0.779999733 15.1763224,0.779999733 L45.2141058,0.779999733 Z"></path>
             </g>
         </svg>
     </a>
-    <div class="information">
-        <img src="lib/data/sample/user-avatar.png" />
-        <a href="">Ozan İlbey Yılmaz</a>
-        <p>A happy designer living in a pixel-perfect world.</p>
+    <div class="information" if={profile}>
+        <img src={profile.Avatar || 'lib/images/avatars/user.png'} />
+        <a>{profile.FullName || profile.Username}</a>
+        <p>{profile.About}</p>
     </div>
-    <button>View Profile</button>
+    <div class="information" if={!profile}>
+        <img src="lib/images/avatars/user.png" />
+        <a>User doesn't exist.</a>
+        <p>We couldn't find any user matching this id.</p>
+    </div>
+    <button if={profile}>View Profile</button>
+    <button if={!profile} onclick={handleUpdate}>Refresh</button>
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
@@ -28,9 +34,26 @@
         @import '../styles/components/profile-card.less';
     </style>
     <script>
-        opts.theme == 'color' && this.root.classList.add(opts.theme);
-
+        import getProfile from '../scripts/getProfile.js';
         import showMessagesBox from '../scripts/showMessagesBox.js';
         this.handleMessagesBox = () => showMessagesBox();
+
+        this.handleInformation = (id) => {
+            let self = this;
+            getProfile(id, function(response) {
+                if(response.success) {
+                    self.profile = response.profile;
+                    self.update();
+                } else {
+                    //Handle errors
+                }
+            });
+        }
+        this.handleUpdate = () => this.update();
+
+        this.id = opts.id;
+        this.on('mount', function() {
+            this.handleInformation(this.id);
+        });
     </script>
 </graphjs-profile-card>

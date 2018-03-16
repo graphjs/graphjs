@@ -7,6 +7,7 @@ graphjs-messages {
         height: 33.5em;
         max-height: 33.5em;
         .no-padding !important;
+        vertical-align: middle;
         & > * {
             float: left;
         }
@@ -14,13 +15,13 @@ graphjs-messages {
             overflow-y: scroll;
             width: 15em;
             height: 100%;
+            .box-shadow(inset -10px 0px 10px 0px fade(black, 2.5%));
             .item {
                 display: table;
                 width: 100%;
                 height: 4.5em;
                 padding: calc(.75em - 1px);
                 padding-bottom: calc(.75em + 1px);
-                border-right: 1px solid fade(@secondary-color, 15%);
                 border-bottom: 1px solid fade(@secondary-color, 15%);
                 &:hover {
                     background-color: fade(@primary-color, 5%);
@@ -78,13 +79,15 @@ graphjs-messages {
             .conversation {
                 overflow: scroll;
                 width: 100%;
-                height: 100%;
+                height: calc(100% - 6.5em);
                 padding: 2em;
-                padding-bottom: 5.5em;
                 .item {
                     width: 90%;
                     height: auto;
-                    margin-bottom: 1em;
+                    margin-bottom: .5em;
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
                     &.inbound {
                         margin-right: 10%;
                         div {
@@ -139,7 +142,8 @@ graphjs-messages {
                 right: 0;
                 bottom: 0;
                 left: 0;
-                height: 5.5em;
+                height: 6.5em;
+                line-height: 1.25em;
                 .border-radius(0);
                 border-right: none;
                 border-bottom: none;
