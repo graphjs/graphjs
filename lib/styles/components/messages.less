@@ -4,8 +4,8 @@ graphjs-messages {
     color: fade(@text-color-strong, 65%);
     .regular-font;
     .content {
-        height: 33.5em;
-        max-height: 33.5em;
+        height: 37em;
+        max-height: 37em;
         .no-padding !important;
         vertical-align: middle;
         & > * {
@@ -15,14 +15,39 @@ graphjs-messages {
             overflow-y: scroll;
             width: 15em;
             height: 100%;
-            .box-shadow(inset -10px 0px 10px 0px fade(black, 2.5%));
+            .box-shadow(inset -2px 0px 2px 0px fade(black, 5%));
+            input {
+                display: block;
+                width: 100%;
+                height: 3.5em;
+                padding-top: 0;
+                padding-right: 1.5em;
+                padding-bottom: 0;
+                padding-left: 1.5em;
+                color: white;
+                line-height: 3.5em;
+                border: none;
+                border-radius: 0;
+                background-color: @primary-color;
+                .transition(height .35s ease);
+                .placeholder-color(fade(white, 75%));
+                &.hidden {
+                    height: 0;
+                    .placeholder-color(transparent);
+                }
+                &::placeholder {
+                    opacity: .5;
+                    .transition(all .35s ease);
+                }
+            }
             .item {
                 display: table;
                 width: 100%;
                 height: 4.5em;
                 padding: calc(.75em - 1px);
                 padding-bottom: calc(.75em + 1px);
-                border-bottom: 1px solid fade(@secondary-color, 15%);
+                border-top: 1px solid fade(black, 2.5%);
+                border-bottom: 1px solid fade(@secondary-color, 2.5%);
                 &:hover {
                     background-color: fade(@primary-color, 5%);
                 }
@@ -30,16 +55,17 @@ graphjs-messages {
                     border-bottom: none;
                 }
                 &.unread {
-                    background-color: fade(@primary-color, 5%);
                     div {
                         b {
                             color: @primary-color;
                         }
+                        color: tint(desaturate(@primary-color, 40%), 20%);
                     }
                 }
                 &.active {
                     border-right: none;
                     background-color: @contrast-color !important;
+                    .box-shadow(0px 0px 5px 0px fade(black, 7.5%));
                 }
                 & > * {
                     pointer-events: none;

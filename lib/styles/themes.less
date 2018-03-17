@@ -14,7 +14,7 @@
 
     input, textarea {
         color: tint(@secondary-color, 50%);
-        border-color: fade(@secondary-color, 15%);
+        border-color: fade(black, 7.5%);
         background-color: @contrast-color;
         .placeholder-color(tint(@secondary-color, 50%));
     }
@@ -165,7 +165,7 @@
             .bar {
                 .search {
                     border-right: 2px solid @contrast-color;
-                    background-color: fade(@secondary-color, 50%);
+                    background-color: desaturate(tint(@primary-color, 20%), 5%);
                     input {
                         color: white;
                         background-color: transparent;
@@ -173,7 +173,7 @@
                     }
                 }
                 button {
-                    .background-color-states(fade(@secondary-color, 75%));
+                    .background-color-states(@primary-color);
                     svg {
                         path {
                             fill: white;
@@ -238,14 +238,15 @@
                         background-color: fade(@primary-color, 5%);
                     }
                     &.unread {
-                        background-color: fade(@primary-color, 5%);
                         div {
                             b {
                                 color: @primary-color;
                             }
+                            color: tint(desaturate(@primary-color, 40%), 20%);
                         }
                     }
                     &.active {
+                        border-right-color: transparent;
                         background-color: @contrast-color !important;
                     }
                     div {
@@ -330,6 +331,9 @@
             &:hover {
                 background-color: fade(black, 5%);
             }
+            &:last-of-type {
+                border-right-color: transparent;
+            }
         }
         .logged {
             a {
@@ -384,5 +388,5 @@
 
 // Dark
 .graphjs-theme-dark {
-    .colorStructure(rgb(71, 71, 71), tint(rgb(71, 71, 71), 5%), rgb(59, 59, 59), rgb(191, 191, 191));
+    .colorStructure(rgb(63, 63, 63), shade(rgb(63, 63, 63), 5%), rgb(71, 71, 71), rgb(191, 191, 191));
 }

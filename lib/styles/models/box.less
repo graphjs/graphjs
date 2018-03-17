@@ -37,11 +37,15 @@
                 float: right;
             }
             svg {
+                &.new {
+                    .transform(rotate(45deg));
+                }
                 position: relative;
                 top: -1px;
                 width: 1.75em;
                 height: 1.75em;
                 vertical-align: middle;
+                .transition(transform .35s ease);
                 path {
                     fill: @primary-color;
                     .transition(fill .35s ease);

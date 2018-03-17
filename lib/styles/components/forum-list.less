@@ -14,7 +14,7 @@ graphjs-forum-list {
             .search {
                 width: 80%;
                 border-right: 2px solid @contrast-color;
-                background-color: fade(@secondary-color, 50%);
+                background-color: desaturate(tint(@primary-color, 20%), 5%);
                 & > * {
                     float: left;
                     border-radius: 0;
@@ -52,7 +52,7 @@ graphjs-forum-list {
                 padding-right: 0;
                 .regular-font;
                 text-transform: none;
-                .background-color-states(fade(@secondary-color, 75%));
+                .background-color-states(@primary-color);
                 svg {
                     position: relative;
                     width: auto;
