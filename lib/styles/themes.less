@@ -206,20 +206,42 @@
     graphjs-forum-thread {
         color: fade(@text-color-strong, 65%);
         .content {
-            .entry {
-                background-color: @contrast-color;
-                article {
+            .thread {
+                .title {
+                    background-color: fade(@contrast-color, 50%);
                     h1 {
                         color: @text-color-strong;
                     }
                 }
+                .entry {
+                    hr {
+                        border-bottom: 1px dashed fade(black, 15%);
+                    }
+                }
+                .replies {
+                    background-color: @shade-color;
+                    .item {
+                        border-top: 1px dotted fade(black, 15%);
+                        .credit {
+                            span {
+                                color: @text-color-normal;
+                            }
+                        }
+                    }
+                }
             }
-            .replies {
-                background-color: @shade-color;
-                .item {
-                    .credit {
-                        span {
-                            color: @text-color-normal;
+            .reply {
+                border-top: 2px solid @primary-color;
+                background-color: @contrast-color;
+                .box-shadow(0 -2px 1px 0px fade(black, 7.5%));
+                .synopsis {
+                    background-color: @contrast-color;
+                    border-bottom: 1px dotted fade(black, 15%);
+                    a {
+                        svg {
+                            path {
+                                fill: @primary-color;
+                            }
                         }
                     }
                 }

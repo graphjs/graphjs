@@ -15,8 +15,7 @@
             <div class="credit">
                 <img src="lib/data/sample/user-avatar.png" />
                 <span>
-                    Ozan İlbey Yılmaz
-                    <br />
+                    <b>Ozan İlbey Yılmaz</b>
                     <time>4 hours ago</time>
                 </span>
             </div>
@@ -26,8 +25,7 @@
             <div class="credit">
                 <img src="lib/data/sample/user-avatar.png" />
                 <span>
-                    Ozan İlbey Yılmaz
-                    <br />
+                    <b>Ozan İlbey Yılmaz</b>
                     <time>4 hours ago</time>
                 </span>
             </div>
@@ -37,8 +35,7 @@
             <div class="credit">
                 <img src="lib/data/sample/user-avatar.png" />
                 <span>
-                    Ozan İlbey Yılmaz
-                    <br />
+                    <b>Ozan İlbey Yılmaz</b>
                     <time>4 hours ago</time>
                 </span>
             </div>

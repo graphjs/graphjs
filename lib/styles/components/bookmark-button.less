@@ -55,7 +55,8 @@ graphjs-bookmark-button {
                     }
                 }
             }
-            .effect {
+            &::before {
+                content: '';
                 display: block;
                 position: absolute;
                 top: 50%;
@@ -95,26 +96,26 @@ graphjs-bookmark-button {
         &:hover {
             .icon {
                 &.favorite {
-                    .effect {
+                    &::before {
                         background-color: fade(orange, 15%);
                     }
                 }
                 &.like {
-                    .effect {
+                    &::before {
                         background-color: fade(dodgerblue, 15%);
                     }
                 }
                 &.love {
-                    .effect {
+                    &::before {
                         background-color: fade(crimson, 15%);
                     }
                 }
                 &.save {
-                    .effect {
+                    &::before {
                         background-color: fade(lightseagreen, 15%);
                     }
                 }
-                .effect {
+                &::before {
                     top: -25%;
                     right: -25%;
                     bottom: -25%;
@@ -128,7 +129,7 @@ graphjs-bookmark-button {
         &.active {
             .icon {
                 &.favorite {
-                    .effect {
+                    &::before {
                         background-color: orange;
                     }
                     svg {
@@ -138,7 +139,7 @@ graphjs-bookmark-button {
                     }
                 }
                 &.like {
-                    .effect {
+                    &::before {
                         background-color: dodgerblue;
                     }
                     svg {
@@ -148,7 +149,7 @@ graphjs-bookmark-button {
                     }
                 }
                 &.love {
-                    .effect {
+                    &::before {
                         background-color: crimson;
                     }
                     svg {
@@ -158,7 +159,7 @@ graphjs-bookmark-button {
                     }
                 }
                 &.save {
-                    .effect {
+                    &::before {
                         background-color: steelblue;
                     }
                     svg {
@@ -167,7 +168,7 @@ graphjs-bookmark-button {
                         }
                     }
                 }
-                .effect {
+                &::before {
                     top: 50%;
                     right: 50%;
                     bottom: 50%;

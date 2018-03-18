@@ -1,4 +1,4 @@
-<graphjs-state class="box">
+<graphjs-state class={!opts.flat && 'box'}>
     <div class="not-logged" if={!id}>
         <a onclick={handleLoginBox}>Login</a>
         <a onclick={handleRegisterBox}>Register</a>
