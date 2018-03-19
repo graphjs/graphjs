@@ -122,7 +122,7 @@
             </div>
             <textarea ref="composer" placeholder="Write your reply here..."></textarea>
             <button>Send Reply</button>
-            <button class="danger">Clear</button>
+            <button onclick={handleClear} class="danger">Clear</button>
         </div>
     </div>
     <style type="less">
@@ -142,6 +142,10 @@
                 this.refs.composer.focus();
                 //this.refs.scrollingContent.scrollTop = this.refs.scrollingContent.scrollHeight;
             }
+        }
+        this.handleClear = () => {
+            this.refs.composer.value = '';
+            this.refs.composer.focus();
         }
     </script>
 </graphjs-forum-thread>

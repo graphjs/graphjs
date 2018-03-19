@@ -26,30 +26,48 @@
     </style>
     <script>
         import bookmark from '../scripts/bookmark.js';
+        import getBookmark from '../scripts/getBookmark.js';
         import getBookmarks from '../scripts/getBookmarks.js';
         this.type = opts.type || 'favorite';
         this.on('before-mount', function() {
-            //isStarred
-            this.count = 173; //Temporary
+            let self = this;
+            getBookmark(window.location.href, function(response) {
+                if(response.success) {
+                    self.active = true;
+                    self.count = response.count;
+                    self.update();
+                }
+            })
+            //this.count = false; //Temporary
         });
         this.active = false;
         this.handleBookmark = (event) => {
             event.preventDefault();
             let self = this;
-            console.log('asd')
-            this.active || bookmark(
-                window.location.href,
-                function(response) {
-                    if(response.success) {
-                        self.active = true;
+            getBookmark(window.location.href, function(response) {
+                if(response.success) {
+                    if(response.starred) {
+                        //removeBookmark
                     } else {
-                        showAlertBox({
-                            title: 'Bookmark Failed!',
-                            message: response.reason || 'There is a problem. Please try again.'
-                        });
+                        bookmark(
+                            window.location.href,
+                            function(response) {
+                                if(response.success) {
+                                    self.active = true;
+                                } else {
+                                    showAlertBox({
+                                        title: 'Bookmark Failed!',
+                                        message: response.reason || 'There is a problem. Please try again.'
+                                    });
+                                }
+                            }
+                        );
                     }
+                    self.count = response.count;
+                    self.update();
                 }
-            );
+            });
+
         }
     </script>
 </graphjs-bookmark-button>

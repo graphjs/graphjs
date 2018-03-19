@@ -150,6 +150,7 @@ graphjs-messages {
                         display: inline-block;
                         width: auto;
                         padding: .75em 1em;
+                        white-space: pre-wrap;
                         .border-radius(@border-radius-medium);
 
                     }
@@ -160,6 +161,9 @@ graphjs-messages {
                         color: @text-color-weak;
                         font-size: .85em;
                         line-height: .85em;
+                        &.error {
+                            color: @danger-color;
+                        }
                     }
                 }
             }

@@ -94,59 +94,55 @@
         }
         this.handleTime = () => {
             let items = document.querySelectorAll('graphjs-messages time');
+            let text;
             for(let item of items) {
-                let timestamp = item.dataset.timestamp;
-                let time = Math.floor((Date.now() - (parseInt(timestamp) * 1000)) / 1000);
-                let amount;
-                let text;
-                if(time < 1) {
-                    amount = time;
-                    text = 'Now';
-                } else if(1 <= time && time < 60) {
-                    amount = time;
-                    text = amount == 1 ? amount + ' second' : amount + ' seconds';
-                } else if(60 <= time && time < 60 * 60) {
-                    amount = Math.floor(time / 60);
-                    text = amount == 1 ? amount + ' minute' : amount + ' minutes';
-                } else if(60 * 60 <= time && time < 60 * 60 * 24) {
-                    amount = Math.floor(time / 60 / 60);
-                    text = amount == 1 ? amount + ' hour' : amount + ' hours';
-                } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
-                    amount = Math.floor(time / 60 / 60 / 24);
-                    text = amount == 1 ? amount + ' day' : amount + ' days';
-                } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
-                    amount = Math.floor(time / 60 / 60 / 24 / 7);
-                    text = amount == 1 ? amount + ' week' : amount + ' weeks';
-                } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
-                    amount = Math.floor(time / 60 / 60 / 24 / 30);
-                    text = amount == 1 ? amount + ' month' : amount + ' months';
+                if(item.dataset.hasOwnProperty('timestamp')) {
+                    let timestamp = item.dataset.timestamp;
+                    let time = Math.floor((Date.now() - (parseInt(timestamp) * 1000)) / 1000);
+                    let amount;
+                    if(time < 1) {
+                        amount = time;
+                        text = 'Now';
+                    } else if(1 <= time && time < 60) {
+                        amount = time;
+                        text = amount == 1 ? amount + ' second' : amount + ' seconds';
+                    } else if(60 <= time && time < 60 * 60) {
+                        amount = Math.floor(time / 60);
+                        text = amount == 1 ? amount + ' minute' : amount + ' minutes';
+                    } else if(60 * 60 <= time && time < 60 * 60 * 24) {
+                        amount = Math.floor(time / 60 / 60);
+                        text = amount == 1 ? amount + ' hour' : amount + ' hours';
+                    } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
+                        amount = Math.floor(time / 60 / 60 / 24);
+                        text = amount == 1 ? amount + ' day' : amount + ' days';
+                    } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
+                        amount = Math.floor(time / 60 / 60 / 24 / 7);
+                        text = amount == 1 ? amount + ' week' : amount + ' weeks';
+                    } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
+                        amount = Math.floor(time / 60 / 60 / 24 / 30);
+                        text = amount == 1 ? amount + ' month' : amount + ' months';
+                    } else if(time >= 60 * 60 * 24 * 30 * 12) {
+                        amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
+                        text = amount == 1 ? amount + ' year' : amount + ' years';
+                    } else {
+                        //Handle errors
+                    }
                 } else {
-                    amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                    text = amount == 1 ? amount + ' year' : amount + ' years';
+                    text = 'Error: Couldn\'t send message'
                 }
                 item.innerHTML = text;
+                item.classList.add('error');
             }
         }
         this.handleSubmit = (event) => {
             let self = this;
             if (event.keyCode == 13) {
-                let value = event.target.value;
-                let caretPosition;
-                if (event.target.selectionStart || event.target.selectionStart == '0') {
-                    caretPosition = event.target.selectionStart;
-                } else {
-                    caretPosition = 0;
-                }
-                if(event.shiftKey){
-                    console.log('caret:', caretPosition);
-                    console.log('value:', value);
-                    event.target.value = value.substring(0, caretPosition - 1) + "\n" + value.substring(caretPosition);
-                    console.log('event.target', event.target.value);
-                } else {
-                    let finalValue = event.target.value;
+                event.preventDefault();
+                let value = event.target.value.replace(/\n+/g, '\n'); // Removes repetitive line breaks
+                if(!event.shiftKey) {
                     event.target.value = '';
                     let randomNumber = Math.floor(Math.random() * 1000000);
-                    self.activeMessages[randomNumber] = {from: this.userId, is_read: false, message: finalValue, timestamp: Date.now(), to: this.activePartner};
+                    self.activeMessages[randomNumber] = {from: this.userId, is_read: false, message: value, timestamp: false, to: this.activePartner};
                     self.messages.push(randomNumber);
                     self.refs.messages.scrollTop = self.refs.messages.scrollHeight;
                     self.partners.sort(function(x, y) {
@@ -159,7 +155,7 @@
                     }
                     let firstAnchor = self.refs.partners;
                     firstAnchor.firstElementChild.classList.add('active') || firstAnchor.firstElementChild.classList.add('active');
-                    sendMessage(self.activePartner, finalValue, function(response) {
+                    sendMessage(self.activePartner, encodeURI(value), function(response) {
                         if(response.success) {
                             self.handleConversation(self.activePartner);
                         } else {
