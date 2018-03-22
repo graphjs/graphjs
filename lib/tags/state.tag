@@ -5,8 +5,8 @@
     </div>
     <div class="logged" if={id}>
         <a class="details" if={profile}>
-            <img src={profile.Avatar || 'lib/images/avatars/user.png'} />
-            <span>{profile.FullName || profile.Username}</span>
+            <img src={profile.avatar || 'lib/images/avatars/user.png'} />
+            <span>{profile.fullname || profile.username}</span>
         </a>
         <a class="exit" onclick={handleExit}>
             <svg viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

@@ -1,4 +1,4 @@
-<graphjs-overlay onclick={handleExit} if={overlayActive}>
+<graphjs-overlay class={opts.scroll ? 'scroll' : ''} onclick={handleExit} if={overlayActive}>
     <div ref="container"></div>
     <style type="less">
         @import '../styles/variables.less';

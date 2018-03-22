@@ -1,5 +1,7 @@
-graphjs-profile-card {
+graphjs-profile-header {
     display: block;
+    margin: 0 auto;
+    width: 48em;
     color: fade(@text-color-strong, 65%);
     .option {
         display: inline-block;
@@ -32,30 +34,6 @@ graphjs-profile-card {
             height: 6.5em;
             border: 4px solid fade(@secondary-color, 15%);
             .border-radius(@border-radius-full);
-        }
-        a {
-            display: inline-block;
-            overflow: hidden;
-            width: 90%;
-            max-height: 2.5em;
-            margin: 0 5%;
-            margin-top: .5em;
-            color: @primary-color;
-            font-size: 1.2em;
-            line-height: 1.25em;
-            .heavy-font;
-            .text-color-states(@primary-color);
-        }
-        p {
-            display: inline-block;
-            overflow: hidden;
-            width: 90%;
-            max-height: 2.5em;
-            margin: 0 5%;
-            margin-top: .75em;
-            color: @text-color-normal;
-            font-size: .95em;
-            line-height: 1.25em;
         }
     }
     &.color {

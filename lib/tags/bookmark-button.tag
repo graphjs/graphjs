@@ -28,45 +28,62 @@
         import bookmark from '../scripts/bookmark.js';
         import getBookmark from '../scripts/getBookmark.js';
         import getBookmarks from '../scripts/getBookmarks.js';
+        import removeBookmark from '../scripts/removeBookmark.js';
+
+        this.active = false;
         this.type = opts.type || 'favorite';
+
         this.on('before-mount', function() {
             let self = this;
             getBookmark(window.location.href, function(response) {
                 if(response.success) {
-                    self.active = true;
-                    self.count = response.count;
-                    self.update();
-                }
-            })
-            //this.count = false; //Temporary
-        });
-        this.active = false;
-        this.handleBookmark = (event) => {
-            event.preventDefault();
-            let self = this;
-            getBookmark(window.location.href, function(response) {
-                if(response.success) {
                     if(response.starred) {
-                        //removeBookmark
+                        self.active = true;
                     } else {
-                        bookmark(
-                            window.location.href,
-                            function(response) {
-                                if(response.success) {
-                                    self.active = true;
-                                } else {
-                                    showAlertBox({
-                                        title: 'Bookmark Failed!',
-                                        message: response.reason || 'There is a problem. Please try again.'
-                                    });
-                                }
-                            }
-                        );
+                        self.active = false;
                     }
                     self.count = response.count;
                     self.update();
+
+
+
                 }
-            });
+            })
+        });
+        this.handleBookmark = (event) => {
+            event.preventDefault();
+            let self = this;
+            if(!self.active) {
+                self.active = true;
+                self.count++;
+                self.update();
+                bookmark(
+                    window.location.href,
+                    function(response) {
+                        if(!response.success) {
+                            self.active = false;
+                            self.count--;
+                        }
+                        self.count = response.count;
+                        self.update();
+                    }
+                );
+            } else {
+                self.active = false;
+                self.count--;
+                self.update();
+                removeBookmark(
+                    window.location.href,
+                    function(response) {
+                        if(!response.success) {
+                            self.active = true;
+                            self.count++;
+                        }
+                        self.count = response.count;
+                        self.update();
+                    }
+                );
+            }
 
         }
     </script>

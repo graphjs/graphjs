@@ -1,7 +1,7 @@
 <graphjs-profile>
-    <p>Placeholder for Profile</p>
-    <!--
     <graphjs-profile-header
+        id={opts.id}
+        active={this.active}
         minor={true}
         callback={changeActiveItem}
     />
@@ -15,31 +15,41 @@
         callback={changeActiveItem}
         if={this.active == 'followers'}
     />
-    <graphjs-profile-followees
+    <graphjs-profile-following
         minor={true}
         callback={changeActiveItem}
-        if={this.active == 'followees'}
+        if={this.active == 'following'}
     />
     <graphjs-profile-groups
         minor={true}
         callback={changeActiveItem}
         if={this.active == 'groups'}
     />
-    -->
+    <graphjs-profile-settings
+        id={opts.id}
+        minor={true}
+        callback={changeActiveItem}
+        if={this.active == 'settings'}
+    />
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
         @import '../styles/options.less';
         /* @import '../styles/components/profile.less'; */
+        graphjs-profile {
+            display: block;
+            width: 48em;
+            margin: 0 auto;
+
+        }
     </style>
     <script>
-        /*
-        import './graphjs-profile-header.tag';
-        import './graphjs-profile-activity.tag';
-        import './graphjs-profile-followers.tag';
-        import './graphjs-profile-followees.tag';
-        import './graphjs-profile-groups.tag';
-        */
+        import './profile-header.tag';
+        import './profile-activity.tag';
+        import './profile-followers.tag';
+        import './profile-following.tag';
+        import './profile-groups.tag';
+        import './profile-settings.tag';
 
         this.active = opts.default || 'activity';
         this.changeActiveItem = (e) => {

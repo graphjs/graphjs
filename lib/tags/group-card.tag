@@ -9,7 +9,7 @@
         <a>Group doesn't exist.</a>
         <p>We couldn't find any group matching this id.</p>
     </div>
-    <button if={group} onclick={handleJoin}>Join Group</button>
+    <button if={group} onclick={handleJoin}>{joined ? 'Joined' : 'Join Group'}</button>
     <button if={!group} onclick={handleUpdate}>Refresh</button>
     <style type="less">
         @import '../styles/variables.less';
@@ -30,8 +30,10 @@
                         if(response.groups[i].id == self.id) {
                             self.group = response.groups[i];
                             listMembers(self.id, function(response) {
-                                self.group['memberCount'] = response.members.length
-                                self.update();
+                                if(response.success) {
+                                    self.group['memberCount'] = response.members.length;
+                                    self.update();
+                                }
                             })
                         }
                     }
@@ -46,6 +48,7 @@
         this.handleUpdate = () => this.update();
 
         this.id = opts.id;
+        this.joined = false;
         this.on('mount', function() {
             this.handleInformation();
         });

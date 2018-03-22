@@ -137,6 +137,7 @@
             this.root.classList.toggle('composer');
             if(this.composerReady) {
                 this.composerReady = false;
+                this.refs.composer.value = '';
             } else {
                 this.composerReady = true;
                 this.refs.composer.focus();

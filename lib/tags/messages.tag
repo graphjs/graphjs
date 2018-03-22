@@ -2,14 +2,20 @@
     <div class="header">
         <div class="title">{this.activePartnerName.length > 0 ? 'Messages with ' +  this.activePartnerName : 'Messages'}</div>
         <a class="option left" onclick={handleNewMessage}>
-            <svg class="new" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <svg class={newMessageOption ? '' : 'new'} viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <path transform="translate(-755.000000, -15.000000)" d="M768.138179,30.0276818 L763.8,25.6895028 L765.689503,23.8 L770.011119,28.1447263 L774.332735,23.8 L776.222238,25.6895028 L771.884059,30.0276818 L771.888398,30.0320442 L771.884064,30.0363784 L776.222238,34.3414365 L774.332735,36.2309392 L770.011119,31.9093232 L765.689503,36.2309392 L763.8,34.3414365 L768.138174,30.0363784 L768.13384,30.0320442 L768.138179,30.0276818 Z M769.983425,15 C778.270718,15 785,21.6961326 785,29.9834254 C785,38.2707182 778.270718,45 769.983425,45 C761.696133,45 755,38.2707182 755,29.9834254 C755,21.6961326 761.696133,15 769.983425,15 Z M769.983425,42.3480663 C776.779006,42.3480663 782.348066,36.8121547 782.348066,29.9834254 C782.348066,23.1878453 776.812155,17.6187845 769.983425,17.6187845 C763.187845,17.6187845 757.618785,23.1546961 757.618785,29.9834254 C757.651934,36.7790055 763.187845,42.3480663 769.983425,42.3480663 Z"></path>
             </svg>
         </a>
     </div>
     <div class="content">
         <div class="sidebar">
-            <input ref="searchForPartners" class={!newMessageOption && 'hidden'} type="text" placeholder="Type a name..." />
+            <input ref="searchForPartners" onkeyup={handleFilter} class={!newMessageOption && 'hidden'} type="text" placeholder="Type a name..." />
+            <div class="suggestions" if={matchedPartners.length > 0}>
+                <a each={matchedPartner in matchedPartners} data-id={matchedPartner.id} onclick={handleNewPartner}>
+                    <img src={matchedPartner.avatar || 'lib/images/avatars/user.png'} />
+                    <b>{matchedPartner.username}</b>
+                </a>
+            </div>
             <div class="list" ref="partners">
                 <a class={list[partner] && list[partner].is_read ? 'item' : 'unread item'} each={partner in partners} data-partner={partner} onclick={handleDisplay}>
                     <img src={list[partner] && list[partner].avatar ? list[partner].avatar : 'lib/images/avatars/user.png'} />
@@ -37,6 +43,36 @@
         @import '../styles/mixins.less';
         @import '../styles/options.less';
         @import '../styles/components/messages.less';
+        .suggestions {
+            max-height: 17.5em;
+            overflow-y: scroll;
+            background-color: fade(black, 7.5%);
+            a {
+                display: block;
+                width: 100%;
+                height: 3.5em;
+                padding: .5em;
+                color: white;
+                border-top: 1px solid fade(black, 5%);
+                .clearfix;
+                & > * {
+                    float: left;
+                    pointer-events: none;
+                }
+                img {
+                    width: 2.5em;
+                    height: 2.5em;
+                    .border-radius(@border-radius-full);
+                }
+                b {
+                    color: @text-color-normal;
+                    height: 2.5em;
+                    margin-left: .5em;
+                    line-height: 2.5em;
+                    .single-line-text;
+                }
+            }
+        }
     </style>
     <script>
         import getConversations from '../scripts/getConversations.js';
@@ -44,6 +80,7 @@
         import getUser from '../scripts/getUser.js';
         import getProfile from '../scripts/getProfile.js';
         import sendMessage from '../scripts/sendMessage.js';
+        import getMembers from '../scripts/getMembers.js';
 
         this.handleConversations = () => {
             let self = this;
@@ -79,8 +116,8 @@
                     if(response.success) {
                         let item = {
                             partner: partner,
-                            avatar: response.profile.Avatar,
-                            username: response.profile.Username,
+                            avatar: response.profile.avatar,
+                            username: response.profile.username,
                             message: messages[partner].message,
                             is_read: messages[partner].is_read
                         }
@@ -128,10 +165,10 @@
                         //Handle errors
                     }
                 } else {
-                    text = 'Error: Couldn\'t send message'
+                    text = 'Error: Couldn\'t send message';
+                    item.classList.add('error');
                 }
                 item.innerHTML = text;
-                item.classList.add('error');
             }
         }
         this.handleSubmit = (event) => {
@@ -153,8 +190,14 @@
                     for(let anchor of anchors) {
                         anchor.classList.remove('active');
                     }
-                    let firstAnchor = self.refs.partners;
-                    firstAnchor.firstElementChild.classList.add('active') || firstAnchor.firstElementChild.classList.add('active');
+                    let anchorsBox = self.refs.partners;
+                    anchorsBox.firstElementChild.classList.add('active') || anchorsBox.firstElementChild.classList.add('active');
+                    let box = anchorsBox.firstElementChild.lastElementChild;
+                    let title = box.firstElementChild;
+                    let text = document.createTextNode(value);
+                    box.innerHTML = '';
+                    box.appendChild(title)
+                    box.appendChild(text);
                     sendMessage(self.activePartner, encodeURI(value), function(response) {
                         if(response.success) {
                             self.handleConversation(self.activePartner);
@@ -167,6 +210,8 @@
         }
         this.handleDisplay = (event) => {
             let anchors = this.refs.partners.children;
+            this.newMessageOption = false;
+            this.matchedPartners = [];
             for(let anchor of anchors) {
                 anchor.classList.remove('active');
             }
@@ -177,13 +222,52 @@
             this.handleTitle(id);
         }
         this.handleNewMessage = (event) => {
-            event.target.firstElementChild.classList.toggle('new');
+            this.refs.searchForPartners.value = '';
             this.newMessageOption = this.newMessageOption ? false : true;
             this.newMessageOption && this.refs.searchForPartners.focus();
+            this.handlePossiblePartners();
+            this.update();
         }
-        this.handleTitle = (id) => {
-            let query = 'a[data-partner="' + id + '"] b';
-            this.activePartnerName = document.querySelectorAll(query)[0].innerHTML;
+        this.handlePossiblePartners = () => {
+            let self = this;
+            Object.keys(self.possiblePartners).length > 0 || getMembers(function(response) {
+                if(response.success) {
+                    self.possiblePartnersData = response.members;
+                    for(let member of Object.keys(response.members)) {
+                        let item = {
+                            id: member,
+                            username: response.members[member].username,
+                            avatar: response.members[member].avatar
+                        }
+                        self.possiblePartners.push(item);
+                    }
+                    self.update();
+                } else {
+                    //Handle error
+                }
+            });
+        }
+        this.handleFilter = (event) => {
+            event.target.value;
+            let self = this;
+            self.matchedPartners = self.possiblePartners.filter(item => item.username.startsWith(event.target.value));
+        }
+        this.handleNewPartner = (event) => {
+            this.newMessageOption = false;
+            let partner = event.target.dataset.id;
+            let data = this.possiblePartnersData[partner];
+            this.list[partner] = {
+                partner: partner,
+                avatar: data.avatar,
+                username: data.username,
+                message: '',
+                is_read: true
+            };/*
+            if(this.partners.includes(partner)) {
+                let index = this.partners.indexOf(partner);
+                this.partners.splice(index, 1)
+            }*/
+            this.partners.unshift(partner);
             this.update();
         }
         this.handleUser = () => {
@@ -196,11 +280,19 @@
                 }
             });
         }
+        this.handleTitle = (id) => {
+            let query = 'a[data-partner="' + id + '"] b';
+            this.activePartnerName = document.querySelectorAll(query)[0].innerHTML;
+            this.update();
+        }
 
         this.userId = '';
         this.activePartner = '';
         this.activePartnerName = '';
         this.partners = [];
+        this.possiblePartnersData = {}
+        this.possiblePartners = [];
+        this.matchedPartners = [];
         this.activeMessages = {};
         this.messages = [];
         this.list = [];
