@@ -2,19 +2,19 @@
     <graphjs-auth-login
         minor={true}
         title={opts.title}
-        callback={changeActiveItem}
+        callback={changeProperties}
         if={this.active == 'login'}
     />
     <graphjs-auth-register
         minor={true}
         title={opts.title}
-        callback={changeActiveItem}
+        callback={changeProperties}
         if={this.active == 'register'}
     />
     <graphjs-auth-reset
         minor={true}
         title={opts.title}
-        callback={changeActiveItem}
+        callback={changeProperties}
         if={this.active == 'reset'}
     />
     <style type="less">
@@ -29,8 +29,8 @@
         import './auth-reset.tag';
 
         this.active = opts.default || 'login';
-        this.changeActiveItem = (e) => {
-            this.active = e.currentTarget.dataset.link;
+        this.changeProperties = (event) => {
+            this.active = event.currentTarget.dataset.link;
             this.update();
         }
     </script>

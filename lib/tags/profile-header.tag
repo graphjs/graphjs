@@ -163,8 +163,9 @@
     </style>
     <script>
         import getProfile from '../scripts/getProfile.js';
-        import showMessagesBox from '../scripts/showMessagesBox.js';
-        this.handleMessagesBox = () => showMessagesBox();
+        import showMessages from '../scripts/showMessages.js';
+
+        this.handleMessagesBox = () => showMessages();
         this.handleFollow = () => {
             //Follow the user
         }

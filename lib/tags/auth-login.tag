@@ -26,13 +26,12 @@
     </style>
     <script>
         import login from '../scripts/login.js';
-        import showAlertBox from '../scripts/showAlertBox.js';
+        import showAlert from '../scripts/showAlert.js';
+        import showRegister from '../scripts/showRegister.js';
+        import showReset from '../scripts/showReset.js';
 
-        import showRegisterBox from '../scripts/showRegisterBox.js';
-        this.handleRegisterBox = () => showRegisterBox();
-
-        import showResetBox from '../scripts/showResetBox.js';
-        this.handleResetBox = () => showResetBox();
+        this.handleRegisterBox = () => showRegister();
+        this.handleResetBox = () => showReset();
 
         this.warningMessages = [];
         this.checkUsernamePattern = () => {
@@ -61,14 +60,14 @@
                 this.refs.password.value,
                 function(response) {
                     if(response.success) {
-                        showAlertBox({
+                        showAlert({
                             title: 'Login Succeeded!',
                             message: 'You are successfully logged in.',
                             customoption: 'Go to Profile',
                             to: '/profile'
                         });
                     } else {
-                        showAlertBox({
+                        showAlert({
                             title: 'Login Failed!',
                             message: response.reason || 'Please try logging in again.',
                             customoption: 'Retry',

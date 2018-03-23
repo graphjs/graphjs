@@ -1,6 +1,6 @@
 <graphjs-forum-thread class={opts.minor != true && 'box'}>
     <div class="header">
-        <a class="option left" data-link="list" onclick={opts.minor ? opts.callback : ''}>
+        <a class="option left" data-link="list" onclick={opts.minor ? handleCallback : handleShow}>
             <svg fill="blue" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g transform="translate(-15.000000, -15.000000)" fill="black" fill-rule="nonzero">
                     <path d="M29.9834254,15 C38.2707182,15 45,21.6961326 45,29.9834254 C45,38.2707182 38.2707182,45 29.9834254,45 C21.6961326,45 15,38.2707182 15,29.9834254 C15,21.6961326 21.6961326,15 29.9834254,15 Z M29.9834254,42.3480663 C36.7790055,42.3480663 42.3480663,36.8121547 42.3480663,29.9834254 C42.3480663,23.1878453 36.8121547,17.6187845 29.9834254,17.6187845 C23.1878453,17.6187845 17.6187845,23.1546961 17.6187845,29.9834254 C17.6519337,36.7790055 23.1878453,42.3480663 29.9834254,42.3480663 Z M25.4088398,29.9834254 L31.6077348,36.1823204 L33.4972376,34.2928177 L29.1546961,29.9834254 L33.4972376,25.640884 L31.6077348,23.7513812 L25.4088398,29.9834254 Z"></path>
@@ -25,15 +25,6 @@
                 <p>Ever wondered how some graphic designers always manage to produce beautiful looking designs for their brochures, website designs, logo designs? Talent…yes, it helps but there are a handful of more important things you can do that will have even complete beginners producing award winning design.</p>
                 <p>There are some that graphic designers will insist are to be obeyed. Only use limited fonts on a design or never use green on a magazine or book cover. Nonsense. You can pretty much do whatever you like but you must apply these STRICT GRAPHIC DESIGN RULES and you will soon be walking away with graphic design silverware.</p>
             </div>
-            <!--
-            <div ref="sticky" class="synopsis sticky">
-                243 views
-                &middot;
-                3 replies
-                &middot;
-                <a onclick={handleComposer}>Write a Reply</a>
-            </div>
-            -->
             <div class="replies">
                 <div class="item">
                     <div class="credit">
@@ -132,6 +123,9 @@
         @import '../styles/components/forum-thread.less';
     </style>
     <script>
+        import getThread from '../scripts/getThread.js'
+        import showForumList from '../scripts/showForumList.js'
+
         this.composerReady = false;
         this.handleComposer = () => {
             this.root.classList.toggle('composer');
@@ -148,5 +142,31 @@
             this.refs.composer.value = '';
             this.refs.composer.focus();
         }
+        this.handleCallback = (properties) => {
+            if(properties.target) {
+                properties.preventDefault();
+                let dataset = Object.assign({}, properties.currentTarget.dataset);
+                opts.callback(dataset);
+            } else {
+                opts.callback(properties);
+            }
+        }
+        this.handleShow = (event) => {
+            event.preventDefault();
+            let dataset = event.currentTarget.dataset;
+            switch(dataset.link) {
+                case 'list':
+                    showForumList();
+                    break;
+            }
+        }
+
+        this.id = opts.id;
+        this.on('mount', function() {
+            let self = this;
+            self.id && getThread(this.id, function(response) {
+                console.log(response)
+            });
+        });
     </script>
 </graphjs-forum-thread>

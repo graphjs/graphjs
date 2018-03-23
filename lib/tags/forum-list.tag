@@ -13,9 +13,9 @@
                         </g>
                     </svg>
                 </div>
-                <input type="text" placeholder="Search in posts..." />
+                <input onkeyup={handleFilter} type="text" placeholder="Search in posts..." />
             </div>
-            <button data-link="compose" onclick={opts.minor ? opts.callback : ''}>
+            <button data-link="compose" onclick={opts.minor ? handleCallback : handleShow}>
                 <svg viewBox="0 0 21 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <g transform="translate(-20.000000, -17.000000)" fill="black" fill-rule="nonzero">
                         <path d="M38.1489476,17 L22.6361271,17 C21.3968108,17 20.3925373,18.0239842 20.3925373,19.2876244 L20.3925373,30.4860904 C20.3925373,31.7497305 21.3968108,32.7737148 22.6361271,32.7737148 L24.7515117,32.7737148 L24.7515117,36.5428483 C24.7515117,36.9132256 25.1574946,37.1310946 25.4566399,36.9132256 L31.4609134,32.7737148 L38.1489476,32.7737148 C39.3882638,32.7737148 40.3925373,31.7497305 40.3925373,30.4860904 L40.3925373,19.2876244 C40.3925373,18.0239842 39.3882638,17 38.1489476,17 Z M31.2728027,25.8802653 L31.2728027,28.6472015 L29.1594735,28.6472015 L29.1594735,25.8802653 L26.3925373,25.8802653 L26.3925373,23.7669362 L29.1594735,23.7669362 L29.1594735,21 L31.2728027,21 L31.2728027,23.7669362 L34.0397388,23.7669362 L34.0397388,25.8802653 L31.2728027,25.8802653 Z"></path>
@@ -25,18 +25,18 @@
             </button>
         </div>
         <div class="list">
-            <a each={thread in threads} class="item" data-link="thread" data-thread={thread} onclick={opts.minor ? opts.callback : showThreadBox}>
+            <a each={matchedThread in matchedThreads} class="item" data-link="thread" data-id={matchedThread} onclick={opts.minor ? handleCallback : handleShow} if={matchedThreads.length > 0}>
                 <div class="title">
-                    {threadsData[thread] && threadsData[thread].title}
+                    {threadsData[matchedThread] && threadsData[matchedThread].title}
                 </div>
                 <div class="views">
                     <svg viewBox="0 0 19 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <path transform="translate(0.000000, -19.000000)" d="M18.5059451,24.5206612 C16.1180812,21.0826446 12.8730354,19 9.32185322,19 C5.77067104,19 2.52562526,21.1157025 0.137761378,24.5206612 C-0.0459204592,24.8181818 -0.0459204592,25.1818182 0.137761378,25.4793388 C2.52562526,28.9173554 5.77067104,31 9.32185322,31 C12.8730354,31 16.1180812,28.8842975 18.5059451,25.4793388 C18.7202405,25.1818182 18.7202405,24.785124 18.5059451,24.5206612 Z M13.2403991,25.2479339 C13.1179445,27.3636364 11.5260353,29.0826446 9.56676233,29.214876 C7.2095121,29.3801653 5.25023917,27.2644628 5.40330737,24.7190083 C5.52576192,22.6033058 7.11767118,20.8842975 9.0769441,20.7520661 C11.4341943,20.5867769 13.3934673,22.7024793 13.2403991,25.2479339 Z M11.4341943,25.1157025 C11.3729671,26.2396694 10.5157852,27.1652893 9.47492142,27.231405 C8.18914856,27.3305785 7.14828482,26.1735537 7.24012573,24.8181818 C7.30135301,23.6942149 8.15853492,22.768595 9.19939866,22.7024793 C10.4545579,22.6033058 11.5260353,23.7603306 11.4341943,25.1157025 Z"></path>
                     </svg>
-                    {threadsData[thread] && threadsData[thread].views}
+                    {threadsData[matchedThread] && threadsData[matchedThread].views}
                 </div>
-                <time data-time={threadsData[thread] && threadsData[thread].timestamp}>
-                    {threadsData[thread] && handleTime(threadsData[thread].timestamp)}
+                <time data-time={threadsData[matchedThread] && threadsData[matchedThread].timestamp}>
+                    {threadsData[matchedThread] && handleTime(threadsData[matchedThread].timestamp)}
                 </time>
                 <div class="contributors">
                     <img src="lib/data/sample/user-avatar.png" />
@@ -45,6 +45,9 @@
                     <img src="lib/data/sample/user-avatar.png" />
                 </div>
             </a>
+            <div class="placeholder item" if={matchedThreads.length <= 0}>
+                There isn't any thread available.
+            </div>
 
         </div>
     </div>
@@ -55,27 +58,13 @@
         @import '../styles/components/forum-list.less';
     </style>
     <script>
-        this.threads = ['123', '456', '789'];
-        this.threadsData = {
-            '123': {
-                timestamp: 1521365497,
-                contibutors: '',
-                views: 123,
-                title: 'Thread title for 123'
-            },
-            '456': {
-                timestamp: 1521365497,
-                contibutors: '',
-                views: 456,
-                title: 'Thread title for 456'
-            },
-            '789': {
-                timestamp: 1521365497,
-                contibutors: '',
-                views: 789,
-                title: 'Thread title for 789'
-            }
-        }
+        import getThreads from '../scripts/getThreads.js'
+        import showForumCompose from '../scripts/showForumCompose.js';
+        import showForumThread from '../scripts/showForumThread.js';
+
+        this.threads = [];
+        this.threadsData = {};
+        this.matchedThreads = [];
         this.handleTime = (timestamp) => {
             let time = timestamp * 1000;
             let passedTime = Math.floor((Date.now() - time) / 1000);
@@ -101,6 +90,55 @@
             'October',
             'November',
             'December'
-        ]
+        ];
+        this.handleCallback = (properties) => {
+            if(properties.target) {
+                properties.preventDefault();
+                let dataset = Object.assign({}, properties.currentTarget.dataset);
+                opts.callback(dataset);
+            } else {
+                opts.callback(properties);
+            }
+        }
+        this.handleShow = (event) => {
+            event.preventDefault();
+            let dataset = event.currentTarget.dataset;
+            switch(dataset.link) {
+                case 'compose':
+                    showForumCompose();
+                    break;
+                case 'thread':
+                    showForumThread({
+                        id: dataset.id
+                    });
+                    break;
+            }
+        }
+        this.handleFilter = (event) => {
+            let self = this;
+            self.matchedThreads = self.threads.filter(item => self.threadsData[item].title.startsWith(event.target.value));
+        }
+
+        this.on('mount', function() {
+            let self = this;
+            getThreads(function(response) {
+                if(response.success) {
+                    for(let thread of response.threads) {
+                        self.threads.push(thread.id);
+                        self.threadsData[thread.id] = {
+                            id: thread.id,
+                            title: thread.title,
+                            author: thread.author,
+                            timestamp: 1521822659, //MAKE THIS DYNAMIC
+                            views: 1317 //MAKE THIS DYNAMIC
+                        }
+                    }
+                    self.matchedThreads = self.threads;
+                    self.update();
+                } else {
+                    //Handle error
+                }
+            });
+        });
     </script>
 </graphjs-forum-list>

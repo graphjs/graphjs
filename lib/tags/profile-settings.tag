@@ -81,7 +81,7 @@
     <script>
         import getProfile from '../scripts/getProfile.js';
         import setProfile from '../scripts/setProfile.js';
-        import showAlertBox from '../scripts/showAlertBox.js';
+        import showAlert from '../scripts/showAlert.js';
         import '../vendor/cloudinary/upload-widget.js';
 
         this.warningMessages = [];
@@ -135,14 +135,14 @@
         		self.refs.username.value,
                 function(response) {
                     if(response.success) {
-                        showAlertBox({
+                        showAlert({
                             title: 'Update Successful!',
                             message: 'You successfully updated your settings.',
                             customoption: 'Show Profile',
                             show: 'profile'
                         });
                     } else {
-                        showAlertBox({
+                        showAlert({
                             title: 'Update Failed!',
                             message: response.reason || 'Please try updating your settings again.',
                             customoption: 'Retry',

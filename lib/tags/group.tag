@@ -3,16 +3,16 @@
     <!--
     <graphjs-group-header
         minor={true}
-        callback={changeActiveItem}
+        callback={changeProperties}
     />
     <graphjs-group-activity
         minor={true}
-        callback={changeActiveItem}
+        callback={changeProperties}
         if={this.active == 'activity'}
     />
     <graphjs-group-members
         minor={true}
-        callback={changeActiveItem}
+        callback={changeProperties}
         if={this.active == 'followers'}
     />
     -->
@@ -30,8 +30,8 @@
         */
 
         this.active = opts.default || 'activity';
-        this.changeActiveItem = (e) => {
-            this.active = e.currentTarget.dataset.link;
+        this.changeProperties = (event) => {
+            this.active = event.currentTarget.dataset.link;
             this.update();
         }
     </script>

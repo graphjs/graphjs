@@ -25,7 +25,7 @@
         <a>User doesn't exist.</a>
         <p>We couldn't find any user matching this id.</p>
     </div>
-    <button onclick={handleShow} if={profile}>View Profile</button>
+    <button data-link="profile" data-id={id} onclick={handleShow} if={profile}>View Profile</button>
     <button if={!profile} onclick={handleUpdate}>Refresh</button>
     <style type="less">
         @import '../styles/variables.less';
@@ -36,8 +36,9 @@
     <script>
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
-        import showMessagesBox from '../scripts/showMessagesBox.js';
-        this.handleMessagesBox = () => showMessagesBox();
+        import showMessages from '../scripts/showMessages.js';
+
+        this.handleMessagesBox = () => showMessages();
 
         this.handleInformation = (id) => {
             let self = this;
@@ -50,12 +51,17 @@
                 }
             });
         }
-        this.handleShow = () => {
+        this.handleShow = (event) => {
             let self = this;
-            showProfile({
-                id: self.id,
-                scroll: true
-            });
+            let dataset = event.target.dataset;
+            switch(dataset.link) {
+                case 'profile':
+                    showProfile({
+                        id: dataset.id,
+                        scroll: true
+                    });
+                    break;
+            }
         }
         this.handleUpdate = () => this.update();
 

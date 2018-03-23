@@ -27,10 +27,10 @@
     </style>
     <script>
         import register from '../scripts/register.js';
-        import showAlertBox from '../scripts/showAlertBox.js';
+        import showAlert from '../scripts/showAlert.js';
+        import showLogin from '../scripts/showLogin.js';
 
-        import showLoginBox from '../scripts/showLoginBox.js';
-        this.handleLoginBox = () => showLoginBox();
+        this.handleLoginBox = () => showLogin();
 
         this.warningMessages = [];
         /*
@@ -123,7 +123,7 @@
         		this.refs.password.value,
                 function(response) {
                     if(response.success) {
-                        showAlertBox({
+                        showAlert({
                             title: 'Register Succeeded!',
                             message: 'You are successfully registered.',
                             customoption: 'Login',
@@ -131,7 +131,7 @@
                             negativeoption: 'Cancel'
                         });
                     } else {
-                        showAlertBox({
+                        showAlert({
                             title: 'Register Failed!',
                             message: response.reason || 'Please try registering again.',
                             customoption: 'Retry',

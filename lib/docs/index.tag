@@ -1,6 +1,6 @@
 <docs-index>
     <aside>
-        <docs-menu callback={changeActiveItem} items={items}></docs-menu>
+        <docs-menu callback={changeProperties} items={items}></docs-menu>
     </aside>
     <main ref="main">
     </main>
@@ -150,7 +150,7 @@
     <script>
         import './menu.tag';
         this.activeItem = 'introduction';
-        this.changeActiveItem = (event) => {
+        this.changeProperties = (event) => {
             for(let element of event.target.parentNode.children) {
                 element.className == 'active' && element.classList.remove('active');
             }

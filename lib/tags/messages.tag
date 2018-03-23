@@ -10,7 +10,7 @@
     <div class="content">
         <div class="sidebar">
             <input ref="searchForPartners" onkeyup={handleFilter} class={!newMessageOption && 'hidden'} type="text" placeholder="Type a name..." />
-            <div class="suggestions" if={matchedPartners.length > 0}>
+            <div class="suggestions" if={newMessageOption && matchedPartners.length > 0}>
                 <a each={matchedPartner in matchedPartners} data-id={matchedPartner.id} onclick={handleNewPartner}>
                     <img src={matchedPartner.avatar || 'lib/images/avatars/user.png'} />
                     <b>{matchedPartner.username}</b>
@@ -223,6 +223,7 @@
         }
         this.handleNewMessage = (event) => {
             this.refs.searchForPartners.value = '';
+            this.matchedPartners = [];
             this.newMessageOption = this.newMessageOption ? false : true;
             this.newMessageOption && this.refs.searchForPartners.focus();
             this.handlePossiblePartners();
@@ -248,7 +249,6 @@
             });
         }
         this.handleFilter = (event) => {
-            event.target.value;
             let self = this;
             self.matchedPartners = self.possiblePartners.filter(item => item.username.startsWith(event.target.value));
         }
@@ -282,7 +282,7 @@
         }
         this.handleTitle = (id) => {
             let query = 'a[data-partner="' + id + '"] b';
-            this.activePartnerName = document.querySelectorAll(query)[0].innerHTML;
+            this.activePartnerName = document.querySelectorAll(query) ? document.querySelectorAll(query)[0].innerHTML : '';
             this.update();
         }
 

@@ -3,32 +3,32 @@
         id={opts.id}
         active={this.active}
         minor={true}
-        callback={changeActiveItem}
+        callback={changeProperties}
     />
     <graphjs-profile-activity
         minor={true}
-        callback={changeActiveItem}
+        callback={changeProperties}
         if={this.active == 'activity'}
     />
     <graphjs-profile-followers
         minor={true}
-        callback={changeActiveItem}
+        callback={changeProperties}
         if={this.active == 'followers'}
     />
     <graphjs-profile-following
         minor={true}
-        callback={changeActiveItem}
+        callback={changeProperties}
         if={this.active == 'following'}
     />
     <graphjs-profile-groups
         minor={true}
-        callback={changeActiveItem}
+        callback={changeProperties}
         if={this.active == 'groups'}
     />
     <graphjs-profile-settings
         id={opts.id}
         minor={true}
-        callback={changeActiveItem}
+        callback={changeProperties}
         if={this.active == 'settings'}
     />
     <style type="less">
@@ -52,8 +52,8 @@
         import './profile-settings.tag';
 
         this.active = opts.default || 'activity';
-        this.changeActiveItem = (e) => {
-            this.active = e.currentTarget.dataset.link;
+        this.changeProperties = (event) => {
+            this.active = event.currentTarget.dataset.link;
             this.update();
         }
     </script>

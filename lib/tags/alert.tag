@@ -16,21 +16,21 @@
     </style>
     <script>
         import hideOverlay from '../scripts/hideOverlay.js';
-        import showAuthBox from '../scripts/showAuthBox.js';
-        import showLoginBox from '../scripts/showLoginBox.js';
-        import showRegisterBox from '../scripts/showRegisterBox.js';
-        import showResetBox from '../scripts/showResetBox.js';
-        import showCommentsBox from '../scripts/showCommentsBox.js';
-        import showForumBox from '../scripts/showForumBox.js';
-        import showMessagesBox from '../scripts/showMessagesBox.js';
+        import showAuth from '../scripts/showAuth.js';
+        import showLogin from '../scripts/showLogin.js';
+        import showRegister from '../scripts/showRegister.js';
+        import showReset from '../scripts/showReset.js';
+        import showComments from '../scripts/showComments.js';
+        import showForum from '../scripts/showForum.js';
+        import showMessages from '../scripts/showMessages.js';
         this.showFunctions = {
-            auth: showAuthBox,
-            login: showLoginBox,
-            register: showRegisterBox,
-            reset: showResetBox,
-            comments: showCommentsBox,
-            forum: showForumBox,
-            message: showMessagesBox
+            auth: showAuth,
+            login: showLogin,
+            register: showRegister,
+            reset: showReset,
+            comments: showComments,
+            forum: showForum,
+            message: showMessages
         }
         this.handleButton = (event) => {
             if(event.target.hasAttribute('to')) {

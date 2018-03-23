@@ -24,9 +24,10 @@
     </style>
     <script>
         import reset from '../scripts/reset.js';
+        import showAlert from '../scripts/showAlert.js';
+        import showRegister from '../scripts/showRegister.js';
 
-        import showRegisterBox from '../scripts/showRegisterBox.js';
-        this.handleRegisterBox = () => showRegisterBox();
+        this.handleRegisterBox = () => showRegister();
 
         this.warningMessages = [];
         this.checkEmailPattern = () => {
@@ -54,12 +55,12 @@
                 this.refs.email.value,
                 function(response) {
                     if(response.success) {
-                        showAlertBox({
+                        showAlert({
                             title: 'Email Sent!',
                             message: 'An email sent to your email address.'
                         });
                     } else {
-                        showAlertBox({
+                        showAlert({
                             title: 'Reset Failed!',
                             message: response.reason || 'Please try entering your email again.',
                             customoption: 'Retry',

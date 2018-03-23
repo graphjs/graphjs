@@ -28,12 +28,11 @@
         import getUser from '../scripts/getUser.js';
         import getProfile from '../scripts/getProfile.js';
         import logout from '../scripts/logout.js'
+        import showLogin from '../scripts/showLogin.js';
+        import showRegister from '../scripts/showRegister.js';
 
-        import showLoginBox from '../scripts/showLoginBox.js';
-        this.handleLoginBox = () => showLoginBox();
-
-        import showRegisterBox from '../scripts/showRegisterBox.js';
-        this.handleRegisterBox = () => showRegisterBox();
+        this.handleLoginBox = () => showLogin();
+        this.handleRegisterBox = () => showRegister();
 
         this.handleState = () => {
             let self = this;
