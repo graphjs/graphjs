@@ -129,7 +129,7 @@
             event.preventDefault();
             let self = this;
         	this.validateProfileForm() && setProfile(
-        		encodeURI(self.profile.avatar),
+        		self.profile.avatar,
         		self.refs.birthday.value,
         		self.refs.bio.value,
         		self.refs.username.value,

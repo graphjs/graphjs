@@ -43,36 +43,6 @@
         @import '../styles/mixins.less';
         @import '../styles/options.less';
         @import '../styles/components/messages.less';
-        .suggestions {
-            max-height: 17.5em;
-            overflow-y: scroll;
-            background-color: fade(black, 7.5%);
-            a {
-                display: block;
-                width: 100%;
-                height: 3.5em;
-                padding: .5em;
-                color: white;
-                border-top: 1px solid fade(black, 5%);
-                .clearfix;
-                & > * {
-                    float: left;
-                    pointer-events: none;
-                }
-                img {
-                    width: 2.5em;
-                    height: 2.5em;
-                    .border-radius(@border-radius-full);
-                }
-                b {
-                    color: @text-color-normal;
-                    height: 2.5em;
-                    margin-left: .5em;
-                    line-height: 2.5em;
-                    .single-line-text;
-                }
-            }
-        }
     </style>
     <script>
         import getConversations from '../scripts/getConversations.js';
@@ -198,7 +168,7 @@
                     box.innerHTML = '';
                     box.appendChild(title)
                     box.appendChild(text);
-                    sendMessage(self.activePartner, encodeURI(value), function(response) {
+                    sendMessage(self.activePartner, value, function(response) {
                         if(response.success) {
                             self.handleConversation(self.activePartner);
                         } else {
@@ -209,6 +179,7 @@
             }
         }
         this.handleDisplay = (event) => {
+            console.log('D I S P L A Y')
             let anchors = this.refs.partners.children;
             this.newMessageOption = false;
             this.matchedPartners = [];
@@ -256,19 +227,23 @@
             this.newMessageOption = false;
             let partner = event.target.dataset.id;
             let data = this.possiblePartnersData[partner];
+            let message;
+            if(this.partners.includes(partner)) {
+                let index = this.partners.indexOf(partner);
+                this.partners.splice(index, 1);
+                message = this.list[partner].message || '';
+            }
+            this.partners.unshift(partner);
             this.list[partner] = {
                 partner: partner,
                 avatar: data.avatar,
                 username: data.username,
-                message: '',
+                message: message,
                 is_read: true
-            };/*
-            if(this.partners.includes(partner)) {
-                let index = this.partners.indexOf(partner);
-                this.partners.splice(index, 1)
-            }*/
-            this.partners.unshift(partner);
+            };
+            let query = '.list a[data-partner="' + partner + '"]';
             this.update();
+            document.querySelectorAll(query).length > 0 && document.querySelectorAll(query)[0].click();
         }
         this.handleUser = () => {
             let self = this;

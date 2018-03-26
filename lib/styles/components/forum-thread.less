@@ -22,6 +22,8 @@ graphjs-forum-thread {
             padding-bottom: 3em;
             /*.transition(padding-bottom .35s ease);*/
             .title {
+                position: relative;
+                z-index: 2;
                 padding: 1.5em 2.5em;
                 line-height: 100%;
                 background-color: fade(@contrast-color, 65%);
@@ -34,20 +36,6 @@ graphjs-forum-thread {
                     line-height: 150%;
                 }
             }
-            .entry {
-                padding: 2.5em;
-                line-height: 150%;
-                .credit {
-                    .credit-metrics(3em);
-                    margin-bottom: 1.5em;
-                }
-                p {
-                    font-size: 1.05em;
-                    & + p {
-                        margin-top: 1em;
-                    }
-                }
-            }
             .replies {
                 padding-right: 2.5em;
                 padding-left: 2.5em;
@@ -55,6 +43,20 @@ graphjs-forum-thread {
                 .item {
                     padding: 1.5em 0;
                     border-top: 1px dotted fade(black, 15%);
+                    &:first-child {
+                        line-height: 150%;
+                        border-top: none !important;
+                        .credit {
+                            margin-bottom: 1.5em;
+                        }
+                        p {
+                            margin-left: 0;
+                            font-size: 1.05em;
+                            & + p {
+                                margin-top: 1em;
+                            }
+                        }
+                    }
                     .credit {
                         .credit-metrics(3em);
                         margin-bottom: .25em;
@@ -63,7 +65,7 @@ graphjs-forum-thread {
                         }
                     }
                     p {
-                        margin-left: 40px * 1.2 !important;
+                        margin-left: 40px * 1.2;
                         .regular-font;
                         line-height: 150%;
                     }
@@ -91,6 +93,13 @@ graphjs-forum-thread {
                 padding: calc(1em - 1px) 0;
                 background-color: @contrast-color;
                 border-bottom: 1px dotted fade(black, 15%);
+                & > b {
+                    &::after {
+                        content: '\00b7';
+                        display: inline;
+                        margin: 0 .25em;
+                    }
+                }
                 & > a {
                     display: inline-block;
                     height: 1em;
@@ -113,24 +122,26 @@ graphjs-forum-thread {
                     }
                 }
             }
-            textarea {
-                width: 100%;
-                height: 9em;
-                margin-top: 1em;
-                .no-padding;
-                line-height: 150%;
-                border: none;
-                &.closed {
-                    height: 0;
+            form {
+                textarea {
+                    width: 100%;
+                    height: 9em;
+                    margin-top: 1em;
+                    .no-padding;
+                    line-height: 150%;
                     border: none;
+                    &.closed {
+                        height: 0;
+                        border: none;
+                    }
                 }
-            }
-            button {
-                float: right;
-                width: auto;
-                margin-top: .5em;
-                margin-left: .5em;
-                font-size: .9em;
+                button {
+                    float: right;
+                    width: auto;
+                    margin-top: .5em;
+                    margin-left: .5em;
+                    font-size: .9em;
+                }
             }
         }
     }

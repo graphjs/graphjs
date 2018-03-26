@@ -1,4 +1,4 @@
-<graphjs-forum-thread class={opts.minor != true && 'box'}>
+<graphjs-forum-thread>
     <div class="header">
         <a class="option left" data-link="list" onclick={opts.minor ? handleCallback : handleShow}>
             <svg fill="blue" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -7,103 +7,32 @@
                 </g>
             </svg>
         </a>
-        <div class="title">{opts.title || 'Thread by Ozan İlbey Yılmaz'}</div>
+        <div class="title">{opts.title || 'Thread by ' + (currentAuthor || 'Forum User')}</div>
     </div>
     <div class="content">
         <div class="thread" ref="scrollingContent">
-            <div class="title">
-                <h1>Strict graphic design rules to remember</h1>
-            </div>
-            <div class="entry">
-                <div class="credit">
-                    <img src="lib/data/sample/user-avatar.png" />
-                    <span>
-                        <b>Ozan İlbey Yılmaz</b>
-                        <time>February 10, 2018 8:05AM</time>
-                    </span>
-                </div>
-                <p>Ever wondered how some graphic designers always manage to produce beautiful looking designs for their brochures, website designs, logo designs? Talent…yes, it helps but there are a handful of more important things you can do that will have even complete beginners producing award winning design.</p>
-                <p>There are some that graphic designers will insist are to be obeyed. Only use limited fonts on a design or never use green on a magazine or book cover. Nonsense. You can pretty much do whatever you like but you must apply these STRICT GRAPHIC DESIGN RULES and you will soon be walking away with graphic design silverware.</p>
+            <div class="title" if={title}>
+                <h1>{title}</h1>
             </div>
             <div class="replies">
-                <div class="item">
-                    <div class="credit">
-                        <img src="lib/data/sample/user-avatar.png" />
+                <div each={entry in entries} class="item">
+                    <div class="credit" if={authorsData.hasOwnProperty(entry.author)}>
+                        <img src={authorsData[entry.author].avatar || 'lib/images/avatars/user.png'} />
                         <span>
-                            <b>Ozan İlbey Yılmaz</b>
-                            <time>4 hours ago</time>
+                            <b>{authorsData[entry.author].username || 'Unknown User'}</b>
+                            <time>{handleTime(entry.timestamp) || ''}</time>
                         </span>
                     </div>
-                    <p>If you remember to apply at least one or two and ideally all 3 of these golden graphic design rules there’s no reason why you shouldn’t be a millionaire/billionaire within one or two months. Now get creative!</p>
-                </div>
-                <div class="item">
-                    <div class="credit">
-                        <img src="lib/data/sample/user-avatar.png" />
-                        <span>
-                            <b>Ozan İlbey Yılmaz</b>
-                            <time>4 hours ago</time>
-                        </span>
-                    </div>
-                    <p>If you remember to apply at least one or two and ideally all 3 of these golden graphic design rules there’s no reason why you shouldn’t be a millionaire/billionaire within one or two months. Now get creative!</p>
-                </div>
-                <div class="item">
-                    <div class="credit">
-                        <img src="lib/data/sample/user-avatar.png" />
-                        <span>
-                            <b>Ozan İlbey Yılmaz</b>
-                            <time>4 hours ago</time>
-                        </span>
-                    </div>
-                    <p>If you remember to apply at least one or two and ideally all 3 of these golden graphic design rules there’s no reason why you shouldn’t be a millionaire/billionaire within one or two months. Now get creative!</p>
-                </div>
-                <div class="item">
-                    <div class="credit">
-                        <img src="lib/data/sample/user-avatar.png" />
-                        <span>
-                            <b>Ozan İlbey Yılmaz</b>
-                            <time>4 hours ago</time>
-                        </span>
-                    </div>
-                    <p>If you remember to apply at least one or two and ideally all 3 of these golden graphic design rules there’s no reason why you shouldn’t be a millionaire/billionaire within one or two months. Now get creative!</p>
-                </div>
-                <div class="item">
-                    <div class="credit">
-                        <img src="lib/data/sample/user-avatar.png" />
-                        <span>
-                            <b>Ozan İlbey Yılmaz</b>
-                            <time>4 hours ago</time>
-                        </span>
-                    </div>
-                    <p>If you remember to apply at least one or two and ideally all 3 of these golden graphic design rules there’s no reason why you shouldn’t be a millionaire/billionaire within one or two months. Now get creative!</p>
-                </div>
-                <div class="item">
-                    <div class="credit">
-                        <img src="lib/data/sample/user-avatar.png" />
-                        <span>
-                            <b>Ozan İlbey Yılmaz</b>
-                            <time>4 hours ago</time>
-                        </span>
-                    </div>
-                    <p>If you remember to apply at least one or two and ideally all 3 of these golden graphic design rules there’s no reason why you shouldn’t be a millionaire/billionaire within one or two months. Now get creative!</p>
-                </div>
-                <div class="item">
-                    <div class="credit">
-                        <img src="lib/data/sample/user-avatar.png" />
-                        <span>
-                            <b>Ozan İlbey Yılmaz</b>
-                            <time>4 hours ago</time>
-                        </span>
-                    </div>
-                    <p>If you remember to apply at least one or two and ideally all 3 of these golden graphic design rules there’s no reason why you shouldn’t be a millionaire/billionaire within one or two months. Now get creative!</p>
+                    <p>{entry.content}</p>
                 </div>
             </div>
         </div>
-        <div class="reply">
+        <div class="reply" if={entries.length > 0}>
             <div onclick={handleComposer} class="synopsis">
-                243 views
-                &middot;
-                3 replies
-                &middot;
+                <!--
+                <b>100 views</b>
+                -->
+                <b if={entries.length > 1}>{entries.length < 2 ? (entries.length - 1) + ' reply' : (entries.length - 1) + ' replies'}</b>
                 <a>{composerReady ? 'Cancel Reply' : 'Write a Reply'}</a>
                 <a class={composerReady ? 'icon' : 'reverse icon'}>
                     <svg viewBox="0 0 62 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -111,9 +40,11 @@
                     </svg>
                 </a>
             </div>
-            <textarea ref="composer" placeholder="Write your reply here..."></textarea>
-            <button>Send Reply</button>
-            <button onclick={handleClear} class="danger">Clear</button>
+            <form>
+                <textarea ref="composer" placeholder="Write your reply here..."></textarea>
+                <button onclick={handleReply}>Send Reply</button>
+                <button onclick={handleClear} class="danger">Clear</button>
+            <form>
         </div>
     </div>
     <style type="less">
@@ -123,10 +54,42 @@
         @import '../styles/components/forum-thread.less';
     </style>
     <script>
-        import getThread from '../scripts/getThread.js'
-        import showForumList from '../scripts/showForumList.js'
+        import getThread from '../scripts/getThread.js';
+        import replyThread from '../scripts/replyThread.js';
+        import showForumList from '../scripts/showForumList.js';
+        import getProfile from '../scripts/getProfile.js';
 
+        this.id = opts.id;
+        this.entries = [];
+        this.authorsData = {};
         this.composerReady = false;
+
+        this.on('mount', function() {
+            opts.minor || this.root.classList.add('box');
+            this.handleContent();
+        });
+
+        this.handleContent = (callback) => {
+            let self = this;
+            self.id && getThread(self.id, function(response) {
+                if(response.success) {
+                    self.title = response.title;
+                    self.entries = response.messages;
+                    self.update();
+                    callback && callback();
+                    for(let entry of self.entries) {
+                        getProfile(entry.author, function(response) {
+                            if(response.success) {
+                                self.currentAuthor = self.currentAuthor || response.profile.username;
+                                self.authorsData[entry.author] = response.profile;
+                            }
+                            self.update();
+                        });
+                    }
+                    self.update();
+                }
+            });
+        }
         this.handleComposer = () => {
             this.root.classList.toggle('composer');
             if(this.composerReady) {
@@ -135,12 +98,29 @@
             } else {
                 this.composerReady = true;
                 this.refs.composer.focus();
-                //this.refs.scrollingContent.scrollTop = this.refs.scrollingContent.scrollHeight;
             }
         }
-        this.handleClear = () => {
+        this.handleClear = (event) => {
+            event.preventDefault();
             this.refs.composer.value = '';
             this.refs.composer.focus();
+        }
+        this.handleReply = (event) => {
+            event.preventDefault();
+            let self = this;
+            replyThread(self.id, self.refs.composer.value, function(response) {
+                if(response.success) {
+                    self.handleContent(/*function() {
+                        self.refs.scrollingContent.scrollTop = self.refs.scrollingContent.scrollHeight;
+                    }*/);
+                    self.composerReady = false;
+                    self.refs.composer.value = '';
+                    self.root.classList.toggle('composer');
+                    self.update();
+                } else {
+                    //Handle error
+                }
+            });
         }
         this.handleCallback = (properties) => {
             if(properties.target) {
@@ -160,13 +140,28 @@
                     break;
             }
         }
-
-        this.id = opts.id;
-        this.on('mount', function() {
-            let self = this;
-            self.id && getThread(this.id, function(response) {
-                console.log(response)
-            });
-        });
+        this.handleTime = (timestamp) => {
+            let date = new Date(parseInt(timestamp) * 1000);
+            let day = date.getDate();
+            let month = this.months[date.getMonth()];
+            let year = date.getFullYear();
+            let hour = date.getHours();
+            let minute = date.getMinutes();
+            return month + ' ' + day + ', ' + year + ' · ' + hour + ':' + minute;
+        }
+        this.months = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ];
     </script>
 </graphjs-forum-thread>

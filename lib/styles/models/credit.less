@@ -26,5 +26,15 @@
             line-height: 100%;
             .regular-font;
         }
+        a {
+            .text-color-states(@danger-color);
+            .regular-font;
+            &::before {
+                content: '\00b7';
+                display: inline;
+                margin: 0 .25em;
+                color: @text-color-weak;
+            }
+        }
     }
 }

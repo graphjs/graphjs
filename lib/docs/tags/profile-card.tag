@@ -25,7 +25,7 @@
     <script>
         this.input = '';
         this.specs = {
-            "id": "46b1e7a138c637eb62dd604bdb039bf8",
+            "id": "4b688921975b3f46544c487d268e24d6",
             "theme": "default"
         }
         this.updateTextWithCheckbox = (event) => {
