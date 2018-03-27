@@ -166,6 +166,7 @@
             {"label": "Auth: Login", "component": "auth-login"},
             {"label": "Auth: Reset Password", "component": "auth-reset"},
             {"label": "Bookmark: Button", "component": "bookmark-button"},
+            {"label": "Bookmark: List", "component": "bookmark-list"},
             {"label": "Comments", "component": "comments"},
             {"label": "Messages", "component": "messages"},
             {"label": "Forum (Multifunctional)", "component": "forum"},

@@ -38,17 +38,10 @@
                 <time data-time={threadsData[matchedThread] && threadsData[matchedThread].timestamp}>
                     {threadsData[matchedThread] && handleTime(threadsData[matchedThread].timestamp)}
                 </time>
-                <div class="contributors">
-                    <img src="lib/data/sample/user-avatar.png" />
-                    <img src="lib/data/sample/user-avatar.png" />
-                    <img src="lib/data/sample/user-avatar.png" />
-                    <img src="lib/data/sample/user-avatar.png" />
-                </div>
             </a>
             <div class="placeholder item" if={matchedThreads.length <= 0}>
                 There isn't any thread available.
             </div>
-
         </div>
     </div>
     <style type="less">
@@ -58,39 +51,37 @@
         @import '../styles/components/forum-list.less';
     </style>
     <script>
-        import getThreads from '../scripts/getThreads.js'
+        import getThreads from '../scripts/getThreads.js';
         import showForumCompose from '../scripts/showForumCompose.js';
         import showForumThread from '../scripts/showForumThread.js';
 
         this.threads = [];
         this.threadsData = {};
         this.matchedThreads = [];
-        this.handleTime = (timestamp) => {
-            let time = timestamp * 1000;
-            let passedTime = Math.floor((Date.now() - time) / 1000);
-            let date = new Date(time);
-            if(passedTime < 60 * 60 * 24) {
-                return date.getHours() + ':' + date.getMinutes();
-            } else if(passedTime >= 60 * 60 * 24 && passedTime < 60 * 60 * 24 * 365) {
-                return this.months[date.getMonth()].substring(0, 3) + ', ' + date.getDate();
-            } else {
-                return this.months[date.getMonth()].substring(0, 3) + ' \'' + date.getFullYear().toString().substring(2, 4);
-            }
-        }
-        this.months = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December'
-        ];
+
+        this.on('mount', function() {
+            let self = this;
+            getThreads(function(response) {
+                if(response.success) {
+                    for(let thread of response.threads) {
+                        self.threads.push(thread.id);
+                        self.threadsData[thread.id] = {
+                            id: thread.id,
+                            title: thread.title,
+                            author: thread.author,
+                            timestamp: thread.timestamp,
+                            contibutors: thread.contributors, //NOT PRINTED FOR NOW
+                            views: 1317 //MAKE THIS DYNAMIC
+                        }
+                    }
+                    self.matchedThreads = self.threads;
+                    self.update();
+                } else {
+                    //Handle error
+                }
+            });
+        });
+
         this.handleCallback = (properties) => {
             if(properties.target) {
                 properties.preventDefault();
@@ -118,27 +109,31 @@
             let self = this;
             self.matchedThreads = self.threads.filter(item => self.threadsData[item].title.startsWith(event.target.value));
         }
-
-        this.on('mount', function() {
-            let self = this;
-            getThreads(function(response) {
-                if(response.success) {
-                    for(let thread of response.threads) {
-                        self.threads.push(thread.id);
-                        self.threadsData[thread.id] = {
-                            id: thread.id,
-                            title: thread.title,
-                            author: thread.author,
-                            timestamp: 1521822659, //MAKE THIS DYNAMIC
-                            views: 1317 //MAKE THIS DYNAMIC
-                        }
-                    }
-                    self.matchedThreads = self.threads;
-                    self.update();
-                } else {
-                    //Handle error
-                }
-            });
-        });
+        this.handleTime = (timestamp) => {
+            let time = timestamp * 1000;
+            let passedTime = Math.floor((Date.now() - time) / 1000);
+            let date = new Date(time);
+            if(passedTime < 60 * 60 * 24) {
+                return date.getHours() + ':' + ((date.getMinutes() < 10 ? '0' : '') + date.getMinutes());
+            } else if(passedTime >= 60 * 60 * 24 && passedTime < 60 * 60 * 24 * 365) {
+                return this.months[date.getMonth()].substring(0, 3) + ', ' + date.getDate();
+            } else {
+                return this.months[date.getMonth()].substring(0, 3) + ' \'' + date.getFullYear().toString().substring(2, 4);
+            }
+        }
+        this.months = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ];
     </script>
 </graphjs-forum-list>

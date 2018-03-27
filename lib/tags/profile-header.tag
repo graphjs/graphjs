@@ -52,6 +52,7 @@
             display: block;
             width: 100%;
             color: fade(@text-color-strong, 65%);
+            text-align: center;
             & + * {
                 margin-top: 1.5em;
             }

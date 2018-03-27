@@ -32,6 +32,7 @@
         graphjs-profile-settings {
             display: block;
             width: 100%;
+            text-align: center;
             .content {
                 .avatar {
                     overflow: hidden;
