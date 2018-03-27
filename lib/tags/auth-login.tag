@@ -3,7 +3,7 @@
         <div class="title">{opts.title || 'Login'}</div>
     </div>
     <div class="warning" if={warningMessages.length > 0}>
-        <ul>
+        <ul if={warningMessages.length > 0} class="fail">
             <li each={warningMessage in warningMessages}>{warningMessage}</li>
         </ul>
     </div>

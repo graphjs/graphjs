@@ -1,11 +1,11 @@
 <graphjs-profile-groups class="wallet">
     <div class="content">
-        <graphjs-group-card id="37fb1bd9e36a97510d88171e8ce6edca"> </graphjs-group-card>
-        <graphjs-group-card id="37fb1bd9e36a97510d88171e8ce6edca"> </graphjs-group-card>
-        <graphjs-group-card id="37fb1bd9e36a97510d88171e8ce6edca"> </graphjs-group-card>
-        <graphjs-group-card id="37fb1bd9e36a97510d88171e8ce6edca"> </graphjs-group-card>
-        <graphjs-group-card id="37fb1bd9e36a97510d88171e8ce6edca"> </graphjs-group-card>
-        <graphjs-group-card id="37fb1bd9e36a97510d88171e8ce6edca"> </graphjs-group-card>
+        <graphjs-group-card id="30e761f926d36f6ece16f2083762341d"> </graphjs-group-card>
+        <graphjs-group-card id="30e761f926d36f6ece16f2083762341d"> </graphjs-group-card>
+        <graphjs-group-card id="30e761f926d36f6ece16f2083762341d"> </graphjs-group-card>
+        <graphjs-group-card id="30e761f926d36f6ece16f2083762341d"> </graphjs-group-card>
+        <graphjs-group-card id="30e761f926d36f6ece16f2083762341d"> </graphjs-group-card>
+        <graphjs-group-card id="30e761f926d36f6ece16f2083762341d"> </graphjs-group-card>
     </div>
     <style type="less">
         @import '../styles/variables.less';

@@ -1,0 +1,68 @@
+graphjs-profile-settings {
+    display: block;
+    width: 100%;
+    text-align: center;
+    .content {
+        .avatar {
+            overflow: hidden;
+            display: inline-block;
+            position: relative;
+            width: 10em;
+            height: 10em;
+            margin: 0 auto;
+            margin-bottom: 1.5em;
+            .heavy-font;
+            text-transform: uppercase;
+            .border-radius(@border-radius-full);
+            &:hover {
+                &::before {
+                    padding-top: 3.6em;
+                    background-color: fade(@primary-color, 90%);
+                }
+            }
+            &::before {
+                content: "Change\APhoto";
+                display: inline-block;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                padding-top: 6.4em;
+                color: white;
+                line-height: 1.4em;
+                vertical-align: middle;
+                background-color: fade(@primary-color, 60%);
+                white-space: pre;
+                .transition(all .35s ease);
+            }
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        form {
+            max-width: 24em;
+            margin: 0 auto;
+            input {
+                &.success {
+                    border: 1px solid @success-color;
+                    &::after {
+                        content: "OK";
+                        display: block;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        width: 2.5em;
+                        height: 2.5em;
+                        color: white;
+                        .heavy-font;
+                        font-size: 1.5em;
+                        line-height: 2.5em;
+                        background-color: @success-color;
+                    }
+                }
+            }
+        }
+    }
+}

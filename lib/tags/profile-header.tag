@@ -26,9 +26,11 @@
         <p>We couldn't find any user matching this id.</p>
     </div>
     <ul if={profile}>
+        <!--
         <li class={opts.active == 'activity' ? 'active' : ''}>
             <a data-link="activity" onclick={opts.callback; handleActiveStyle;}>Activity</a>
         </li>
+        -->
         <li class={opts.active == 'followers' ? 'active' : ''}>
             <a data-link="followers" onclick={opts.callback; handleActiveStyle;}>Followers</a>
         </li>
@@ -38,7 +40,7 @@
         <li class={opts.active == 'groups' ? 'active' : ''}>
             <a data-link="groups" onclick={opts.callback; handleActiveStyle;}>Groups</a>
         </li>
-        <li class={opts.active == 'settings' ? 'active' : ''}>
+        <li if={userId == id} class={opts.active == 'settings' ? 'active' : ''}>
             <a data-link="settings" onclick={opts.callback; handleActiveStyle;}>Settings</a>
         </li>
     </ul>
@@ -47,130 +49,36 @@
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
         @import '../styles/options.less';
-        /* @import '../styles/components/profile-header.less'; */
-        graphjs-profile-header {
-            display: block;
-            width: 100%;
-            color: fade(@text-color-strong, 65%);
-            text-align: center;
-            & + * {
-                margin-top: 1.5em;
-            }
-            .option {
-                display: inline-block;
-                width: 3.75em;
-                height: 3.75em;
-                padding: 1em;
-                text-align: center;
-                .icon-color-states(@primary-color);
-                &.left {
-                    float: left;
-                }
-                &.right {
-                    float: right;
-                }
-                svg {
-                    position: relative;
-                    max-width: 1.5em;
-                    max-height: auto;
-                    vertical-align: middle;
-                    path {
-                        fill: @primary-color;
-                        .transition(fill .35s ease);
-                    }
-                }
-            }
-            .information {
-                height: 15em;
-                padding-top: 2em;
-                img {
-                    width: 6.5em;
-                    height: 6.5em;
-                    border: 4px solid fade(@secondary-color, 15%);
-                    .border-radius(@border-radius-full);
-                }
-                a {
-                    display: inline-block;
-                    overflow: hidden;
-                    width: 90%;
-                    max-height: 2.5em;
-                    margin: 0 5%;
-                    margin-top: .5em;
-                    color: @primary-color;
-                    font-size: 1.2em;
-                    line-height: 1.25em;
-                    .heavy-font;
-                    .text-color-states(@primary-color);
-                }
-                p {
-                    display: inline-block;
-                    overflow: hidden;
-                    width: 90%;
-                    max-height: 2.5em;
-                    margin: 0 5%;
-                    margin-top: .75em;
-                    color: @text-color-normal;
-                    line-height: 1.25em;
-                }
-            }
-            ul {
-                margin: 0;
-                padding: 0;
-                font-size: 0;
-                .border-radius(0);
-                background-color: @primary-color;
-                list-style: none;
-                li {
-                    display: inline-block;
-                    background-color: transparent;
-                    .transition(background-color .35s ease);
-                    &:hover {
-                        background-color: fade(black, 20%);
-                    }
-                    &.active {
-                        background-color: fade(black, 20%);
-                        a {
-                            opacity: 1;
-
-                        }
-                    }
-                    a {
-                        display: inline-block;
-                        opacity: .85;
-                        padding: 0 1em;
-                        cursor: pointer;
-                        color: white;
-                        font-size: @font-size-default * 1.1;
-                        .bold-font;
-                        line-height: 2.5em;
-                    }
-                }
-            }
-            &.color {
-                .option {
-                    svg {
-                        path {
-                            fill: white;
-                        }
-                    }
-                }
-                .information {
-                    img {
-                        border: 4px solid white;
-                    }
-                }
-            }
-        }
+        @import '../styles/components/profile-header.less';
     </style>
     <script>
         import getProfile from '../scripts/getProfile.js';
+        import getUser from '../scripts/getUser.js';
         import showMessages from '../scripts/showMessages.js';
 
+        this.id = opts.id;
+        this.userId = undefined;
+
+        this.on('mount', function() {
+            this.handleInformation(this.id);
+            this.handleUser();
+        });
+
+        this.handleUser = () => {
+            let self = this;
+            getUser(function(response) {
+                if(response.success) {
+                    self.userId = response.id;
+                    self.update();
+                } else {
+                    //Handle errors
+                }
+            });
+        }
         this.handleMessagesBox = () => showMessages();
         this.handleFollow = () => {
             //Follow the user
         }
-
         this.handleInformation = (id) => {
             let self = this;
             getProfile(id, function(response) {
@@ -186,10 +94,5 @@
             console.log('osman')//event.target.parentNode.classList.add('active');
         }
         this.handleUpdate = () => this.update();
-
-        this.id = opts.id;
-        this.on('mount', function() {
-            this.handleInformation(this.id);
-        });
     </script>
 </graphjs-profile-header>

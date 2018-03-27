@@ -1,11 +1,11 @@
 <graphjs-profile-following class="wallet">
     <div class="content">
-        <graphjs-profile-card id="46b1e7a138c637eb62dd604bdb039bf8"></graphjs-profile-card>
-        <graphjs-profile-card id="46b1e7a138c637eb62dd604bdb039bf8"></graphjs-profile-card>
-        <graphjs-profile-card id="46b1e7a138c637eb62dd604bdb039bf8"></graphjs-profile-card>
-        <graphjs-profile-card id="46b1e7a138c637eb62dd604bdb039bf8"></graphjs-profile-card>
-        <graphjs-profile-card id="46b1e7a138c637eb62dd604bdb039bf8"></graphjs-profile-card>
-        <graphjs-profile-card id="46b1e7a138c637eb62dd604bdb039bf8"></graphjs-profile-card>
+        <graphjs-profile-card id="4b688921975b3f46544c487d268e24d6"></graphjs-profile-card>
+        <graphjs-profile-card id="4b688921975b3f46544c487d268e24d6"></graphjs-profile-card>
+        <graphjs-profile-card id="4b688921975b3f46544c487d268e24d6"></graphjs-profile-card>
+        <graphjs-profile-card id="4b688921975b3f46544c487d268e24d6"></graphjs-profile-card>
+        <graphjs-profile-card id="4b688921975b3f46544c487d268e24d6"></graphjs-profile-card>
+        <graphjs-profile-card id="4b688921975b3f46544c487d268e24d6"></graphjs-profile-card>
     </div>
     <style type="less">
         @import '../styles/variables.less';

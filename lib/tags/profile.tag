@@ -51,7 +51,7 @@
         import './profile-groups.tag';
         import './profile-settings.tag';
 
-        this.active = opts.default || 'activity';
+        this.active = opts.default || 'followers';
         this.changeProperties = (event) => {
             this.active = event.currentTarget.dataset.link;
             this.update();

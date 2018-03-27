@@ -53,21 +53,34 @@
             }
         }
         + .warning {
-            color: @contrast-color;
+            color: white;
             border-bottom: none;
-            background-color: @danger-color;
+            ul {
+                &.fail {
+                    background-color: @danger-color;
+                }
+                &.success {
+                    background-color: @success-color;
+                }
+            }
         }
     }
     .warning {
         display: inline-block;
         width: 100%;
         padding: 0 5%;
-        color: @danger-color;
         text-align: center;
         border-bottom: 1px solid fade(@secondary-color, 15%);
         ul {
             list-style: none;
-            padding: 0;
+            width: 100%;
+            padding: 0 5%;
+            &.fail {
+                color: @danger-color;
+            }
+            &.success {
+                color: @success-color;
+            }
             li {
                 margin-bottom: .1em;
                 &:last-child {
