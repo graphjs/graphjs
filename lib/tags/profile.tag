@@ -11,16 +11,19 @@
         if={this.active == 'activity'}
     />
     <graphjs-profile-followers
+        id={opts.id}
         minor={true}
         callback={changeProperties}
         if={this.active == 'followers'}
     />
     <graphjs-profile-following
+        id={opts.id}
         minor={true}
         callback={changeProperties}
         if={this.active == 'following'}
     />
     <graphjs-profile-groups
+        id={opts.id}
         minor={true}
         callback={changeProperties}
         if={this.active == 'groups'}

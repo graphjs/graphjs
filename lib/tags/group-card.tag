@@ -2,14 +2,14 @@
     <div class="information" if={group}>
         <img src={group.cover || 'lib/images/covers/group.png'} />
         <a>{group.title}</a>
-        <p>{group.memberCount == 1 ? group.memberCount + ' Member' : group.memberCount + ' Members'}</p>
+        <p>{group.count == 1 ? group.count + ' Member' : group.count + ' Members'}</p>
     </div>
     <div class="information" if={!group}>
         <img src="lib/images/covers/group.png" />
         <a>Group doesn't exist.</a>
         <p>We couldn't find any group matching this id.</p>
     </div>
-    <button if={group} onclick={handleJoin}>{joined ? 'Joined' : 'Join Group'}</button>
+    <button if={group} onclick={!joined && handleJoin}>{joined ? 'Joined' : 'Join Group'}</button>
     <button if={!group} onclick={handleUpdate}>Refresh</button>
     <style type="less">
         @import '../styles/variables.less';
@@ -18,39 +18,36 @@
         @import '../styles/components/group-card.less';
     </style>
     <script>
-        import listGroups from '../scripts/listGroups.js';
-        import listMembers from '../scripts/listMembers.js';
+        import getGroup from '../scripts/getGroup.js';
+
+        this.id = opts.id;
+        this.joined = false;
+        
+        this.on('before-mount', function() {
+            this.handleInformation();
+        });
 
         this.handleInformation = () => {
             let self = this;
-            //Change this to getGroup(id) function
-            listGroups(function(response) {
+            getGroup(self.id, function(response) {
                 if(response.success) {
-                    for(let i = 0; i < response.groups.length; i++) {
-                        if(response.groups[i].id == self.id) {
-                            self.group = response.groups[i];
-                            listMembers(self.id, function(response) {
-                                if(response.success) {
-                                    self.group['memberCount'] = response.members.length;
-                                    self.update();
-                                }
-                            })
-                        }
-                    }
+                    self.group = response.group;
+                    self.update();
                 } else {
                     //Handle errors
                 }
             });
         }
         this.handleJoin = () => {
-
+            joinGroup(self.id, function(response) {
+                if(response.success) {
+                    self.joined = true;
+                    self.update();
+                } else {
+                    //Handle errors
+                }
+            });
         }
         this.handleUpdate = () => this.update();
-
-        this.id = opts.id;
-        this.joined = false;
-        this.on('mount', function() {
-            this.handleInformation();
-        });
     </script>
 </graphjs-group-card>

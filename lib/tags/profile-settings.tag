@@ -17,13 +17,13 @@
             <input ref="email" type="text" placeholder="Enter email address" value={profile ? profile.email : ''} />
             <input ref="bio" type="text" placeholder="Enter a short bio" value={profile ? profile.about : ''} />
             <input ref="birthday" type="text" placeholder="Enter birthday (MM/DD/YYYY)" value={profile ? profile.birthday : ''} />
-            <button ref="submit" onclick={handleProfileSubmit}>Set Information</button>
+            <button ref="submit" onclick={handleProfileSubmit}>Update Profile</button>
         </form>
         <h2>Password</h2>
         <form>
             <input ref="password" type="password" placeholder="Enter new password" />
             <input ref="confirmation" type="password" placeholder="Confirm new password" />
-            <button ref="submit" onclick={handlePasswordSubmit}>Change</button>
+            <button ref="submit" onclick={handlePasswordSubmit}>Change Password</button>
         </form>
     </div>
     <style type="less">

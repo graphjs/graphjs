@@ -33,7 +33,7 @@
                     </svg>
                 </div>
                 <a class="title" href={bookmarksData[matchedBookmark] && bookmarksData[matchedBookmark].url}>
-                    {bookmarksData[matchedBookmark] && bookmarksData[matchedBookmark].url}
+                    {bookmarksData[matchedBookmark].title || bookmarksData[matchedBookmark].url}
                 </a>
                 <div class="count">
                     {bookmarksData[matchedBookmark] && bookmarksData[matchedBookmark].count}
@@ -54,7 +54,7 @@
         @import '../styles/components/bookmark-list.less';
     </style>
     <script>
-        import getBookmarks from '../scripts/getBookmarks.js';
+        import getUserBookmarks from '../scripts/getUserBookmarks.js';
         import removeBookmark from '../scripts/removeBookmark.js';
 
         this.type = opts.type || 'favorite';
@@ -68,14 +68,15 @@
 
         this.handleContent = () => {
             let self = this;
-            getBookmarks(function(response) {
+            getUserBookmarks(function(response) {
                 if(response.success) {
                     self.bookmarks = [];
                     for(let bookmark of Object.keys(response.pages)) {
                         self.bookmarks.push(bookmark);
                         self.bookmarksData[bookmark] = {
                             url: bookmark,
-                            count: response.pages[bookmark]
+                            title: response.pages[bookmark].title && unescape(response.pages[bookmark].title),
+                            count: response.pages[bookmark].star_count
                         }
                     }
                     self.matchedBookmarks = self.bookmarks;

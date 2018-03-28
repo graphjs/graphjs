@@ -1,5 +1,5 @@
 <graphjs-profile-card class={opts.theme ? opts.theme + ' card box' : 'card box'}>
-    <a class="left option" href="" if={profile}>
+    <a onclick={handleFollow} class="left option" if={profile}>
         <svg viewBox="0 0 24 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g transform="translate(-22.000000, -20.000000)" fill="black" fill-rule="nonzero">
@@ -36,9 +36,15 @@
     <script>
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
+        import follow from '../scripts/follow.js';
         import showMessages from '../scripts/showMessages.js';
 
-        this.handleMessagesBox = () => showMessages();
+        this.id = opts.id;
+        this.following = false;
+
+        this.on('before-mount', function() {
+            this.handleInformation(this.id);
+        });
 
         this.handleInformation = (id) => {
             let self = this;
@@ -63,11 +69,18 @@
                     break;
             }
         }
+        this.handleFollow = () => {
+            let self = this;
+            follow(self.id, function(response) {
+                if(response.success) {
+                    self.following = true;
+                    self.update();
+                } else {
+                    //Handle errors
+                }
+            });
+        }
+        this.handleMessagesBox = () => showMessages();
         this.handleUpdate = () => this.update();
-
-        this.id = opts.id;
-        this.on('mount', function() {
-            this.handleInformation(this.id);
-        });
     </script>
 </graphjs-profile-card>
