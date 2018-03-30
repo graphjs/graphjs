@@ -15,7 +15,7 @@
     <script>
         this.input = '';
         this.specs = {
-            id: '57dd66ff28c179bf867035a89a8c2d56'
+            "id": "57dd66ff28c179bf867035a89a8c2d56"
         }
         this.updateText = (event) => {
             let target = event.target.parentNode.name;

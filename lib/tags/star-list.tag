@@ -1,4 +1,4 @@
-<graphjs-bookmark-list class={opts.minor != true && 'box'}>
+<graphjs-star-list class={opts.minor != true && 'box'}>
     <div class="header" if={opts.title}>
         <div class="title">{opts.title || 'Login'}</div>
     </div>
@@ -17,9 +17,9 @@
             </div>
         </div>
         <div class="list">
-            <div each={matchedBookmark in matchedBookmarks} class="item" data-link="bookmark" data-id={matchedBookmark} onclick={opts.minor ? handleCallback : handleShow} if={matchedBookmarks.length > 0}>
+            <div each={matchedStar in matchedStars} class="item" data-link="star" data-id={matchedStar} onclick={opts.minor ? handleCallback : handleShow} if={matchedStars.length > 0}>
                 <div class={type + ' icon'}>
-                    <svg if={type == 'favorite'} viewBox="0 0 62 58" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <svg if={type == 'default'} viewBox="0 0 62 58" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <path transform="translate(-19.000000, 0.000000)" d="M78.55,20.92 L60,18.22 L51.41,0.88 C51.1430837,0.342731823 50.5949178,0.00297581751 49.995,0.00297581751 C49.3950822,0.00297581751 48.8469163,0.342731823 48.58,0.88 L40,18.22 L21.43,20.92 C20.7357885,21.0320591 20.1641226,21.5260416 19.9525703,22.1966625 C19.7410179,22.8672834 19.9257511,23.5998777 20.43,24.09 L33.86,37.2 L30.64,56 C30.5260197,56.6400466 30.78705,57.289052 31.3124543,57.6719377 C31.8378586,58.0548234 32.535622,58.1045341 33.11,57.8 L50,48.92 L66.89,57.8 C67.464378,58.1045341 68.1621414,58.0548234 68.6875457,57.6719377 C69.21295,57.289052 69.4739803,56.6400466 69.36,56 L66.14,37.2 L79.58,24.1 C80.0914811,23.6064567 80.2769729,22.8645697 80.0579562,22.1883821 C79.8389395,21.5121946 79.2537111,21.0199434 78.55,20.92 Z"></path>
                     </svg>
                     <svg if={type == 'like'} viewBox="0 0 42 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -32,18 +32,18 @@
                         <path transform="translate(-15.000000, 0.000000)" d="M86.291,44.172 L86.291,8.734 C86.291,4.069 82.525,0.303 77.86,0.303 L24.114,0.303 C19.463,0.303 15.683,4.069 15.683,8.734 L15.683,44.171 L15.682,44.171 L15.682,87.949 L50.987,69.682 L86.292,87.949 L86.291,44.172 Z"></path>
                     </svg>
                 </div>
-                <a class="title" href={bookmarksData[matchedBookmark] && bookmarksData[matchedBookmark].url}>
-                    {bookmarksData[matchedBookmark].title || bookmarksData[matchedBookmark].url}
+                <a class="title" href={starsData[matchedStar] && starsData[matchedStar].url}>
+                    {starsData[matchedStar].title || starsData[matchedStar].url}
                 </a>
                 <div class="count">
-                    {bookmarksData[matchedBookmark] && bookmarksData[matchedBookmark].count}
+                    {starsData[matchedStar] && starsData[matchedStar].count}
                 </div>
-                <a onclick={handleRemove} data-id={matchedBookmark} class="remove">
+                <a onclick={handleRemove} data-id={matchedStar} class="remove">
                     Delete
                 </a>
             </div>
-            <div class="placeholder item" if={matchedBookmarks.length <= 0}>
-                There isn't any bookmark available.
+            <div class="placeholder item" if={matchedStars.length <= 0}>
+                There isn't any star available.
             </div>
         </div>
     </div>
@@ -51,16 +51,16 @@
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
         @import '../styles/options.less';
-        @import '../styles/components/bookmark-list.less';
+        @import '../styles/components/star-list.less';
     </style>
     <script>
-        import getUserBookmarks from '../scripts/getUserBookmarks.js';
-        import removeBookmark from '../scripts/removeBookmark.js';
+        import getUserStars from '../scripts/getUserStars.js';
+        import removeStar from '../scripts/removeStar.js';
 
-        this.type = opts.type || 'favorite';
-        this.bookmarks = [];
-        this.bookmarksData = {};
-        this.matchedBookmarks = [];
+        this.type = opts.type || 'default';
+        this.stars = [];
+        this.starsData = {};
+        this.matchedStars = [];
 
         this.on('mount', function() {
             this.handleContent();
@@ -68,18 +68,18 @@
 
         this.handleContent = () => {
             let self = this;
-            getUserBookmarks(function(response) {
+            getUserStars(function(response) {
                 if(response.success) {
-                    self.bookmarks = [];
-                    for(let bookmark of Object.keys(response.pages)) {
-                        self.bookmarks.push(bookmark);
-                        self.bookmarksData[bookmark] = {
-                            url: bookmark,
-                            title: response.pages[bookmark].title && unescape(response.pages[bookmark].title),
-                            count: response.pages[bookmark].star_count
+                    self.stars = [];
+                    for(let star of Object.keys(response.pages)) {
+                        self.stars.push(star);
+                        self.starsData[star] = {
+                            url: star,
+                            title: response.pages[star].title && unescape(response.pages[star].title),
+                            count: response.pages[star].star_count
                         }
                     }
-                    self.matchedBookmarks = self.bookmarks;
+                    self.matchedStars = self.stars;
                     self.update();
                 } else {
                     //Handle error
@@ -88,12 +88,12 @@
         }
         this.handleFilter = (event) => {
             let self = this;
-            self.matchedBookmarks = self.bookmarks.filter(item => self.bookmarksData[item].url.includes(event.target.value));
+            self.matchedStars = self.stars.filter(item => self.starsData[item].url.includes(event.target.value));
         }
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
-            removeBookmark(event.target.dataset.id, function(response) {
+            removeStar(event.target.dataset.id, function(response) {
                 if(response.success) {
                     self.handleContent();
                     self.update();
@@ -103,4 +103,4 @@
             });
         }
     </script>
-</graphjs-bookmark-list>
+</graphjs-star-list>

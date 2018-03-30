@@ -1,0 +1,110 @@
+graphjs-group-header {
+    display: block;
+    width: 100%;
+    color: fade(@text-color-strong, 65%);
+    text-align: center;
+    & + * {
+        margin-top: 1.5em;
+    }
+    .information {
+        height: auto;
+        .cover {
+            display: block;
+            width: 100%;
+            height: 15em;
+            background-position: center;
+            background-size: cover;
+        }
+        a {
+            display: inline-block;
+            overflow: hidden;
+            width: 90%;
+            max-height: 2.5em;
+            margin: 0 5%;
+            margin-top: 1.5em;
+            color: @primary-color;
+            font-size: 1.2em;
+            line-height: 1.25em;
+            .heavy-font;
+            .text-color-states(@primary-color);
+        }
+        p {
+            display: inline-block;
+            overflow: hidden;
+            width: 90%;
+            max-height: 2.5em;
+            margin: 0 5%;
+            margin-top: .75em;
+            color: @text-color-normal;
+            line-height: 1.25em;
+        }
+        button {
+            display: inline-block;
+            position: relative;
+            width: auto;
+            height: 2.5em;
+            margin: 1.5em auto;
+            padding-right: 3.5em;
+            span {
+                display: block;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: 2.5em;
+                height: 100%;
+                line-height: 2.5em;
+                vertical-align: middle;
+                border-left: 1px dotted white;
+                background-color: rgba(0, 0, 0, .1);
+            }
+        }
+    }
+    ul {
+        margin: 0;
+        padding: 0;
+        font-size: 0;
+        .border-radius(0);
+        background-color: @primary-color;
+        list-style: none;
+        li {
+            display: inline-block;
+            background-color: transparent;
+            .transition(background-color .35s ease);
+            &:hover {
+                background-color: fade(black, 20%);
+            }
+            &.active {
+                background-color: fade(black, 20%);
+                a {
+                    opacity: 1;
+
+                }
+            }
+            a {
+                display: inline-block;
+                opacity: .85;
+                padding: 0 1em;
+                cursor: pointer;
+                color: white;
+                font-size: @font-size-default * 1.1;
+                .bold-font;
+                line-height: 2.5em;
+            }
+        }
+    }
+    &.color {
+        .option {
+            svg {
+                path {
+                    fill: white;
+                }
+            }
+        }
+        .information {
+            img {
+                border: 4px solid white;
+            }
+        }
+    }
+}

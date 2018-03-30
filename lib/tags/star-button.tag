@@ -1,7 +1,7 @@
-<graphjs-bookmark-button class="box"}>
-    <a class={this.active ? 'active' : ''} onclick={handleBookmark}>
+<graphjs-star-button class="box"}>
+    <a class={this.active ? 'active' : ''} onclick={handleStar}>
         <div class={type + ' icon'}>
-            <svg if={type == 'favorite'} viewBox="0 0 62 58" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <svg if={type == 'default'} viewBox="0 0 62 58" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <path transform="translate(-19.000000, 0.000000)" d="M78.55,20.92 L60,18.22 L51.41,0.88 C51.1430837,0.342731823 50.5949178,0.00297581751 49.995,0.00297581751 C49.3950822,0.00297581751 48.8469163,0.342731823 48.58,0.88 L40,18.22 L21.43,20.92 C20.7357885,21.0320591 20.1641226,21.5260416 19.9525703,22.1966625 C19.7410179,22.8672834 19.9257511,23.5998777 20.43,24.09 L33.86,37.2 L30.64,56 C30.5260197,56.6400466 30.78705,57.289052 31.3124543,57.6719377 C31.8378586,58.0548234 32.535622,58.1045341 33.11,57.8 L50,48.92 L66.89,57.8 C67.464378,58.1045341 68.1621414,58.0548234 68.6875457,57.6719377 C69.21295,57.289052 69.4739803,56.6400466 69.36,56 L66.14,37.2 L79.58,24.1 C80.0914811,23.6064567 80.2769729,22.8645697 80.0579562,22.1883821 C79.8389395,21.5121946 79.2537111,21.0199434 78.55,20.92 Z"></path>
             </svg>
             <svg if={type == 'like'} viewBox="0 0 42 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -22,20 +22,20 @@
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
         @import '../styles/options.less';
-        @import '../styles/components/bookmark-button.less';
+        @import '../styles/components/star-button.less';
     </style>
     <script>
-        import bookmark from '../scripts/bookmark.js';
-        import getBookmark from '../scripts/getBookmark.js';
-        import getBookmarks from '../scripts/getBookmarks.js';
-        import removeBookmark from '../scripts/removeBookmark.js';
+        import star from '../scripts/star.js';
+        import getStar from '../scripts/getStar.js';
+        import getStars from '../scripts/getStars.js';
+        import removeStar from '../scripts/removeStar.js';
 
         this.active = false;
-        this.type = opts.type || 'favorite';
+        this.type = opts.type || 'default';
 
         this.on('before-mount', function() {
             let self = this;
-            getBookmark(window.location.href, function(response) {
+            getStar(window.location.href, function(response) {
                 if(response.success) {
                     if(response.starred) {
                         self.active = true;
@@ -44,20 +44,17 @@
                     }
                     self.count = response.count;
                     self.update();
-
-
-
                 }
             })
         });
-        this.handleBookmark = (event) => {
+        this.handleStar = (event) => {
             event.preventDefault();
             let self = this;
             if(!self.active) {
                 self.active = true;
                 self.count++;
                 self.update();
-                bookmark(
+                star(
                     window.location.href,
                     function(response) {
                         if(!response.success) {
@@ -72,7 +69,7 @@
                 self.active = false;
                 self.count--;
                 self.update();
-                removeBookmark(
+                removeStar(
                     window.location.href,
                     function(response) {
                         if(!response.success) {
@@ -87,4 +84,4 @@
 
         }
     </script>
-</graphjs-bookmark-button>
+</graphjs-star-button>

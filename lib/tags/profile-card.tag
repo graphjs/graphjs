@@ -1,4 +1,4 @@
-<graphjs-profile-card class={opts.theme ? opts.theme + ' card box' : 'card box'}>
+<graphjs-profile-card class="card box">
     <a onclick={handleFollow} class="left option" if={profile}>
         <svg viewBox="0 0 24 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -44,6 +44,9 @@
 
         this.on('before-mount', function() {
             this.handleInformation(this.id);
+        });
+        this.on('mount', function() {
+            opts.theme && this.root.classList.add(opts.theme);
         });
 
         this.handleInformation = (id) => {

@@ -8,62 +8,27 @@
         /* TEMPORARY */
         body {
             font-family: sans-serif;
-            background-color: antiquewhite;
+            margin: 0;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
             -webkit-text-size-adjust: 100%;
+            background-color: rgb(240, 243, 245);
         }
-        h1 {
-            color: orangered;
+        body.graphjs-theme-light {
+            color: rgba(0, 0, 0, .5);
+            background-color: rgb(240, 243, 245);
+        }
+        body.graphjs-theme-dark {
+            color: rgba(255, 255, 255, .5);
+            background-color: rgb(47, 47, 47);
         }
         h2 {
-            color: lightslategray;
             margin: 2em 0 1em;
         }
     </style>
 </head>
-<body>
-    <div id="pho-container"></div>
-    <h1>GraphJS Tags</h1>
-    <h2>Auth (Multifunctional)</h2>
-	<graphjs-auth default="register"></graphjs-auth>
-    <h2>Auth (Login)</h2>
-	<graphjs-auth-login></graphjs-auth-login>
-    <h2>Auth (Register)</h2>
-	<graphjs-auth-register></graphjs-auth-register>
-    <h2>Auth (Reset)</h2>
-	<graphjs-auth-reset></graphjs-auth-reset>
-    <h2>Bookmark (Button)</h2>
-    <graphjs-bookmark-button type="favorite"></graphjs-bookmark-button>
-    <graphjs-bookmark-button type="like"></graphjs-bookmark-button>
-    <graphjs-bookmark-button type="love"></graphjs-bookmark-button>
-    <graphjs-bookmark-button type="save"></graphjs-bookmark-button>
-    <h2>Forum (Multifunctional)</h2>
-    <graphjs-forum></graphjs-forum>
-    <h2>Forum (List)</h2>
-    <graphjs-forum-list></graphjs-forum-list>
-    <h2>Forum (Thread)</h2>
-    <graphjs-forum-thread></graphjs-forum-thread>
-    <h2>Forum (Compose)</h2>
-    <graphjs-forum-compose></graphjs-forum-compose>
-    <h2>State</h2>
-    <graphjs-state></graphjs-state>
-    <graphjs-state theme="color"></graphjs-state>
-    <h2>Profile Card</h2>
-    <graphjs-profile-card id="46b1e7a138c637eb62dd604bdb039bf8"></graphjs-profile-card>
-    <graphjs-profile-card id="46b1e7a138c637eb62dd604bdb039bf8" theme="color"></graphjs-profile-card>
-    <h2>Group Card</h2>
-    <graphjs-group-card id="37fb1bd9e36a97510d88171e8ce6edca"> </graphjs-group-card>
-    <graphjs-group-card id="37fb1bd9e36a97510d88171e8ce6edca" theme="color"> </graphjs-group-card>
-    <h2>Messages</h2>
-    <graphjs-messages></graphjs-messages>
-    <h2>Comments</h2>
-    <graphjs-comments></graphjs-comments>
-    <h2>Alert</h2>
-    <graphjs-alert message="You added Ozan İlbey Yılmaz."></graphjs-alert>
-    <graphjs-alert title="Profile Created" message="Your profile has been created." customoption="Go to Profile"></graphjs-alert>
-    <graphjs-alert title="Login Required" message="You need to login to view the group details." customoption="Login" negativeoption="Cancel"></graphjs-alert>
-
+<body class="graphjs-theme-light">
+	<docs-index></docs-index>
     <script src="pho.js" charset="utf-8"></script>
     <script>
         Pho.init("16D58CF2-FD88-4A49-972B-6F60054BF023");

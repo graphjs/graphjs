@@ -31,9 +31,15 @@
         import showLogin from '../scripts/showLogin.js';
         import showRegister from '../scripts/showRegister.js';
 
+        this.on('before-mount', function() {
+            this.handleState();
+        });
+        this.on('mount', function() {
+            opts.theme && this.root.classList.add(opts.theme);
+        });
+
         this.handleLoginBox = () => showLogin();
         this.handleRegisterBox = () => showRegister();
-
         this.handleState = () => {
             let self = this;
             getUser(function(response) {
@@ -67,11 +73,5 @@
                 }
             });
         }
-
-        this.on('before-mount', function() {
-            this.handleState();
-        });
-
-        this.root.classList.add(opts.theme || 'light');
     </script>
 </graphjs-state>

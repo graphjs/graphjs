@@ -1,21 +1,24 @@
-<graphjs-group-card class="card box">
+<graphjs-group-header class="box">
     <div class="information" if={group}>
-        <img src={group.cover || 'lib/images/covers/group.png'} />
-        <a data-link="group" data-id={id} onclick={handleShow} if={group}>{group.title}</a>
-        <p>{group.count == 1 ? group.count + ' Member' : group.count + ' Members'}</p>
+        <div class="cover" style={'background-image: url(' + (group.cover ? 'https://' + group.id + '.png' : 'lib/images/covers/group.png') + ');'}></div>
+        <a>{group.title}</a>
+        <p>{group.description}</p>
+        <button onclick={joined ? handleLeave : handleJoin}>
+            {joined ? 'Leave Group' : 'Join Group'}
+            <span if={group.count}>{group.count.length}</span>
+        </button>
     </div>
     <div class="information" if={!group}>
-        <img src="lib/images/covers/group.png" />
+        <div class="cover" style="background-image: url(lib/images/covers/group.png)"></div>
         <a>Group doesn't exist.</a>
         <p>We couldn't find any group matching this id.</p>
+        <button onclick={handleUpdate}>Refresh</button>
     </div>
-    <button if={group} onclick={joined ? handleLeave : handleJoin}>{joined ? 'Leave Group' : 'Join Group'}</button>
-    <button if={!group} onclick={handleUpdate}>Refresh</button>
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
         @import '../styles/options.less';
-        @import '../styles/components/group-card.less';
+        @import '../styles/components/group-header.less';
     </style>
     <script>
         import getGroup from '../scripts/getGroup.js';
@@ -26,7 +29,7 @@
         import listMembers from '../scripts/listMembers.js';
 
         this.id = opts.id;
-        this.members = opts.id;
+        this.userId = undefined;
 
         this.on('before-mount', function() {
             this.handleInformation();
@@ -41,6 +44,7 @@
             getGroup(self.id, function(response) {
                 if(response.success) {
                     self.group = response.group;
+                    console.log(self.group.count)
                     self.update();
                 } else {
                     //Handle errors
@@ -66,23 +70,12 @@
                 }
             });
         };
-        this.handleShow = (event) => {
-            event.preventDefault();
-            let dataset = event.currentTarget.dataset;
-            switch(dataset.link) {
-                case 'group':
-                    showGroup({
-                        id: dataset.id,
-                        scroll: true
-                    });
-                    break;
-            }
-        }
         this.handleJoin = () => {
             let self = this;
             joinGroup(self.id, function(response) {
                 if(response.success) {
                     self.joined = true;
+                    self.handleInformation();
                     self.update();
                 } else {
                     //Handle errors
@@ -94,6 +87,7 @@
             leaveGroup(self.id, function(response) {
                 if(response.success) {
                     self.joined = false;
+                    self.handleInformation();
                     self.update();
                 } else {
                     //Handle errors
@@ -102,4 +96,4 @@
         }
         this.handleUpdate = () => this.update();
     </script>
-</graphjs-group-card>
+</graphjs-group-header>

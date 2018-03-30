@@ -1,19 +1,14 @@
-<docs-bookmark-list>
+<docs-star-button>
     <h1>{opts.title}</h1>
     <h2><{opts.component}></h2>
     <section class="demo" ref="liveDemo"></section>
     <section class="options">
         <form>
-            <fieldset name="title">
-                <legend>Title</legend>
-                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.title} />
-                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.title} />
-            </fieldset>
             <fieldset name="type">
-            <legend>Type</legend>
+                <legend>Default</legend>
                 <div class="radiobutton">
-                    <input onclick={updateRadio} type="radio" name="type" id="favorite" checked={specs.type == 'favorite'} />
-                    <label for="favorite">Favorite</label>
+                    <input onclick={updateRadio} type="radio" name="type" id="default" checked={specs.type == 'default'} />
+                    <label for="default">Default</label>
                     <input onclick={updateRadio} type="radio" name="type" id="like" checked={specs.type == 'like'} />
                     <label for="like">Like</label>
                     <input onclick={updateRadio} type="radio" name="type" id="love" checked={specs.type == 'love'} />
@@ -29,18 +24,7 @@
     <script>
         this.input = '';
         this.specs = {
-            type: 'favorite'
-        }
-        this.updateTextWithCheckbox = (event) => {
-            let target = event.target.parentNode.name;
-            if(event.target.type == 'checkbox') {
-                let sibling = event.target.parentNode.children[2];
-                event.target.checked ? this.specs[target] = sibling.value : delete this.specs[target];
-            } else {
-                let sibling = event.target.parentNode.children[1];
-                this.specs[target] = event.target.value;
-            }
-            this.handleCode();
+            "type": "default"
         }
         this.updateRadio = (event) => {
             let target = event.target.parentNode.parentNode.name;
@@ -61,4 +45,4 @@
             updateTag(opts.component, this.specs, this.refs.liveDemo);
         })
     </script>
-</docs-bookmark-list>
+</docs-star-button>

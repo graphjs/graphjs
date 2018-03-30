@@ -1,4 +1,4 @@
-graphjs-bookmark-button {
+graphjs-star-button {
     display: inline-block;
     width: auto;
     height: 50px;
@@ -23,7 +23,7 @@ graphjs-bookmark-button {
             height: 48px;
             text-align: center;
             .border-radius(inherit);
-            &.favorite {
+            &.default {
                 svg {
                     path {
                         fill: desaturate(orange, 70%);
@@ -95,7 +95,7 @@ graphjs-bookmark-button {
         }
         &:hover {
             .icon {
-                &.favorite {
+                &.default {
                     &::before {
                         background-color: fade(orange, 15%);
                     }
@@ -128,7 +128,7 @@ graphjs-bookmark-button {
         }
         &.active {
             .icon {
-                &.favorite {
+                &.default {
                     &::before {
                         background-color: orange;
                     }
@@ -160,7 +160,7 @@ graphjs-bookmark-button {
                 }
                 &.save {
                     &::before {
-                        background-color: steelblue;
+                        background-color: lightseagreen;
                     }
                     svg {
                         path {

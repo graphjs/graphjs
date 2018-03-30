@@ -38,13 +38,7 @@
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
         @import '../styles/options.less';
-        /* @import '../styles/components/profile.less'; */
-        graphjs-profile {
-            display: block;
-            width: 48em;
-            margin: 0 auto;
-
-        }
+        @import '../styles/components/profile.less';
     </style>
     <script>
         import './profile-header.tag';

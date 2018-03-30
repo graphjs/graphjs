@@ -1,11 +1,16 @@
-<docs-bookmark-button>
+<docs-star-list>
     <h1>{opts.title}</h1>
     <h2><{opts.component}></h2>
     <section class="demo" ref="liveDemo"></section>
     <section class="options">
         <form>
+            <fieldset name="title">
+                <legend>Title</legend>
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.title} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.title} />
+            </fieldset>
             <fieldset name="type">
-                <legend>Default</legend>
+            <legend>Type</legend>
                 <div class="radiobutton">
                     <input onclick={updateRadio} type="radio" name="type" id="favorite" checked={specs.type == 'favorite'} />
                     <label for="favorite">Favorite</label>
@@ -24,7 +29,18 @@
     <script>
         this.input = '';
         this.specs = {
-            "type": "favorite"
+            "type": "default"
+        }
+        this.updateTextWithCheckbox = (event) => {
+            let target = event.target.parentNode.name;
+            if(event.target.type == 'checkbox') {
+                let sibling = event.target.parentNode.children[2];
+                event.target.checked ? this.specs[target] = sibling.value : delete this.specs[target];
+            } else {
+                let sibling = event.target.parentNode.children[1];
+                this.specs[target] = event.target.value;
+            }
+            this.handleCode();
         }
         this.updateRadio = (event) => {
             let target = event.target.parentNode.parentNode.name;
@@ -45,4 +61,4 @@
             updateTag(opts.component, this.specs, this.refs.liveDemo);
         })
     </script>
-</docs-bookmark-button>
+</docs-star-list>

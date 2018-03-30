@@ -1,4 +1,4 @@
-<graphjs-profile-header class={opts.theme ? opts.theme + ' box' : 'box'}>
+<graphjs-profile-header class="box">
     <a class="left option" onclick={handleFollow} if={profile}>
         <svg viewBox="0 0 24 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -32,16 +32,16 @@
         </li>
         -->
         <li class={opts.active == 'followers' ? 'active' : ''}>
-            <a data-link="followers" onclick={opts.callback; handleActiveStyle;}>Followers</a>
+            <a data-link="followers" onclick={opts.callback;}>Followers</a>
         </li>
         <li class={opts.active == 'following' ? 'active' : ''}>
-            <a data-link="following" onclick={opts.callback; handleActiveStyle;}>Following</a>
+            <a data-link="following" onclick={opts.callback;}>Following</a>
         </li>
         <li class={opts.active == 'groups' ? 'active' : ''}>
-            <a data-link="groups" onclick={opts.callback; handleActiveStyle;}>Groups</a>
+            <a data-link="groups" onclick={opts.callback;}>Groups</a>
         </li>
         <li if={userId == id} class={opts.active == 'settings' ? 'active' : ''}>
-            <a data-link="settings" onclick={opts.callback; handleActiveStyle;}>Settings</a>
+            <a data-link="settings" onclick={opts.callback;}>Settings</a>
         </li>
     </ul>
     <button if={!profile} onclick={handleUpdate}>Refresh</button>
@@ -59,9 +59,12 @@
         this.id = opts.id;
         this.userId = undefined;
 
-        this.on('mount', function() {
+        this.on('before-mount', function() {
             this.handleInformation(this.id);
             this.handleUser();
+        });
+        this.on('mount', function() {
+            opts.theme && this.root.classList.add(opts.theme);
         });
 
         this.handleUser = () => {
@@ -89,9 +92,6 @@
                     //Handle errors
                 }
             });
-        }
-        this.handleActiveStyle = (event) => {
-            console.log('osman')//event.target.parentNode.classList.add('active');
         }
         this.handleUpdate = () => this.update();
     </script>
