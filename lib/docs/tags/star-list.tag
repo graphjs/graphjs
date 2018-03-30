@@ -9,11 +9,20 @@
                 <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.title} />
                 <input onkeyup={updateTextWithCheckbox} type="text" value={specs.title} />
             </fieldset>
-            <fieldset name="type">
-            <legend>Type</legend>
+            <fieldset name="scope">
+                <legend>Scope</legend>
                 <div class="radiobutton">
-                    <input onclick={updateRadio} type="radio" name="type" id="favorite" checked={specs.type == 'favorite'} />
-                    <label for="favorite">Favorite</label>
+                    <input onclick={updateRadio} type="radio" name="scope" id="global" checked={specs.scope == 'global'} />
+                    <label for="global">Global</label>
+                    <input onclick={updateRadio} type="radio" name="scope" id="user" checked={specs.scope == 'user'} />
+                    <label for="user">User</label>
+                <div>
+            </fieldset>
+            <fieldset name="type">
+                <legend>Type</legend>
+                <div class="radiobutton">
+                    <input onclick={updateRadio} type="radio" name="type" id="default" checked={specs.type == 'default'} />
+                    <label for="default">Default</label>
                     <input onclick={updateRadio} type="radio" name="type" id="like" checked={specs.type == 'like'} />
                     <label for="like">Like</label>
                     <input onclick={updateRadio} type="radio" name="type" id="love" checked={specs.type == 'love'} />
@@ -29,7 +38,8 @@
     <script>
         this.input = '';
         this.specs = {
-            "type": "default"
+            "type": "default",
+            "scope": "global"
         }
         this.updateTextWithCheckbox = (event) => {
             let target = event.target.parentNode.name;

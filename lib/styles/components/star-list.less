@@ -61,6 +61,9 @@ graphjs-star-list {
                 }
                 &:hover {
                     background-color: fade(@primary-color, 5%);
+                    .remove {
+                        display: block;
+                    }
                 }
                 &.placeholder {
                     color: @text-color-weak;
@@ -123,9 +126,25 @@ graphjs-star-list {
                         }
                     }
                 }
+                .count {
+                    width: 7.5%;
+                    font-size: 1.75em;
+                    text-align: left;
+                    & + .title {
+                        width: calc(90% - 3.5em);
+                    }
+                    svg {
+                        width: auto;
+                        height: .75em;
+                        margin-right: .25em;
+                        path {
+                            fill: @text-color-normal;
+                        }
+                    }
+                }
                 .title {
                     cursor: pointer;
-                    width: calc(70% - 3.5em);
+                    width: calc(85% - 3.5em);
                     color: @text-color-strong;
                     .single-line-text;
                     &:hover {
@@ -142,20 +161,8 @@ graphjs-star-list {
                         .transition(all .35s ease);
                     }
                 }
-                .count {
-                    width: 15%;
-                    font-size: .9em;
-                    text-align: right;
-                    svg {
-                        width: auto;
-                        height: .75em;
-                        margin-right: .25em;
-                        path {
-                            fill: @text-color-normal;
-                        }
-                    }
-                }
                 .remove {
+                    display: none;
                     cursor: pointer;
                     width: 15%;
                     text-align: right;

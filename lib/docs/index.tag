@@ -85,7 +85,7 @@
                             float: left;
                             position: relative;
                             width: 47.5%;
-                            height: auto;
+                            height: 5em;
                             margin: 0;
                             margin-bottom: 2.5%;
                             padding: 0;
@@ -107,13 +107,13 @@
                             input[type="text"] {
                                 position: relative;
                                 margin: 0;
-                                margin-top: 2.5%;
+                                margin-top: .5em;
                             }
                             .radiobutton {
                                 display: inline-block;
                                 width: 100%;
                                 height: 2.5em;
-                                margin-top: 2.5%;
+                                margin-top: .5em;
                             }
                             input[type="radio"] {
                                 display: inline-block;
@@ -161,18 +161,18 @@
             this.createTag(event.target.dataset.component, event.target.dataset.label);
         }
         this.items = [
-            {"label": "Auth (Multifunctional)", "component": "auth"},
-            {"label": "Auth: Register", "component": "auth-register"},
-            {"label": "Auth: Login", "component": "auth-login"},
-            {"label": "Auth: Reset Password", "component": "auth-reset"},
+            {"label": "Auth", "component": "auth"},
+            //{"label": "Auth: Register", "component": "auth-register"},
+            //{"label": "Auth: Login", "component": "auth-login"},
+            //{"label": "Auth: Reset Password", "component": "auth-reset"},
             {"label": "Star: Button", "component": "star-button"},
             {"label": "Star: List", "component": "star-list"},
             {"label": "Comments", "component": "comments"},
             {"label": "Messages", "component": "messages"},
-            {"label": "Forum (Multifunctional)", "component": "forum"},
-            {"label": "Forum: List", "component": "forum-list"},
-            {"label": "Forum: Compose", "component": "forum-compose"},
-            {"label": "Forum: Thread", "component": "forum-thread"},
+            {"label": "Forum", "component": "forum"},
+            //{"label": "Forum: List", "component": "forum-list"},
+            //{"label": "Forum: Compose", "component": "forum-compose"},
+            //{"label": "Forum: Thread", "component": "forum-thread"},
             {"label": "Profile Card", "component": "profile-card"},
             {"label": "Group Card", "component": "group-card"},
             {"label": "State", "component": "state"},

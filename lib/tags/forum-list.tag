@@ -29,11 +29,11 @@
                 <div class="title">
                     {threadsData[matchedThread] && threadsData[matchedThread].title}
                 </div>
-                <div class="views">
+                <div class="views" if={threadsData[matchedThread].views}>
                     <svg viewBox="0 0 19 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <path transform="translate(0.000000, -19.000000)" d="M18.5059451,24.5206612 C16.1180812,21.0826446 12.8730354,19 9.32185322,19 C5.77067104,19 2.52562526,21.1157025 0.137761378,24.5206612 C-0.0459204592,24.8181818 -0.0459204592,25.1818182 0.137761378,25.4793388 C2.52562526,28.9173554 5.77067104,31 9.32185322,31 C12.8730354,31 16.1180812,28.8842975 18.5059451,25.4793388 C18.7202405,25.1818182 18.7202405,24.785124 18.5059451,24.5206612 Z M13.2403991,25.2479339 C13.1179445,27.3636364 11.5260353,29.0826446 9.56676233,29.214876 C7.2095121,29.3801653 5.25023917,27.2644628 5.40330737,24.7190083 C5.52576192,22.6033058 7.11767118,20.8842975 9.0769441,20.7520661 C11.4341943,20.5867769 13.3934673,22.7024793 13.2403991,25.2479339 Z M11.4341943,25.1157025 C11.3729671,26.2396694 10.5157852,27.1652893 9.47492142,27.231405 C8.18914856,27.3305785 7.14828482,26.1735537 7.24012573,24.8181818 C7.30135301,23.6942149 8.15853492,22.768595 9.19939866,22.7024793 C10.4545579,22.6033058 11.5260353,23.7603306 11.4341943,25.1157025 Z"></path>
                     </svg>
-                    {threadsData[matchedThread] && threadsData[matchedThread].views}
+                    {threadsData[matchedThread].views}
                 </div>
                 <time data-time={threadsData[matchedThread] && threadsData[matchedThread].timestamp}>
                     {threadsData[matchedThread] && handleTime(threadsData[matchedThread].timestamp)}
@@ -69,9 +69,9 @@
                             id: thread.id,
                             title: thread.title,
                             author: thread.author,
+                            //views: 1317, //MAKE THIS DYNAMIC
                             timestamp: thread.timestamp,
-                            contibutors: thread.contributors, //NOT PRINTED FOR NOW
-                            views: 1317 //MAKE THIS DYNAMIC
+                            contibutors: thread.contributors //NOT PRINTED FOR NOW
                         }
                     }
                     self.matchedThreads = self.threads;

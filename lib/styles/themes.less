@@ -8,31 +8,13 @@
     @text-color-normal: tint(@theme-text-color-strong, 25%);
     @text-color-weak:   tint(@theme-text-color-strong, 50%);
 
-    a {
-        color: @primary-color;
-    }
-
     input, textarea {
         color: tint(@secondary-color, 50%);
-        border-color: fade(black, 7.5%);
         background-color: @contrast-color;
         .placeholder-color(tint(@secondary-color, 50%));
     }
 
-    button {
-        color: white;
-        .background-color-states(@primary-color);
-        &.danger {
-            .background-color-states(@danger-color);
-        }
-    }
-
     form {
-        input, textarea {
-            &.error {
-                border-color: @danger-color;
-            }
-        }
         .option {
             a {
                 color: @text-color-normal;
@@ -43,28 +25,14 @@
     .box {
         border: 1px solid fade(@secondary-color, 3%);
         background-color: @shade-color;
-        .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
         .header {
             border-bottom: 2px solid fade(@secondary-color, 10%);
             background-color: @contrast-color;
-            .title {
-                color: @primary-color;
-            }
-            .option {
-                .icon-color-states(@primary-color);
-                svg {
-                    path {
-                        fill: @primary-color;
-                    }
-                }
-            }
             + .warning {
                 color: @contrast-color;
-                background-color: @danger-color;
             }
         }
         .warning {
-            color: @danger-color;
             border-bottom: 1px solid fade(@secondary-color, 15%);
         }
         .content {
@@ -75,41 +43,14 @@
     .card {
         background-color: @contrast-color;
         .information {
-            a {
-                color: @primary-color;
-                .text-color-states(@primary-color);
-            }
             p {
                 color: @text-color-normal;
-            }
-        }
-        &.color {
-            background-color: @primary-color;
-            .option {
-                svg {
-                    path {
-                        fill: white;
-                    }
-                }
-            }
-            .information {
-                a {
-                    .text-color-states(white);
-                }
-                p {
-                    color: fade(white, 65%);
-                }
-            }
-            button {
-                color: @primary-color;
-                background-color: white;
             }
         }
     }
 
     .credit {
         span {
-            color: @primary-color;
             small, time {
                 color: @text-color-weak;
             }
@@ -118,9 +59,6 @@
 
     graphjs-alert {
         color: fade(@text-color-strong, 65%);
-        & > button {
-            .box-shadow(inset 0 2px 1px fade(black, 15%));
-        }
     }
 
     graphjs-auth {
@@ -165,29 +103,11 @@
             .bar {
                 .search {
                     border-right: 2px solid @contrast-color;
-                    background-color: desaturate(tint(@primary-color, 20%), 5%);
-                    input {
-                        color: white;
-                        background-color: transparent;
-                        .placeholder-color(fade(white, 75%));
-                    }
-                }
-                button {
-                    .background-color-states(@primary-color);
-                    svg {
-                        path {
-                            fill: white;
-                        }
-                    }
                 }
             }
             .list {
                 .item {
                     color: @text-color-normal;
-                    border-bottom: 1px solid fade(black, 10%);
-                    &:hover {
-                        background-color: fade(@primary-color, 5%);
-                    }
                     .title {
                         color: @text-color-strong;
                     }
@@ -213,15 +133,9 @@
                         color: @text-color-strong;
                     }
                 }
-                .entry {
-                    hr {
-                        border-bottom: 1px dashed fade(black, 15%);
-                    }
-                }
                 .replies {
                     background-color: @shade-color;
                     .item {
-                        border-top: 1px dotted fade(black, 15%);
                         .credit {
                             span {
                                 color: @text-color-normal;
@@ -231,19 +145,9 @@
                 }
             }
             .reply {
-                border-top: 2px solid @primary-color;
                 background-color: @contrast-color;
-                .box-shadow(0 -2px 1px 0px fade(black, 7.5%));
                 .synopsis {
                     background-color: @contrast-color;
-                    border-bottom: 1px dotted fade(black, 15%);
-                    a {
-                        svg {
-                            path {
-                                fill: @primary-color;
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -256,19 +160,7 @@
                 .item {
                     border-right: 1px solid fade(@secondary-color, 15%);
                     border-bottom: 1px solid fade(@secondary-color, 15%);
-                    &:hover {
-                        background-color: fade(@primary-color, 5%);
-                    }
-                    &.unread {
-                        div {
-                            b {
-                                color: @primary-color;
-                            }
-                            color: tint(desaturate(@primary-color, 40%), 20%);
-                        }
-                    }
                     &.active {
-                        border-right-color: transparent;
                         background-color: @contrast-color !important;
                     }
                     div {
@@ -289,12 +181,6 @@
                                 background-color: @shade-color;
                             }
                         }
-                        &.outbound {
-                            p {
-                                color: white;
-                                background-color: @primary-color;
-                            }
-                        }
                         time {
                             color: @text-color-weak;
                         }
@@ -306,89 +192,25 @@
 
     graphjs-overlay {
         color: fade(@text-color-strong, 65%);
-        background-color: fade(black, 85%);
     }
 
     graphjs-profile-card {
         color: fade(@text-color-strong, 65%);
-        .option {
-            .icon-color-states(@primary-color);
-            svg {
-                path {
-                    fill: @primary-color;
-                }
-            }
-        }
         .information {
             img {
                 border: 4px solid fade(@secondary-color, 15%);
-            }
-        }
-        &.color {
-            .option {
-                svg {
-                    path {
-                        fill: white;
-                    }
-                }
-            }
-            .information {
-                img {
-                    border: 4px solid white;
-                }
             }
         }
     }
 
     graphjs-profile-header {
         color: fade(@text-color-strong, 65%);
-        .option {
-            .icon-color-states(@primary-color);
-            svg {
-                path {
-                    fill: @primary-color;
-                }
-            }
-        }
         .information {
             img {
                 border: 4px solid fade(@secondary-color, 15%);
             }
-            a {
-                color: @primary-color;
-                .text-color-states(@primary-color);
-            }
             p {
                 color: @text-color-normal;
-            }
-        }
-        ul {
-            background-color: @primary-color;
-            li {
-                background-color: transparent;
-                &:hover {
-                    background-color: fade(black, 20%);
-                }
-                &.active {
-                    background-color: fade(black, 20%);
-                }
-                a {
-                    color: white;
-                }
-            }
-        }
-        &.color {
-            .option {
-                svg {
-                    path {
-                        fill: white;
-                    }
-                }
-            }
-            .information {
-                img {
-                    border: 4px solid white;
-                }
             }
         }
     }
@@ -402,41 +224,12 @@
         background-color: @contrast-color;
         a {
             border-right: 1px dotted fade(@secondary-color, 20%);
-            background-color: transparent;
-            &:hover {
-                background-color: fade(black, 5%);
-            }
-            &:last-of-type {
-                border-right-color: transparent;
-            }
         }
         .logged {
-            a {
-                color: @primary-color;
-            }
             .exit {
                 svg {
                     path {
                         fill: @text-color-weak;
-                    }
-                }
-            }
-        }
-        &.color {
-            background-color: @primary-color;
-            a {
-                color: white;
-                border-right: 1px dotted fade(white, 35%);
-                &:hover {
-                    background-color: fade(black, 5%);
-                }
-            }
-            .logged {
-                .exit {
-                    svg {
-                        path {
-                            fill: fade(white, 50%);
-                        }
                     }
                 }
             }

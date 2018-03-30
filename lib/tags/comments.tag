@@ -8,6 +8,9 @@
             <button onclick={handleComment}>Send Comment</button>
             <button onclick={handleClear} class="danger">Clear</button>
         </div>
+        <div class="synopsis"if={comments.length <= 0}>
+            Not comments yet. Be the first person to comment!
+        </div>
         <div class="synopsis"if={comments.length > 0}>
             {comments.length <= 1 ? comments.length + ' comment' : comments.length + ' comments'}
         </div>
