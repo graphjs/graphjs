@@ -456,6 +456,30 @@
     }
 }
 
+graphjs-star-list {
+    color: fade(@text-color-strong, 65%);
+    .content {
+        .list {
+            .item {
+                color: @text-color-normal;
+                &.placeholder {
+                    color: @text-color-weak;
+                }
+                .title {
+                    color: @text-color-strong;
+                }
+                .count {
+                    svg {
+                        path {
+                            fill: @text-color-normal;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 // Light
 .graphjs-theme-light {
     .colorStructure(rgb(63, 95, 127), tint(rgb(63, 95, 127), 95%), white, rgb(63, 95, 127));
