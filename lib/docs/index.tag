@@ -1,6 +1,6 @@
 <docs-index>
     <aside>
-        <docs-menu callback={changeActiveItem} items={items}></docs-menu>
+        <docs-menu callback={changeProperties} items={items}></docs-menu>
     </aside>
     <main ref="main">
     </main>
@@ -12,24 +12,51 @@
             display: inline-block;
             width: 100%;
             aside {
+                overflow-y: scroll;
                 position: fixed;
-                width: 17.5%;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                width: 20%;
                 height: auto;
-                margin: 2.5%;
-                background-color: @contrast-color;
+                background: linear-gradient(rgb(93, 60, 246), rgb(158, 119, 255));
                 .menu {
+                    color: white;
                     display: inline-block;
-                    padding: 5%;
+                    padding: 10%;
+                    img {
+                        width: 85%;
+                        height: auto;
+                        margin: 7.5%;
+                    }
+                    form {
+                        fieldset {
+                            border: none;
+                            input[type="radio"] {
+                                display: inline-block;
+                                width: auto;
+                                margin-left: 10%;
+                                &:first-of-type {
+                                    margin-left: 0;
+                                }
+                            }
+                        }
+                    }
                     h2 {
+                        color: white;
                         display: inline-block;
                         width: 100%;
                         margin: 1em 0;
                         padding: 0 5%;
                     }
                     a {
+                        color: white;
                         display: inline-block;
                         width: 100%;
                         padding: 5%;
+                        &.active {
+                            color: yellow;
+                        }
                     }
                 }
             }
@@ -38,7 +65,12 @@
                 width: 70%;
                 margin: 2.5% 5% 2.5% 25%;
                 h1 {
-                    color: @primary-color;
+                    color: rgb(93, 60, 246);
+                    margin: 1em 0;
+                }
+                h2 {
+                    color: rgb(158, 119, 255);
+                    margin: 2em 0;
                 }
                 .demo {
                     width: 100%;
@@ -53,7 +85,7 @@
                             float: left;
                             position: relative;
                             width: 47.5%;
-                            height: auto;
+                            height: 5em;
                             margin: 0;
                             margin-bottom: 2.5%;
                             padding: 0;
@@ -75,13 +107,13 @@
                             input[type="text"] {
                                 position: relative;
                                 margin: 0;
-                                margin-top: 2.5%;
+                                margin-top: .5em;
                             }
                             .radiobutton {
                                 display: inline-block;
                                 width: 100%;
                                 height: 2.5em;
-                                margin-top: 2.5%;
+                                margin-top: .5em;
                             }
                             input[type="radio"] {
                                 display: inline-block;
@@ -107,6 +139,9 @@
                             word-wrap: break-word;
                             white-space: pre-wrap;
                         }
+                        button {
+                            .background-color-states(rgb(158, 119, 255));
+                        }
                     }
                 }
             }
@@ -115,22 +150,29 @@
     <script>
         import './menu.tag';
         this.activeItem = 'introduction';
-        this.changeActiveItem = (event) => {
+        this.changeProperties = (event) => {
+            for(let element of event.target.parentNode.children) {
+                element.className == 'active' && element.classList.remove('active');
+            }
+            event.target.classList.add('active');
             this.activeItem = event.target.dataset.id;
             this.update();
             this.refs.main.innerHTML = '';
             this.createTag(event.target.dataset.component, event.target.dataset.label);
         }
         this.items = [
-            {"label": "Auth (Multifunctional)", "component": "auth"},
-            {"label": "Auth: Register", "component": "auth-register"},
-            {"label": "Auth: Login", "component": "auth-login"},
-            {"label": "Auth: Reset Password", "component": "auth-reset"},
+            {"label": "Auth", "component": "auth"},
+            //{"label": "Auth: Register", "component": "auth-register"},
+            //{"label": "Auth: Login", "component": "auth-login"},
+            //{"label": "Auth: Reset Password", "component": "auth-reset"},
+            {"label": "Star: Button", "component": "star-button"},
+            {"label": "Star: List", "component": "star-list"},
+            {"label": "Comments", "component": "comments"},
             {"label": "Messages", "component": "messages"},
-            {"label": "Forum (Multifunctional)", "component": "forum"},
-            {"label": "Forum: List", "component": "forum-list"},
-            {"label": "Forum: Compose", "component": "forum-compose"},
-            {"label": "Forum: Thread", "component": "forum-thread"},
+            {"label": "Forum", "component": "forum"},
+            //{"label": "Forum: List", "component": "forum-list"},
+            //{"label": "Forum: Compose", "component": "forum-compose"},
+            //{"label": "Forum: Thread", "component": "forum-thread"},
             {"label": "Profile Card", "component": "profile-card"},
             {"label": "Group Card", "component": "group-card"},
             {"label": "State", "component": "state"},

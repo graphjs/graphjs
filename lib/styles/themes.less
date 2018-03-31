@@ -1,0 +1,284 @@
+.colorStructure(@theme-secondary-color, @theme-shade-color, @theme-contrast-color, @theme-text-color-strong) {
+    @primary-color:   rgb(0, 127, 255);
+    @secondary-color: @theme-secondary-color;
+    @danger-color:    rgb(255, 79, 79);
+    @shade-color: @theme-shade-color;
+    @contrast-color: @theme-contrast-color;
+    @text-color-strong: @theme-text-color-strong;
+    @text-color-normal: tint(@theme-text-color-strong, 25%);
+    @text-color-weak:   tint(@theme-text-color-strong, 50%);
+
+    input, textarea {
+        color: tint(@secondary-color, 50%);
+        background-color: @contrast-color;
+        .placeholder-color(tint(@secondary-color, 50%));
+    }
+
+    form {
+        .option {
+            a {
+                color: @text-color-normal;
+            }
+        }
+    }
+
+    .box {
+        border: 1px solid fade(@secondary-color, 3%);
+        background-color: @shade-color;
+        .header {
+            border-bottom: 2px solid fade(@secondary-color, 10%);
+            background-color: @contrast-color;
+            + .warning {
+                color: @contrast-color;
+            }
+        }
+        .warning {
+            border-bottom: 1px solid fade(@secondary-color, 15%);
+        }
+        .content {
+            background-color: @shade-color;
+        }
+    }
+
+    .card {
+        background-color: @contrast-color;
+        .information {
+            p {
+                color: @text-color-normal;
+            }
+        }
+    }
+
+    .credit {
+        span {
+            small, time {
+                color: @text-color-weak;
+            }
+        }
+    }
+
+    graphjs-alert {
+        color: fade(@text-color-strong, 65%);
+    }
+
+    graphjs-auth {
+        color: fade(@text-color-strong, 65%);
+    }
+
+    graphjs-auth-login {
+        color: fade(@text-color-strong, 65%);
+    }
+
+    graphjs-auth-register {
+        color: fade(@text-color-strong, 65%);
+    }
+
+    graphjs-auth-reset {
+        color: fade(@text-color-strong, 65%);
+    }
+
+    graphjs-comments {
+        color: fade(@text-color-strong, 65%);
+        background-color: @shade-color;
+        .item {
+            .credit {
+                span {
+                    color: @text-color-normal;
+                }
+            }
+        }
+    }
+
+    graphjs-forum {
+        color: fade(@text-color-strong, 65%);
+    }
+
+    graphjs-forum-compose {
+        color: fade(@text-color-strong, 65%);
+    }
+
+    graphjs-forum-list {
+        color: fade(@text-color-strong, 65%);
+        .content {
+            .bar {
+                .search {
+                    border-right: 2px solid @contrast-color;
+                }
+            }
+            .list {
+                .item {
+                    color: @text-color-normal;
+                    .title {
+                        color: @text-color-strong;
+                    }
+                    .views {
+                        svg {
+                            path {
+                                fill: @text-color-normal;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    graphjs-forum-thread {
+        color: fade(@text-color-strong, 65%);
+        .content {
+            .thread {
+                .title {
+                    background-color: fade(@contrast-color, 50%);
+                    h1 {
+                        color: @text-color-strong;
+                    }
+                }
+                .replies {
+                    background-color: @shade-color;
+                    .item {
+                        .credit {
+                            span {
+                                color: @text-color-normal;
+                            }
+                        }
+                    }
+                }
+            }
+            .reply {
+                background-color: @contrast-color;
+                .synopsis {
+                    background-color: @contrast-color;
+                }
+            }
+        }
+    }
+
+    graphjs-messages {
+        color: fade(@text-color-strong, 65%);
+        .content {
+            .sidebar {
+                .item {
+                    border-right: 1px solid fade(@secondary-color, 15%);
+                    border-bottom: 1px solid fade(@secondary-color, 15%);
+                    &.active {
+                        background-color: @contrast-color !important;
+                    }
+                    div {
+                        color: @text-color-normal;
+                        b {
+                            color: @text-color-strong;
+                        }
+                    }
+                }
+            }
+            .main {
+                background-color: @contrast-color;
+                .conversation {
+                    .item {
+                        &.inbound {
+                            p {
+                                color: @text-color-normal;
+                                background-color: @shade-color;
+                            }
+                        }
+                        time {
+                            color: @text-color-weak;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    graphjs-overlay {
+        color: fade(@text-color-strong, 65%);
+    }
+
+    graphjs-profile-card {
+        color: fade(@text-color-strong, 65%);
+        .information {
+            img {
+                border: 4px solid fade(@secondary-color, 15%);
+            }
+        }
+    }
+
+    graphjs-profile-header {
+        color: fade(@text-color-strong, 65%);
+        .information {
+            img {
+                border: 4px solid fade(@secondary-color, 15%);
+            }
+            p {
+                color: @text-color-normal;
+            }
+        }
+    }
+
+    graphjs-group-card {
+        color: fade(@text-color-strong, 65%);
+    }
+
+    graphjs-state {
+        color: fade(@text-color-strong, 65%);
+        background-color: @contrast-color;
+        a {
+            border-right: 1px dotted fade(@secondary-color, 20%);
+        }
+        .logged {
+            .exit {
+                svg {
+                    path {
+                        fill: @text-color-weak;
+                    }
+                }
+            }
+        }
+    }
+
+    graphjs-star-button {
+        color: @text-color-normal;
+        &:hover {
+            background-color: @contrast-color;
+        }
+        a {
+            .text {
+                color: @text-color-normal;
+            }
+        }
+    }
+}
+
+graphjs-star-list {
+    color: fade(@text-color-strong, 65%);
+    .content {
+        .list {
+            .item {
+                color: @text-color-normal;
+                &.placeholder {
+                    color: @text-color-weak;
+                }
+                .title {
+                    color: @text-color-strong;
+                }
+                .count {
+                    svg {
+                        path {
+                            fill: @text-color-normal;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Light
+.graphjs-theme-light {
+    .colorStructure(rgb(63, 95, 127), tint(rgb(63, 95, 127), 95%), white, rgb(63, 95, 127));
+}
+
+// Dark
+.graphjs-theme-dark {
+    .colorStructure(rgb(63, 63, 63), shade(rgb(63, 63, 63), 5%), rgb(71, 71, 71), rgb(191, 191, 191));
+}

@@ -1,0 +1,54 @@
+graphjs-comments {
+    display: block;
+    color: fade(@text-color-strong, 65%);
+    background-color: @shade-color;
+    .comment {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 1.25em;
+        textarea {
+            width: 100%;
+            height: 7.5em;
+            &.closed {
+                height: 0;
+                border: none;
+            }
+        }
+        button {
+            float: right;
+            width: auto;
+            margin-top: .5em;
+            margin-left: .5em;
+            font-size: .9em;
+        }
+    }
+    .synopsis {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 1.25em;
+        button {
+            float: right;
+            width: auto;
+            font-size: .75em;
+        }
+    }
+    .item {
+        margin-bottom: 1.25em;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        .credit {
+            .credit-metrics(3em);
+            margin-bottom: .25em;
+            span {
+                color: @text-color-normal;
+            }
+        }
+        p {
+            margin-left: 40px * 1.2 !important;
+            .regular-font;
+            font-size: .95em;
+            line-height: 150%;
+        }
+    }
+}

@@ -4,42 +4,23 @@
     <section class="demo" ref="liveDemo"></section>
     <section class="options">
         <form>
-            <fieldset name="id">
-                <legend>Identification</legend>
-                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.id} />
-                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.id} />
-            </fieldset>
             <fieldset name="theme">
                 <legend>Theme</legend>
                 <div class="radiobutton">
-                    <input onclick={updateRadio} type="radio" name="theme" id="light" checked={specs.theme == 'light'} />
-                    <label for="light">Light</label>
-                    <input onclick={updateRadio} type="radio" name="theme" id="dark" checked={specs.theme == 'dark'} />
-                    <label for="dark">Dark</label>
+                    <input onclick={updateRadio} type="radio" name="theme" id="default" checked={specs.theme == 'default'} />
+                    <label for="default">Default</label>
                     <input onclick={updateRadio} type="radio" name="theme" id="color" checked={specs.theme == 'color'} />
                     <label for="color">Color</label>
                 <div>
             </fieldset>
-            <xmp ref="inputCode" onclick={handleCode} class="code">{input}</xmp>
+            <xmp ref="inputCode" class="code">{input}</xmp>
             <button onclick={handleSubmit}>Apply</button>
         </form>
     </section>
     <script>
         this.input = '';
         this.specs = {
-            "id": "1234567890",
-            "theme": "color"
-        }
-        this.updateTextWithCheckbox = (event) => {
-            let target = event.target.parentNode.name;
-            if(event.target.type == 'checkbox') {
-                let sibling = event.target.parentNode.children[2];
-                event.target.checked ? this.specs[target] = sibling.value : delete this.specs[target];
-            } else {
-                let sibling = event.target.parentNode.children[1];
-                this.specs[target] = event.target.value;
-            }
-            this.handleCode();
+            "theme": "default"
         }
         this.updateRadio = (event) => {
             let target = event.target.parentNode.parentNode.name;

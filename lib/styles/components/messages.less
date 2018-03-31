@@ -1,11 +1,13 @@
 graphjs-messages {
     display: block;
     width: 800px;
+    color: fade(@text-color-strong, 65%);
     .regular-font;
     .content {
-        height: 33.5em;
-        max-height: 33.5em;
+        height: 37em;
+        max-height: 37em;
         .no-padding !important;
+        vertical-align: middle;
         & > * {
             float: left;
         }
@@ -13,56 +15,115 @@ graphjs-messages {
             overflow-y: scroll;
             width: 15em;
             height: 100%;
-            .item {
-                display: table;
+            .box-shadow(inset -2px 0px 2px 0px fade(black, 5%));
+            input {
+                display: block;
                 width: 100%;
-                height: 4.5em;
-                padding: calc(.75em - 1px);
-                padding-bottom: calc(.75em + 1px);
-                border-right: 1px solid fade(@secondary-color, 15%);
-                border-bottom: 1px solid fade(@secondary-color, 15%);
-                &:hover {
-                    background-color: fade(@primary-color, 5%);
+                height: 3.5em;
+                padding-top: 0;
+                padding-right: 1.5em;
+                padding-bottom: 0;
+                padding-left: 1.5em;
+                color: white;
+                line-height: 3.5em;
+                border: none;
+                border-radius: 0;
+                background-color: @primary-color;
+                .transition(height .35s ease);
+                .placeholder-color(fade(white, 75%));
+                &.hidden {
+                    height: 0;
+                    .placeholder-color(transparent);
                 }
-                &:last-child {
-                    border-bottom: none;
+                &::placeholder {
+                    opacity: .5;
+                    .transition(all .35s ease);
                 }
-                &.unread {
-                    background-color: fade(@primary-color, 5%);
-                    div {
-                        b {
-                            color: @primary-color;
-                        }
+            }
+            .suggestions {
+                max-height: 17.5em;
+                overflow-y: scroll;
+                background-color: fade(black, 7.5%);
+                a {
+                    display: block;
+                    width: 100%;
+                    height: 3.5em;
+                    padding: .5em;
+                    color: white;
+                    border-top: 1px solid fade(black, 5%);
+                    .clearfix;
+                    & > * {
+                        float: left;
+                        pointer-events: none;
+                    }
+                    img {
+                        width: 2.5em;
+                        height: 2.5em;
+                        .border-radius(@border-radius-full);
+                    }
+                    b {
+                        color: @text-color-normal;
+                        height: 2.5em;
+                        margin-left: .5em;
+                        line-height: 2.5em;
+                        .single-line-text;
                     }
                 }
-                &.active {
-                    border-right: none;
-                    background-color: @contrast-color !important;
-                }
-                & > * {
-                    pointer-events: none;
-                }
-                img {
-                    width: calc(3em + 1px);
-                    height: calc(3em + 1px);
-                    .border-radius(@border-radius-full);
-                }
-                div {
-                    display: inline-block;
-                    overflow: hidden;
-                    width: 10em / .9;
-                    height: 3em / .9;
-                    margin-left: calc(.5em / .9);
-                    color: @text-color-normal;
-                    font-size: .9em;
-                    line-height: 1em / .9;
-                    b {
-                        display: block;
-                        margin-bottom: .05em / .9;
-                        color: @text-color-strong;
-                        font-size: .95em / .9;
-                        line-height: .95em / .9;
-                        .bold-font;
+            }
+            .list {
+                .item {
+                    display: table;
+                    width: 100%;
+                    height: 4.5em;
+                    padding: calc(.75em - 1px);
+                    padding-bottom: calc(.75em + 1px);
+                    border-top: 1px solid fade(black, 2.5%);
+                    border-bottom: 1px solid fade(@secondary-color, 2.5%);
+                    &:hover {
+                        background-color: fade(@primary-color, 5%);
+                    }
+                    &:last-child {
+                        border-bottom: none;
+                    }
+                    &.unread {
+                        div {
+                            b {
+                                color: @primary-color;
+                            }
+                            color: tint(desaturate(@primary-color, 40%), 20%);
+                        }
+                    }
+                    &.active {
+                        border-right: none;
+                        background-color: @contrast-color !important;
+                        .box-shadow(0px 0px 5px 0px fade(black, 7.5%));
+                    }
+                    & > * {
+                        pointer-events: none;
+                    }
+                    img {
+                        width: calc(3em + 1px);
+                        height: calc(3em + 1px);
+                        .border-radius(@border-radius-full);
+                    }
+                    div {
+                        display: inline-block;
+                        overflow: hidden;
+                        width: 10em / .9;
+                        height: 3em / .9;
+                        margin-left: calc(.5em / .9);
+                        color: @text-color-normal;
+                        font-size: .9em;
+                        line-height: 1em / .9;
+                        b {
+                            display: block;
+                            margin-bottom: .05em / .9;
+                            color: @text-color-strong;
+                            font-size: .95em / .9;
+                            line-height: .95em / .9;
+                            .bold-font;
+                            .single-line-text;
+                        }
                     }
                 }
             }
@@ -76,13 +137,15 @@ graphjs-messages {
             .conversation {
                 overflow: scroll;
                 width: 100%;
-                height: 100%;
+                height: calc(100% - 6.5em);
                 padding: 2em;
-                padding-bottom: 5.5em;
                 .item {
                     width: 90%;
                     height: auto;
-                    margin-bottom: 1em;
+                    margin-bottom: .5em;
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
                     &.inbound {
                         margin-right: 10%;
                         div {
@@ -102,7 +165,7 @@ graphjs-messages {
                             text-align: right;
                         }
                         p {
-                            color: @contrast-color;
+                            color: white;
                             background-color: @primary-color;
                             .border-radius(@border-radius-medium);
                         }
@@ -119,6 +182,8 @@ graphjs-messages {
                         display: inline-block;
                         width: auto;
                         padding: .75em 1em;
+                        word-break: break-word;
+                        white-space: pre-wrap;
                         .border-radius(@border-radius-medium);
 
                     }
@@ -129,6 +194,9 @@ graphjs-messages {
                         color: @text-color-weak;
                         font-size: .85em;
                         line-height: .85em;
+                        &.error {
+                            color: @danger-color;
+                        }
                     }
                 }
             }
@@ -137,7 +205,8 @@ graphjs-messages {
                 right: 0;
                 bottom: 0;
                 left: 0;
-                height: 5.5em;
+                height: 6.5em;
+                line-height: 1.25em;
                 .border-radius(0);
                 border-right: none;
                 border-bottom: none;

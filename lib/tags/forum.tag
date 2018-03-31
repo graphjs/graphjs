@@ -2,19 +2,20 @@
     <graphjs-forum-list
         minor={true}
         title={opts.title}
-        callback={changeActiveItem}
+        callback={changeProperties}
         if={this.active == 'list'}
     />
     <graphjs-forum-thread
         minor={true}
         title={opts.title}
-        callback={changeActiveItem}
+        id={id}
+        callback={changeProperties}
         if={this.active == 'thread'}
     />
     <graphjs-forum-compose
         minor={true}
         title={opts.title}
-        callback={changeActiveItem}
+        callback={changeProperties}
         if={this.active == 'compose'}
     />
     <style type="less">
@@ -29,8 +30,10 @@
         import './forum-compose.tag'
 
         this.active = 'list';
-        this.changeActiveItem = (e) => {
-            this.active = e.currentTarget.dataset.link;
+        this.id = undefined;
+        this.changeProperties = (properties) => {
+            this.active = properties.link || undefined;
+            this.id = properties.id || undefined;
             this.update();
         }
     </script>

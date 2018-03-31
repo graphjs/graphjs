@@ -1,14 +1,14 @@
-<graphjs-state class="box">
-    <div class="not-logged" if={!this.id}>
+<graphjs-state class={!opts.flat && 'box'}>
+    <div class="not-logged" if={!id}>
         <a onclick={handleLoginBox}>Login</a>
         <a onclick={handleRegisterBox}>Register</a>
     </div>
-    <div class="logged" if={this.id}>
-        <a href="" class="details">
-            <img src="lib/data/sample/user-avatar.png" />
-            <span>Ozan Y.</span>
+    <div class="logged" if={id}>
+        <a class="details" if={profile}>
+            <img src={profile.avatar || 'lib/images/avatars/user.png'} />
+            <span>{profile.fullname || profile.username}</span>
         </a>
-        <a class="exit" onclick={exit}>
+        <a class="exit" onclick={handleExit}>
             <svg viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g transform="translate(-17.000000, -16.000000)" fill="black" fill-rule="nonzero">
@@ -25,18 +25,53 @@
         @import '../styles/components/state.less';
     </style>
     <script>
-        import showLoginBox from '../scripts/showLoginBox.js';
-        this.handleLoginBox = () => showLoginBox();
-
-        import showRegisterBox from '../scripts/showRegisterBox.js';
-        this.handleRegisterBox = () => showRegisterBox();
-
-        this.id = opts.id;
+        import getUser from '../scripts/getUser.js';
+        import getProfile from '../scripts/getProfile.js';
         import logout from '../scripts/logout.js'
-        this.root.classList.add(opts.theme || 'light');
-        this.exit = () => {
-            logout();
-            this.id = undefined;
+        import showLogin from '../scripts/showLogin.js';
+        import showRegister from '../scripts/showRegister.js';
+
+        this.on('before-mount', function() {
+            this.handleState();
+        });
+        this.on('mount', function() {
+            opts.theme && this.root.classList.add(opts.theme);
+        });
+
+        this.handleLoginBox = () => showLogin();
+        this.handleRegisterBox = () => showRegister();
+        this.handleState = () => {
+            let self = this;
+            getUser(function(response) {
+                if(response.success) {
+                    self.id = response.id;
+                    self.handleInformation(self.id);
+                } else {
+                    //Handle errors
+                }
+            });
+        }
+        this.handleInformation = (id) => {
+            let self = this;
+            getProfile(id, function(response) {
+                if(response.success) {
+                    self.profile = response.profile;
+                    self.update();
+                } else {
+                    //Handle errors
+                }
+            });
+        }
+        this.handleExit = () => {
+            let self = this;
+            logout(function(response) {
+                if(response.success) {
+                    self.id = undefined;
+                    self.update();
+                } else {
+                    //Handle errors
+                }
+            });
         }
     </script>
 </graphjs-state>

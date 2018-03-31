@@ -1,0 +1,188 @@
+graphjs-star-button {
+    display: inline-block;
+    width: auto;
+    height: 50px;
+    color: @text-color-normal;
+    vertical-align: middle;
+    .transition(background-color .35s ease);
+    &:hover {
+        background-color: @contrast-color;
+    }
+    a {
+        display: inline-block;
+        overflow: hidden;
+        width: auto;
+        height: 48px;
+        vertical-align: middle;
+        .border-radius(inherit);
+        .icon {
+            display: block;
+            float: left;
+            position: relative;
+            width: 48px;
+            height: 48px;
+            text-align: center;
+            .border-radius(inherit);
+            &.default {
+                svg {
+                    path {
+                        fill: desaturate(orange, 70%);
+                    }
+                }
+            }
+            &.like {
+                svg {
+                    path {
+                        fill: desaturate(dodgerblue, 70%);
+                    }
+                }
+            }
+            &.love {
+                svg {
+                    padding-top: 3px;
+                    padding-bottom: 1px;
+                    path {
+                        fill: desaturate(crimson, 70%);
+                    }
+                }
+            }
+            &.save {
+                svg {
+                    padding-top: 3px;
+                    padding-bottom: 1px;
+                    path {
+                        fill: desaturate(lightseagreen, 70%);
+                    }
+                }
+            }
+            &::before {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: 50%;
+                bottom: 50%;
+                left: 50%;
+                width: 0%;
+                height: 0%;
+                vertical-align: middle;
+                .border-radius(@border-radius-full);
+                .transition(all .35s ease);
+            }
+            svg {
+                display: inline-block;
+                position: relative;
+                width: 50%;
+                height: 50%;
+                margin: 25%;
+                vertical-align: middle;
+                path {
+                    fill: desaturate(silver, 65%);
+                }
+            }
+        }
+        .text {
+            display: block;
+            float: left;
+            width: auto;
+            height: 50px;
+            margin: 0;
+            margin-right: 15px;
+            color: @text-color-normal;
+            font-size: 1.6em;
+            line-height: 51px;
+            letter-spacing: .015em;
+        }
+        &:hover {
+            .icon {
+                &.default {
+                    &::before {
+                        background-color: fade(orange, 15%);
+                    }
+                }
+                &.like {
+                    &::before {
+                        background-color: fade(dodgerblue, 15%);
+                    }
+                }
+                &.love {
+                    &::before {
+                        background-color: fade(crimson, 15%);
+                    }
+                }
+                &.save {
+                    &::before {
+                        background-color: fade(lightseagreen, 15%);
+                    }
+                }
+                &::before {
+                    top: -25%;
+                    right: -25%;
+                    bottom: -25%;
+                    left: -25%;
+                    width: 150%;
+                    height: 150%;
+                    background-color: fade(silver, 15%);
+                }
+            }
+        }
+        &.active {
+            .icon {
+                &.default {
+                    &::before {
+                        background-color: orange;
+                    }
+                    svg {
+                        path {
+                            fill: orange;
+                        }
+                    }
+                }
+                &.like {
+                    &::before {
+                        background-color: dodgerblue;
+                    }
+                    svg {
+                        path {
+                            fill: dodgerblue;
+                        }
+                    }
+                }
+                &.love {
+                    &::before {
+                        background-color: crimson;
+                    }
+                    svg {
+                        path {
+                            fill: crimson;
+                        }
+                    }
+                }
+                &.save {
+                    &::before {
+                        background-color: lightseagreen;
+                    }
+                    svg {
+                        path {
+                            fill: lightseagreen;
+                        }
+                    }
+                }
+                &::before {
+                    top: 50%;
+                    right: 50%;
+                    bottom: 50%;
+                    left: 50%;
+                    width: 0%;
+                    height: 0%;
+                    background-color: silver;
+                }
+                svg {
+                    path {
+                        fill: silver;
+                    }
+                }
+            }
+        }
+    }
+}

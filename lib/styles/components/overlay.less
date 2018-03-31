@@ -7,7 +7,15 @@ graphjs-overlay {
     bottom: 0;
     width: 100vw;
     height: 100vh;
+    color: fade(@text-color-strong, 65%);
     background-color: fade(black, 85%);
+    &.scroll {
+        display: block;
+        overflow-y: scroll;
+        & > div {
+            display: block;
+        }
+    }
     & > div {
         display: table-cell;
         width: 100%;
@@ -19,6 +27,7 @@ graphjs-overlay {
         & > * {
             margin-left: auto;
             margin-right: auto;
+            text-align: left;
         }
     }
 }

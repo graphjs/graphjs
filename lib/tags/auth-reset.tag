@@ -3,7 +3,7 @@
         <div class="title">{opts.title || 'Reset Password'}</div>
     </div>
     <div class="warning" if={warningMessages.length > 0}>
-        <ul>
+        <ul if={warningMessages.length > 0} class="fail">
             <li each={warningMessage in warningMessages}>{warningMessage}</li>
         </ul>
     </div>
@@ -24,10 +24,11 @@
     </style>
     <script>
         import reset from '../scripts/reset.js';
+        import showAlert from '../scripts/showAlert.js';
+        import showRegister from '../scripts/showRegister.js';
 
-        import showRegisterBox from '../scripts/showRegisterBox.js';
-        this.handleRegisterBox = () => showRegisterBox();
-        
+        this.handleRegisterBox = () => showRegister();
+
         this.warningMessages = [];
         this.checkEmailPattern = () => {
             let warningMessage = 'Email is invalid.';
@@ -51,7 +52,23 @@
         this.handleSubmit = (event) => {
             event.preventDefault();
             this.validateForm() && reset(
-                this.refs.email.value
+                this.refs.email.value,
+                function(response) {
+                    if(response.success) {
+                        showAlert({
+                            title: 'Email Sent!',
+                            message: 'An email sent to your email address.'
+                        });
+                    } else {
+                        showAlert({
+                            title: 'Reset Failed!',
+                            message: response.reason || 'Please try entering your email again.',
+                            customoption: 'Retry',
+                            show: 'reset',
+                            negativeoption: 'Cancel'
+                        });
+                    }
+                }
             );
         }
     </script>

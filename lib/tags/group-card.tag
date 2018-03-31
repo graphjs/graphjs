@@ -1,10 +1,16 @@
 <graphjs-group-card class="card box">
-    <div class="information">
-        <img src="lib/data/sample/group-picture.png" />
-        <a href="">Freelance Web Developers</a>
-        <p>37 Members</p>
+    <div class="information" if={group}>
+        <img src={group.cover || 'lib/images/covers/group.png'} />
+        <a data-link="group" data-id={id} onclick={handleShow} if={group}>{group.title}</a>
+        <p>{group.count == 1 ? group.count + ' Member' : group.count + ' Members'}</p>
     </div>
-    <button>View Group</button>
+    <div class="information" if={!group}>
+        <img src="lib/images/covers/group.png" />
+        <a>Group doesn't exist.</a>
+        <p>We couldn't find any group matching this id.</p>
+    </div>
+    <button if={group} onclick={joined ? handleLeave : handleJoin}>{joined ? 'Leave Group' : 'Join Group'}</button>
+    <button if={!group} onclick={handleUpdate}>Refresh</button>
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
@@ -12,6 +18,88 @@
         @import '../styles/components/group-card.less';
     </style>
     <script>
-        this.root.classList.add(opts.theme || 'light');
+        import getGroup from '../scripts/getGroup.js';
+        import joinGroup from '../scripts/joinGroup.js';
+        import leaveGroup from '../scripts/leaveGroup.js';
+        import showGroup from '../scripts/showGroup.js';
+        import getUser from '../scripts/getUser.js';
+        import listMembers from '../scripts/listMembers.js';
+
+        this.id = opts.id;
+        this.members = opts.id;
+
+        this.on('before-mount', function() {
+            this.handleInformation();
+            this.handleMembers();
+        });
+        this.on('mount', function() {
+            opts.theme && this.root.classList.add(opts.theme);
+        });
+
+        this.handleInformation = () => {
+            let self = this;
+            getGroup(self.id, function(response) {
+                if(response.success) {
+                    self.group = response.group;
+                    self.update();
+                } else {
+                    //Handle errors
+                }
+            });
+        }
+        this.handleMembers = () => {
+            let self = this;
+            listMembers(self.id, function(response) {
+                if(response.success) {
+                    self.members = response.members;
+                    self.update();
+                    getUser(function(response) {
+                        if(response.success) {
+                            self.joined = self.members.includes(response.id);
+                            self.update();
+                        } else {
+                            //Handle errors
+                        }
+                    });
+                } else {
+                    //Handle errors
+                }
+            });
+        };
+        this.handleShow = (event) => {
+            event.preventDefault();
+            let dataset = event.currentTarget.dataset;
+            switch(dataset.link) {
+                case 'group':
+                    showGroup({
+                        id: dataset.id,
+                        scroll: true
+                    });
+                    break;
+            }
+        }
+        this.handleJoin = () => {
+            let self = this;
+            joinGroup(self.id, function(response) {
+                if(response.success) {
+                    self.joined = true;
+                    self.update();
+                } else {
+                    //Handle errors
+                }
+            });
+        }
+        this.handleLeave = () => {
+            let self = this;
+            leaveGroup(self.id, function(response) {
+                if(response.success) {
+                    self.joined = false;
+                    self.update();
+                } else {
+                    //Handle errors
+                }
+            });
+        }
+        this.handleUpdate = () => this.update();
     </script>
 </graphjs-group-card>

@@ -1,67 +1,137 @@
 graphjs-forum-thread {
     display: block;
-    .content {
-        .no-padding !important;
-        .entry {
-            padding: 2.5em;
-            background-color: @contrast-color;
-            .credit {
-                .credit-metrics(50px);
-                margin-bottom: 1.5em;
+    color: fade(@text-color-strong, 65%);
+    &.composer {
+        .content {
+            .thread {
+                padding-bottom: 18em;
             }
-            article {
-                line-height: 150%;
+            .reply {
+                bottom: 0;
+            }
+        }
+    }
+    .content {
+        position: relative;
+        .no-padding !important;
+        vertical-align: middle;
+        .thread {
+            overflow-y: scroll;
+            position: relative;
+            max-height: 50em;
+            padding-bottom: 3em;
+            /*.transition(padding-bottom .35s ease);*/
+            .title {
+                position: relative;
+                z-index: 2;
+                padding: 1.5em 2.5em;
+                line-height: 100%;
+                background-color: fade(@contrast-color, 65%);
+                .box-shadow(0 2px 1px 0px rgba(0, 0, 0, 0.075));
                 h1 {
                     .no-margin;
-                    margin-bottom: .5em;
                     color: @text-color-strong;
                     .regular-font;
                     font-size: 1.75em;
                     line-height: 150%;
                 }
-                p {
-                    font-size: 1.05em;
-                    & + p {
-                        margin-top: 1em;
+            }
+            .replies {
+                padding-right: 2.5em;
+                padding-left: 2.5em;
+                background-color: @shade-color;
+                .item {
+                    padding: 1.5em 0;
+                    border-top: 1px dotted fade(black, 15%);
+                    /*
+                    &:first-child {
+                        line-height: 150%;
+                        border-top: none !important;
+                        .credit {
+                            margin-bottom: 1.5em;
+                        }
+                        p {
+                            margin-left: 0;
+                            font-size: 1.05em;
+                            & + p {
+                                margin-top: 1em;
+                            }
+                        }
+                    }
+                    */
+                    .credit {
+                        .credit-metrics(3em);
+                        margin-bottom: .25em;
+                        span {
+                            color: @text-color-normal;
+                        }
+                    }
+                    p {
+                        margin-left: 40px * 1.2;
+                        .regular-font;
+                        line-height: 150%;
                     }
                 }
             }
         }
-        .replies {
-            padding: 2.5em;
-            background-color: @shade-color;
+        .reply {
+            display: inline-block;
+            position: absolute;
+            right: 0;
+            bottom: -15em;
+            left: 0;
+            width: 100%;
+            height: 18em;
+            padding: 1.5em 2.5em;
+            padding-top: 0;
+            border-top: 2px solid @primary-color;
+            background-color: @contrast-color;
+            .box-shadow(0 -2px 1px 0px fade(black, 7.5%));
+            /*.transition(bottom .35s ease);*/
             .synopsis {
                 display: inline-block;
+                position: relative;
                 width: 100%;
-                margin-bottom: 1em;
-                button {
-                    float: right;
-                    width: auto;
-                    font-size: .75em;
-                }
-            }
-            .item {
-                margin-bottom: 1.25em;
-                .credit {
-                    .credit-metrics(40px);
-                    margin-bottom: .25em;
-                    span {
-                        color: @text-color-normal;
+                padding: calc(1em - 1px) 0;
+                background-color: @contrast-color;
+                border-bottom: 1px dotted fade(black, 15%);
+                & > b {
+                    &::after {
+                        content: '\00b7';
+                        display: inline;
+                        margin: 0 .25em;
                     }
                 }
-                p {
-                    margin-left: 40px * 1.2;
-                    .regular-font;
-                    font-size: .95em;
-                    line-height: 150%;
+                & > a {
+                    display: inline-block;
+                    height: 1em;
+                    &.icon {
+                        float: right;
+                        position: relative;
+                        top: .1em;
+                        &.reverse {
+                            top: -.1em;
+                            .transform(scaleY(-1));
+                        }
+                        svg {
+                            width: auto;
+                            height: .8em;
+                            padding: .1em 0;
+                            path {
+                                fill: @primary-color;
+                            }
+                        }
+                    }
                 }
             }
-            .reply {
-                display: inline-block;
-                width: 100%;
+            form {
                 textarea {
                     width: 100%;
-                    height: 7.5em;
+                    height: 9em;
+                    margin-top: 1em;
+                    .no-padding;
+                    line-height: 150%;
+                    border: none;
                     &.closed {
                         height: 0;
                         border: none;

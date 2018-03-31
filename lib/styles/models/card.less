@@ -4,56 +4,34 @@
     background-color: @contrast-color;
     .information {
         height: 15em;
-        a {
-            display: inline-block;
-            overflow: hidden;
-            width: 90%;
-            max-height: 2.5em;
-            margin: 0 5%;
-            margin-top: .5em;
-            color: @primary-color;
-            font-size: 1.2em;
-            line-height: 1.25em;
-            .heavy-font;
-            .text-color-states(@primary-color);
-        }
-        p {
-            display: inline-block;
-            overflow: hidden;
-            width: 90%;
-            max-height: 2.5em;
-            margin: 0 5%;
-            margin-top: .75em;
-            color: @text-color-normal;
-            font-size: .95em;
-            line-height: 1.25em;
-        }
     }
     button {
         width: 100%;
         height: 3em;
         .border-radius(0);
+        color: white;
+        background-color: @primary-color;
     }
     &.color {
         background-color: @primary-color;
         .option {
             svg {
                 path {
-                    fill: @contrast-color;
+                    fill: white;
                 }
             }
         }
         .information {
             a {
-                .text-color-states(@contrast-color);
+                .text-color-states(white);
             }
             p {
-                color: fade(@contrast-color, 65%);
+                color: fade(white, 65%);
             }
         }
         button {
             color: @primary-color;
-            background-color: @contrast-color;
+            background-color: white;
         }
     }
 }

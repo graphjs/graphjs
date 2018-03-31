@@ -3,7 +3,7 @@
         <div class="title">{opts.title || 'Register'}</div>
     </div>
     <div class="warning" if={warningMessages.length > 0}>
-        <ul>
+        <ul if={warningMessages.length > 0} class="fail">
             <li each={warningMessage in warningMessages}>{warningMessage}</li>
         </ul>
     </div>
@@ -27,9 +27,10 @@
     </style>
     <script>
         import register from '../scripts/register.js';
+        import showAlert from '../scripts/showAlert.js';
+        import showLogin from '../scripts/showLogin.js';
 
-        import showLoginBox from '../scripts/showLoginBox.js';
-        this.handleLoginBox = () => showLoginBox();
+        this.handleLoginBox = () => showLogin();
 
         this.warningMessages = [];
         /*
@@ -119,7 +120,26 @@
         	this.validateForm() && register(
         		this.refs.username.value,
         		this.refs.email.value,
-        		this.refs.password.value
+        		this.refs.password.value,
+                function(response) {
+                    if(response.success) {
+                        showAlert({
+                            title: 'Register Succeeded!',
+                            message: 'You are successfully registered.',
+                            customoption: 'Login',
+                            show: 'login',
+                            negativeoption: 'Cancel'
+                        });
+                    } else {
+                        showAlert({
+                            title: 'Register Failed!',
+                            message: response.reason || 'Please try registering again.',
+                            customoption: 'Retry',
+                            show: 'register',
+                            negativeoption: 'Cancel'
+                        });
+                    }
+                }
         	);
         }
     </script>
