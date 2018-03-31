@@ -1,4 +1,4 @@
-pho.js
+dist/pho.js
 node_modules
 logs
 *.log
