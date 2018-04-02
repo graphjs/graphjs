@@ -52,11 +52,39 @@
         import sendMessage from '../scripts/sendMessage.js';
         import getMembers from '../scripts/getMembers.js';
 
+        this.userId = '';
+        this.activePartner = '';
+        this.activePartnerName = '';
+        this.partners = [];
+        this.possiblePartnersData = {}
+        this.possiblePartners = [];
+        this.matchedPartners = [];
+        this.activeMessages = {};
+        this.messages = [];
+        this.list = [];
+        this.frequentlyUpdateTime;
+        this.newMessageOption = false;
+        this.selectedTextLength = 0;
+
+        this.on('before-mount', function() {
+            this.handleUser();
+            this.handleConversations();
+            this.frequentlyUpdateTime = setInterval(this.handleTime,  60 * 1000);
+        });
+        this.on('unmount', function() {
+            clearInterval(this.frequentlyUpdateTime);
+        });
+        this.on('updated', function() {
+            this.activePartner != '' || this.refs.partners.firstElementChild.click();
+            this.refs.messages.scrollTop = this.refs.messages.scrollHeight;
+        });
+
         this.handleConversations = () => {
             let self = this;
             getConversations(function(response) {
                 if(response.success) {
                     self.handleList(response.messages);
+                    self.update();
                 } else {
                     //Handle errors
                 }
@@ -179,6 +207,8 @@
             }
         }
         this.handleDisplay = (event) => {
+            let id = event.target.dataset.partner;
+            this.activePartner = id;
             let anchors = this.refs.partners.children;
             this.newMessageOption = false;
             this.matchedPartners = [];
@@ -186,8 +216,7 @@
                 anchor.classList.remove('active');
             }
             event.target.classList.hasOwnProperty('unread') || event.target.classList.remove('unread');
-            event.target.classList.hasOwnProperty('active') || event.target.classList.add('active');
-            let id = event.target.dataset.partner;
+            event.target.classList.add('active');
             this.handleConversation(id);
             this.handleTitle(id);
         }
@@ -255,37 +284,8 @@
             });
         }
         this.handleTitle = (id) => {
-            let query = 'a[data-partner="' + id + '"] b';
-            this.activePartnerName = document.querySelectorAll(query) ? document.querySelectorAll(query)[0].innerHTML : '';
+            //this.activePartnerName = this.list.length < 0 ? this.list[id].username : '';
             this.update();
         }
-
-        this.userId = '';
-        this.activePartner = '';
-        this.activePartnerName = '';
-        this.partners = [];
-        this.possiblePartnersData = {}
-        this.possiblePartners = [];
-        this.matchedPartners = [];
-        this.activeMessages = {};
-        this.messages = [];
-        this.list = [];
-        this.frequentlyUpdateTime;
-        this.newMessageOption = false;
-        this.selectedTextLength = 0;
-
-        this.on('mount', function() {
-            this.handleUser();
-            this.handleConversations();
-            this.frequentlyUpdateTime = setInterval(this.handleTime,  60 * 1000);
-        });
-        this.on('unmount', function() {
-            clearInterval(this.frequentlyUpdateTime);
-        });
-
-        this.on('updated', function() {
-            document.querySelector('.sidebar .active') || this.refs.partners.firstElementChild.click()
-            this.refs.messages.scrollTop = this.refs.messages.scrollHeight;
-        });
     </script>
 </graphjs-messages>

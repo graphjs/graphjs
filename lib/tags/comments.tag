@@ -89,7 +89,8 @@
         this.handleComment = (event) => {
             event.preventDefault();
             let self = this;
-            addComment(window.location.href, self.refs.composer.value, function(response) {
+            let url = window.location.href.replace(/\/$/, "");
+            addComment(url, self.refs.composer.value, function(response) {
                 if(response.success) {
                     self.handleContent(function() {
                         self.refs.scrollingContent.scrollTop = self.refs.scrollingContent.scrollHeight;
