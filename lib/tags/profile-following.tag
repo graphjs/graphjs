@@ -1,7 +1,9 @@
 <graphjs-profile-following class="wallet">
     <div class="content">
+        <!--
         <p if={list.length <= 0}>This user is not following any users.</p>
         <p if={list.length > 0}>{'Following ' + list.length + ' User' + (list.length > 1 ? 's' : '')}</p>
+        -->
         <graphjs-profile-card each={id in list} id={id}></graphjs-profile-card>
     </div>
     <style type="less">

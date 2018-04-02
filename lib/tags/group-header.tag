@@ -5,7 +5,7 @@
         <p>{group.description}</p>
         <button onclick={joined ? handleLeave : handleJoin}>
             {joined ? 'Leave Group' : 'Join Group'}
-            <span if={group.count}>{group.count.length}</span>
+            <span if={group.count}>{group.count}</span>
         </button>
     </div>
     <div class="information" if={!group}>

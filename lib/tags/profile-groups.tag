@@ -1,7 +1,9 @@
 <graphjs-profile-groups class="wallet">
     <div class="content">
+        <!--
         <p if={list.length <= 0}>This does not belong to any group.</p>
         <p if={list.length > 0}>{'Member of ' + list.length + ' Group' + (list.length > 1 ? 's' : '')}</p>
+        -->
         <graphjs-group-card each={id in list} id={id}></graphjs-group-card>
     </div>
     <style type="less">

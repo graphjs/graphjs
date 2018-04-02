@@ -63,7 +63,7 @@
                         showAlert({
                             title: 'Login Succeeded!',
                             message: 'You are successfully logged in.',
-                            customoption: 'Thanks!'
+                            customoption: 'Done'
                         });
                     } else {
                         showAlert({
