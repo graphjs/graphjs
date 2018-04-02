@@ -62,7 +62,8 @@
         }
         this.handleContent = (callback) => {
             let self = this;
-            getComments(window.location.href, function(response) {
+            let url = window.location.href.replace(/\/$/, "");
+            getComments(url, function(response) {
                 if(response.success) {
                     self.comments = [];
                     for(let comment of response.comments) {
