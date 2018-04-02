@@ -31,7 +31,11 @@
 	<docs-index></docs-index>
     <script src="pho.js" charset="utf-8"></script>
     <script>
-        Pho.init("16D58CF2-FD88-4A49-972B-6F60054BF023");
+        if(window.location.href.replace(/\/$/, "") == 'http://docs.graphjs.com') {
+            Pho.init("16D58CF2-FD88-4A49-972B-6F60054BF023");
+        } else {
+            Pho.init("79982844-6a27-4b3b-b77f-419a79be0e10");
+        }
     </script>
 </body>
 </html>

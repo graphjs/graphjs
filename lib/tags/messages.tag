@@ -177,7 +177,7 @@
                 if(!event.shiftKey) {
                     event.target.value = '';
                     let randomNumber = Math.floor(Math.random() * 1000000);
-                    self.activeMessages[randomNumber] = {from: this.userId, is_read: false, message: value, timestamp: false, to: this.activePartner};
+                    self.activeMessages[randomNumber] = {from: self.userId, is_read: false, message: value, timestamp: false, to: self.activePartner};
                     self.messages.push(randomNumber);
                     self.refs.messages.scrollTop = self.refs.messages.scrollHeight;
                     self.partners.sort(function(x, y) {
