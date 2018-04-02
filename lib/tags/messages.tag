@@ -179,7 +179,6 @@
             }
         }
         this.handleDisplay = (event) => {
-            console.log('D I S P L A Y')
             let anchors = this.refs.partners.children;
             this.newMessageOption = false;
             this.matchedPartners = [];

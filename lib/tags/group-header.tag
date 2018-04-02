@@ -44,7 +44,6 @@
             getGroup(self.id, function(response) {
                 if(response.success) {
                     self.group = response.group;
-                    console.log(self.group.count)
                     self.update();
                 } else {
                     //Handle errors

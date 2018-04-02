@@ -18,7 +18,6 @@
             listMembers(self.id, function(response) {
                 if(response.success) {
                     self.list = response.members;
-                    console.log(self.list)
                     self.update();
                 } else {
                     //Handle error

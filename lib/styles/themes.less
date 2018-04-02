@@ -59,6 +59,15 @@
 
     graphjs-alert {
         color: fade(@text-color-strong, 65%);
+        & > button {
+            background-color: @contrast-color !important;
+            &:hover {
+                background-color: @contrast-color !important;
+            }
+            &.danger {
+                background-color: @contrast-color;
+            }
+        }
     }
 
     graphjs-auth {

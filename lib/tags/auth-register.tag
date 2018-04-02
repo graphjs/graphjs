@@ -27,6 +27,7 @@
     </style>
     <script>
         import register from '../scripts/register.js';
+        import login from '../scripts/login.js';
         import showAlert from '../scripts/showAlert.js';
         import showLogin from '../scripts/showLogin.js';
 
@@ -116,20 +117,35 @@
             ) ? true : false;
         }
         this.handleSubmit = (event) => {
+            let self = this;
             event.preventDefault();
         	this.validateForm() && register(
-        		this.refs.username.value,
-        		this.refs.email.value,
-        		this.refs.password.value,
+        		self.refs.username.value,
+        		self.refs.email.value,
+        		self.refs.password.value,
                 function(response) {
                     if(response.success) {
-                        showAlert({
-                            title: 'Register Succeeded!',
-                            message: 'You are successfully registered.',
-                            customoption: 'Login',
-                            show: 'login',
-                            negativeoption: 'Cancel'
-                        });
+                        //Auto-Login
+                        login(
+                            self.refs.username.value,
+                            self.refs.password.value,
+                            function(response) {
+                                if(response.success) {
+                                    showAlert({
+                                        title: 'Register Successful!',
+                                        message: 'You are successfully registered and automatically logged in.'
+                                    });
+                                } else {
+                                    showAlert({
+                                        title: 'Register Successful!',
+                                        message: 'Please login to continue.',
+                                        customoption: 'Login',
+                                        show: 'login',
+                                        negativeoption: 'Cancel'
+                                    });
+                                }
+                            }
+                        );
                     } else {
                         showAlert({
                             title: 'Register Failed!',
