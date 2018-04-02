@@ -63,8 +63,7 @@
                         showAlert({
                             title: 'Login Succeeded!',
                             message: 'You are successfully logged in.',
-                            customoption: 'Go to Profile',
-                            to: '/profile'
+                            customoption: 'Thanks!'
                         });
                     } else {
                         showAlert({

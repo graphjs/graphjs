@@ -173,8 +173,10 @@
             //{"label": "Forum: List", "component": "forum-list"},
             //{"label": "Forum: Compose", "component": "forum-compose"},
             //{"label": "Forum: Thread", "component": "forum-thread"},
-            {"label": "Profile Card", "component": "profile-card"},
-            {"label": "Group Card", "component": "group-card"},
+            {"label": "Profile", "component": "profile"},
+            {"label": "Profile: Card", "component": "profile-card"},
+            {"label": "Group", "component": "group"},
+            {"label": "Group: Card", "component": "group-card"},
             {"label": "State", "component": "state"},
             {"label": "Alert", "component": "alert"}
         ];

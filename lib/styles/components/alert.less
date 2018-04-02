@@ -9,7 +9,7 @@ graphjs-alert {
         }
     }
     & > button {
-        .text-color-states(@primary-color);
+        .text-color-states(@primary-color) !important;
         .bold-font;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
@@ -19,7 +19,7 @@ graphjs-alert {
             background-color: @contrast-color !important;
         }
         &.danger {
-            .text-color-states(@danger-color);
+            .text-color-states(@danger-color) !important;
             background-color: @contrast-color;
         }
         &.full {
