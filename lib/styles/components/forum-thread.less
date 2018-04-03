@@ -1,6 +1,13 @@
 graphjs-forum-thread {
     display: block;
     color: fade(@text-color-strong, 65%);
+    &.loading {
+        &.blocked {
+            &::after {
+                content: "Login to see the forum";
+            }
+        }
+    }
     &.composer {
         .content {
             .thread {

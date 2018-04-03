@@ -1,4 +1,4 @@
-<graphjs-forum-compose class={opts.minor != true && 'box'}>
+<graphjs-forum-compose class={(opts.minor ? '' : 'box') + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')} onclick={blocked ? handleBlock : ''}>
     <div class="header">
         <div class="title">{opts.title || 'New Thread'}</div>
         <a class="option right" data-link="list" onclick={opts.minor ? handleCallback : handleShow}>
@@ -32,11 +32,38 @@
         @import '../styles/components/forum-compose.less';
     </style>
     <script>
+        import getUser from '../scripts/getUser.js';
         import startThread from '../scripts/startThread.js';
         import showForumList from '../scripts/showForumList.js';
         import showForumThread from '../scripts/showForumThread.js';
+        import showLogin from '../scripts/showLogin.js';
 
+        this.blocked = false;
         this.warningMessages = [];
+
+        this.on('before-mount', function() {
+            this.handleUser();
+        });
+
+        this.handleUser = () => {
+            let self = this;
+            getUser(function(response) {
+                if(response.success) {
+                    self.userId = response.id;
+                    self.loaded = true;
+                    self.update();
+                } else {
+                    self.loaded = false;
+                    self.blocked = true;
+                    self.update();
+                    //Handle errors
+                }
+            });
+        }
+        this.handleBlock = (event) => {
+            event.preventDefault();
+            showLogin();
+        }
         this.checkTitle = () => {
             let warningMessage = 'Title is too short.';
             if(this.refs.title.value.length >= 10) {

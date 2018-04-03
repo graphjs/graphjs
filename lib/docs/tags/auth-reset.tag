@@ -1,5 +1,5 @@
 <docs-auth-reset>
-    <h1>{opts.title}</h1>
+    <h1>{opts.label}</h1>
     <h2><{opts.component}></h2>
     <section class="demo" ref="liveDemo"></section>
     <section class="options">

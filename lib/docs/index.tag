@@ -185,9 +185,9 @@
             let component = document.createAttribute('component');
             component.value = 'graphjs-' + itemComponent;
             currentElement.setAttributeNode(component);
-            let title = document.createAttribute('title');
-            title.value = itemLabel;
-            currentElement.setAttributeNode(title);
+            let label = document.createAttribute('label');
+            label.value = itemLabel;
+            currentElement.setAttributeNode(label);
             riot.mount(currentElement);
             this.refs.main.appendChild(currentElement);
         }

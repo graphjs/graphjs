@@ -1,4 +1,4 @@
-<graphjs-messages class="box">
+<graphjs-messages class={'box' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')} onclick={blocked ? handleBlock : ''}>
     <div class="header">
         <div class="title">{'Messages' + (activePartnerName != '' ? ' with ' +  activePartnerName : '')}</div>
         <a class="option left" onclick={handleNewMessage}>
@@ -51,7 +51,9 @@
         import getProfile from '../scripts/getProfile.js';
         import sendMessage from '../scripts/sendMessage.js';
         import getMembers from '../scripts/getMembers.js';
+        import showLogin from '../scripts/showLogin.js';
 
+        this.blocked = false;
         this.userId = '';
         this.activePartner = '';
         this.activePartnerName = '';
@@ -86,6 +88,25 @@
             this.refs.messages.scrollTop = this.refs.messages.scrollHeight;
         });
 
+        this.handleUser = () => {
+            let self = this;
+            getUser(function(response) {
+                if(response.success) {
+                    self.userId = response.id;
+                    self.loaded = true;
+                    self.update();
+                } else {
+                    self.loaded = false;
+                    self.blocked = true;
+                    self.update();
+                    //Handle errors
+                }
+            });
+        }
+        this.handleBlock = (event) => {
+            event.preventDefault();
+            showLogin();
+        }
         this.handleConversations = () => {
             let self = this;
             getConversations(function(response) {
@@ -279,16 +300,6 @@
             let query = '.list a[data-partner="' + partner + '"]';
             this.update();
             document.querySelectorAll(query).length > 0 && document.querySelectorAll(query)[0].click();
-        }
-        this.handleUser = () => {
-            let self = this;
-            getUser(function(response) {
-                if(response.success) {
-                    self.userId = response.id;
-                } else {
-                    //Handle errors
-                }
-            });
         }
         this.handleTitle = (id) => {
             this.activePartnerName = this.list.length > 0 ? this.list[id].username : '';

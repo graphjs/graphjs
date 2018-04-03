@@ -1,4 +1,4 @@
-<graphjs-forum-thread>
+<graphjs-forum-thread class={(opts.minor ? '' : 'box') + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')} onclick={blocked ? handleBlock : ''}>
     <div class="header">
         <a class="option left" data-link="list" onclick={opts.minor ? handleCallback : handleShow}>
             <svg fill="blue" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -54,21 +54,43 @@
         @import '../styles/components/forum-thread.less';
     </style>
     <script>
+        import getUser from '../scripts/getUser.js';
         import getThread from '../scripts/getThread.js';
         import replyThread from '../scripts/replyThread.js';
         import showForumList from '../scripts/showForumList.js';
         import getProfile from '../scripts/getProfile.js';
+        import showLogin from '../scripts/showLogin.js';
 
+        this.blocked = false;
         this.id = opts.id;
         this.entries = [];
         this.authorsData = {};
         this.composerReady = false;
 
-        this.on('mount', function() {
-            opts.minor || this.root.classList.add('box');
+        this.on('before-mount', function() {
+            this.handleUser();
             this.handleContent();
         });
 
+        this.handleUser = () => {
+            let self = this;
+            getUser(function(response) {
+                if(response.success) {
+                    self.userId = response.id;
+                    self.loaded = true;
+                    self.update();
+                } else {
+                    self.loaded = false;
+                    self.blocked = true;
+                    self.update();
+                    //Handle errors
+                }
+            });
+        }
+        this.handleBlock = (event) => {
+            event.preventDefault();
+            showLogin();
+        }
         this.handleContent = (callback) => {
             let self = this;
             self.id && getThread(self.id, function(response) {
