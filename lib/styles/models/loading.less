@@ -45,22 +45,23 @@
             height: 3.5em;
             margin-top: -1.75em;
             margin-left: -7em;
-            color: lighten(@secondary-color, 15%);
+            color: @text-color-weak;
             .bold-font;
             line-height: 3.5em;
             text-align: center;
             border-radius: .5em;
             border-width: 3px;
             border-style: solid;
-            border-color: lighten(@secondary-color, 15%);
+            border-color: @text-color-weak;
             .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
             pointer-events: all;
             .transition(all 1s ease);
         }
         &:hover {
             &::after {
-                color: @secondary-color;
-                border-color: @secondary-color;
+                color: @text-color-normal;
+                border-color: @text-color-normal;
+                background-color: @contrast-color;
             }
         }
     }

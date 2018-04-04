@@ -58,6 +58,7 @@
         import showLogin from '../scripts/showLogin.js';
 
         this.blocked = false;
+        this.access = opts.access || 'public';
         this.threads = [];
         this.threadsData = {};
         this.matchedThreads = [];
@@ -75,8 +76,12 @@
                     self.loaded = true;
                     self.update();
                 } else {
-                    self.loaded = false;
-                    self.blocked = true;
+                    if(self.access != 'private') {
+                        self.loaded = true;
+                    } else {
+                        self.loaded = false;
+                        self.blocked = true;
+                    }
                     self.update();
                     //Handle errors
                 }

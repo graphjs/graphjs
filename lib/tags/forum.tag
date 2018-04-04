@@ -2,12 +2,14 @@
     <graphjs-forum-list
         minor={true}
         title={opts.title}
+        access={opts.access}
         callback={changeProperties}
         if={this.active == 'list'}
     />
     <graphjs-forum-thread
         minor={true}
         title={opts.title}
+        access={opts.access}
         id={id}
         callback={changeProperties}
         if={this.active == 'thread'}
