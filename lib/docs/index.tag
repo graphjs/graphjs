@@ -75,6 +75,9 @@
                 .demo {
                     width: 100%;
                     margin-bottom: 5%;
+                    & > * {
+                        margin: 0;
+                    }
                 }
                 .options {
                     form {

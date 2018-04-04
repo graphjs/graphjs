@@ -50,6 +50,9 @@ graphjs-forum-thread {
                 .item {
                     padding: 1.5em 0;
                     border-top: 1px dotted fade(black, 15%);
+                    &:first-child {
+                        border-top: none !important;
+                    }
                     /*
                     &:first-child {
                         line-height: 150%;
@@ -102,16 +105,15 @@ graphjs-forum-thread {
                 padding: calc(1em - 1px) 0;
                 background-color: @contrast-color;
                 border-bottom: 1px dotted fade(black, 15%);
-                & > b {
-                    &::after {
-                        content: '\00b7';
-                        display: inline;
-                        margin: 0 .25em;
-                    }
-                }
+                cursor: pointer;
                 & > a {
                     display: inline-block;
                     height: 1em;
+                    &:last-of-type {
+                        &::before {
+                            display: none;
+                        }
+                    }
                     &.icon {
                         float: right;
                         position: relative;
@@ -129,9 +131,21 @@ graphjs-forum-thread {
                             }
                         }
                     }
+                    &::before {
+                        content: '\00b7';
+                        display: inline;
+                        margin: 0 .25em;
+                    }
                 }
             }
             form {
+                &.loading {
+                    &.blocked {
+                        &::after {
+                            content: "Login to write a reply";
+                        }
+                    }
+                }
                 textarea {
                     width: 100%;
                     height: 9em;

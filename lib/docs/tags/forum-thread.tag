@@ -8,6 +8,15 @@
                 <legend>Title</legend>
                 <input onkeyup={updateText} type="text" value={specs.title} placeholder="Thread by USERNAME" />
             </fieldset>
+            <fieldset name="access">
+                <legend>Access</legend>
+                <div class="radiobutton">
+                    <input onclick={updateRadio} type="radio" name="access" id="public" checked={specs.access == 'public'} />
+                    <label for="public">Public</label>
+                    <input onclick={updateRadio} type="radio" name="access" id="private" checked={specs.access == 'private'} />
+                    <label for="private">Private</label>
+                <div>
+            </fieldset>
             <xmp ref="inputCode" class="code">{input}</xmp>
             <button onclick={handleSubmit}>Apply</button>
         </form>
@@ -15,11 +24,17 @@
     <script>
         this.input = '';
         this.specs = {
-            "id": "57dd66ff28c179bf867035a89a8c2d56"
+            "id": "57dd66ff28c179bf867035a89a8c2d56",
+            "access": "public"
         }
         this.updateText = (event) => {
             let target = event.target.parentNode.name;
             this.specs[target] = event.target.value;
+            this.handleCode();
+        }
+        this.updateRadio = (event) => {
+            let target = event.target.parentNode.parentNode.name;
+            this.specs[target] = event.target.id;
             this.handleCode();
         }
         import updateCode from '../scripts/updateCode.js';

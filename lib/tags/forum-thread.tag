@@ -1,4 +1,4 @@
-<graphjs-forum-thread class={(opts.minor ? '' : 'box') + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')} onclick={blocked ? handleBlock : ''}>
+<graphjs-forum-thread class={'composer' + (opts.minor ? '' : ' box') + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')} onclick={blocked ? handleBlock : ''}>
     <div class="header">
         <a class="option left" data-link="list" onclick={opts.minor ? handleCallback : handleShow}>
             <svg fill="blue" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -33,14 +33,14 @@
                 <b>100 views</b>
                 -->
                 <b if={entries.length > 1}>{entries.length < 2 ? (entries.length - 1) + ' reply' : (entries.length - 1) + ' replies'}</b>
-                <a>{composerReady ? 'Cancel Reply' : 'Write a Reply'}</a>
+                <a if={!composerReady}>Write a Reply</a>
                 <a class={composerReady ? 'icon' : 'reverse icon'}>
                     <svg viewBox="0 0 62 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <path transform="translate(-19.000000, 0.000000)" d="M78.5,2.4 C81.1,5 81.1,9.1 78.5,11.6 L54.6,35.6 C52,38.2 47.9,38.2 45.4,35.6 L21.5,11.7 C18.9,9.1 18.9,5 21.5,2.5 C24.1,-0.1 28.2,-0.1 30.7,2.5 L50,21.7 L69.3,2.4 C71.8,-0.1 76,-0.1 78.5,2.4 Z"></path>
                     </svg>
                 </a>
             </div>
-            <form>
+            <form class={userId ? '' : 'loading blocked'} onclick={userId ? '' : handleBlock}>
                 <textarea ref="composer" placeholder="Write your reply here..."></textarea>
                 <button onclick={handleReply}>Send Reply</button>
                 <button onclick={handleClear} class="danger">Clear</button>
@@ -62,10 +62,11 @@
         import showLogin from '../scripts/showLogin.js';
 
         this.blocked = false;
+        this.access = opts.access || 'public';
         this.id = opts.id;
         this.entries = [];
         this.authorsData = {};
-        this.composerReady = false;
+        this.composerReady = true;
 
         this.on('before-mount', function() {
             this.handleUser();
@@ -80,8 +81,12 @@
                     self.loaded = true;
                     self.update();
                 } else {
-                    self.loaded = false;
-                    self.blocked = true;
+                    if(self.access != 'private') {
+                        self.loaded = true;
+                    } else {
+                        self.loaded = false;
+                        self.blocked = true;
+                    }
                     self.update();
                     //Handle errors
                 }

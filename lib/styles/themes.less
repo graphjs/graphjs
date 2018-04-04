@@ -5,8 +5,8 @@
     @shade-color: @theme-shade-color;
     @contrast-color: @theme-contrast-color;
     @text-color-strong: @theme-text-color-strong;
-    @text-color-normal: tint(@theme-text-color-strong, 25%);
-    @text-color-weak:   tint(@theme-text-color-strong, 50%);
+    @text-color-normal: fade(@theme-text-color-strong, 75%);
+    @text-color-weak:   fade(@theme-text-color-strong, 50%);
 
     input, textarea {
         color: tint(@secondary-color, 50%);
@@ -53,6 +53,33 @@
         span {
             small, time {
                 color: @text-color-weak;
+            }
+        }
+    }
+
+    .loading {
+        &:hover {
+            &::before {
+                background-color: fade(@shade-color, 85%);
+            }
+        }
+        &:not(.blocked) {
+            &::before {
+                background-color: fade(@shade-color, 65%);
+                background-image: url("../images/animations/loading-dots.gif");
+            }
+        }
+        &.blocked {
+            &::after {
+                color: @text-color-weak;
+                border-color: @text-color-weak;
+            }
+            &:hover {
+                &::after {
+                    color: @text-color-normal;
+                    border-color: @text-color-normal;
+                    background-color: @contrast-color;
+                }
             }
         }
     }
