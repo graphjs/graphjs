@@ -3,6 +3,13 @@ graphjs-messages {
     width: 800px;
     color: fade(@text-color-strong, 65%);
     .regular-font;
+    &.loading {
+        &.blocked {
+            &::after {
+                content: "Login to see messages";
+            }
+        }
+    }
     .content {
         height: 37em;
         max-height: 37em;

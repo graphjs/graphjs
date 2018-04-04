@@ -3,7 +3,7 @@
         <div class="title">{opts.title || 'Comments'}</div>
     </div>
     <div class="content" ref="scrollingContent">
-        <div class="comment">
+        <div class={'comment' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')} onclick={blocked ? handleBlock : ''}>
             <textarea ref="composer" placeholder="Write your comment here..."></textarea>
             <button onclick={handleComment}>Send Comment</button>
             <button onclick={handleClear} class="danger">Clear</button>
@@ -33,12 +33,14 @@
         @import '../styles/components/comments.less';
     </style>
     <script>
+        import getUser from '../scripts/getUser.js';
         import getComments from '../scripts/getComments.js';
         import addComment from '../scripts/addComment.js';
         import removeComment from '../scripts/removeComment.js';
-        import getUser from '../scripts/getUser.js';
         import getProfile from '../scripts/getProfile.js';
+        import showLogin from '../scripts/showLogin.js';
 
+        this.blocked = false;
         this.page = 1;
         this.pageLimit = 10;
         this.comments = [];
@@ -55,10 +57,19 @@
             getUser(function(response) {
                 if(response.success) {
                     self.userId = response.id;
+                    self.loaded = true;
+                    self.update();
                 } else {
+                    self.loaded = false;
+                    self.blocked = true;
+                    self.update();
                     //Handle errors
                 }
             });
+        }
+        this.handleBlock = (event) => {
+            event.preventDefault();
+            showLogin();
         }
         this.handleContent = (callback) => {
             let self = this;

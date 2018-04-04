@@ -1,0 +1,70 @@
+.loading {
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
+    cursor: pointer;
+    &:hover {
+        &::before {
+            background-color: fade(@shade-color, 85%);
+        }
+    }
+    &::before {
+        content: "";
+        box-sizing: border-box;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        vertical-align: middle;
+        pointer-events: all;
+        .transition(all 1s ease);
+    }
+    &:not(.blocked) {
+        &::before {
+            background-color: fade(@shade-color, 65%);
+            background-image: url("../../images/animations/loading-dots.gif");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 3em 1em;
+        }
+    }
+    &.blocked {
+        &::after {
+            content: "Login to enable";
+            box-sizing: content-box;
+            position: absolute;
+            z-index: 3;
+            top: 50%;
+            left: 50%;
+            width: 14em;
+            height: 3.5em;
+            margin-top: -1.75em;
+            margin-left: -7em;
+            color: lighten(@secondary-color, 15%);
+            .bold-font;
+            line-height: 3.5em;
+            text-align: center;
+            border-radius: .5em;
+            border-width: 3px;
+            border-style: solid;
+            border-color: lighten(@secondary-color, 15%);
+            .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
+            pointer-events: all;
+            .transition(all 1s ease);
+        }
+        &:hover {
+            &::after {
+                color: @secondary-color;
+                border-color: @secondary-color;
+            }
+        }
+    }
+    & > * {
+        filter: blur(5px);
+    }
+}

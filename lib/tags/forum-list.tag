@@ -1,4 +1,4 @@
-<graphjs-forum-list class={opts.minor != true && 'box'}>
+<graphjs-forum-list class={(opts.minor ? '' : 'box') + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')} onclick={blocked ? handleBlock : ''}>
     <div class="header">
         <div class="title">{opts.title || 'Community Forum'}</div>
     </div>
@@ -51,15 +51,42 @@
         @import '../styles/components/forum-list.less';
     </style>
     <script>
+        import getUser from '../scripts/getUser.js';
         import getThreads from '../scripts/getThreads.js';
         import showForumCompose from '../scripts/showForumCompose.js';
         import showForumThread from '../scripts/showForumThread.js';
+        import showLogin from '../scripts/showLogin.js';
 
+        this.blocked = false;
         this.threads = [];
         this.threadsData = {};
         this.matchedThreads = [];
 
-        this.on('mount', function() {
+        this.on('before-mount', function() {
+            this.handleUser();
+            this.handleContent();
+        });
+
+        this.handleUser = () => {
+            let self = this;
+            getUser(function(response) {
+                if(response.success) {
+                    self.userId = response.id;
+                    self.loaded = true;
+                    self.update();
+                } else {
+                    self.loaded = false;
+                    self.blocked = true;
+                    self.update();
+                    //Handle errors
+                }
+            });
+        }
+        this.handleBlock = (event) => {
+            event.preventDefault();
+            showLogin();
+        }
+        this.handleContent = () => {
             let self = this;
             getThreads(function(response) {
                 if(response.success) {
@@ -80,8 +107,7 @@
                     //Handle error
                 }
             });
-        });
-
+        }
         this.handleCallback = (properties) => {
             if(properties.target) {
                 properties.preventDefault();
