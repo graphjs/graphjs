@@ -1,4 +1,4 @@
-<graphjs-auth-reset class={opts.minor != true && 'box'}>
+<graphjs-auth-reset class={'root' + (opts.minor ? '' : ' box')}>
     <div class="header" if={opts.title}>
         <div class="title">{opts.title || 'Reset Password'}</div>
     </div>
@@ -16,6 +16,9 @@
             </div>
         </form>
     </div>
+    <a class="promo" href="http://graphjs.com">
+        powered by <img src="lib/images/identity/logo.svg" />
+    </a>
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';

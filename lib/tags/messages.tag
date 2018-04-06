@@ -1,4 +1,13 @@
-<graphjs-messages class={'box' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')} onclick={blocked ? handleBlock : ''}>
+<graphjs-messages
+    class={'root box' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}
+    onclick={blocked ? handleBlock : ''}
+    style={
+        (opts.minwidth ? 'min-width: ' + opts.minwidth + '; ' : '') +
+        (opts.maxwidth ? 'max-width: ' + opts.maxwidth + '; ' : '') +
+        (opts.minheight ? 'min-height: ' + opts.minheight + '; ' : '') +
+        (opts.maxheight ? 'max-height: ' + opts.maxheight + '; ' : '')
+    }
+>
     <div class="header">
         <div class="title">{'Messages' + (activePartnerName != '' ? ' with ' +  activePartnerName : '')}</div>
         <a class="option left" onclick={handleNewMessage}>
@@ -38,6 +47,9 @@
             <textarea onselect={handleTextSelection} onclick={handleTextSelection} onkeyup={handleSubmit} placeholder="Write your message here..."></textarea>
         </div>
     </div>
+    <a class="promo" href="http://graphjs.com">
+        powered by <img src="lib/images/identity/logo.svg" />
+    </a>
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';

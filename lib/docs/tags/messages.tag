@@ -9,6 +9,26 @@
                 <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.title} />
                 <input onkeyup={updateTextWithCheckbox} type="text" value={specs.title} />
             </fieldset>
+            <fieldset name="minwidth">
+                <legend>Minimum Width</legend>
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.minwidth} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.minwidth} />
+            </fieldset>
+            <fieldset name="maxwidth">
+                <legend>Maximum Width</legend>
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.maxwidth} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.maxwidth} />
+            </fieldset>
+            <fieldset name="minheight">
+                <legend>Minimum Height</legend>
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.minheight} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.minheight} />
+            </fieldset>
+            <fieldset name="maxheight">
+                <legend>Maximum Height</legend>
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.maxheight} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.maxheight} />
+            </fieldset>
             <xmp ref="inputCode" class="code">{input}</xmp>
             <button onclick={handleSubmit}>Apply</button>
         </form>

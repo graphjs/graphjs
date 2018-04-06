@@ -1,4 +1,4 @@
-<graphjs-forum-compose class={(opts.minor ? '' : 'box') + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')} onclick={blocked ? handleBlock : ''}>
+<graphjs-forum-compose class={'root' + (opts.minor ? '' : ' box') + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')} onclick={blocked ? handleBlock : ''}>
     <div class="header">
         <div class="title">{opts.title || 'New Thread'}</div>
         <a class="option right" data-link="list" onclick={opts.minor ? handleCallback : handleShow}>
@@ -25,6 +25,9 @@
             <button data-link="list" onclick={opts.minor ? handleCallback : handleShow} class="danger">Cancel</button>
         </form>
     </div>
+    <a class="promo" href="http://graphjs.com">
+        powered by <img src="lib/images/identity/logo.svg" />
+    </a>
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';

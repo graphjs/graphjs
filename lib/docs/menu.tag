@@ -12,7 +12,7 @@
         </fieldset>
     </form>
     <h2>Components</h2>
-    <a each={item in opts.items} onclick={opts.callback} data-component={item.component} data-label={item.label}>{item.label}</a>
+    <a each={item in opts.items} onclick={opts.callback} data-component={item.component} data-label={item.label} data-parent={item.parent || ''}>{item.label}</a>
     <script>
         this.theme = 'light';
         this.updateRadio = (event) => {
@@ -23,6 +23,12 @@
             document.body.classList.add(className);
         }
         this.on('mount', function() {
+            let children = document.querySelectorAll('docs-menu a[data-parent]');
+            for(let child of children) {
+                let parent = child.dataset.parent;
+                child.classList.add(parent + '-item');
+                child.classList.add('submenu');
+            }
             document.querySelectorAll('docs-menu a:first-of-type')[0].click();
         });
     </script>

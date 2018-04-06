@@ -1,4 +1,12 @@
-<graphjs-forum class="box">
+<graphjs-forum
+    class="box"
+    style={
+        (opts.minwidth ? 'min-width: ' + opts.minwidth + '; ' : '') +
+        (opts.maxwidth ? 'max-width: ' + opts.maxwidth + '; ' : '') +
+        (opts.minheight ? 'min-height: ' + opts.minheight + '; ' : '') +
+        (opts.maxheight ? 'max-height: ' + opts.maxheight + '; ' : '')
+    }
+>
     <graphjs-forum-list
         minor={true}
         title={opts.title}

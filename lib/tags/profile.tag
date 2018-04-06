@@ -1,4 +1,4 @@
-<graphjs-profile>
+<graphjs-profile class="root">
     <graphjs-profile-header
         id={opts.id}
         active={this.active}
@@ -34,6 +34,9 @@
         callback={changeProperties}
         if={this.active == 'settings'}
     />
+    <a class="promo" href="http://graphjs.com">
+        powered by <img src="lib/images/identity/logo.svg" />
+    </a>
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';

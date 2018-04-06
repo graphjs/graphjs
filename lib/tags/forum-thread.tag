@@ -1,4 +1,4 @@
-<graphjs-forum-thread class={'composer' + (opts.minor ? '' : ' box') + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')} onclick={blocked ? handleBlock : ''}>
+<graphjs-forum-thread class={'root composer' + (opts.minor ? '' : ' box') + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')} onclick={blocked ? handleBlock : ''}>
     <div class="header">
         <a class="option left" data-link="list" onclick={opts.minor ? handleCallback : handleShow}>
             <svg fill="blue" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -15,12 +15,13 @@
                 <h1>{title}</h1>
             </div>
             <div class="replies">
-                <div each={entry in entries} class="item">
+                <div each={entry, index in entries} data-id={index} class="item">
                     <div class="credit" if={authorsData.hasOwnProperty(entry.author)}>
                         <img src={authorsData[entry.author].avatar || 'lib/images/avatars/user.png'} />
                         <span>
                             <b>{authorsData[entry.author].username || 'Unknown User'}</b>
                             <time>{handleTime(entry.timestamp) || ''}</time>
+                            <a if={entry.author == userId} onclick={index == 0 ? handleDestroy : handleRemove} data-id={index}>Delete</a>
                         </span>
                     </div>
                     <p>{entry.content}</p>
@@ -47,6 +48,9 @@
             <form>
         </div>
     </div>
+    <a class="promo" href="http://graphjs.com">
+        powered by <img src="lib/images/identity/logo.svg" />
+    </a>
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
@@ -102,6 +106,7 @@
                 if(response.success) {
                     self.title = response.title;
                     self.entries = response.messages;
+                    console.log(self.entries);
                     self.update();
                     callback && callback();
                     for(let entry of self.entries) {
@@ -137,9 +142,9 @@
             let self = this;
             replyThread(self.id, self.refs.composer.value, function(response) {
                 if(response.success) {
-                    self.handleContent(/*function() {
+                    self.handleContent(function() {
                         self.refs.scrollingContent.scrollTop = self.refs.scrollingContent.scrollHeight;
-                    }*/);
+                    });
                     self.composerReady = false;
                     self.refs.composer.value = '';
                     self.root.classList.toggle('composer');
@@ -166,6 +171,44 @@
                     showForumList();
                     break;
             }
+        }
+        this.handleRemove = (event) => {
+            event.preventDefault();
+            let query = '.replies [data-id="' + event.target.dataset.id + '"]';
+            let element = document.querySelectorAll(query)[0];
+            element.parentNode.removeChild(element);
+            self.update();
+            let self = this;
+            /*
+            removeReply(event.target.dataset.id, function(response) {
+                if(response.success) {
+                    let query = '.replies [data-id="' + event.target.dataset.id + '"]';
+                    let element = document.querySelectorAll(query)[0];
+                    element.parentNode.removeChild(element);
+                    self.update();
+                } else {
+                    //Handle error
+                }
+            });
+            */
+        }
+        this.handleDestroy = (event) => {
+            event.preventDefault();
+            let query = '.option[data-link="list"]';
+            let element = document.querySelectorAll(query)[0];
+            element.click();
+            /*
+            removeReply(event.target.dataset.id, function(response) {
+                if(response.success) {
+                    event.preventDefault();
+                    let query = '[data-link="list"]';
+                    let element = document.querySelectorAll(query)[0];
+                    element.click();
+                } else {
+                    //Handle error
+                }
+            });
+            */
         }
         this.handleTime = (timestamp) => {
             let date = new Date(parseInt(timestamp) * 1000);

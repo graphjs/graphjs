@@ -16,16 +16,18 @@ module.exports = {
             {
                 test: /\.tag$/,
                 exclude: /node_modules/,
-                loader: 'riot-tag-loader',
-                options: {
-                    type: 'es6',
-                    hot: true
+                use: {
+                    loader: 'riot-tag-loader',
+                    options: {
+                        type: 'es6',
+                        hot: true
+                    }
                 }
             },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader'
+                use: 'babel-loader'
             },
             {
                 test: /\.less$/,
@@ -41,7 +43,7 @@ module.exports = {
             },
             {
                 test: /\.(jpg|png|gif|woff|svg)$/,
-                loader: 'url-loader?limit=100000'
+                use: 'url-loader?limit=100000'
             }
         ]
     }

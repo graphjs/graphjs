@@ -14,6 +14,7 @@
             aside {
                 overflow-y: scroll;
                 position: fixed;
+                z-index: 9;
                 top: 0;
                 bottom: 0;
                 left: 0;
@@ -51,11 +52,25 @@
                     }
                     a {
                         color: white;
+                        font-size: 1.1em;
+                        line-height: 200%;
                         display: inline-block;
                         width: 100%;
-                        padding: 5%;
+                        padding: 0 5%;
                         &.active {
                             color: yellow;
+                        }
+                        &.submenu {
+                            display: none;
+                            font-size: 1em;
+                            line-height: 150%;
+                            &::before {
+                                content: "└";
+                                margin-right: .25em;
+                            }
+                            &.visible {
+                                display: block;
+                            }
                         }
                     }
                 }
@@ -154,28 +169,39 @@
         import './menu.tag';
         this.activeItem = 'introduction';
         this.changeProperties = (event) => {
-            for(let element of event.target.parentNode.children) {
-                element.className == 'active' && element.classList.remove('active');
+            for(let element of event.currentTarget.parentNode.children) {
+                element.classList.remove('active');
             }
-            event.target.classList.add('active');
+            event.currentTarget.classList.add('active');
+            if(!event.currentTarget.dataset.hasOwnProperty('parent')) {
+                let removals = document.querySelectorAll('.submenu');
+                for(let removal of removals) {
+                    removal.classList.remove('visible');
+                }
+                let parent = event.currentTarget.dataset.component;
+                let query = '.' + parent + '-item';
+                for(let item of document.querySelectorAll(query)) {
+                    item.classList.add('visible');
+                }
+            }
             this.activeItem = event.target.dataset.id;
             this.update();
             this.refs.main.innerHTML = '';
-            this.createTag(event.target.dataset.component, event.target.dataset.label);
+            this.createTag(event.currentTarget.dataset.component, event.currentTarget.dataset.label);
         }
         this.items = [
             {"label": "Auth", "component": "auth"},
-            //{"label": "Auth: Register", "component": "auth-register"},
-            //{"label": "Auth: Login", "component": "auth-login"},
-            //{"label": "Auth: Reset Password", "component": "auth-reset"},
+            {"label": "Register", "component": "auth-register", "parent": "auth"},
+            {"label": "Login", "component": "auth-login", "parent": "auth"},
+            {"label": "Reset Password", "component": "auth-reset", "parent": "auth"},
             {"label": "Star: Button", "component": "star-button"},
             {"label": "Star: List", "component": "star-list"},
             {"label": "Comments", "component": "comments"},
             {"label": "Messages", "component": "messages"},
             {"label": "Forum", "component": "forum"},
-            //{"label": "Forum: List", "component": "forum-list"},
-            //{"label": "Forum: Compose", "component": "forum-compose"},
-            //{"label": "Forum: Thread", "component": "forum-thread"},
+            {"label": "List", "component": "forum-list", "parent": "forum"},
+            {"label": "Thread", "component": "forum-thread", "parent": "forum"},
+            {"label": "Compose", "component": "forum-compose", "parent": "forum"},
             {"label": "Profile", "component": "profile"},
             {"label": "Profile: Card", "component": "profile-card"},
             {"label": "Group", "component": "group"},
