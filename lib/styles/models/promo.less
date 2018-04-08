@@ -1,0 +1,40 @@
+.promo {
+    overflow: hidden;
+    display: inline-block;
+    position: absolute;
+    z-index: 10;
+    opacity: .5;
+    right: 1em;
+    bottom: 0;
+    width: auto;
+    height: 1.6em;
+    margin: 0 auto;
+    padding: 0 .4em;
+    color: white;
+    font-size: .8em;
+    line-height: 1.6em;
+    text-align: center;
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+    background-color: fade(@secondary-color, 85%);
+    .transition(all .35s ease);
+    &:hover {
+        opacity: 1;
+    }
+    &::before {
+        content: "\26A1\FE0F";
+        display: inline-block;
+        font-size: .9em;
+        letter-spacing: -.25em;
+    }
+    svg {
+        display: inline-block;
+        width: auto;
+        height: 1.8em;
+        padding-top: .4em;
+        vertical-align: middle;
+        path {
+            fill: white;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-<graphjs-profile-card class="card box">
+<graphjs-profile-card class={'card box' + (loaded ? '' : ' loading')}>
     <a onclick={handleFollow} class="left option" if={profile && userId && userId != id}>
         <svg viewBox="0 0 24 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -17,16 +17,27 @@
     </a>
     <div class="information" if={profile}>
         <img src={profile.avatar || 'lib/images/avatars/user.png'} />
-        <a>{profile.fullName || profile.username}</a>
-        <p>{profile.about}</p>
+        <a class="title">{profile.fullName || profile.username}</a>
+        <p class="description">{profile.about}</p>
     </div>
+    <button data-link="profile" data-id={id} onclick={handleShow} if={profile}>View Profile</button>
     <div class="information" if={!profile}>
         <img src="lib/images/avatars/user.png" />
         <a>User doesn't exist.</a>
         <p>We couldn't find any user matching this id.</p>
     </div>
-    <button data-link="profile" data-id={id} onclick={handleShow} if={profile}>View Profile</button>
     <button if={!profile} onclick={handleUpdate}>Refresh</button>
+    <div if={!loaded} class="placeholder loader">
+        <div class="information">
+            <div class="avatar circle fill"></div>
+            <div class="title line fill"></div>
+            <div class="description paragraph centered">
+                <div class="line fill"></div>
+                <div class="line fill"></div>
+            </div>
+            <div class="button rectangle fill"></div>
+        </div>
+    </div>
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
@@ -57,8 +68,10 @@
             getProfile(id, function(response) {
                 if(response.success) {
                     self.profile = response.profile;
+                    self.loaded = true;
                     self.update();
                 } else {
+                    self.loaded = true;
                     //Handle errors
                 }
             });

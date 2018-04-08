@@ -1,13 +1,6 @@
 graphjs-forum-thread {
     display: block;
     color: fade(@text-color-strong, 65%);
-    &.loading {
-        &.blocked {
-            &::after {
-                content: "Login to see the forum";
-            }
-        }
-    }
     &.composer {
         .content {
             .thread {
@@ -139,13 +132,6 @@ graphjs-forum-thread {
                 }
             }
             form {
-                &.loading {
-                    &.blocked {
-                        &::after {
-                            content: "Login to write a reply";
-                        }
-                    }
-                }
                 textarea {
                     width: 100%;
                     height: 9em;

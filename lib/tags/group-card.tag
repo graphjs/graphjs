@@ -1,4 +1,4 @@
-<graphjs-group-card class="card box">
+<graphjs-group-card class={'card box' + (loaded ? '' : ' loading')}>
     <div class="information" if={group}>
         <img src={group.cover || 'lib/images/covers/group.png'} />
         <a data-link="group" data-id={id} onclick={handleShow} if={group}>{group.title}</a>
@@ -11,6 +11,17 @@
     </div>
     <button if={group} onclick={joined ? handleLeave : handleJoin}>{joined ? 'Leave Group' : 'Join Group'}</button>
     <button if={!group} onclick={handleUpdate}>Refresh</button>
+    <div if={!loaded} class="placeholder loader">
+        <div class="information">
+            <div class="cover rectangle fill"></div>
+            <div class="title paragraph centered">
+                <div class="line fill"></div>
+                <div class="line fill"></div>
+            </div>
+            <div class="description line centered fill"></div>
+            <div class="button rectangle fill"></div>
+        </div>
+    </div>
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
@@ -41,8 +52,10 @@
             getGroup(self.id, function(response) {
                 if(response.success) {
                     self.group = response.group;
+                    self.loaded = true;
                     self.update();
                 } else {
+                    self.loaded = true;
                     //Handle errors
                 }
             });

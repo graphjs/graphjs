@@ -30,6 +30,7 @@ graphjs-profile-card {
         img {
             width: 6.5em;
             height: 6.5em;
+            vertical-align: middle;
             border: 4px solid fade(@secondary-color, 15%);
             .border-radius(@border-radius-full);
         }
@@ -70,6 +71,52 @@ graphjs-profile-card {
             img {
                 border: 4px solid white;
             }
+        }
+    }
+    /* Placeholder */
+    .placeholder {
+        .information {
+            display: inline-block;
+            width: 100%;
+            height: 15em;
+            padding-top: 2em;
+            .avatar {
+                display: inline-block;
+                width: 6.5em;
+                height: 6.5em;
+                margin: 0 auto;
+            }
+            .title {
+                display: inline-block;
+                width: 60%;
+                height: 1em;
+                margin: 0 20%;
+                margin-top: .75em;
+                margin-bottom: .25em;
+                .border-radius(calc(1em / 2));
+            }
+            .description {
+                display: inline-block;
+                width: 90%;
+                height: 2.5em;
+                margin: 0 5%;
+                margin-top: 1em;
+                padding: .1em 0;
+                .line {
+                    height: .85em;
+                    margin-bottom: .3em;
+                    .border-radius(calc(.85em / 2));
+                }
+            }
+        }
+        .button {
+            display: inline-block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 3.3em;
         }
     }
 }

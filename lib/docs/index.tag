@@ -106,7 +106,7 @@
                             height: 5em;
                             margin: 0;
                             margin-bottom: 2.5%;
-                            padding: 0;
+                            .no-padding;
                             border: none;
                             &:nth-child(even) {
                                 margin-left: 5%;
@@ -139,7 +139,7 @@
                                 height: inherit;
                                 max-width: 1.5em;
                                 margin: 0;
-                                padding: 0;
+                                .no-padding;
                                 & + label {
                                     float: left;
                                     height: inherit;

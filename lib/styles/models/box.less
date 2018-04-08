@@ -1,4 +1,6 @@
 .box {
+    overflow-x: hidden;
+    overflow-y: scroll;
     position: relative;
     .border-radius(@border-radius-large);
     border: 1px solid fade(@secondary-color, 3%);
@@ -90,9 +92,11 @@
         }
     }
     .content {
+        overflow: hidden;
         display: inline-block;
         width: 100%;
         padding: 2.5em;
+        vertical-align: middle;
         background-color: @shade-color;
         p {
             margin: 0;

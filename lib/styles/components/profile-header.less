@@ -35,6 +35,7 @@ graphjs-profile-header {
     .information {
         height: 15em;
         padding-top: 2em;
+        background-color: @contrast-color;
         img {
             width: 6.5em;
             height: 6.5em;
@@ -48,11 +49,10 @@ graphjs-profile-header {
             max-height: 2.5em;
             margin: 0 5%;
             margin-top: .5em;
-            color: @primary-color;
+            .text-color-states(@primary-color);
             font-size: 1.2em;
             line-height: 1.25em;
             .heavy-font;
-            .text-color-states(@primary-color);
         }
         p {
             display: inline-block;
@@ -67,31 +67,31 @@ graphjs-profile-header {
     }
     ul {
         margin: 0;
-        padding: 0;
+        .no-padding;
         font-size: 0;
+        border-top: 2px solid fade(@secondary-color, 10%);
         .border-radius(0);
-        background-color: @primary-color;
         list-style: none;
         li {
             display: inline-block;
             background-color: transparent;
             .transition(background-color .35s ease);
             &:hover {
-                background-color: fade(black, 20%);
-            }
-            &.active {
-                background-color: fade(black, 20%);
                 a {
                     opacity: 1;
-
+                }
+            }
+            &.active {
+                a {
+                    opacity: 1;
                 }
             }
             a {
                 display: inline-block;
-                opacity: .85;
+                opacity: .75;
                 padding: 0 1em;
                 cursor: pointer;
-                color: white;
+                .text-color-states(@primary-color);
                 font-size: @font-size-default * 1.1;
                 .bold-font;
                 line-height: 2.5em;
@@ -110,6 +110,49 @@ graphjs-profile-header {
             img {
                 border: 4px solid white;
             }
+        }
+    }
+    /* Placeholder */
+    .placeholder {
+        .information {
+            display: block;
+            width: 100%;
+            height: 15em;
+            max-width: 24em;
+            margin: 0 auto;
+            padding-top: 2em;
+            background-color: transparent !important;
+            .avatar {
+                display: block;
+                width: 6.5em;
+                height: 6.5em;
+                margin: 0 auto;
+            }
+            .title {
+                display: block;
+                width: 40%;
+                height: 1em;
+                margin: 0 30%;
+                margin-top: 1em;
+                .border-radius(calc(1em / 2));
+            }
+            .description {
+                display: block;
+                width: 90%;
+                height: .85em;
+                margin: 0 5%;
+                margin-top: 1.5em;
+                .border-radius(calc(.85em / 2));
+            }
+        }
+        .list {
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 2.75em;
         }
     }
 }

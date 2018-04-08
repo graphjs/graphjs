@@ -2,14 +2,21 @@
     position: relative;
     z-index: 1;
     pointer-events: none;
-    cursor: pointer;
     &:hover {
-        &::before {
+        .loader {
             background-color: fade(@shade-color, 85%);
+            &.inline {
+                background-color: transparent;
+            }
+            &.placeholder {
+                background-color: @shade-color;
+            }
         }
     }
-    &::before {
-        content: "";
+    & > * {
+        filter: blur(5px);
+    }
+    .loader {
         box-sizing: border-box;
         position: absolute;
         z-index: 2;
@@ -22,50 +29,88 @@
         text-align: center;
         vertical-align: middle;
         pointer-events: all;
+        filter: none;
         .transition(all 1s ease);
-    }
-    &:not(.blocked) {
-        &::before {
-            background-color: fade(@shade-color, 65%);
-            background-image: url("../../images/animations/loading-dots.gif");
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: 3em 1em;
-        }
-    }
-    &.blocked {
-        &::after {
-            content: "Login to enable";
-            box-sizing: content-box;
-            position: absolute;
-            z-index: 3;
-            top: 50%;
-            left: 50%;
-            width: 14em;
-            height: 3.5em;
-            margin-top: -1.75em;
-            margin-left: -7em;
-            color: @text-color-weak;
-            .bold-font;
-            line-height: 3.5em;
-            text-align: center;
-            border-radius: .5em;
-            border-width: 3px;
-            border-style: solid;
-            border-color: @text-color-weak;
-            .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
-            pointer-events: all;
-            .transition(all 1s ease);
-        }
-        &:hover {
-            &::after {
-                color: @text-color-normal;
-                border-color: @text-color-normal;
-                background-color: @contrast-color;
+        &.placeholder {
+            background-color: @shade-color;
+            .fill {
+                -moz-transition: all 2s linear;
+                -webkit-transition: all 2s linear;
+                -o-transition: all 2s linear;
+                -ms-transition: all 2s linear;
+                transition: all 2s linear;
+                -moz-animation: placeholder normal 2s infinite ease-in-out;
+                -webkit-animation: placeholder normal 2s infinite ease-in-out;
+                -ms-animation: placeholder normal 2s infinite ease-in-out;
+                animation: placeholder normal 2s infinite ease-in-out;
+            }
+            .circle {
+                .border-radius(@border-radius-full) !important;
+            }
+            .paragraph {
+                display: block;
+                &.centered {
+                    .line:last-child {
+                        margin-left: calc(100% / 3 / 2) !important;
+                        margin-right: calc(100% / 3 / 2) !important;
+                    }
+                }
+                .line:last-child {
+                    width: calc(100% / 3 * 2) !important;
+                }
+            }
+            .line {
+                display: block;
             }
         }
     }
-    & > * {
-        filter: blur(5px);
+    .blockage {
+        position: absolute;
+        z-index: 3;
+        top: 50%;
+        left: 50%;
+        width: auto;
+        color: @text-color-weak;
+        font-size: 1em !important;
+        text-transform: none;
+        border-width: 3px;
+        border-style: solid;
+        border-color: @text-color-weak;
+        border-radius: .5em;
+        background-color: transparent;
+        .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
+        pointer-events: all;
+        cursor: pointer;
+        filter: none;
+        transform: translate(-50%, -50%);
+        .transition(all 1s ease);
+        &:hover {
+            color: @text-color-normal;
+            border-color: @text-color-normal;
+            background-color: @contrast-color;
+        }
+    }
+}
+
+@keyframes placeholder {
+    0% {
+           background-color: rgba(187, 191, 195, .25)
+    }
+    50% {
+           background-color: rgba(187, 191, 195, .75)
+    }
+    100% {
+           background-color: rgba(187, 191, 195, .25)
+    }
+}
+@-webkit-keyframes placeholder {
+    0% {
+           background-color: rgba(187, 191, 195, .25)
+    }
+    50% {
+           background-color: rgba(187, 191, 195, .75)
+    }
+    100% {
+           background-color: rgba(187, 191, 195, .25)
     }
 }

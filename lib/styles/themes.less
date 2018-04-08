@@ -59,40 +59,45 @@
 
     .loading {
         &:hover {
-            &::before {
+            .placeholder {
                 background-color: fade(@shade-color, 85%);
             }
         }
-        &:not(.blocked) {
-            &::before {
-                background-color: fade(@shade-color, 65%);
-                background-image: url("../images/animations/loading-dots.gif");
-            }
-        }
-        &.blocked {
-            &::after {
-                color: @text-color-weak;
-                border-color: @text-color-weak;
-            }
+        .blockage {
+            color: @text-color-weak;
+            border-color: @text-color-weak;
             &:hover {
-                &::after {
-                    color: @text-color-normal;
-                    border-color: @text-color-normal;
-                    background-color: @contrast-color;
-                }
+                color: @text-color-normal;
+                border-color: @text-color-normal;
+                background-color: @contrast-color;
             }
         }
     }
 
     graphjs-alert {
         color: fade(@text-color-strong, 65%);
+        background-color: @contrast-color !important;
+        .content {
+            background-color: @contrast-color !important;
+        }
         & > button {
+            color: @primary-color !important;
+            border-color: fade(@secondary-color, 10%);
             background-color: @contrast-color !important;
             &:hover {
                 background-color: @contrast-color !important;
             }
             &.danger {
+                color: @danger-color !important;
                 background-color: @contrast-color;
+            }
+            &.half {
+                &:first-of-type {
+                    border-color: fade(@secondary-color, 10%);
+                }
+                &:last-of-type {
+                    border-color: fade(@secondary-color, 10%);
+                }
             }
         }
     }
@@ -242,6 +247,7 @@
     graphjs-profile-header {
         color: fade(@text-color-strong, 65%);
         .information {
+            background-color: @contrast-color;
             img {
                 border: 4px solid fade(@secondary-color, 15%);
             }
@@ -298,25 +304,31 @@
             }
         }
     }
-}
 
-graphjs-star-list {
-    color: fade(@text-color-strong, 65%);
-    .content {
-        .list {
-            .item {
-                color: @text-color-normal;
-                &.placeholder {
-                    color: @text-color-weak;
-                }
-                .title {
-                    color: @text-color-strong;
-                }
-                .count {
-                    svg {
-                        path {
-                            fill: @text-color-normal;
+    graphjs-star-list {
+        color: fade(@text-color-strong, 65%);
+        .content {
+            .list {
+                .item {
+                    color: @text-color-normal;
+                    &:hover {
+                        background-color: fade(@primary-color, 5%);
+                    }
+                    &.placeholder {
+                        color: @text-color-weak;
+                    }
+                    .count {
+                        svg {
+                            path {
+                                fill: @text-color-normal;
+                            }
                         }
+                    }
+                    .title {
+                        color: @text-color-strong;
+                    }
+                    .remove {
+                        .text-color-states(@danger-color);
                     }
                 }
             }
