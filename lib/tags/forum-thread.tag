@@ -41,7 +41,7 @@
                     </svg>
                 </a>
             </div>
-            <form class={userId ? '' : 'loading blocked'} onclick={userId ? '' : handleBlock}>
+            <form class={userId ? '' : 'loading blocked'}>
                 <textarea ref="composer" placeholder="Write your reply here..."></textarea>
                 <button onclick={handleReply}>Send Reply</button>
                 <button onclick={handleClear} class="danger">Clear</button>
@@ -73,6 +73,7 @@
         import getUser from '../scripts/getUser.js';
         import getThread from '../scripts/getThread.js';
         import replyThread from '../scripts/replyThread.js';
+        import removeReply from '../scripts/removeReply.js';
         import showForumList from '../scripts/showForumList.js';
         import getProfile from '../scripts/getProfile.js';
         import showLogin from '../scripts/showLogin.js';
@@ -116,6 +117,7 @@
             let self = this;
             self.id && getThread(self.id, function(response) {
                 if(response.success) {
+                    console.log(response)
                     self.title = response.title;
                     self.entries = response.messages;
                     self.update();
@@ -185,12 +187,7 @@
         }
         this.handleRemove = (event) => {
             event.preventDefault();
-            let query = '.replies [data-id="' + event.target.dataset.id + '"]';
-            let element = document.querySelectorAll(query)[0];
-            element.parentNode.removeChild(element);
-            self.update();
             let self = this;
-            /*
             removeReply(event.target.dataset.id, function(response) {
                 if(response.success) {
                     let query = '.replies [data-id="' + event.target.dataset.id + '"]';
@@ -201,14 +198,9 @@
                     //Handle error
                 }
             });
-            */
         }
         this.handleDestroy = (event) => {
             event.preventDefault();
-            let query = '.option[data-link="list"]';
-            let element = document.querySelectorAll(query)[0];
-            element.click();
-            /*
             removeReply(event.target.dataset.id, function(response) {
                 if(response.success) {
                     event.preventDefault();
@@ -219,7 +211,6 @@
                     //Handle error
                 }
             });
-            */
         }
         this.handleTime = (timestamp) => {
             let date = new Date(parseInt(timestamp) * 1000);

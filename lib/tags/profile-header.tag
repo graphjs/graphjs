@@ -75,7 +75,7 @@
         this.userId = undefined;
 
         this.on('before-mount', function() {
-            this.handleInformation(this.id);
+            this.handleInformation();
             this.handleUser();
         });
         this.on('mount', function() {
@@ -97,9 +97,9 @@
         this.handleFollow = () => {
             //Follow the user
         }
-        this.handleInformation = (id) => {
+        this.handleInformation = () => {
             let self = this;
-            getProfile(id, function(response) {
+            getProfile(self.id, function(response) {
                 if(response.success) {
                     self.profile = response.profile;
                     self.loaded = true;

@@ -49,7 +49,7 @@
 
         this.handleInformation = () => {
             let self = this;
-            getGroup(self.id, function(response) {
+            self.id && getGroup(self.id, function(response) {
                 if(response.success) {
                     self.group = response.group;
                     self.loaded = true;
@@ -62,7 +62,7 @@
         }
         this.handleMembers = () => {
             let self = this;
-            listMembers(self.id, function(response) {
+            self.id && listMembers(self.id, function(response) {
                 if(response.success) {
                     self.members = response.members;
                     self.update();

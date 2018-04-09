@@ -1,4 +1,4 @@
-<graphjs-group-header class="box">
+<graphjs-group-header class={'box' + (loaded ? '' : ' loading')}>
     <div class="information" if={group}>
         <div class="cover" style={'background-image: url(' + (group.cover ? 'https://' + group.id + '.png' : 'lib/images/covers/group.png') + ');'}></div>
         <a>{group.title}</a>
@@ -14,6 +14,14 @@
         <p>We couldn't find any group matching this id.</p>
         <button onclick={handleUpdate}>Refresh</button>
     </div>
+    <div if={!loaded} class="placeholder loader">
+        <div class="information">
+            <div class="cover rectangle fill"></div>
+            <div class="title line centered fill"></div>
+            <div class="description line centered fill"></div>
+            <div class="list rectangle centered fill"></div>
+        </div>
+    </div>
     <a class="promo" href="http://graphjs.com">
         <svg viewBox="0 0 200 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g transform="translate(-620.000000, -18.000000)">
@@ -26,6 +34,49 @@
         @import '../styles/mixins.less';
         @import '../styles/options.less';
         @import '../styles/components/group-header.less';
+        graphjs-group-header {
+            /* Placeholder */
+            .placeholder {
+                .information {
+                    display: block;
+                    width: 100%;
+                    height: 15em;
+                    margin: 0 auto;
+                    background-color: transparent !important;
+                    .cover {
+                        display: block;
+                        width: 100%;
+                        height: 15em;
+                        margin: 0;
+                    }
+                    .title {
+                        display: block;
+                        width: 40%;
+                        height: 1em;
+                        margin: 0 30%;
+                        margin-top: 2em;
+                        .border-radius(calc(1em / 2));
+                    }
+                    .description {
+                        display: block;
+                        width: 60%;
+                        height: .85em;
+                        margin: 0 20%;
+                        margin-top: 1.5em;
+                        .border-radius(calc(.85em / 2));
+                    }
+                }
+                .list {
+                    display: block;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    width: 100%;
+                    height: 2.75em;
+                }
+            }
+        }
     </style>
     <script>
         import getGroup from '../scripts/getGroup.js';
@@ -51,8 +102,10 @@
             getGroup(self.id, function(response) {
                 if(response.success) {
                     self.group = response.group;
+                    self.loaded = true;
                     self.update();
                 } else {
+                    self.loaded = true;
                     //Handle errors
                 }
             });

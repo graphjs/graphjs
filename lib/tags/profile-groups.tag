@@ -1,10 +1,17 @@
 <graphjs-profile-groups class="wallet">
-    <div class="content">
+    <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
         <!--
         <p if={list.length <= 0}>This does not belong to any group.</p>
         <p if={list.length > 0}>{'Member of ' + list.length + ' Group' + (list.length > 1 ? 's' : '')}</p>
         -->
         <graphjs-group-card each={id in list} id={id}></graphjs-group-card>
+        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
+        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
+        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
+        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
+        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
+        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
+        <button if={blocked} onclick={handleBlock} class="blockage">Login to display content</button>
     </div>
     <style type="less">
         @import '../styles/variables.less';
@@ -13,15 +20,20 @@
     </style>
     <script>
         import listMemberships from '../scripts/listMemberships.js';
+        import getUser from '../scripts/getUser.js';
 
         this.id = opts.id;
         this.list = [];
+        this.loaded = true;
 
         this.on('before-mount', function() {
+            this.handleUser();
+        });
+
+        this.handleContent = () => {
             let self = this;
             listMemberships(self.id, function(response) {
                 if(response.success) {
-                    self.list = [];
                     for(let group of response.groups) {
                         self.list.push(group.id)
                     }
@@ -30,6 +42,21 @@
                     //Handle error
                 }
             });
-        });
+        }
+        this.handleUser = () => {
+            let self = this;
+            getUser(function(response) {
+                if(response.success) {
+                    self.userId = response.id;
+                    self.update();
+                    self.handleContent();
+                } else {
+                    self.loaded = false;
+                    self.blocked = true;
+                    self.update();
+                    //Handle errors
+                }
+            });
+        }
     </script>
 </graphjs-profile-groups>

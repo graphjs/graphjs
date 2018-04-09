@@ -56,16 +56,16 @@
         this.userId = undefined;
 
         this.on('before-mount', function() {
-            this.handleInformation(this.id);
+            this.handleInformation();
             this.handleUser();
         });
         this.on('mount', function() {
             opts.theme && this.root.classList.add(opts.theme);
         });
 
-        this.handleInformation = (id) => {
+        this.handleInformation = () => {
             let self = this;
-            getProfile(id, function(response) {
+            self.id && getProfile(self.id, function(response) {
                 if(response.success) {
                     self.profile = response.profile;
                     self.loaded = true;
