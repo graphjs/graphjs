@@ -4,7 +4,8 @@ graphjs-forum-thread {
     &.composer {
         .content {
             .thread {
-                padding-bottom: 18em;
+                max-height: 32em;
+                margin-bottom: 18em;
             }
             .reply {
                 bottom: 0;
@@ -13,21 +14,20 @@ graphjs-forum-thread {
     }
     .content {
         position: relative;
+        min-height: 28.5em;
         .no-padding !important;
         vertical-align: middle;
         .thread {
             overflow-y: scroll;
             position: relative;
-            max-height: 50em;
-            padding-bottom: 3em;
-            /*.transition(padding-bottom .35s ease);*/
+            max-height: 47em;
+            margin-bottom: 3em;
+            /*.transition(margin-bottom .35s ease);*/
             .title {
                 position: relative;
                 z-index: 2;
-                padding: 1.5em 2.5em;
+                padding: 1.5em 2.5em 0;
                 line-height: 100%;
-                background-color: fade(@contrast-color, 65%);
-                .box-shadow(0 2px 1px 0px rgba(0, 0, 0, 0.075));
                 h1 {
                     .no-margin;
                     color: @text-color-strong;
@@ -70,7 +70,7 @@ graphjs-forum-thread {
                         }
                     }
                     p {
-                        margin-left: 40px * 1.2;
+                        margin-left: 3em * 1.2;
                         .regular-font;
                         line-height: 150%;
                     }
@@ -102,7 +102,12 @@ graphjs-forum-thread {
                 & > a {
                     display: inline-block;
                     height: 1em;
-                    &:last-of-type {
+                    &:first-child {
+                        &::before {
+                            display: none;
+                        }
+                    }
+                    &:last-child {
                         &::before {
                             display: none;
                         }
@@ -151,6 +156,61 @@ graphjs-forum-thread {
                     margin-left: .5em;
                     font-size: .9em;
                 }
+            }
+        }
+    }
+    /* Placeholder */
+    .placeholder {
+        padding: 0 2.5em;
+        .title {
+            display: block;
+            position: relative;
+            top: -.5em;
+            width: calc(50% - 2.5em);
+            margin-top: 2.5em;
+            padding: 0;
+            height: 1.5em;
+            .border-radius(calc(1.5em / 2));
+        }
+        .creator {
+            display: block;
+            height: 3em;
+            margin-top: 1.5em;
+            .clearfix;
+            & > * {
+                float: left;
+            }
+            .avatar {
+                display: block;
+                width: 3em;
+                height: 3em;
+            }
+            .information {
+                display: block;
+                width: calc(35% - 2.5em);
+                height: 3em;
+                padding: .5em;
+                .line {
+                    height: .8em;
+                    .border-radius(calc(.8em / 2));
+                    &:first-child {
+                        width: 80%;
+                        margin-bottom: .4em;
+                    }
+                }
+            }
+        }
+        .text {
+            display: block;
+            width: 100%;
+            height: 6em;
+            margin-top: .75em;
+            margin-bottom: 1em;
+            padding-left: calc(3em * 1.2);
+            .line {
+                height: .85em;
+                margin-bottom: .65em;
+                .border-radius(calc(.85em / 2));
             }
         }
     }

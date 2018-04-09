@@ -52,9 +52,50 @@
             <form>
         </div>
         <div if={!loaded} class="placeholder loader">
-            <img src="lib/images/animations/loading-dots.gif">
+            <div class="title line fill"></div>
+            <div class="creator">
+                <div class="avatar circle fill"></div>
+                <div class="information">
+                    <div class="line fill"></div>
+                    <div class="line fill"></div>
+                </div>
+            </div>
+            <div class="text paragraph">
+                <div class="line fill"></div>
+                <div class="line fill"></div>
+                <div class="line fill"></div>
+                <div class="line fill"></div>
+            </div>
+            <hr class="fill" />
+            <div class="creator">
+                <div class="avatar circle fill"></div>
+                <div class="information">
+                    <div class="line fill"></div>
+                    <div class="line fill"></div>
+                </div>
+            </div>
+            <div class="text paragraph">
+                <div class="line fill"></div>
+                <div class="line fill"></div>
+                <div class="line fill"></div>
+                <div class="line fill"></div>
+            </div>
+            <hr class="fill" />
+            <div class="creator">
+                <div class="avatar circle fill"></div>
+                <div class="information">
+                    <div class="line fill"></div>
+                    <div class="line fill"></div>
+                </div>
+            </div>
+            <div class="text paragraph">
+                <div class="line fill"></div>
+                <div class="line fill"></div>
+                <div class="line fill"></div>
+                <div class="line fill"></div>
+            </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="blockage">Login to display forum</button>
+        <button if={blocked} onclick={handleBlock} class="blockage">Login to display thread</button>
     </div>
     <a class="promo" href="http://graphjs.com">
         <svg viewBox="0 0 200 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -87,7 +128,6 @@
 
         this.on('before-mount', function() {
             this.handleUser();
-            this.handleContent();
         });
 
         this.handleUser = () => {
@@ -95,11 +135,13 @@
             getUser(function(response) {
                 if(response.success) {
                     self.userId = response.id;
-                    self.loaded = true;
+                    //self.loaded = true;
+                    self.handleContent();
                     self.update();
                 } else {
                     if(self.access != 'private') {
-                        self.loaded = true;
+                        //self.loaded = true;
+                        self.handleContent();
                     } else {
                         self.loaded = false;
                         self.blocked = true;
@@ -133,6 +175,8 @@
                     }
                     self.update();
                 }
+                self.loaded = true;
+                self.update();
             });
         }
         this.handleComposer = () => {

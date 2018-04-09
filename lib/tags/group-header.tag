@@ -34,49 +34,6 @@
         @import '../styles/mixins.less';
         @import '../styles/options.less';
         @import '../styles/components/group-header.less';
-        graphjs-group-header {
-            /* Placeholder */
-            .placeholder {
-                .information {
-                    display: block;
-                    width: 100%;
-                    height: 15em;
-                    margin: 0 auto;
-                    background-color: transparent !important;
-                    .cover {
-                        display: block;
-                        width: 100%;
-                        height: 15em;
-                        margin: 0;
-                    }
-                    .title {
-                        display: block;
-                        width: 40%;
-                        height: 1em;
-                        margin: 0 30%;
-                        margin-top: 2em;
-                        .border-radius(calc(1em / 2));
-                    }
-                    .description {
-                        display: block;
-                        width: 60%;
-                        height: .85em;
-                        margin: 0 20%;
-                        margin-top: 1.5em;
-                        .border-radius(calc(.85em / 2));
-                    }
-                }
-                .list {
-                    display: block;
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-                    width: 100%;
-                    height: 2.75em;
-                }
-            }
-        }
     </style>
     <script>
         import getGroup from '../scripts/getGroup.js';

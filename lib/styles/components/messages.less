@@ -11,8 +11,8 @@ graphjs-messages {
         }
     }
     .content {
-        height: 37em;
-        max-height: 37em;
+        height: 36em;
+        max-height: 36em;
         .no-padding !important;
         vertical-align: middle;
         & > * {
@@ -79,13 +79,14 @@ graphjs-messages {
             }
             .list {
                 .item {
-                    display: table;
+                    display: block;
                     width: 100%;
                     height: 4.5em;
-                    padding: calc(.75em - 1px);
-                    padding-bottom: calc(.75em + 1px);
+                    padding-top: calc(.75em - 1px);
+                    padding-left: calc(.75em - 1px);
                     border-top: 1px solid fade(black, 2.5%);
                     border-bottom: 1px solid fade(@secondary-color, 2.5%);
+                    .clearfix;
                     &:hover {
                         background-color: fade(@primary-color, 5%);
                     }
@@ -109,8 +110,8 @@ graphjs-messages {
                         pointer-events: none;
                     }
                     img {
-                        width: calc(3em + 1px);
-                        height: calc(3em + 1px);
+                        width: 3em;
+                        height: 3em;
                         .border-radius(@border-radius-full);
                     }
                     div {
@@ -218,6 +219,77 @@ graphjs-messages {
                 border-right: none;
                 border-bottom: none;
                 border-left: none;
+            }
+        }
+    }
+    /* Placeholder */
+    .placeholder {
+        .clearfix;
+        & > * {
+            float: left;
+        }
+        .left {
+            width: 15em;
+            .user {
+                display: block;
+                width: 100%;
+                height: calc(4.5em - 1px);
+                padding-top: calc(.75em - 1px);
+                padding-left: calc(.75em - 1px);
+                .clearfix;
+                & > * {
+                    float: left;
+                }
+                .avatar {
+                    display: block;
+                    width: 3em;
+                    height: 3em;
+                }
+                .information {
+                    display: block;
+                    width: 10em;
+                    height: 3em;
+                    margin-left: .75em;
+                    padding: .35em 0;
+                    .line {
+                        height: .5em;
+                        margin-bottom: .4em;
+                        .border-radius(calc(.5em / 2));
+                        &:first-child {
+                            width: 60%;
+                        }
+                        &:last-child {
+                            width: 80%;
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+        .right {
+            width: calc(100% - 15em - 1px);
+            height: 100%;
+            padding: 2em;
+            .message {
+                width: 60%;
+                height: 4em;
+                margin-bottom: 1em;
+                &:nth-child(even) {
+                    margin-left: 40%;
+                    .time {
+                        margin-left: 80%;
+                    }
+                }
+                .text {
+                    height: 3em;
+                    .border-radius(calc(1em / 2));
+                }
+                .time {
+                    width: 20%;
+                    height: .5em;
+                    margin-top: .5em;
+                    .border-radius(calc(.5em / 2));
+                }
             }
         }
     }

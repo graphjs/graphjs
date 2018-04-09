@@ -20,7 +20,8 @@ module.exports = {
                     loader: 'riot-tag-loader',
                     options: {
                         type: 'es6',
-                        hot: true
+                        hot: true,
+                        sourcemap: true
                     }
                 }
             },

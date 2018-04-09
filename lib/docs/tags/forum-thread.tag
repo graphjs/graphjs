@@ -44,7 +44,7 @@
     <script>
         this.input = '';
         this.specs = {
-            "id": "57dd66ff28c179bf867035a89a8c2d56",
+            "id": "595eab35744c5cb1f2985cec7c82cb1b",
             "access": "public"
         }
         this.updateText = (event) => {

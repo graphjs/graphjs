@@ -1,19 +1,16 @@
-<graphjs-messages
-    class={'root box'}
-    style={
-        (opts.minwidth ? 'min-width: ' + opts.minwidth + '; ' : '') +
-        (opts.maxwidth ? 'max-width: ' + opts.maxwidth + '; ' : '') +
-        (opts.minheight ? 'min-height: ' + opts.minheight + '; ' : '') +
-        (opts.maxheight ? 'max-height: ' + opts.maxheight + '; ' : '')
-    }
->
+<graphjs-messages class={'root box'} style={
+    (opts.minwidth ? 'min-width: ' + opts.minwidth + '; ' : '') +
+    (opts.maxwidth ? 'max-width: ' + opts.maxwidth + '; ' : '') +
+    (opts.minheight ? 'min-height: ' + opts.minheight + '; ' : '') +
+    (opts.maxheight ? 'max-height: ' + opts.maxheight + '; ' : '')
+}>
     <div class="header">
-        <div class="title">{'Messages' + (activePartnerName != '' ? ' with ' +  activePartnerName : '')}</div>
-        <a class="option left" onclick={handleNewMessage}>
+        <a class="option left" onclick={handleNewMessage} if={loaded}>
             <svg class={newMessageOption ? '' : 'new'} viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <path transform="translate(-755.000000, -15.000000)" d="M768.138179,30.0276818 L763.8,25.6895028 L765.689503,23.8 L770.011119,28.1447263 L774.332735,23.8 L776.222238,25.6895028 L771.884059,30.0276818 L771.888398,30.0320442 L771.884064,30.0363784 L776.222238,34.3414365 L774.332735,36.2309392 L770.011119,31.9093232 L765.689503,36.2309392 L763.8,34.3414365 L768.138174,30.0363784 L768.13384,30.0320442 L768.138179,30.0276818 Z M769.983425,15 C778.270718,15 785,21.6961326 785,29.9834254 C785,38.2707182 778.270718,45 769.983425,45 C761.696133,45 755,38.2707182 755,29.9834254 C755,21.6961326 761.696133,15 769.983425,15 Z M769.983425,42.3480663 C776.779006,42.3480663 782.348066,36.8121547 782.348066,29.9834254 C782.348066,23.1878453 776.812155,17.6187845 769.983425,17.6187845 C763.187845,17.6187845 757.618785,23.1546961 757.618785,29.9834254 C757.651934,36.7790055 763.187845,42.3480663 769.983425,42.3480663 Z"></path>
             </svg>
         </a>
+        <div class="title">{'Messages' + (activePartnerName != '' ? ' with ' +  activePartnerName : '')}</div>
     </div>
     <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
         <div class="sidebar">
@@ -43,10 +40,101 @@
                     <time data-timestamp={activeMessages[message].timestamp}></time>
                 </div>
             </div>
-            <textarea onselect={handleTextSelection} onclick={handleTextSelection} onkeyup={handleSubmit} placeholder="Write your message here..."></textarea>
+            <textarea onkeyup={handleSubmit} placeholder="Write your message here..."></textarea>
         </div>
         <div if={!loaded} class="placeholder loader">
-            <img src="lib/images/animations/loading-dots.gif">
+            <div class="left">
+                <div class="user">
+                    <div class="avatar circle fill"></div>
+                    <div class="information">
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                    </div>
+                </div>
+                <hr class="fill" />
+                <div class="user">
+                    <div class="avatar circle fill"></div>
+                    <div class="information">
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                    </div>
+                </div>
+                <hr class="fill" />
+                <div class="user">
+                    <div class="avatar circle fill"></div>
+                    <div class="information">
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                    </div>
+                </div>
+                <hr class="fill" />
+                <div class="user">
+                    <div class="avatar circle fill"></div>
+                    <div class="information">
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                    </div>
+                </div>
+                <hr class="fill" />
+                <div class="user">
+                    <div class="avatar circle fill"></div>
+                    <div class="information">
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                    </div>
+                </div>
+                <hr class="fill" />
+                <div class="user">
+                    <div class="avatar circle fill"></div>
+                    <div class="information">
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                    </div>
+                </div>
+                <hr class="fill" />
+                <div class="user">
+                    <div class="avatar circle fill"></div>
+                    <div class="information">
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                    </div>
+                </div>
+                <hr class="fill" />
+                <div class="user">
+                    <div class="avatar circle fill"></div>
+                    <div class="information">
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                        <div class="line fill"></div>
+                    </div>
+                </div>
+            </div>
+            <hr class="vertical fill" />
+            <div class="right">
+                <div class="message">
+                    <div class="text line fill"></div>
+                    <div class="time line fill"></div>
+                </div>
+                <div class="message">
+                    <div class="text line fill"></div>
+                    <div class="time line fill"></div>
+                </div>
+                <div class="message">
+                    <div class="text line fill"></div>
+                    <div class="time line fill"></div>
+                </div>
+                <div class="message">
+                    <div class="text line fill"></div>
+                    <div class="time line fill"></div>
+                </div>
+            </div>
         </div>
         <button if={blocked} onclick={handleBlock} class="blockage">Login to display messages</button>
     </div>
@@ -85,11 +173,9 @@
         this.list = [];
         this.frequentlyUpdateTime;
         this.newMessageOption = false;
-        this.selectedTextLength = 0;
 
         this.on('before-mount', function() {
             this.handleUser();
-            this.handleConversations();
             this.frequentlyUpdateTime = setInterval(this.handleTime,  60 * 1000);
         });
         this.on('unmount', function() {
@@ -112,7 +198,7 @@
             getUser(function(response) {
                 if(response.success) {
                     self.userId = response.id;
-                    self.loaded = true;
+                    self.handleConversations();
                     self.update();
                 } else {
                     self.loaded = false;
@@ -131,6 +217,7 @@
             getConversations(function(response) {
                 if(response.success) {
                     self.handleList(response.messages);
+                    self.loaded = true;
                     self.update();
                 } else {
                     //Handle errors
