@@ -10,6 +10,7 @@ graphjs-group-header {
     }
     .information {
         height: auto;
+        padding-bottom: 2em;
         .cover {
             display: block;
             width: 100%;
@@ -66,32 +67,39 @@ graphjs-group-header {
         margin: 0;
         .no-padding;
         font-size: 0;
+        border-top: 2px solid fade(@secondary-color, 10%);
         .border-radius(0);
-        background-color: @primary-color;
         list-style: none;
         li {
             display: inline-block;
             background-color: transparent;
             .transition(background-color .35s ease);
             &:hover {
-                background-color: fade(black, 20%);
-            }
-            &.active {
-                background-color: fade(black, 20%);
                 a {
                     opacity: 1;
-
+                }
+            }
+            &.active {
+                a {
+                    opacity: 1;
+                    pointer-events: none;
                 }
             }
             a {
                 display: inline-block;
-                opacity: .85;
+                opacity: .75;
                 padding: 0 1em;
                 cursor: pointer;
-                color: white;
+                .text-color-states(@primary-color);
                 font-size: @font-size-default * 1.1;
                 .bold-font;
                 line-height: 2.5em;
+                &.count{
+                    &::before {
+                        content: attr(data-count);
+                        margin-right: .25em;
+                    }
+                }
             }
         }
     }

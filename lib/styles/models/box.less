@@ -55,7 +55,6 @@
             }
         }
         + .warning {
-            color: white;
             border-bottom: none;
             ul {
                 &.fail {
@@ -64,19 +63,22 @@
                 &.success {
                     background-color: @success-color;
                 }
+                li {
+                    color: white !important;
+                }
             }
         }
     }
     .warning {
         display: inline-block;
         width: 100%;
-        padding: 0 5%;
         text-align: center;
         border-bottom: 1px solid fade(@secondary-color, 15%);
         ul {
             list-style: none;
             width: 100%;
-            padding: 0 5%;
+            margin: 0;
+            padding: .75em 5%;
             &.fail {
                 color: @danger-color;
             }
@@ -84,7 +86,7 @@
                 color: @success-color;
             }
             li {
-                margin-bottom: .1em;
+                margin-bottom: .25em;
                 &:last-child {
                     margin-bottom: 0;
                 }

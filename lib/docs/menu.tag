@@ -12,7 +12,9 @@
         </fieldset>
     </form>
     <h2>Components</h2>
-    <a each={item in opts.items} onclick={opts.callback} data-component={item.component} data-label={item.label} data-parent={item.parent || ''}>{item.label}</a>
+    <a each={item in opts.components} onclick={opts.callback} data-type="component" data-component={item.component} data-label={item.label} data-parent={item.parent || ''}>{item.label}</a>
+    <h2>Functions</h2>
+    <a each={item in opts.functions} onclick={opts.callback} data-type="function" data-function={item.function} data-label={item.label} data-parent={item.parent || ''}>{item.label}</a>
     <script>
         this.theme = 'light';
         this.updateRadio = (event) => {

@@ -2,9 +2,9 @@
     <div class="header" if={opts.title}>
         <div class="title">{opts.title || 'Register'}</div>
     </div>
-    <div class="warning" if={warningMessages.length > 0}>
-        <ul if={warningMessages.length > 0} class="fail">
-            <li each={warningMessage in warningMessages}>{warningMessage}</li>
+    <div class="warning" if={failMessages.length > 0}>
+        <ul if={failMessages.length > 0} class="fail">
+            <li each={failMessage in failMessages}>{failMessage}</li>
         </ul>
     </div>
     <div class="content">
@@ -40,130 +40,162 @@
 
         this.handleLoginBox = () => showLogin();
 
-        this.warningMessages = [];
-        /*
-        this.checkUsernameLength = () => {
-            let warningMessage = 'Username is too short.';
-            let usernameLength = 4;
-            if(this.refs.username.value.length >= usernameLength) {
+        this.failMessages = [];
+
+        this.checkUsernameMinimumLength = () => {
+            let usernameMinimumLengthLimit = 1;
+            let failMessage = 'Username is too short!';
+            if(this.refs.username.value.length >= usernameMinimumLengthLimit) {
                 this.refs.username.classList.remove('error');
-                this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
+                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
                 this.refs.username.classList.add('error');
-                this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
+                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
         }
-        */
-        this.checkUsernamePattern = () => {
-            let warningMessage = 'Username is invalid. Valid characters are letters, numbers, hyphens, and underscores.';
-            let usernamePattern = /^[a-zA-Z0-9-_]+$/;
-            if(usernamePattern.test(this.refs.username.value)) {
+        this.checkUsernameMaximumLength = () => {
+            let usernameMaximumLengthLimit = 12;
+            let failMessage = 'Username must be ' + usernameMaximumLengthLimit + ' characters maximum!';
+            if(this.refs.username.value.length <= usernameMaximumLengthLimit) {
                 this.refs.username.classList.remove('error');
-                this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
+                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
                 this.refs.username.classList.add('error');
-                this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
+                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
+                return false;
+            }
+        }
+        this.checkUsernamePattern = () => {
+            let failMessage = 'Username is invalid. Valid characters are letters, numbers, hyphens, and underscores.';
+            let usernamePattern = /^[a-zA-Z0-9-_]+$/;
+            if(usernamePattern.test(this.refs.username.value)) {
+                this.refs.username.classList.remove('error');
+                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
+                return true;
+            } else {
+                this.refs.username.classList.add('error');
+                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
         }
         this.checkEmailPattern = () => {
-            let warningMessage = 'Email is invalid.';
+            let failMessage = 'Email is invalid. Valid format: user@site.com';
             let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
             if(emailPattern.test(this.refs.email.value)) {
                 this.refs.email.classList.remove('error');
-                this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
+                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
                 this.refs.email.classList.add('error');
-                this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
+                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
         }
-        /*
-        this.checkPasswordLength = () => {
-            let warningMessage = 'Password is too short.';
-            let passwordLength = 4;
-            if(this.refs.password.value.length >= passwordLength) {
+        this.checkPasswordMinimumLength = () => {
+            let passwordMinimumLengthLimit = 5;
+            let failMessage = 'Password must be ' + passwordMinimumLengthLimit + ' characters minimum!';
+            if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
                 this.refs.password.classList.remove('error');
-                this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
+                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
                 this.refs.password.classList.add('error');
-                this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
+                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
         }
-        */
+        this.checkPasswordMaximumLength = () => {
+            let passwordMaximumLengthLimit = 15;
+            let failMessage = 'Password must be ' + passwordMaximumLengthLimit + ' characters maximum!';
+            if(this.refs.password.value.length <= passwordMaximumLengthLimit) {
+                this.refs.password.classList.remove('error');
+                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
+                return true;
+            } else {
+                this.refs.password.classList.add('error');
+                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
+                return false;
+            }
+        }
         this.checkPasswordMatch = () => {
-            let warningMessage = 'Passwords do not match.';
+            let failMessage = 'Passwords do not match.';
             if(this.refs.password.value == this.refs.confirmation.value) {
                 this.refs.confirmation.classList.remove('error');
-                this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
+                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
                 this.refs.confirmation.classList.add('error');
-                this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
+                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
         }
-        this.validateForm = () => {
-            //let validUsernameLength = this.checkUsernameLength();
+        this.validateInformation = () => {
+            let validUsernameMinimumLength = this.checkUsernameMinimumLength();
+            let validUsernameMaximumLength = this.checkUsernameMaximumLength();
             let validUsernamePattern = this.checkUsernamePattern();
             let validEmailPattern = this.checkEmailPattern();
-            //let validPasswordLength = this.checkPasswordLength();
+            let validPasswordMinimumLength = this.checkPasswordMinimumLength();
+            let validPasswordMaximumLength = this.checkPasswordMaximumLength();
             let validPasswordMatch = this.checkPasswordMatch();
             return (
-                //validUsernameLength &&
-                validUsernamePattern &&
-                validEmailPattern &&
-                //validPasswordLength &&
-                validPasswordMatch
+                validUsernameMinimumLength && validUsernameMaximumLength && validUsernamePattern && // Username
+                validEmailPattern && // Email
+                validPasswordMinimumLength && validPasswordMaximumLength && validPasswordMatch // Password
             ) ? true : false;
         }
         this.handleSubmit = (event) => {
-            let self = this;
             event.preventDefault();
-        	this.validateForm() && register(
-        		self.refs.username.value,
-        		self.refs.email.value,
-        		self.refs.password.value,
-                function(response) {
-                    if(response.success) {
-                        //Auto-Login
-                        login(
-                            self.refs.username.value,
-                            self.refs.password.value,
-                            function(response) {
-                                if(response.success) {
-                                    showAlert({
-                                        title: 'Register Successful!',
-                                        message: 'You are successfully registered and automatically logged in.'
-                                    });
-                                } else {
-                                    showAlert({
-                                        title: 'Register Successful!',
-                                        message: 'Please login to continue.',
-                                        customoption: 'Login',
-                                        show: 'login',
-                                        negativeoption: 'Cancel'
-                                    });
+            let self = this;
+            let username = self.refs.username.value;
+            let email = self.refs.email.value;
+            let password = self.refs.password.value;
+            self.refs.username.className = '';
+            self.refs.email.className = '';
+            self.refs.password.className = '';
+            self.failMessages = [];
+            if(self.validateInformation()) {
+            	register(
+            		username,
+            		email,
+            		password,
+                    function(response) {
+                        if(response.success) {
+                            //Auto-Login
+                            login(
+                                username,
+                                password,
+                                function(response) {
+                                    if(response.success) {
+                                        showAlert({
+                                            title: 'Register Successful!',
+                                            message: 'You are successfully registered and automatically logged in.'
+                                        });
+                                    } else {
+                                        showAlert({
+                                            title: 'Register Successful!',
+                                            message: 'Please login to continue.',
+                                            customoption: 'Login',
+                                            show: 'login',
+                                            negativeoption: 'Cancel'
+                                        });
+                                    }
                                 }
-                            }
-                        );
-                    } else {
-                        showAlert({
-                            title: 'Register Failed!',
-                            message: response.reason || 'Please try registering again.',
-                            customoption: 'Retry',
-                            show: 'register',
-                            negativeoption: 'Cancel'
-                        });
+                            );
+                        } else {
+                            showAlert({
+                                title: 'Register Failed!',
+                                message: response.reason || 'Please try registering again.',
+                                customoption: 'Retry',
+                                show: 'register',
+                                negativeoption: 'Cancel'
+                            });
+                        }
                     }
-                }
-        	);
+            	);
+            }
         }
     </script>
 </graphjs-auth-register>

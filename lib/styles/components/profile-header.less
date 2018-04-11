@@ -96,6 +96,12 @@ graphjs-profile-header {
                 font-size: @font-size-default * 1.1;
                 .bold-font;
                 line-height: 2.5em;
+                &.count{
+                    &::before {
+                        content: attr(data-count);
+                        margin-right: .25em;
+                    }
+                }
             }
         }
     }

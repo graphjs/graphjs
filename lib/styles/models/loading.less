@@ -39,10 +39,10 @@
                 -o-transition: all 2s linear;
                 -ms-transition: all 2s linear;
                 transition: all 2s linear;
-                -moz-animation: placeholder normal 2s infinite ease-in-out;
-                -webkit-animation: placeholder normal 2s infinite ease-in-out;
-                -ms-animation: placeholder normal 2s infinite ease-in-out;
-                animation: placeholder normal 2s infinite ease-in-out;
+                -moz-animation: loading-placeholder normal 2s infinite ease-in-out;
+                -webkit-animation: loading-placeholder normal 2s infinite ease-in-out;
+                -ms-animation: loading-placeholder normal 2s infinite ease-in-out;
+                animation: loading-placeholder normal 2s infinite ease-in-out;
             }
             .circle {
                 .border-radius(@border-radius-full) !important;
@@ -104,25 +104,15 @@
     }
 }
 
-@keyframes placeholder {
-    0% {
-           background-color: rgba(187, 191, 195, .25)
-    }
-    50% {
-           background-color: rgba(187, 191, 195, .75)
-    }
-    100% {
-           background-color: rgba(187, 191, 195, .25)
-    }
-}
-@-webkit-keyframes placeholder {
-    0% {
-           background-color: rgba(187, 191, 195, .25)
-    }
-    50% {
-           background-color: rgba(187, 191, 195, .75)
-    }
-    100% {
-           background-color: rgba(187, 191, 195, .25)
+.blocked {
+    .placeholder {
+        filter: blur(5px);
+        .fill {
+            -moz-animation: unset !important;
+            -webkit-animation: unset !important;
+            -ms-animation: unset !important;
+            animation: unset !important;
+            background-color: rgba(187, 191, 195, .25);
+        }
     }
 }

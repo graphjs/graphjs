@@ -9,25 +9,25 @@
                 <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.title} />
                 <input onkeyup={updateTextWithCheckbox} type="text" value={specs.title} />
             </fieldset>
-            <fieldset name="minwidth">
+            <fieldset name="min-width">
                 <legend>Minimum Width</legend>
-                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.minwidth} />
-                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.minwidth} />
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.minWidth} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.minWidth} />
             </fieldset>
-            <fieldset name="maxwidth">
+            <fieldset name="max-width">
                 <legend>Maximum Width</legend>
-                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.maxwidth} />
-                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.maxwidth} />
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.maxWidth} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.maxWidth} />
             </fieldset>
-            <fieldset name="minheight">
+            <fieldset name="min-height">
                 <legend>Minimum Height</legend>
-                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.minheight} />
-                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.minheight} />
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.minHeight} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.minHeight} />
             </fieldset>
-            <fieldset name="maxheight">
+            <fieldset name="max-height">
                 <legend>Maximum Height</legend>
-                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.maxheight} />
-                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.maxheight} />
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.maxHeight} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.maxHeight} />
             </fieldset>
             <xmp ref="inputCode" class="code">{input}</xmp>
             <button onclick={handleSubmit}>Apply</button>

@@ -1,13 +1,27 @@
 <graphjs-group-header class={'box' + (loaded ? '' : ' loading')}>
     <div class="information" if={group}>
-        <div class="cover" style={'background-image: url(' + (group.cover ? 'https://' + group.id + '.png' : 'lib/images/covers/group.png') + ');'}></div>
+        <div class="cover" style={'background-image: url(' + (group && group.cover ? group.cover : 'lib/images/covers/group.png') + ');'}></div>
         <a>{group.title}</a>
         <p>{group.description}</p>
-        <button onclick={joined ? handleLeave : handleJoin}>
-            {joined ? 'Leave Group' : 'Join Group'}
-            <span if={group.count}>{group.count}</span>
-        </button>
     </div>
+    <ul if={group}>
+        <!--
+        <li class={opts.active == 'activity' ? 'active' : ''}>
+            <a data-link="activity" onclick={opts.callback}>Activity</a>
+        </li>
+        -->
+        <li class={opts.active == 'members' ? 'active' : ''}>
+            <a class={group.count > 1 ? 'count' : ''} data-link="members" data-count={group.count || ''} onclick={opts.callback}>Members</a>
+        </li>
+        <li if={userId == group.creator} class={opts.active == 'settings' ? 'active' : ''}>
+            <a data-link="settings" onclick={opts.callback}>Settings</a>
+        </li>
+        <li>
+            <a  onclick={joined ? handleLeave : handleJoin}>
+                {joined ? 'Leave Group' : 'Join Group'}
+            </a>
+        </li>
+    </ul>
     <div class="information" if={!group}>
         <div class="cover" style="background-image: url(lib/images/covers/group.png)"></div>
         <a>Group doesn't exist.</a>
@@ -47,6 +61,7 @@
         this.userId = undefined;
 
         this.on('before-mount', function() {
+            this.handleUser();
             this.handleInformation();
             this.handleMembers();
         });
@@ -54,6 +69,20 @@
             opts.theme && this.root.classList.add(opts.theme);
         });
 
+        this.handleUser = () => {
+            let self = this;
+            getUser(function(response) {
+                if(response.success) {
+                    self.userId = response.id;
+                    self.update();
+                } else {
+                    self.loaded = false;
+                    self.blocked = true;
+                    self.update();
+                    //Handle errors
+                }
+            });
+        }
         this.handleInformation = () => {
             let self = this;
             getGroup(self.id, function(response) {

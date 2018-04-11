@@ -1,6 +1,6 @@
 <docs-index>
     <aside>
-        <docs-menu callback={changeProperties} items={items}></docs-menu>
+        <docs-menu callback={changeProperties} components={components} functions={functions}></docs-menu>
     </aside>
     <main ref="main">
     </main>
@@ -167,6 +167,35 @@
     </style>
     <script>
         import './menu.tag';
+        // Functions
+        import showGroupCreator from '../scripts/showGroupCreator.js';
+        this.functionsList = {
+            showGroupCreator: showGroupCreator
+        };
+        this.functions = [
+            {"label": "Create Group", "function": "showGroupCreator"}
+        ];
+        //Components
+        this.components = [
+            {"label": "Auth", "component": "auth"},
+            {"label": "Register", "component": "auth-register", "parent": "auth"},
+            {"label": "Login", "component": "auth-login", "parent": "auth"},
+            {"label": "Reset Password", "component": "auth-reset", "parent": "auth"},
+            {"label": "Star: Button", "component": "star-button"},
+            {"label": "Star: List", "component": "star-list"},
+            {"label": "Comments", "component": "comments"},
+            {"label": "Messages", "component": "messages"},
+            {"label": "Forum", "component": "forum"},
+            {"label": "List", "component": "forum-list", "parent": "forum"},
+            {"label": "Thread", "component": "forum-thread", "parent": "forum"},
+            {"label": "Compose", "component": "forum-compose", "parent": "forum"},
+            {"label": "Profile", "component": "profile"},
+            {"label": "Profile: Card", "component": "profile-card"},
+            {"label": "Group", "component": "group"},
+            {"label": "Group: Card", "component": "group-card"},
+            {"label": "State", "component": "state"},
+            {"label": "Alert", "component": "alert"}
+        ];
         this.activeItem = 'introduction';
         this.changeProperties = (event) => {
             for(let element of event.currentTarget.parentNode.children) {
@@ -187,28 +216,13 @@
             this.activeItem = event.target.dataset.id;
             this.update();
             this.refs.main.innerHTML = '';
-            this.createTag(event.currentTarget.dataset.component, event.currentTarget.dataset.label);
+            if(event.currentTarget.dataset.type == 'component') {
+                this.createTag(event.currentTarget.dataset.component, event.currentTarget.dataset.label);
+            } else if(event.currentTarget.dataset.type == 'function') {
+                let functionName = event.currentTarget.dataset.function;
+                this.functionsList[functionName]();
+            }
         }
-        this.items = [
-            {"label": "Auth", "component": "auth"},
-            {"label": "Register", "component": "auth-register", "parent": "auth"},
-            {"label": "Login", "component": "auth-login", "parent": "auth"},
-            {"label": "Reset Password", "component": "auth-reset", "parent": "auth"},
-            {"label": "Star: Button", "component": "star-button"},
-            {"label": "Star: List", "component": "star-list"},
-            {"label": "Comments", "component": "comments"},
-            {"label": "Messages", "component": "messages"},
-            {"label": "Forum", "component": "forum"},
-            {"label": "List", "component": "forum-list", "parent": "forum"},
-            {"label": "Thread", "component": "forum-thread", "parent": "forum"},
-            {"label": "Compose", "component": "forum-compose", "parent": "forum"},
-            {"label": "Profile", "component": "profile"},
-            {"label": "Profile: Card", "component": "profile-card"},
-            {"label": "Group", "component": "group"},
-            {"label": "Group: Card", "component": "group-card"},
-            {"label": "State", "component": "state"},
-            {"label": "Alert", "component": "alert"}
-        ];
         this.createTag = (itemComponent, itemLabel) => {
             let currentElement = document.createElement('docs-' + itemComponent);
             let component = document.createAttribute('component');

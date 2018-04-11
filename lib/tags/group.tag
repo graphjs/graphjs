@@ -31,6 +31,7 @@
         import './group-header.tag';
         import './group-activity.tag';
         import './group-members.tag';
+        import './group-settings.tag';
 
         this.active = opts.default || 'members';
         this.changeProperties = (event) => {

@@ -9,7 +9,7 @@
     </div>
     <div class="content">
         <a ref="uploadWidget" class="avatar">
-            <img src={profile ? profile.avatar : 'lib/images/avatars/user.png'} />
+            <img src={profile && profile.avatar ? profile.avatar : 'lib/images/avatars/user.png'} />
         </a>
         <h2>Profile</h2>
         <form>
@@ -47,9 +47,11 @@
         this.failMessages = [];
         this.successMessages = [];
 
+        this.on('before-mount', function() {
+            this.handleInformation(opts.id);
+        });
         this.on('mount', function() {
             let self = this;
-            this.handleInformation(opts.id);
             this.refs.uploadWidget.addEventListener("click", function() {
                 cloudinary.openUploadWidget({
                     cloud_name: 'graphjs',
@@ -61,17 +63,27 @@
                     theme: 'minimal'
                 },
                 function(error, result) {
+                    let failMessage = 'Avatar couldn\'t be set.';
+                    let successMessage = 'Avatar has been set successfully.';
                     if(result) {
                         setAvatar(result[0].url, function(response) {
                             if(response.success) {
                                 self.profile.avatar = result[0].url;
+                                self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
+                                self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                                self.update();
+                            } else {
+                                self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
+                                self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
                                 self.update();
                             }
                         });
                         self.update();
                     }
                     if(error) {
-                        //Handle error
+                        self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
+                        self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                        self.update();
                     }
                 });
             }, false);
@@ -142,10 +154,10 @@
                 return false;
             }
         }
-        this.checkBioLength = () => {
-            let bioLengthLimit = 255;
-            let failMessage = 'Bio must be ' + bioLengthLimit + ' characters maximum!';
-            if(this.refs.bio.value.length <= bioLengthLimit) {
+        this.checkBioMaximumLength = () => {
+            let bioMaximumLengthLimit = 255;
+            let failMessage = 'Bio must be ' + bioMaximumLengthLimit + ' characters maximum!';
+            if(this.refs.bio.value.length <= bioMaximumLengthLimit) {
                 this.refs.bio.classList.remove('error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
@@ -184,7 +196,7 @@
         }
         this.checkPasswordMinimumLength = () => {
             let passwordMinimumLengthLimit = 5;
-            let failMessage = 'Password must be ' + passwordMinimumLengthLimit + ' characters maximum!';
+            let failMessage = 'Password must be ' + passwordMinimumLengthLimit + ' characters minimum!';
             if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
                 this.refs.password.classList.remove('error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -225,13 +237,13 @@
             let validUsernameMaximumLength = this.checkUsernameMaximumLength();
             let validUsernamePattern = this.checkUsernamePattern();
             let validEmailPattern = this.checkEmailPattern();
-            let validBioLength = this.checkBioLength();
+            let validBioMaximumLength = this.checkBioMaximumLength();
             let validBirthdayFormat = this.checkBirthdayFormat();
             let validBirthdayLimit = this.checkBirthdayLimit();
             return (
                 validUsernameMinimumLength && validUsernameMaximumLength && validUsernamePattern && // Username
                 validEmailPattern && // Email
-                validBioLength && // Bio
+                validBioMaximumLength && // Bio
                 validBirthdayFormat && validBirthdayLimit // Birthday
             ) ? true : false;
         }

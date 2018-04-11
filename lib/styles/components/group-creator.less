@@ -1,0 +1,31 @@
+graphjs-group-creator {
+    display: block;
+    width: 100%;
+    max-width: 29em;
+    text-align: center;
+    .content {
+        form {
+            max-width: 24em;
+            margin: 0 auto;
+            input {
+                &.success {
+                    border: 1px solid @success-color;
+                    &::after {
+                        content: "OK";
+                        display: block;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        width: 2.5em;
+                        height: 2.5em;
+                        color: white;
+                        .heavy-font;
+                        font-size: 1.5em;
+                        line-height: 2.5em;
+                        background-color: @success-color;
+                    }
+                }
+            }
+        }
+    }
+}

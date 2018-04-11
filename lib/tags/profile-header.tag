@@ -23,20 +23,20 @@
     <ul if={profile}>
         <!--
         <li class={opts.active == 'activity' ? 'active' : ''}>
-            <a data-link="activity" onclick={opts.callback; handleActiveStyle;}>Activity</a>
+            <a data-link="activity" onclick={opts.callback}>Activity</a>
         </li>
         -->
         <li class={opts.active == 'followers' ? 'active' : ''}>
-            <a data-link="followers" onclick={opts.callback;}>Followers</a>
+            <a data-link="followers" onclick={opts.callback}>Followers</a>
         </li>
         <li class={opts.active == 'following' ? 'active' : ''}>
-            <a data-link="following" onclick={opts.callback;}>Following</a>
+            <a data-link="following" onclick={opts.callback}>Following</a>
         </li>
         <li class={opts.active == 'groups' ? 'active' : ''}>
-            <a data-link="groups" onclick={opts.callback;}>Groups</a>
+            <a data-link="groups" onclick={opts.callback}>Groups</a>
         </li>
         <li if={userId == id} class={opts.active == 'settings' ? 'active' : ''}>
-            <a data-link="settings" onclick={opts.callback;}>Settings</a>
+            <a data-link="settings" onclick={opts.callback}>Settings</a>
         </li>
     </ul>
     <div class="information" if={!profile}>

@@ -2,9 +2,9 @@
     <div class="header" if={opts.title}>
         <div class="title">{opts.title || 'Reset Password'}</div>
     </div>
-    <div class="warning" if={warningMessages.length > 0}>
-        <ul if={warningMessages.length > 0} class="fail">
-            <li each={warningMessage in warningMessages}>{warningMessage}</li>
+    <div class="warning" if={failMessages.length > 0}>
+        <ul if={failMessages.length > 0} class="fail">
+            <li each={failMessage in failMessages}>{failMessage}</li>
         </ul>
     </div>
     <div class="content">
@@ -36,21 +36,22 @@
 
         this.handleRegisterBox = () => showRegister();
 
-        this.warningMessages = [];
+        this.failMessages = [];
+
         this.checkEmailPattern = () => {
-            let warningMessage = 'Email is invalid.';
+            let failMessage = 'Email is invalid. Valid format: user@site.com';
             let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
             if(emailPattern.test(this.refs.email.value)) {
                 this.refs.email.classList.remove('error');
-                this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
+                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
                 this.refs.email.classList.add('error');
-                this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
+                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
         }
-        this.validateForm = () => {
+        this.validateInformation = () => {
             let validEmailPattern = this.checkEmailPattern();
             return (
                 validEmailPattern
@@ -58,25 +59,31 @@
         }
         this.handleSubmit = (event) => {
             event.preventDefault();
-            this.validateForm() && reset(
-                this.refs.email.value,
-                function(response) {
-                    if(response.success) {
-                        showAlert({
-                            title: 'Email Sent!',
-                            message: 'An email sent to your email address.'
-                        });
-                    } else {
-                        showAlert({
-                            title: 'Reset Failed!',
-                            message: response.reason || 'Please try entering your email again.',
-                            customoption: 'Retry',
-                            show: 'reset',
-                            negativeoption: 'Cancel'
-                        });
+            let self = this;
+            let email = self.refs.email.value;
+            self.refs.email.className = '';
+            self.failMessages = [];
+            if(self.validateInformation()) {
+                reset(
+                    email,
+                    function(response) {
+                        if(response.success) {
+                            showAlert({
+                                title: 'Email Sent!',
+                                message: 'An email sent to your email address.'
+                            });
+                        } else {
+                            showAlert({
+                                title: 'Reset Failed!',
+                                message: response.reason || 'Please try entering your email again.',
+                                customoption: 'Retry',
+                                show: 'reset',
+                                negativeoption: 'Cancel'
+                            });
+                        }
                     }
-                }
-            );
+                );
+            }
         }
     </script>
 </graphjs-auth-reset>

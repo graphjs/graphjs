@@ -1,8 +1,8 @@
 <graphjs-comments class="root box" style={
-    (opts.minwidth ? 'min-width: ' + opts.minwidth + '; ' : '') +
-    (opts.maxwidth ? 'max-width: ' + opts.maxwidth + '; ' : '') +
-    (opts.minheight ? 'min-height: ' + opts.minheight + '; ' : '') +
-    (opts.maxheight ? 'max-height: ' + opts.maxheight + '; ' : '')
+    (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
+    (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
+    (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
+    (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
 }>
     <div class="header" if={opts.title}>
         <div class="title">{opts.title || 'Comments'}</div>

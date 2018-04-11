@@ -2,9 +2,9 @@
     <div class="header" if={opts.title}>
         <div class="title">{opts.title || 'Login'}</div>
     </div>
-    <div class="warning" if={warningMessages.length > 0}>
-        <ul if={warningMessages.length > 0} class="fail">
-            <li each={warningMessage in warningMessages}>{warningMessage}</li>
+    <div class="warning" if={failMessages.length > 0}>
+        <ul if={failMessages.length > 0} class="fail">
+            <li each={failMessage in failMessages}>{failMessage}</li>
         </ul>
     </div>
     <div class="content">
@@ -40,49 +40,88 @@
         this.handleRegisterBox = () => showRegister();
         this.handleResetBox = () => showReset();
 
-        this.warningMessages = [];
-        this.checkUsernamePattern = () => {
-            let warningMessage = 'Username is invalid. Valid characters are letters, numbers, hyphens, and underscores.';
-            let usernamePattern = /^[a-zA-Z0-9-_]+$/;
-            if(usernamePattern.test(this.refs.username.value)) {
+        this.failMessages = [];
+
+        this.checkUsernameMinimumLength = () => {
+            let usernameMinimumLengthLimit = 1;
+            let failMessage = 'Username is too short!';
+            if(this.refs.username.value.length >= usernameMinimumLengthLimit) {
                 this.refs.username.classList.remove('error');
-                this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
+                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
                 this.refs.username.classList.add('error');
-                this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
+                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
         }
-        this.validateForm = () => {
+        this.checkUsernamePattern = () => {
+            let failMessage = 'Username is invalid. Valid characters are letters, numbers, hyphens, and underscores.';
+            let usernamePattern = /^[a-zA-Z0-9-_]+$/;
+            if(usernamePattern.test(this.refs.username.value)) {
+                this.refs.username.classList.remove('error');
+                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
+                return true;
+            } else {
+                this.refs.username.classList.add('error');
+                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
+                return false;
+            }
+        }
+        this.checkPasswordMinimumLength = () => {
+            let passwordMinimumLengthLimit = 5;
+            let failMessage = 'Password must be ' + passwordMinimumLengthLimit + ' characters minimum!';
+            if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
+                this.refs.password.classList.remove('error');
+                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
+                return true;
+            } else {
+                this.refs.password.classList.add('error');
+                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
+                return false;
+            }
+        }
+        this.validateInformation = () => {
+            console.log('osman')
+            let validUsernameMinimumLength = this.checkUsernameMinimumLength();
             let validUsernamePattern = this.checkUsernamePattern();
+            let validPasswordMinimumLength = this.checkPasswordMinimumLength();
             return (
-                validUsernamePattern
+                validUsernameMinimumLength && validUsernamePattern && // Username
+                validPasswordMinimumLength // Username
             ) ? true : false;
         }
         this.handleSubmit = (event) => {
             event.preventDefault();
-            this.validateForm() && login(
-                this.refs.username.value,
-                this.refs.password.value,
-                function(response) {
-                    if(response.success) {
-                        showAlert({
-                            title: 'Login Succeeded!',
-                            message: 'You are successfully logged in.',
-                            customoption: 'Done'
-                        });
-                    } else {
-                        showAlert({
-                            title: 'Login Failed!',
-                            message: response.reason || 'Please try logging in again.',
-                            customoption: 'Retry',
-                            show: 'login',
-                            negativeoption: 'Cancel'
-                        });
+            let self = this;
+            let username = self.refs.username.value;
+            let password = self.refs.password.value;
+            self.refs.username.className = '';
+            self.refs.password.className = '';
+            self.failMessages = [];
+            if(self.validateInformation()) {
+                login(
+                    username,
+                    password,
+                    function(response) {
+                        if(response.success) {
+                            showAlert({
+                                title: 'Login Succeeded!',
+                                message: 'You are successfully logged in.',
+                                customoption: 'Done'
+                            });
+                        } else {
+                            showAlert({
+                                title: 'Login Failed!',
+                                message: response.reason || 'Please try logging in again.',
+                                customoption: 'Retry',
+                                show: 'login',
+                                negativeoption: 'Cancel'
+                            });
+                        }
                     }
-                }
-            );
+                );
+            }
         }
     </script>
 </graphjs-auth-login>
