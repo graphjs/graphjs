@@ -72,6 +72,7 @@
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                                 self.update();
+                                self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                             } else {
                                 self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                 self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
@@ -280,6 +281,7 @@
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                                 self.update();
+                                self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                             } else {
                                 self.refs.username.classList.remove('success');
                                 self.refs.username.classList.add('error');
@@ -311,6 +313,7 @@
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                                 self.update();
+                                self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                             } else {
                                 self.refs.email.classList.remove('success');
                                 self.refs.email.classList.add('error');
@@ -341,6 +344,7 @@
                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                             self.update();
+                            self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                         } else {
                             self.refs.bio.classList.remove('success');
                             self.refs.bio.classList.add('error');
@@ -362,6 +366,7 @@
                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                             self.update();
+                            self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                         } else {
                             self.refs.birthday.classList.remove('success');
                             self.refs.birthday.classList.add('error');

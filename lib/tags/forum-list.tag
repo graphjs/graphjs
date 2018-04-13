@@ -46,6 +46,29 @@
                 There isn't any thread available.
             </div>
         </div>
+        <div class="controls" if={matchedThreads.length > pageLimit}>
+            <a class={page == 1 ? 'disabled' : ''} data-target="first" onclick={handlePagination}>
+                <svg viewBox="0 0 59 59" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path transform="translate(-316.000000, -236.000000)" d="M320.8,294.640939 L321.4,294.640939 C324,294.640939 326.1,292.540939 326.1,289.940939 L326.1,270.140939 L367.6,294.040939 C370.7,295.840939 374.6,293.640939 374.6,290.040939 L374.6,240.640939 C374.6,237.040939 370.7,234.840939 367.6,236.640939 L326,260.540939 L326,240.740939 C326,238.140939 323.9,236.040939 321.3,236.040939 L320.7,236.040939 C318.1,236.040939 316,238.140939 316,240.740939 L316,290.040939 C316.1,292.540939 318.2,294.640939 320.8,294.640939 Z"></path>
+                </svg>
+            </a>
+            <a class={page == 1 ? 'disabled' : ''} data-target="previous" onclick={handlePagination}>
+                <svg viewBox="0 0 54 62" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path transform="translate(-288.000000, -111.000000)" d="M289.5,139.023766 L337.3,111.423766 C339.3,110.223766 341.8,111.723766 341.8,114.023766 L341.8,169.223766 C341.8,171.523766 339.3,173.023766 337.3,171.823766 L289.5,144.223766 C287.5,143.023766 287.5,140.223766 289.5,139.023766 Z"></path>
+                </svg>
+            </a>
+            <p>{'Displaying ' + parseInt(((page - 1) * pageLimit + 1), 10) + '-' + Math.min(matchedThreads.length, parseInt(page * pageLimit, 10)) + ' of ' + matchedThreads.length}</p>
+            <a class={page == Math.ceil(matchedThreads.length / pageLimit) ? 'disabled' : ''} data-target="next" onclick={handlePagination}>
+                <svg viewBox="0 0 54 62" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path transform="translate(-218.000000, -205.000000)" d="M270.5,238.223766 L222.7,265.823766 C220.7,267.023766 218.2,265.523766 218.2,263.223766 L218.2,208.023766 C218.2,205.723766 220.7,204.223766 222.7,205.423766 L270.5,233.023766 C272.5,234.223766 272.5,237.023766 270.5,238.223766 Z"></path>
+                </svg>
+            </a>
+            <a class={page == Math.ceil(matchedThreads.length / pageLimit) ? 'disabled' : ''} data-target="last" onclick={handlePagination}>
+                <svg viewBox="0 0 59 59" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path transform="translate(-172.000000, 0.000000)" d="M225.7,0.140939378 L225.1,0.140939378 C222.5,0.140939378 220.4,2.24093938 220.4,4.84093938 L220.4,24.6409394 L179,0.640939378 C175.9,-1.15906062 172,1.04093938 172,4.64093938 L172,54.1409394 C172,57.7409394 175.9,59.9409394 179,58.1409394 L220.5,34.2409394 L220.5,54.0409394 C220.5,56.6409394 222.6,58.7409394 225.2,58.7409394 L225.8,58.7409394 C228.4,58.7409394 230.5,56.6409394 230.5,54.0409394 L230.5,4.84093938 C230.4,2.24093938 228.3,0.140939378 225.7,0.140939378 Z"></path>
+                </svg>
+            </a>
+        </div>
         <div if={!loaded} class="placeholder loader">
             <div class="bar rectangle fill"></div>
             <div class="list">
@@ -131,6 +154,52 @@
         @import '../styles/mixins.less';
         @import '../styles/options.less';
         @import '../styles/components/forum-list.less';
+        .controls {
+            width: 100%;
+            height: 3em;
+            padding: .5em;
+            color: @text-color-strong;
+            line-height: 2em;
+            text-align: center;
+            vertical-align: middle;
+            background-color: fade(@secondary-color, 10%);
+            .disable-selection;
+            & > * {
+                .disable-selection;
+            }
+            a {
+                display: inline-block;
+                opacity: .65;
+                width: auto;
+                height: 2em;
+                padding: 0 .35em;
+                font-size: 1em;
+                text-align: center;
+                vertical-align: middle;
+                .transition(opacity .35s ease);
+                &:hover {
+                    opacity: 1;
+                }
+                &.disabled {
+                    opacity: .35;
+                    pointer-events: none;
+                }
+                svg {
+                    height: .8em;
+                    vertical-align: middle;
+                    path {
+                        fill: @text-color-strong;
+                    }
+                }
+            }
+            p {
+                display: inline-block;
+                opacity: .65;
+                padding: 0 .65em;
+                font-size: .9em;
+                line-height: inherit;
+            }
+        }
     </style>
     <script>
         import getUser from '../scripts/getUser.js';
@@ -141,6 +210,8 @@
 
         this.blocked = false;
         this.access = opts.access || 'public';
+        this.page = 1;
+        this.pageLimit = opts.pageLimit || 10;
         this.threads = [];
         this.threadsData = {};
         this.matchedThreads = [];
@@ -227,7 +298,26 @@
         }
         this.handleFilter = (event) => {
             let self = this;
-            self.matchedThreads = self.threads.filter(item => self.threadsData[item].title.startsWith(event.target.value));
+            self.matchedThreads = self.threads.filter(item => self.threadsData[item].title.toLowerCase().startsWith(event.target.value.toLowerCase()));
+        }
+        this.handlePagination = (event) => {
+            let self = this;
+            let target = event.target.dataset.target;
+            let lastPage = Math.ceil(self.matchedThreads.length / self.pageLimit);
+            switch(target) {
+                case 'first':
+                    self.page = 1;
+                    break;
+                case 'previous':
+                    self.page = self.page == 1 ? 1 : self.page - 1;
+                    break;
+                case 'next':
+                    self.page = self.page == lastPage ? lastPage : self.page + 1;
+                    break;
+                case 'last':
+                    self.page = lastPage;
+                    break;
+            }
         }
         this.handleTime = (timestamp) => {
             let time = timestamp * 1000;

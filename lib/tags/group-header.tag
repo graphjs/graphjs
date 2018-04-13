@@ -140,5 +140,6 @@
             });
         }
         this.handleUpdate = () => this.update();
+        this.updateInformation = () => this.handleInformation();
     </script>
 </graphjs-group-header>

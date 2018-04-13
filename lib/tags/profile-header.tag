@@ -27,13 +27,13 @@
         </li>
         -->
         <li class={opts.active == 'followers' ? 'active' : ''}>
-            <a data-link="followers" onclick={opts.callback}>Followers</a>
+            <a class={profile.follower_count > 1 ? 'count' : ''} data-link="followers" data-count={profile.follower_count || ''} onclick={opts.callback}>Followers</a>
         </li>
         <li class={opts.active == 'following' ? 'active' : ''}>
-            <a data-link="following" onclick={opts.callback}>Following</a>
+            <a class={profile.following_count > 1 ? 'count' : ''} data-link="following" data-count={profile.following_count || ''} onclick={opts.callback}>Following</a>
         </li>
         <li class={opts.active == 'groups' ? 'active' : ''}>
-            <a data-link="groups" onclick={opts.callback}>Groups</a>
+            <a class={profile.membership_count > 1 ? 'count' : ''} data-link="groups" data-count={profile.membership_count || ''} onclick={opts.callback}>Groups</a>
         </li>
         <li if={userId == id} class={opts.active == 'settings' ? 'active' : ''}>
             <a data-link="settings" onclick={opts.callback}>Settings</a>
@@ -72,6 +72,7 @@
         import showMessages from '../scripts/showMessages.js';
 
         this.id = opts.id;
+        this.profile = {};
         this.userId = undefined;
 
         this.on('before-mount', function() {
@@ -103,6 +104,7 @@
                 if(response.success) {
                     self.profile = response.profile;
                     self.loaded = true;
+                    console.log(self.profile.membership_count)
                     self.update();
                 } else {
                     self.loaded = true;
@@ -111,5 +113,6 @@
             });
         }
         this.handleUpdate = () => this.update();
+        this.updateInformation = () => this.handleInformation();
     </script>
 </graphjs-profile-header>

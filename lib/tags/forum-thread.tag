@@ -15,13 +15,13 @@
                 <h1>{title}</h1>
             </div>
             <div class="replies">
-                <div each={entry, index in entries} data-id={index} class="item">
+                <div each={entry, index in entries} data-id={entry.id} class="item">
                     <div class="credit" if={authorsData.hasOwnProperty(entry.author)}>
                         <img src={authorsData[entry.author].avatar || 'lib/images/avatars/user.png'} />
                         <span>
                             <b>{authorsData[entry.author].username || 'Unknown User'}</b>
                             <time>{handleTime(entry.timestamp) || ''}</time>
-                            <a if={entry.author == userId} onclick={index == 0 ? handleDestroy : handleRemove} data-id={index}>Delete</a>
+                            <a if={entry.author == userId} onclick={index == 0 ? handleDestroy : handleRemove} data-id={entry.id}>Delete</a>
                         </span>
                     </div>
                     <p>{entry.content}</p>

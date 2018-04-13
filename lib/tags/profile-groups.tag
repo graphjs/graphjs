@@ -1,7 +1,7 @@
 <graphjs-profile-groups class="wallet">
     <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
+        <p if={list.length <= 0}>This user does not have any groups.</p>
         <!--
-        <p if={list.length <= 0}>This does not belong to any group.</p>
         <p if={list.length > 0}>{'Member of ' + list.length + ' Group' + (list.length > 1 ? 's' : '')}</p>
         -->
         <graphjs-group-card each={id in list} id={id}></graphjs-group-card>
@@ -36,6 +36,10 @@
                 if(response.success) {
                     for(let group of response.groups) {
                         self.list.push(group.id)
+                    }
+                    if(self.parent.tags.hasOwnProperty('graphjs-profile-header')) {
+                        self.parent.tags['graphjs-profile-header'].profile.membership_count = self.list.length;
+                        self.parent.tags['graphjs-profile-header'].update();
                     }
                     self.update();
                 } else {
