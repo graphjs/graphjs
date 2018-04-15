@@ -1,9 +1,6 @@
 <graphjs-profile-following class="wallet">
     <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
-        <p if={list.length <= 0}>This user is not following any users.</p>
-        <!--
-        <p if={list.length > 0}>{'Following ' + list.length + ' User' + (list.length > 1 ? 's' : '')}</p>
-        -->
+        <p if={empty}>This user is not following any users.</p>
         <graphjs-profile-card each={id in list} id={id}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
@@ -35,6 +32,7 @@
             getFollowing(self.id, function(response) {
                 if(response.success) {
                     self.list = Object.keys(response.following);
+                    self.empty = self.list.length == 0 ? true : false;
                     if(self.parent.tags.hasOwnProperty('graphjs-profile-header')) {
                         self.parent.tags['graphjs-profile-header'].following = self.list.length;
                         self.parent.tags['graphjs-profile-header'].update();

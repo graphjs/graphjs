@@ -1,4 +1,4 @@
-<graphjs-auth-reset class={'root' + (opts.minor ? '' : ' box')}>
+<graphjs-auth-reset class={'root' + (opts.minor ? '' : ' box') + (checked ? ' checked' : '')}>
     <div class="header" if={opts.title}>
         <div class="title">{opts.title || 'Reset Password'}</div>
     </div>
@@ -15,6 +15,12 @@
                 <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>Not registered?</a>
             </div>
         </form>
+    </div>
+    <div class="check">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark_circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="checkmark_check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
     </div>
     <a class="promo" href="http://graphjs.com">
         <svg viewBox="0 0 200 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

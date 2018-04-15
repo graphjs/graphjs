@@ -9,6 +9,7 @@
            background-color: rgba(187, 191, 195, .25)
     }
 }
+
 @-webkit-keyframes loading-placeholder {
     0% {
            background-color: rgba(187, 191, 195, .25)
@@ -36,5 +37,29 @@
     }
     to {
         background-position: 100%;
+    }
+}
+
+@keyframes error-shake {
+    0%, 100% {
+        left: 0px;
+    }
+    20%, 60% {
+        left: 1em;
+    }
+    40%, 80% {
+        left: -1em;
+    }
+}
+
+@-webkit-keyframes error-shake {
+    0%, 100% {
+        left: 0px;
+    }
+    20%, 60% {
+        left: 1em;
+    }
+    40%, 80% {
+        left: -1em;
     }
 }

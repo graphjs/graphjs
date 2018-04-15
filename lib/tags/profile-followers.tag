@@ -1,6 +1,6 @@
 <graphjs-profile-followers class="wallet">
     <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
-        <p if={list.length <= 0}>This user has no followers.</p>
+        <p if={empty}>This user has no followers.</p>
         <!--
         <p if={list.length > 0}>{list.length + ' Follower' + (list.length > 1 ? 's' : '')}</p>
         -->
@@ -35,6 +35,7 @@
             getFollowers(self.id, function(response) {
                 if(response.success) {
                     self.list = Object.keys(response.followers);
+                    self.empty = self.list.length == 0 ? true : false;
                     if(self.parent.tags.hasOwnProperty('graphjs-profile-header')) {
                         self.parent.tags['graphjs-profile-header'].profile.follower_count = self.list.length;
                         self.parent.tags['graphjs-profile-header'].update();

@@ -73,10 +73,15 @@ button {
 
 form {
     input, textarea {
+        position: relative;
         margin-bottom: .5em;
         .transition(border-color .35s ease);
         &.error {
             border-color: @danger-color;
+            -moz-animation: error-shake normal .35s ease-in-out;
+            -webkit-animation: error-shake normal .35s ease-in-out;
+            -ms-animation: error-shake normal .35s ease-in-out;
+            animation: error-shake normal .35s ease-in-out;
         }
         & + button {
             margin-top: .25em;

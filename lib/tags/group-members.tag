@@ -1,6 +1,6 @@
 <graphjs-group-members class="wallet">
     <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
-        <p if={list.length <= 0}>This group has no followers.</p>
+        <p if={empty}>This group has no followers.</p>
         <graphjs-profile-card each={id in list} id={id}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
@@ -32,6 +32,7 @@
             listMembers(self.id, function(response) {
                 if(response.success) {
                     self.list = response.members;
+                    self.empty = self.list.length == 0 ? true : false;
                     if(self.parent.tags.hasOwnProperty('graphjs-group-header')) {
                         self.parent.tags['graphjs-group-header'].group.count = self.list.length;
                         self.parent.tags['graphjs-group-header'].update();
