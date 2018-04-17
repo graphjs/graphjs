@@ -2,12 +2,12 @@
     <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
         <p if={empty}>This group has no followers.</p>
         <graphjs-profile-card each={id in list} id={id}></graphjs-profile-card>
-        <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
-        <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
-        <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
-        <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
-        <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
-        <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
+        <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
+        <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
+        <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
+        <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
+        <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
+        <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
         <button if={blocked} onclick={handleBlock} class="blockage">Login to display content</button>
     </div>
     <style type="less">
@@ -18,6 +18,7 @@
     <script>
         import listMembers from '../scripts/listMembers.js';
         import getUser from '../scripts/getUser.js';
+        import showLogin from '../scripts/showLogin.js';
 
         this.id = opts.id;
         this.list = [];
@@ -57,6 +58,10 @@
                     //Handle errors
                 }
             });
+        }
+        this.handleBlock = (event) => {
+            event.preventDefault();
+            showLogin();
         }
     </script>
 </graphjs-group-members>

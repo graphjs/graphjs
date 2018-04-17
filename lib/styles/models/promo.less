@@ -5,7 +5,6 @@
     z-index: 10;
     opacity: .5;
     right: 1em;
-    bottom: 0;
     width: auto;
     height: 1.6em;
     margin: 0 auto;
@@ -14,8 +13,6 @@
     font-size: .8em;
     line-height: 1.6em;
     text-align: center;
-    border-top-left-radius: .5em;
-    border-top-right-radius: .5em;
     background-color: fade(@secondary-color, 85%);
     .transition(all .35s ease);
     &:hover {
@@ -26,6 +23,16 @@
         display: inline-block;
         font-size: .9em;
         letter-spacing: -.25em;
+    }
+    &.top {
+        top: 0;
+        border-bottom-left-radius: .5em;
+        border-bottom-right-radius: .5em;
+    }
+    &.bottom {
+        bottom: 0;
+        border-top-left-radius: .5em;
+        border-top-right-radius: .5em;
     }
     svg {
         display: inline-block;

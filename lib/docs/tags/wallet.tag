@@ -1,25 +1,16 @@
-<docs-state>
+<docs-wallet>
     <h1>{opts.label}</h1>
     <h2><{opts.component}></h2>
     <section class="demo" ref="liveDemo"></section>
     <section class="options">
         <form>
-            <fieldset name="style">
-                <legend>Style</legend>
+            <fieldset name="content">
+                <legend>Content</legend>
                 <div class="radiobutton">
-                    <input onclick={updateRadio} type="radio" name="style" id="standalone" checked={specs.style == 'standalone'} />
-                    <label for="standalone">Standalone</label>
-                    <input onclick={updateRadio} type="radio" name="style" id="inline" checked={specs.style == 'inline'} />
-                    <label for="inline">Inline</label>
-                <div>
-            </fieldset>
-            <fieldset name="theme">
-                <legend>Theme</legend>
-                <div class="radiobutton">
-                    <input onclick={updateRadio} type="radio" name="theme" id="default" checked={specs.theme == 'default'} />
-                    <label for="default">Default</label>
-                    <input onclick={updateRadio} type="radio" name="theme" id="color" checked={specs.theme == 'color'} />
-                    <label for="color">Color</label>
+                    <input onclick={updateRadio} type="radio" name="content" id="users" checked={specs.content == 'users'} />
+                    <label for="users">Users</label>
+                    <input onclick={updateRadio} type="radio" name="content" id="groups" checked={specs.content == 'groups'} />
+                    <label for="groups">Groups</label>
                 <div>
             </fieldset>
             <xmp ref="inputCode" class="code">{input}</xmp>
@@ -29,8 +20,7 @@
     <script>
         this.input = '';
         this.specs = {
-            "style": "standalone",
-            "theme": "default"
+            "content": "users"
         }
         this.updateRadio = (event) => {
             let target = event.target.parentNode.parentNode.name;
@@ -51,4 +41,4 @@
             updateTag(opts.component, this.specs, this.refs.liveDemo);
         })
     </script>
-</docs-state>
+</docs-wallet>

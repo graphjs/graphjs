@@ -177,23 +177,24 @@
         ];
         //Components
         this.components = [
+            {"label": "State", "component": "state"},
             {"label": "Auth", "component": "auth"},
             {"label": "Register", "component": "auth-register", "parent": "auth"},
             {"label": "Login", "component": "auth-login", "parent": "auth"},
             {"label": "Reset Password", "component": "auth-reset", "parent": "auth"},
-            {"label": "Star: Button", "component": "star-button"},
-            {"label": "Star: List", "component": "star-list"},
             {"label": "Comments", "component": "comments"},
             {"label": "Messages", "component": "messages"},
             {"label": "Forum", "component": "forum"},
             {"label": "List", "component": "forum-list", "parent": "forum"},
             {"label": "Thread", "component": "forum-thread", "parent": "forum"},
             {"label": "Compose", "component": "forum-compose", "parent": "forum"},
+            {"label": "Star: Button", "component": "star-button"},
+            {"label": "Star: List", "component": "star-list"},
             {"label": "Profile", "component": "profile"},
             {"label": "Profile: Card", "component": "profile-card"},
             {"label": "Group", "component": "group"},
             {"label": "Group: Card", "component": "group-card"},
-            {"label": "State", "component": "state"},
+            {"label": "Wallet", "component": "wallet"},
             {"label": "Alert", "component": "alert"}
         ];
         this.activeItem = 'introduction';
