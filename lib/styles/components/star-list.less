@@ -128,12 +128,9 @@ graphjs-star-list {
                     }
                 }
                 .count {
-                    width: 7.5%;
-                    font-size: 1.75em;
+                    width: 3em;
+                    font-size: 1.5em;
                     text-align: left;
-                    & + .title {
-                        width: calc(90% - 3.5em);
-                    }
                     svg {
                         width: auto;
                         height: .75em;
@@ -142,10 +139,13 @@ graphjs-star-list {
                             fill: @text-color-normal;
                         }
                     }
+                    & + .title {
+                        width: calc(100% - 8em);
+                    }
                 }
                 .title {
                     cursor: pointer;
-                    width: calc(85% - 3.5em);
+                    width: calc(100% - 7em);
                     color: @text-color-strong;
                     .single-line-text;
                     &:hover {
@@ -165,10 +165,14 @@ graphjs-star-list {
                 .remove {
                     display: none;
                     cursor: pointer;
-                    width: 15%;
-                    text-align: right;
-                    padding-right: 1.5em;
-                    .text-color-states(@danger-color);
+                    width: 3.5em;
+                    height: 3.5em;
+                    .icon-color-states(@danger-color);
+                    svg {
+                        width: 1.3em;
+                        height: 1.3em;
+                        margin: 1.1em;
+                    }
                 }
             }
         }
@@ -260,4 +264,66 @@ graphjs-star-list {
             }
         }
     }
+}
+
+// Responsive
+
+/* Window Width < 480 */
+@media only screen and (max-width: 479px) {
+    graphjs-star-list {
+        .content {
+            .list {
+                .item {
+                    .remove {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* 480 ≤ Window Width < 768 */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    graphjs-star-list {
+        .content {
+            .list {
+                .item {
+                    .remove {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* 768 ≤ Window Width < 1024 */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+/* 1024 ≤ Window Width < 1152 */
+@media only screen and (min-width: 1024px) and (max-width: 1151px) {
+
+}
+
+/* 1152 ≤ Window Width < 1280 */
+@media only screen and (min-width: 1152px) and (max-width: 1280px) {
+
+}
+
+/* 1280 ≤ Window Width < 1440 */
+@media only screen and (min-width: 1280px) and (max-width: 1439px) {
+
+}
+
+/* 1440 ≤ Window Width < 1680 */
+@media only screen and (min-width: 1440px) and (max-width: 1679px) {
+
+}
+
+/* 1680 ≤ Window Width */
+@media only screen and (min-width: 1680px) {
+
 }

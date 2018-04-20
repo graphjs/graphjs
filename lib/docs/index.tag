@@ -194,7 +194,7 @@
             {"label": "Profile: Card", "component": "profile-card"},
             {"label": "Group", "component": "group"},
             {"label": "Group: Card", "component": "group-card"},
-            {"label": "Wallet", "component": "wallet"},
+            {"label": "List", "component": "list"},
             {"label": "Alert", "component": "alert"}
         ];
         this.activeItem = 'introduction';

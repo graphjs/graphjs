@@ -215,3 +215,121 @@ graphjs-forum-thread {
         }
     }
 }
+
+// Responsive
+
+/* Window Width < 480 */
+@media only screen and (max-width: 479px) {
+    graphjs-forum-thread {
+        &.composer {
+            .content {
+                .thread {
+                    max-height: 32em;
+                    margin-bottom: 18em;
+                }
+            }
+        }
+        .content {
+            min-height: 28.5em;
+            .thread {
+                max-height: 47em;
+                margin-bottom: 3em;
+                .title {
+                    padding: 1.5em 2.5em 0;
+                    h1 {
+                        font-size: 1.75em;
+                        line-height: 150%;
+                    }
+                }
+                .replies {
+                    padding-right: 2.5em;
+                    padding-left: 2.5em;
+                    .item {
+                        padding: 1.5em 0;
+                        .credit {
+                            margin-bottom: .25em;
+                        }
+                        p {
+                            margin-left: 3em * 1.2;
+                        }
+                    }
+                }
+            }
+            .reply {
+                bottom: -15em;
+                height: 18em;
+                padding: 1.5em 2.5em;
+                .synopsis {
+                    padding: calc(1em - 1px) 0;
+                    & > a {
+                        height: 1em;
+                        &.icon {
+                            top: .1em;
+                            &.reverse {
+                                top: -.1em;
+                                .transform(scaleY(-1));
+                            }
+                            svg {
+                                height: .8em;
+                                padding: .1em 0;
+                            }
+                        }
+                        &::before {
+                            margin: 0 .25em;
+                        }
+                    }
+                }
+                form {
+                    textarea {
+                        height: 9em;
+                        margin-top: 1em;
+                    }
+                    button {
+                        margin-top: .5em;
+                        margin-left: .5em;
+                        font-size: .9em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* 480 ≤ Window Width < 768 */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    graphjs-forum-thread {
+        .content {
+
+        }
+    }
+}
+
+/* 768 ≤ Window Width < 1024 */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+/* 1024 ≤ Window Width < 1152 */
+@media only screen and (min-width: 1024px) and (max-width: 1151px) {
+
+}
+
+/* 1152 ≤ Window Width < 1280 */
+@media only screen and (min-width: 1152px) and (max-width: 1280px) {
+
+}
+
+/* 1280 ≤ Window Width < 1440 */
+@media only screen and (min-width: 1280px) and (max-width: 1439px) {
+
+}
+
+/* 1440 ≤ Window Width < 1680 */
+@media only screen and (min-width: 1440px) and (max-width: 1679px) {
+
+}
+
+/* 1680 ≤ Window Width */
+@media only screen and (min-width: 1680px) {
+
+}

@@ -1,4 +1,4 @@
-<graphjs-wallet class="wallet">
+<graphjs-list class="wallet">
     <div if={content == 'groups'} class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
         <graphjs-group-card each={id in list} id={id}></graphjs-group-card>
         <graphjs-group-card if={list.length == 0}></graphjs-group-card>
@@ -82,4 +82,4 @@
             showLogin();
         }
     </script>
-</graphjs-wallet>
+</graphjs-list>

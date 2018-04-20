@@ -13,7 +13,7 @@ graphjs-forum-list {
                 border-radius: 0;
             }
             .search {
-                width: 80%;
+                width: calc(100% - 12em);
                 border-right: 2px solid @contrast-color;
                 background-color: desaturate(tint(@primary-color, 20%), 5%);
                 & > * {
@@ -47,11 +47,12 @@ graphjs-forum-list {
                 }
             }
             button {
-                width: 20%;
-                height: 3.5em / 1.1;
+                width: 12em;
+                height: 3.5em;
                 padding-left: 0;
                 padding-right: 0;
                 .regular-font;
+                font-size: 1em;
                 text-transform: none;
                 .background-color-states(@primary-color);
                 svg {
@@ -95,7 +96,7 @@ graphjs-forum-list {
                     }
                 }
                 .title {
-                    width: 70%;
+                    width: calc(100% - 16em);
                     padding: 0 1.5em;
                     color: @text-color-strong;
                     .single-line-text;
@@ -115,12 +116,13 @@ graphjs-forum-list {
                 }
                 */
                 time {
-                    width: 10%;
+                    width: calc(4em / .9);
                     font-size: .9em;
                 }
                 .contributors {
-                    width: 20%;
+                    width: 10.5em;
                     height: 3.5em;
+                    margin-right: 1.5em;
                     padding: .75em 0;
                     img {
                         width: 2em;
@@ -182,4 +184,104 @@ graphjs-forum-list {
             }
         }
     }
+}
+
+// Responsive
+
+/* Window Width < 480 */
+@media only screen and (max-width: 479px) {
+    graphjs-forum-list {
+        .content {
+            .bar {
+                .search {
+                    width: calc(100% - 3.5em);
+                }
+                button {
+                    width: 3.5em;
+                    span {
+                        display: none;
+                    }
+                }
+            }
+            .list {
+                .item {
+                    .title {
+                        width: calc(100% - 11.5em);
+                        padding: 0 1em;
+                    }
+                    .contributors {
+                        width: 6.5em;
+                        margin-right: 1em;
+                        img {
+                            margin-right: -.9em;
+                            border: 2px solid @contrast-color;
+                            box-shadow: 0 0 2px fade(black, 65%);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* 480 ≤ Window Width < 768 */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    graphjs-forum-list {
+        .content {
+            .bar {
+                .search {
+                    width: calc(100% - 10em);
+                }
+                button {
+                    width: 10em;
+                }
+            }
+            .list {
+                .item {
+                    .title {
+                        width: calc(100% - 14em);
+                        padding: 0 1.5em;
+                    }
+                    .contributors {
+                        width: 8.5em;
+                        margin-right: 1.5em;
+                        img {
+                            margin-right: -.4em;
+                            border: 2px solid @contrast-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* 768 ≤ Window Width < 1024 */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+/* 1024 ≤ Window Width < 1152 */
+@media only screen and (min-width: 1024px) and (max-width: 1151px) {
+
+}
+
+/* 1152 ≤ Window Width < 1280 */
+@media only screen and (min-width: 1152px) and (max-width: 1280px) {
+
+}
+
+/* 1280 ≤ Window Width < 1440 */
+@media only screen and (min-width: 1280px) and (max-width: 1439px) {
+
+}
+
+/* 1440 ≤ Window Width < 1680 */
+@media only screen and (min-width: 1440px) and (max-width: 1679px) {
+
+}
+
+/* 1680 ≤ Window Width */
+@media only screen and (min-width: 1680px) {
+
 }

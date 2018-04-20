@@ -3,16 +3,19 @@ graphjs-profile-card {
     color: fade(@text-color-strong, 65%);
     .option {
         display: inline-block;
+        position: absolute;
         width: 3.75em;
         height: 3.75em;
         padding: 1em;
         text-align: center;
         .icon-color-states(@primary-color);
         &.left {
-            float: left;
+            top: 0;
+            left: 0;
         }
         &.right {
-            float: right;
+            top: 0;
+            right: 0;
         }
         svg {
             position: relative;
@@ -31,7 +34,9 @@ graphjs-profile-card {
             width: 6.5em;
             height: 6.5em;
             vertical-align: middle;
-            border: 4px solid fade(@secondary-color, 15%);
+            border-width: 4px;
+            border-style: solid;
+            border-color: fade(@secondary-color, 15%);
             .border-radius(@border-radius-full);
         }
         a {
@@ -119,4 +124,94 @@ graphjs-profile-card {
             height: 3.3em;
         }
     }
+}
+
+// Responsive
+
+/* Window Width < 480 */
+@media only screen and (max-width: 479px) {
+    graphjs-profile-card {
+        .option {
+            width: 3em;
+            height: 3em;
+            padding: .75em;
+            svg {
+                max-width: 1.25em;
+            }
+        }
+        .information {
+            padding-top: 1em;
+            img {
+                width: 4.5em;
+                height: 4.5em;
+                border-width: 2px;
+            }
+            a {
+                font-size: 1.1em;
+            }
+            p {
+                margin-top: .25em;
+                font-size: .9em;
+            }
+        }
+    }
+}
+
+/* 480 ≤ Window Width < 768 */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    graphjs-profile-card {
+        .option {
+            width: 3.5em;
+            height: 3.5em;
+            padding: .875em;
+            svg {
+                max-width: 1.5em;
+            }
+        }
+        .information {
+            padding-top: 1.5em;
+            img {
+                width: 5.5em;
+                height: 5.5em;
+                border-width: 3px;
+            }
+            a {
+                font-size: 1.15em;
+            }
+            p {
+                margin-top: .5em;
+                font-size: .925em;
+            }
+        }
+    }
+}
+
+/* 768 ≤ Window Width < 1024 */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+/* 1024 ≤ Window Width < 1152 */
+@media only screen and (min-width: 1024px) and (max-width: 1151px) {
+
+}
+
+/* 1152 ≤ Window Width < 1280 */
+@media only screen and (min-width: 1152px) and (max-width: 1280px) {
+
+}
+
+/* 1280 ≤ Window Width < 1440 */
+@media only screen and (min-width: 1280px) and (max-width: 1439px) {
+
+}
+
+/* 1440 ≤ Window Width < 1680 */
+@media only screen and (min-width: 1440px) and (max-width: 1679px) {
+
+}
+
+/* 1680 ≤ Window Width */
+@media only screen and (min-width: 1680px) {
+
 }

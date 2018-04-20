@@ -1,4 +1,4 @@
-<docs-wallet>
+<docs-list>
     <h1>{opts.label}</h1>
     <h2><{opts.component}></h2>
     <section class="demo" ref="liveDemo"></section>
@@ -41,4 +41,4 @@
             updateTag(opts.component, this.specs, this.refs.liveDemo);
         })
     </script>
-</docs-wallet>
+</docs-list>

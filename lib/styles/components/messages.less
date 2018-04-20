@@ -1,6 +1,5 @@
 graphjs-messages {
     display: block;
-    width: 800px;
     color: fade(@text-color-strong, 65%);
     .regular-font;
     .content {
@@ -286,4 +285,126 @@ graphjs-messages {
             }
         }
     }
+}
+
+// Responsive
+
+/* Window Width < 480 */
+@media only screen and (max-width: 479px) {
+    graphjs-messages {
+        .content {
+            height: 36em;
+            .sidebar {
+                width: 4.5em;
+                input {
+                    position: absolute;
+                    z-index: 2;
+                    top: 3.5;
+                    left: 0;
+                    .box-shadow(0 4px 2px -2px fade(black, 25%));
+                }
+                .suggestions {
+                    position: absolute;
+                    z-index: 2;
+                    top: 7em;
+                    left: 0;
+                    right: 0;
+                    a {
+                        background-color: @shade-color;
+                    }
+                }
+                .list {
+                    .item {
+                        div {
+                            display: none;
+                        }
+                    }
+                }
+            }
+            .main {
+                width: calc(100% - 4.5em);
+                .conversation {
+                    height: calc(100% - 5em);
+                    padding: 1em;
+                    .item {
+                        width: 95%;
+                        &.inbound {
+                            margin-right: 5%;
+                        }
+                        &.outbound {
+                            margin-left: 5%;
+                        }
+                    }
+                }
+                textarea {
+                    height: 5em;
+                    padding: .5em .75em;
+                }
+            }
+        }
+    }
+}
+
+/* 480 ≤ Window Width < 768 */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    graphjs-messages {
+        .content {
+            height: 36em;
+            .sidebar {
+                width: 12.5em;
+                .list {
+                    .item {
+                        div {
+                            width: 7.5em / .9;
+                        }
+                    }
+                }
+            }
+            .main {
+                width: calc(100% - 12.5em);
+                .conversation {
+                    padding: 1.5em;
+                    .item {
+                        width: 95%;
+                        &.inbound {
+                            margin-right: 5%;
+                        }
+                        &.outbound {
+                            margin-left: 5%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* 768 ≤ Window Width < 1024 */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+/* 1024 ≤ Window Width < 1152 */
+@media only screen and (min-width: 1024px) and (max-width: 1151px) {
+
+}
+
+/* 1152 ≤ Window Width < 1280 */
+@media only screen and (min-width: 1152px) and (max-width: 1280px) {
+
+}
+
+/* 1280 ≤ Window Width < 1440 */
+@media only screen and (min-width: 1280px) and (max-width: 1439px) {
+
+}
+
+/* 1440 ≤ Window Width < 1680 */
+@media only screen and (min-width: 1440px) and (max-width: 1679px) {
+
+}
+
+/* 1680 ≤ Window Width */
+@media only screen and (min-width: 1680px) {
+
 }

@@ -8,7 +8,7 @@ graphjs-forum-compose {
                 width: 60%;
             }
             textarea {
-                height: 21.5em;
+                min-height: 21.5em;
                 line-height: 1.25em;
             }
             button {
@@ -24,4 +24,92 @@ graphjs-forum-compose {
             }
         }
     }
+}
+
+// Responsive
+
+/* Window Width < 480 */
+@media only screen and (max-width: 479px) {
+    graphjs-forum-compose {
+        .content {
+            form {
+                input {
+                    width: 100%;
+                }
+                textarea {
+                    min-height: 16.5em;
+                }
+                button {
+                    width: auto;
+                }
+                span {
+                    display: none;
+                    /*
+                    display: inline-block;
+                    width: 100%;
+                    max-width: 100%;
+                    margin-bottom: 1em;
+                    */
+                }
+            }
+        }
+    }
+}
+
+/* 480 ≤ Window Width < 768 */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    graphjs-forum-compose {
+        .content {
+            form {
+                input {
+                    width: 80%;
+                }
+                textarea {
+                    min-height: 19em;
+                }
+                button {
+                    width: auto;
+                }
+                span {
+                    display: none;
+                    /*
+                    display: inline-block;
+                    width: 100%;
+                    max-width: 100%;
+                    margin-bottom: 1em;
+                    */
+                }
+            }
+        }
+    }
+}
+
+/* 768 ≤ Window Width < 1024 */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+/* 1024 ≤ Window Width < 1152 */
+@media only screen and (min-width: 1024px) and (max-width: 1151px) {
+
+}
+
+/* 1152 ≤ Window Width < 1280 */
+@media only screen and (min-width: 1152px) and (max-width: 1280px) {
+
+}
+
+/* 1280 ≤ Window Width < 1440 */
+@media only screen and (min-width: 1280px) and (max-width: 1439px) {
+
+}
+
+/* 1440 ≤ Window Width < 1680 */
+@media only screen and (min-width: 1440px) and (max-width: 1679px) {
+
+}
+
+/* 1680 ≤ Window Width */
+@media only screen and (min-width: 1680px) {
+
 }
