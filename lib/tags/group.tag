@@ -1,25 +1,26 @@
 <graphjs-group class="root">
     <graphjs-group-header
         id={opts.id}
+        active={active}
         minor={true}
         callback={changeProperties}
     />
     <graphjs-group-activity
         minor={true}
         callback={changeProperties}
-        if={this.active == 'activity'}
+        if={active == 'activity'}
     />
     <graphjs-group-members
         id={opts.id}
         minor={true}
         callback={changeProperties}
-        if={this.active == 'members'}
+        if={active == 'members'}
     />
     <graphjs-group-settings
         id={opts.id}
         minor={true}
         callback={changeProperties}
-        if={this.active == 'settings'}
+        if={active == 'settings'}
     />
     <style type="less">
         @import '../styles/variables.less';

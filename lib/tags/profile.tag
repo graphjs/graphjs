@@ -1,38 +1,38 @@
 <graphjs-profile class="root">
     <graphjs-profile-header
         id={opts.id}
-        active={this.active}
+        active={active}
         minor={true}
         callback={changeProperties}
     />
     <graphjs-profile-activity
         minor={true}
         callback={changeProperties}
-        if={this.active == 'activity'}
+        if={active == 'activity'}
     />
     <graphjs-profile-followers
         id={opts.id}
         minor={true}
         callback={changeProperties}
-        if={this.active == 'followers'}
+        if={active == 'followers'}
     />
     <graphjs-profile-following
         id={opts.id}
         minor={true}
         callback={changeProperties}
-        if={this.active == 'following'}
+        if={active == 'following'}
     />
     <graphjs-profile-groups
         id={opts.id}
         minor={true}
         callback={changeProperties}
-        if={this.active == 'groups'}
+        if={active == 'groups'}
     />
     <graphjs-profile-settings
         id={opts.id}
         minor={true}
         callback={changeProperties}
-        if={this.active == 'settings'}
+        if={active == 'settings'}
     />
     <style type="less">
         @import '../styles/variables.less';

@@ -7,12 +7,19 @@
     <style>
         /* TEMPORARY */
         body {
-            font-family: sans-serif;
+            overflow-x: hidden;
+        	position: relative;
+        	left: 0;
             margin: 0;
+            font-family: sans-serif;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
             -webkit-text-size-adjust: 100%;
             background-color: rgb(240, 243, 245);
+            -moz-transition: left .35s ease;
+            -o-transition: left .35s ease;
+            -webkit-transition: left .35s ease;
+            transition: left .35s ease;
         }
         body.graphjs-theme-light {
             color: rgba(0, 0, 0, .5);
@@ -24,6 +31,16 @@
         }
         h2 {
             margin: 2em 0 1em;
+        }
+        /* Window Width < 1024 */
+        @media only screen and (max-width: 1023px) {
+            body.push {
+                left: 200px;
+            }
+            body.push main {
+                opacity: .5;
+                pointer-events: none;
+            }
         }
     </style>
 </head>

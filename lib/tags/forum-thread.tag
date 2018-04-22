@@ -7,7 +7,8 @@
                 </g>
             </svg>
         </a>
-        <div class="title">{opts.title || 'Thread by ' + (currentAuthor || 'Forum User')}</div>
+        <div if={window.innerWidth < 768} class="title">{opts.title || 'Thread by ' + (currentAuthor || 'Forum User')}</div>
+        <div if={window.innerWidth >= 768} class="title">{title || 'Thread by ' + (currentAuthor || 'Forum User')}</div>
     </div>
     <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
         <div class="thread" ref="scrollingContent">

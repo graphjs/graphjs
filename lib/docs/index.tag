@@ -1,6 +1,13 @@
 <docs-index>
-    <aside>
+    <aside ref="menuContainer">
         <docs-menu callback={changeProperties} components={components} functions={functions}></docs-menu>
+        <a onclick={toggleMenu}>
+            <svg version="1.1" viewBox="106.925 6.163 41.27 32.386" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+                <path d="M145.248,6.163h-35.375c-1.628,0-2.948,1.319-2.948,2.948c0,1.628,1.32,2.947,2.948,2.947h35.375 c1.628,0,2.947-1.319,2.947-2.947C148.195,7.483,146.875,6.163,145.248,6.163z"></path>
+                <path d="M145.248,19.408h-35.375c-1.628,0-2.948,1.319-2.948,2.948c0,1.628,1.32,2.947,2.948,2.947h35.375 c1.628,0,2.947-1.319,2.947-2.947C148.195,20.728,146.875,19.408,145.248,19.408z"></path>
+                <path d="M148.195,35.601c0-1.628-1.319-2.947-2.947-2.947h-35.375c-1.628,0-2.948,1.319-2.948,2.947 c0,1.629,1.32,2.948,2.948,2.948h35.375C146.875,38.549,148.195,37.23,148.195,35.601z"></path>
+            </svg>
+        </a>
     </aside>
     <main ref="main">
     </main>
@@ -12,19 +19,35 @@
             display: inline-block;
             width: 100%;
             aside {
-                overflow-y: scroll;
                 position: fixed;
                 z-index: 9;
                 top: 0;
                 bottom: 0;
                 left: 0;
-                width: 20%;
+                width: 200px;
                 height: auto;
                 background: linear-gradient(rgb(93, 60, 246), rgb(158, 119, 255));
+                .transition(left .35s ease);
+                & > a {
+                    display: none;
+                    position: absolute;
+                    top: 2.5em;
+                    right: -3em;
+                    width: 2em;
+                    height: 2em;
+                    svg {
+                        padding: .2em 0;
+                        path {
+                            fill: rgb(93, 60, 246);
+                        }
+                    }
+                }
                 .menu {
-                    color: white;
+                    overflow-y: scroll;
                     display: inline-block;
+                    height: 100%;
                     padding: 10%;
+                    color: white;
                     img {
                         width: 85%;
                         height: auto;
@@ -49,11 +72,13 @@
                         width: 100%;
                         margin: 1em 0;
                         padding: 0 5%;
+                        font-size: 1.25em;
+                        text-shadow: 0.1em 0.1em 0.1em rgba(0, 0, 0, .1);
                     }
                     a {
                         color: white;
-                        font-size: 1.1em;
-                        line-height: 200%;
+                        font-size: 1em;
+                        line-height: 175%;
                         display: inline-block;
                         width: 100%;
                         padding: 0 5%;
@@ -77,24 +102,30 @@
             }
             main {
                 display: inline-block;
-                width: 70%;
-                margin: 2.5% 5% 2.5% 25%;
+                width: calc(100% - 200px);
+                margin-left: 200px;
+                padding: 2.5em 5em;
                 h1 {
                     color: rgb(93, 60, 246);
-                    margin: 1em 0;
+                    margin: 0;
+                    font-size: 2em;
+                    line-height: 1em;
                 }
                 h2 {
                     color: rgb(158, 119, 255);
-                    margin: 2em 0;
+                    margin: 0;
+                    margin-top: 1em;
                 }
                 .demo {
                     width: 100%;
+                    margin-top: 5%;
                     margin-bottom: 5%;
                     & > * {
                         margin: 0;
                     }
                 }
                 .options {
+                    max-width: 50em;
                     form {
                         width: 100%;
                         margin-bottom: 5%;
@@ -164,6 +195,123 @@
                 }
             }
         }
+
+        /* Window Width < 480 */
+        @media only screen and (max-width: 479px) {
+            docs-index {
+                aside {
+                    left: -200px;
+                    & > a {
+                        display: inline-block;
+                    }
+                    &.open {
+                        left: 0;
+                    }
+                }
+                main {
+                    width: 100%;
+                    margin-left: 0;
+                    padding: 2.5em 1.5em 2.5em 4em;
+                    .options {
+                        width: 100%;
+                        max-width: none;
+                        form {
+                            fieldset {
+                                width: 100%;
+                                margin-left: 0 !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* 480 ≤ Window Width < 768 */
+        @media only screen and (min-width: 480px) and (max-width: 767px) {
+            docs-index {
+                aside {
+                    left: -200px;
+                    & > a {
+                        display: inline-block;
+                    }
+                    &.open {
+                        left: 0;
+                    }
+                }
+                main {
+                    width: 100%;
+                    margin-left: 0;
+                    padding: 2.5em 1.5em 2.5em 4em;
+                    .options {
+                        width: 100%;
+                        max-width: none;
+                        form {
+                            fieldset {
+                                width: 100%;
+                                margin-left: 0 !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* 768 ≤ Window Width < 1024 */
+        @media only screen and (min-width: 768px) and (max-width: 1023px) {
+            docs-index {
+                aside {
+                    left: -200px;
+                    & > a {
+                        display: inline-block;
+                    }
+                    &.open {
+                        left: 0;
+                    }
+                }
+                main {
+                    width: 100%;
+                    margin-left: 0;
+                    padding: 2.5em 1.5em 2.5em 4em;
+                    .options {
+                        width: 100%;
+                        max-width: none;
+                    }
+                }
+            }
+        }
+
+        /* 1024 ≤ Window Width < 1152 */
+        @media only screen and (min-width: 1024px) and (max-width: 1151px) {
+            docs-index {
+                main {
+                    padding: 2.5em;
+                }
+            }
+        }
+
+        /* 1152 ≤ Window Width < 1280 */
+        @media only screen and (min-width: 1152px) and (max-width: 1280px) {
+            docs-index {
+                main {
+                    padding: 2.5em;
+                }
+            }
+        }
+
+        /* 1280 ≤ Window Width < 1440 */
+        @media only screen and (min-width: 1280px) and (max-width: 1439px) {
+
+        }
+
+        /* 1440 ≤ Window Width < 1680 */
+        @media only screen and (min-width: 1440px) and (max-width: 1679px) {
+
+        }
+
+        /* 1680 ≤ Window Width */
+        @media only screen and (min-width: 1680px) {
+
+        }
     </style>
     <script>
         import './menu.tag';
@@ -198,7 +346,14 @@
             {"label": "Alert", "component": "alert"}
         ];
         this.activeItem = 'introduction';
+        this.toggleMenu = (event) => {
+            event.preventDefault();
+            this.refs.menuContainer.classList.toggle('open');
+            document.body.classList.toggle('push');
+        }
         this.changeProperties = (event) => {
+            this.refs.menuContainer.classList.toggle('open');
+            document.body.classList.toggle('push');
             for(let element of event.currentTarget.parentNode.children) {
                 element.classList.remove('active');
             }

@@ -24,6 +24,7 @@ graphjs-forum-thread {
             margin-bottom: 3em;
             /*.transition(margin-bottom .35s ease);*/
             .title {
+                display: none;
                 position: relative;
                 z-index: 2;
                 padding: 1.5em 2.5em 0;
@@ -72,6 +73,7 @@ graphjs-forum-thread {
                     p {
                         margin-left: 3em * 1.2;
                         .regular-font;
+                        font-size: 1em;
                         line-height: 150%;
                     }
                 }
@@ -163,9 +165,8 @@ graphjs-forum-thread {
     .placeholder {
         padding: 0 2.5em;
         .title {
-            display: block;
+            display: none !important;
             position: relative;
-            top: -.5em;
             width: calc(50% - 2.5em);
             margin-top: 2.5em;
             padding: 0;
@@ -224,71 +225,59 @@ graphjs-forum-thread {
         &.composer {
             .content {
                 .thread {
-                    max-height: 32em;
-                    margin-bottom: 18em;
+                    margin-bottom: 15em;
                 }
             }
         }
         .content {
-            min-height: 28.5em;
             .thread {
-                max-height: 47em;
-                margin-bottom: 3em;
                 .title {
-                    padding: 1.5em 2.5em 0;
+                    display: block;
+                    padding: 1em 1.5em 0;
                     h1 {
-                        font-size: 1.75em;
-                        line-height: 150%;
+                        font-size: 1.55em;
                     }
                 }
                 .replies {
-                    padding-right: 2.5em;
-                    padding-left: 2.5em;
+                    padding-right: 1.5em;
+                    padding-left: 1.5em;
                     .item {
-                        padding: 1.5em 0;
+                        padding: 1em 0;
                         .credit {
-                            margin-bottom: .25em;
+                            margin-bottom: .75em;
                         }
                         p {
-                            margin-left: 3em * 1.2;
+                            margin-left: 0;
                         }
                     }
                 }
             }
             .reply {
-                bottom: -15em;
-                height: 18em;
-                padding: 1.5em 2.5em;
-                .synopsis {
-                    padding: calc(1em - 1px) 0;
-                    & > a {
-                        height: 1em;
-                        &.icon {
-                            top: .1em;
-                            &.reverse {
-                                top: -.1em;
-                                .transform(scaleY(-1));
-                            }
-                            svg {
-                                height: .8em;
-                                padding: .1em 0;
-                            }
-                        }
-                        &::before {
-                            margin: 0 .25em;
-                        }
-                    }
-                }
+                bottom: -12em;
+                height: 15em;
+                padding: 1em 1.5em;
+                padding-top: 0;
                 form {
                     textarea {
-                        height: 9em;
-                        margin-top: 1em;
+                        height: 6em;
                     }
-                    button {
-                        margin-top: .5em;
-                        margin-left: .5em;
-                        font-size: .9em;
-                    }
+                }
+            }
+        }
+        /* Placeholder */
+        .placeholder {
+            padding: 0 1.5em;
+            .title {
+                display: block;
+                width: calc(90% - 2.5em);
+                margin-top: 1.25em;
+            }
+            .text {
+                padding-left: 0;
+            }
+            .creator {
+                .information {
+                    width: calc(45% - 2.5em);
                 }
             }
         }
@@ -298,8 +287,64 @@ graphjs-forum-thread {
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
     graphjs-forum-thread {
+        &.composer {
+            .content {
+                .thread {
+                    margin-bottom: 16.5em;
+                }
+            }
+        }
         .content {
-
+            .thread {
+                .title {
+                    display: block;
+                    padding: 1.25em 2em 0;
+                    h1 {
+                        font-size: 1.65em;
+                    }
+                }
+                .replies {
+                    padding-right: 2em;
+                    padding-left: 2em;
+                    .item {
+                        padding: 1.25em 0;
+                        .credit {
+                            margin-bottom: .5em;
+                        }
+                        p {
+                            margin-left: 0;
+                        }
+                    }
+                }
+            }
+            .reply {
+                bottom: -13.5em;
+                height: 16.5em;
+                padding: 1.25em 2em;
+                padding-top: 0;
+                form {
+                    textarea {
+                        height: 7.5em;
+                    }
+                }
+            }
+        }
+        /* Placeholder */
+        .placeholder {
+            padding: 0 2em;
+            .title {
+                display: block;
+                width: calc(70% - 2.5em);
+                margin-top: 2em
+            }
+            .text {
+                padding-left: 0;
+            }
+            .creator {
+                .information {
+                    width: calc(40% - 2.5em);
+                }
+            }
         }
     }
 }

@@ -8,6 +8,9 @@
         <div class="title">{opts.title || 'Comments'}</div>
     </div>
     <div class="content" ref="scrollingContent">
+        <div class="synopsis"if={comments.length <= 0}>
+            Not comments yet. Be the first person to comment!
+        </div>
         <div class={'comment' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
             <textarea ref="composer" placeholder="Write your comment here..."></textarea>
             <button onclick={handleComment}>Send Comment</button>
@@ -16,9 +19,6 @@
                 <img src="lib/images/animations/loading-dots.gif">
             </div>
             <button if={blocked} onclick={handleBlock} class="blockage">Login to write a comment</button>
-        </div>
-        <div class="synopsis"if={comments.length <= 0}>
-            Not comments yet. Be the first person to comment!
         </div>
         <div class="synopsis"if={comments.length > 0}>
             {comments.length <= 1 ? comments.length + ' comment' : comments.length + ' comments'}

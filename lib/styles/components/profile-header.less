@@ -96,10 +96,16 @@ graphjs-profile-header {
                 font-size: @font-size-default * 1.1;
                 .bold-font;
                 line-height: 2.5em;
-                &.count{
+                &.count {
                     &::before {
                         content: attr(data-count);
                         margin-right: .25em;
+                    }
+                }
+                svg {
+                    display: none;
+                    path {
+                        fill: @primary-color;
                     }
                 }
             }
@@ -162,4 +168,168 @@ graphjs-profile-header {
             height: 2.75em;
         }
     }
+}
+
+// Responsive
+
+/* Window Width < 480 */
+@media only screen and (max-width: 479px) {
+    graphjs-profile-header {
+        ul {
+            display: flex;
+            border-top: none;
+            li {
+                flex-grow: 1;
+                border-top: 1px solid rgba(0, 0, 0, .05);
+                border-right: 1px solid rgba(0, 0, 0, .05);
+                vertical-align: middle;
+                &:last-of-type {
+                    border-right: none;
+                }
+                &.active {
+                    border-top: none;
+                    background-color: @contrast-color;
+                }
+                a {
+                    position: relative;
+                    width: 100%;
+                    padding: 1.25em 0;
+                    font-size: @font-size-default * 1.1;
+                    line-height: .85em;
+                    &.count{
+                        &::before {
+                            display: none;
+                        }
+                        &::after {
+                            content: attr(data-count);
+                            display: inline-block;
+                            position: absolute;
+                            top: 4.25em;
+                            left: 0;
+                            width: 100%;
+                            color: @text-color-weak;
+                            font-size: .6em;
+                            line-height: 1.25em;
+                            text-align: center;
+                        }
+                    }
+                    span {
+                        display: none;
+                    }
+                    svg {
+                        display: inline;
+                        width: 2.25em;
+                        height: 1.25em;
+                    }
+                    &[data-link="followers"], &[data-link="following"] {
+                        svg {
+                            padding-left: .25em;
+                        }
+                    }
+                }
+            }
+        }
+        /* Placeholder */
+        .placeholder {
+            .list {
+                height: 5em;
+            }
+        }
+    }
+}
+
+/* 480 ≤ Window Width < 768 */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    graphjs-profile-header {
+        ul {
+            display: flex;
+            border-top: none;
+            li {
+                flex-grow: 1;
+                border-top: 1px solid rgba(0, 0, 0, .05);
+                border-right: 1px solid rgba(0, 0, 0, .05);
+                vertical-align: middle;
+                &:last-of-type {
+                    border-right: none;
+                }
+                &.active {
+                    border-top: none;
+                    background-color: @contrast-color;
+                }
+                a {
+                    position: relative;
+                    width: 100%;
+                    padding: 1.25em 0;
+                    font-size: @font-size-default * 1.1;
+                    line-height: .85em;
+                    &.count {
+                        &::before {
+                            display: none;
+                        }
+                        &::after {
+                            content: attr(data-count);
+                            display: inline-block;
+                            position: absolute;
+                            top: 4.25em;
+                            left: 0;
+                            width: 100%;
+                            color: @text-color-weak;
+                            font-size: .6em;
+                            line-height: 1.25em;
+                            text-align: center;
+                        }
+                    }
+                    span {
+                        display: none;
+                    }
+                    svg {
+                        display: inline;
+                        width: 2.25em;
+                        height: 1.25em;
+                    }
+                    &[data-link="followers"], &[data-link="following"] {
+                        svg {
+                            padding-left: .25em;
+                        }
+                    }
+                }
+            }
+        }
+        /* Placeholder */
+        .placeholder {
+            .list {
+                height: 5em;
+            }
+        }
+    }
+}
+
+/* 768 ≤ Window Width < 1024 */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+/* 1024 ≤ Window Width < 1152 */
+@media only screen and (min-width: 1024px) and (max-width: 1151px) {
+
+}
+
+/* 1152 ≤ Window Width < 1280 */
+@media only screen and (min-width: 1152px) and (max-width: 1280px) {
+
+}
+
+/* 1280 ≤ Window Width < 1440 */
+@media only screen and (min-width: 1280px) and (max-width: 1439px) {
+
+}
+
+/* 1440 ≤ Window Width < 1680 */
+@media only screen and (min-width: 1440px) and (max-width: 1679px) {
+
+}
+
+/* 1680 ≤ Window Width */
+@media only screen and (min-width: 1680px) {
+
 }

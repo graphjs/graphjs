@@ -343,6 +343,27 @@ graphjs-messages {
             }
         }
     }
+    /* Placeholder */
+    .placeholder {
+        .left {
+            width: 4.5em;
+            .user {
+                .information {
+                    display: none;
+                }
+            }
+        }
+        .right {
+            width: calc(100% - 4.5em - 1px);
+            padding: 1em;
+            .message {
+                width: 95%;
+                &:nth-child(even) {
+                    margin-left: 5%;
+                }
+            }
+        }
+    }
 }
 
 /* 480 ≤ Window Width < 768 */
@@ -372,6 +393,27 @@ graphjs-messages {
                         &.outbound {
                             margin-left: 5%;
                         }
+                    }
+                }
+            }
+        }
+        /* Placeholder */
+        .placeholder {
+            .left {
+                width: 12.5em;
+                .user {
+                    .information {
+                        width: 7em;
+                    }
+                }
+            }
+            .right {
+                width: calc(100% - 12.5em - 1px);
+                padding: 1.5em;
+                .message {
+                    width: 95%;
+                    &:nth-child(even) {
+                        margin-left: 5%;
                     }
                 }
             }
