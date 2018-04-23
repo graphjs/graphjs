@@ -1,4 +1,12 @@
-<graphjs-forum-thread class={'root composer' + (opts.minor ? '' : ' box')}>
+<graphjs-forum-thread
+    class={'root composer' + (opts.minor ? '' : ' box')}
+    style={
+        (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
+        (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
+        (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
+        (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
+    }
+>
     <div class="header">
         <a class="option left" data-link="list" onclick={opts.minor ? handleCallback : handleShow}>
             <svg fill="blue" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

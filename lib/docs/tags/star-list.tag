@@ -33,23 +33,23 @@
             </fieldset>
             <fieldset name="min-width">
                 <legend>Minimum Width</legend>
-                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.minWidth} />
-                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.minWidth} />
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs['min-width']} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs['min-width']} />
             </fieldset>
             <fieldset name="max-width">
                 <legend>Maximum Width</legend>
-                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.maxWidth} />
-                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.maxWidth} />
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs['max-width']} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs['max-width']} />
             </fieldset>
             <fieldset name="min-height">
                 <legend>Minimum Height</legend>
-                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.minHeight} />
-                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.minHeight} />
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs['min-height']} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs['min-height']} />
             </fieldset>
             <fieldset name="max-height">
                 <legend>Maximum Height</legend>
-                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.maxHeight} />
-                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.maxHeight} />
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs['max-height']} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs['max-height']} />
             </fieldset>
             <xmp ref="inputCode" class="code">{input}</xmp>
             <button onclick={handleSubmit}>Apply</button>
@@ -59,7 +59,8 @@
         this.input = '';
         this.specs = {
             "type": "default",
-            "scope": "global"
+            "scope": "global",
+            "max-width": "800px"
         }
         this.updateTextWithCheckbox = (event) => {
             let target = event.target.parentNode.name;

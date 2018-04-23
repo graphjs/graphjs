@@ -9,15 +9,6 @@
                 <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.id} />
                 <input onkeyup={updateTextWithCheckbox} type="text" value={specs.id} />
             </fieldset>
-            <fieldset name="theme">
-                <legend>Theme</legend>
-                <div class="radiobutton">
-                    <input onclick={updateRadio} type="radio" name="theme" id="default" checked={specs.theme == 'default'} />
-                    <label for="default">Default</label>
-                    <input onclick={updateRadio} type="radio" name="theme" id="color" checked={specs.theme == 'color'} />
-                    <label for="color">Color</label>
-                <div>
-            </fieldset>
             <xmp ref="inputCode" class="code">{input}</xmp>
             <button onclick={handleSubmit}>Apply</button>
         </form>
@@ -25,8 +16,7 @@
     <script>
         this.input = '';
         this.specs = {
-            "id": "4254d4931b6ec83d4fa10b2593f85643",
-            "theme": "default"
+            "id": "4254d4931b6ec83d4fa10b2593f85643"
         }
         this.updateTextWithCheckbox = (event) => {
             let target = event.target.parentNode.name;
@@ -37,11 +27,6 @@
                 let sibling = event.target.parentNode.children[1];
                 this.specs[target] = event.target.value;
             }
-            this.handleCode();
-        }
-        this.updateRadio = (event) => {
-            let target = event.target.parentNode.parentNode.name;
-            this.specs[target] = event.target.id;
             this.handleCode();
         }
         import updateCode from '../scripts/updateCode.js';

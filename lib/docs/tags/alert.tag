@@ -13,15 +13,15 @@
                 <legend>Message</legend>
                 <input onkeyup={updateText} type="text" value={specs.message} placeholder="A message is required." />
             </fieldset>
-            <fieldset name="customoption">
+            <fieldset name="custom-option">
                 <legend>Custom Option</legend>
-                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.customoption} />
-                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.customoption} placeholder="Done" />
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs['custom-option']} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs['custom-option']} placeholder="Done" />
             </fieldset>
-            <fieldset name="negativeoption">
+            <fieldset name="negative-option">
                 <legend>Negative Option</legend>
-                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.negativeoption} />
-                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.negativeoption} />
+                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs['negative-option']} />
+                <input onkeyup={updateTextWithCheckbox} type="text" value={specs['negative-option']} />
             </fieldset>
             <xmp ref="inputCode" class="code">{input}</xmp>
             <button onclick={handleSubmit}>Apply</button>
@@ -32,8 +32,8 @@
         this.specs = {
             "title": "Login Required",
             "message": "You need to login to view the group details.",
-            "customoption": "Login",
-            "negativeoption": "Cancel"
+            "custom-option": "Login",
+            "negative-option": "Cancel"
         }
         this.updateText = (event) => {
             let target = event.target.parentNode.name;

@@ -5,9 +5,9 @@
     <div class="content">
         <p>{opts.message}</p>
     </div>
-    <button if={opts.customoption == undefined || opts.customoption == ''} onclick={handleButton}>Done</button>
-    <button ref="custom" if={opts.customoption} onclick={handleButton}>{opts.customoption}</button>
-    <button if={opts.customoption && opts.negativeoption} onclick={handleButton} class="danger">{opts.negativeoption}</button>
+    <button if={opts.customOption == undefined || opts.customOption == ''} onclick={handleButton}>Done</button>
+    <button ref="custom" if={opts.customOption} onclick={handleButton}>{opts.customOption}</button>
+    <button if={opts.customOption && opts.negativeOption} onclick={handleButton} class="danger">{opts.negativeOption}</button>
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';

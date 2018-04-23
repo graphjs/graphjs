@@ -1,4 +1,12 @@
-<graphjs-forum-list class={'root' + (opts.minor ? '' : ' box')}>
+<graphjs-forum-list
+    class={'root' + (opts.minor ? '' : ' box')}
+    style={
+        (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
+        (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
+        (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
+        (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
+    }
+>
     <div class="header">
         <div class="title">{opts.title || 'Community Forum'}</div>
     </div>

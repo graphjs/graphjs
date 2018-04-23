@@ -1,5 +1,7 @@
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
+const CompressionPlugin = require("compression-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
     entry: './lib/app.js',
@@ -47,5 +49,12 @@ module.exports = {
                 use: 'url-loader?limit=100000'
             }
         ]
-    }
+    },
+    plugins: [
+        new UglifyJsPlugin(),
+        new webpack.optimize.AggressiveMergingPlugin(),
+        new CompressionPlugin({
+            algorithm: 'gzip'
+        })
+    ]
 }
