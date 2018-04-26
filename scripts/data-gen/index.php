@@ -21,7 +21,7 @@ $faker = Faker\Factory::create();
 //Generate a birthday
 date_default_timezone_set('Europe/Istanbul');
 $date = $faker->dateTimeThisCentury->format('m/d/Y');
-list($month, $day, $year) = split('[/.-]', $date);
+list($month, $day, $year) = preg_split('[/.-]', $date);
 if($year > date("Y") - 13) {
     $year = date("Y") - 13 - 1;
 }
