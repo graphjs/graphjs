@@ -239,6 +239,10 @@ foreach($fixed->groups as $group) {
     
 }
 
+$max = 24;
+if(isset($argv[1]&&is_numeric($argv[1]))
+    $max = (int) $argv[1];
+
 for($i=0;$i<24;$i++) {
     run();
 }
