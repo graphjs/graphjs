@@ -9,8 +9,6 @@ $server = "http://phonetworks.com:1338";
 //Set public id
 $publicId = "79982844-6a27-4b3b-b77f-419a79be0e10";
 
-function run() {
-    
 // Create a client
 $client = new \GuzzleHttp\Client();
 
@@ -235,16 +233,6 @@ foreach($fixed->groups as $group) {
             "Joined ".$group
         );
     }
-}
-    
-}
-
-$max = 24;
-if(isset($argv[1]&&is_numeric($argv[1]))
-    $max = (int) $argv[1];
-
-for($i=0;$i<24;$i++) {
-    run();
 }
 
 ?>
