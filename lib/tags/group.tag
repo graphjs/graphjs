@@ -6,6 +6,7 @@
         callback={changeProperties}
     />
     <graphjs-group-activity
+        id={opts.id}
         minor={true}
         callback={changeProperties}
         if={active == 'activity'}

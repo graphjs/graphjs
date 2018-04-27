@@ -8,12 +8,24 @@
         </ul>
     </div>
     <div class="content">
-        <form>
+        <form if={next == 'enterEmail'}>
             <input ref="email" type="text" placeholder="Enter your email address"/>
-            <button onclick={handleSubmit}>Reset</button>
+            <button ref="submitEmail" onclick={handleSubmitEmail}>Reset</button>
             <div class="option single">
                 <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>Not registered?</a>
             </div>
+        </form>
+        <form class="code" if={next == 'verifyCode'}>
+            <p>Please enter the 6-digit code we sent to your email.</p>
+            <fieldset>
+                <input type="text" placeholder="X"/>
+                <input type="text" placeholder="X"/>
+                <input type="text" placeholder="X"/>
+                <input type="text" placeholder="X"/>
+                <input type="text" placeholder="X"/>
+                <input type="text" placeholder="X"/>
+            </fieldset>
+            <button ref="submitCode" onclick={handleSubmitCode}>Reset</button>
         </form>
     </div>
     <div class="check">
@@ -40,8 +52,7 @@
         import showAlert from '../scripts/showAlert.js';
         import showRegister from '../scripts/showRegister.js';
 
-        this.handleRegisterBox = () => showRegister();
-
+        this.next = 'enterEmail';
         this.failMessages = [];
 
         this.checkEmailPattern = () => {
@@ -59,13 +70,19 @@
         }
         this.validateInformation = () => {
             let validEmailPattern = this.checkEmailPattern();
-            return (
+            if(
                 validEmailPattern
-            ) ? true : false;
+            ) {
+                return true;
+            } else {
+                this.refs.submitEmail.classList.remove('loading');
+                return false;
+            }
         }
-        this.handleSubmit = (event) => {
+        this.handleSubmitEmail = (event) => {
             event.preventDefault();
             let self = this;
+            self.refs.submitEmail.classList.add('loading');
             let email = self.refs.email.value;
             self.refs.email.className = '';
             self.failMessages = [];
@@ -74,22 +91,19 @@
                     email,
                     function(response) {
                         if(response.success) {
-                            showAlert({
-                                title: 'Email Sent!',
-                                message: 'An email sent to your email address.'
-                            });
+                            self.refs.submitEmail.classList.remove('loading');
+                            self.next = 'verifyCode';
+                            self.update();
                         } else {
-                            showAlert({
-                                title: 'Reset Failed!',
-                                message: response.reason || 'Please try entering your email again.',
-                                customoption: 'Retry',
-                                show: 'reset',
-                                negativeoption: 'Cancel'
-                            });
+                            failMessage = response.reason || 'Please try entering your email again.';
+                            self.refs.submitEmail.classList.remove('loading');
+                            this.refs.email.classList.add('error');
+                            this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                         }
                     }
                 );
             }
         }
+        this.handleRegisterBox = () => showRegister();
     </script>
 </graphjs-auth-reset>

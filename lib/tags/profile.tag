@@ -6,6 +6,7 @@
         callback={changeProperties}
     />
     <graphjs-profile-activity
+        id={opts.id}
         minor={true}
         callback={changeProperties}
         if={active == 'activity'}
@@ -48,7 +49,7 @@
         import './profile-groups.tag';
         import './profile-settings.tag';
 
-        this.active = opts.default || 'followers';
+        this.active = opts.default || 'activity';
         this.changeProperties = (event) => {
             this.active = event.currentTarget.dataset.link;
             this.update();

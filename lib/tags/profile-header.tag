@@ -25,11 +25,14 @@
         <p>{profile.about}</p>
     </div>
     <ul if={profile}>
-        <!--
         <li class={opts.active == 'activity' ? 'active' : ''}>
-            <a data-link="activity" onclick={opts.callback}>Activity</a>
+            <a data-link="activity" onclick={opts.callback}>
+                <span>Activity</span>
+                <svg viewBox="0 0 76 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path d="M28,16 C25.790861,16 24,14.209139 24,12 L24,8 C24,5.790861 25.790861,4 28,4 L72,4 C74.209139,4 76,5.790861 76,8 L76,12 C76,14.209139 74.209139,16 72,16 L28,16 Z M16,12 C16,14.209139 14.209139,16 12,16 L4,16 C1.790861,16 2.705415e-16,14.209139 0,12 L0,4 C-2.705415e-16,1.790861 1.790861,4.05812251e-16 4,0 L12,0 C14.209139,-4.05812251e-16 16,1.790861 16,4 L16,12 Z M28,60 C25.790861,60 24,58.209139 24,56 L24,52 C24,49.790861 25.790861,48 28,48 L72,48 C74.209139,48 76,49.790861 76,52 L76,56 C76,58.209139 74.209139,60 72,60 L28,60 Z M16,60 C16,62.209139 14.209139,64 12,64 L4,64 C1.790861,64 2.705415e-16,62.209139 0,60 L0,52 C-2.705415e-16,49.790861 1.790861,48 4,48 L12,48 C14.209139,48 16,49.790861 16,52 L16,60 Z M28,38 C25.790861,38 24,36.209139 24,34 L24,30 C24,27.790861 25.790861,26 28,26 L72,26 C74.209139,26 76,27.790861 76,30 L76,34 C76,36.209139 74.209139,38 72,38 L28,38 Z M16,36 C16,38.209139 14.209139,40 12,40 L4,40 C1.790861,40 2.705415e-16,38.209139 0,36 L0,28 C-2.705415e-16,25.790861 1.790861,24 4,24 L12,24 C14.209139,24 16,25.790861 16,28 L16,36 Z"></path>
+                </svg>
+            </a>
         </li>
-        -->
         <li class={opts.active == 'followers' ? 'active' : ''}>
             <a class={profile.follower_count > 1 ? 'count' : ''} data-link="followers" data-count={profile.follower_count || ''} onclick={opts.callback}>
                 <span>Followers</span>
@@ -147,22 +150,26 @@
         }
         this.handleFollow = () => {
             let self = this;
+            self.following = true;
             follow(self.id, function(response) {
                 if(response.success) {
-                    self.following = true;
-                    self.update();
+                    //No action required
                 } else {
+                    self.following = false;
+                    self.update();
                     //Handle errors
                 }
             });
         }
         this.handleUnfollow = () => {
             let self = this;
+            self.following = false;
             unfollow(self.id, function(response) {
                 if(response.success) {
-                    self.following = false;
-                    self.update();
+                    //No action required
                 } else {
+                    self.following = true;
+                    self.update();
                     //Handle errors
                 }
             });

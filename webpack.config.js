@@ -52,7 +52,7 @@ module.exports = {
     },
     plugins: [
         new UglifyJsPlugin(),
-        new webpack.optimize.AggressiveMergingPlugin(),
+        //new webpack.optimize.AggressiveMergingPlugin(),
         new CompressionPlugin({
             algorithm: 'gzip'
         })

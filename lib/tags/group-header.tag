@@ -3,11 +3,19 @@
         <div class="cover" style={'background-image: url(' + (group && group.cover ? group.cover : 'lib/images/covers/group.png') + ');'}></div>
         <a>{group.title}</a>
         <p>{group.description}</p>
+        <div class="members" if={avatars}>
+            <img each={avatar in avatars} src={avatar || 'lib/images/avatars/user.png'} />
+            <span if={members && members.length >= 5}>
+                <small>{'+' + (members.length - 4)}</small>
+            </span>
+        </div>
     </div>
     <ul if={group}>
         <!--
         <li class={opts.active == 'activity' ? 'active' : ''}>
-            <a data-link="activity" onclick={opts.callback}>Activity</a>
+            <a data-link="activity" onclick={opts.callback}>
+                <span>Activity</span>
+            </a>
         </li>
         -->
         <li class={opts.active == 'members' ? 'active' : ''}>
@@ -52,6 +60,13 @@
             <div class="cover rectangle fill"></div>
             <div class="title line centered fill"></div>
             <div class="description line centered fill"></div>
+            <div class="members">
+                <div class="avatar circle fill"></div>
+                <div class="avatar circle fill"></div>
+                <div class="avatar circle fill"></div>
+                <div class="avatar circle fill"></div>
+                <div class="avatar circle fill"></div>
+            </div>
             <div class="list rectangle centered fill"></div>
         </div>
     </div>
@@ -75,6 +90,7 @@
         import showGroup from '../scripts/showGroup.js';
         import getUser from '../scripts/getUser.js';
         import listMembers from '../scripts/listMembers.js';
+        import getProfile from '../scripts/getProfile.js';
 
         this.id = opts.id;
         this.userId = undefined;
@@ -103,6 +119,27 @@
                 }
             });
         }
+        this.handleAvatars = () => {
+            let self = this;
+            self.avatars = [];
+            let limit = 4;
+            let index = 0;
+            for(let member of self.members) {
+                if(index < limit) {
+                    getProfile(member, function(response) {
+                        if(response.success) {
+                            self.avatars.push(response.profile.avatar);
+                            self.update();
+                        } else {
+                            //Handle errors
+                        }
+                    });
+                } else {
+                    break;
+                }
+                index++;
+            }
+        }
         this.handleInformation = () => {
             let self = this;
             getGroup(self.id, function(response) {
@@ -121,11 +158,10 @@
             listMembers(self.id, function(response) {
                 if(response.success) {
                     self.members = response.members;
-                    console.log(self.members)
+                    self.handleAvatars();
                     self.update();
                     getUser(function(response) {
                         if(response.success) {
-                            console.log(response)
                             self.joined = self.members.includes(response.id);
                             self.membershipInformation = true;
                             self.update();

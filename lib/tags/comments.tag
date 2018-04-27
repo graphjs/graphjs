@@ -13,7 +13,7 @@
         </div>
         <div class={'comment' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
             <textarea ref="composer" placeholder="Write your comment here..."></textarea>
-            <button onclick={handleComment}>Send Comment</button>
+            <button ref="submit" onclick={handleComment}>Send Comment</button>
             <button onclick={handleClear} class="danger">Clear</button>
             <div if={!loaded} class="inline loader">
                 <img src="lib/images/animations/loading-dots.gif">
@@ -122,15 +122,18 @@
         this.handleComment = (event) => {
             event.preventDefault();
             let self = this;
+            self.refs.submit.classList.add('loading');
             let url = window.location.href.replace(/\/$/, "");
             addComment(url, self.refs.composer.value, function(response) {
                 if(response.success) {
+                    self.refs.submit.classList.remove('loading');
                     self.handleContent(function() {
                         self.refs.scrollingContent.scrollTop = self.refs.scrollingContent.scrollHeight;
                     });
                     self.refs.composer.value = '';
                     self.update();
                 } else {
+                    self.refs.submit.classList.remove('loading');
                     //Handle error
                 }
             });
@@ -168,7 +171,6 @@
             }
         }
         this.handleTime = (timestamp) => {
-            console.log('horray!')
             let text;
             let time = Math.floor((Date.now() - (parseInt(timestamp) * 1000)) / 1000);
             let amount;

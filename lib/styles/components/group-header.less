@@ -42,6 +42,32 @@ graphjs-group-header {
             color: @text-color-normal;
             line-height: 1.25em;
         }
+        .members {
+            width: 10.5em;
+            margin: 0 auto;
+            margin-top: 1em;
+            & > *:last-child {
+                margin-right: 0 !important;
+            }
+            img, span {
+                width: 2em;
+                height: 2em;
+                margin-right: .1em;
+                vertical-align: middle;
+                .border-radius(@border-radius-full);
+            }
+            span {
+                display: inline-block;
+                color: white;
+                line-height: 2em;
+                text-align: center;
+                border: none !important;
+                background-color: @primary-color;
+                small {
+                    font-size: .8em;
+                }
+            }
+        }
         button {
             display: inline-block;
             position: relative;
@@ -154,6 +180,23 @@ graphjs-group-header {
                 margin-top: 1.5em;
                 .border-radius(calc(.85em / 2));
             }
+            .members {
+                width: 10.5em;
+                height: 2em;
+                margin-top: 1.25em;
+                .no-padding;
+                .clearfix;
+                .avatar {
+                    display: block;
+                    float: left;
+                    width: 2em;
+                    height: 2em;
+                    margin-right: .1em;
+                    &:last-child {
+                        margin-right: 0 !important;
+                    }
+                }
+            }
         }
         .list {
             display: block;
@@ -172,6 +215,16 @@ graphjs-group-header {
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
     graphjs-group-header {
+        .information {
+            .members {
+                width: 6.5em;
+                img, span {
+                    margin-right: -.9em;
+                    border: 2px solid @contrast-color;
+                    box-shadow: 0 0 2px fade(black, 65%);
+                }
+            }
+        }
         ul {
             display: flex;
             border-top: none;
@@ -237,6 +290,14 @@ graphjs-group-header {
         }
         /* Placeholder */
         .placeholder {
+            .information {
+                .members {
+                    width: 6.5em;
+                    .avatar {
+                        margin-right: -.9em;
+                    }
+                }
+            }
             .list {
                 height: 5em;
             }
@@ -247,6 +308,16 @@ graphjs-group-header {
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
     graphjs-group-header {
+        .information {
+            .members {
+                width: 8.5em;
+                img, span {
+                    margin-right: -.4em;
+                    border: 2px solid @contrast-color;
+                    box-shadow: 0 0 2px fade(black, 65%);
+                }
+            }
+        }
         ul {
             display: flex;
             border-top: none;
@@ -309,6 +380,14 @@ graphjs-group-header {
         }
         /* Placeholder */
         .placeholder {
+            .information {
+                .members {
+                    width: 8.5em;
+                    .avatar {
+                        margin-right: -.4em;
+                    }
+                }
+            }
             .list {
                 height: 5em;
             }

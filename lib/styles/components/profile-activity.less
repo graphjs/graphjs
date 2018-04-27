@@ -1,0 +1,36 @@
+graphjs-profile-activity {
+    display: block;
+    .content {
+        ul {
+            margin: 0;
+            padding: 0;
+            li {
+                position: relative;
+                list-style: none;
+                width: 100%;
+                height: 3em;
+                padding-left: 1em;
+                padding-bottom: .5em;
+                line-height: 1.35em;
+                border-left: 2px solid fade(@text-color-normal, 35%);
+                &:last-of-type {
+                    border-color: transparent;
+                }
+                &::before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    left: calc(-.4em - 1px);
+                    width: .8em;
+                    height: .8em;
+                    border-radius: 50%;
+                    background-color: @primary-color;
+                }
+                div {
+                    position: relative;
+                    top: -.2em;
+                }
+            }
+        }
+    }
+}

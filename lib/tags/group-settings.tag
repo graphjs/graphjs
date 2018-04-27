@@ -132,14 +132,20 @@
             let validTitleMinimumLength = this.checkTitleMinimumLength();
             let validTitleMaximumLength = this.checkTitleMaximumLength();
             let validDescriptionMaximumLength = this.checkDescriptionMaximumLength();
-            return (
+            if(
                 validTitleMinimumLength && validTitleMaximumLength && // Title
                 validDescriptionMaximumLength // Description
-            ) ? true : false;
+            ) {
+                return true;
+            } else {
+                this.refs.submit.classList.remove('loading');
+                return false;
+            }
         }
         this.handleInformationSubmit = (event) => {
             event.preventDefault();
             let self = this;
+            self.refs.submit.classList.remove('loading');
             let title = self.refs.title.value;
             let description = self.refs.description.value;
             self.refs.title.className = '';
@@ -160,6 +166,7 @@
                                 self.refs.title.classList.add('success');
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                                self.refs.submitPassword.classList.remove('loading');
                                 self.update();
                                 self.parent.tags.hasOwnProperty('graphjs-group-header') && self.parent.tags['graphjs-group-header'].updateInformation();
                             } else {
@@ -167,6 +174,7 @@
                                 self.refs.title.classList.add('error');
                                 self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                 self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                                self.refs.submitPassword.classList.remove('loading');
                                 self.update();
                             }
                         }
@@ -178,6 +186,7 @@
                     self.refs.title.classList.add('success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                     self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                    self.refs.submitPassword.classList.remove('loading');
                     self.update();
                 }
                 if(description != self.group.description) {
@@ -193,6 +202,7 @@
                                 self.refs.description.classList.add('success');
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                                self.refs.submitPassword.classList.remove('loading');
                                 self.update();
                                 self.parent.tags.hasOwnProperty('graphjs-group-header') && self.parent.tags['graphjs-group-header'].updateInformation();
                             } else {
@@ -200,6 +210,7 @@
                                 self.refs.description.classList.add('error');
                                 self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                 self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                                self.refs.submitPassword.classList.remove('loading');
                                 self.update();
                             }
                         }
@@ -211,6 +222,7 @@
                     self.refs.description.classList.add('success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                     self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                    self.refs.submitPassword.classList.remove('loading');
                     self.update();
                 }
             }

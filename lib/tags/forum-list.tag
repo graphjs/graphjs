@@ -33,7 +33,7 @@
             </button>
         </div>
         <div class="list">
-            <a each={matchedThread in matchedThreads} class="item" data-link="thread" data-id={matchedThread} onclick={opts.minor ? handleCallback : handleShow} if={matchedThreads.length > 0}>
+            <a each={matchedThread, index in matchedThreads} class="item" data-link="thread" data-id={matchedThread} onclick={opts.minor ? handleCallback : handleShow} if={matchedThreads.length > 0 && index + 1 >= parseInt(((page - 1) * pageLimit + 1), 10) && index + 1 <= Math.min(matchedThreads.length, parseInt(page * pageLimit, 10))}>
                 <div class="title">
                     {threadsData[matchedThread] && threadsData[matchedThread].title}
                 </div>
@@ -47,7 +47,7 @@
                     {threadsData[matchedThread] && handleTime(threadsData[matchedThread].timestamp)}
                 </time>
                 <div class="contributors" if={threadsData[matchedThread].contributors}>
-                    <img each={contributor, index in threadsData[matchedThread].contributors} asd={index} src={contributor.avatar || 'lib/images/avatars/user.png'} />
+                    <img each={contributor, index in threadsData[matchedThread].contributors} src={contributor.avatar || 'lib/images/avatars/user.png'} />
                 </div>
             </a>
             <div class="placeholder item" if={matchedThreads.length <= 0}>

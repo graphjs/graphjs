@@ -349,7 +349,7 @@
             for(let anchor of anchors) {
                 anchor.classList.remove('active');
             }
-            event.target.classList.hasOwnProperty('unread') || event.target.classList.remove('unread');
+            event.target.classList.remove('unread');
             event.target.classList.add('active');
             this.handleConversation(id);
             this.handleTitle(id);

@@ -59,7 +59,7 @@ button {
     &.loading {
         background-image: linear-gradient(-45deg, transparent 25%, rgba(0, 0, 0, .1) 25%, rgba(0, 0, 0, .1) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, .1) 75%);
         background-size: 50px 50px;
-        animation: loading-stripes 10s infinite linear;
+        .animation(loading-stripes 10s infinite linear);
     }
 }
 form {
@@ -69,10 +69,7 @@ form {
         .transition(border-color .35s ease);
         &.error {
             border-color: @danger-color;
-            -moz-animation: error-shake normal .35s ease-in-out;
-            -webkit-animation: error-shake normal .35s ease-in-out;
-            -ms-animation: error-shake normal .35s ease-in-out;
-            animation: error-shake normal .35s ease-in-out;
+            .animation(error-shake normal .35s ease-in-out);
         }
         & + button {
             margin-top: .25em;

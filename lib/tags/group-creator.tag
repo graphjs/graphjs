@@ -98,14 +98,20 @@
             let validTitleMaximumLength = this.checkTitleMaximumLength();
             let validDescriptionMinimumLength = this.checkDescriptionMinimumLength();
             let validDescriptionMaximumLength = this.checkDescriptionMaximumLength();
-            return (
+            if(
                 validTitleMinimumLength && validTitleMaximumLength && // Title
                 validDescriptionMinimumLength && validDescriptionMaximumLength // Description
-            ) ? true : false;
+            ) {
+                return true;
+            } else {
+                this.refs.submit.classList.remove('loading');
+                return false;
+            }
         }
         this.handleSubmit = (event) => {
             event.preventDefault();
             let self = this;
+            self.refs.submit.classList.add('loading');
             let title = self.refs.title.value;
             let description = self.refs.description.value;
             self.refs.title.className = '';
@@ -126,6 +132,7 @@
                             self.refs.description.classList.add('success');
                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                            self.refs.submit.classList.remove('loading');
                             self.update();
                             showGroup({
                                 "id": response.id,
@@ -138,6 +145,7 @@
                             self.refs.description.classList.add('error');
                             self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                             self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                            self.refs.submit.classList.remove('loading');
                             self.update();
                         }
                     }

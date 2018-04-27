@@ -17,13 +17,13 @@
             <input ref="email" type="text" placeholder="Enter email address" value={profile ? profile.email : ''} />
             <input ref="bio" type="text" placeholder="Enter a short bio" value={profile ? profile.about : ''} />
             <input ref="birthday" type="text" placeholder="Enter birthday (MM/DD/YYYY)" value={profile ? profile.birthday : ''} />
-            <button ref="submit" onclick={handleProfileSubmit}>Update Profile</button>
+            <button ref="submitProfile" onclick={handleProfileSubmit}>Update Profile</button>
         </form>
         <h2>Password</h2>
         <form>
             <input ref="password" type="password" placeholder="Enter new password" />
             <input ref="confirmation" type="password" placeholder="Confirm new password" />
-            <button ref="submit" onclick={handlePasswordSubmit}>Change Password</button>
+            <button ref="submitPassword" onclick={handlePasswordSubmit}>Change Password</button>
         </form>
     </div>
     <style type="less">
@@ -241,24 +241,35 @@
             let validBioMaximumLength = this.checkBioMaximumLength();
             let validBirthdayFormat = this.checkBirthdayFormat();
             let validBirthdayLimit = this.checkBirthdayLimit();
-            return (
+            if(
                 validUsernameMinimumLength && validUsernameMaximumLength && validUsernamePattern && // Username
                 validEmailPattern && // Email
                 validBioMaximumLength && // Bio
                 validBirthdayFormat && validBirthdayLimit // Birthday
-            ) ? true : false;
+            ) {
+                return true;
+            } else {
+                this.refs.submitProfile.classList.remove('loading');
+                return false;
+            }
         }
         this.validatePassword = () => {
             let validPasswordMinimumLength = this.checkPasswordMinimumLength();
             let validPasswordMaximumLength = this.checkPasswordMaximumLength();
             let validPasswordMatch = this.checkPasswordMatch();
-            return (
+            if(
                 validPasswordMinimumLength && validPasswordMaximumLength && validPasswordMatch // Password
-            ) ? true : false;
+            ) {
+                return true;
+            } else {
+                this.refs.submitPassword.classList.remove('loading');
+                return false;
+            }
         }
         this.handleProfileSubmit = (event) => {
             event.preventDefault();
             let self = this;
+            self.refs.submitProfile.classList.add('loading');
             let username = self.refs.username.value;
             let email = self.refs.email.value;
             let bio = self.refs.bio.value;
@@ -280,6 +291,7 @@
                                 self.refs.username.classList.add('success');
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                                self.refs.submitProfile.classList.remove('loading');
                                 self.update();
                                 self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                             } else {
@@ -287,6 +299,7 @@
                                 self.refs.username.classList.add('error');
                                 self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                 self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                                self.refs.submitProfile.classList.remove('loading');
                                 self.update();
                             }
                         }
@@ -298,6 +311,7 @@
                     self.refs.username.classList.add('success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                     self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                    self.refs.submitProfile.classList.remove('loading');
                     self.update();
                 }
                 if(email != self.profile.email) {
@@ -312,6 +326,7 @@
                                 self.refs.email.classList.add('success');
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                                self.refs.submitProfile.classList.remove('loading');
                                 self.update();
                                 self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                             } else {
@@ -319,6 +334,7 @@
                                 self.refs.email.classList.add('error');
                                 self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                 self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                                self.refs.submitProfile.classList.remove('loading');
                                 self.update();
                             }
                         }
@@ -330,6 +346,7 @@
                     self.refs.email.classList.add('success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                     self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                    self.refs.submitProfile.classList.remove('loading');
                     self.update();
                 }
                 setBio(
@@ -343,6 +360,7 @@
                             self.refs.bio.classList.add('success');
                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                            self.refs.submitProfile.classList.remove('loading');
                             self.update();
                             self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                         } else {
@@ -350,6 +368,7 @@
                             self.refs.bio.classList.add('error');
                             self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                             self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                            self.refs.submitProfile.classList.remove('loading');
                             self.update();
                         }
                     }
@@ -365,6 +384,7 @@
                             self.refs.birthday.classList.add('success');
                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                            self.refs.submitProfile.classList.remove('loading');
                             self.update();
                             self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                         } else {
@@ -372,6 +392,7 @@
                             self.refs.birthday.classList.add('error');
                             self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                             self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                            self.refs.submitProfile.classList.remove('loading');
                             self.update();
                         }
                     }
@@ -381,6 +402,7 @@
         this.handlePasswordSubmit = (event) => {
             event.preventDefault();
             let self = this;
+            self.refs.submitPassword.classList.add('loading');
             let password = self.refs.password.value;
             self.refs.password.className = '';
             self.refs.confirmation.className = '';
@@ -400,6 +422,7 @@
                             self.refs.confirmation.classList.add('success');
                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                            self.refs.submitPassword.classList.remove('loading');
                             self.update();
                         } else {
                             self.refs.password.classList.remove('success');
@@ -408,6 +431,7 @@
                             self.refs.confirmation.classList.add('error');
                             self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                             self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                            self.refs.submitPassword.classList.remove('loading');
                             self.update();
                         }
                     }

@@ -2,6 +2,7 @@
     <h1>{opts.label}</h1>
     <h2><{opts.component}></h2>
     <section class="demo" ref="liveDemo"></section>
+    <h2>Options</h2>
     <section class="options">
         <form>
             <fieldset name="id">
@@ -9,14 +10,15 @@
                 <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.id} />
                 <input onkeyup={updateTextWithCheckbox} type="text" value={specs.id} />
             </fieldset>
-            <xmp ref="inputCode" class="code">{input}</xmp>
-            <button onclick={handleSubmit}>Apply</button>
         </form>
     </section>
+    <h2>Code</h2>
+    <pre class="prettyprint"><xmp ref="inputCode" class="code">{input}</xmp></pre>
+    <button onclick={handleSubmit}>Apply</button>
     <script>
         this.input = '';
         this.specs = {
-            "id": "4254d4931b6ec83d4fa10b2593f85643"
+            "id": "48760696099368953dd71a90b727acba"
         }
         this.updateTextWithCheckbox = (event) => {
             let target = event.target.parentNode.name;

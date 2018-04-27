@@ -116,22 +116,26 @@
         }
         this.handleFollow = () => {
             let self = this;
+            self.following = true;
             follow(self.id, function(response) {
                 if(response.success) {
-                    self.following = true;
-                    self.update();
+                    //No action required
                 } else {
+                    self.following = false;
+                    self.update();
                     //Handle errors
                 }
             });
         }
         this.handleUnfollow = () => {
             let self = this;
+            self.following = false;
             unfollow(self.id, function(response) {
                 if(response.success) {
-                    self.following = false;
-                    self.update();
+                    //No action required
                 } else {
+                    self.following = true;
+                    self.update();
                     //Handle errors
                 }
             });

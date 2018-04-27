@@ -30,6 +30,7 @@
 	-moz-transform:    @string;
 	-ms-transform: 	   @string;
 	-o-transform: 	   @string;
+	transform: 	       @string;
 }
 
 .transition(@property) {
@@ -37,6 +38,15 @@
 	-moz-transition:    @property;
 	-ms-transition:     @property;
 	-o-transition:      @property;
+	transition:         @property;
+}
+
+.animation(@property) {
+	-webkit-animation: @property;
+	-moz-animation:    @property;
+	-ms-animation:     @property;
+	-o-animation:      @property;
+	animation:         @property;
 }
 
 .sticky() {

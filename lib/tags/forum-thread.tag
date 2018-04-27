@@ -52,7 +52,7 @@
             </div>
             <form class={userId ? '' : 'loading blocked'}>
                 <textarea ref="composer" placeholder="Write your reply here..."></textarea>
-                <button onclick={handleReply}>Send Reply</button>
+                <button ref="submit" onclick={handleReply}>Send Reply</button>
                 <button onclick={handleClear} class="danger">Clear</button>
                 <div if={!loaded} class="inline loader">
                     <img src="lib/images/animations/loading-dots.gif">
@@ -209,8 +209,10 @@
         this.handleReply = (event) => {
             event.preventDefault();
             let self = this;
+            self.refs.submit.classList.add('loading');
             replyThread(self.id, self.refs.composer.value, function(response) {
                 if(response.success) {
+                    self.refs.submit.classList.remove('loading');
                     self.handleContent(function() {
                         self.refs.scrollingContent.scrollTop = self.refs.scrollingContent.scrollHeight;
                     });
@@ -219,6 +221,8 @@
                     self.root.classList.toggle('composer');
                     self.update();
                 } else {
+                    self.refs.submit.classList.remove('loading');
+                    self.update();
                     //Handle error
                 }
             });

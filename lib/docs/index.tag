@@ -24,7 +24,7 @@
                 top: 0;
                 bottom: 0;
                 left: 0;
-                width: 200px;
+                width: 220px;
                 height: auto;
                 background: linear-gradient(rgb(93, 60, 246), rgb(158, 119, 255));
                 .transition(left .35s ease);
@@ -46,15 +46,15 @@
                     overflow-y: scroll;
                     display: inline-block;
                     height: 100%;
-                    padding: 10%;
+                    padding: 20%;
                     color: white;
                     img {
-                        width: 85%;
+                        width: 100%;
                         height: auto;
-                        margin: 7.5%;
                     }
                     form {
                         fieldset {
+                            padding: 0;
                             border: none;
                             input[type="radio"] {
                                 display: inline-block;
@@ -71,9 +71,8 @@
                         display: inline-block;
                         width: 100%;
                         margin: 1em 0;
-                        padding: 0 5%;
                         font-size: 1.25em;
-                        text-shadow: 0.1em 0.1em 0.1em rgba(0, 0, 0, .1);
+                        text-shadow: .1em .1em .1em rgba(0, 0, 0, .1);
                     }
                     a {
                         color: white;
@@ -81,9 +80,33 @@
                         line-height: 175%;
                         display: inline-block;
                         width: 100%;
-                        padding: 0 5%;
                         &.active {
                             color: yellow;
+                        }
+                        &.toggle {
+                            margin-left: -1.25em;
+                            & > svg {
+                                float: left;
+                                display: inline-block;
+                                width: .9em;
+                                height: .9em;
+                                margin-top: .325em;
+                                margin-right: .35em;
+                                &.close {
+                                    display: none;
+                                }
+                                path {
+                                    fill: fade(white, 35%);
+                                }
+                            }
+                            &.on {
+                                & > svg {
+                                    display: none;
+                                    &.close {
+                                        display: block;
+                                    }
+                                }
+                            }
                         }
                         &.submenu {
                             display: none;
@@ -102,19 +125,26 @@
             }
             main {
                 display: inline-block;
-                width: calc(100% - 200px);
-                margin-left: 200px;
+                width: calc(100% - 220px);
+                margin-left: 220px;
                 padding: 2.5em 5em;
                 h1 {
+                    width: 100%;
                     color: rgb(93, 60, 246);
                     margin: 0;
                     font-size: 2em;
                     line-height: 1em;
+                    margin-bottom: .5em;
                 }
                 h2 {
+                    width: 100%;
                     color: rgb(158, 119, 255);
                     margin: 0;
-                    margin-top: 1em;
+                    margin-bottom: 1.5em;
+                }
+                section {
+                    display: block;
+                    .clearfix;
                 }
                 .demo {
                     width: 100%;
@@ -179,18 +209,50 @@
                                 }
                             }
                         }
-                        .code {
+                    }
+                }
+                pre {
+                    .code {
+                        display: block;
+                        overflow: hidden;
+                        width: 100%;
+                        padding: 1.5em;
+                        font-size: 1.2em;
+                        line-height: 150%;
+                        .border-radius(@border-radius-small);
+                        background-color: white;
+                        .box-shadow(0 0 15px 0 fade(black, 5%));
+                        word-wrap: break-word;
+                        white-space: pre-wrap;
+                        .tag {
                             display: block;
-                            overflow: hidden;
                             width: 100%;
-                            font-size: 1.2em;
-                            line-height: 150%;
-                            word-wrap: break-word;
-                            white-space: pre-wrap;
+                            color: lightslategray;
+                            &:first-of-type {
+                                display: inline-block;
+                            }
                         }
-                        button {
-                            .background-color-states(rgb(158, 119, 255));
+                        .atn {
+                            color: rgb(158, 119, 255);
+                            &::before {
+                                content: "\A\00a0\00a0\00a0\00a0";
+                            }
                         }
+                        .pun {
+                            color: rgb(158, 119, 255);
+                        }
+                        .pln {
+                            color: rgb(93, 60, 246);
+                        }
+                        .atv {
+                            color: rgb(93, 60, 246);
+                        }
+                        .kwd {
+                            color: rgb(93, 60, 246);
+                        }
+                    }
+                    & + button {
+                        .background-color-states(rgb(93, 60, 246));
                     }
                 }
             }
@@ -200,7 +262,7 @@
         @media only screen and (max-width: 479px) {
             docs-index {
                 aside {
-                    left: -200px;
+                    left: -220px;
                     & > a {
                         display: inline-block;
                     }
@@ -230,7 +292,7 @@
         @media only screen and (min-width: 480px) and (max-width: 767px) {
             docs-index {
                 aside {
-                    left: -200px;
+                    left: -220px;
                     & > a {
                         display: inline-block;
                     }
@@ -260,7 +322,7 @@
         @media only screen and (min-width: 768px) and (max-width: 1023px) {
             docs-index {
                 aside {
-                    left: -200px;
+                    left: -220px;
                     & > a {
                         display: inline-block;
                     }
@@ -317,6 +379,7 @@
         import './menu.tag';
         // Functions
         import showGroupCreator from '../scripts/showGroupCreator.js';
+        import '../vendor/google-code-prettify/prettify.js';
         this.functionsList = {
             showGroupCreator: showGroupCreator
         };
@@ -326,23 +389,28 @@
         //Components
         this.components = [
             {"label": "State", "component": "state"},
-            {"label": "Auth", "component": "auth"},
-            {"label": "Register", "component": "auth-register", "parent": "auth"},
-            {"label": "Login", "component": "auth-login", "parent": "auth"},
-            {"label": "Reset Password", "component": "auth-reset", "parent": "auth"},
+            {"label": "Auth", "component": "auth", "toggle": true},
+            {"label": "Auth", "component": "auth", "parent": "auth"},
+            {"label": "Auth: Register", "component": "auth-register", "parent": "auth"},
+            {"label": "Auth: Login", "component": "auth-login", "parent": "auth"},
+            {"label": "Auth: Reset", "component": "auth-reset", "parent": "auth"},
             {"label": "Comments", "component": "comments"},
+            {"label": "Forum", "component": "forum", "toggle": true},
+            {"label": "Forum", "component": "forum", "parent": "forum"},
+            {"label": "Forum: List", "component": "forum-list", "parent": "forum"},
+            {"label": "Forum: Thread", "component": "forum-thread", "parent": "forum"},
+            {"label": "Forum: Compose", "component": "forum-compose", "parent": "forum"},
             {"label": "Messages", "component": "messages"},
-            {"label": "Forum", "component": "forum"},
-            {"label": "List", "component": "forum-list", "parent": "forum"},
-            {"label": "Thread", "component": "forum-thread", "parent": "forum"},
-            {"label": "Compose", "component": "forum-compose", "parent": "forum"},
-            {"label": "Star: Button", "component": "star-button"},
-            {"label": "Star: List", "component": "star-list"},
-            {"label": "Profile", "component": "profile"},
-            {"label": "Profile: Card", "component": "profile-card"},
-            {"label": "Group", "component": "group"},
-            {"label": "Group: Card", "component": "group-card"},
+            {"label": "Profile", "component": "profile", "toggle": true},
+            {"label": "Profile", "component": "profile", "parent": "profile"},
+            {"label": "Profile: Card", "component": "profile-card", "parent": "profile"},
+            {"label": "Group", "component": "group", "toggle": true},
+            {"label": "Group", "component": "group", "parent": "group"},
+            {"label": "Group: Card", "component": "group-card", "parent": "group"},
             {"label": "List", "component": "list"},
+            {"label": "Star", "component": "star", "toggle": true},
+            {"label": "Star: Button", "component": "star-button", "parent": "star"},
+            {"label": "Star: List", "component": "star-list", "parent": "star"},
             {"label": "Alert", "component": "alert"}
         ];
         this.activeItem = 'introduction';
@@ -352,31 +420,29 @@
             document.body.classList.toggle('push');
         }
         this.changeProperties = (event) => {
-            this.refs.menuContainer.classList.toggle('open');
-            document.body.classList.toggle('push');
-            for(let element of event.currentTarget.parentNode.children) {
-                element.classList.remove('active');
-            }
-            event.currentTarget.classList.add('active');
-            if(!event.currentTarget.dataset.hasOwnProperty('parent')) {
-                let removals = document.querySelectorAll('.submenu');
-                for(let removal of removals) {
-                    removal.classList.remove('visible');
-                }
+            if(event.currentTarget.classList.contains('toggle')) {
                 let parent = event.currentTarget.dataset.component;
-                let query = '.' + parent + '-item';
-                for(let item of document.querySelectorAll(query)) {
-                    item.classList.add('visible');
+                let children = document.querySelectorAll('.' + parent + '-item');
+                for(let child of children) {
+                    child.classList.toggle('visible');
                 }
-            }
-            this.activeItem = event.target.dataset.id;
-            this.update();
-            this.refs.main.innerHTML = '';
-            if(event.currentTarget.dataset.type == 'component') {
-                this.createTag(event.currentTarget.dataset.component, event.currentTarget.dataset.label);
-            } else if(event.currentTarget.dataset.type == 'function') {
-                let functionName = event.currentTarget.dataset.function;
-                this.functionsList[functionName]();
+                event.currentTarget.classList.toggle('on');
+            } else {
+                this.refs.menuContainer.classList.toggle('open');
+                document.body.classList.toggle('push');
+                for(let element of event.currentTarget.parentNode.children) {
+                    element.classList.remove('active');
+                }
+                event.currentTarget.classList.add('active');
+                this.activeItem = event.currentTarget.dataset.id;
+                this.update();
+                this.refs.main.innerHTML = '';
+                if(event.currentTarget.dataset.type == 'component') {
+                    this.createTag(event.currentTarget.dataset.component, event.currentTarget.dataset.label);
+                } else if(event.currentTarget.dataset.type == 'function') {
+                    let functionName = event.currentTarget.dataset.function;
+                    this.functionsList[functionName]();
+                }
             }
         }
         this.createTag = (itemComponent, itemLabel) => {
@@ -389,6 +455,7 @@
             currentElement.setAttributeNode(label);
             riot.mount(currentElement);
             this.refs.main.appendChild(currentElement);
+            PR.prettyPrint();
         }
     </script>
 </docs-index>

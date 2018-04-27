@@ -29,7 +29,7 @@
             <span>
                 <b>Supported formats:</b> Markdown
             </span>
-            <button data-link="thread" onclick={handleSubmit}>Publish</button>
+            <button ref="submit" data-link="thread" onclick={handleSubmit}>Publish</button>
             <button data-link="list" onclick={opts.minor ? handleCallback : handleShow} class="danger">Cancel</button>
         </form>
         <div if={!loaded} class="loader">
@@ -95,10 +95,9 @@
                 return false;
             }
         }
-        /*
         this.checkTextBody = () => {
             let warningMessage = 'Text body is too short.';
-            if(this.refs.body.value.length >= 10) {
+            if(this.refs.body.value.length >= 1) {
                 this.refs.body.classList.remove('error');
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
                 return true;
@@ -108,36 +107,47 @@
                 return false;
             }
         }
-        */
         this.validateForm = () => {
             let validTitle = this.checkTitle();
-            //let validTextBody = this.checkTextBody();
-            return (
-                validTitle //&& validTextBody
-            ) ? true : false;
+            let validTextBody = this.checkTextBody();
+            if(
+                validTitle && validTextBody
+            ) {
+                return true;
+            } else {
+                this.refs.submit.classList.remove('loading');
+                return false;
+            }
         }
         this.handleSubmit = (event) => {
             event.preventDefault();
             let self = this;
+            self.refs.submit.classList.add('loading');
             this.validateForm() && startThread(
                 self.refs.title.value,
                 self.refs.body.value,
                 function(response) {
                     if(opts.minor) {
                         if(response.success) {
+                            self.refs.submit.classList.remove('loading');
                             self.handleCallback({
                                 link: 'thread',
                                 id: response.id
                             });
                         } else {
+                            self.refs.submit.classList.remove('loading');
+                            self.update();
                             //Handle error
                         }
                     } else {
                         if(response.success) {
+                            self.refs.submit.classList.remove('loading');
                             showForumThread({
                                 id: response.id
-                            })
+                            });
                         } else {
+                            self.refs.submit.classList.remove('loading');
+                            self.update();
                             //Handle error
                         }
                     }

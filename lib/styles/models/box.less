@@ -138,8 +138,8 @@
             stroke-width: 2;
             stroke-miterlimit: 10;
             box-shadow: inset 0px 0px 0px @success-color;
-            //transform: translate(-50%, -50%);
-            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+            //.transform(translate(-50%, -50%));
+            .animation(e("fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both"));
         }
         .checkmark_circle {
             stroke-dasharray: 166;
@@ -148,13 +148,13 @@
             stroke-miterlimit: 10;
             stroke: @success-color;
             fill: none;
-            animation: stroke 0.6s cubic-bezier(.65, 0, .45, 1) forwards;
+            .animation(stroke .6s cubic-bezier(.65, 0, .45, 1) forwards);
         }
         .checkmark_check {
             transform-origin: 50% 50%;
             stroke-dasharray: 48;
             stroke-dashoffset: 48;
-            animation: stroke 0.3s cubic-bezier(.65, 0, .45, 1) .8s forwards;
+            .animation(stroke .3s cubic-bezier(.65, 0, .45, 1) .8s forwards);
         }
     }
     .content {

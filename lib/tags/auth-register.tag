@@ -146,15 +146,21 @@
             let validPasswordMinimumLength = this.checkPasswordMinimumLength();
             let validPasswordMaximumLength = this.checkPasswordMaximumLength();
             let validPasswordMatch = this.checkPasswordMatch();
-            return (
+            if(
                 validUsernameMinimumLength && validUsernameMaximumLength && validUsernamePattern && // Username
                 validEmailPattern && // Email
                 validPasswordMinimumLength && validPasswordMaximumLength && validPasswordMatch // Password
-            ) ? true : false;
+            ) {
+                return true;
+            } else {
+                this.refs.submit.classList.remove('loading');
+                return false;
+            }
         }
         this.handleSubmit = (event) => {
             event.preventDefault();
             let self = this;
+            self.refs.submit.classList.add('loading');
             let username = self.refs.username.value;
             let email = self.refs.email.value;
             let password = self.refs.password.value;
@@ -176,6 +182,7 @@
                                 function(response) {
                                     if(response.success) {
                                         self.checked = true;
+                                        self.refs.submit.classList.remove('loading');
                                         self.update();
                                         /*
                                         showAlert({
@@ -184,6 +191,7 @@
                                         });
                                         */
                                     } else {
+                                        self.refs.submit.classList.remove('loading');
                                         showAlert({
                                             title: 'Register Successful!',
                                             message: 'Please login to continue.',

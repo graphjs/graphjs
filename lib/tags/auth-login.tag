@@ -11,7 +11,7 @@
         <form>
             <input ref="username" type="text" placeholder="Enter your username" />
             <input ref="password" type="password" placeholder="Enter your password" />
-            <button onclick={handleSubmit}>Login</button>
+            <button ref="submit" onclick={handleSubmit}>Login</button>
             <div class="option double">
                 <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>Not registered?</a>
                 <a data-link="reset" onclick={opts.minor ? opts.callback : handleResetBox}>Forgot Password</a>
@@ -91,14 +91,20 @@
             let validUsernameMinimumLength = this.checkUsernameMinimumLength();
             let validUsernamePattern = this.checkUsernamePattern();
             let validPasswordMinimumLength = this.checkPasswordMinimumLength();
-            return (
+            if(
                 validUsernameMinimumLength && validUsernamePattern && // Username
                 validPasswordMinimumLength // Username
-            ) ? true : false;
+            ) {
+                return true;
+            } else {
+                this.refs.submit.classList.remove('loading');
+                return false;
+            }
         }
         this.handleSubmit = (event) => {
             event.preventDefault();
             let self = this;
+            self.refs.submit.classList.add('loading');
             let username = self.refs.username.value;
             let password = self.refs.password.value;
             self.refs.username.className = '';
@@ -111,6 +117,7 @@
                     function(response) {
                         if(response.success) {
                             self.checked = true;
+                            self.refs.submit.classList.remove('loading');
                             self.update();
                             /*
                             showAlert({
@@ -125,6 +132,7 @@
                             self.failMessages.push(failMessage);
                             self.refs.username.className = 'error';
                             self.refs.password.className = 'error';
+                            self.refs.submit.classList.remove('loading');
                             self.update();
                             /*
                             showAlert({
