@@ -8,24 +8,29 @@
         </ul>
     </div>
     <div class="content">
-        <form if={next == 'enterEmail'}>
-            <input ref="email" type="text" placeholder="Enter your email address"/>
-            <button ref="submitEmail" onclick={handleSubmitEmail}>Reset</button>
+        <form if={next == 'provideEmail'}>
+            <b>Step 1</b>
+            <p>Please enter your email address.</p>
+            <input ref="email" type="text" placeholder="Email address"/>
+            <button ref="submitEmail" onclick={handleEmailSubmit}>Continue</button>
             <div class="option single">
                 <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>Not registered?</a>
             </div>
         </form>
         <form class="code" if={next == 'verifyCode'}>
+            <b>Step 2</b>
             <p>Please enter the 6-digit code we sent to your email.</p>
-            <fieldset>
-                <input type="text" placeholder="X"/>
-                <input type="text" placeholder="X"/>
-                <input type="text" placeholder="X"/>
-                <input type="text" placeholder="X"/>
-                <input type="text" placeholder="X"/>
-                <input type="text" placeholder="X"/>
-            </fieldset>
-            <button ref="submitCode" onclick={handleSubmitCode}>Reset</button>
+            <div ref="code">
+                <input each={item in Array(codeCharacterCount)} onkeyup={handleCodeInput} type="text" maxlength="1" />
+            </div>
+            <button ref="submitCode" onclick={handleCodeSubmit}>Continue</button>
+        </form>
+        <form class="code" if={next == 'updatePassword'}>
+            <b>Step 3</b>
+            <p>Please enter new password.</p>
+            <input ref="password" type="password" placeholder="Enter new password" />
+            <input ref="confirmation" type="password" placeholder="Confirm new password" />
+            <button ref="submitPassword" onclick={handlePasswordSubmit}>Update Password</button>
         </form>
     </div>
     <div class="check">
@@ -49,12 +54,19 @@
     </style>
     <script>
         import reset from '../scripts/reset.js';
+        import verify from '../scripts/verify.js';
         import showAlert from '../scripts/showAlert.js';
         import showRegister from '../scripts/showRegister.js';
+        import setPassword from '../scripts/setPassword.js';
 
-        this.next = 'enterEmail';
+        //this.next = 'provideEmail';
+        this.next = 'provideEmail';
+        this.codeCharacterCount = 6;
+        this.codeTemplate = new Array(this.codeCharacterCount);
         this.failMessages = [];
 
+        this.handleRegisterBox = () => showRegister();
+        //Step 1: provideEmail
         this.checkEmailPattern = () => {
             let failMessage = 'Email is invalid. Valid format: user@site.com';
             let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -68,7 +80,7 @@
                 return false;
             }
         }
-        this.validateInformation = () => {
+        this.validateEmail = () => {
             let validEmailPattern = this.checkEmailPattern();
             if(
                 validEmailPattern
@@ -79,31 +91,203 @@
                 return false;
             }
         }
-        this.handleSubmitEmail = (event) => {
+        this.handleEmailSubmit = (event) => {
             event.preventDefault();
             let self = this;
             self.refs.submitEmail.classList.add('loading');
             let email = self.refs.email.value;
             self.refs.email.className = '';
             self.failMessages = [];
-            if(self.validateInformation()) {
+            if(self.validateEmail()) {
                 reset(
                     email,
                     function(response) {
                         if(response.success) {
                             self.refs.submitEmail.classList.remove('loading');
+                            self.email = email;
                             self.next = 'verifyCode';
                             self.update();
+                            self.refs.code.firstElementChild.focus();
                         } else {
                             failMessage = response.reason || 'Please try entering your email again.';
                             self.refs.submitEmail.classList.remove('loading');
-                            this.refs.email.classList.add('error');
-                            this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
+                            self.refs.email.classList.add('error');
+                            self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
                         }
                     }
                 );
             }
         }
-        this.handleRegisterBox = () => showRegister();
+        //Step 2: verifyCode
+        this.handleCodeInput = (event) => {
+            if(event.keyCode != 46 && event.keyCode != 8) {
+                if(!isNaN(parseInt(event.target.value))) {
+                    event.target.nextElementSibling && event.target.nextElementSibling.focus();
+                } else {
+                    event.target.value = '';
+                }
+            }
+        }
+        this.checkCodeCharacterLength = () => {
+            let self = this;
+            let characters = Array.from(self.refs.code.children);
+            let failMessage = 'All ' + self.codeCharacterCount + ' characters must be entered!';
+            let result = true;
+            characters.forEach(function(item) {
+                if(item.value.length != 1) {
+                    result = false;
+                }
+            });
+            if(result == true) {
+                self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
+            } else {
+                self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+            }
+            return result;
+        }
+        this.checkCodeCharacterType = () => {
+            let self = this;
+            let characters = Array.from(self.refs.code.children);
+            let failMessage = 'All ' + self.codeCharacterCount + ' characters must be number!';
+            let result = true;
+            characters.forEach(function(item) {
+                if(isNaN(item.value)) {
+                    result = false;
+                }
+            });
+            if(result == true) {
+                self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
+            } else {
+                self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+            }
+            return result;
+        }
+        this.validateCode = () => {
+            let characters = Array.from(this.refs.code.children);
+            let validCodeCharacterLength = this.checkCodeCharacterLength();
+            let validCodeCharacterType = this.checkCodeCharacterType();
+            if(
+                validCodeCharacterLength && validCodeCharacterType // Code
+            ) {
+                characters.forEach(function(item) {
+                    item.classList.remove('error');
+                });
+                return true;
+            } else {
+                this.refs.submitCode.classList.remove('loading');
+                characters.forEach(function(item) {
+                    item.classList.add('error');
+                });
+                return false;
+            }
+        }
+        this.handleCodeSubmit = (event) => {
+            event.preventDefault();
+            let self = this;
+            let characters = Array.from(self.refs.code.children);
+            self.refs.submitCode.classList.add('loading');
+            let code = '';
+            characters.forEach(function(item) {
+                code += item.value;
+                item.className = '';
+            });
+            self.failMessages = [];
+            if(self.validateCode()) {
+                verify(
+                    self.email,
+                    code,
+                    function(response) {
+                        if(response.success) {
+                            self.refs.submitCode.classList.remove('loading');
+                            self.next = 'updatePassword';
+                            self.update();
+                        } else {
+                            failMessage = response.reason || 'Please try entering your code again.';
+                            self.refs.submitCode.classList.remove('loading');
+                            self.refs.password.classList.add('error');
+                            self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                        }
+                    }
+                );
+            }
+        }
+        //Step 3: updatePassword
+        this.checkPasswordMinimumLength = () => {
+            let passwordMinimumLengthLimit = 5;
+            let failMessage = 'Password must be ' + passwordMinimumLengthLimit + ' characters minimum!';
+            if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
+                this.refs.password.classList.remove('error');
+                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
+                return true;
+            } else {
+                this.refs.password.classList.add('error');
+                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
+                return false;
+            }
+        }
+        this.checkPasswordMaximumLength = () => {
+            let passwordMaximumLengthLimit = 15;
+            let failMessage = 'Password must be ' + passwordMaximumLengthLimit + ' characters maximum!';
+            if(this.refs.password.value.length <= passwordMaximumLengthLimit) {
+                this.refs.password.classList.remove('error');
+                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
+                return true;
+            } else {
+                this.refs.password.classList.add('error');
+                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
+                return false;
+            }
+        }
+        this.checkPasswordMatch = () => {
+            let failMessage = 'Passwords do not match.';
+            if(this.refs.password.value == this.refs.confirmation.value) {
+                this.refs.confirmation.classList.remove('error');
+                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
+                return true;
+            } else {
+                this.refs.confirmation.classList.add('error');
+                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
+                return false;
+            }
+        }
+        this.validatePassword = () => {
+            let validPasswordMinimumLength = this.checkPasswordMinimumLength();
+            let validPasswordMaximumLength = this.checkPasswordMaximumLength();
+            let validPasswordMatch = this.checkPasswordMatch();
+            if(
+                validPasswordMinimumLength && validPasswordMaximumLength && validPasswordMatch // Password
+            ) {
+                return true;
+            } else {
+                this.refs.submitPassword.classList.remove('loading');
+                return false;
+            }
+        }
+        this.handlePasswordSubmit = (event) => {
+            event.preventDefault();
+            let self = this;
+            self.refs.submitPassword.classList.add('loading');
+            let password = self.refs.password.value;
+            self.refs.password.className = '';
+            self.refs.confirmation.className = '';
+            self.failMessages = [];
+            if(self.validatePassword()) {
+                setPassword(
+                    password,
+                    function(response) {
+                        if(response.success) {
+                            self.refs.submitPassword.classList.remove('loading');
+                            self.checked = true;
+                            self.update();
+                        } else {
+                            failMessage = response.reason || 'Please try entering your password again.';
+                            self.refs.submitPassword.classList.remove('loading');
+                            self.refs.password.classList.add('error');
+                            self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                        }
+                    }
+                );
+            }
+        }
     </script>
 </graphjs-auth-reset>

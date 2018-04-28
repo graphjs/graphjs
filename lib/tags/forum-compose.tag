@@ -32,7 +32,7 @@
             <button ref="submit" data-link="thread" onclick={handleSubmit}>Publish</button>
             <button data-link="list" onclick={opts.minor ? handleCallback : handleShow} class="danger">Cancel</button>
         </form>
-        <div if={!loaded} class="loader">
+        <div if={!loaded && !blocked} class="loader">
             <img src="lib/images/animations/loading-dots.gif">
         </div>
         <button if={blocked} onclick={handleBlock} class="blockage">Login to start a thread</button>

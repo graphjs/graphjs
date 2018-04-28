@@ -5,9 +5,9 @@
     <h2>Options</h2>
     <section class="options">
         <form>
-            <fieldset name="title">
-                <legend>Title</legend>
-                <input onkeyup={updateText} type="text" value={specs.title} placeholder="Thread by USERNAME" />
+            <fieldset name="id">
+                <legend>Identification</legend>
+                <input onkeyup={updateText} type="text" value={specs.id} placeholder="Identification number is required" />
             </fieldset>
             <fieldset name="access">
                 <legend>Access</legend>
@@ -17,6 +17,10 @@
                     <input onclick={updateRadio} type="radio" name="access" id="private" checked={specs.access == 'private'} />
                     <label for="private">Private</label>
                 <div>
+            </fieldset>
+            <fieldset name="title">
+                <legend>Title</legend>
+                <input onkeyup={updateText} type="text" value={specs.title} placeholder="Thread by USERNAME" />
             </fieldset>
             <fieldset name="min-width">
                 <legend>Minimum Width</legend>
@@ -46,7 +50,7 @@
     <script>
         this.input = '';
         this.specs = {
-            "id": "595eab35744c5cb1f2985cec7c82cb1b",
+            "id": "50a5a634eed9d6dad5f64daa3bef6587",
             "access": "public",
             "max-width": "800px"
         }

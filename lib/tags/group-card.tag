@@ -4,13 +4,8 @@
         <a data-link="group" data-id={id} onclick={handleShow} if={group}>{group.title}</a>
         <p>{group.count == 1 ? group.count + ' Member' : group.count + ' Members'}</p>
     </div>
-    <div class="information" if={!group}>
-        <img src="lib/images/covers/group.png" />
-        <a>Group doesn't exist.</a>
-        <p>We couldn't find any group matching this id.</p>
-    </div>
-    <button if={group} onclick={joined ? handleLeave : handleJoin}>{joined ? 'Leave Group' : 'Join Group'}</button>
-    <button if={!group} onclick={handleUpdate}>Refresh</button>
+    <button if={(!group || !joinInformation) && loaded}>&middot; &middot; &middot;</button>
+    <button if={(group && joinInformation) && loaded} onclick={joined ? handleLeave : handleJoin}>{joined ? 'Leave Group' : 'Join Group'}</button>
     <div if={!loaded} class="placeholder loader">
         <div class="information">
             <div class="cover rectangle fill"></div>
@@ -69,6 +64,7 @@
                     getUser(function(response) {
                         if(response.success) {
                             self.joined = self.members.includes(response.id);
+                            self.joinInformation = true;
                             self.update();
                         } else {
                             //Handle errors

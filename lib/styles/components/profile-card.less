@@ -1,5 +1,6 @@
 graphjs-profile-card {
     display: block;
+    height: 18em;
     color: fade(@text-color-strong, 65%);
     .option {
         display: inline-block;
@@ -121,7 +122,7 @@ graphjs-profile-card {
             left: 0;
             right: 0;
             width: 100%;
-            height: 3.3em;
+            height: 3em;
         }
     }
 }
@@ -131,6 +132,7 @@ graphjs-profile-card {
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
     graphjs-profile-card {
+        height: 13.5em;
         .option {
             width: 3em;
             height: 3em;
@@ -177,7 +179,7 @@ graphjs-profile-card {
                 }
             }
             .button {
-                height: 2.7em;
+                height: 2.5em;
             }
         }
     }
@@ -186,6 +188,7 @@ graphjs-profile-card {
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
     graphjs-profile-card {
+        height: 15.25em;
         .option {
             width: 3.5em;
             height: 3.5em;
@@ -232,7 +235,7 @@ graphjs-profile-card {
                 }
             }
             .button {
-                height: 3em;
+                height: 2.75em;
             }
         }
     }

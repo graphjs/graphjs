@@ -1,4 +1,27 @@
 graphjs-auth-reset {
     display: block;
     color: fade(@text-color-strong, 65%);
+    .content {
+        form {
+            b {
+                display: block;
+            }
+            p {
+                margin-bottom: 1em !important;
+            }
+            div {
+                display: flex;
+                input {
+                    flex-grow: 1;
+                    padding-left: 0;
+                    padding-right: 0;
+                    text-align: center;
+                    margin-right: .5em;
+                    &:last-of-type {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
 }

@@ -15,7 +15,7 @@
             <textarea ref="composer" placeholder="Write your comment here..."></textarea>
             <button ref="submit" onclick={handleComment}>Send Comment</button>
             <button onclick={handleClear} class="danger">Clear</button>
-            <div if={!loaded} class="inline loader">
+            <div if={!loaded && !blocked} class="inline loader">
                 <img src="lib/images/animations/loading-dots.gif">
             </div>
             <button if={blocked} onclick={handleBlock} class="blockage">Login to write a comment</button>

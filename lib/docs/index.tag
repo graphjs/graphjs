@@ -71,12 +71,12 @@
                         display: inline-block;
                         width: 100%;
                         margin: 1em 0;
-                        font-size: 1.25em;
+                        font-size: 17px !important;
                         text-shadow: .1em .1em .1em rgba(0, 0, 0, .1);
                     }
                     a {
                         color: white;
-                        font-size: 1em;
+                        font-size: 14px !important;
                         line-height: 175%;
                         display: inline-block;
                         width: 100%;
@@ -187,6 +187,9 @@
                                 position: relative;
                                 margin: 0;
                                 margin-top: .5em;
+                                &::placeholder {
+                                    opacity: .5;
+                                }
                             }
                             .radiobutton {
                                 display: inline-block;
