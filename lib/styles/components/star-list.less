@@ -76,76 +76,84 @@ graphjs-star-list {
                         border-left: none;
                     }
                 }
-                .icon {
+                & > .icon {
                     display: block;
                     float: left;
                     position: relative;
-                    width: 3.5em;
+                    width: 4em;
                     height: 3.5em;
+                    padding: .75em 0;
+                    padding-right: 1em;
                     text-align: center;
                     .border-radius(inherit);
+                    .clearfix;
+                    &.count {
+                        width: 7.5em;
+                    }
                     &.default {
-                        svg {
-                            path {
-                                fill: orange;
-                            }
+                        div {
+                            background-color: orange;
                         }
                     }
                     &.like {
-                        svg {
-                            path {
-                                fill: dodgerblue;
-                            }
+                        div {
+                            background-color: dodgerblue;
                         }
                     }
                     &.love {
-                        svg {
-                            padding-top: 2px;
-                            path {
-                                fill: crimson;
+                        div {
+                            background-color: crimson;
+                            svg {
+                                padding-top: 2px;
                             }
                         }
                     }
                     &.save {
-                        svg {
-                            padding-top: 2px;
-                            path {
-                                fill: lightseagreen;
+                        div {
+                            background-color: lightseagreen;
+                            svg {
+                                padding-top: 2px;
                             }
                         }
                     }
-                    svg {
+                    div {
                         display: inline-block;
-                        position: relative;
-                        top: -2px;
-                        width: 34%;
-                        height: 33%;
-                        margin: 33%;
-                        vertical-align: middle;
-                        path {
-                            fill: silver;
-                        }
-                    }
-                }
-                .count {
-                    width: 3em;
-                    font-size: 1.5em;
-                    text-align: left;
-                    svg {
+                        float: right;
                         width: auto;
-                        height: .75em;
-                        margin-right: .25em;
-                        path {
-                            fill: @text-color-normal;
+                        height: 2em;
+                        .border-radius(@border-radius-large);
+                        .clearfix;
+                        & > * {
+                            float: left;
                         }
-                    }
-                    & + .title {
-                        width: calc(100% - 8em);
+                        .icon {
+                            width: 2em;
+                            height: 2em;
+                            svg {
+                                display: inline-block;
+                                position: relative;
+                                top: -1px;
+                                width: 50%;
+                                height: 50%;
+                                margin: 25%;
+                                vertical-align: top;
+                                path {
+                                    fill: white;
+                                }
+                            }
+                        }
+                        .count {
+                            color: white;
+                            .bold-font;
+                            font-size: 1.5em;
+                            line-height: 4em / 3;
+                            margin-right: 1em / 3;
+                        }
                     }
                 }
                 .title {
                     cursor: pointer;
-                    width: calc(100% - 7em);
+                    width: calc(100% - 7.5em);
                     color: @text-color-strong;
                     .single-line-text;
                     &:hover {
@@ -167,6 +175,7 @@ graphjs-star-list {
                     cursor: pointer;
                     width: 3.5em;
                     height: 3.5em;
+                    margin-left: .5em;
                     .icon-color-states(@danger-color);
                     svg {
                         width: 1.3em;
@@ -225,6 +234,16 @@ graphjs-star-list {
     }
     /* Placeholder */
     .placeholder {
+        &.tight {
+            .list {
+                .item {
+                    .icon {
+                        width: 2em;
+                        margin-left: .25em;
+                    }
+                }
+            }
+        }
         .bar {
             display: block;
             width: 100%;
@@ -237,18 +256,12 @@ graphjs-star-list {
                 display: block;
                 width: 100%;
                 height: 3.5em;
-                padding: 1em;
+                padding: .75em;
                 .icon {
                     display: block;
-                    width: 1em;
-                    height: 1em;
-                    margin: .25em;
-                }
-                .count {
-                    display: block;
-                    width: 2.75em;
-                    height: 1.5em;
-                    margin-left: .75em;
+                    width: 4em;
+                    height: 2em;
+                    margin-left: 1.75em;
                     font-size: 1em;
                     .border-radius(calc(1em / 2));
                 }
@@ -257,8 +270,8 @@ graphjs-star-list {
                     width: 100%;
                     height: .9em;
                     max-width: 30em;
-                    margin: .3em;
-                    margin-left: 2em;
+                    margin: .55em;
+                    margin-left: 1em;
                     .border-radius(calc(.9em / 2));
                 }
             }

@@ -260,7 +260,6 @@
                             id: thread.id,
                             title: thread.title,
                             author: thread.author,
-                            //views: 1317, //MAKE THIS DYNAMIC
                             timestamp: thread.timestamp
                         }
                         let contributors = typeof(thread.contributors) == 'object' ? thread.contributors : {};
@@ -295,11 +294,14 @@
             let dataset = event.currentTarget.dataset;
             switch(dataset.link) {
                 case 'compose':
-                    showForumCompose();
+                    showForumCompose({
+                        scroll: true
+                    });
                     break;
                 case 'thread':
                     showForumThread({
-                        id: dataset.id
+                        id: dataset.id,
+                        scroll: true
                     });
                     break;
             }

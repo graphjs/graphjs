@@ -1,22 +1,19 @@
 <graphjs-list class="wallet">
-    <div if={content == 'groups'} class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
-        <graphjs-group-card each={id in list} id={id}></graphjs-group-card>
-        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
-        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
-        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
-        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
-        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
-        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
-        <button if={blocked} onclick={handleBlock} class="blockage">Login to display content</button>
-    </div>
-    <div if={content == 'users'} class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
-        <graphjs-profile-card each={id in list} id={id}></graphjs-profile-card>
-        <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
-        <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
-        <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
-        <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
-        <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
-        <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
+    <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
+        <graphjs-profile-card if={content == 'users'} each={id in list} id={id}></graphjs-profile-card>
+        <graphjs-profile-card if={content == 'users' && list.length == 0}></graphjs-profile-card>
+        <graphjs-profile-card if={content == 'users' && list.length == 0}></graphjs-profile-card>
+        <graphjs-profile-card if={content == 'users' && list.length == 0}></graphjs-profile-card>
+        <graphjs-profile-card if={content == 'users' && list.length == 0}></graphjs-profile-card>
+        <graphjs-profile-card if={content == 'users' && list.length == 0}></graphjs-profile-card>
+        <graphjs-profile-card if={content == 'users' && list.length == 0}></graphjs-profile-card>
+        <graphjs-group-card if={content == 'groups'} each={id in list} id={id}></graphjs-group-card>
+        <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
+        <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
+        <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
+        <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
+        <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
+        <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
         <button if={blocked} onclick={handleBlock} class="blockage">Login to display content</button>
     </div>
     <style type="less">
@@ -33,9 +30,12 @@
         this.content = opts.content || 'users';
         this.list = [];
         this.loaded = true;
+        this.placeholderCount = 6;
 
         this.on('before-mount', function() {
-            this.handleUser();
+            opts.access == 'private'
+            ? this.handleUser()
+            : this.handleContent();
         });
 
         this.handleContent = () => {

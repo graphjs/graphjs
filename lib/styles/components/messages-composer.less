@@ -3,8 +3,42 @@ graphjs-messages-composer {
     width: 100%;
     max-width: 29em;
     .content {
+        .no-padding !important;
+        .recipient {
+            padding: .75em 1em;
+            color: @text-color-strong;
+            &.unknown {
+                &::before {
+                    display: none;
+                }
+            }
+            &::before {
+                content: "Recipient:";
+                margin-right: .25em;
+                color: @text-color-normal;
+            }
+        }
         form {
-            margin: 0 auto;
+            width: 100%;
+            padding: 1em;
+            background-color: @contrast-color;
+            .clearfix;
+            textarea {
+                width: 100%;
+                height: 10em;
+                margin: 0 auto;
+                margin-bottom: 0;
+                .no-padding;
+                vertical-align: middle;
+                border: none;
+            }
+            button {
+                float: right;
+                width: auto;
+                margin-top: .5em;
+                margin-left: .5em;
+                font-size: .9em;
+            }
         }
     }
 }

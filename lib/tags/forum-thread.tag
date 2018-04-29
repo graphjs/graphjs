@@ -148,12 +148,10 @@
             getUser(function(response) {
                 if(response.success) {
                     self.userId = response.id;
-                    //self.loaded = true;
                     self.handleContent();
                     self.update();
                 } else {
                     if(self.access != 'private') {
-                        //self.loaded = true;
                         self.handleContent();
                     } else {
                         self.loaded = false;
@@ -241,7 +239,9 @@
             let dataset = event.currentTarget.dataset;
             switch(dataset.link) {
                 case 'list':
-                    showForumList();
+                    showForumList({
+                        scroll: true
+                    });
                     break;
             }
         }

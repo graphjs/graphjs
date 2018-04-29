@@ -349,6 +349,9 @@
             for(let anchor of anchors) {
                 anchor.classList.remove('active');
             }
+            if(this.list.hasOwnProperty(id)) {
+                this.list[id].is_read = true;
+            }
             event.target.classList.remove('unread');
             event.target.classList.add('active');
             this.handleConversation(id);

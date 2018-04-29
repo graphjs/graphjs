@@ -1,7 +1,8 @@
-<graphjs-state class={opts.style == 'inline' ? 'inline' : 'box'}>
+<graphjs-auth-state class={opts.style == 'inline' ? 'inline' : 'box'}>
     <div class="not-logged" if={!id}>
-        <a onclick={handleLoginBox}>Login</a>
-        <a onclick={handleRegisterBox}>Register</a>
+        <a if={!stateInformation}>&middot; &middot; &middot;</a>
+        <a if={stateInformation} data-link="login" onclick={opts.minor ? opts.callback : handleLoginBox}>Login</a>
+        <a if={stateInformation} data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>Register</a>
     </div>
     <div class="logged" if={id}>
         <a class="details" if={profile}>
@@ -22,7 +23,7 @@
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
         @import '../styles/options.less';
-        @import '../styles/components/state.less';
+        @import '../styles/components/auth-state.less';
     </style>
     <script>
         import getUser from '../scripts/getUser.js';
@@ -48,6 +49,8 @@
                     self.handleInformation(self.id);
                 } else {
                     //Handle errors
+                    self.stateInformation = true;
+                    self.update();
                 }
             });
         }
@@ -56,8 +59,11 @@
             getProfile(id, function(response) {
                 if(response.success) {
                     self.profile = response.profile;
+                    self.stateInformation = true;
                     self.update();
                 } else {
+                    self.stateInformation = true;
+                    self.update();
                     //Handle errors
                 }
             });
@@ -74,4 +80,4 @@
             });
         }
     </script>
-</graphjs-state>
+</graphjs-auth-state>

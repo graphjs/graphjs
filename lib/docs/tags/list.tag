@@ -14,6 +14,15 @@
                     <label for="groups">Groups</label>
                 <div>
             </fieldset>
+            <fieldset name="access">
+                <legend>Access</legend>
+                <div class="radiobutton">
+                    <input onclick={updateRadio} type="radio" name="access" id="public" checked={specs.access == 'public'} />
+                    <label for="public">Public</label>
+                    <input onclick={updateRadio} type="radio" name="access" id="private" checked={specs.access == 'private'} />
+                    <label for="private">Private</label>
+                <div>
+            </fieldset>
         </form>
     </section>
     <h2>Code</h2>
@@ -22,7 +31,8 @@
     <script>
         this.input = '';
         this.specs = {
-            "content": "users"
+            "content": "users",
+            "access": "public"
         }
         this.updateRadio = (event) => {
             let target = event.target.parentNode.parentNode.name;

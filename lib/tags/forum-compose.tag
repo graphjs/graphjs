@@ -32,7 +32,7 @@
             <button ref="submit" data-link="thread" onclick={handleSubmit}>Publish</button>
             <button data-link="list" onclick={opts.minor ? handleCallback : handleShow} class="danger">Cancel</button>
         </form>
-        <div if={!loaded && !blocked} class="loader">
+        <div if={!loaded && !blocked} class="inline loader">
             <img src="lib/images/animations/loading-dots.gif">
         </div>
         <button if={blocked} onclick={handleBlock} class="blockage">Login to start a thread</button>
@@ -143,7 +143,8 @@
                         if(response.success) {
                             self.refs.submit.classList.remove('loading');
                             showForumThread({
-                                id: response.id
+                                id: response.id,
+                                scroll: true
                             });
                         } else {
                             self.refs.submit.classList.remove('loading');
@@ -168,11 +169,14 @@
             let dataset = event.currentTarget.dataset;
             switch(dataset.link) {
                 case 'list':
-                    showForumList();
+                    showForumList({
+                        scroll: true
+                    });
                     break;
                 case 'thread':
                     showForumThread({
-                        id: dataset.id
+                        id: dataset.id,
+                        scroll: true
                     });
                     break;
             }

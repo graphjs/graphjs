@@ -10,6 +10,7 @@
                 <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.title} />
                 <input onkeyup={updateTextWithCheckbox} type="text" value={specs.title} />
             </fieldset>
+            <!--
             <fieldset name="default">
                 <legend>Default</legend>
                 <div class="radiobutton">
@@ -21,6 +22,25 @@
                     <label for="reset">Reset</label>
                 <div>
             </fieldset>
+            -->
+            <fieldset name="style">
+                <legend>Style</legend>
+                <div class="radiobutton">
+                    <input onclick={updateRadio} type="radio" name="style" id="standalone" checked={specs.style == 'standalone'} />
+                    <label for="standalone">Standalone</label>
+                    <input onclick={updateRadio} type="radio" name="style" id="inline" checked={specs.style == 'inline'} />
+                    <label for="inline">Inline</label>
+                <div>
+            </fieldset>
+            <fieldset name="theme">
+                <legend>Theme</legend>
+                <div class="radiobutton">
+                    <input onclick={updateRadio} type="radio" name="theme" id="default" checked={specs.theme == 'default'} />
+                    <label for="default">Default</label>
+                    <input onclick={updateRadio} type="radio" name="theme" id="color" checked={specs.theme == 'color'} />
+                    <label for="color">Color</label>
+                <div>
+            </fieldset>
         </form>
     </section>
     <h2>Code</h2>
@@ -29,7 +49,9 @@
     <script>
         this.input = '';
         this.specs = {
-            "default": "register"
+            //"default": "register",
+            "style": "standalone",
+            "theme": "default"
         }
         this.updateTextWithCheckbox = (event) => {
             let target = event.target.parentNode.name;

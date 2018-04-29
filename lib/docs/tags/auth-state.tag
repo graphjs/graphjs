@@ -1,4 +1,4 @@
-<docs-state>
+<docs-auth-state>
     <h1>{opts.label}</h1>
     <h2><{opts.component}></h2>
     <section class="demo" ref="liveDemo"></section>
@@ -53,4 +53,4 @@
             updateTag(opts.component, this.specs, this.refs.liveDemo);
         })
     </script>
-</docs-state>
+</docs-auth-state>

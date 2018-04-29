@@ -16,6 +16,10 @@
             <button onclick={handleMessage}>Send Message</button>
             <button onclick={handleClear} class="danger">Clear</button>
         </form>
+        <div if={!loaded && !blocked} class="inline loader">
+            <img src="lib/images/animations/loading-dots.gif">
+        </div>
+        <button if={blocked} onclick={handleBlock} class="blockage">Login to start a thread</button>
     </div>
     <div class="check">
         <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
@@ -28,44 +32,6 @@
         @import '../styles/mixins.less';
         @import '../styles/options.less';
         @import '../styles/components/messages-composer.less';
-        .content {
-            .no-padding !important;
-            .recipient {
-                padding: .75em 1em;
-                color: @text-color-strong;
-                &.unknown {
-                    &::before {
-                        display: none;
-                    }
-                }
-                &::before {
-                    content: "Recipient:";
-                    margin-right: .25em;
-                    color: @text-color-normal;
-                }
-            }
-            form {
-                width: 100%;
-                padding: 1em;
-                background-color: @contrast-color;
-                .clearfix;
-                textarea {
-                    width: 100%;
-                    height: 10em;
-                    margin-bottom: 0;
-                    .no-padding;
-                    vertical-align: middle;
-                    border: none;
-                }
-                button {
-                    float: right;
-                    width: auto;
-                    margin-top: .5em;
-                    margin-left: .5em;
-                    font-size: .9em;
-                }
-            }
-        }
     </style>
     <script>
         import getUser from '../scripts/getUser.js';
@@ -74,11 +40,10 @@
         import hideOverlay from '../scripts/hideOverlay.js';
 
         this.recipient = opts.to;
-        this.loaded = true;
+        this.loaded = false;
 
         this.on('before-mount', function() {
             this.handleUser();
-            this.handleRecipient();
         });
         this.on('mount', function() {
             this.refs.message.focus();
@@ -89,7 +54,7 @@
             getUser(function(response) {
                 if(response.success) {
                     self.userId = response.id;
-                    self.update();
+                    self.handleRecipient();
                 } else {
                     self.loaded = false;
                     self.blocked = true;
@@ -103,6 +68,7 @@
             self.recipient && getProfile(self.recipient, function(response) {
                 if(response.success) {
                     self.profile = response.profile;
+                    self.loaded = true;
                     self.update();
                 } else {
                     //Handle errors

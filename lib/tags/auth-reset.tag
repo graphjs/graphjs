@@ -279,6 +279,10 @@
                             self.refs.submitPassword.classList.remove('loading');
                             self.checked = true;
                             self.update();
+                            if(opts.minor) {
+                                opts.callback();
+                                opts.refresh();
+                            }
                         } else {
                             failMessage = response.reason || 'Please try entering your password again.';
                             self.refs.submitPassword.classList.remove('loading');

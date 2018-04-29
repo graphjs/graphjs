@@ -47,10 +47,12 @@
                     display: inline-block;
                     height: 100%;
                     padding: 20%;
+                    padding-right: 0;
                     color: white;
                     img {
                         width: 100%;
                         height: auto;
+                        padding-right: 25%;
                     }
                     form {
                         fieldset {
@@ -391,9 +393,9 @@
         ];
         //Components
         this.components = [
-            {"label": "State", "component": "state"},
             {"label": "Auth", "component": "auth", "toggle": true},
             {"label": "Auth", "component": "auth", "parent": "auth"},
+            {"label": "Auth: State", "component": "auth-state", "parent": "auth"},
             {"label": "Auth: Register", "component": "auth-register", "parent": "auth"},
             {"label": "Auth: Login", "component": "auth-login", "parent": "auth"},
             {"label": "Auth: Reset", "component": "auth-reset", "parent": "auth"},
@@ -403,7 +405,9 @@
             {"label": "Forum: List", "component": "forum-list", "parent": "forum"},
             {"label": "Forum: Thread", "component": "forum-thread", "parent": "forum"},
             {"label": "Forum: Compose", "component": "forum-compose", "parent": "forum"},
-            {"label": "Messages", "component": "messages"},
+            {"label": "Messages", "component": "messages", "toggle": true},
+            {"label": "Messages", "component": "messages", "parent": "messages"},
+            {"label": "Messages: Composer", "component": "messages-composer", "parent": "messages"},
             {"label": "Profile", "component": "profile", "toggle": true},
             {"label": "Profile", "component": "profile", "parent": "profile"},
             {"label": "Profile: Card", "component": "profile-card", "parent": "profile"},

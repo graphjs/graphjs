@@ -184,6 +184,10 @@
                                         self.checked = true;
                                         self.refs.submit.classList.remove('loading');
                                         self.update();
+                                        if(opts.minor) {
+                                            opts.callback();
+                                            opts.refresh();
+                                        }
                                         /*
                                         showAlert({
                                             title: 'Register Successful!',
