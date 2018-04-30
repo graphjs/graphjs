@@ -120,7 +120,7 @@
         @import '../styles/components/forum-thread.less';
     </style>
     <script>
-        import getUser from '../scripts/getUser.js';
+        import getSession from '../scripts/getSession.js';
         import getThread from '../scripts/getThread.js';
         import replyThread from '../scripts/replyThread.js';
         import removeReply from '../scripts/removeReply.js';
@@ -145,7 +145,7 @@
 
         this.handleUser = () => {
             let self = this;
-            getUser(function(response) {
+            getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
                     self.handleContent();

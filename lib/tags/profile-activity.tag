@@ -130,7 +130,7 @@
         }
     </style>
     <script>
-        import getUser from '../scripts/getUser.js';
+        import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
         import showForumThread from '../scripts/showForumThread.js';
@@ -194,7 +194,7 @@
         }
         this.handleUser = () => {
             let self = this;
-            getUser(function(response) {
+            getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
                     self.update();

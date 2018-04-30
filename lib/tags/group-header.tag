@@ -88,7 +88,7 @@
         import joinGroup from '../scripts/joinGroup.js';
         import leaveGroup from '../scripts/leaveGroup.js';
         import showGroup from '../scripts/showGroup.js';
-        import getUser from '../scripts/getUser.js';
+        import getSession from '../scripts/getSession.js';
         import listMembers from '../scripts/listMembers.js';
         import getProfile from '../scripts/getProfile.js';
 
@@ -107,7 +107,7 @@
 
         this.handleUser = () => {
             let self = this;
-            getUser(function(response) {
+            getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
                     self.update();
@@ -160,7 +160,7 @@
                     self.members = response.members;
                     self.handleAvatars();
                     self.update();
-                    getUser(function(response) {
+                    getSession(function(response) {
                         if(response.success) {
                             self.joined = self.members.includes(response.id);
                             self.membershipInformation = true;

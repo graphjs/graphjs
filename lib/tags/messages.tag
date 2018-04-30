@@ -154,7 +154,7 @@
     <script>
         import getConversations from '../scripts/getConversations.js';
         import getConversation from '../scripts/getConversation.js';
-        import getUser from '../scripts/getUser.js';
+        import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
         import sendMessage from '../scripts/sendMessage.js';
         import getMembers from '../scripts/getMembers.js';
@@ -195,7 +195,7 @@
 
         this.handleUser = () => {
             let self = this;
-            getUser(function(response) {
+            getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
                     self.handleConversations();

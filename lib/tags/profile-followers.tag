@@ -20,7 +20,7 @@
     </style>
     <script>
         import getFollowers from '../scripts/getFollowers.js';
-        import getUser from '../scripts/getUser.js';
+        import getSession from '../scripts/getSession.js';
         import showLogin from '../scripts/showLogin.js';
 
         this.id = opts.id;
@@ -49,7 +49,7 @@
         }
         this.handleUser = () => {
             let self = this;
-            getUser(function(response) {
+            getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
                     self.update();

@@ -1,0 +1,53 @@
+.pagination {
+    padding-bottom: 3em !important;
+    .controls {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 3em;
+        padding: .5em;
+        color: @text-color-strong;
+        line-height: 2em;
+        text-align: center;
+        vertical-align: middle;
+        background-color: fade(@secondary-color, 10%);
+        .disable-selection;
+        & > * {
+            .disable-selection;
+        }
+        a {
+            display: inline-block;
+            opacity: .65;
+            width: auto;
+            height: 2em;
+            padding: 0 .35em;
+            font-size: 1em;
+            text-align: center;
+            vertical-align: middle;
+            .transition(opacity .35s ease);
+            &:hover {
+                opacity: 1;
+            }
+            &.disabled {
+                opacity: .35;
+                pointer-events: none;
+            }
+            svg {
+                height: .8em;
+                vertical-align: middle;
+                path {
+                    fill: @text-color-strong;
+                }
+            }
+        }
+        p {
+            display: inline-block;
+            opacity: .65;
+            padding: 0 .65em;
+            font-size: .9em;
+            line-height: inherit;
+        }
+    }
+}

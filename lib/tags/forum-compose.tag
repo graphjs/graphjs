@@ -51,7 +51,7 @@
         @import '../styles/components/forum-compose.less';
     </style>
     <script>
-        import getUser from '../scripts/getUser.js';
+        import getSession from '../scripts/getSession.js';
         import startThread from '../scripts/startThread.js';
         import showForumList from '../scripts/showForumList.js';
         import showForumThread from '../scripts/showForumThread.js';
@@ -66,7 +66,7 @@
 
         this.handleUser = () => {
             let self = this;
-            getUser(function(response) {
+            getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
                     self.loaded = true;

@@ -26,7 +26,7 @@
         @import '../styles/components/auth-state.less';
     </style>
     <script>
-        import getUser from '../scripts/getUser.js';
+        import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
         import logout from '../scripts/logout.js'
         import showLogin from '../scripts/showLogin.js';
@@ -43,7 +43,7 @@
         this.handleRegisterBox = () => showRegister();
         this.handleState = () => {
             let self = this;
-            getUser(function(response) {
+            getSession(function(response) {
                 if(response.success) {
                     self.id = response.id;
                     self.handleInformation(self.id);

@@ -7,7 +7,7 @@
     <div class="header" if={opts.title}>
         <div class="title">{opts.title || 'Login'}</div>
     </div>
-    <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
+    <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '') + (matchedStars.length > pageLimit ? ' pagination' : '')}>
         <div class="bar">
             <div class="search">
                 <div class="icon">

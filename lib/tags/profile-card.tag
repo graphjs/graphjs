@@ -48,7 +48,7 @@
         import follow from '../scripts/follow.js';
         import unfollow from '../scripts/unfollow.js';
         import showMessageComposer from '../scripts/showMessageComposer.js';
-        import getUser from '../scripts/getUser.js';
+        import getSession from '../scripts/getSession.js';
         import getFollowing from '../scripts/getFollowing.js';
 
         this.id = opts.id;
@@ -78,7 +78,7 @@
         }
         this.handleUser = () => {
             let self = this;
-            getUser(function(response) {
+            getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
                     getFollowing(self.userId, function(response) {

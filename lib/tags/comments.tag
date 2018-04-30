@@ -49,7 +49,7 @@
         @import '../styles/components/comments.less';
     </style>
     <script>
-        import getUser from '../scripts/getUser.js';
+        import getSession from '../scripts/getSession.js';
         import getComments from '../scripts/getComments.js';
         import addComment from '../scripts/addComment.js';
         import removeComment from '../scripts/removeComment.js';
@@ -74,7 +74,7 @@
 
         this.handleUser = () => {
             let self = this;
-            getUser(function(response) {
+            getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
                     self.loaded = true;

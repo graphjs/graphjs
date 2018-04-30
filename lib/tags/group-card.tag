@@ -28,7 +28,7 @@
         import joinGroup from '../scripts/joinGroup.js';
         import leaveGroup from '../scripts/leaveGroup.js';
         import showGroup from '../scripts/showGroup.js';
-        import getUser from '../scripts/getUser.js';
+        import getSession from '../scripts/getSession.js';
         import listMembers from '../scripts/listMembers.js';
 
         this.id = opts.id;
@@ -61,7 +61,7 @@
                 if(response.success) {
                     self.members = response.members;
                     self.update();
-                    getUser(function(response) {
+                    getSession(function(response) {
                         if(response.success) {
                             self.joined = self.members.includes(response.id);
                             self.joinInformation = true;

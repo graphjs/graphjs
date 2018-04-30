@@ -10,7 +10,7 @@
     <div class="header">
         <div class="title">{opts.title || 'Community Forum'}</div>
     </div>
-    <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
+    <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '') + (matchedThreads.length > pageLimit ? ' pagination' : '')}>
         <div class="bar">
             <div class="search">
                 <div class="icon">
@@ -162,55 +162,9 @@
         @import '../styles/mixins.less';
         @import '../styles/options.less';
         @import '../styles/components/forum-list.less';
-        .controls {
-            width: 100%;
-            height: 3em;
-            padding: .5em;
-            color: @text-color-strong;
-            line-height: 2em;
-            text-align: center;
-            vertical-align: middle;
-            background-color: fade(@secondary-color, 10%);
-            .disable-selection;
-            & > * {
-                .disable-selection;
-            }
-            a {
-                display: inline-block;
-                opacity: .65;
-                width: auto;
-                height: 2em;
-                padding: 0 .35em;
-                font-size: 1em;
-                text-align: center;
-                vertical-align: middle;
-                .transition(opacity .35s ease);
-                &:hover {
-                    opacity: 1;
-                }
-                &.disabled {
-                    opacity: .35;
-                    pointer-events: none;
-                }
-                svg {
-                    height: .8em;
-                    vertical-align: middle;
-                    path {
-                        fill: @text-color-strong;
-                    }
-                }
-            }
-            p {
-                display: inline-block;
-                opacity: .65;
-                padding: 0 .65em;
-                font-size: .9em;
-                line-height: inherit;
-            }
-        }
     </style>
     <script>
-        import getUser from '../scripts/getUser.js';
+        import getSession from '../scripts/getSession.js';
         import getThreads from '../scripts/getThreads.js';
         import showForumCompose from '../scripts/showForumCompose.js';
         import showForumThread from '../scripts/showForumThread.js';
@@ -231,13 +185,12 @@
 
         this.handleUser = () => {
             let self = this;
-            getUser(function(response) {
+            getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
                     self.update();
                 } else {
-                    if(self.access != 'private') {
-                    } else {
+                    if(self.access == 'private') {
                         self.loaded = false;
                         self.blocked = true;
                     }

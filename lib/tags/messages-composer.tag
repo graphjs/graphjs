@@ -34,7 +34,7 @@
         @import '../styles/components/messages-composer.less';
     </style>
     <script>
-        import getUser from '../scripts/getUser.js';
+        import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
         import sendMessage from '../scripts/sendMessage.js';
         import hideOverlay from '../scripts/hideOverlay.js';
@@ -51,7 +51,7 @@
 
         this.handleUser = () => {
             let self = this;
-            getUser(function(response) {
+            getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
                     self.handleRecipient();
