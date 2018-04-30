@@ -19,7 +19,7 @@
         <div if={!loaded && !blocked} class="inline loader">
             <img src="lib/images/animations/loading-dots.gif">
         </div>
-        <button if={blocked} onclick={handleBlock} class="blockage">Login to start a thread</button>
+        <button if={blocked} onclick={handleBlock} class="blockage">Login to send message</button>
     </div>
     <div class="check">
         <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">

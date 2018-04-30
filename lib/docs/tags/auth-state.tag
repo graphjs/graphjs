@@ -5,12 +5,12 @@
     <h2>Options</h2>
     <section class="options">
         <form>
-            <fieldset name="style">
-                <legend>Style</legend>
+            <fieldset name="type">
+                <legend>Type</legend>
                 <div class="radiobutton">
-                    <input onclick={updateRadio} type="radio" name="style" id="standalone" checked={specs.style == 'standalone'} />
+                    <input onclick={updateRadio} type="radio" name="type" id="standalone" checked={specs.type == 'standalone'} />
                     <label for="standalone">Standalone</label>
-                    <input onclick={updateRadio} type="radio" name="style" id="inline" checked={specs.style == 'inline'} />
+                    <input onclick={updateRadio} type="radio" name="type" id="inline" checked={specs.type == 'inline'} />
                     <label for="inline">Inline</label>
                 <div>
             </fieldset>
@@ -31,7 +31,7 @@
     <script>
         this.input = '';
         this.specs = {
-            "style": "standalone",
+            "type": "standalone",
             "theme": "default"
         }
         this.updateRadio = (event) => {

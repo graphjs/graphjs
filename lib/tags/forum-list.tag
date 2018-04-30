@@ -11,7 +11,7 @@
         <div class="title">{opts.title || 'Community Forum'}</div>
     </div>
     <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '') + (matchedThreads.length > pageLimit ? ' pagination' : '')}>
-        <div class="bar">
+        <div class="bar" if={loaded}>
             <div class="search">
                 <div class="icon">
                     <svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -32,7 +32,7 @@
                 <span>New Thread</span>
             </button>
         </div>
-        <div class="list">
+        <div class="list" if={loaded}>
             <a each={matchedThread, index in matchedThreads} class="item" data-link="thread" data-id={matchedThread} onclick={opts.minor ? handleCallback : handleShow} if={matchedThreads.length > 0 && index + 1 >= parseInt(((page - 1) * pageLimit + 1), 10) && index + 1 <= Math.min(matchedThreads.length, parseInt(page * pageLimit, 10))}>
                 <div class="title">
                     {threadsData[matchedThread] && threadsData[matchedThread].title}
@@ -180,7 +180,6 @@
 
         this.on('before-mount', function() {
             this.handleUser();
-            this.handleContent();
         });
 
         this.handleUser = () => {
@@ -189,13 +188,15 @@
                 if(response.success) {
                     self.userId = response.id;
                     self.update();
+                    self.handleContent();
                 } else {
                     if(self.access == 'private') {
                         self.loaded = false;
                         self.blocked = true;
+                        self.update();
+                    } else {
+                        self.handleContent();
                     }
-                    self.update();
-                    //Handle errors
                 }
             });
         }
@@ -229,6 +230,7 @@
                     self.update();
                 } else {
                     self.loaded = false;
+                    self.update();
                     //Handle error
                 }
             });

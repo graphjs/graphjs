@@ -141,14 +141,19 @@
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
-            removeComment(event.target.dataset.id, function(response) {
-                if(response.success) {
-                    self.handleContent();
-                    self.update();
-                } else {
-                    //Handle error
-                }
-            });
+            if (window.confirm('Are you sure to delete this item?')) {
+                let query = '[data-id="' + event.target.dataset.id + '"]';
+                let element = document.querySelectorAll(query)[0];
+                element.parentNode.removeChild(element);
+                self.update();
+                removeComment(event.target.dataset.id, function(response) {
+                    if(response.success) {
+                        self.handleContent();
+                    } else {
+                        //Handle error
+                    }
+                });
+            }
         }
         /*
         this.handleTime = (timestamp) => {

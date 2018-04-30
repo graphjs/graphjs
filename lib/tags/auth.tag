@@ -2,7 +2,7 @@
     <graphjs-auth-state
         minor={true}
         callback={changeProperties}
-        style={opts.style}
+        type={opts.type}
         theme={opts.theme}
     />
     <div if={active} class="box">

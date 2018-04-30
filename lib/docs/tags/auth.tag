@@ -5,30 +5,12 @@
     <h2>Options</h2>
     <section class="options">
         <form>
-            <fieldset name="title">
-                <legend>Title</legend>
-                <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs.title} />
-                <input onkeyup={updateTextWithCheckbox} type="text" value={specs.title} />
-            </fieldset>
-            <!--
-            <fieldset name="default">
-                <legend>Default</legend>
+            <fieldset name="type">
+                <legend>Type</legend>
                 <div class="radiobutton">
-                    <input onclick={updateRadio} type="radio" name="default" id="register" checked={specs.default == 'register'} />
-                    <label for="register">Register</label>
-                    <input onclick={updateRadio} type="radio" name="default" id="login" checked={specs.default == 'login'} />
-                    <label for="login">Login</label>
-                    <input onclick={updateRadio} type="radio" name="default" id="reset" checked={specs.default == 'reset'} />
-                    <label for="reset">Reset</label>
-                <div>
-            </fieldset>
-            -->
-            <fieldset name="style">
-                <legend>Style</legend>
-                <div class="radiobutton">
-                    <input onclick={updateRadio} type="radio" name="style" id="standalone" checked={specs.style == 'standalone'} />
+                    <input onclick={updateRadio} type="radio" name="type" id="standalone" checked={specs.type == 'standalone'} />
                     <label for="standalone">Standalone</label>
-                    <input onclick={updateRadio} type="radio" name="style" id="inline" checked={specs.style == 'inline'} />
+                    <input onclick={updateRadio} type="radio" name="type" id="inline" checked={specs.type == 'inline'} />
                     <label for="inline">Inline</label>
                 <div>
             </fieldset>
@@ -49,8 +31,7 @@
     <script>
         this.input = '';
         this.specs = {
-            //"default": "register",
-            "style": "standalone",
+            "type": "standalone",
             "theme": "default"
         }
         this.updateTextWithCheckbox = (event) => {

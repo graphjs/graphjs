@@ -1,15 +1,16 @@
-<graphjs-auth-state class={opts.style == 'inline' ? 'inline' : 'box'}>
+<graphjs-auth-state class={opts.type == 'inline' ? 'inline' : 'box'}>
     <div class="not-logged" if={!id}>
-        <a if={!stateInformation}>&middot; &middot; &middot;</a>
+        <a if={!stateInformation} class="idle">&middot; &middot; &middot;</a>
         <a if={stateInformation} data-link="login" onclick={opts.minor ? opts.callback : handleLoginBox}>Login</a>
         <a if={stateInformation} data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>Register</a>
     </div>
     <div class="logged" if={id}>
+        <a if={!profile} class="idle">&middot; &middot; &middot;</a>
         <a class="details" if={profile}>
             <img src={profile.avatar || 'lib/images/avatars/user.png'} />
             <span>{profile.fullname || profile.username}</span>
         </a>
-        <a class="exit" onclick={handleExit}>
+        <a class="exit" if={profile} onclick={handleExit}>
             <svg viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g transform="translate(-17.000000, -16.000000)" fill="black" fill-rule="nonzero">

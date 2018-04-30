@@ -214,6 +214,7 @@
                             self.refs.email.className = 'error';
                             self.refs.password.className = 'error';
                             self.refs.confirmation.className = 'error';
+                            self.refs.submit.classList.remove('loading');
                             self.update();
                         }
                     }

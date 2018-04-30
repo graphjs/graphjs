@@ -8,7 +8,7 @@
         <div class="title">{opts.title || 'Login'}</div>
     </div>
     <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '') + (matchedStars.length > pageLimit ? ' pagination' : '')}>
-        <div class="bar">
+        <div if={loaded} class="bar">
             <div class="search">
                 <div class="icon">
                     <svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -20,7 +20,7 @@
                 <input onkeyup={handleFilter} type="text" placeholder="Search web addresses..." />
             </div>
         </div>
-        <div class="list">
+        <div if={loaded} class="list">
             <div each={matchedStar, index in matchedStars} class="item" data-link="star" data-id={matchedStar} onclick={opts.minor ? handleCallback : handleShow} if={matchedStars.length > 0 && index + 1 >= parseInt(((page - 1) * pageLimit + 1), 10) && index + 1 <= Math.min(matchedStars.length, parseInt(page * pageLimit, 10))}>
                 <div class={type + ' icon' + (scope == 'global' ? ' count' : '')}>
                     <div>
@@ -175,6 +175,7 @@
                 self.update();
             } else {
                 self.loaded = false;
+                self.blocked = true;
                 self.update();
                 //Handle error
             }
@@ -186,14 +187,16 @@
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
-            removeStar(event.target.dataset.id, function(response) {
-                if(response.success) {
-                    self.handleContent();
-                    self.update();
-                } else {
-                    //Handle error
-                }
-            });
+            if (window.confirm('Are you sure to remove this item?')) {
+                event.target.parentNode.parentNode.removeChild(event.target.parentNode);
+                removeStar(event.target.dataset.id, function(response) {
+                    if(response.success) {
+                        self.handleContent();
+                    } else {
+                        //Handle error
+                    }
+                });
+            }
         }
         this.handlePagination = (event) => {
             let self = this;

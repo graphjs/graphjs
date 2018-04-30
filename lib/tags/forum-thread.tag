@@ -248,29 +248,36 @@
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
-            removeReply(event.target.dataset.id, function(response) {
-                if(response.success) {
-                    let query = '.replies [data-id="' + event.target.dataset.id + '"]';
-                    let element = document.querySelectorAll(query)[0];
-                    element.parentNode.removeChild(element);
-                    self.update();
-                } else {
-                    //Handle error
-                }
-            });
+            if (window.confirm('Are you sure to delete this reply?')) {
+                let query = '.replies [data-id="' + event.target.dataset.id + '"]';
+                let element = document.querySelectorAll(query)[0];
+                element.parentNode.removeChild(element);
+                self.update();
+                removeReply(event.target.dataset.id, function(response) {
+                    if(response.success) {
+                        self.handleContent();
+                    } else {
+                        //Handle error
+                    }
+                });
+            }
+
         }
         this.handleDestroy = (event) => {
             event.preventDefault();
-            removeReply(event.target.dataset.id, function(response) {
-                if(response.success) {
-                    event.preventDefault();
-                    let query = '[data-link="list"]';
-                    let element = document.querySelectorAll(query)[0];
-                    element.click();
-                } else {
-                    //Handle error
-                }
-            });
+            let self = this;
+            if (window.confirm('Are you sure to remove this thread?')) {
+                let query = '[data-link="list"]';
+                let element = document.querySelectorAll(query)[0];
+                element.click();
+                removeReply(event.target.dataset.id, function(response) {
+                    if(response.success) {
+                        //Nothing to do
+                    } else {
+                        //Handle error
+                    }
+                });
+            }
         }
         /*
         this.handleTime = (timestamp) => {
