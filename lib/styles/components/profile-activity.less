@@ -1,18 +1,20 @@
 graphjs-profile-activity {
     display: block;
     .content {
+        min-height: 21em;
         ul {
             margin: 0;
             padding: 0;
+            margin-left: 3.5em;
             li {
                 position: relative;
                 list-style: none;
                 width: 100%;
-                height: 3em;
+                min-height: 3.5em;
                 padding-left: 1em;
                 padding-bottom: .5em;
                 line-height: 1.35em;
-                border-left: 2px solid fade(@text-color-normal, 35%);
+                border-left: 2px dotted fade(@text-color-normal, 35%);
                 &:last-of-type {
                     border-color: transparent;
                 }
@@ -20,15 +22,79 @@ graphjs-profile-activity {
                     content: "";
                     display: block;
                     position: absolute;
-                    left: calc(-.4em - 1px);
-                    width: .8em;
-                    height: .8em;
+                    left: calc(-.35em - 1px);
+                    width: .7em;
+                    height: .7em;
                     border-radius: 50%;
                     background-color: @primary-color;
                 }
                 div {
                     position: relative;
-                    top: -.2em;
+                    top: -.25em;
+                    vertical-align: top;
+                    svg {
+                        width: 2em;
+                        height: 1.5em;
+                        position: absolute;
+                        top: -.125em;
+                        left: -4.5em;
+                        path {
+                            fill: @primary-color;
+                        }
+                    }
+                    time {
+                        display: block;
+                        position: relative;
+                        top: -.125em;
+                        width: 100%;
+                        color: @text-color-weak;
+                        .bold-font;
+                        font-size: .75em;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+        }
+        .placeholder {
+            display: block;
+            padding: 2.5em;
+            .list {
+                display: block;
+                .clearfix;
+                .item {
+                    display: block;
+                    height: 3em;
+                    .clearfix;
+                    & > * {
+                        float: left;
+                    }
+                    .icon {
+                        position: relative;
+                        top: -.4em;
+                        width: 1.5em;
+                        height: 1.5em;
+                        margin-left: .35em;
+                    }
+                    .bullet {
+                        position: relative;
+                        left: calc(-.35em + 1px);
+                        width: .7em;
+                        height: .7em;
+                        margin-left: 1.65em;
+                    }
+                    .paragraph {
+                        width: calc(100% - 5.5em);
+                        height: 3em;
+                        margin-left: .5em;
+                        .line {
+                            height: .6em;
+                            margin-bottom: .8em;
+                            .border-radius(calc(.6em / 2));
+                            &:last-child {
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -62,6 +62,14 @@
 
         this.on('before-mount', function() {
             this.handleUser();
+            //showCallbacks
+            if(!window.showCallbacks) {
+                window.showCallbacks = {};
+            }
+            let self = this;
+            window.showCallbacks['updateForumCompose'] = function() {
+                self.handleUser();
+            }
         });
 
         this.handleUser = () => {
@@ -81,7 +89,9 @@
         }
         this.handleBlock = (event) => {
             event.preventDefault();
-            showLogin();
+            showLogin({
+                action: 'updateForumCompose'
+            });
         }
         this.checkTitle = () => {
             let warningMessage = 'Title is too short.';
@@ -127,8 +137,8 @@
                 self.refs.title.value,
                 self.refs.body.value,
                 function(response) {
-                    if(opts.minor) {
-                        if(response.success) {
+                    if(response.success) {
+                        if(opts.minor) {
                             self.refs.submit.classList.remove('loading');
                             self.handleCallback({
                                 link: 'thread',
@@ -136,21 +146,15 @@
                             });
                         } else {
                             self.refs.submit.classList.remove('loading');
-                            self.update();
-                            //Handle error
-                        }
-                    } else {
-                        if(response.success) {
-                            self.refs.submit.classList.remove('loading');
                             showForumThread({
                                 id: response.id,
                                 scroll: true
                             });
-                        } else {
-                            self.refs.submit.classList.remove('loading');
-                            self.update();
-                            //Handle error
                         }
+                    } else {
+                        self.refs.submit.classList.remove('loading');
+                        self.update();
+                        //Handle error
                     }
                 }
             );

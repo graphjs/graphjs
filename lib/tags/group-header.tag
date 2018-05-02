@@ -11,13 +11,6 @@
         </div>
     </div>
     <ul if={group}>
-        <!--
-        <li class={opts.active == 'activity' ? 'active' : ''}>
-            <a data-link="activity" onclick={opts.callback}>
-                <span>Activity</span>
-            </a>
-        </li>
-        -->
         <li class={opts.active == 'members' ? 'active' : ''}>
             <a class={group.count > 1 ? 'count' : ''} data-link="members" data-count={group.count || ''} onclick={opts.callback}>
                 <span>Members</span>

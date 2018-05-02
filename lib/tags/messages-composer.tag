@@ -44,6 +44,14 @@
 
         this.on('before-mount', function() {
             this.handleUser();
+            //showCallbacks
+            if(!window.showCallbacks) {
+                window.showCallbacks = {};
+            }
+            let self = this;
+            window.showCallbacks['updateMessagesComposer'] = function() {
+                self.handleUser();
+            }
         });
         this.on('mount', function() {
             this.refs.message.focus();
@@ -92,6 +100,12 @@
             event.preventDefault();
             this.refs.message.value = '';
             this.refs.message.focus();
+        }
+        this.handleBlock = (event) => {
+            event.preventDefault();
+            showLogin({
+                action: 'updateMessagesComposer'
+            });
         }
         this.handleOverlay = () => hideOverlay();
     </script>

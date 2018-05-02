@@ -119,6 +119,14 @@
                             self.checked = true;
                             self.refs.submit.classList.remove('loading');
                             self.update();
+                            if(opts.action) {
+                                if(opts.action != 'handleState') {
+                                    window.showCallbacks[opts.action]();
+                                }
+                                if(window.showCallbacks.hasOwnProperty('handleState')) {
+                                    window.showCallbacks['handleState']();
+                                }
+                            }
                             if(opts.minor) {
                                 opts.callback();
                                 opts.refresh();

@@ -36,8 +36,33 @@
             opts.access == 'private'
             ? this.handleUser()
             : this.handleContent();
+            //showCallbacks
+            if(!window.showCallbacks) {
+                window.showCallbacks = {};
+            }
+            let self = this;
+            window.showCallbacks['updateList'] = function() {
+                opts.access == 'private'
+                ? self.handleUser()
+                : self.handleContent();
+            }
         });
 
+        this.handleUser = () => {
+            let self = this;
+            getSession(function(response) {
+                if(response.success) {
+                    self.userId = response.id;
+                    self.update();
+                    self.handleContent();
+                } else {
+                    self.loaded = false;
+                    self.blocked = true;
+                    self.update();
+                    //Handle errors
+                }
+            });
+        }
         this.handleContent = () => {
             let self = this;
             this.content == 'users'
@@ -62,24 +87,11 @@
                 }
             });
         }
-        this.handleUser = () => {
-            let self = this;
-            getSession(function(response) {
-                if(response.success) {
-                    self.userId = response.id;
-                    self.update();
-                    self.handleContent();
-                } else {
-                    self.loaded = false;
-                    self.blocked = true;
-                    self.update();
-                    //Handle errors
-                }
-            });
-        }
         this.handleBlock = (event) => {
             event.preventDefault();
-            showLogin();
+            showLogin({
+                action: 'updateList'
+            });
         }
     </script>
 </graphjs-list>

@@ -160,7 +160,6 @@
         import getMembers from '../scripts/getMembers.js';
         import showLogin from '../scripts/showLogin.js';
 
-        this.blocked = false;
         this.userId = '';
         this.activePartner = '';
         this.activePartnerName = '';
@@ -177,15 +176,27 @@
         this.on('before-mount', function() {
             this.handleUser();
             this.frequentlyUpdateTime = setInterval(this.handleTime,  60 * 1000);
+            //showCallbacks
+            if(!window.showCallbacks) {
+                window.showCallbacks = {};
+            }
+            let self = this;
+            window.showCallbacks['updateMessages'] = function() {
+                self.blocked = false;
+                self.update();
+                self.handleUser();
+            }
         });
         this.on('unmount', function() {
             clearInterval(this.frequentlyUpdateTime);
         });
         this.on('updated', function() {
             if(this.activePartner == '') {
-                this.activePartner = this.refs.partners.firstElementChild.dataset.partner;
-                this.update();
-                this.refs.partners.firstElementChild.click();
+                if(this.refs.partners.firstElementChild) {
+                    this.activePartner = this.refs.partners.firstElementChild.dataset.partner;
+                    this.update();
+                    this.refs.partners.firstElementChild.click();
+                }
             }
             if(!this.activePartnerName && this.activePartnerName == '') {
                 this.activePartnerName = this.list.hasOwnProperty(this.activePartner) ? this.list[this.activePartner].username : '';
@@ -198,8 +209,8 @@
             getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
-                    self.handleConversations();
                     self.update();
+                    self.handleConversations();
                 } else {
                     self.loaded = false;
                     self.blocked = true;
@@ -210,15 +221,15 @@
         }
         this.handleBlock = (event) => {
             event.preventDefault();
-            showLogin();
+            showLogin({
+                action: 'updateMessages'
+            });
         }
         this.handleConversations = () => {
             let self = this;
             getConversations(function(response) {
                 if(response.success) {
                     self.handleList(response.messages);
-                    self.loaded = true;
-                    self.update();
                 } else {
                     //Handle errors
                 }
@@ -260,6 +271,8 @@
                     self.update();
                 });
             }
+            self.loaded = true;
+            self.update();
         }
         this.handleTime = () => {
             let items = document.querySelectorAll('graphjs-messages time');

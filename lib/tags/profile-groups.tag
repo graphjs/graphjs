@@ -26,8 +26,34 @@
 
         this.on('before-mount', function() {
             this.handleUser();
+            //showCallbacks
+            if(!window.showCallbacks) {
+                window.showCallbacks = {};
+            }
+            let self = this;
+            window.showCallbacks['updateProfileGroups'] = function() {
+                self.loaded = true;
+                self.blocked = false;
+                self.update();
+                self.handleUser();
+            }
         });
 
+        this.handleUser = () => {
+            let self = this;
+            getSession(function(response) {
+                if(response.success) {
+                    self.userId = response.id;
+                    self.update();
+                    self.handleContent();
+                } else {
+                    self.loaded = false;
+                    self.blocked = true;
+                    self.update();
+                    //Handle errors
+                }
+            });
+        }
         this.handleContent = () => {
             let self = this;
             listMemberships(self.id, function(response) {
@@ -46,24 +72,11 @@
                 }
             });
         }
-        this.handleUser = () => {
-            let self = this;
-            getSession(function(response) {
-                if(response.success) {
-                    self.userId = response.id;
-                    self.update();
-                    self.handleContent();
-                } else {
-                    self.loaded = false;
-                    self.blocked = true;
-                    self.update();
-                    //Handle errors
-                }
-            });
-        }
         this.handleBlock = (event) => {
             event.preventDefault();
-            showLogin();
+            showLogin({
+                action: 'updateProfileGroups'
+            });
         }
     </script>
 </graphjs-profile-groups>

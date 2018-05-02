@@ -33,15 +33,29 @@
         import showLogin from '../scripts/showLogin.js';
         import showRegister from '../scripts/showRegister.js';
 
+        this.failMessages = [];
+
         this.on('before-mount', function() {
             this.handleState();
+            //showCallbacks
+            if(!window.showCallbacks) {
+                window.showCallbacks = {};
+            }
+            let self = this;
+            window.showCallbacks['updateState'] = function() {
+                self.handleState();
+            }
         });
         this.on('mount', function() {
             opts.theme && this.root.classList.add(opts.theme);
         });
 
-        this.handleLoginBox = () => showLogin();
-        this.handleRegisterBox = () => showRegister();
+        this.handleLoginBox = () => showLogin({
+            action: 'updateState'
+        });
+        this.handleRegisterBox = () => showRegister({
+            action: 'updateState'
+        });
         this.handleState = () => {
             let self = this;
             getSession(function(response) {

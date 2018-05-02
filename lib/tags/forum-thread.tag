@@ -39,9 +39,6 @@
         </div>
         <div class="reply" if={entries.length > 0}>
             <div onclick={handleComposer} class="synopsis">
-                <!--
-                <b>100 views</b>
-                -->
                 <b if={entries.length > 1}>{entries.length < 2 ? (entries.length - 1) + ' reply' : (entries.length - 1) + ' replies'}</b>
                 <a if={!composerReady}>Write a Reply</a>
                 <a class={composerReady ? 'icon' : 'reverse icon'}>
@@ -138,6 +135,14 @@
         this.on('before-mount', function() {
             this.handleUser();
             this.frequentlyUpdateTime = setInterval(this.handleTimeUpdate,  60 * 1000);
+            //showCallbacks
+            if(!window.showCallbacks) {
+                window.showCallbacks = {};
+            }
+            let self = this;
+            window.showCallbacks['updateForumThread'] = function() {
+                self.handleUser();
+            }
         });
         this.on('unmount', function() {
             clearInterval(this.frequentlyUpdateTime);
@@ -148,8 +153,8 @@
             getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
-                    self.handleContent();
                     self.update();
+                    self.handleContent();
                 } else {
                     if(self.access != 'private') {
                         self.handleContent();
@@ -164,7 +169,9 @@
         }
         this.handleBlock = (event) => {
             event.preventDefault();
-            showLogin();
+            showLogin({
+                action: 'updateForumThread'
+            });
         }
         this.handleContent = (callback) => {
             let self = this;

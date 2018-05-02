@@ -180,6 +180,14 @@
 
         this.on('before-mount', function() {
             this.handleUser();
+            //showCallbacks
+            if(!window.showCallbacks) {
+                window.showCallbacks = {};
+            }
+            let self = this;
+            window.showCallbacks['updateForumList'] = function() {
+                self.handleUser();
+            }
         });
 
         this.handleUser = () => {
@@ -187,6 +195,7 @@
             getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
+                    self.blocked = false;
                     self.update();
                     self.handleContent();
                 } else {
@@ -195,6 +204,8 @@
                         self.blocked = true;
                         self.update();
                     } else {
+                        self.blocked = false;
+                        self.update();
                         self.handleContent();
                     }
                 }
@@ -202,7 +213,9 @@
         }
         this.handleBlock = (event) => {
             event.preventDefault();
-            showLogin();
+            showLogin({
+                action: 'updateForumList'
+            });
         }
         this.handleContent = () => {
             let self = this;
@@ -227,6 +240,7 @@
                     }
                     self.matchedThreads = self.threads;
                     self.loaded = true;
+                    self.blocked = false;
                     self.update();
                 } else {
                     self.loaded = false;

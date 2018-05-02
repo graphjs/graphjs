@@ -115,19 +115,6 @@
             opts.theme && this.root.classList.add(opts.theme);
         });
 
-        this.handleInformation = () => {
-            let self = this;
-            getProfile(self.id, function(response) {
-                if(response.success) {
-                    self.profile = response.profile;
-                    self.loaded = true;
-                    self.update();
-                } else {
-                    self.loaded = true;
-                    //Handle errors
-                }
-            });
-        }
         this.handleUser = () => {
             let self = this;
             getSession(function(response) {
@@ -144,6 +131,19 @@
                     });
                     self.update();
                 } else {
+                    //Handle errors
+                }
+            });
+        }
+        this.handleInformation = () => {
+            let self = this;
+            getProfile(self.id, function(response) {
+                if(response.success) {
+                    self.profile = response.profile;
+                    self.loaded = true;
+                    self.update();
+                } else {
+                    self.loaded = true;
                     //Handle errors
                 }
             });

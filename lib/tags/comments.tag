@@ -65,8 +65,15 @@
 
         this.on('before-mount', function() {
             this.handleUser();
-            this.handleContent();
             this.frequentlyUpdateTime = setInterval(this.handleTimeUpdate,  60 * 1000);
+            //showCallbacks
+            if(!window.showCallbacks) {
+                window.showCallbacks = {};
+            }
+            let self = this;
+            window.showCallbacks['updateComments'] = function() {
+                self.handleUser();
+            }
         });
         this.on('unmount', function() {
             clearInterval(this.frequentlyUpdateTime);
@@ -77,8 +84,8 @@
             getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
-                    self.loaded = true;
                     self.update();
+                    self.handleContent();
                 } else {
                     self.loaded = false;
                     self.blocked = true;
@@ -86,10 +93,6 @@
                     //Handle errors
                 }
             });
-        }
-        this.handleBlock = (event) => {
-            event.preventDefault();
-            showLogin();
         }
         this.handleContent = (callback) => {
             let self = this;
@@ -109,10 +112,19 @@
                             self.update();
                         });
                     }
+                    self.loaded = true;
                     self.update();
+                } else {
+                    //Handle errors
                 }
             });
             self.update();
+        }
+        this.handleBlock = (event) => {
+            event.preventDefault();
+            showLogin({
+                action: 'updateComments'
+            });
         }
         this.handleClear = (event) => {
             event.preventDefault();

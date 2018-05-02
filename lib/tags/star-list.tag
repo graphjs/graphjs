@@ -141,6 +141,14 @@
 
         this.on('before-mount', function() {
             this.handleContent();
+            //showCallbacks
+            if(!window.showCallbacks) {
+                window.showCallbacks = {};
+            }
+            let self = this;
+            window.showCallbacks['updateStarList'] = function() {
+                self.handleContent();
+            }
         });
 
         this.handleContent = () => {
@@ -219,7 +227,9 @@
         }
         this.handleBlock = (event) => {
             event.preventDefault();
-            showLogin();
+            showLogin({
+                action: 'updateStarList'
+            });
         }
     </script>
 </graphjs-star-list>
