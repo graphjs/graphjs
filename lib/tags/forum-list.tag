@@ -166,7 +166,7 @@
     <script>
         import getSession from '../scripts/getSession.js';
         import getThreads from '../scripts/getThreads.js';
-        import showForumCompose from '../scripts/showForumCompose.js';
+        import showForumCompose from '../scripts/showForumComposer.js';
         import showForumThread from '../scripts/showForumThread.js';
         import showLogin from '../scripts/showLogin.js';
 

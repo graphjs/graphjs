@@ -1,6 +1,6 @@
 <graphjs-group-creator class="root box">
     <div class="header">
-        <div class="title">Create Group</div>
+        <div class="title">{opts.title || 'Create Group'}</div>
         <a class="option right" onclick={handleOverlay}>
             <svg viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g transform="translate(-755.000000, -15.000000)" fill="black" fill-rule="nonzero">

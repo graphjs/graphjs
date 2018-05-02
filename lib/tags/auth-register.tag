@@ -198,18 +198,18 @@
                                         }
                                         /*
                                         showAlert({
-                                            title: 'Register Successful!',
-                                            message: 'You are successfully registered and automatically logged in.'
+                                            'title': 'Register Successful!',
+                                            'message': 'You are successfully registered and automatically logged in.'
                                         });
                                         */
                                     } else {
                                         self.refs.submit.classList.remove('loading');
                                         showAlert({
-                                            title: 'Register Successful!',
-                                            message: 'Please login to continue.',
-                                            customoption: 'Login',
-                                            show: 'login',
-                                            negativeoption: 'Cancel'
+                                            'title': 'Register Successful!',
+                                            'message': 'Please login to continue.',
+                                            'affirmative': 'Login',
+                                            'negative': 'Cancel',
+                                            'show': 'login'
                                         });
                                     }
                                 }

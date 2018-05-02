@@ -1,18 +1,11 @@
-<docs-list>
+<docs-showForum>
     <h1>{opts.label}</h1>
-    <h2><{opts.component}></h2>
-    <section class="demo" ref="liveDemo"></section>
     <h2>Options</h2>
     <section class="options">
         <form>
-            <fieldset name="content">
-                <legend>Content</legend>
-                <div class="radiobutton">
-                    <input onclick={updateRadio} type="radio" name="content" id="users" checked={specs.content == 'users'} />
-                    <label for="users">Users</label>
-                    <input onclick={updateRadio} type="radio" name="content" id="groups" checked={specs.content == 'groups'} />
-                    <label for="groups">Groups</label>
-                <div>
+            <fieldset name="title">
+                <legend>Title</legend>
+                <input onkeyup={updateText} type="text" value={specs.title} placeholder="Multiple Titles (by default)" />
             </fieldset>
             <fieldset name="access">
                 <legend>Access</legend>
@@ -27,30 +20,36 @@
     </section>
     <h2>Code</h2>
     <pre class="prettyprint"><xmp ref="inputCode" class="code">{input}</xmp></pre>
-    <button onclick={handleSubmit}>Apply</button>
+    <button onclick={handleSubmit}>Execute</button>
     <script>
+        import updateCode from '../scripts/updateCode.js';
+        import showForum from '../../scripts/showForum.js';
+
         this.input = '';
         this.specs = {
-            "content": "users",
             "access": "public"
+        }
+
+        this.on('mount', function() {
+            updateCode('function', opts.function, this.specs, this.refs.inputCode);
+        });
+
+        this.updateText = (event) => {
+            let target = event.target.parentNode.name;
+            this.specs[target] = event.target.value;
+            this.handleCode();
         }
         this.updateRadio = (event) => {
             let target = event.target.parentNode.parentNode.name;
             this.specs[target] = event.target.id;
             this.handleCode();
         }
-        import updateCode from '../scripts/updateCode.js';
-        import updateTag from '../scripts/updateTag.js';
         this.handleCode = () => {
-            updateCode('component', opts.component, this.specs, this.refs.inputCode);
+            updateCode('function', opts.function, this.specs, this.refs.inputCode);
         }
         this.handleSubmit = (event) => {
             event.preventDefault();
-            updateTag(opts.component, this.specs, this.refs.liveDemo);
+            showForum(this.specs);
         }
-        this.on('mount', function() {
-            updateCode('component', opts.component, this.specs, this.refs.inputCode);
-            updateTag(opts.component, this.specs, this.refs.liveDemo);
-        })
     </script>
-</docs-list>
+</docs-showForum>

@@ -18,10 +18,6 @@
                     <label for="private">Private</label>
                 <div>
             </fieldset>
-            <fieldset name="title">
-                <legend>Title</legend>
-                <input onkeyup={updateText} type="text" value={specs.title} placeholder="Thread by USERNAME" />
-            </fieldset>
             <fieldset name="min-width">
                 <legend>Minimum Width</legend>
                 <input onclick={updateTextWithCheckbox} type="checkbox" checked={specs['min-width']} />
@@ -78,14 +74,14 @@
         import updateCode from '../scripts/updateCode.js';
         import updateTag from '../scripts/updateTag.js';
         this.handleCode = () => {
-            updateCode(opts.component, this.specs, this.refs.inputCode);
+            updateCode('component', opts.component, this.specs, this.refs.inputCode);
         }
         this.handleSubmit = (event) => {
             event.preventDefault();
             updateTag(opts.component, this.specs, this.refs.liveDemo);
         }
         this.on('mount', function() {
-            updateCode(opts.component, this.specs, this.refs.inputCode);
+            updateCode('component', opts.component, this.specs, this.refs.inputCode);
             updateTag(opts.component, this.specs, this.refs.liveDemo);
         })
     </script>

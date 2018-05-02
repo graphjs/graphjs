@@ -1,7 +1,5 @@
-<docs-auth-register>
+<docs-showComments>
     <h1>{opts.label}</h1>
-    <h2><{opts.component}></h2>
-    <section class="demo" ref="liveDemo"></section>
     <h2>Options</h2>
     <section class="options">
         <form>
@@ -14,10 +12,18 @@
     </section>
     <h2>Code</h2>
     <pre class="prettyprint"><xmp ref="inputCode" class="code">{input}</xmp></pre>
-    <button onclick={handleSubmit}>Apply</button>
+    <button onclick={handleSubmit}>Execute</button>
     <script>
+        import updateCode from '../scripts/updateCode.js';
+        import showComments from '../../scripts/showComments.js';
+
         this.input = '';
         this.specs = {}
+
+        this.on('mount', function() {
+            updateCode('function', opts.function, this.specs, this.refs.inputCode);
+        });
+
         this.updateTextWithCheckbox = (event) => {
             let target = event.target.parentNode.name;
             if(event.target.type == 'checkbox') {
@@ -29,18 +35,12 @@
             }
             this.handleCode();
         }
-        import updateCode from '../scripts/updateCode.js';
-        import updateTag from '../scripts/updateTag.js';
         this.handleCode = () => {
-            updateCode('component', opts.component, this.specs, this.refs.inputCode);
+            updateCode('function', opts.function, this.specs, this.refs.inputCode);
         }
         this.handleSubmit = (event) => {
             event.preventDefault();
-            updateTag(opts.component, this.specs, this.refs.liveDemo);
+            showComments(this.specs);
         }
-        this.on('mount', function() {
-            updateCode('component', opts.component, this.specs, this.refs.inputCode);
-            updateTag(opts.component, this.specs, this.refs.liveDemo);
-        })
     </script>
-</docs-auth-register>
+</docs-showComments>

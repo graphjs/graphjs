@@ -1,4 +1,4 @@
-<graphjs-forum-compose
+<graphjs-forum-composer
     class={'root' + (opts.minor ? '' : ' box')}
     style={
         (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
@@ -48,7 +48,7 @@
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
         @import '../styles/options.less';
-        @import '../styles/components/forum-compose.less';
+        @import '../styles/components/forum-composer.less';
     </style>
     <script>
         import getSession from '../scripts/getSession.js';
@@ -186,4 +186,4 @@
             }
         }
     </script>
-</graphjs-forum-compose>
+</graphjs-forum-composer>

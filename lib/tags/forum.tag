@@ -22,7 +22,7 @@
         callback={changeProperties}
         if={this.active == 'thread'}
     />
-    <graphjs-forum-compose
+    <graphjs-forum-composer
         minor={true}
         title={opts.title}
         callback={changeProperties}
@@ -37,7 +37,7 @@
     <script>
         import './forum-list.tag'
         import './forum-thread.tag'
-        import './forum-compose.tag'
+        import './forum-composer.tag'
 
         this.active = 'list';
         this.id = undefined;

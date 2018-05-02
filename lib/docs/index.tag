@@ -24,7 +24,7 @@
                 top: 0;
                 bottom: 0;
                 left: 0;
-                width: 220px;
+                width: 240px;
                 height: auto;
                 background: linear-gradient(rgb(93, 60, 246), rgb(158, 119, 255));
                 .transition(left .35s ease);
@@ -127,8 +127,8 @@
             }
             main {
                 display: inline-block;
-                width: calc(100% - 220px);
-                margin-left: 220px;
+                width: calc(100% - 240px);
+                margin-left: 240px;
                 padding: 2.5em 5em;
                 h1 {
                     width: 100%;
@@ -136,7 +136,7 @@
                     margin: 0;
                     font-size: 2em;
                     line-height: 1em;
-                    margin-bottom: .5em;
+                    margin-bottom: 1.5em;
                 }
                 h2 {
                     width: 100%;
@@ -150,7 +150,6 @@
                 }
                 .demo {
                     width: 100%;
-                    margin-top: 5%;
                     margin-bottom: 5%;
                     & > * {
                         margin: 0;
@@ -181,6 +180,7 @@
                             }
                             input[type="checkbox"] {
                                 display: inline-block;
+                                float: left;
                                 max-width: 1.5em;
                                 max-height: 1.5em;
                                 margin: 0;
@@ -267,7 +267,7 @@
         @media only screen and (max-width: 479px) {
             docs-index {
                 aside {
-                    left: -220px;
+                    left: -240px;
                     & > a {
                         display: inline-block;
                     }
@@ -297,7 +297,7 @@
         @media only screen and (min-width: 480px) and (max-width: 767px) {
             docs-index {
                 aside {
-                    left: -220px;
+                    left: -240px;
                     & > a {
                         display: inline-block;
                     }
@@ -327,7 +327,7 @@
         @media only screen and (min-width: 768px) and (max-width: 1023px) {
             docs-index {
                 aside {
-                    left: -220px;
+                    left: -240px;
                     & > a {
                         display: inline-block;
                     }
@@ -385,11 +385,22 @@
         // Functions
         import showGroupCreator from '../scripts/showGroupCreator.js';
         import '../vendor/google-code-prettify/prettify.js';
-        this.functionsList = {
-            showGroupCreator: showGroupCreator
-        };
         this.functions = [
-            {"label": "Create Group", "function": "showGroupCreator"}
+            {"label": "Show Functions", "function": "show", "toggle": true},
+            {"label": "showAlert", "function": "showAlert", "parent": "show"},
+            {"label": "showAuth", "function": "showAuth", "parent": "show"},
+            {"label": "showLogin", "function": "showLogin", "parent": "show"},
+            {"label": "showRegister", "function": "showRegister", "parent": "show"},
+            {"label": "showReset", "function": "showReset", "parent": "show"},
+            {"label": "showComments", "function": "showComments", "parent": "show"},
+            {"label": "showForum", "function": "showForum", "parent": "show"},
+            {"label": "showForumList", "function": "showForumList", "parent": "show"},
+            {"label": "showForumThread", "function": "showForumThread", "parent": "show"},
+            {"label": "showMessages", "function": "showMessages", "parent": "show"},
+            {"label": "showMessagesComposer", "function": "showMessagesComposer", "parent": "show"},
+            {"label": "showProfile", "function": "showProfile", "parent": "show"},
+            {"label": "showGroup", "function": "showGroup", "parent": "show"},
+            {"label": "showGroupCreator", "function": "showGroupCreator", "parent": "show"}
         ];
         //Components
         this.components = [
@@ -404,7 +415,7 @@
             {"label": "Forum", "component": "forum", "parent": "forum"},
             {"label": "Forum: List", "component": "forum-list", "parent": "forum"},
             {"label": "Forum: Thread", "component": "forum-thread", "parent": "forum"},
-            {"label": "Forum: Compose", "component": "forum-compose", "parent": "forum"},
+            {"label": "Forum: Composer", "component": "forum-composer", "parent": "forum"},
             {"label": "Messages", "component": "messages", "toggle": true},
             {"label": "Messages", "component": "messages", "parent": "messages"},
             {"label": "Messages: Composer", "component": "messages-composer", "parent": "messages"},
@@ -414,11 +425,10 @@
             {"label": "Group", "component": "group", "toggle": true},
             {"label": "Group", "component": "group", "parent": "group"},
             {"label": "Group: Card", "component": "group-card", "parent": "group"},
-            {"label": "List", "component": "list"},
             {"label": "Star", "component": "star", "toggle": true},
             {"label": "Star: Button", "component": "star-button", "parent": "star"},
             {"label": "Star: List", "component": "star-list", "parent": "star"},
-            {"label": "Alert", "component": "alert"}
+            {"label": "List", "component": "list"}
         ];
         this.activeItem = 'introduction';
         this.toggleMenu = (event) => {
@@ -428,7 +438,7 @@
         }
         this.changeProperties = (event) => {
             if(event.currentTarget.classList.contains('toggle')) {
-                let parent = event.currentTarget.dataset.component;
+                let parent = event.currentTarget.dataset[event.currentTarget.dataset.type];
                 let children = document.querySelectorAll('.' + parent + '-item');
                 for(let child of children) {
                     child.classList.toggle('visible');
@@ -444,11 +454,13 @@
                 this.activeItem = event.currentTarget.dataset.id;
                 this.update();
                 this.refs.main.innerHTML = '';
-                if(event.currentTarget.dataset.type == 'component') {
-                    this.createTag(event.currentTarget.dataset.component, event.currentTarget.dataset.label);
-                } else if(event.currentTarget.dataset.type == 'function') {
-                    let functionName = event.currentTarget.dataset.function;
-                    this.functionsList[functionName]();
+                switch(event.currentTarget.dataset.type) {
+                    case 'component':
+                        this.createTag(event.currentTarget.dataset['component'], event.currentTarget.dataset.label);
+                        break;
+                    case 'function':
+                        this.createFunction(event.currentTarget.dataset['function'], event.currentTarget.dataset.label);
+                        break;
                 }
             }
         }
@@ -457,6 +469,18 @@
             let component = document.createAttribute('component');
             component.value = 'graphjs-' + itemComponent;
             currentElement.setAttributeNode(component);
+            let label = document.createAttribute('label');
+            label.value = itemLabel;
+            currentElement.setAttributeNode(label);
+            riot.mount(currentElement);
+            this.refs.main.appendChild(currentElement);
+            PR.prettyPrint();
+        }
+        this.createFunction = (itemFunction, itemLabel) => {
+            let currentElement = document.createElement('docs-' + itemFunction);
+            let functionName = document.createAttribute('function');
+            functionName.value = itemFunction;
+            currentElement.setAttributeNode(functionName);
             let label = document.createAttribute('label');
             label.value = itemLabel;
             currentElement.setAttributeNode(label);

@@ -133,9 +133,9 @@
                             }
                             /*
                             showAlert({
-                                title: 'Login Succeeded!',
-                                message: 'You are successfully logged in.',
-                                customoption: 'Done'
+                                'title': 'Login Succeeded!',
+                                'message': 'You are successfully logged in.',
+                                'affirmative': 'Done'
                             });
                             */
                         } else {
@@ -148,11 +148,11 @@
                             self.update();
                             /*
                             showAlert({
-                                title: 'Login Failed!',
-                                message: response.reason || 'Please try logging in again.',
-                                customoption: 'Retry',
-                                show: 'login',
-                                negativeoption: 'Cancel'
+                                'title': 'Login Failed!',
+                                'message': response.reason || 'Please try logging in again.',
+                                'affirmative': 'Retry',
+                                'negative': 'Cancel',
+                                'show': 'login'
                             });
                             */
                         }

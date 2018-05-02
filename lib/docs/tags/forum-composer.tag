@@ -1,4 +1,4 @@
-<docs-forum-compose>
+<docs-forum-composer>
     <h1>{opts.label}</h1>
     <h2><{opts.component}></h2>
     <section class="demo" ref="liveDemo"></section>
@@ -58,15 +58,15 @@
         import updateCode from '../scripts/updateCode.js';
         import updateTag from '../scripts/updateTag.js';
         this.handleCode = () => {
-            updateCode(opts.component, this.specs, this.refs.inputCode);
+            updateCode('component', opts.component, this.specs, this.refs.inputCode);
         }
         this.handleSubmit = (event) => {
             event.preventDefault();
             updateTag(opts.component, this.specs, this.refs.liveDemo);
         }
         this.on('mount', function() {
-            updateCode(opts.component, this.specs, this.refs.inputCode);
+            updateCode('component', opts.component, this.specs, this.refs.inputCode);
             updateTag(opts.component, this.specs, this.refs.liveDemo);
         })
     </script>
-</docs-forum-compose>
+</docs-forum-composer>
