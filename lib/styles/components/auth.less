@@ -1,5 +1,47 @@
 graphjs-auth {
+    overflow: visible;
     display: inline-block;
+    position: relative;
     width: auto;
     color: fade(@text-color-strong, 65%);
+    &.topleft {
+        graphjs-auth-state {
+            & + * {
+                top: 65px;
+                left: 0;
+            }
+        }
+    }
+    &.topright {
+        graphjs-auth-state {
+            & + * {
+                top: 65px;
+                right: 0;
+            }
+        }
+    }
+    &.bottomleft {
+        graphjs-auth-state {
+            & + * {
+                top: -15px;
+                left: 0;
+                .transform(translateY(-100%));
+            }
+        }
+    }
+    &.bottomright {
+        graphjs-auth-state {
+            & + * {
+                top: -15px;
+                right: 0;
+                .transform(translateY(-100%));
+            }
+        }
+    }
+    graphjs-auth-state {
+        & + * {
+            position: absolute !important;
+            z-index: 9;
+        }
+    }
 }

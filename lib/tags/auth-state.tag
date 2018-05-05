@@ -1,8 +1,8 @@
 <graphjs-auth-state class={opts.type == 'inline' ? 'inline' : 'box'}>
     <div class="not-logged" if={!id}>
         <a if={!stateInformation} class="idle">&middot; &middot; &middot;</a>
-        <a if={stateInformation} data-link="login" onclick={opts.minor ? opts.callback : handleLoginBox}>Login</a>
-        <a if={stateInformation} data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>Register</a>
+        <a if={stateInformation} class={opts.minor && opts.active == 'login' ? 'active' : ''} data-link="login" onclick={opts.minor ? handleCallback : handleLoginBox}>Login</a>
+        <a if={stateInformation} class={opts.minor && opts.active == 'register' ? 'active' : ''} data-link="register" onclick={opts.minor ? handleCallback : handleRegisterBox}>Register</a>
     </div>
     <div class="logged" if={id}>
         <a if={!profile} class="idle">&middot; &middot; &middot;</a>
@@ -82,6 +82,11 @@
                     //Handle errors
                 }
             });
+        }
+        this.handleCallback = (event) => {
+            event.target.classList.contains('active')
+            ? opts.callback()
+            : opts.callback(event);
         }
         this.handleExit = () => {
             let self = this;

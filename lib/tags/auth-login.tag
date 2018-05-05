@@ -1,4 +1,4 @@
-<graphjs-auth-login class={'root' + (opts.minor ? '' : ' box') + (checked ? ' checked' : '')}>
+<graphjs-auth-login class={'root box' + (checked ? ' checked' : '')}>
     <div class="header" if={opts.title}>
         <div class="title">{opts.title || 'Login'}</div>
     </div>

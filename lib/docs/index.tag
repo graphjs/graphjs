@@ -205,6 +205,7 @@
                                 height: inherit;
                                 max-width: 1.5em;
                                 margin: 0;
+                                margin-right: .15em;
                                 .no-padding;
                                 & + label {
                                     float: left;
@@ -255,10 +256,16 @@
                         .kwd {
                             color: rgb(93, 60, 246);
                         }
+                        .str {
+                            word-break: break-all;
+                        }
                     }
                     & + button {
                         .background-color-states(rgb(93, 60, 246));
                     }
+                }
+                .response {
+                    padding-top: 1.5em;
                 }
             }
         }
@@ -400,7 +407,60 @@
             {"label": "showMessagesComposer", "function": "showMessagesComposer", "parent": "show"},
             {"label": "showProfile", "function": "showProfile", "parent": "show"},
             {"label": "showGroup", "function": "showGroup", "parent": "show"},
-            {"label": "showGroupCreator", "function": "showGroupCreator", "parent": "show"}
+            {"label": "showGroupCreator", "function": "showGroupCreator", "parent": "show"},
+            {"label": "Call Functions", "function": "call", "toggle": true},
+            {"label": "getActivityToken", "function": "getActivityToken", "parent": "call"},
+            {"label": "getSession", "function": "getSession", "parent": "call"},
+            {"label": "getUser", "function": "getUser", "parent": "call"},
+            {"label": "login", "function": "login", "parent": "call"},
+            {"label": "logout", "function": "logout", "parent": "call"},
+            {"label": "register", "function": "register", "parent": "call"},
+            {"label": "reset", "function": "reset", "parent": "call"},
+            //{"label": "verify", "function": "verify", "parent": "call"},
+            {"label": "addComment", "function": "addComment", "parent": "call"},
+            {"label": "getComments", "function": "getComments", "parent": "call"},
+            {"label": "removeComment", "function": "removeComment", "parent": "call"},
+            {"label": "getThread", "function": "getThread", "parent": "call"},
+            {"label": "getThreads", "function": "getThreads", "parent": "call"},
+            {"label": "removeReply", "function": "removeReply", "parent": "call"},
+            {"label": "replyThread", "function": "replyThread", "parent": "call"},
+            {"label": "startThread", "function": "startThread", "parent": "call"},
+            {"label": "createGroup", "function": "createGroup", "parent": "call"},
+            {"label": "getGroup", "function": "getGroup", "parent": "call"},
+            {"label": "joinGroup", "function": "joinGroup", "parent": "call"},
+            {"label": "leaveGroup", "function": "leaveGroup", "parent": "call"},
+            {"label": "listGroups", "function": "listGroups", "parent": "call"},
+            {"label": "listMembers", "function": "listMembers", "parent": "call"},
+            {"label": "setGroupCover", "function": "setGroupCover", "parent": "call"},
+            {"label": "setGroupDescription", "function": "setGroupDescription", "parent": "call"},
+            {"label": "setGroupTitle", "function": "setGroupTitle", "parent": "call"},
+            {"label": "follow", "function": "follow", "parent": "call"},
+            {"label": "getFollowers", "function": "getFollowers", "parent": "call"},
+            {"label": "getFollowing", "function": "getFollowing", "parent": "call"},
+            {"label": "getMembers", "function": "getMembers", "parent": "call"},
+            {"label": "unfollow", "function": "unfollow", "parent": "call"},
+            {"label": "countUnreadMessages", "function": "countUnreadMessages", "parent": "call"},
+            {"label": "getConversation", "function": "getConversation", "parent": "call"},
+            {"label": "getConversations", "function": "getConversations", "parent": "call"},
+            {"label": "getInbox", "function": "getInbox", "parent": "call"},
+            {"label": "getMessage", "function": "getMessage", "parent": "call"},
+            {"label": "getOutbox", "function": "getOutbox", "parent": "call"},
+            {"label": "sendMessage", "function": "sendMessage", "parent": "call"},
+            {"label": "getActivityToken", "function": "getActivityToken", "parent": "call"},
+            {"label": "getProfile", "function": "getProfile", "parent": "call"},
+            {"label": "listMemberships", "function": "listMemberships", "parent": "call"},
+            {"label": "setAvatar", "function": "setAvatar", "parent": "call"},
+            {"label": "setBio", "function": "setBio", "parent": "call"},
+            {"label": "setBirthday", "function": "setBirthday", "parent": "call"},
+            {"label": "setEmail", "function": "setEmail", "parent": "call"},
+            {"label": "setPassword", "function": "setPassword", "parent": "call"},
+            {"label": "setProfile", "function": "setProfile", "parent": "call"},
+            {"label": "setUsername", "function": "setUsername", "parent": "call"},
+            {"label": "star", "function": "star", "parent": "call"},
+            {"label": "getStar", "function": "getStar", "parent": "call"},
+            {"label": "getStars", "function": "getStars", "parent": "call"},
+            {"label": "getUserStars", "function": "getUserStars", "parent": "call"},
+            {"label": "removeStar", "function": "removeStar", "parent": "call"}
         ];
         //Components
         this.components = [

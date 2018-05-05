@@ -15,10 +15,13 @@ graphjs-auth-state {
             border-right: none !important;
         }
         &:hover {
-            background-color: fade(black, 5%);
+            background-color: fade(@contrast-color, 50%);
         }
         &:last-of-type {
             border-right-color: transparent;
+        }
+        &.active {
+            background-color: @contrast-color;
         }
     }
     .not-logged {
@@ -93,6 +96,9 @@ graphjs-auth-state {
             }
             &:hover {
                 background-color: fade(black, 5%);
+            }
+            &.active {
+                background-color: fade(black, 10%);
             }
         }
         .logged {

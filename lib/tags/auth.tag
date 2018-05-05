@@ -1,33 +1,32 @@
-<graphjs-auth>
+<graphjs-auth class={['topleft', 'topright', 'bottomleft', 'bottomright'].includes(opts.position) ? opts.position : ''}>
     <graphjs-auth-state
         minor={true}
         callback={changeProperties}
         type={opts.type}
         theme={opts.theme}
+        active={active}
     />
-    <div if={active} class="box">
-        <graphjs-auth-login
-            minor={true}
-            title={opts.title}
-            callback={changeProperties}
-            refresh={refreshState}
-            if={active == 'login'}
-        />
-        <graphjs-auth-register
-            minor={true}
-            title={opts.title}
-            callback={changeProperties}
-            refresh={refreshState}
-            if={active == 'register'}
-        />
-        <graphjs-auth-reset
-            minor={true}
-            title={opts.title}
-            callback={changeProperties}
-            refresh={refreshState}
-            if={active == 'reset'}
-        />
-    </div>
+    <graphjs-auth-login
+        minor={true}
+        title={opts.title}
+        callback={changeProperties}
+        refresh={refreshState}
+        if={active == 'login'}
+    />
+    <graphjs-auth-register
+        minor={true}
+        title={opts.title}
+        callback={changeProperties}
+        refresh={refreshState}
+        if={active == 'register'}
+    />
+    <graphjs-auth-reset
+        minor={true}
+        title={opts.title}
+        callback={changeProperties}
+        refresh={refreshState}
+        if={active == 'reset'}
+    />
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
