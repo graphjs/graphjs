@@ -8,29 +8,32 @@
     @text-color-normal: fade(@theme-text-color-strong, 75%);
     @text-color-weak:   fade(@theme-text-color-strong, 50%);
 
-    input, textarea {
-        color: tint(@secondary-color, 50%);
-        background-color: @contrast-color;
-        .placeholder-color(tint(@secondary-color, 50%));
-    }
-
-    form {
-        .option {
-            a {
-                color: @text-color-normal;
+    .graphjs-root {
+        color: fade(@text-color-strong, 65%);
+        * {
+            .placeholder-color(tint(@secondary-color, 50%));
+        }
+        a {
+            color: @primary-color;
+        }
+        input, textarea {
+            color: tint(@secondary-color, 50%);
+            background-color: @contrast-color;
+        }
+        form {
+            .option {
+                a {
+                    color: @text-color-normal;
+                }
             }
         }
     }
-
     .box {
         border: 1px solid fade(@secondary-color, 3%);
         background-color: @shade-color;
         .header {
             border-bottom: 2px solid fade(@secondary-color, 10%);
             background-color: @contrast-color;
-            + .warning {
-                color: @contrast-color;
-            }
         }
         .warning {
             border-bottom: 1px solid fade(@secondary-color, 15%);
@@ -39,28 +42,38 @@
             background-color: @shade-color;
         }
     }
-
-    .card {
-        background-color: @contrast-color;
-        .information {
-            p {
-                color: @text-color-normal;
-            }
+    .checked {
+        .check {
+            background-color: @shade-color;
         }
     }
-
+    .card {
+        background-color: @contrast-color;
+    }
     .credit {
         span {
             small, time {
                 color: @text-color-weak;
             }
+            a {
+                &::before {
+                    color: @text-color-weak;
+                }
+            }
         }
     }
-
     .loading {
         &:hover {
-            .placeholder {
+            .loader {
                 background-color: fade(@shade-color, 85%);
+                &.placeholder {
+                    background-color: @shade-color;
+                }
+            }
+        }
+        .loader {
+            &.placeholder {
+                background-color: @shade-color;
             }
         }
         .blockage {
@@ -73,98 +86,134 @@
             }
         }
     }
-
-    graphjs-alert {
+    .pagination {
+        .controls {
+            color: @text-color-strong;
+            background-color: fade(@secondary-color, 10%);
+            a {
+                svg {
+                    path {
+                        fill: @text-color-strong;
+                    }
+                }
+            }
+        }
+    }
+    .promo {
+        background-color: fade(@secondary-color, 85%);
+    }
+    .wallet {
+        .content {
+            & > p {
+                color: @text-color-strong;
+            }
+        }
+    }
+    graphjs-alert.graphjs-root {
         color: fade(@text-color-strong, 65%);
         background-color: @contrast-color !important;
         .content {
             background-color: @contrast-color !important;
         }
         & > button {
-            color: @primary-color !important;
-            border-color: fade(@secondary-color, 10%);
+            border-top: 2px solid fade(@secondary-color, 10%);
             background-color: @contrast-color !important;
             &:hover {
                 background-color: @contrast-color !important;
             }
             &.danger {
-                color: @danger-color !important;
                 background-color: @contrast-color;
             }
             &.half {
                 &:first-of-type {
-                    border-color: fade(@secondary-color, 10%);
+                    border-right: 1px solid fade(@secondary-color, 10%);
                 }
                 &:last-of-type {
-                    border-color: fade(@secondary-color, 10%);
+                    border-left: 1px solid fade(@secondary-color, 10%);
                 }
             }
         }
     }
-
-    graphjs-auth {
+    graphjs-auth-login.graphjs-root {
         color: fade(@text-color-strong, 65%);
     }
-
-    graphjs-auth-login {
+    graphjs-auth-register.graphjs-root {
         color: fade(@text-color-strong, 65%);
     }
-
-    graphjs-auth-register {
+    graphjs-auth-reset.graphjs-root {
         color: fade(@text-color-strong, 65%);
     }
-
-    graphjs-auth-reset {
-        color: fade(@text-color-strong, 65%);
-    }
-
-    graphjs-comments {
-        color: fade(@text-color-strong, 65%);
-        background-color: @shade-color;
-        .item {
-            .credit {
-                span {
-                    color: @text-color-normal;
-                }
-            }
-        }
-    }
-
-    graphjs-forum {
-        color: fade(@text-color-strong, 65%);
-    }
-
-    graphjs-forum-compose {
-        color: fade(@text-color-strong, 65%);
-    }
-
-    graphjs-forum-list {
-        color: fade(@text-color-strong, 65%);
+    graphjs-auth-state.graphjs-root {
+        background-color: @contrast-color;
         .content {
-            .bar {
-                .search {
-                    border-right: 2px solid @contrast-color;
+            color: fade(@text-color-strong, 65%);
+            a {
+                border-right: 1px dotted fade(@secondary-color, 20%);
+                &:hover {
+                    background-color: fade(@contrast-color, 50%);
+                }
+                &:last-of-type {
+                    border-right-color: transparent;
+                }
+                &.active {
+                    background-color: @contrast-color;
                 }
             }
-            .list {
-                .item {
-                    color: @text-color-normal;
-                    .title {
-                        color: @text-color-strong;
-                    }
-                    .views {
-                        svg {
-                            path {
-                                fill: @text-color-normal;
-                            }
+            .logged {
+                .exit {
+                    svg {
+                        path {
+                            fill: @text-color-weak;
                         }
                     }
                 }
             }
         }
     }
-
-    graphjs-forum-thread {
+    graphjs-auth.graphjs-root {
+        color: fade(@text-color-strong, 65%);
+    }
+    graphjs-comments.graphjs-root {
+        color: fade(@text-color-strong, 65%);
+        background-color: @shade-color;
+        .content {
+            .item {
+                .credit {
+                    span {
+                        color: @text-color-normal;
+                    }
+                }
+            }
+        }
+    }
+    graphjs-forum-composer.graphjs-root {
+        color: fade(@text-color-strong, 65%);
+    }
+    graphjs-forum-list.graphjs-root {
+        color: fade(@text-color-strong, 65%);
+        .content {
+            .bar {
+                .search {
+                    border-right: 2px solid @contrast-color;
+                    input {
+                        background-color: transparent;
+                    }
+                }
+            }
+            .list {
+                .item {
+                    color: @text-color-normal;
+                    &.placeholder {
+                        color: @text-color-weak;
+                    }
+                    .title {
+                        color: @text-color-strong;
+                    }
+                }
+            }
+        }
+    }
+    graphjs-forum-thread.graphjs-root {
         color: fade(@text-color-strong, 65%);
         .content {
             .thread {
@@ -186,27 +235,81 @@
             }
             .reply {
                 background-color: @contrast-color;
-                .synopsis {
-                    background-color: @contrast-color;
-                }
             }
         }
     }
-
-    graphjs-messages {
+    graphjs-forum.graphjs-root {
+        color: fade(@text-color-strong, 65%);
+    }
+    graphjs-group-card.graphjs-root {
+        .information {
+            p {
+                color: @text-color-normal;
+            }
+        }
+    }
+    graphjs-group-header.graphjs-root {
+        color: fade(@text-color-strong, 65%);
+        .information {
+            background-color: @contrast-color;
+            p {
+                color: @text-color-normal;
+            }
+        }
+        ul {
+            border-top: 2px solid fade(@secondary-color, 10%);
+        }
+    }
+    graphjs-group-settings.graphjs-root {
+        .content {
+            h2 {
+                color: @secondary-color;
+            }
+        }
+    }
+    graphjs-messages-composer.graphjs-root {
+        .content {
+            .recipient {
+                color: @text-color-strong;
+                &::before {
+                    color: @text-color-normal;
+                }
+            }
+            form {
+                background-color: @contrast-color;
+                .clearfix;
+            }
+        }
+    }
+    graphjs-messages.graphjs-root {
         color: fade(@text-color-strong, 65%);
         .content {
             .sidebar {
-                .item {
-                    border-right: 1px solid fade(@secondary-color, 15%);
-                    border-bottom: 1px solid fade(@secondary-color, 15%);
-                    &.active {
-                        background-color: @contrast-color !important;
-                    }
-                    div {
-                        color: @text-color-normal;
+                .suggestions {
+                    a {
                         b {
-                            color: @text-color-strong;
+                            color: @text-color-normal;
+                        }
+                    }
+                }
+                .list {
+                    .item {
+                        border-bottom: 1px solid fade(@secondary-color, 2.5%);
+                        &.active {
+                            background-color: @contrast-color !important;
+                        }
+                        &.unread {
+                            div {
+                                b {
+                                    color: @primary-color;
+                                }
+                            }
+                        }
+                        div {
+                            color: @text-color-normal;
+                            b {
+                                color: @text-color-strong;
+                            }
                         }
                     }
                 }
@@ -229,21 +332,35 @@
             }
         }
     }
-
-    graphjs-overlay {
+    graphjs-overlay.graphjs-root {
         color: fade(@text-color-strong, 65%);
     }
-
-    graphjs-profile-card {
-        color: fade(@text-color-strong, 65%);
-        .information {
-            img {
-                border: 4px solid fade(@secondary-color, 15%);
+    graphjs-profile-activity.graphjs-root {
+        .content {
+            ul {
+                li {
+                    border-left: 2px dotted fade(@text-color-normal, 35%);
+                    div {
+                        time {
+                            color: @text-color-weak;
+                        }
+                    }
+                }
             }
         }
     }
-
-    graphjs-profile-header {
+    graphjs-profile-card.graphjs-root {
+        color: fade(@text-color-strong, 65%);
+        .information {
+            img {
+                border-color: fade(@secondary-color, 15%);
+            }
+            p {
+                color: @text-color-normal;
+            }
+        }
+    }
+    graphjs-profile-header.graphjs-root {
         color: fade(@text-color-strong, 65%);
         .information {
             background-color: @contrast-color;
@@ -254,80 +371,139 @@
                 color: @text-color-normal;
             }
         }
-    }
-
-    graphjs-group-card {
-        color: fade(@text-color-strong, 65%);
-    }
-
-    graphjs-auth-state {
-        color: fade(@text-color-strong, 65%);
-        background-color: @contrast-color;
-        a {
-            border-right: 1px dotted fade(@secondary-color, 20%);
+        ul {
+            border-top: 2px solid fade(@secondary-color, 10%);
         }
-        .logged {
-            .exit {
-                svg {
-                    path {
-                        fill: @text-color-weak;
-                    }
-                }
-            }
-        }
-        &.color {
-            a {
-                border-right: 1px dotted fade(white, 20%);
-            }
-            background-color: @primary-color;
-            .logged {
-                .exit {
-                    svg {
-                        path {
-                            fill: white;
-                        }
-                    }
-                }
+    }
+    graphjs-profile-settings.graphjs-root {
+        .content {
+            h2 {
+                color: @secondary-color;
             }
         }
     }
-
-    graphjs-star-button {
+    graphjs-star-button.graphjs-root {
         color: @text-color-normal;
         &:hover {
             background-color: @contrast-color;
         }
-        a {
-            .text {
-                color: @text-color-normal;
+        .content {
+            a {
+                .text {
+                    color: @text-color-normal;
+                }
             }
         }
     }
-
-    graphjs-star-list {
+    graphjs-star-list.graphjs-root {
         color: fade(@text-color-strong, 65%);
         .content {
             .list {
                 .item {
                     color: @text-color-normal;
-                    &:hover {
-                        background-color: fade(@primary-color, 5%);
-                    }
                     &.placeholder {
                         color: @text-color-weak;
-                    }
-                    .count {
-                        svg {
-                            path {
-                                fill: @text-color-normal;
-                            }
-                        }
                     }
                     .title {
                         color: @text-color-strong;
                     }
-                    .remove {
-                        .text-color-states(@danger-color);
+                }
+            }
+            .controls {
+                color: @text-color-strong;
+                background-color: fade(@secondary-color, 10%);
+                a {
+                    svg {
+                        path {
+                            fill: @text-color-strong;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Responsive
+
+    /* Window Width < 480 */
+    @media only screen and (max-width: 479px) {
+        graphjs-group-header.graphjs-root {
+            .information {
+                .members {
+                    img, span {
+                        border: 2px solid @contrast-color;
+                    }
+                }
+            }
+            ul {
+                li {
+                    &.active {
+                        background-color: @contrast-color;
+                    }
+                    a {
+                        &.count, &.label {
+                            &::after {
+                                color: @text-color-weak;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        graphjs-profile-header.graphjs-root {
+            ul {
+                li {
+                    &.active {
+                        background-color: @contrast-color;
+                    }
+                    a {
+                        &.count{
+                            &::after {
+                                color: @text-color-weak;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /* 480 ≤ Window Width < 768 */
+    @media only screen and (min-width: 480px) and (max-width: 767px) {
+        graphjs-group-header.graphjs-root {
+            .information {
+                .members {
+                    img, span {
+                        border: 2px solid @contrast-color;
+                    }
+                }
+            }
+            ul {
+                li {
+                    &.active {
+                        background-color: @contrast-color;
+                    }
+                    a {
+                        &.count, &.label {
+                            &::after {
+                                color: @text-color-weak;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        graphjs-profile-header.graphjs-root {
+            ul {
+                li {
+                    &.active {
+                        background-color: @contrast-color;
+                    }
+                    a {
+                        &.count {
+                            &::after {
+                                color: @text-color-weak;
+                            }
+                        }
                     }
                 }
             }

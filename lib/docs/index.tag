@@ -77,13 +77,13 @@
                         text-shadow: .1em .1em .1em rgba(0, 0, 0, .1);
                     }
                     a {
-                        color: white;
+                        color: white !important;
                         font-size: 14px !important;
                         line-height: 175%;
                         display: inline-block;
                         width: 100%;
                         &.active {
-                            color: yellow;
+                            color: yellow !important;
                         }
                         &.toggle {
                             margin-left: -1.25em;
@@ -257,11 +257,12 @@
                             color: rgb(93, 60, 246);
                         }
                         .str {
+                            color: @text-color-normal;
                             word-break: break-all;
                         }
                     }
                     & + button {
-                        .background-color-states(rgb(93, 60, 246));
+                        .background-color-states(rgb(93, 60, 246)) !important;
                     }
                 }
                 .response {
