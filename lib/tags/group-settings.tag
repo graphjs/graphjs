@@ -1,4 +1,4 @@
-<graphjs-group-settings class="box">
+<graphjs-group-settings class="graphjs-root box">
     <div class="warning" if={failMessages.length > 0 || successMessages.length > 0}>
         <ul if={failMessages.length > 0} class="fail">
             <li each={failMessage in failMessages}>{failMessage}</li>

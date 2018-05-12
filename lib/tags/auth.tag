@@ -1,4 +1,4 @@
-<graphjs-auth class={['topleft', 'topright', 'bottomleft', 'bottomright'].includes(opts.position) ? opts.position : ''}>
+<graphjs-auth class={'graphjs-root' + (['topleft', 'topright', 'bottomleft', 'bottomright'].includes(opts.position) ? ' ' + opts.position : '')}>
     <graphjs-auth-state
         minor={true}
         callback={changeProperties}

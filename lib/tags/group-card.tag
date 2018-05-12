@@ -1,4 +1,4 @@
-<graphjs-group-card class={'card box' + (loaded ? '' : ' loading')}>
+<graphjs-group-card class={'graphjs-root card box' + (loaded ? '' : ' loading')}>
     <div class="information" if={group}>
         <img src={group.cover || 'lib/images/covers/group.png'} />
         <a data-link="group" data-id={id} onclick={handleShow} if={group}>{group.title}</a>

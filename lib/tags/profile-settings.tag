@@ -1,4 +1,4 @@
-<graphjs-profile-settings class="box">
+<graphjs-profile-settings class="graphjs-root box">
     <div class="warning" if={failMessages.length > 0 || successMessages.length > 0}>
         <ul if={failMessages.length > 0} class="fail">
             <li each={failMessage in failMessages}>{failMessage}</li>

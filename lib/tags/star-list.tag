@@ -1,4 +1,4 @@
-<graphjs-star-list class="root box" style={
+<graphjs-star-list class="graphjs-root box" style={
     (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
     (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
     (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +

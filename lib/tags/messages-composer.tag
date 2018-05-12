@@ -1,4 +1,4 @@
-<graphjs-messages-composer class={'root box' + (checked ? ' checked' : '')}>
+<graphjs-messages-composer class={'graphjs-root box' + (checked ? ' checked' : '')}>
     <div class="header">
         <div class="title">Send Message</div>
         <a class="option right" onclick={handleOverlay}>

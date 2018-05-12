@@ -1,105 +1,105 @@
 // Elements
 
-* {
-    .box-sizing(border-box);
-    .placeholder-color(tint(@secondary-color, 50%));
-}
-body {
+.graphjs-root {
     font-size: @font-size-default;
     line-height: @font-size-default;
     color: fade(@text-color-strong, 65%);
     .regular-font;
     letter-spacing: -.0075em;
-}
-a {
-    cursor: pointer;
-    color: @primary-color;
-    text-decoration: none;
-}
-b {
-    .bold-font;
-}
-svg {
-    pointer-events: none;
-}
-input, textarea, button {
-    width: 100%;
-    padding: .75em 1em;
-    border: none;
-    .border-radius(@border-radius-small);
-    outline: none;
-}
-input, textarea {
-    color: tint(@secondary-color, 50%);
-    .regular-font;
-    font-size: @font-size-default;
-    line-height: @font-size-default;
-    border: 1px solid fade(black, 10%);
-    background-color: @contrast-color;
-}
-textarea {
-    resize: none;
-}
-button {
-    cursor: pointer;
-    font-size: @font-size-default * 1.1;
-    color: white;
-    .heavy-font;
-    .single-line-text;
-    text-transform: uppercase;
-    .transition(background-color .35s ease);
-    //.background-color-states(@primary-color);
-    .background-color-states(@button-color);
-    &[disabled] {
-        opacity: .5;
+    * {
+        .box-sizing(border-box);
+        .placeholder-color(tint(@secondary-color, 50%));
     }
-    &.danger {
-        .background-color-states(@danger-color);
+    a {
+        cursor: pointer;
+        color: @primary-color;
+        text-decoration: none;
     }
-    &.loading {
-        background-image: linear-gradient(-45deg, transparent 25%, rgba(0, 0, 0, .1) 25%, rgba(0, 0, 0, .1) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, .1) 75%);
-        background-size: 50px 50px;
-        .animation(loading-stripes 10s infinite linear);
+    b {
+        .bold-font;
     }
-}
-form {
+    svg {
+        pointer-events: none;
+    }
+    input, textarea, button {
+        width: 100%;
+        padding: .75em 1em;
+        border: none;
+        .border-radius(@border-radius-small);
+        outline: none;
+    }
     input, textarea {
-        position: relative;
-        margin-bottom: .5em;
-        .transition(border-color .35s ease);
-        &.error {
-            border-color: @danger-color;
-            .animation(error-shake normal .35s ease-in-out);
+        color: tint(@secondary-color, 50%);
+        .regular-font;
+        font-size: @font-size-default;
+        line-height: @font-size-default;
+        border: 1px solid fade(black, 10%);
+        background-color: @contrast-color;
+    }
+    textarea {
+        resize: none;
+    }
+    button {
+        cursor: pointer;
+        font-size: @font-size-default * 1.1;
+        color: white;
+        .heavy-font;
+        .single-line-text;
+        text-transform: uppercase;
+        .transition(background-color .35s ease);
+        //.background-color-states(@primary-color);
+        .background-color-states(@button-color);
+        &[disabled] {
+            opacity: .5;
         }
-        & + button {
-            margin-top: .25em;
+        &.danger {
+            .background-color-states(@danger-color);
+        }
+        &.loading {
+            background-image: linear-gradient(-45deg, transparent 25%, rgba(0, 0, 0, .1) 25%, rgba(0, 0, 0, .1) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, .1) 75%);
+            background-size: 50px 50px;
+            .animation(loading-stripes 10s infinite linear);
         }
     }
-    .option {
-        display: block;
-        height: 3.3em;
-        margin-bottom: -2em;
-        a {
-            display: inline-block;
-            float: left;
-            opacity: 1;
-            color: @text-color-normal;
-            font-size: .9em;
-            line-height: 3.3em / .9;
-            text-align: center;
-            .transition(opacity .35s ease);
-            &:hover {
-                opacity: .75;
+    form {
+        input, textarea {
+            position: relative;
+            margin-bottom: .5em;
+            .transition(border-color .35s ease);
+            &.error {
+                border-color: @danger-color;
+                .animation(error-shake normal .35s ease-in-out);
+            }
+            & + button {
+                margin-top: .25em;
             }
         }
-        &.single {
+        .option {
+            display: block;
+            height: 3.3em;
+            margin-bottom: -2em;
             a {
-                width: 100%;
+                display: inline-block;
+                float: left;
+                opacity: 1;
+                color: @text-color-normal;
+                font-size: .9em;
+                line-height: 3.3em / .9;
+                text-align: center;
+                .transition(opacity .35s ease);
+                &:hover {
+                    opacity: .75;
+                }
             }
-        }
-        &.double {
-            a {
-                width: 50%;
+            &.single {
+                a {
+                    width: 100%;
+                }
+            }
+            &.double {
+                a {
+                    width: 50%;
+                }
             }
         }
     }
@@ -109,154 +109,154 @@ form {
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    body {
+    .graphjs-root {
         font-size: @font-size-xsmall;
         line-height: @font-size-xsmall;
-    }
-    input, textarea {
-        font-size: @font-size-xsmall;
-        line-height: @font-size-xsmall;
-    }
-    button {
-        font-size: @font-size-xsmall * 1.1;
-        &.loading {
-            background-size: (@font-size-xsmall * 2.6) (@font-size-xsmall * 2.6);
+        input, textarea {
+            font-size: @font-size-xsmall;
+            line-height: @font-size-xsmall;
         }
-    }
-    form {
-        .option {
-            margin-bottom: -1em;
+        button {
+            font-size: @font-size-xsmall * 1.1;
+            &.loading {
+                background-size: (@font-size-xsmall * 2.6) (@font-size-xsmall * 2.6);
+            }
+        }
+        form {
+            .option {
+                margin-bottom: -1em;
+            }
         }
     }
 }
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    body {
+    .graphjs-root {
         font-size: @font-size-xsmall;
         line-height: @font-size-xsmall;
-    }
-    input, textarea {
-        font-size: @font-size-xsmall;
-        line-height: @font-size-xsmall;
-    }
-    button {
-        font-size: @font-size-xsmall * 1.1;
-        &.loading {
-            background-size: (@font-size-xsmall * 2.6) (@font-size-xsmall * 2.6);
+        input, textarea {
+            font-size: @font-size-xsmall;
+            line-height: @font-size-xsmall;
         }
-    }
-    form {
-        .option {
-            margin-bottom: -1em;
+        button {
+            font-size: @font-size-xsmall * 1.1;
+            &.loading {
+                background-size: (@font-size-xsmall * 2.6) (@font-size-xsmall * 2.6);
+            }
+        }
+        form {
+            .option {
+                margin-bottom: -1em;
+            }
         }
     }
 }
 
 /* 768 ≤ Window Width < 1024 */
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
-    body {
+    .graphjs-root {
         font-size: @font-size-small;
         line-height: @font-size-small;
-    }
-    input, textarea {
-        font-size: @font-size-small;
-        line-height: @font-size-small;
-    }
-    button {
-        font-size: @font-size-small * 1.1;
-        &.loading {
-            background-size: (@font-size-small * 2.6) (@font-size-small * 2.6);
+        input, textarea {
+            font-size: @font-size-small;
+            line-height: @font-size-small;
+        }
+        button {
+            font-size: @font-size-small * 1.1;
+            &.loading {
+                background-size: (@font-size-small * 2.6) (@font-size-small * 2.6);
+            }
         }
     }
 }
 
 /* 1024 ≤ Window Width < 1152 */
 @media only screen and (min-width: 1024px) and (max-width: 1151px) {
-    body {
+    .graphjs-root {
         font-size: @font-size-medium;
         line-height: @font-size-medium;
-    }
-    input, textarea {
-        font-size: @font-size-medium;
-        line-height: @font-size-medium;
-    }
-    button {
-        font-size: @font-size-medium * 1.1;
-        &.loading {
-            background-size: (@font-size-medium * 2.6) (@font-size-medium * 2.6);
+        input, textarea {
+            font-size: @font-size-medium;
+            line-height: @font-size-medium;
+        }
+        button {
+            font-size: @font-size-medium * 1.1;
+            &.loading {
+                background-size: (@font-size-medium * 2.6) (@font-size-medium * 2.6);
+            }
         }
     }
 }
 
 /* 1152 ≤ Window Width < 1280 */
 @media only screen and (min-width: 1152px) and (max-width: 1280px) {
-    body {
+    .graphjs-root {
         font-size: @font-size-medium;
         line-height: @font-size-medium;
-    }
-    input, textarea {
-        font-size: @font-size-medium;
-        line-height: @font-size-medium;
-    }
-    button {
-        font-size: @font-size-medium * 1.1;
-        &.loading {
-            background-size: (@font-size-medium * 2.6) (@font-size-medium * 2.6);
+        input, textarea {
+            font-size: @font-size-medium;
+            line-height: @font-size-medium;
+        }
+        button {
+            font-size: @font-size-medium * 1.1;
+            &.loading {
+                background-size: (@font-size-medium * 2.6) (@font-size-medium * 2.6);
+            }
         }
     }
 }
 
 /* 1280 ≤ Window Width < 1440 */
 @media only screen and (min-width: 1280px) and (max-width: 1439px) {
-    body {
+    .graphjs-root {
         font-size: @font-size-large;
         line-height: @font-size-large;
-    }
-    input, textarea {
-        font-size: @font-size-large;
-        line-height: @font-size-large;
-    }
-    button {
-        font-size: @font-size-large * 1.1;
-        &.loading {
-            background-size: (@font-size-large * 2.6) (@font-size-large * 2.6);
+        input, textarea {
+            font-size: @font-size-large;
+            line-height: @font-size-large;
+        }
+        button {
+            font-size: @font-size-large * 1.1;
+            &.loading {
+                background-size: (@font-size-large * 2.6) (@font-size-large * 2.6);
+            }
         }
     }
 }
 
 /* 1440 ≤ Window Width < 1680 */
 @media only screen and (min-width: 1440px) and (max-width: 1679px) {
-    body {
+    .graphjs-root {
         font-size: @font-size-large;
         line-height: @font-size-large;
-    }
-    input, textarea {
-        font-size: @font-size-large;
-        line-height: @font-size-large;
-    }
-    button {
-        font-size: @font-size-large * 1.1;
-        &.loading {
-            background-size: (@font-size-large * 2.6) (@font-size-large * 2.6);
+        input, textarea {
+            font-size: @font-size-large;
+            line-height: @font-size-large;
+        }
+        button {
+            font-size: @font-size-large * 1.1;
+            &.loading {
+                background-size: (@font-size-large * 2.6) (@font-size-large * 2.6);
+            }
         }
     }
 }
 
 /* 1680 ≤ Window Width */
 @media only screen and (min-width: 1680px) {
-    body {
+    .graphjs-root {
         font-size: @font-size-xlarge;
         line-height: @font-size-xlarge;
-    }
-    input, textarea {
-        font-size: @font-size-xlarge;
-        line-height: @font-size-xlarge;
-    }
-    button {
-        font-size: @font-size-xlarge * 1.1;
-        &.loading {
-            background-size: (@font-size-xlarge * 2.6) (@font-size-xlarge * 2.6);
+        input, textarea {
+            font-size: @font-size-xlarge;
+            line-height: @font-size-xlarge;
+        }
+        button {
+            font-size: @font-size-xlarge * 1.1;
+            &.loading {
+                background-size: (@font-size-xlarge * 2.6) (@font-size-xlarge * 2.6);
+            }
         }
     }
 }

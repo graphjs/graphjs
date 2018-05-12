@@ -1,11 +1,11 @@
-graphjs-auth {
+graphjs-auth.graphjs-root {
     overflow: visible;
     display: inline-block;
     position: relative;
     width: auto;
     color: fade(@text-color-strong, 65%);
     &.topleft {
-        graphjs-auth-state {
+        graphjs-auth-state.graphjs-root {
             & + * {
                 top: 65px;
                 left: 0;
@@ -13,7 +13,7 @@ graphjs-auth {
         }
     }
     &.topright {
-        graphjs-auth-state {
+        graphjs-auth-state.graphjs-root {
             & + * {
                 top: 65px;
                 right: 0;
@@ -21,7 +21,7 @@ graphjs-auth {
         }
     }
     &.bottomleft {
-        graphjs-auth-state {
+        graphjs-auth-state.graphjs-root {
             & + * {
                 top: -15px;
                 left: 0;
@@ -30,7 +30,7 @@ graphjs-auth {
         }
     }
     &.bottomright {
-        graphjs-auth-state {
+        graphjs-auth-state.graphjs-root {
             & + * {
                 top: -15px;
                 right: 0;
@@ -38,7 +38,7 @@ graphjs-auth {
             }
         }
     }
-    graphjs-auth-state {
+    graphjs-auth-state.graphjs-root {
         & + * {
             position: absolute !important;
             z-index: 9;

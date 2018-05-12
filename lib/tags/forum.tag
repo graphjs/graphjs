@@ -1,5 +1,5 @@
 <graphjs-forum
-    class="box"
+    class="graphjs-root box"
     style={
         (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
         (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +

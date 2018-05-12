@@ -1,4 +1,4 @@
-<graphjs-group class="root">
+<graphjs-group class="graphjs-root">
     <graphjs-group-header
         id={opts.id}
         active={active}

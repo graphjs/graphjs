@@ -1,4 +1,4 @@
-<graphjs-profile-following class="wallet">
+<graphjs-profile-following class="graphjs-root wallet">
     <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
         <p if={empty}>This user is not following any users.</p>
         <graphjs-profile-card each={id in list} id={id}></graphjs-profile-card>

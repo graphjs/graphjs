@@ -1,4 +1,4 @@
-<graphjs-list class="wallet">
+<graphjs-list class="graphjs-root wallet">
     <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
         <graphjs-profile-card if={content == 'users'} each={id in list} id={id}></graphjs-profile-card>
         <graphjs-profile-card if={content == 'users' && list.length == 0}></graphjs-profile-card>

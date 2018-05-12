@@ -1,4 +1,4 @@
-<graphjs-group-header class={'box' + (loaded ? '' : ' loading')}>
+<graphjs-group-header class={'graphjs-root box' + (loaded ? '' : ' loading')}>
     <div class="information" if={group}>
         <div class="cover" style={'background-image: url(' + (group && group.cover ? group.cover : 'lib/images/covers/group.png') + ');'}></div>
         <a>{group.title}</a>

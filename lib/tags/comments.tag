@@ -1,4 +1,4 @@
-<graphjs-comments class="root box" style={
+<graphjs-comments class="graphjs-root box" style={
     (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
     (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
     (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
