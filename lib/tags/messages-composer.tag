@@ -38,6 +38,7 @@
         import getProfile from '../scripts/getProfile.js';
         import sendMessage from '../scripts/sendMessage.js';
         import hideOverlay from '../scripts/hideOverlay.js';
+        import showLogin from '../scripts/showLogin.js';
 
         this.recipient = opts.to;
         this.loaded = false;
