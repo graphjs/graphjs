@@ -14,7 +14,7 @@
         <form>
             <textarea ref="message" placeholder="Write your message here..."></textarea>
             <button onclick={handleMessage}>Send Message</button>
-            <button onclick={handleClear} class="danger">Clear</button>
+            <button if={opts.clearEnabled||clearEnabled} onclick={handleClear} class="danger">Clear</button>
         </form>
         <div if={!loaded && !blocked} class="inline loader">
             <img src="lib/images/animations/loading-dots.gif">
@@ -42,6 +42,7 @@
 
         this.recipient = opts.to;
         this.loaded = false;
+        this.clearEnabled = false;
 
         this.on('before-mount', function() {
             this.handleUser();
