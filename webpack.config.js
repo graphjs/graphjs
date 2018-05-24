@@ -6,9 +6,9 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 module.exports = {
     entry: './lib/app.js',
     output: {
-        library: "Pho",
+        library: "GraphJS",
         libraryTarget: "window",
-        filename: "pho.js",
+        filename: "dist/graph.js",
         publicPath: "",
         auxiliaryComment: "Test Comment"
     },
