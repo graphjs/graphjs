@@ -1,13 +1,13 @@
-<graphjs-alert class="graphjs-root box">
-    <div class="header" if={opts.title}>
-        <div class="title">{opts.title}</div>
+<graphjs-alert class="graphjs-root graphjs-box">
+    <div class="graphjs-header" if={opts.title}>
+        <div class="graphjs-title">{opts.title}</div>
     </div>
-    <div class="content">
+    <div class="graphjs-content">
         <p>{opts.message}</p>
     </div>
     <button if={opts.affirmative == undefined || opts.affirmative == ''} onclick={handleButton}>Done</button>
     <button ref="custom" if={opts.affirmative} onclick={handleButton}>{opts.affirmative}</button>
-    <button if={opts.affirmative && opts.negative} onclick={handleButton} class="danger">{opts.negative}</button>
+    <button if={opts.affirmative && opts.negative} onclick={handleButton} class="graphjs-danger">{opts.negative}</button>
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
@@ -44,7 +44,7 @@
         }
         this.on('mount', function() {
             let buttonList = this.root.getElementsByTagName('button');
-            let buttonClass = buttonList.length > 1 ? 'half' : 'full';
+            let buttonClass = buttonList.length > 1 ? 'graphjs-half' : 'graphjs-full';
             for(let i=0; i<buttonList.length; i++) {
                 buttonList[i].classList.add(buttonClass);
             }

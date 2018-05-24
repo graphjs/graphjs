@@ -1,8 +1,10 @@
-graphjs-messages.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-messages.@{prefix}-root {
     display: block;
     color: fade(@text-color-strong, 65%);
     .regular-font;
-    .content {
+    .@{prefix}-content {
         height: 36em;
         max-height: 36em;
         .no-padding !important;
@@ -10,7 +12,7 @@ graphjs-messages.graphjs-root {
         & > * {
             float: left;
         }
-        .sidebar {
+        .@{prefix}-sidebar {
             overflow-y: scroll;
             width: 15em;
             height: 100%;
@@ -30,7 +32,7 @@ graphjs-messages.graphjs-root {
                 background-color: @primary-color;
                 .transition(height .35s ease);
                 .placeholder-color(fade(white, 75%));
-                &.hidden {
+                &.@{prefix}-hidden {
                     height: 0;
                     .placeholder-color(transparent);
                 }
@@ -39,7 +41,7 @@ graphjs-messages.graphjs-root {
                     .transition(all .35s ease);
                 }
             }
-            .suggestions {
+            .@{prefix}-suggestions {
                 max-height: 17.5em;
                 overflow-y: scroll;
                 background-color: fade(black, 7.5%);
@@ -69,8 +71,8 @@ graphjs-messages.graphjs-root {
                     }
                 }
             }
-            .list {
-                .item {
+            .@{prefix}-list {
+                .@{prefix}-item {
                     display: block;
                     width: 100%;
                     height: 4.5em;
@@ -85,7 +87,7 @@ graphjs-messages.graphjs-root {
                     &:last-child {
                         border-bottom: none;
                     }
-                    &.unread {
+                    &.@{prefix}-unread {
                         background-color: fade(@primary-color, 10%);
                         div {
                             b {
@@ -94,7 +96,7 @@ graphjs-messages.graphjs-root {
                             color: tint(desaturate(@primary-color, 40%), 20%);
                         }
                     }
-                    &.active {
+                    &.@{prefix}-active {
                         border-right: none;
                         background-color: @contrast-color !important;
                         .box-shadow(0px 0px 5px 0px fade(black, 7.5%));
@@ -129,25 +131,25 @@ graphjs-messages.graphjs-root {
                 }
             }
         }
-        .main {
+        .@{prefix}-main {
             overflow-y: scroll;
             position: relative;
             width: calc(100% - 15em);
             height: 100%;
             background-color: @contrast-color;
-            .conversation {
+            .@{prefix}-conversation {
                 overflow: scroll;
                 width: 100%;
                 height: calc(100% - 6.5em);
                 padding: 2em;
-                .item {
+                .@{prefix}-item {
                     width: 90%;
                     height: auto;
                     margin-bottom: .5em;
                     &:last-of-type {
                         margin-bottom: 0;
                     }
-                    &.inbound {
+                    &.@{prefix}-inbound {
                         margin-right: 10%;
                         div {
                             text-align: left;
@@ -160,7 +162,7 @@ graphjs-messages.graphjs-root {
                             text-align: left;
                         }
                     }
-                    &.outbound {
+                    &.@{prefix}-outbound {
                         margin-left: 10%;
                         div {
                             text-align: right;
@@ -194,7 +196,7 @@ graphjs-messages.graphjs-root {
                         color: @text-color-weak;
                         font-size: .85em;
                         line-height: .85em;
-                        &.error {
+                        &.@{prefix}-error {
                             color: @danger-color;
                         }
                     }
@@ -215,14 +217,14 @@ graphjs-messages.graphjs-root {
         }
     }
     /* Placeholder */
-    .placeholder {
+    .@{prefix}-placeholder {
         .clearfix;
         & > * {
             float: left;
         }
-        .left {
+        .@{prefix}-left {
             width: 15em;
-            .user {
+            .@{prefix}-user {
                 display: block;
                 width: 100%;
                 height: calc(4.5em - 1px);
@@ -232,18 +234,18 @@ graphjs-messages.graphjs-root {
                 & > * {
                     float: left;
                 }
-                .avatar {
+                .@{prefix}-avatar {
                     display: block;
                     width: 3em;
                     height: 3em;
                 }
-                .information {
+                .@{prefix}-information {
                     display: block;
                     width: 10em;
                     height: 3em;
                     margin-left: .75em;
                     padding: .35em 0;
-                    .line {
+                    .@{prefix}-line {
                         height: .5em;
                         margin-bottom: .4em;
                         .border-radius(calc(.5em / 2));
@@ -258,25 +260,25 @@ graphjs-messages.graphjs-root {
                 }
             }
         }
-        .right {
+        .@{prefix}-right {
             width: calc(100% - 15em - 1px);
             height: 100%;
             padding: 2em;
-            .message {
+            .@{prefix}-message {
                 width: 60%;
                 height: 4em;
                 margin-bottom: 1em;
                 &:nth-child(even) {
                     margin-left: 40%;
-                    .time {
+                    .@{prefix}-time {
                         margin-left: 80%;
                     }
                 }
-                .text {
+                .@{prefix}-text {
                     height: 3em;
                     .border-radius(calc(1em / 2));
                 }
-                .time {
+                .@{prefix}-time {
                     width: 20%;
                     height: .5em;
                     margin-top: .5em;
@@ -291,10 +293,10 @@ graphjs-messages.graphjs-root {
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    graphjs-messages.graphjs-root {
-        .content {
+    @{prefix}-messages.@{prefix}-root {
+        .@{prefix}-content {
             height: 36em;
-            .sidebar {
+            .@{prefix}-sidebar {
                 width: 4.5em;
                 input {
                     position: absolute;
@@ -303,7 +305,7 @@ graphjs-messages.graphjs-root {
                     left: 0;
                     .box-shadow(0 4px 2px -2px fade(black, 25%));
                 }
-                .suggestions {
+                .@{prefix}-suggestions {
                     position: absolute;
                     z-index: 2;
                     top: 7em;
@@ -313,7 +315,7 @@ graphjs-messages.graphjs-root {
                         background-color: @shade-color;
                     }
                 }
-                .list {
+                .@{prefix}-list {
                     .item {
                         div {
                             display: none;
@@ -321,17 +323,17 @@ graphjs-messages.graphjs-root {
                     }
                 }
             }
-            .main {
+            .@{prefix}-main {
                 width: calc(100% - 4.5em);
-                .conversation {
+                .@{prefix}-conversation {
                     height: calc(100% - 5em);
                     padding: 1em;
-                    .item {
+                    .@{prefix}-item {
                         width: 95%;
-                        &.inbound {
+                        &.@{prefix}-inbound {
                             margin-right: 5%;
                         }
-                        &.outbound {
+                        &.@{prefix}-outbound {
                             margin-left: 5%;
                         }
                     }
@@ -344,19 +346,19 @@ graphjs-messages.graphjs-root {
         }
     }
     /* Placeholder */
-    .placeholder {
-        .left {
+    .@{prefix}-placeholder {
+        .@{prefix}-left {
             width: 4.5em;
-            .user {
-                .information {
+            .@{prefix}-user {
+                .@{prefix}-information {
                     display: none;
                 }
             }
         }
-        .right {
+        .@{prefix}-right {
             width: calc(100% - 4.5em - 1px);
             padding: 1em;
-            .message {
+            .@{prefix}-message {
                 width: 95%;
                 &:nth-child(even) {
                     margin-left: 5%;
@@ -368,29 +370,29 @@ graphjs-messages.graphjs-root {
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    graphjs-messages.graphjs-root {
-        .content {
+    @{prefix}-messages.@{prefix}-root {
+        .@{prefix}-content {
             height: 36em;
-            .sidebar {
+            .@{prefix}-sidebar {
                 width: 12.5em;
-                .list {
-                    .item {
+                .@{prefix}-list {
+                    .@{prefix}-item {
                         div {
                             width: 7.5em / .9;
                         }
                     }
                 }
             }
-            .main {
+            .@{prefix}-main {
                 width: calc(100% - 12.5em);
-                .conversation {
+                .@{prefix}-conversation {
                     padding: 1.5em;
-                    .item {
+                    .@{prefix}-item {
                         width: 95%;
-                        &.inbound {
+                        &.@{prefix}-inbound {
                             margin-right: 5%;
                         }
-                        &.outbound {
+                        &.@{prefix}-outbound {
                             margin-left: 5%;
                         }
                     }
@@ -398,19 +400,19 @@ graphjs-messages.graphjs-root {
             }
         }
         /* Placeholder */
-        .placeholder {
-            .left {
+        .@{prefix}-placeholder {
+            .@{prefix}-left {
                 width: 12.5em;
-                .user {
-                    .information {
+                .@{prefix}-user {
+                    .@{prefix}-information {
                         width: 7em;
                     }
                 }
             }
-            .right {
+            .@{prefix}-right {
                 width: calc(100% - 12.5em - 1px);
                 padding: 1.5em;
-                .message {
+                .@{prefix}-message {
                     width: 95%;
                     &:nth-child(even) {
                         margin-left: 5%;

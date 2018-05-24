@@ -1,11 +1,13 @@
-.wallet {
+@prefix: graphjs;
+
+.@{prefix}-wallet {
     display: block;
     width: auto;
     margin-top: .75em;
     margin-left: -.75em;
     margin-right: -.75em;
     .clearfix;
-    .content {
+    .@{prefix}-content {
         .clearfix;
         & > * {
             float: left;
@@ -27,11 +29,11 @@
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    .wallet {
+    .@{prefix}-wallet {
         margin-top: .25em;
         margin-left: -.25em;
         margin-right: -.25em;
-        .content {
+        .@{prefix}-content {
             & > * {
                 margin: .25em;
             }
@@ -44,11 +46,11 @@
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    .wallet {
+    .@{prefix}-wallet {
         margin-top: .25em;
         margin-left: -.25em;
         margin-right: -.25em;
-        .content {
+        .@{prefix}-content {
             & > * {
                 margin: .25em;
             }

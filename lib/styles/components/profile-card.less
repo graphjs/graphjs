@@ -1,8 +1,10 @@
-graphjs-profile-card.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-profile-card.@{prefix}-root {
     display: block;
     height: 18em;
     color: fade(@text-color-strong, 65%);
-    .option {
+    .@{prefix}-option {
         display: inline-block;
         position: absolute;
         width: 3.75em;
@@ -10,11 +12,11 @@ graphjs-profile-card.graphjs-root {
         padding: 1em;
         text-align: center;
         .icon-color-states(@primary-color);
-        &.left {
+        &.@{prefix}-left {
             top: 0;
             left: 0;
         }
-        &.right {
+        &.@{prefix}-right {
             top: 0;
             right: 0;
         }
@@ -29,7 +31,7 @@ graphjs-profile-card.graphjs-root {
             }
         }
     }
-    .information {
+    .@{prefix}-information {
         padding-top: 2em;
         img {
             width: 6.5em;
@@ -65,34 +67,34 @@ graphjs-profile-card.graphjs-root {
             line-height: 1.25em;
         }
     }
-    &.color {
-        .option {
+    &.@{prefix}-color {
+        .@{prefix}-option {
             svg {
                 path {
                     fill: white;
                 }
             }
         }
-        .information {
+        .@{prefix}-information {
             img {
                 border: 4px solid white;
             }
         }
     }
     /* Placeholder */
-    .placeholder {
-        .information {
+    .@{prefix}-placeholder {
+        .@{prefix}-information {
             display: inline-block;
             width: 100%;
             height: 15em;
             padding-top: 2em;
-            .avatar {
+            .@{prefix}-avatar {
                 display: inline-block;
                 width: 6.5em;
                 height: 6.5em;
                 margin: 0 auto;
             }
-            .title {
+            .@{prefix}-title {
                 display: inline-block;
                 width: 60%;
                 height: 1em;
@@ -101,21 +103,21 @@ graphjs-profile-card.graphjs-root {
                 margin-bottom: .25em;
                 .border-radius(calc(1em / 2));
             }
-            .description {
+            .@{prefix}-description {
                 display: inline-block;
                 width: 90%;
                 height: 2.5em;
                 margin: 0 5%;
                 margin-top: 1em;
                 padding: .1em 0;
-                .line {
+                .@{prefix}-line {
                     height: .85em;
                     margin-bottom: .3em;
                     .border-radius(calc(.85em / 2));
                 }
             }
         }
-        .button {
+        .@{prefix}-button {
             display: inline-block;
             position: absolute;
             bottom: 0;
@@ -131,9 +133,9 @@ graphjs-profile-card.graphjs-root {
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    graphjs-profile-card.graphjs-root {
+    @{prefix}-profile-card.@{prefix}-root {
         height: 13.5em;
-        .option {
+        .@{prefix}-option {
             width: 3em;
             height: 3em;
             padding: .75em;
@@ -141,7 +143,7 @@ graphjs-profile-card.graphjs-root {
                 max-width: 1.25em;
             }
         }
-        .information {
+        .@{prefix}-information {
             padding-top: 1em;
             img {
                 width: 4.5em;
@@ -157,28 +159,28 @@ graphjs-profile-card.graphjs-root {
             }
         }
         /* Placeholder */
-        .placeholder {
-            .information {
+        .@{prefix}-placeholder {
+            .@{prefix}-information {
                 height: 11em;
                 padding-top: 1em;
-                .avatar {
+                .@{prefix}-avatar {
                     width: 4.5em;
                     height: 4.5em;
                 }
-                .title {
+                .@{prefix}-title {
                     height: .85em;
                     .border-radius(calc(.85em / 2));
                 }
-                .description {
+                .@{prefix}-description {
                     height: 2.2em;
                     margin-top: .6em;
-                    .line {
+                    .@{prefix}-line {
                         height: .75em;
                         .border-radius(calc(.75em / 2));
                     }
                 }
             }
-            .button {
+            .@{prefix}-button {
                 height: 2.5em;
             }
         }
@@ -187,9 +189,9 @@ graphjs-profile-card.graphjs-root {
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    graphjs-profile-card.graphjs-root {
+    @{prefix}-profile-card.@{prefix}-root {
         height: 15.25em;
-        .option {
+        .@{prefix}-option {
             width: 3.5em;
             height: 3.5em;
             padding: .875em;
@@ -197,7 +199,7 @@ graphjs-profile-card.graphjs-root {
                 max-width: 1.5em;
             }
         }
-        .information {
+        .@{prefix}-information {
             padding-top: 1.5em;
             img {
                 width: 5.5em;
@@ -213,28 +215,28 @@ graphjs-profile-card.graphjs-root {
             }
         }
         /* Placeholder */
-        .placeholder {
-            .information {
+        .@{prefix}-placeholder {
+            .@{prefix}-information {
                 height: 12.5em;
                 padding-top: 1.5em;
-                .avatar {
+                .@{prefix}-avatar {
                     width: 5.5em;
                     height: 5.5em;
                 }
-                .title {
+                .@{prefix}-title {
                     height: .9em;
                     .border-radius(calc(.9em / 2));
                 }
-                .description {
+                .@{prefix}-description {
                     height: 2.3em;
                     margin-top: .7em;
-                    .line {
+                    .@{prefix}-line {
                         height: .8em;
                         .border-radius(calc(.8em / 2));
                     }
                 }
             }
-            .button {
+            .@{prefix}-button {
                 height: 2.75em;
             }
         }

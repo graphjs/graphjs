@@ -1,13 +1,15 @@
-graphjs-messages-composer.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-messages-composer.@{prefix}-root {
     display: block;
     width: 100%;
     max-width: 29em;
-    .content {
+    .@{prefix}-content {
         .no-padding !important;
-        .recipient {
+        .@{prefix}-recipient {
             padding: .75em 1em;
             color: @text-color-strong;
-            &.unknown {
+            &.@{prefix}-unknown {
                 &::before {
                     display: none;
                 }

@@ -1,17 +1,17 @@
-<graphjs-auth-state class={'graphjs-root' + (opts.type == 'inline' ? ' inline' : ' box')}>
-    <div class="content">
-        <div class="not-logged" if={!id}>
-            <a if={!stateInformation} class="idle">&middot; &middot; &middot;</a>
-            <a if={stateInformation} class={opts.minor && opts.active == 'login' ? 'active' : ''} data-link="login" onclick={opts.minor ? handleCallback : handleLoginBox}>Login</a>
-            <a if={stateInformation} class={opts.minor && opts.active == 'register' ? 'active' : ''} data-link="register" onclick={opts.minor ? handleCallback : handleRegisterBox}>Register</a>
+<graphjs-auth-state class={'graphjs-root' + (opts.type == 'inline' ? ' graphjs-inline' : ' graphjs-box')}>
+    <div class="graphjs-content">
+        <div class="graphjs-not-logged" if={!id}>
+            <a if={!stateInformation} class="graphjs-idle">&middot; &middot; &middot;</a>
+            <a if={stateInformation} class={opts.minor && opts.active == 'login' ? 'graphjs-active' : ''} data-link="login" onclick={opts.minor ? handleCallback : handleLoginBox}>Login</a>
+            <a if={stateInformation} class={opts.minor && opts.active == 'register' ? 'graphjs-active' : ''} data-link="register" onclick={opts.minor ? handleCallback : handleRegisterBox}>Register</a>
         </div>
-        <div class="logged" if={id}>
-            <a if={!profile} class="idle">&middot; &middot; &middot;</a>
-            <a class="details" if={profile}>
+        <div class="graphjs-logged" if={id}>
+            <a if={!profile} class="graphjs-idle">&middot; &middot; &middot;</a>
+            <a class="graphjs-details" if={profile}>
                 <img src={profile.avatar || 'lib/images/avatars/user.png'} />
                 <span>{profile.fullname || profile.username}</span>
             </a>
-            <a class="exit" if={profile} onclick={handleExit}>
+            <a class="graphjs-exit" if={profile} onclick={handleExit}>
                 <svg viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <g transform="translate(-17.000000, -16.000000)" fill="black" fill-rule="nonzero">
@@ -49,7 +49,7 @@
             }
         });
         this.on('mount', function() {
-            opts.theme && this.root.classList.add(opts.theme);
+            opts.theme && this.root.classList.add('graphjs-' + opts.theme);
         });
 
         this.handleLoginBox = () => showLogin({
@@ -86,7 +86,7 @@
             });
         }
         this.handleCallback = (event) => {
-            event.target.classList.contains('active')
+            event.target.classList.contains('graphjs-active')
             ? opts.callback()
             : opts.callback(event);
         }

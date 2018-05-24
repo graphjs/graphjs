@@ -1,6 +1,8 @@
+@prefix: graphjs;
+
 // Elements
 
-.graphjs-root {
+.@{prefix}-root {
     font-size: @font-size-default;
     line-height: @font-size-default;
     color: fade(@text-color-strong, 65%);
@@ -52,10 +54,10 @@
         &[disabled] {
             opacity: .5;
         }
-        &.danger {
+        &.@{prefix}-danger {
             .background-color-states(@danger-color);
         }
-        &.loading {
+        &.@{prefix}-loading {
             background-image: linear-gradient(-45deg, transparent 25%, rgba(0, 0, 0, .1) 25%, rgba(0, 0, 0, .1) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, .1) 75%);
             background-size: 50px 50px;
             .animation(loading-stripes 10s infinite linear);
@@ -66,7 +68,7 @@
             position: relative;
             margin-bottom: .5em;
             .transition(border-color .35s ease);
-            &.error {
+            &.@{prefix}-error {
                 border-color: @danger-color;
                 .animation(error-shake normal .35s ease-in-out);
             }
@@ -74,7 +76,7 @@
                 margin-top: .25em;
             }
         }
-        .option {
+        .@{prefix}-option {
             display: block;
             height: 3.3em;
             margin-bottom: -2em;
@@ -91,12 +93,12 @@
                     opacity: .75;
                 }
             }
-            &.single {
+            &.@{prefix}-single {
                 a {
                     width: 100%;
                 }
             }
-            &.double {
+            &.@{prefix}-double {
                 a {
                     width: 50%;
                 }
@@ -109,7 +111,7 @@
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    .graphjs-root {
+    .@{prefix}-root {
         font-size: @font-size-xsmall;
         line-height: @font-size-xsmall;
         input, textarea {
@@ -118,12 +120,12 @@
         }
         button {
             font-size: @font-size-xsmall * 1.1;
-            &.loading {
+            &.@{prefix}-loading {
                 background-size: (@font-size-xsmall * 2.6) (@font-size-xsmall * 2.6);
             }
         }
         form {
-            .option {
+            .@{prefix}-option {
                 margin-bottom: -1em;
             }
         }
@@ -132,7 +134,7 @@
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    .graphjs-root {
+    .@{prefix}-root {
         font-size: @font-size-xsmall;
         line-height: @font-size-xsmall;
         input, textarea {
@@ -141,12 +143,12 @@
         }
         button {
             font-size: @font-size-xsmall * 1.1;
-            &.loading {
+            &.@{prefix}-loading {
                 background-size: (@font-size-xsmall * 2.6) (@font-size-xsmall * 2.6);
             }
         }
         form {
-            .option {
+            .@{prefix}-option {
                 margin-bottom: -1em;
             }
         }
@@ -155,7 +157,7 @@
 
 /* 768 ≤ Window Width < 1024 */
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
-    .graphjs-root {
+    .@{prefix}-root {
         font-size: @font-size-small;
         line-height: @font-size-small;
         input, textarea {
@@ -164,7 +166,7 @@
         }
         button {
             font-size: @font-size-small * 1.1;
-            &.loading {
+            &.@{prefix}-loading {
                 background-size: (@font-size-small * 2.6) (@font-size-small * 2.6);
             }
         }
@@ -173,7 +175,7 @@
 
 /* 1024 ≤ Window Width < 1152 */
 @media only screen and (min-width: 1024px) and (max-width: 1151px) {
-    .graphjs-root {
+    .@{prefix}-root {
         font-size: @font-size-medium;
         line-height: @font-size-medium;
         input, textarea {
@@ -182,7 +184,7 @@
         }
         button {
             font-size: @font-size-medium * 1.1;
-            &.loading {
+            &.@{prefix}-loading {
                 background-size: (@font-size-medium * 2.6) (@font-size-medium * 2.6);
             }
         }
@@ -191,7 +193,7 @@
 
 /* 1152 ≤ Window Width < 1280 */
 @media only screen and (min-width: 1152px) and (max-width: 1280px) {
-    .graphjs-root {
+    .@{prefix}-root {
         font-size: @font-size-medium;
         line-height: @font-size-medium;
         input, textarea {
@@ -200,7 +202,7 @@
         }
         button {
             font-size: @font-size-medium * 1.1;
-            &.loading {
+            &.@{prefix}-loading {
                 background-size: (@font-size-medium * 2.6) (@font-size-medium * 2.6);
             }
         }
@@ -209,7 +211,7 @@
 
 /* 1280 ≤ Window Width < 1440 */
 @media only screen and (min-width: 1280px) and (max-width: 1439px) {
-    .graphjs-root {
+    .@{prefix}-root {
         font-size: @font-size-large;
         line-height: @font-size-large;
         input, textarea {
@@ -218,7 +220,7 @@
         }
         button {
             font-size: @font-size-large * 1.1;
-            &.loading {
+            &.@{prefix}-loading {
                 background-size: (@font-size-large * 2.6) (@font-size-large * 2.6);
             }
         }
@@ -227,7 +229,7 @@
 
 /* 1440 ≤ Window Width < 1680 */
 @media only screen and (min-width: 1440px) and (max-width: 1679px) {
-    .graphjs-root {
+    .@{prefix}-root {
         font-size: @font-size-large;
         line-height: @font-size-large;
         input, textarea {
@@ -236,7 +238,7 @@
         }
         button {
             font-size: @font-size-large * 1.1;
-            &.loading {
+            &.@{prefix}-loading {
                 background-size: (@font-size-large * 2.6) (@font-size-large * 2.6);
             }
         }
@@ -245,7 +247,7 @@
 
 /* 1680 ≤ Window Width */
 @media only screen and (min-width: 1680px) {
-    .graphjs-root {
+    .@{prefix}-root {
         font-size: @font-size-xlarge;
         line-height: @font-size-xlarge;
         input, textarea {
@@ -254,7 +256,7 @@
         }
         button {
             font-size: @font-size-xlarge * 1.1;
-            &.loading {
+            &.@{prefix}-loading {
                 background-size: (@font-size-xlarge * 2.6) (@font-size-xlarge * 2.6);
             }
         }

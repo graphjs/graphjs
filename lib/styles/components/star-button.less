@@ -1,4 +1,6 @@
-graphjs-star-button.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-star-button.@{prefix}-root {
     display: inline-block;
     width: auto;
     height: 50px;
@@ -8,7 +10,7 @@ graphjs-star-button.graphjs-root {
     &:hover {
         background-color: @contrast-color;
     }
-    .content {
+    .@{prefix}-content {
         .no-padding !important;
         background-color: transparent !important;
         a {
@@ -18,7 +20,7 @@ graphjs-star-button.graphjs-root {
             height: 48px;
             vertical-align: middle;
             .border-radius(inherit);
-            .icon {
+            .@{prefix}-icon {
                 display: block;
                 float: left;
                 position: relative;
@@ -26,21 +28,21 @@ graphjs-star-button.graphjs-root {
                 height: 48px;
                 text-align: center;
                 .border-radius(inherit);
-                &.default {
+                &.@{prefix}-default {
                     svg {
                         path {
                             fill: desaturate(orange, 70%);
                         }
                     }
                 }
-                &.like {
+                &.@{prefix}-like {
                     svg {
                         path {
                             fill: desaturate(dodgerblue, 70%);
                         }
                     }
                 }
-                &.love {
+                &.@{prefix}-love {
                     svg {
                         padding-top: 3px;
                         padding-bottom: 1px;
@@ -49,7 +51,7 @@ graphjs-star-button.graphjs-root {
                         }
                     }
                 }
-                &.save {
+                &.@{prefix}-save {
                     svg {
                         padding-top: 3px;
                         padding-bottom: 1px;
@@ -84,7 +86,7 @@ graphjs-star-button.graphjs-root {
                     }
                 }
             }
-            .text {
+            .@{prefix}-text {
                 display: block;
                 float: left;
                 width: auto;
@@ -97,23 +99,23 @@ graphjs-star-button.graphjs-root {
                 letter-spacing: .015em;
             }
             &:hover {
-                .icon {
-                    &.default {
+                .@{prefix}-icon {
+                    &.@{prefix}-default {
                         &::before {
                             background-color: fade(orange, 15%);
                         }
                     }
-                    &.like {
+                    &.@{prefix}-like {
                         &::before {
                             background-color: fade(dodgerblue, 15%);
                         }
                     }
-                    &.love {
+                    &.@{prefix}-love {
                         &::before {
                             background-color: fade(crimson, 15%);
                         }
                     }
-                    &.save {
+                    &.@{prefix}-save {
                         &::before {
                             background-color: fade(lightseagreen, 15%);
                         }
@@ -129,9 +131,9 @@ graphjs-star-button.graphjs-root {
                     }
                 }
             }
-            &.active {
-                .icon {
-                    &.default {
+            &.@{prefix}-active {
+                .@{prefix}-icon {
+                    &.@{prefix}-default {
                         &::before {
                             background-color: orange;
                         }
@@ -141,7 +143,7 @@ graphjs-star-button.graphjs-root {
                             }
                         }
                     }
-                    &.like {
+                    &.@{prefix}-like {
                         &::before {
                             background-color: dodgerblue;
                         }
@@ -151,7 +153,7 @@ graphjs-star-button.graphjs-root {
                             }
                         }
                     }
-                    &.love {
+                    &.@{prefix}-love {
                         &::before {
                             background-color: crimson;
                         }
@@ -161,7 +163,7 @@ graphjs-star-button.graphjs-root {
                             }
                         }
                     }
-                    &.save {
+                    &.@{prefix}-save {
                         &::before {
                             background-color: lightseagreen;
                         }

@@ -1,14 +1,16 @@
-.loading {
+@prefix: graphjs;
+
+.@{prefix}-loading {
     position: relative;
     z-index: 1;
     pointer-events: none;
     &:hover {
-        .loader {
+        .@{prefix}-loader {
             background-color: fade(@shade-color, 85%);
-            &.inline {
+            &.@{prefix}-inline {
                 background-color: transparent;
             }
-            &.placeholder {
+            &.@{prefix}-placeholder {
                 background-color: @shade-color;
             }
         }
@@ -16,7 +18,7 @@
     & > * {
         filter: blur(5px);
     }
-    .loader {
+    .@{prefix}-loader {
         box-sizing: border-box;
         position: absolute;
         z-index: 2;
@@ -31,31 +33,31 @@
         pointer-events: all;
         filter: none;
         .transition(all 1s ease);
-        &.placeholder {
+        &.@{prefix}-placeholder {
             background-color: @shade-color;
-            .fill {
+            .@{prefix}-fill {
                 .transition(background-color 2s linear);
                 .animation(loading-placeholder normal 2s infinite ease-in-out);
             }
-            .circle {
+            .@{prefix}-circle {
                 .border-radius(@border-radius-full) !important;
             }
-            .rounded-square {
+            .@{prefix}-rounded-square {
                 .border-radius(25%) !important;
             }
-            .paragraph {
+            .@{prefix}-paragraph {
                 display: block;
-                &.centered {
+                &.@{prefix}-centered {
                     .line:last-child {
                         margin-left: calc(100% / 3 / 2) !important;
                         margin-right: calc(100% / 3 / 2) !important;
                     }
                 }
-                .line:last-child {
+                .@{prefix}-line:last-child {
                     width: calc(100% / 3 * 2) !important;
                 }
             }
-            .line {
+            .@{prefix}-line {
                 display: block;
             }
             hr {
@@ -64,14 +66,14 @@
                 border: none;
                 outline: none;
             }
-            hr.vertical {
+            hr.@{prefix}-vertical {
                 width: 1px;
                 height: 100%;
                 border: none;
                 outline: none;
             }
         }
-        &.inline {
+        &.@{prefix}-inline {
             img {
                 position: absolute;
                 top: 50%;
@@ -80,7 +82,7 @@
             }
         }
     }
-    .blockage {
+    .@{prefix}-blockage {
         position: absolute;
         z-index: 3;
         top: 50%;
@@ -108,10 +110,10 @@
     }
 }
 
-.blocked {
-    & > .placeholder {
+.@{prefix}-blocked {
+    & > .@{prefix}-placeholder {
         filter: blur(5px);
-        .fill {
+        .@{prefix}-fill {
             .animation(unset) !important;
             background-color: fade(black, 5%);
         }

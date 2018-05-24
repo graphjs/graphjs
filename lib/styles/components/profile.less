@@ -1,4 +1,6 @@
-graphjs-profile.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-profile.@{prefix}-root {
     display: block;
     width: 48em;
     margin: 0 auto;
@@ -8,14 +10,14 @@ graphjs-profile.graphjs-root {
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    graphjs-profile.graphjs-root {
+    @{prefix}-profile.@{prefix}-root {
         width: 22.5em;
     }
 }
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    graphjs-profile.graphjs-root {
+    @{prefix}-profile.@{prefix}-root {
         width: 38.5em;
     }
 }

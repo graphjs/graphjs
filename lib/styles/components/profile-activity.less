@@ -1,6 +1,8 @@
-graphjs-profile-activity.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-profile-activity.@{prefix}-root {
     display: block;
-    .content {
+    .@{prefix}-content {
         min-height: 21em;
         ul {
             margin: 0;
@@ -55,38 +57,38 @@ graphjs-profile-activity.graphjs-root {
                 }
             }
         }
-        .placeholder {
+        .@{prefix}-placeholder {
             display: block;
             padding: 2.5em;
-            .list {
+            .@{prefix}-list {
                 display: block;
                 .clearfix;
-                .item {
+                .@{prefix}-item {
                     display: block;
                     height: 3em;
                     .clearfix;
                     & > * {
                         float: left;
                     }
-                    .icon {
+                    .@{prefix}-icon {
                         position: relative;
                         top: -.4em;
                         width: 1.5em;
                         height: 1.5em;
                         margin-left: .35em;
                     }
-                    .bullet {
+                    .@{prefix}-bullet {
                         position: relative;
                         left: calc(-.35em + 1px);
                         width: .7em;
                         height: .7em;
                         margin-left: 1.65em;
                     }
-                    .paragraph {
+                    .@{prefix}-paragraph {
                         width: calc(100% - 5.5em);
                         height: 3em;
                         margin-left: .5em;
-                        .line {
+                        .@{prefix}-line {
                             height: .6em;
                             margin-bottom: .8em;
                             .border-radius(calc(.6em / 2));

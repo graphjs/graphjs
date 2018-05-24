@@ -1,14 +1,16 @@
-graphjs-group-creator.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-group-creator.@{prefix}-root {
     display: block;
     width: 100%;
     max-width: 29em;
     text-align: center;
-    .content {
+    .@{prefix}-content {
         form {
             max-width: 24em;
             margin: 0 auto;
             input {
-                &.success {
+                &.@{prefix}-success {
                     border: 1px solid @success-color;
                     &::after {
                         content: "OK";

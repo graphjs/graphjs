@@ -1,20 +1,20 @@
-<graphjs-group-card class={'graphjs-root card box' + (loaded ? '' : ' loading')}>
-    <div class="information" if={group}>
+<graphjs-group-card class={'graphjs-root graphjs-card graphjs-box' + (loaded ? '' : ' graphjs-loading')}>
+    <div class="graphjs-information" if={group}>
         <img src={group.cover || 'lib/images/covers/group.png'} />
         <a data-link="group" data-id={id} onclick={handleShow} if={group}>{group.title}</a>
         <p>{group.count == 1 ? group.count + ' Member' : group.count + ' Members'}</p>
     </div>
     <button if={(!group || !joinInformation) && loaded}>&middot; &middot; &middot;</button>
     <button if={(group && joinInformation) && loaded} onclick={joined ? handleLeave : handleJoin}>{joined ? 'Leave Group' : 'Join Group'}</button>
-    <div if={!loaded} class="placeholder loader">
+    <div if={!loaded} class="graphjs-placeholder graphjs-loader">
         <div class="information">
-            <div class="cover rectangle fill"></div>
-            <div class="title paragraph centered">
-                <div class="line fill"></div>
-                <div class="line fill"></div>
+            <div class="graphjs-cover graphjs-rectangle graphjs-fill"></div>
+            <div class="graphjs-title graphjs-paragraph graphjs-centered">
+                <div class="graphjs-line graphjs-fill"></div>
+                <div class="graphjs-line graphjs-fill"></div>
             </div>
-            <div class="description line centered fill"></div>
-            <div class="button rectangle fill"></div>
+            <div class="graphjs-description graphjs-line graphjs-centered graphjs-fill"></div>
+            <div class="graphjs-button graphjs-rectangle graphjs-fill"></div>
         </div>
     </div>
     <style type="less">
@@ -39,7 +39,7 @@
             this.handleMembers();
         });
         this.on('mount', function() {
-            opts.theme && this.root.classList.add(opts.theme);
+            opts.theme && this.root.classList.add('graphjs-' + opts.theme);
         });
 
         this.handleInformation = () => {

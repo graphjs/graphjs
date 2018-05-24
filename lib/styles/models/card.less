@@ -1,10 +1,12 @@
-.card {
+@prefix: graphjs;
+
+.@{prefix}-card {
     overflow: hidden;
     width: 15em;
     text-align: center;
     .border-radius(@border-radius-large);
     background-color: @contrast-color;
-    .information {
+    .@{prefix}-information {
         height: 15em;
     }
     button {
@@ -15,16 +17,16 @@
         font-size: 1em;
         background-color: @primary-color;
     }
-    &.color {
+    &.@{prefix}-color {
         background-color: @primary-color;
-        .option {
+        .@{prefix}-option {
             svg {
                 path {
                     fill: white;
                 }
             }
         }
-        .information {
+        .@{prefix}-information {
             a {
                 .text-color-states(white);
             }
@@ -43,9 +45,9 @@
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    .card {
+    .@{prefix}-card {
         width: 11em;
-        .information {
+        .@{prefix}-information {
             height: 11em;
         }
         button {
@@ -57,9 +59,9 @@
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    .card {
+    .@{prefix}-card {
         width: 12.5em;
-        .information {
+        .@{prefix}-information {
             height: 12.5em;
         }
         button {

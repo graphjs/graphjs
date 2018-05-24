@@ -1,15 +1,17 @@
-graphjs-comments.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-comments.@{prefix}-root {
     display: block;
     color: fade(@text-color-strong, 65%);
     background-color: @shade-color;
-    .content {
-        .comment {
+    .@{prefix}-content {
+        .@{prefix}-comment {
             display: inline-block;
             width: 100%;
             textarea {
                 width: 100%;
                 height: 7.5em;
-                &.closed {
+                &.@{prefix}-closed {
                     height: 0;
                     border: none;
                 }
@@ -21,11 +23,11 @@ graphjs-comments.graphjs-root {
                 margin-left: .5em;
                 font-size: .9em;
             }
-            & + .synopsis {
+            & + .@{prefix}-synopsis {
                 margin-top: 2.5em;
             }
         }
-        .synopsis {
+        .@{prefix}-synopsis {
             display: inline-block;
             width: 100%;
             margin-bottom: 1.25em;
@@ -35,12 +37,12 @@ graphjs-comments.graphjs-root {
                 font-size: .75em;
             }
         }
-        .item {
+        .@{prefix}-item {
             margin-bottom: 1.25em;
             &:last-child {
                 margin-bottom: 0;
             }
-            .credit {
+            .@{prefix}-credit {
                 .credit-metrics(3em);
                 margin-bottom: .25em;
                 span {
@@ -61,10 +63,10 @@ graphjs-comments.graphjs-root {
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    graphjs-comments.graphjs-root {
-        .content {
-            .item {
-                .credit {
+    @{prefix}-comments.@{prefix}-root {
+        .@{prefix}-content {
+            .@{prefix}-item {
+                .@{prefix}-credit {
                     margin-bottom: .75em;
                 }
                 p {
@@ -77,10 +79,10 @@ graphjs-comments.graphjs-root {
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    graphjs-comments.graphjs-root {
-        .content {
-            .item {
-                .credit {
+    @{prefix}-comments.@{prefix}-root {
+        .@{prefix}-content {
+            .@{prefix}-item {
+                .@{prefix}-credit {
                     margin-bottom: .5em;
                 }
                 p {

@@ -1,4 +1,6 @@
-graphjs-overlay.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-overlay.@{prefix}-root {
     display: table;
     position: fixed;
     z-index: 10;
@@ -10,7 +12,7 @@ graphjs-overlay.graphjs-root {
     height: 100vh;
     color: fade(@text-color-strong, 65%);
     background-color: fade(black, 85%);
-    &.scroll {
+    &.@{prefix}-scroll {
         display: block;
         overflow-y: scroll;
         & > div {

@@ -1,4 +1,6 @@
-.box {
+@prefix: graphjs;
+
+.@{prefix}-box {
     overflow-x: hidden;
     overflow-y: scroll;
     position: relative;
@@ -6,7 +8,7 @@
     border: 1px solid fade(@secondary-color, 3%);
     background-color: @shade-color;
     .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
-    .header {
+    .@{prefix}-header {
         position: relative;
         width: 100%;
         height: 3.5em;
@@ -15,7 +17,7 @@
         text-align: center;
         border-bottom: 2px solid fade(@secondary-color, 10%);
         background-color: @contrast-color;
-        .title {
+        .@{prefix}-title {
             position: absolute;
             top: 0;
             right: 2.5em;
@@ -26,20 +28,20 @@
             font-size: 1.2em;
             .single-line-text;
         }
-        .option {
+        .@{prefix}-option {
             display: inline-block;
             width: 3.5em;
             height: 3.5em;
             text-align: center;
             .icon-color-states(@primary-color);
-            &.left {
+            &.@{prefix}-left {
                 float: left;
             }
-            &.right {
+            &.@{prefix}-right {
                 float: right;
             }
             svg {
-                &.new {
+                &.@{prefix}-new {
                     .transform(rotate(45deg));
                 }
                 position: relative;
@@ -54,13 +56,13 @@
                 }
             }
         }
-        + .warning {
+        + .@{prefix}-warning {
             border-bottom: none;
             ul {
-                &.fail {
+                &.@{prefix}-fail {
                     background-color: @danger-color;
                 }
-                &.success {
+                &.@{prefix}-success {
                     background-color: @success-color;
                 }
                 li {
@@ -69,7 +71,7 @@
             }
         }
     }
-    .warning {
+    .@{prefix}-warning {
         display: inline-block;
         width: 100%;
         text-align: center;
@@ -79,10 +81,10 @@
             width: 100%;
             margin: 0;
             padding: .75em 5%;
-            &.fail {
+            &.@{prefix}-fail {
                 color: @danger-color;
             }
-            &.success {
+            &.@{prefix}-success {
                 color: @success-color;
             }
             li {
@@ -93,7 +95,7 @@
             }
         }
     }
-    .content {
+    .@{prefix}-content {
         overflow: hidden;
         display: inline-block;
         width: 100%;
@@ -106,15 +108,15 @@
             line-height: 150%;
         }
     }
-    .check {
+    .@{prefix}-check {
         display: none;
         background-color: transparent;
         .transition(background-color .35s ease);
     }
 }
 
-.checked {
-    .check {
+.@{prefix}-checked {
+    .@{prefix}-check {
         display: block;
         position: absolute;
         top: 0;
@@ -124,7 +126,7 @@
         width: 100%;
         height: 100%;
         background-color: @shade-color;
-        .checkmark {
+        .@{prefix}-checkmark {
             display: block;
             position: absolute;
             top: 50%;
@@ -141,7 +143,7 @@
             //.transform(translate(-50%, -50%));
             .animation(e("fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both"));
         }
-        .checkmark_circle {
+        .@{prefix}-checkmark_circle {
             stroke-dasharray: 166;
             stroke-dashoffset: 166;
             stroke-width: 2;
@@ -150,14 +152,14 @@
             fill: none;
             .animation(stroke .6s cubic-bezier(.65, 0, .45, 1) forwards);
         }
-        .checkmark_check {
+        .@{prefix}-checkmark_check {
             transform-origin: 50% 50%;
             stroke-dasharray: 48;
             stroke-dashoffset: 48;
             .animation(stroke .3s cubic-bezier(.65, 0, .45, 1) .8s forwards);
         }
     }
-    .content {
+    .@{prefix}-content {
         opacity: 0;
     }
     @keyframes stroke {
@@ -184,8 +186,8 @@
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    .box {
-        .content {
+    .@{prefix}-box {
+        .@{prefix}-content {
             padding: 1.5em;
         }
     }
@@ -193,8 +195,8 @@
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    .box {
-        .content {
+    .@{prefix}-box {
+        .@{prefix}-content {
             padding: 2em;
         }
     }

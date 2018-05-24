@@ -1,8 +1,10 @@
-.pagination {
-    .list {
+@prefix: graphjs;
+
+.@{prefix}-pagination {
+    .@{prefix}-list {
         margin-bottom: 3em;
     }
-    .controls {
+    .@{prefix}-controls {
         position: absolute;
         left: 0;
         right: 0;
@@ -32,7 +34,7 @@
             &:hover {
                 opacity: 1;
             }
-            &.disabled {
+            &.@{prefix}-disabled {
                 opacity: .35;
                 pointer-events: none;
             }

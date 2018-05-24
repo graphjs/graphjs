@@ -1,14 +1,14 @@
-<graphjs-profile-settings class="graphjs-root box">
-    <div class="warning" if={failMessages.length > 0 || successMessages.length > 0}>
-        <ul if={failMessages.length > 0} class="fail">
+<graphjs-profile-settings class="graphjs-root graphjs-box">
+    <div class="graphjs-warning" if={failMessages.length > 0 || successMessages.length > 0}>
+        <ul if={failMessages.length > 0} class="graphjs-fail">
             <li each={failMessage in failMessages}>{failMessage}</li>
         </ul>
-        <ul if={successMessages.length > 0} class="success">
+        <ul if={successMessages.length > 0} class="graphjs-success">
             <li each={successMessage in successMessages}>{successMessage}</li>
         </ul>
     </div>
-    <div class="content">
-        <a ref="uploadWidget" class="avatar">
+    <div class="graphjs-content">
+        <a ref="uploadWidget" class="graphjs-avatar">
             <img src={profile && profile.avatar ? profile.avatar : 'lib/images/avatars/user.png'} />
         </a>
         <h2>Profile</h2>
@@ -107,11 +107,11 @@
             let usernameMinimumLengthLimit = 1;
             let failMessage = 'Username is too short!';
             if(this.refs.username.value.length >= usernameMinimumLengthLimit) {
-                this.refs.username.classList.remove('error');
+                this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
-                this.refs.username.classList.add('error');
+                this.refs.username.classList.add('graphjs-error');
                 this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
@@ -120,11 +120,11 @@
             let usernameMaximumLengthLimit = 12;
             let failMessage = 'Username must be ' + usernameMaximumLengthLimit + ' characters maximum!';
             if(this.refs.username.value.length <= usernameMaximumLengthLimit) {
-                this.refs.username.classList.remove('error');
+                this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
-                this.refs.username.classList.add('error');
+                this.refs.username.classList.add('graphjs-error');
                 this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
@@ -133,11 +133,11 @@
             let failMessage = 'Username is invalid. Valid characters are letters, numbers, hyphens, and underscores.';
             let usernamePattern = /^[a-zA-Z0-9-_]+$/;
             if(usernamePattern.test(this.refs.username.value)) {
-                this.refs.username.classList.remove('error');
+                this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
-                this.refs.username.classList.add('error');
+                this.refs.username.classList.add('graphjs-error');
                 this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
@@ -146,11 +146,11 @@
             let failMessage = 'Email is invalid. Valid format: user@site.com';
             let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
             if(emailPattern.test(this.refs.email.value)) {
-                this.refs.email.classList.remove('error');
+                this.refs.email.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
-                this.refs.email.classList.add('error');
+                this.refs.email.classList.add('graphjs-error');
                 this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
@@ -159,11 +159,11 @@
             let bioMaximumLengthLimit = 255;
             let failMessage = 'Bio must be ' + bioMaximumLengthLimit + ' characters maximum!';
             if(this.refs.bio.value.length <= bioMaximumLengthLimit) {
-                this.refs.bio.classList.remove('error');
+                this.refs.bio.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
-                this.refs.bio.classList.add('error');
+                this.refs.bio.classList.add('graphjs-error');
                 this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
@@ -172,11 +172,11 @@
             let failMessage = 'Invalid birthday! Correct format: MM/DD/YYYY';
             let birthdayPattern = /^\d{2}\/\d{2}\/\d{4}$/;
             if(birthdayPattern.test(this.refs.birthday.value)) {
-                this.refs.birthday.classList.remove('error');
+                this.refs.birthday.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
-                this.refs.birthday.classList.add('error');
+                this.refs.birthday.classList.add('graphjs-error');
                 this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
@@ -186,11 +186,11 @@
             let failMessage = 'You must be at least ' + birthdayLimit + ' years old to register!';
             let birthYear = parseInt(this.refs.birthday.value.split('/')[2]);
             if(((new Date()).getFullYear() - birthYear) >= birthdayLimit) {
-                this.refs.birthday.classList.remove('error');
+                this.refs.birthday.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
-                this.refs.birthday.classList.add('error');
+                this.refs.birthday.classList.add('graphjs-error');
                 this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
@@ -199,11 +199,11 @@
             let passwordMinimumLengthLimit = 5;
             let failMessage = 'Password must be ' + passwordMinimumLengthLimit + ' characters minimum!';
             if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
-                this.refs.password.classList.remove('error');
+                this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
-                this.refs.password.classList.add('error');
+                this.refs.password.classList.add('graphjs-error');
                 this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
@@ -212,11 +212,11 @@
             let passwordMaximumLengthLimit = 15;
             let failMessage = 'Password must be ' + passwordMaximumLengthLimit + ' characters maximum!';
             if(this.refs.password.value.length <= passwordMaximumLengthLimit) {
-                this.refs.password.classList.remove('error');
+                this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
-                this.refs.password.classList.add('error');
+                this.refs.password.classList.add('graphjs-error');
                 this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
@@ -224,11 +224,11 @@
         this.checkPasswordMatch = () => {
             let failMessage = 'Passwords do not match.';
             if(this.refs.password.value == this.refs.confirmation.value) {
-                this.refs.confirmation.classList.remove('error');
+                this.refs.confirmation.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
-                this.refs.confirmation.classList.add('error');
+                this.refs.confirmation.classList.add('graphjs-error');
                 this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
@@ -249,7 +249,7 @@
             ) {
                 return true;
             } else {
-                this.refs.submitProfile.classList.remove('loading');
+                this.refs.submitProfile.classList.remove('graphjs-loading');
                 return false;
             }
         }
@@ -262,14 +262,14 @@
             ) {
                 return true;
             } else {
-                this.refs.submitPassword.classList.remove('loading');
+                this.refs.submitPassword.classList.remove('graphjs-loading');
                 return false;
             }
         }
         this.handleProfileSubmit = (event) => {
             event.preventDefault();
             let self = this;
-            self.refs.submitProfile.classList.add('loading');
+            self.refs.submitProfile.classList.add('graphjs-loading');
             let username = self.refs.username.value;
             let email = self.refs.email.value;
             let bio = self.refs.bio.value;
@@ -287,19 +287,19 @@
                             let successMessage = 'Username has been set successfully.';
                             if(response.success) {
                                 self.profile.username = username;
-                                self.refs.username.classList.remove('error');
-                                self.refs.username.classList.add('success');
+                                self.refs.username.classList.remove('graphjs-error');
+                                self.refs.username.classList.add('graphjs-success');
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
-                                self.refs.submitProfile.classList.remove('loading');
+                                self.refs.submitProfile.classList.remove('graphjs-loading');
                                 self.update();
                                 self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                             } else {
-                                self.refs.username.classList.remove('success');
-                                self.refs.username.classList.add('error');
+                                self.refs.username.classList.remove('graphjs-success');
+                                self.refs.username.classList.add('graphjs-error');
                                 self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                 self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
-                                self.refs.submitProfile.classList.remove('loading');
+                                self.refs.submitProfile.classList.remove('graphjs-loading');
                                 self.update();
                             }
                         }
@@ -307,11 +307,11 @@
                 } else {
                     let failMessage = 'Username couldn\'t be set.';
                     let successMessage = 'Username has been set successfully.';
-                    self.refs.username.classList.remove('error');
-                    self.refs.username.classList.add('success');
+                    self.refs.username.classList.remove('graphjs-error');
+                    self.refs.username.classList.add('graphjs-success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                     self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
-                    self.refs.submitProfile.classList.remove('loading');
+                    self.refs.submitProfile.classList.remove('graphjs-loading');
                     self.update();
                 }
                 if(email != self.profile.email) {
@@ -322,19 +322,19 @@
                             let successMessage = 'Email has been set successfully.';
                             if(response.success) {
                                 self.profile.email = email;
-                                self.refs.email.classList.remove('error');
-                                self.refs.email.classList.add('success');
+                                self.refs.email.classList.remove('graphjs-error');
+                                self.refs.email.classList.add('graphjs-success');
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
-                                self.refs.submitProfile.classList.remove('loading');
+                                self.refs.submitProfile.classList.remove('graphjs-loading');
                                 self.update();
                                 self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                             } else {
-                                self.refs.email.classList.remove('success');
-                                self.refs.email.classList.add('error');
+                                self.refs.email.classList.remove('graphjs-success');
+                                self.refs.email.classList.add('graphjs-error');
                                 self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                 self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
-                                self.refs.submitProfile.classList.remove('loading');
+                                self.refs.submitProfile.classList.remove('graphjs-loading');
                                 self.update();
                             }
                         }
@@ -342,11 +342,11 @@
                 } else {
                     let failMessage = 'Email couldn\'t be set.';
                     let successMessage = 'Email has been set successfully.';
-                    self.refs.email.classList.remove('error');
-                    self.refs.email.classList.add('success');
+                    self.refs.email.classList.remove('graphjs-error');
+                    self.refs.email.classList.add('graphjs-success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                     self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
-                    self.refs.submitProfile.classList.remove('loading');
+                    self.refs.submitProfile.classList.remove('graphjs-loading');
                     self.update();
                 }
                 setBio(
@@ -356,19 +356,19 @@
                         let successMessage = 'Bio has been set successfully.';
                         if(response.success) {
                             self.profile.about = bio;
-                            self.refs.bio.classList.remove('error');
-                            self.refs.bio.classList.add('success');
+                            self.refs.bio.classList.remove('graphjs-error');
+                            self.refs.bio.classList.add('graphjs-success');
                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
-                            self.refs.submitProfile.classList.remove('loading');
+                            self.refs.submitProfile.classList.remove('graphjs-loading');
                             self.update();
                             self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                         } else {
-                            self.refs.bio.classList.remove('success');
-                            self.refs.bio.classList.add('error');
+                            self.refs.bio.classList.remove('graphjs-success');
+                            self.refs.bio.classList.add('graphjs-error');
                             self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                             self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
-                            self.refs.submitProfile.classList.remove('loading');
+                            self.refs.submitProfile.classList.remove('graphjs-loading');
                             self.update();
                         }
                     }
@@ -380,19 +380,19 @@
                         let successMessage = 'Birthday has been set successfully.';
                         if(response.success) {
                             self.profile.birthday = birthday;
-                            self.refs.birthday.classList.remove('error');
-                            self.refs.birthday.classList.add('success');
+                            self.refs.birthday.classList.remove('graphjs-error');
+                            self.refs.birthday.classList.add('graphjs-success');
                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
-                            self.refs.submitProfile.classList.remove('loading');
+                            self.refs.submitProfile.classList.remove('graphjs-loading');
                             self.update();
                             self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                         } else {
-                            self.refs.birthday.classList.remove('success');
-                            self.refs.birthday.classList.add('error');
+                            self.refs.birthday.classList.remove('graphjs-success');
+                            self.refs.birthday.classList.add('graphjs-error');
                             self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                             self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
-                            self.refs.submitProfile.classList.remove('loading');
+                            self.refs.submitProfile.classList.remove('graphjs-loading');
                             self.update();
                         }
                     }
@@ -402,7 +402,7 @@
         this.handlePasswordSubmit = (event) => {
             event.preventDefault();
             let self = this;
-            self.refs.submitPassword.classList.add('loading');
+            self.refs.submitPassword.classList.add('graphjs-loading');
             let password = self.refs.password.value;
             self.refs.password.className = '';
             self.refs.confirmation.className = '';
@@ -416,22 +416,22 @@
                         let successMessage = 'Password has been set successfully.';
                         if(response.success) {
                             self.profile.password = password;
-                            self.refs.password.classList.remove('error');
-                            self.refs.confirmation.classList.remove('error');
-                            self.refs.password.classList.add('success');
-                            self.refs.confirmation.classList.add('success');
+                            self.refs.password.classList.remove('graphjs-error');
+                            self.refs.confirmation.classList.remove('graphjs-error');
+                            self.refs.password.classList.add('graphjs-success');
+                            self.refs.confirmation.classList.add('graphjs-success');
                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
-                            self.refs.submitPassword.classList.remove('loading');
+                            self.refs.submitPassword.classList.remove('graphjs-loading');
                             self.update();
                         } else {
-                            self.refs.password.classList.remove('success');
-                            self.refs.confirmation.classList.remove('success');
-                            self.refs.password.classList.add('error');
-                            self.refs.confirmation.classList.add('error');
+                            self.refs.password.classList.remove('graphjs-success');
+                            self.refs.confirmation.classList.remove('graphjs-success');
+                            self.refs.password.classList.add('graphjs-error');
+                            self.refs.confirmation.classList.add('graphjs-error');
                             self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                             self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
-                            self.refs.submitPassword.classList.remove('loading');
+                            self.refs.submitPassword.classList.remove('graphjs-loading');
                             self.update();
                         }
                     }

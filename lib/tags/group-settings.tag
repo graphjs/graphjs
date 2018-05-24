@@ -1,14 +1,14 @@
-<graphjs-group-settings class="graphjs-root box">
-    <div class="warning" if={failMessages.length > 0 || successMessages.length > 0}>
-        <ul if={failMessages.length > 0} class="fail">
+<graphjs-group-settings class="graphjs-root graphjs-box">
+    <div class="graphjs-warning" if={failMessages.length > 0 || successMessages.length > 0}>
+        <ul if={failMessages.length > 0} class="graphjs-fail">
             <li each={failMessage in failMessages}>{failMessage}</li>
         </ul>
-        <ul if={successMessages.length > 0} class="success">
+        <ul if={successMessages.length > 0} class="graphjs-success">
             <li each={successMessage in successMessages}>{successMessage}</li>
         </ul>
     </div>
-    <div class="content">
-        <a ref="uploadWidget" class="cover">
+    <div class="graphjs-content">
+        <a ref="uploadWidget" class="graphjs-cover">
             <img src={group && group.cover ? group.cover : 'lib/images/covers/group.png'} />
         </a>
         <form>
@@ -93,11 +93,11 @@
             let titleMinimumLengthLimit = 2;
             let failMessage = 'Title must be ' + titleMinimumLengthLimit + ' characters minimum!';
             if(this.refs.title.value.length >= titleMinimumLengthLimit) {
-                this.refs.title.classList.remove('error');
+                this.refs.title.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
-                this.refs.title.classList.add('error');
+                this.refs.title.classList.add('graphjs-error');
                 this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
@@ -106,11 +106,11 @@
             let titleMaximumLengthLimit = 80;
             let failMessage = 'Title must be ' + titleMaximumLengthLimit + ' characters maximum!';
             if(this.refs.title.value.length <= titleMaximumLengthLimit) {
-                this.refs.title.classList.remove('error');
+                this.refs.title.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
-                this.refs.title.classList.add('error');
+                this.refs.title.classList.add('graphjs-error');
                 this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
@@ -119,11 +119,11 @@
             let descriptionMaximumLengthLimit = 255;
             let failMessage = 'Description must be ' + descriptionMaximumLengthLimit + ' characters maximum!';
             if(this.refs.description.value.length <= descriptionMaximumLengthLimit) {
-                this.refs.description.classList.remove('error');
+                this.refs.description.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
-                this.refs.description.classList.add('error');
+                this.refs.description.classList.add('graphjs-error');
                 this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
@@ -138,14 +138,14 @@
             ) {
                 return true;
             } else {
-                this.refs.submit.classList.remove('loading');
+                this.refs.submit.classList.remove('graphjs-loading');
                 return false;
             }
         }
         this.handleInformationSubmit = (event) => {
             event.preventDefault();
             let self = this;
-            self.refs.submit.classList.remove('loading');
+            self.refs.submit.classList.remove('graphjs-loading');
             let title = self.refs.title.value;
             let description = self.refs.description.value;
             self.refs.title.className = '';
@@ -162,16 +162,16 @@
                             let successMessage = 'Title has been set successfully.';
                             if(response.success) {
                                 self.group.title = title;
-                                self.refs.title.classList.remove('error');
-                                self.refs.title.classList.add('success');
+                                self.refs.title.classList.remove('graphjs-error');
+                                self.refs.title.classList.add('graphjs-success');
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
-                                self.refs.submitPassword.classList.remove('loading');
+                                self.refs.submitPassword.classList.remove('graphjs-loading');
                                 self.update();
                                 self.parent.tags.hasOwnProperty('graphjs-group-header') && self.parent.tags['graphjs-group-header'].updateInformation();
                             } else {
-                                self.refs.title.classList.remove('success');
-                                self.refs.title.classList.add('error');
+                                self.refs.title.classList.remove('graphjs-success');
+                                self.refs.title.classList.add('graphjs-error');
                                 self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                 self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
                                 self.refs.submitPassword.classList.remove('loading');
@@ -182,11 +182,11 @@
                 } else {
                     let failMessage = 'Title couldn\'t be set.';
                     let successMessage = 'Title has been set successfully.';
-                    self.refs.title.classList.remove('error');
-                    self.refs.title.classList.add('success');
+                    self.refs.title.classList.remove('graphjs-error');
+                    self.refs.title.classList.add('graphjs-success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                     self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
-                    self.refs.submitPassword.classList.remove('loading');
+                    self.refs.submitPassword.classList.remove('graphjs-loading');
                     self.update();
                 }
                 if(description != self.group.description) {
@@ -198,19 +198,19 @@
                             let successMessage = 'Description has been set successfully.';
                             if(response.success) {
                                 self.group.description = description;
-                                self.refs.description.classList.remove('error');
-                                self.refs.description.classList.add('success');
+                                self.refs.description.classList.remove('graphjs-error');
+                                self.refs.description.classList.add('graphjs-success');
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
-                                self.refs.submitPassword.classList.remove('loading');
+                                self.refs.submitPassword.classList.remove('graphjs-loading');
                                 self.update();
                                 self.parent.tags.hasOwnProperty('graphjs-group-header') && self.parent.tags['graphjs-group-header'].updateInformation();
                             } else {
-                                self.refs.description.classList.remove('success');
-                                self.refs.description.classList.add('error');
+                                self.refs.description.classList.remove('graphjs-success');
+                                self.refs.description.classList.add('graphjs-error');
                                 self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                 self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
-                                self.refs.submitPassword.classList.remove('loading');
+                                self.refs.submitPassword.classList.remove('graphjs-loading');
                                 self.update();
                             }
                         }
@@ -218,11 +218,11 @@
                 } else {
                     let failMessage = 'Description couldn\'t be set.';
                     let successMessage = 'Description has been set successfully.';
-                    self.refs.description.classList.remove('error');
-                    self.refs.description.classList.add('success');
+                    self.refs.description.classList.remove('graphjs-error');
+                    self.refs.description.classList.add('graphjs-success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                     self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
-                    self.refs.submitPassword.classList.remove('loading');
+                    self.refs.submitPassword.classList.remove('graphjs-loading');
                     self.update();
                 }
             }

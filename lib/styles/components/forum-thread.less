@@ -1,29 +1,31 @@
-graphjs-forum-thread.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-forum-thread.@{prefix}-root {
     display: block;
     color: fade(@text-color-strong, 65%);
-    &.composer {
-        .content {
-            .thread {
+    &.@{prefix}-composer {
+        .@{prefix}-content {
+            .@{prefix}-thread {
                 max-height: 32em;
                 margin-bottom: 18em;
             }
-            .reply {
+            .@{prefix}-reply {
                 bottom: 0;
             }
         }
     }
-    .content {
+    .@{prefix}-content {
         position: relative;
         min-height: 28.5em;
         .no-padding !important;
         vertical-align: middle;
-        .thread {
+        .@{prefix}-thread {
             overflow-y: scroll;
             position: relative;
             max-height: 47em;
             margin-bottom: 3em;
             /*.transition(margin-bottom .35s ease);*/
-            .title {
+            .@{prefix}-title {
                 display: none;
                 position: relative;
                 z-index: 2;
@@ -37,11 +39,11 @@ graphjs-forum-thread.graphjs-root {
                     line-height: 150%;
                 }
             }
-            .replies {
+            .@{prefix}-replies {
                 padding-right: 2.5em;
                 padding-left: 2.5em;
                 background-color: @shade-color;
-                .item {
+                .@{prefix}-item {
                     padding: 1.5em 0;
                     border-top: 1px dotted fade(black, 15%);
                     &:first-child {
@@ -63,7 +65,7 @@ graphjs-forum-thread.graphjs-root {
                         }
                     }
                     */
-                    .credit {
+                    .@{prefix}-credit {
                         .credit-metrics(3em);
                         margin-bottom: .25em;
                         span {
@@ -79,7 +81,7 @@ graphjs-forum-thread.graphjs-root {
                 }
             }
         }
-        .reply {
+        .@{prefix}-reply {
             display: inline-block;
             position: absolute;
             right: 0;
@@ -93,7 +95,7 @@ graphjs-forum-thread.graphjs-root {
             background-color: @contrast-color;
             .box-shadow(0 -2px 1px 0px fade(black, 7.5%));
             /*.transition(bottom .35s ease);*/
-            .synopsis {
+            .@{prefix}-synopsis {
                 display: inline-block;
                 position: relative;
                 width: 100%;
@@ -113,11 +115,11 @@ graphjs-forum-thread.graphjs-root {
                             display: none;
                         }
                     }
-                    &.icon {
+                    &.@{prefix}-icon {
                         float: right;
                         position: relative;
                         top: .1em;
-                        &.reverse {
+                        &.@{prefix}-reverse {
                             top: -.1em;
                             .transform(scaleY(-1));
                         }
@@ -145,7 +147,7 @@ graphjs-forum-thread.graphjs-root {
                     .no-padding;
                     line-height: 150%;
                     border: none;
-                    &.closed {
+                    &.@{prefix}-closed {
                         height: 0;
                         border: none;
                     }
@@ -161,9 +163,9 @@ graphjs-forum-thread.graphjs-root {
         }
     }
     /* Placeholder */
-    .placeholder {
+    .@{prefix}-placeholder {
         padding: 0 2.5em;
-        .title {
+        .@{prefix}-title {
             display: none !important;
             position: relative;
             width: calc(50% - 2.5em);
@@ -172,7 +174,7 @@ graphjs-forum-thread.graphjs-root {
             height: 1.5em;
             .border-radius(calc(1.5em / 2));
         }
-        .creator {
+        .@{prefix}-creator {
             display: block;
             height: 3em;
             margin-top: 1.5em;
@@ -180,17 +182,17 @@ graphjs-forum-thread.graphjs-root {
             & > * {
                 float: left;
             }
-            .avatar {
+            .@{prefix}-avatar {
                 display: block;
                 width: 3em;
                 height: 3em;
             }
-            .information {
+            .@{prefix}-information {
                 display: block;
                 width: calc(35% - 2.5em);
                 height: 3em;
                 padding: .5em;
-                .line {
+                .@{prefix}-line {
                     height: .8em;
                     .border-radius(calc(.8em / 2));
                     &:first-child {
@@ -200,14 +202,14 @@ graphjs-forum-thread.graphjs-root {
                 }
             }
         }
-        .text {
+        .@{prefix}-text {
             display: block;
             width: 100%;
             height: 6em;
             margin-top: .75em;
             margin-bottom: 1em;
             padding-left: calc(3em * 1.2);
-            .line {
+            .@{prefix}-line {
                 height: .85em;
                 margin-bottom: .65em;
                 .border-radius(calc(.85em / 2));
@@ -220,29 +222,29 @@ graphjs-forum-thread.graphjs-root {
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    graphjs-forum-thread.graphjs-root {
-        &.composer {
-            .content {
-                .thread {
+    @{prefix}-forum-thread.@{prefix}-root {
+        &.@{prefix}-composer {
+            .@{prefix}-content {
+                .@{prefix}-thread {
                     margin-bottom: 15em;
                 }
             }
         }
-        .content {
-            .thread {
-                .title {
+        .@{prefix}-content {
+            .@{prefix}-thread {
+                .@{prefix}-title {
                     display: block;
                     padding: 1em 1.5em 0;
                     h1 {
                         font-size: 1.55em;
                     }
                 }
-                .replies {
+                .@{prefix}-replies {
                     padding-right: 1.5em;
                     padding-left: 1.5em;
-                    .item {
+                    .@{prefix}-item {
                         padding: 1em 0;
-                        .credit {
+                        .@{prefix}-credit {
                             margin-bottom: .75em;
                         }
                         p {
@@ -251,7 +253,7 @@ graphjs-forum-thread.graphjs-root {
                     }
                 }
             }
-            .reply {
+            .@{prefix}-reply {
                 bottom: -12em;
                 height: 15em;
                 padding: 1em 1.5em;
@@ -264,18 +266,18 @@ graphjs-forum-thread.graphjs-root {
             }
         }
         /* Placeholder */
-        .placeholder {
+        .@{prefix}-placeholder {
             padding: 0 1.5em;
-            .title {
+            .@{prefix}-title {
                 display: block;
                 width: calc(90% - 2.5em);
                 margin-top: 1.25em;
             }
-            .text {
+            .@{prefix}-text {
                 padding-left: 0;
             }
-            .creator {
-                .information {
+            .@{prefix}-creator {
+                .@{prefix}-information {
                     width: calc(45% - 2.5em);
                 }
             }
@@ -285,29 +287,29 @@ graphjs-forum-thread.graphjs-root {
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    graphjs-forum-thread.graphjs-root {
-        &.composer {
-            .content {
-                .thread {
+    @{prefix}-forum-thread.@{prefix}-root {
+        &.@{prefix}-composer {
+            .@{prefix}-content {
+                .@{prefix}-thread {
                     margin-bottom: 16.5em;
                 }
             }
         }
-        .content {
-            .thread {
-                .title {
+        .@{prefix}-content {
+            .@{prefix}-thread {
+                .@{prefix}-title {
                     display: block;
                     padding: 1.25em 2em 0;
                     h1 {
                         font-size: 1.65em;
                     }
                 }
-                .replies {
+                .@{prefix}-replies {
                     padding-right: 2em;
                     padding-left: 2em;
-                    .item {
+                    .@{prefix}-item {
                         padding: 1.25em 0;
-                        .credit {
+                        .@{prefix}-credit {
                             margin-bottom: .5em;
                         }
                         p {
@@ -316,7 +318,7 @@ graphjs-forum-thread.graphjs-root {
                     }
                 }
             }
-            .reply {
+            .@{prefix}-reply {
                 bottom: -13.5em;
                 height: 16.5em;
                 padding: 1.25em 2em;
@@ -329,18 +331,18 @@ graphjs-forum-thread.graphjs-root {
             }
         }
         /* Placeholder */
-        .placeholder {
+        .@{prefix}-placeholder {
             padding: 0 2em;
-            .title {
+            .@{prefix}-title {
                 display: block;
                 width: calc(70% - 2.5em);
                 margin-top: 2em
             }
-            .text {
+            .@{prefix}-text {
                 padding-left: 0;
             }
-            .creator {
-                .information {
+            .@{prefix}-creator {
+                .@{prefix}-information {
                     width: calc(40% - 2.5em);
                 }
             }

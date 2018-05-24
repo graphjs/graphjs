@@ -1,10 +1,12 @@
-graphjs-alert.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-alert.@{prefix}-root {
     display: block;
     width: 320px;
     color: fade(@text-color-strong, 65%);
     background-color: @contrast-color !important;
     .clearfix;
-    .content {
+    .@{prefix}-content {
         background-color: @contrast-color !important;
         p {
             text-align: center;
@@ -21,14 +23,14 @@ graphjs-alert.graphjs-root {
         &:hover {
             background-color: @contrast-color !important;
         }
-        &.danger {
+        &.@{prefix}-danger {
             color: @danger-color !important;
             background-color: @contrast-color;
         }
-        &.full {
+        &.@{prefix}-full {
             width: 100%;
         }
-        &.half {
+        &.@{prefix}-half {
             float: left;
             width: 50%;
             &:first-of-type {

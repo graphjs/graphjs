@@ -1,5 +1,5 @@
-<graphjs-profile-following class="graphjs-root wallet">
-    <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
+<graphjs-profile-following class="graphjs-root graphjs-wallet">
+    <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <p if={empty}>This user is not following any users.</p>
         <graphjs-profile-card each={id in list} id={id}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
@@ -8,7 +8,7 @@
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
-        <button if={blocked} onclick={handleBlock} class="blockage">Login to display content</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to display content</button>
     </div>
     <style type="less">
         @import '../styles/variables.less';

@@ -1,5 +1,5 @@
-<graphjs-profile-activity class="graphjs-root box">
-    <div class={'content' + (loaded ? '' : ' loading') + (blocked ? ' blocked' : '')}>
+<graphjs-profile-activity class="graphjs-root graphjs-box">
+    <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <ul if={activity.length > 0}>
             <li each={item in activity}>
                 <div if={item.type == '_construct'}>
@@ -74,59 +74,59 @@
                 </div>
             </li>
         </ul>
-        <div if={!loaded} class="placeholder loader">
-            <div class="list">
-                <div class="item">
-                    <div class="icon rounded-square fill"></div>
-                    <div class="bullet circle fill"></div>
-                    <div class="paragraph">
-                        <div class="line fill"></div>
-                        <div class="line fill"></div>
+        <div if={!loaded} class="graphjs-placeholder graphjs-loader">
+            <div class="graphjs-list">
+                <div class="graphjs-item">
+                    <div class="graphjs-icon graphjs-rounded-square graphjs-fill"></div>
+                    <div class="graphjs-bullet graphjs-circle graphjs-fill"></div>
+                    <div class="graphjs-paragraph">
+                        <div class="graphjs-line graphjs-fill"></div>
+                        <div class="graphjs-line graphjs-fill"></div>
                     </div>
                 </div>
-                <div class="item">
-                    <div class="icon rounded-square fill"></div>
-                    <div class="bullet circle fill"></div>
-                    <div class="paragraph">
-                        <div class="line fill"></div>
-                        <div class="line fill"></div>
+                <div class="graphjs-item">
+                    <div class="graphjs-icon graphjs-rounded-square graphjs-fill"></div>
+                    <div class="graphjs-bullet graphjs-circle graphjs-fill"></div>
+                    <div class="graphjs-paragraph">
+                        <div class="graphjs-line graphjs-fill"></div>
+                        <div class="graphjs-line graphjs-fill"></div>
                     </div>
                 </div>
-                <div class="item">
-                    <div class="icon rounded-square fill"></div>
-                    <div class="bullet circle fill"></div>
-                    <div class="paragraph">
-                        <div class="line fill"></div>
-                        <div class="line fill"></div>
+                <div class="graphjs-item">
+                    <div class="graphjs-icon graphjs-rounded-square graphjs-fill"></div>
+                    <div class="graphjs-bullet graphjs-circle graphjs-fill"></div>
+                    <div class="graphjs-paragraph">
+                        <div class="graphjs-line graphjs-fill"></div>
+                        <div class="graphjs-line graphjs-fill"></div>
                     </div>
                 </div>
-                <div class="item">
-                    <div class="icon rounded-square fill"></div>
-                    <div class="bullet circle fill"></div>
-                    <div class="paragraph">
-                        <div class="line fill"></div>
-                        <div class="line fill"></div>
+                <div class="graphjs-item">
+                    <div class="graphjs-icon graphjs-rounded-square graphjs-fill"></div>
+                    <div class="graphjs-bullet graphjs-circle graphjs-fill"></div>
+                    <div class="graphjs-paragraph">
+                        <div class="graphjs-line graphjs-fill"></div>
+                        <div class="graphjs-line graphjs-fill"></div>
                     </div>
                 </div>
-                <div class="item">
-                    <div class="icon rounded-square fill"></div>
-                    <div class="bullet circle fill"></div>
-                    <div class="paragraph">
-                        <div class="line fill"></div>
-                        <div class="line fill"></div>
+                <div class="graphjs-item">
+                    <div class="graphjs-icon graphjs-rounded-square graphjs-fill"></div>
+                    <div class="graphjs-bullet graphjs-circle graphjs-fill"></div>
+                    <div class="graphjs-paragraph">
+                        <div class="graphjs-line graphjs-fill"></div>
+                        <div class="graphjs-line graphjs-fill"></div>
                     </div>
                 </div>
-                <div class="item">
-                    <div class="icon rounded-square fill"></div>
-                    <div class="bullet circle fill"></div>
-                    <div class="paragraph">
-                        <div class="line fill"></div>
-                        <div class="line fill"></div>
+                <div class="graphjs-item">
+                    <div class="graphjs-icon graphjs-rounded-square graphjs-fill"></div>
+                    <div class="graphjs-bullet graphjs-circle graphjs-fill"></div>
+                    <div class="graphjs-paragraph">
+                        <div class="graphjs-line graphjs-fill"></div>
+                        <div class="graphjs-line graphjs-fill"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="blockage">Login to display thread</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to display thread</button>
     </div>
     <style type="less">
         @import '../styles/variables.less';

@@ -1,7 +1,9 @@
-graphjs-forum-composer.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-forum-composer.@{prefix}-root {
     display: block;
     color: fade(@text-color-strong, 65%);
-    .content {
+    .@{prefix}-content {
         form {
             .clearfix;
             input {
@@ -30,8 +32,8 @@ graphjs-forum-composer.graphjs-root {
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    graphjs-forum-compose.graphjs-root {
-        .content {
+    @{prefix}-forum-compose.@{prefix}-root {
+        .@{prefix}-content {
             form {
                 input {
                     width: 100%;
@@ -58,8 +60,8 @@ graphjs-forum-composer.graphjs-root {
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    graphjs-forum-compose.graphjs-root {
-        .content {
+    @{prefix}-forum-compose.@{prefix}-root {
+        .@{prefix}-content {
             form {
                 input {
                     width: 80%;

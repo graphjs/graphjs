@@ -1,10 +1,12 @@
-graphjs-forum-list.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-forum-list.@{prefix}-root {
     display: block;
     color: fade(@text-color-strong, 65%);
-    .content {
+    .@{prefix}-content {
         min-height: 21em;
         .no-padding !important;
-        .bar {
+        .@{prefix}-bar {
             display: table;
             width: 100%;
             height: auto;
@@ -12,7 +14,7 @@ graphjs-forum-list.graphjs-root {
                 float: left;
                 border-radius: 0;
             }
-            .search {
+            .@{prefix}-search {
                 width: calc(100% - 12em);
                 border-right: 2px solid @contrast-color;
                 background-color: desaturate(tint(@primary-color, 20%), 5%);
@@ -20,7 +22,7 @@ graphjs-forum-list.graphjs-root {
                     float: left;
                     border-radius: 0;
                 }
-                .icon {
+                .@{prefix}-icon {
                     width: 3.5em;
                     height: 3.5em;
                     svg {
@@ -68,12 +70,12 @@ graphjs-forum-list.graphjs-root {
                 }
             }
         }
-        .list {
+        .@{prefix}-list {
             display: inline-block;
             width: 100%;
             height: auto;
             vertical-align: middle;
-            .item {
+            .@{prefix}-item {
                 display: table;
                 width: 100%;
                 color: @text-color-normal;
@@ -85,7 +87,7 @@ graphjs-forum-list.graphjs-root {
                 &:hover {
                     background-color: fade(@primary-color, 5%);
                 }
-                &.placeholder {
+                &.@{prefix}-placeholder {
                     color: @text-color-weak;
                     text-align: center;
                 }
@@ -95,14 +97,14 @@ graphjs-forum-list.graphjs-root {
                         border-left: none;
                     }
                 }
-                .title {
+                .@{prefix}-title {
                     width: calc(100% - 16em);
                     padding: 0 1.5em;
                     color: @text-color-strong;
                     .single-line-text;
                 }
                 /*
-                .views {
+                .@{prefix}-views {
                     width: 10%;
                     font-size: .9em;
                     svg {
@@ -119,7 +121,7 @@ graphjs-forum-list.graphjs-root {
                     width: calc(4em / .9);
                     font-size: .9em;
                 }
-                .contributors {
+                .@{prefix}-contributors {
                     width: 10.5em;
                     height: 3.5em;
                     margin-right: 1.5em;
@@ -135,22 +137,22 @@ graphjs-forum-list.graphjs-root {
         }
     }
     /* Placeholder */
-    .placeholder {
-        .bar {
+    .@{prefix}-placeholder {
+        .@{prefix}-bar {
             display: block;
             width: 100%;
             height: 3.5em;
         }
-        .list {
+        .@{prefix}-list {
             display: block;
             width: 100%;
             height: auto;
-            .item {
+            .@{prefix}-item {
                 display: block;
                 width: 100%;
                 height: calc(3.5em + 1px);
                 padding: .75em 0;
-                .title {
+                .@{prefix}-title {
                     display: block;
                     width: calc(80% - 17.5em);
                     height: .9em;
@@ -160,7 +162,7 @@ graphjs-forum-list.graphjs-root {
                     .no-padding;
                     .border-radius(calc(.9em / 2));
                 }
-                .time {
+                .@{prefix}-time {
                     display: block;
                     width: 2.5em;
                     height: .8em;
@@ -169,12 +171,12 @@ graphjs-forum-list.graphjs-root {
                     margin-right: 1.5em;
                     .border-radius(calc(.8em / 2));
                 }
-                .contributors {
+                .@{prefix}-contributors {
                     width: 10.5em;
                     height: 2em;
                     .no-padding;
                     .clearfix;
-                    .avatar {
+                    .@{prefix}-avatar {
                         display: block;
                         float: left;
                         width: 2em;
@@ -191,10 +193,10 @@ graphjs-forum-list.graphjs-root {
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    graphjs-forum-list.graphjs-root {
-        .content {
-            .bar {
-                .search {
+    @{prefix}-forum-list.@{prefix}-root {
+        .@{prefix}-content {
+            .@{prefix}-bar {
+                .@{prefix}-search {
                     width: calc(100% - 3.5em);
                 }
                 button {
@@ -204,13 +206,13 @@ graphjs-forum-list.graphjs-root {
                     }
                 }
             }
-            .list {
-                .item {
-                    .title {
+            .@{prefix}-list {
+                .@{prefix}-item {
+                    .@{prefix}-title {
                         width: calc(100% - 11.5em);
                         padding: 0 1em;
                     }
-                    .contributors {
+                    .@{prefix}-contributors {
                         width: 6.5em;
                         margin-right: 1em;
                         img {
@@ -223,21 +225,21 @@ graphjs-forum-list.graphjs-root {
             }
         }
         /* Placeholder */
-        .placeholder {
-            .list {
-                .item {
+        .@{prefix}-placeholder {
+            .@{prefix}-list {
+                .@{prefix}-item {
                     height: calc(3.5em + 1px);
-                    .title {
+                    .@{prefix}-title {
                         width: calc(80% - 12.5em);
                         margin-left: 1em;
                         margin-right: 20%;
                     }
-                    .time {
+                    .@{prefix}-time {
                         width: 2.5em;
                         margin-right: 1.5em;
                     }
-                    .contributors {
-                        .avatar {
+                    .@{prefix}-contributors {
+                        .@{prefix}-avatar {
                             margin-right: -.9em;
                         }
                     }
@@ -249,23 +251,23 @@ graphjs-forum-list.graphjs-root {
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    graphjs-forum-list.graphjs-root {
-        .content {
-            .bar {
-                .search {
+    @{prefix}-forum-list.@{prefix}-root {
+        .@{prefix}-content {
+            .@{prefix}-bar {
+                .@{prefix}-search {
                     width: calc(100% - 10em);
                 }
                 button {
                     width: 10em;
                 }
             }
-            .list {
-                .item {
-                    .title {
+            .@{prefix}-list {
+                .@{prefix}-item {
+                    .@{prefix}-title {
                         width: calc(100% - 14em);
                         padding: 0 1.5em;
                     }
-                    .contributors {
+                    .@{prefix}-contributors {
                         width: 8.5em;
                         margin-right: 1.5em;
                         img {
@@ -277,21 +279,21 @@ graphjs-forum-list.graphjs-root {
             }
         }
         /* Placeholder */
-        .placeholder {
-            .list {
-                .item {
+        .@{prefix}-placeholder {
+            .@{prefix}-list {
+                .@{prefix}-item {
                     height: calc(3.5em + 1px);
-                    .title {
+                    .@{prefix}-title {
                         width: calc(80% - 15.5em);
                         margin-left: 1.5em;
                         margin-right: 20%;
                     }
-                    .time {
+                    .@{prefix}-time {
                         width: 2.5em;
                         margin-right: 1.5em;
                     }
-                    .contributors {
-                        .avatar {
+                    .@{prefix}-contributors {
+                        .@{prefix}-avatar {
                             margin-right: -.4em;
                         }
                     }

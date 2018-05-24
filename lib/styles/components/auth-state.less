@@ -1,10 +1,12 @@
-graphjs-auth-state.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-auth-state.@{prefix}-root {
     display: inline-block;
     box-sizing: content-box !important;
     height: @bar-height;
     border: none;
     background-color: @contrast-color;
-    .content {
+    .@{prefix}-content {
         .no-padding !important;
         color: fade(@text-color-strong, 65%);
         .bold-font;
@@ -23,11 +25,11 @@ graphjs-auth-state.graphjs-root {
             &:last-of-type {
                 border-right-color: transparent;
             }
-            &.active {
+            &.@{prefix}-active {
                 background-color: @contrast-color;
             }
         }
-        .not-logged {
+        .@{prefix}-not-logged {
             height: @bar-height;
             line-height: @bar-height;
             text-align: center;
@@ -38,7 +40,7 @@ graphjs-auth-state.graphjs-root {
 
             }
         }
-        .logged {
+        .@{prefix}-logged {
             height: @bar-height;
             a {
                 display: inline-block;
@@ -46,10 +48,10 @@ graphjs-auth-state.graphjs-root {
                 line-height: @bar-height;
                 .transition(background-color .35s ease);
             }
-            .idle {
+            .@{prefix}-idle {
                 padding: 0 15px;
             }
-            .details {
+            .@{prefix}-details {
                 float: left;
                 height: @bar-height;
                 padding: 5px;
@@ -71,7 +73,7 @@ graphjs-auth-state.graphjs-root {
                     vertical-align: middle;
                 }
             }
-            .exit {
+            .@{prefix}-exit {
                 float: right;
                 width: @bar-height;
                 height: @bar-height;
@@ -92,7 +94,7 @@ graphjs-auth-state.graphjs-root {
     }
     &.color {
         background-color: @primary-color;
-        .content {
+        .@{prefix}-content {
             a {
                 color: white;
                 border-right: 1px dotted fade(white, 35%);
@@ -102,12 +104,12 @@ graphjs-auth-state.graphjs-root {
                 &:hover {
                     background-color: fade(black, 5%);
                 }
-                &.active {
+                &.@{prefix}-active {
                     background-color: fade(black, 10%);
                 }
             }
-            .logged {
-                .exit {
+            .@{prefix}-logged {
+                .@{prefix}-exit {
                     svg {
                         path {
                             fill: fade(white, 50%);
@@ -117,7 +119,7 @@ graphjs-auth-state.graphjs-root {
             }
         }
     }
-    &.inline {
+    &.@{prefix}-inline {
         border: none !important;
         background-color: transparent !important;
         box-shadow: none !important;

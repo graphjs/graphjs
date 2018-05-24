@@ -1,10 +1,12 @@
-graphjs-star-list.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-star-list.@{prefix}-root {
     display: block;
     color: fade(@text-color-strong, 65%);
-    .content {
+    .@{prefix}-content {
         min-height: 21em;
         .no-padding !important;
-        .bar {
+        .@{prefix}-bar {
             display: table;
             width: 100%;
             height: auto;
@@ -12,14 +14,14 @@ graphjs-star-list.graphjs-root {
                 float: left;
                 border-radius: 0;
             }
-            .search {
+            .@{prefix}-search {
                 width: 100%;
                 background-color: desaturate(tint(@primary-color, 20%), 5%);
                 & > * {
                     float: left;
                     border-radius: 0;
                 }
-                .icon {
+                .@{prefix}-icon {
                     width: 3.5em;
                     height: 3.5em;
                     svg {
@@ -46,12 +48,12 @@ graphjs-star-list.graphjs-root {
                 }
             }
         }
-        .list {
+        .@{prefix}-list {
             display: inline-block;
             width: 100%;
             height: auto;
             vertical-align: middle;
-            .item {
+            .@{prefix}-item {
                 display: table;
                 width: 100%;
                 color: @text-color-normal;
@@ -62,11 +64,11 @@ graphjs-star-list.graphjs-root {
                 }
                 &:hover {
                     background-color: fade(@primary-color, 5%);
-                    .remove {
+                    .@{prefix}-remove {
                         display: block;
                     }
                 }
-                &.placeholder {
+                &.@{prefix}-placeholder {
                     color: @text-color-weak;
                     text-align: center;
                 }
@@ -76,7 +78,7 @@ graphjs-star-list.graphjs-root {
                         border-left: none;
                     }
                 }
-                & > .icon {
+                & > .@{prefix}-icon {
                     display: block;
                     float: left;
                     position: relative;
@@ -87,20 +89,20 @@ graphjs-star-list.graphjs-root {
                     text-align: center;
                     .border-radius(inherit);
                     .clearfix;
-                    &.count {
+                    &.@{prefix}-count {
                         width: 7.5em;
                     }
-                    &.default {
+                    &.@{prefix}-default {
                         div {
                             background-color: orange;
                         }
                     }
-                    &.like {
+                    &.@{prefix}-like {
                         div {
                             background-color: dodgerblue;
                         }
                     }
-                    &.love {
+                    &.@{prefix}-love {
                         div {
                             background-color: crimson;
                             svg {
@@ -108,7 +110,7 @@ graphjs-star-list.graphjs-root {
                             }
                         }
                     }
-                    &.save {
+                    &.@{prefix}-save {
                         div {
                             background-color: lightseagreen;
                             svg {
@@ -126,7 +128,7 @@ graphjs-star-list.graphjs-root {
                         & > * {
                             float: left;
                         }
-                        .icon {
+                        .@{prefix}-icon {
                             width: 2em;
                             height: 2em;
                             svg {
@@ -142,7 +144,7 @@ graphjs-star-list.graphjs-root {
                                 }
                             }
                         }
-                        .count {
+                        .@{prefix}-count {
                             color: white;
                             .bold-font;
                             font-size: 1.5em;
@@ -151,7 +153,7 @@ graphjs-star-list.graphjs-root {
                         }
                     }
                 }
-                .title {
+                .@{prefix}-title {
                     cursor: pointer;
                     width: calc(100% - 7.5em);
                     color: @text-color-strong;
@@ -170,7 +172,7 @@ graphjs-star-list.graphjs-root {
                         .transition(all .35s ease);
                     }
                 }
-                .remove {
+                .@{prefix}-remove {
                     display: none;
                     cursor: pointer;
                     width: 3.5em;
@@ -184,7 +186,7 @@ graphjs-star-list.graphjs-root {
                 }
             }
         }
-        .controls {
+        .@{prefix}-controls {
             width: 100%;
             height: 3em;
             padding: .5em;
@@ -210,7 +212,7 @@ graphjs-star-list.graphjs-root {
                 &:hover {
                     opacity: 1;
                 }
-                &.disabled {
+                &.@{prefix}-disabled {
                     opacity: .35;
                     pointer-events: none;
                 }
@@ -232,31 +234,31 @@ graphjs-star-list.graphjs-root {
         }
     }
     /* Placeholder */
-    .placeholder {
-        &.tight {
-            .list {
-                .item {
-                    .icon {
+    .@{prefix}-placeholder {
+        &.@{prefix}-tight {
+            .@{prefix}-list {
+                .@{prefix}-item {
+                    .@{prefix}-icon {
                         width: 2em;
                         margin-left: .25em;
                     }
                 }
             }
         }
-        .bar {
+        .@{prefix}-bar {
             display: block;
             width: 100%;
             height: 3.5em;
         }
-        .list {
+        .@{prefix}-list {
             display: block;
             width: 100%;
-            .item {
+            .@{prefix}-item {
                 display: block;
                 width: 100%;
                 height: 3.5em;
                 padding: .75em;
-                .icon {
+                .@{prefix}-icon {
                     display: block;
                     width: 4em;
                     height: 2em;
@@ -264,7 +266,7 @@ graphjs-star-list.graphjs-root {
                     font-size: 1em;
                     .border-radius(calc(1em / 2));
                 }
-                .title {
+                .@{prefix}-title {
                     display: block;
                     width: 100%;
                     height: .9em;
@@ -282,11 +284,11 @@ graphjs-star-list.graphjs-root {
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    graphjs-star-list {
-        .content {
-            .list {
-                .item {
-                    .remove {
+    @{prefix}-star-list {
+        .@{prefix}-content {
+            .@{prefix}-list {
+                .@{prefix}-item {
+                    .@{prefix}-remove {
                         display: block;
                     }
                 }
@@ -297,11 +299,11 @@ graphjs-star-list.graphjs-root {
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    graphjs-star-list {
-        .content {
-            .list {
-                .item {
-                    .remove {
+    @{prefix}-star-list {
+        .@{prefix}-content {
+            .@{prefix}-list {
+                .@{prefix}-item {
+                    .@{prefix}-remove {
                         display: block;
                     }
                 }

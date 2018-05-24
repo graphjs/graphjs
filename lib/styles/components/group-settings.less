@@ -1,12 +1,14 @@
-graphjs-group-settings.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-group-settings.@{prefix}-root {
     display: block;
     width: 100%;
     text-align: center;
-    .content {
+    .@{prefix}-content {
         h2 {
             color: @secondary-color;
         }
-        .cover {
+        .@{prefix}-cover {
             overflow: hidden;
             display: inline-block;
             position: relative;
@@ -48,7 +50,7 @@ graphjs-group-settings.graphjs-root {
             max-width: 24em;
             margin: 0 auto;
             input {
-                &.success {
+                &.@{prefix}-success {
                     border: 1px solid @success-color;
                     &::after {
                         content: "OK";

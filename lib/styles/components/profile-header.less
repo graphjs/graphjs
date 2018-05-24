@@ -1,4 +1,6 @@
-graphjs-profile-header.graphjs-root {
+@prefix: graphjs;
+
+@{prefix}-profile-header.@{prefix}-root {
     overflow: hidden;
     display: block;
     width: 100%;
@@ -8,17 +10,17 @@ graphjs-profile-header.graphjs-root {
     & + * {
         margin-top: 1.5em;
     }
-    .option {
+    .@{prefix}-option {
         display: inline-block;
         width: 3.75em;
         height: 3.75em;
         padding: 1em;
         text-align: center;
         .icon-color-states(@primary-color);
-        &.left {
+        &.@{prefix}-left {
             float: left;
         }
-        &.right {
+        &.@{prefix}-right {
             float: right;
         }
         svg {
@@ -32,7 +34,7 @@ graphjs-profile-header.graphjs-root {
             }
         }
     }
-    .information {
+    .@{prefix}-information {
         height: 15em;
         padding-top: 2em;
         background-color: @contrast-color;
@@ -81,7 +83,7 @@ graphjs-profile-header.graphjs-root {
                     opacity: 1;
                 }
             }
-            &.active {
+            &.@{prefix}-active {
                 a {
                     opacity: 1;
                     pointer-events: none;
@@ -96,7 +98,7 @@ graphjs-profile-header.graphjs-root {
                 font-size: @font-size-default * 1.1;
                 .bold-font;
                 line-height: 2.5em;
-                &.count {
+                &.@{prefix}-count {
                     &::before {
                         content: attr(data-count);
                     }
@@ -110,23 +112,23 @@ graphjs-profile-header.graphjs-root {
             }
         }
     }
-    &.color {
-        .option {
+    &.@{prefix}-color {
+        .@{prefix}-option {
             svg {
                 path {
                     fill: white;
                 }
             }
         }
-        .information {
+        .@{prefix}-information {
             img {
                 border: 4px solid white;
             }
         }
     }
     /* Placeholder */
-    .placeholder {
-        .information {
+    .@{prefix}-placeholder {
+        .@{prefix}-information {
             display: block;
             width: 100%;
             height: 15em;
@@ -134,13 +136,13 @@ graphjs-profile-header.graphjs-root {
             margin: 0 auto;
             padding-top: 2em;
             background-color: transparent !important;
-            .avatar {
+            .@{prefix}-avatar {
                 display: block;
                 width: 6.5em;
                 height: 6.5em;
                 margin: 0 auto;
             }
-            .title {
+            .@{prefix}-title {
                 display: block;
                 width: 40%;
                 height: 1em;
@@ -148,7 +150,7 @@ graphjs-profile-header.graphjs-root {
                 margin-top: 1em;
                 .border-radius(calc(1em / 2));
             }
-            .description {
+            .@{prefix}-description {
                 display: block;
                 width: 90%;
                 height: .85em;
@@ -157,7 +159,7 @@ graphjs-profile-header.graphjs-root {
                 .border-radius(calc(.85em / 2));
             }
         }
-        .list {
+        .@{prefix}-list {
             display: block;
             position: absolute;
             bottom: 0;
@@ -173,7 +175,7 @@ graphjs-profile-header.graphjs-root {
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    graphjs-profile-header.graphjs-root {
+    @{prefix}-profile-header.@{prefix}-root {
         ul {
             display: flex;
             border-top: none;
@@ -185,7 +187,7 @@ graphjs-profile-header.graphjs-root {
                 &:last-of-type {
                     border-right: none;
                 }
-                &.active {
+                &.@{prefix}-active {
                     border-top: none;
                     background-color: @contrast-color;
                 }
@@ -195,7 +197,7 @@ graphjs-profile-header.graphjs-root {
                     padding: 1.25em 0;
                     font-size: @font-size-default * 1.1;
                     line-height: .85em;
-                    &.count{
+                    &.@{prefix}-count{
                         &::before {
                             display: none;
                         }
@@ -229,8 +231,8 @@ graphjs-profile-header.graphjs-root {
             }
         }
         /* Placeholder */
-        .placeholder {
-            .list {
+        .@{prefix}-placeholder {
+            .@{prefix}-list {
                 height: 5em;
             }
         }
@@ -239,7 +241,7 @@ graphjs-profile-header.graphjs-root {
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    graphjs-profile-header.graphjs-root {
+    @{prefix}-profile-header.@{prefix}-root {
         ul {
             display: flex;
             border-top: none;
@@ -251,7 +253,7 @@ graphjs-profile-header.graphjs-root {
                 &:last-of-type {
                     border-right: none;
                 }
-                &.active {
+                &.@{prefix}-active {
                     border-top: none;
                     background-color: @contrast-color;
                 }
@@ -261,7 +263,7 @@ graphjs-profile-header.graphjs-root {
                     padding: 1.25em 0;
                     font-size: @font-size-default * 1.1;
                     line-height: .85em;
-                    &.count {
+                    &.@{prefix}-count {
                         &::before {
                             display: none;
                         }
@@ -295,8 +297,8 @@ graphjs-profile-header.graphjs-root {
             }
         }
         /* Placeholder */
-        .placeholder {
-            .list {
+        .@{prefix}-placeholder {
+            .@{prefix}-list {
                 height: 5em;
             }
         }
