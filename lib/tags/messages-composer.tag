@@ -14,7 +14,7 @@
         <form>
             <textarea ref="message" placeholder="Write your message here..."></textarea>
             <button onclick={handleMessage}>Send Message</button>
-            <button onclick={handleClear} class="graphjs-danger">Clear</button>
+            <button if={opts.clear} onclick={handleClear} class="graphjs-danger">Clear</button>
         </form>
         <div if={!loaded && !blocked} class="graphjs-inline graphjs-loader">
             <img src="lib/images/animations/loading-dots.gif">
