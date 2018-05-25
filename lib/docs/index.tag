@@ -142,7 +142,8 @@
                     width: 100%;
                     color: rgb(158, 119, 255);
                     margin: 0;
-                    margin-bottom: 1.5em;
+                    margin-top: .5em;
+                    margin-bottom: 1em;
                 }
                 section {
                     display: block;

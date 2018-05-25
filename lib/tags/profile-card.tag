@@ -138,7 +138,8 @@
         this.handleMessagesComposer = () => {
             let self = this;
             showMessagesComposer({
-                "to": self.id
+                "to": self.id,
+                "close": true
             });
         }
         this.handleUpdate = () => this.update();
