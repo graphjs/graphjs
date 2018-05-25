@@ -1,6 +1,6 @@
 <graphjs-group-card class={'graphjs-root graphjs-card graphjs-box' + (loaded ? '' : ' graphjs-loading')}>
     <div class="graphjs-information" if={group}>
-        <img src={group.cover || 'lib/images/covers/group.png'} />
+        <img src={downsizeImage(group.cover, 240) || 'lib/images/covers/group.png'} />
         <a data-link="group" data-id={id} onclick={handleShow} if={group}>{group.title}</a>
         <p>{group.count == 1 ? group.count + ' Member' : group.count + ' Members'}</p>
     </div>
@@ -30,6 +30,9 @@
         import showGroup from '../scripts/showGroup.js';
         import getSession from '../scripts/getSession.js';
         import listMembers from '../scripts/listMembers.js';
+        
+        import {downsizeImage} from '../scripts/client.js';
+        this.downsizeImage = downsizeImage;
 
         this.id = opts.id;
         this.members = opts.id;

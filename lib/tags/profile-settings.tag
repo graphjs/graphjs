@@ -9,7 +9,7 @@
     </div>
     <div class="graphjs-content">
         <a ref="uploadWidget" class="graphjs-avatar">
-            <img src={profile && profile.avatar ? profile.avatar : 'lib/images/avatars/user.png'} />
+            <img src={profile && profile.avatar ? downsizeImage(profile.avatar, 160) : 'lib/images/avatars/user.png'} />
         </a>
         <h2>Profile</h2>
         <form>
@@ -43,6 +43,9 @@
         import setUsername from '../scripts/setUsername.js';
         import showAlert from '../scripts/showAlert.js';
         import '../vendor/cloudinary/upload-widget.js';
+        
+        import {downsizeImage} from '../scripts/client.js';
+        this.downsizeImage = downsizeImage;
 
         this.failMessages = [];
         this.successMessages = [];

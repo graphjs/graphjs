@@ -8,7 +8,7 @@
         <div class="graphjs-logged" if={id}>
             <a if={!profile} class="graphjs-idle">&middot; &middot; &middot;</a>
             <a class="graphjs-details" if={profile}>
-                <img src={profile.avatar || 'lib/images/avatars/user.png'} />
+                <img src={downsizeImage(profile.avatar, 40) || 'lib/images/avatars/user.png'} />
                 <span>{profile.fullname || profile.username}</span>
             </a>
             <a class="graphjs-exit" if={profile} onclick={handleExit}>
@@ -34,6 +34,9 @@
         import logout from '../scripts/logout.js'
         import showLogin from '../scripts/showLogin.js';
         import showRegister from '../scripts/showRegister.js';
+        
+        import {downsizeImage} from '../scripts/client.js';
+        this.downsizeImage = downsizeImage;
 
         this.failMessages = [];
 

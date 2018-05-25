@@ -1,10 +1,10 @@
 <graphjs-group-header class={'graphjs-root graphjs-box' + (loaded ? '' : ' graphjs-loading')}>
     <div class="graphjs-information" if={group}>
-        <div class="graphjs-cover" style={'background-image: url(' + (group && group.cover ? group.cover : 'lib/images/covers/group.png') + ');'}></div>
+        <div class="graphjs-cover" style={'background-image: url(' + (group && group.cover ? downsizeImage(group.cover, 770) : 'lib/images/covers/group.png') + ');'}></div>
         <a>{group.title}</a>
         <p>{group.description}</p>
         <div class="graphjs-members" if={avatars}>
-            <img each={avatar in avatars} src={avatar || 'lib/images/avatars/user.png'} />
+            <img each={avatar in avatars} src={downsizeImage(avatar, 30) || 'lib/images/avatars/user.png'} />
             <span if={members && members.length >= 5}>
                 <small>{'+' + (members.length - 4)}</small>
             </span>
@@ -84,6 +84,9 @@
         import getSession from '../scripts/getSession.js';
         import listMembers from '../scripts/listMembers.js';
         import getProfile from '../scripts/getProfile.js';
+        
+        import {downsizeImage} from '../scripts/client.js';
+        this.downsizeImage = downsizeImage;
 
         this.id = opts.id;
         this.userId = undefined;

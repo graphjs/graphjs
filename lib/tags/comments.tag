@@ -25,7 +25,7 @@
         </div>
         <div each={comment in comments} data-id={comment} class="graphjs-item">
             <div class="graphjs-credit" if={authorsData.hasOwnProperty(commentsData[comment].author)}>
-                <img src={authorsData[commentsData[comment].author].avatar || 'lib/images/avatars/user.png'} />
+                <img src={downsizeImage(authorsData[commentsData[comment].author].avatar, 50) || 'lib/images/avatars/user.png'} />
                 <span>
                     <b>{authorsData[commentsData[comment].author].username || 'Unknown User'}</b>
                     <time data-timestamp={commentsData[comment].createTime}>{handleTime(commentsData[comment].createTime)}</time>
@@ -55,6 +55,9 @@
         import removeComment from '../scripts/removeComment.js';
         import getProfile from '../scripts/getProfile.js';
         import showLogin from '../scripts/showLogin.js';
+        
+        import {downsizeImage} from '../scripts/client.js';
+        this.downsizeImage = downsizeImage;
 
         this.blocked = false;
         this.page = 1;

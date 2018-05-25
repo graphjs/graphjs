@@ -20,7 +20,7 @@
         </svg>
     </a>
     <div class="graphjs-information" if={profile}>
-        <img src={profile.avatar || 'lib/images/avatars/user.png'} />
+        <img src={downsizeImage(profile.avatar, 110) || 'lib/images/avatars/user.png'} />
         <a>{profile.fullName || profile.username}</a>
         <p>{profile.about}</p>
     </div>
@@ -101,6 +101,9 @@
         import showMessagesComposer from '../scripts/showMessagesComposer.js';
         import getSession from '../scripts/getSession.js';
         import getFollowing from '../scripts/getFollowing.js';
+        
+        import {downsizeImage} from '../scripts/client.js';
+        this.downsizeImage = downsizeImage;
 
         this.id = opts.id;
         this.profile = {};

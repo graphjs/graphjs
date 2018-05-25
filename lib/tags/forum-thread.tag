@@ -26,7 +26,7 @@
             <div class="graphjs-replies">
                 <div each={entry, index in entries} data-id={entry.id} class="graphjs-item">
                     <div class="graphjs-credit" if={authorsData.hasOwnProperty(entry.author)}>
-                        <img src={authorsData[entry.author].avatar || 'lib/images/avatars/user.png'} />
+                        <img src={downsizeImage(authorsData[entry.author].avatar, 50) || 'lib/images/avatars/user.png'} />
                         <span>
                             <b>{authorsData[entry.author].username || 'Unknown User'}</b>
                             <time data-timestamp={entry.timestamp}>{handleTime(entry.timestamp)}</time>
@@ -124,6 +124,9 @@
         import showForumList from '../scripts/showForumList.js';
         import getProfile from '../scripts/getProfile.js';
         import showLogin from '../scripts/showLogin.js';
+        
+        import {downsizeImage} from '../scripts/client.js';
+        this.downsizeImage = downsizeImage;
 
         this.blocked = false;
         this.access = opts.access || 'public';

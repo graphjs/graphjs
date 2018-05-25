@@ -46,7 +46,7 @@
                     {threadsData[matchedThread] && handleTime(threadsData[matchedThread].timestamp)}
                 </time>
                 <div class="graphjs-contributors" if={threadsData[matchedThread].contributors}>
-                    <img each={contributor, index in threadsData[matchedThread].contributors} src={contributor.avatar || 'lib/images/avatars/user.png'} />
+                    <img each={contributor, index in threadsData[matchedThread].contributors} src={downsizeImage(contributor.avatar, 30) || 'lib/images/avatars/user.png'} />
                 </div>
             </a>
             <div class="graphjs-placeholder graphjs-item" if={matchedThreads.length <= 0}>
@@ -168,6 +168,9 @@
         import showForumCompose from '../scripts/showForumComposer.js';
         import showForumThread from '../scripts/showForumThread.js';
         import showLogin from '../scripts/showLogin.js';
+        
+        import {downsizeImage} from '../scripts/client.js';
+        this.downsizeImage = downsizeImage;
 
         this.blocked = false;
         this.access = opts.access || 'public';
