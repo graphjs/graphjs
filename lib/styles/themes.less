@@ -11,7 +11,7 @@
     @text-color-weak:   fade(@theme-text-color-strong, 50%);
 
     .@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
         * {
             .placeholder-color(tint(@default-color, 50%));
         }
@@ -119,7 +119,7 @@
         }
     }
     @{prefix}-alert.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
         background-color: @contrast-color !important;
         .@{prefix}-content {
             background-color: @contrast-color !important;
@@ -144,18 +144,18 @@
         }
     }
     @{prefix}-auth-login.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
     }
     @{prefix}-auth-register.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
     }
     @{prefix}-auth-reset.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
     }
     @{prefix}-auth-state.@{prefix}-root {
         background-color: @shade-color;
         .@{prefix}-content {
-            color: fade(@text-color-strong, 65%);
+            color: @text-color-normal;
             a {
                 border-right: 1px dotted fade(@default-color, 20%);
                 &:hover {
@@ -180,10 +180,10 @@
         }
     }
     @{prefix}-auth.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
     }
     @{prefix}-comments.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
         background-color: @shade-color;
         .@{prefix}-content {
             .@{prefix}-item {
@@ -196,10 +196,10 @@
         }
     }
     @{prefix}-forum-composer.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
     }
     @{prefix}-forum-list.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
         .@{prefix}-content {
             .@{prefix}-bar {
                 .@{prefix}-search {
@@ -223,7 +223,7 @@
         }
     }
     @{prefix}-forum-thread.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
         .@{prefix}-content {
             .@{prefix}-thread {
                 .@{prefix}-title {
@@ -248,7 +248,7 @@
         }
     }
     @{prefix}-forum.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
     }
     @{prefix}-group-card.@{prefix}-root {
         .@{prefix}-information {
@@ -258,7 +258,7 @@
         }
     }
     @{prefix}-group-header.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
         .@{prefix}-information {
             background-color: @contrast-color;
             p {
@@ -291,7 +291,7 @@
         }
     }
     @{prefix}-messages.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
         .@{prefix}-content {
             .@{prefix}-sidebar {
                 .@{prefix}-suggestions {
@@ -342,7 +342,7 @@
         }
     }
     @{prefix}-overlay.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
     }
     @{prefix}-profile-activity.@{prefix}-root {
         .@{prefix}-content {
@@ -359,7 +359,7 @@
         }
     }
     @{prefix}-profile-card.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
         .@{prefix}-information {
             img {
                 border-color: fade(@default-color, 15%);
@@ -370,7 +370,7 @@
         }
     }
     @{prefix}-profile-header.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
         .@{prefix}-information {
             background-color: @contrast-color;
             img {
@@ -405,7 +405,7 @@
         }
     }
     @{prefix}-star-list.@{prefix}-root {
-        color: fade(@text-color-strong, 65%);
+        color: @text-color-normal;
         .@{prefix}-content {
             .@{prefix}-list {
                 .@{prefix}-item {
