@@ -1,0 +1,289 @@
+@prefix: graphjs;
+
+@theme-color: transparent;
+
+.@{prefix}-custom-color {
+    a {
+        .text-color-states(@theme-color);
+    }
+    button {
+        .background-color-states(@theme-color);
+    }
+    .@{prefix}-box {
+        .@{prefix}-header {
+            .@{prefix}-title {
+                color: @theme-color;
+            }
+            .@{prefix}-option {
+                .icon-color-states(@theme-color);
+                svg {
+                    path {
+                        fill: @theme-color;
+                    }
+                }
+            }
+        }
+    }
+    .@{prefix}-card {
+        .@{prefix}-information {
+            a {
+                .text-color-states(@theme-color);
+            }
+        }
+        button {
+            .background-color-states(@theme-color);
+        }
+        &.@{prefix}-color {
+            background-color: @theme-color;
+            button {
+                color: @theme-color;
+            }
+        }
+    }
+    .@{prefix}-credit {
+        span {
+            color: @theme-color;
+            b {
+                color: @theme-color;
+            }
+        }
+    }
+    .@{prefix}-loading {
+        .@{prefix}-loader {
+            &.@{prefix}-inline {
+                .@{prefix}-dots {
+                    & > span {
+                        background-color: @theme-color;
+                    }
+                }
+            }
+        }
+    }
+    @{prefix}-alert.@{prefix}-root {
+        & > button {
+            &:not(.@{prefix}-danger) {
+                color: @theme-color !important;
+            }
+        }
+    }
+    @{prefix}-auth-state.@{prefix}-root {
+        .@{prefix}-content {
+            .@{prefix}-logged {
+                a {
+                    color: @theme-color;
+                }
+            }
+        }
+        &.color {
+            background-color: @theme-color;
+        }
+    }
+    @{prefix}-forum-list.@{prefix}-root {
+        .@{prefix}-content {
+            .@{prefix}-bar {
+                .@{prefix}-search {
+                    background-color: desaturate(tint(@theme-color, 20%), 5%);
+                }
+                button {
+                    .background-color-states(@theme-color);
+                }
+            }
+            .@{prefix}-list {
+                .@{prefix}-item {
+                    &:hover {
+                        background-color: fade(@theme-color, 5%);
+                    }
+                }
+            }
+        }
+    }
+    @{prefix}-forum-thread.@{prefix}-root {
+        .@{prefix}-content {
+            .@{prefix}-reply {
+                border-top: 2px solid @theme-color;
+                .@{prefix}-synopsis {
+                    & > a {
+                        &.@{prefix}-icon {
+                            svg {
+                                path {
+                                    fill: @theme-color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @{prefix}-group-card.@{prefix}-root {
+        .@{prefix}-information {
+            a {
+                color: @theme-color;
+                .text-color-states(@theme-color);
+            }
+        }
+    }
+    @{prefix}-group-header.@{prefix}-root {
+        .@{prefix}-information {
+            a {
+                color: @theme-color;
+                .text-color-states(@theme-color);
+            }
+            .@{prefix}-members {
+                span {
+                    background-color: @theme-color;
+                }
+            }
+        }
+        ul {
+            li {
+                a {
+                    .text-color-states(@theme-color);
+                    svg {
+                        path {
+                            fill: @theme-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @{prefix}-group-settings.@{prefix}-root {
+        .@{prefix}-content {
+            .@{prefix}-cover {
+                &:hover {
+                    &::before {
+                        background-color: fade(@theme-color, 90%);
+                    }
+                }
+                &::before {
+                    background-color: fade(@theme-color, 60%);
+                }
+            }
+        }
+    }
+    @{prefix}-messages.@{prefix}-root {
+        .@{prefix}-content {
+            .@{prefix}-sidebar {
+                input {
+                    background-color: @theme-color;
+                }
+                .@{prefix}-list {
+                    .@{prefix}-item {
+                        &.@{prefix}-unread {
+                            background-color: fade(@theme-color, 15%);
+                            div {
+                                b {
+                                    color: @theme-color !important;
+                                }
+                                color: tint(desaturate(@theme-color, 40%), 20%);
+                            }
+                        }
+                    }
+                }
+            }
+            .@{prefix}-main {
+                .@{prefix}-conversation {
+                    .@{prefix}-item {
+                        &.@{prefix}-outbound {
+                            p {
+                                background-color: @theme-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @{prefix}-profile-activity.@{prefix}-root {
+        .@{prefix}-content {
+            ul {
+                li {
+                    &::before {
+                        background-color: @theme-color;
+                    }
+                    div {
+                        svg {
+                            path {
+                                fill: @theme-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @{prefix}-profile-card.@{prefix}-root {
+        .@{prefix}-option {
+            .icon-color-states(@theme-color);
+            svg {
+                path {
+                    fill: @theme-color;
+                }
+            }
+        }
+        .@{prefix}-information {
+            a {
+                color: @theme-color;
+                .text-color-states(@theme-color);
+            }
+        }
+    }
+    @{prefix}-profile-header.@{prefix}-root {
+        .@{prefix}-option {
+            .icon-color-states(@theme-color);
+            svg {
+                path {
+                    fill: @theme-color;
+                }
+            }
+        }
+        .@{prefix}-information {
+            a {
+                .text-color-states(@theme-color);
+            }
+        }
+        ul {
+            li {
+                a {
+                    .text-color-states(@theme-color);
+                    svg {
+                        path {
+                            fill: @theme-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @{prefix}-profile-settings.@{prefix}-root {
+        .@{prefix}-content {
+            .@{prefix}-avatar {
+                &:hover {
+                    &::before {
+                        background-color: fade(@theme-color, 90%);
+                    }
+                }
+                &::before {
+                    background-color: fade(@theme-color, 60%);
+                }
+            }
+        }
+    }
+    @{prefix}-star-list.@{prefix}-root {
+        .@{prefix}-content {
+            .@{prefix}-bar {
+                .@{prefix}-search {
+                    background-color: desaturate(tint(@theme-color, 20%), 5%);
+                }
+            }
+            .@{prefix}-list {
+                .@{prefix}-item {
+                    &:hover {
+                        background-color: fade(@theme-color, 5%);
+                    }
+                }
+            }
+        }
+    }
+}

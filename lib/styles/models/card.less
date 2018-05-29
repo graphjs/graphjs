@@ -8,6 +8,9 @@
     background-color: @contrast-color;
     .@{prefix}-information {
         height: 15em;
+        a {
+            .text-color-states(@theme-color);
+        }
     }
     button {
         width: 100%;
@@ -15,7 +18,7 @@
         .border-radius(0);
         color: white;
         font-size: 1em;
-        background-color: @theme-color;
+        .background-color-states(@theme-color);
     }
     &.@{prefix}-color {
         background-color: @theme-color;
@@ -36,7 +39,7 @@
         }
         button {
             color: @theme-color;
-            background-color: white;
+            .background-color-states(white);
         }
     }
 }

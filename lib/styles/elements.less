@@ -14,7 +14,7 @@
     }
     a {
         cursor: pointer;
-        color: @theme-color;
+        .text-color-states(@theme-color);
         text-decoration: none;
     }
     b {
@@ -49,8 +49,7 @@
         .single-line-text;
         text-transform: uppercase;
         .transition(background-color .35s ease);
-        //.background-color-states(@theme-color);
-        .background-color-states(@button-color);
+        .background-color-states(@theme-color);
         &[disabled] {
             opacity: .5;
         }

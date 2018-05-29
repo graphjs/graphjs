@@ -7,7 +7,7 @@
     <button if={(!group || !joinInformation) && loaded}>&middot; &middot; &middot;</button>
     <button if={(group && joinInformation) && loaded} onclick={joined ? handleLeave : handleJoin}>{joined ? 'Leave Group' : 'Join Group'}</button>
     <div if={!loaded} class="graphjs-placeholder graphjs-loader">
-        <div class="information">
+        <div class="graphjs-information">
             <div class="graphjs-cover graphjs-rectangle graphjs-fill"></div>
             <div class="graphjs-title graphjs-paragraph graphjs-centered">
                 <div class="graphjs-line graphjs-fill"></div>
@@ -30,7 +30,7 @@
         import showGroup from '../scripts/showGroup.js';
         import getSession from '../scripts/getSession.js';
         import listMembers from '../scripts/listMembers.js';
-        
+
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 

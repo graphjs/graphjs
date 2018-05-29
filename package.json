@@ -20,6 +20,8 @@
     "babel-preset-es2015-riot": "^1.1.0",
     "compression-webpack-plugin": "^1.1.11",
     "css-loader": "^0.28.10",
+    "file-loader": "^1.1.11",
+    "fs": "0.0.1-security",
     "getstream": "^3.15.0",
     "less": "^3.0.1",
     "less-loader": "^4.0.5",

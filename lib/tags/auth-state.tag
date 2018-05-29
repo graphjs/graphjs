@@ -66,6 +66,7 @@
             getSession(function(response) {
                 if(response.success) {
                     self.id = response.id;
+                    console.log(self.id, response.id)
                     self.handleInformation(self.id);
                 } else {
                     //Handle errors

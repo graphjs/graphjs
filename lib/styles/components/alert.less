@@ -14,12 +14,14 @@
         }
     }
     & > button {
-        color: @theme-color !important;
         .bold-font;
         border-top: 2px solid fade(@default-color, 10%);
         border-top-left-radius: 0;
         border-top-right-radius: 0;
         background-color: @contrast-color !important;
+        &:not(.@{prefix}-danger) {
+            color: @theme-color !important;
+        }
         &:hover {
             background-color: @contrast-color !important;
         }

@@ -15,9 +15,6 @@
         * {
             .placeholder-color(tint(@default-color, 50%));
         }
-        a {
-            color: @theme-color;
-        }
         input, textarea {
             color: tint(@default-color, 50%);
             background-color: @contrast-color;
@@ -76,13 +73,6 @@
         .@{prefix}-loader {
             &.@{prefix}-placeholder {
                 background-color: @shade-color;
-            }
-            &.@{prefix}-inline {
-                .@{prefix}-dots {
-                    & > span {
-                        background-color: @contrast-color;
-                    }
-                }
             }
         }
         .@{prefix}-blockage {
@@ -306,13 +296,6 @@
                         border-bottom: 1px solid fade(@default-color, 2.5%);
                         &.@{prefix}-active {
                             background-color: @contrast-color !important;
-                        }
-                        &.@{prefix}-unread {
-                            div {
-                                b {
-                                    color: @theme-color;
-                                }
-                            }
                         }
                         div {
                             color: @text-color-normal;

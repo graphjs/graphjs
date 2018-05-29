@@ -48,7 +48,7 @@
             .@{prefix}-paragraph {
                 display: block;
                 &.@{prefix}-centered {
-                    .line:last-child {
+                    .@{prefix}-line:last-child {
                         margin-left: calc(100% / 3 / 2) !important;
                         margin-right: calc(100% / 3 / 2) !important;
                     }
@@ -85,13 +85,12 @@
                     height: .85em;
                     margin-right: .15em;
                     border-radius: 100%;
-                    background-color: @contrast-color;
+                    background-color: @theme-color;
                     animation-name: loading-dots;
                     animation-duration: 2s;
                     animation-iteration-count: infinite;
                     animation-fill-mode: both;
                     transition: opacity .125s linear;
-                    filter: invert(100);
                     &:nth-child(2) {
                         animation-delay: .5s;
                     }
@@ -132,7 +131,7 @@
 }
 
 .@{prefix}-blocked {
-    & > .@{prefix}-placeholder {
+    .@{prefix}-placeholder {
         filter: blur(5px);
         .@{prefix}-fill {
             .animation(unset) !important;
