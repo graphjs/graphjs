@@ -17,7 +17,7 @@
             .@{prefix}-search {
                 width: calc(100% - 12em);
                 border-right: 2px solid @contrast-color;
-                background-color: desaturate(tint(@primary-color, 20%), 5%);
+                background-color: desaturate(tint(@theme-color, 20%), 5%);
                 & > * {
                     float: left;
                     border-radius: 0;
@@ -56,7 +56,7 @@
                 .regular-font;
                 font-size: 1em;
                 text-transform: none;
-                .background-color-states(@primary-color);
+                .background-color-states(@theme-color);
                 svg {
                     position: relative;
                     width: auto;
@@ -85,7 +85,7 @@
                     border-bottom: none;
                 }
                 &:hover {
-                    background-color: fade(@primary-color, 5%);
+                    background-color: fade(@theme-color, 5%);
                 }
                 &.@{prefix}-placeholder {
                     color: @text-color-weak;

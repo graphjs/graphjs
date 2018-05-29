@@ -5,7 +5,7 @@
     box-sizing: content-box !important;
     height: @bar-height;
     border: none;
-    background-color: @contrast-color;
+    background-color: @shade-color;
     .@{prefix}-content {
         .no-padding !important;
         color: fade(@text-color-strong, 65%);
@@ -14,7 +14,7 @@
         background-color: transparent !important;
         a {
             float: left;
-            border-right: 1px dotted fade(@secondary-color, 20%);
+            border-right: 1px dotted fade(@default-color, 20%);
             background-color: transparent;
             &:last-of-type {
                 border-right: none !important;
@@ -44,7 +44,7 @@
             height: @bar-height;
             a {
                 display: inline-block;
-                color: @primary-color;
+                color: @theme-color;
                 line-height: @bar-height;
                 .transition(background-color .35s ease);
             }
@@ -93,7 +93,7 @@
         }
     }
     &.color {
-        background-color: @primary-color;
+        background-color: @theme-color;
         .@{prefix}-content {
             a {
                 color: white;

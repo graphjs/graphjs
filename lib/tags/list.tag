@@ -36,15 +36,16 @@
             opts.access == 'private'
             ? this.handleUser()
             : this.handleContent();
-            //showCallbacks
-            if(!window.showCallbacks) {
-                window.showCallbacks = {};
+            //GraphJSCallbacks
+            if(!window.GraphJSCallbacks) {
+                window.GraphJSCallbacks = {};
             }
             let self = this;
-            window.showCallbacks['updateList'] = function() {
-                opts.access == 'private'
-                ? self.handleUser()
-                : self.handleContent();
+            window.GraphJSCallbacks['updateList'] = function() {
+                self.loaded = true;
+                self.blocked = false;
+                self.update();
+                self.handleUser();
             }
         });
 

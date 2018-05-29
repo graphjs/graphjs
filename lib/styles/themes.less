@@ -1,11 +1,11 @@
 @prefix: graphjs;
 
-.colorStructure(@theme-secondary-color, @theme-shade-color, @theme-contrast-color, @theme-text-color-strong) {
-    @primary-color:   rgb(0, 127, 255);
-    @secondary-color: @theme-secondary-color;
-    @danger-color:    rgb(255, 79, 79);
-    @shade-color: @theme-shade-color;
-    @contrast-color: @theme-contrast-color;
+.colorStructure(@theme-default-color, @theme-shade-color, @theme-contrast-color, @theme-text-color-strong) {
+    @default-color:     @theme-default-color;
+    @theme-color:       tint(@default-color, 25%);
+    @danger-color:      rgb(255, 79, 79);
+    @shade-color:       @theme-shade-color;
+    @contrast-color:    @theme-contrast-color;
     @text-color-strong: @theme-text-color-strong;
     @text-color-normal: fade(@theme-text-color-strong, 75%);
     @text-color-weak:   fade(@theme-text-color-strong, 50%);
@@ -13,13 +13,13 @@
     .@{prefix}-root {
         color: fade(@text-color-strong, 65%);
         * {
-            .placeholder-color(tint(@secondary-color, 50%));
+            .placeholder-color(tint(@default-color, 50%));
         }
         a {
-            color: @primary-color;
+            color: @theme-color;
         }
         input, textarea {
-            color: tint(@secondary-color, 50%);
+            color: tint(@default-color, 50%);
             background-color: @contrast-color;
         }
         form {
@@ -31,14 +31,14 @@
         }
     }
     .@{prefix}-box {
-        border: 1px solid fade(@secondary-color, 3%);
+        border: 1px solid fade(@default-color, 3%);
         background-color: @shade-color;
         .@{prefix}-header {
-            border-bottom: 2px solid fade(@secondary-color, 10%);
+            border-bottom: 2px solid fade(@default-color, 10%);
             background-color: @contrast-color;
         }
         .@{prefix}-warning {
-            border-bottom: 1px solid fade(@secondary-color, 15%);
+            border-bottom: 1px solid fade(@default-color, 15%);
         }
         .@{prefix}-content {
             background-color: @shade-color;
@@ -77,6 +77,13 @@
             &.@{prefix}-placeholder {
                 background-color: @shade-color;
             }
+            &.@{prefix}-inline {
+                .@{prefix}-dots {
+                    & > span {
+                        background-color: @contrast-color;
+                    }
+                }
+            }
         }
         .@{prefix}-blockage {
             color: @text-color-weak;
@@ -91,7 +98,7 @@
     .@{prefix}-pagination {
         .@{prefix}-controls {
             color: @text-color-strong;
-            background-color: fade(@secondary-color, 10%);
+            background-color: fade(@default-color, 10%);
             a {
                 svg {
                     path {
@@ -102,7 +109,7 @@
         }
     }
     .@{prefix}-promo {
-        background-color: fade(@secondary-color, 85%);
+        background-color: fade(@default-color, 85%);
     }
     .@{prefix}-wallet {
         .@{prefix}-content {
@@ -118,7 +125,7 @@
             background-color: @contrast-color !important;
         }
         & > button {
-            border-top: 2px solid fade(@secondary-color, 10%);
+            border-top: 2px solid fade(@default-color, 10%);
             background-color: @contrast-color !important;
             &:hover {
                 background-color: @contrast-color !important;
@@ -128,10 +135,10 @@
             }
             &.@{prefix}-half {
                 &:first-of-type {
-                    border-right: 1px solid fade(@secondary-color, 10%);
+                    border-right: 1px solid fade(@default-color, 10%);
                 }
                 &:last-of-type {
-                    border-left: 1px solid fade(@secondary-color, 10%);
+                    border-left: 1px solid fade(@default-color, 10%);
                 }
             }
         }
@@ -146,11 +153,11 @@
         color: fade(@text-color-strong, 65%);
     }
     @{prefix}-auth-state.@{prefix}-root {
-        background-color: @contrast-color;
+        background-color: @shade-color;
         .@{prefix}-content {
             color: fade(@text-color-strong, 65%);
             a {
-                border-right: 1px dotted fade(@secondary-color, 20%);
+                border-right: 1px dotted fade(@default-color, 20%);
                 &:hover {
                     background-color: fade(@contrast-color, 50%);
                 }
@@ -259,13 +266,13 @@
             }
         }
         ul {
-            border-top: 2px solid fade(@secondary-color, 10%);
+            border-top: 2px solid fade(@default-color, 10%);
         }
     }
     @{prefix}-group-settings.@{prefix}-root {
         .@{prefix}-content {
             h2 {
-                color: @secondary-color;
+                color: @default-color;
             }
         }
     }
@@ -296,14 +303,14 @@
                 }
                 .@{prefix}-list {
                     .@{prefix}-item {
-                        border-bottom: 1px solid fade(@secondary-color, 2.5%);
+                        border-bottom: 1px solid fade(@default-color, 2.5%);
                         &.@{prefix}-active {
                             background-color: @contrast-color !important;
                         }
                         &.@{prefix}-unread {
                             div {
                                 b {
-                                    color: @primary-color;
+                                    color: @theme-color;
                                 }
                             }
                         }
@@ -355,7 +362,7 @@
         color: fade(@text-color-strong, 65%);
         .@{prefix}-information {
             img {
-                border-color: fade(@secondary-color, 15%);
+                border-color: fade(@default-color, 15%);
             }
             p {
                 color: @text-color-normal;
@@ -367,20 +374,20 @@
         .@{prefix}-information {
             background-color: @contrast-color;
             img {
-                border: 4px solid fade(@secondary-color, 15%);
+                border: 4px solid fade(@default-color, 15%);
             }
             p {
                 color: @text-color-normal;
             }
         }
         ul {
-            border-top: 2px solid fade(@secondary-color, 10%);
+            border-top: 2px solid fade(@default-color, 10%);
         }
     }
     @{prefix}-profile-settings.@{prefix}-root {
         .@{prefix}-content {
             h2 {
-                color: @secondary-color;
+                color: @default-color;
             }
         }
     }
@@ -413,7 +420,7 @@
             }
             .@{prefix}-controls {
                 color: @text-color-strong;
-                background-color: fade(@secondary-color, 10%);
+                background-color: fade(@default-color, 10%);
                 a {
                     svg {
                         path {

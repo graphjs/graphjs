@@ -29,7 +29,7 @@
                 line-height: 3.5em;
                 border: none;
                 border-radius: 0;
-                background-color: @primary-color;
+                background-color: @theme-color;
                 .transition(height .35s ease);
                 .placeholder-color(fade(white, 75%));
                 &.@{prefix}-hidden {
@@ -79,7 +79,7 @@
                     padding-top: calc(.75em - 1px);
                     padding-left: calc(.75em - 1px);
                     border-top: 1px solid fade(black, 2.5%);
-                    border-bottom: 1px solid fade(@secondary-color, 2.5%);
+                    border-bottom: 1px solid fade(@default-color, 2.5%);
                     .clearfix;
                     &:hover {
                         background-color: fade(black, 5%);
@@ -88,12 +88,12 @@
                         border-bottom: none;
                     }
                     &.@{prefix}-unread {
-                        background-color: fade(@primary-color, 10%);
+                        background-color: fade(@theme-color, 10%);
                         div {
                             b {
-                                color: @primary-color;
+                                color: @theme-color;
                             }
-                            color: tint(desaturate(@primary-color, 40%), 20%);
+                            color: tint(desaturate(@theme-color, 40%), 20%);
                         }
                     }
                     &.@{prefix}-active {
@@ -169,7 +169,7 @@
                         }
                         p {
                             color: white;
-                            background-color: @primary-color;
+                            background-color: @theme-color;
                             .border-radius(@border-radius-medium);
                         }
                         time {

@@ -11,7 +11,7 @@
         height: 3.75em;
         padding: 1em;
         text-align: center;
-        .icon-color-states(@primary-color);
+        .icon-color-states(@theme-color);
         &.@{prefix}-left {
             top: 0;
             left: 0;
@@ -26,7 +26,7 @@
             max-height: auto;
             vertical-align: middle;
             path {
-                fill: @primary-color;
+                fill: @theme-color;
                 .transition(fill .35s ease);
             }
         }
@@ -39,7 +39,7 @@
             vertical-align: middle;
             border-width: 4px;
             border-style: solid;
-            border-color: fade(@secondary-color, 15%);
+            border-color: fade(@default-color, 15%);
             .border-radius(@border-radius-full);
         }
         a {
@@ -49,11 +49,11 @@
             max-height: 2.5em;
             margin: 0 5%;
             margin-top: .5em;
-            color: @primary-color;
+            color: @theme-color;
             font-size: 1.2em;
             line-height: 1.25em;
             .heavy-font;
-            .text-color-states(@primary-color);
+            .text-color-states(@theme-color);
         }
         p {
             display: inline-block;

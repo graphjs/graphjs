@@ -1,12 +1,12 @@
 // Colors
 
-@primary-color:   rgb(0, 127, 255);
-@secondary-color: rgb(63, 95, 127);
-@success-color:   rgb(0, 223, 95);
-@button-color:    rgb(105, 123, 140);
-@danger-color:    rgb(255, 79, 79);
-@shade-color:     tint(@secondary-color, 95%);
-@contrast-color:  white;
+@default-color:  tint(rgb(63, 95, 127), 25%);
+@theme-color:    @default-color;//rgb(0, 127, 255)
+@success-color:  rgb(0, 223, 95);
+@button-color:   rgb(105, 123, 140);
+@danger-color:   rgb(255, 79, 79);
+@shade-color:    tint(@default-color, 95%);
+@contrast-color: white;
 
 @text-color-strong: rgb(63, 95, 127);
 @text-color-normal: tint(@text-color-strong, 25%);
@@ -20,10 +20,10 @@
 @border-radius-full:   50%;
 
 @font-size-xsmall:  12px;
-@font-size-small:  13px;
-@font-size-medium: 14px;
-@font-size-large:  15px;
-@font-size-xlarge: 16px;
+@font-size-small:   13px;
+@font-size-medium:  14px;
+@font-size-large:   15px;
+@font-size-xlarge:  16px;
 @font-size-default: @font-size-medium;
 
 @bar-height: 50px;

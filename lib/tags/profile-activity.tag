@@ -150,12 +150,12 @@
         this.on('before-mount', function() {
             this.handleUser();
             this.handleInformation();
-            //showCallbacks
-            if(!window.showCallbacks) {
-                window.showCallbacks = {};
+            //GraphJSCallbacks
+            if(!window.GraphJSCallbacks) {
+                window.GraphJSCallbacks = {};
             }
             let self = this;
-            window.showCallbacks['updateProfileActivity'] = function() {
+            window.GraphJSCallbacks['updateProfileActivity'] = function() {
                 self.blocked = true;
                 self.update();
                 self.handleUser();

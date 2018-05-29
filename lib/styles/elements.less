@@ -10,11 +10,11 @@
     letter-spacing: -.0075em;
     * {
         .box-sizing(border-box);
-        .placeholder-color(tint(@secondary-color, 50%));
+        .placeholder-color(tint(@default-color, 50%));
     }
     a {
         cursor: pointer;
-        color: @primary-color;
+        color: @theme-color;
         text-decoration: none;
     }
     b {
@@ -31,7 +31,7 @@
         outline: none;
     }
     input, textarea {
-        color: tint(@secondary-color, 50%);
+        color: tint(@default-color, 50%);
         .regular-font;
         font-size: @font-size-default;
         line-height: @font-size-default;
@@ -49,7 +49,7 @@
         .single-line-text;
         text-transform: uppercase;
         .transition(background-color .35s ease);
-        //.background-color-states(@primary-color);
+        //.background-color-states(@theme-color);
         .background-color-states(@button-color);
         &[disabled] {
             opacity: .5;

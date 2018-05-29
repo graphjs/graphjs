@@ -6,7 +6,6 @@
     position: absolute;
     z-index: 10;
     opacity: .5;
-    right: 1em;
     width: auto;
     height: 1.6em;
     margin: 0 auto;
@@ -15,7 +14,7 @@
     font-size: .8em;
     line-height: 1.6em;
     text-align: center;
-    background-color: fade(@secondary-color, 85%);
+    background-color: fade(@default-color, 85%);
     .transition(all .35s ease);
     &:hover {
         opacity: 1;
@@ -35,6 +34,12 @@
         bottom: 0;
         border-top-left-radius: .5em;
         border-top-right-radius: .5em;
+    }
+    &.@{prefix}-left {
+        left: 1em;
+    }
+    &.@{prefix}-right {
+        right: 1em;
     }
     svg {
         display: inline-block;

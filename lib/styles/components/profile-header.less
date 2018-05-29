@@ -16,7 +16,7 @@
         height: 3.75em;
         padding: 1em;
         text-align: center;
-        .icon-color-states(@primary-color);
+        .icon-color-states(@theme-color);
         &.@{prefix}-left {
             float: left;
         }
@@ -29,7 +29,7 @@
             max-height: auto;
             vertical-align: middle;
             path {
-                fill: @primary-color;
+                fill: @theme-color;
                 .transition(fill .35s ease);
             }
         }
@@ -41,7 +41,7 @@
         img {
             width: 6.5em;
             height: 6.5em;
-            border: 4px solid fade(@secondary-color, 15%);
+            border: 4px solid fade(@default-color, 15%);
             .border-radius(@border-radius-full);
         }
         a {
@@ -51,7 +51,7 @@
             max-height: 2.5em;
             margin: 0 5%;
             margin-top: .5em;
-            .text-color-states(@primary-color);
+            .text-color-states(@theme-color);
             font-size: 1.2em;
             line-height: 1.25em;
             .heavy-font;
@@ -71,7 +71,7 @@
         margin: 0;
         .no-padding;
         font-size: 0;
-        border-top: 2px solid fade(@secondary-color, 10%);
+        border-top: 2px solid fade(@default-color, 10%);
         .border-radius(0);
         list-style: none;
         li {
@@ -94,7 +94,7 @@
                 opacity: .75;
                 padding: 0 1em;
                 cursor: pointer;
-                .text-color-states(@primary-color);
+                .text-color-states(@theme-color);
                 font-size: @font-size-default * 1.1;
                 .bold-font;
                 line-height: 2.5em;
@@ -106,7 +106,7 @@
                 svg {
                     display: none;
                     path {
-                        fill: @primary-color;
+                        fill: @theme-color;
                     }
                 }
             }

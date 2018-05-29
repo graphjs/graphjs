@@ -34,7 +34,7 @@
         import logout from '../scripts/logout.js'
         import showLogin from '../scripts/showLogin.js';
         import showRegister from '../scripts/showRegister.js';
-        
+
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
@@ -42,12 +42,12 @@
 
         this.on('before-mount', function() {
             this.handleState();
-            //showCallbacks
-            if(!window.showCallbacks) {
-                window.showCallbacks = {};
+            //GraphJSCallbacks
+            if(!window.GraphJSCallbacks) {
+                window.GraphJSCallbacks = {};
             }
             let self = this;
-            window.showCallbacks['updateState'] = function() {
+            window.GraphJSCallbacks['updateState'] = function() {
                 self.handleState();
             }
         });

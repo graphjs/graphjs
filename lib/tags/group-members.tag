@@ -26,12 +26,12 @@
 
         this.on('before-mount', function() {
             this.handleUser();
-            //showCallbacks
-            if(!window.showCallbacks) {
-                window.showCallbacks = {};
+            //GraphJSCallbacks
+            if(!window.GraphJSCallbacks) {
+                window.GraphJSCallbacks = {};
             }
             let self = this;
-            window.showCallbacks['updateGroupMembers'] = function() {
+            window.GraphJSCallbacks['updateGroupMembers'] = function() {
                 self.loaded = true;
                 self.blocked = false;
                 self.update();

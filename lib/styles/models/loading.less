@@ -74,11 +74,32 @@
             }
         }
         &.@{prefix}-inline {
-            img {
+            .@{prefix}-dots {
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 .transform(translate(-50%, -50%));
+                & > span {
+                    display: inline-block;
+                    width: .85em;
+                    height: .85em;
+                    margin-right: .15em;
+                    border-radius: 100%;
+                    background-color: @contrast-color;
+                    animation-name: loading-dots;
+                    animation-duration: 2s;
+                    animation-iteration-count: infinite;
+                    animation-fill-mode: both;
+                    transition: opacity .125s linear;
+                    filter: invert(100);
+                    &:nth-child(2) {
+                        animation-delay: .5s;
+                    }
+                    &:nth-child(3) {
+                        animation-delay: 1s;
+                        margin-right: 0;
+                    }
+                }
             }
         }
     }

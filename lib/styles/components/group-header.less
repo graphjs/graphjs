@@ -28,11 +28,11 @@
             max-height: 2.5em;
             margin: 0 5%;
             margin-top: 1.5em;
-            color: @primary-color;
+            color: @theme-color;
             font-size: 1.2em;
             line-height: 1.25em;
             .heavy-font;
-            .text-color-states(@primary-color);
+            .text-color-states(@theme-color);
         }
         p {
             display: inline-block;
@@ -64,7 +64,7 @@
                 line-height: 2em;
                 text-align: center;
                 border: none !important;
-                background-color: @primary-color;
+                background-color: @theme-color;
                 small {
                     font-size: .8em;
                 }
@@ -96,7 +96,7 @@
         margin: 0;
         .no-padding;
         font-size: 0;
-        border-top: 2px solid fade(@secondary-color, 10%);
+        border-top: 2px solid fade(@default-color, 10%);
         .border-radius(0);
         list-style: none;
         li {
@@ -119,7 +119,7 @@
                 opacity: .75;
                 padding: 0 1em;
                 cursor: pointer;
-                .text-color-states(@primary-color);
+                .text-color-states(@theme-color);
                 font-size: @font-size-default * 1.1;
                 .bold-font;
                 line-height: 2.5em;
@@ -132,7 +132,7 @@
                 svg {
                     display: none;
                     path {
-                        fill: @primary-color;
+                        fill: @theme-color;
                     }
                 }
             }

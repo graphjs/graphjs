@@ -16,7 +16,7 @@
             }
             .@{prefix}-search {
                 width: 100%;
-                background-color: desaturate(tint(@primary-color, 20%), 5%);
+                background-color: desaturate(tint(@theme-color, 20%), 5%);
                 & > * {
                     float: left;
                     border-radius: 0;
@@ -63,7 +63,7 @@
                     border-bottom: none;
                 }
                 &:hover {
-                    background-color: fade(@primary-color, 5%);
+                    background-color: fade(@theme-color, 5%);
                     .@{prefix}-remove {
                         display: block;
                     }
@@ -194,7 +194,7 @@
             line-height: 2em;
             text-align: center;
             vertical-align: middle;
-            background-color: fade(@secondary-color, 10%);
+            background-color: fade(@default-color, 10%);
             .disable-selection;
             & > * {
                 .disable-selection;
