@@ -121,7 +121,7 @@
                             self.update();
                         });
                     }
-                    //self.loaded = true;
+                    self.loaded = true;
                     self.update();
                 } else {
                     //Handle errors
