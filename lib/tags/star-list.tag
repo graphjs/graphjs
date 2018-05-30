@@ -21,7 +21,7 @@
             </div>
         </div>
         <div if={loaded} class="graphjs-list">
-            <div each={matchedStar, index in matchedStars} class="graphjs-item" data-link="star" data-id={matchedStar} onclick={opts.minor ? handleCallback : handleShow} if={matchedStars.length > 0 && index + 1 >= parseInt(((page - 1) * pageLimit + 1), 10) && index + 1 <= Math.min(matchedStars.length, parseInt(page * pageLimit, 10))}>
+            <div each={matchedStar, index in matchedStars} class={'graphjs-item' + ((index + 1 > (page - 1) * pageLimit && index + 1 <= Math.min(matchedStars.length, page * pageLimit)) ? '' : ' graphjs-hidden')} data-link="star" data-id={matchedStar} onclick={opts.minor ? handleCallback : handleShow}>
                 <div class={'graphjs-' + type + ' graphjs-icon' + (scope == 'global' ? ' graphjs-count' : '')}>
                     <div>
                         <span class="graphjs-icon">

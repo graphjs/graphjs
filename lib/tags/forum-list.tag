@@ -32,7 +32,7 @@
             </button>
         </div>
         <div class="graphjs-list" if={loaded}>
-            <a each={matchedThread, index in matchedThreads} class="graphjs-item" data-link="thread" data-id={matchedThread} onclick={opts.minor ? handleCallback : handleShow} if={matchedThreads.length > 0 && index + 1 >= parseInt(((page - 1) * pageLimit + 1), 10) && index + 1 <= Math.min(matchedThreads.length, parseInt(page * pageLimit, 10))}>
+            <a each={matchedThread, index in matchedThreads} class={'graphjs-item' + ((index + 1 > (page - 1) * pageLimit && index + 1 <= Math.min(matchedThreads.length, page * pageLimit)) ? '' : ' graphjs-hidden')} data-link="thread" data-id={matchedThread} onclick={opts.minor ? handleCallback : handleShow}>
                 <div class="graphjs-title">
                     {threadsData[matchedThread] && threadsData[matchedThread].title}
                 </div>
@@ -301,6 +301,8 @@
                     self.page = lastPage;
                     break;
             }
+            self.update();
+            console.log(self.page)
         }
         this.handleTime = (timestamp) => {
             let time = timestamp * 1000;
