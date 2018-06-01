@@ -19,10 +19,10 @@
             </g>
         </svg>
     </a>
-    <div class="graphjs-information" if={profile}>
-        <img src={downsizeImage(profile.avatar, 110) || 'lib/images/avatars/user.png'} />
-        <a>{profile.fullName || profile.username}</a>
-        <p>{profile.about}</p>
+    <div class="graphjs-information vcard" if={profile}>
+        <img class="photo" src={downsizeImage(profile.avatar, 110) || 'lib/images/avatars/user.png'} />
+        <a class="nickname">{profile.fullName || profile.username}</a>
+        <p class="note">{profile.about}</p>
     </div>
     <ul if={profile}>
         <li class={opts.active == 'activity' ? 'graphjs-active' : ''}>
