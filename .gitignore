@@ -1,9 +1,5 @@
-dist/pho.js
 node_modules
 logs
 *.log
 npm-debug.log*
-
-test.html
-list.md
 .DS_Store

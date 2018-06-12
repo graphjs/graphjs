@@ -33,6 +33,7 @@
                 <span>
                     <b>{authorsData[commentsData[comment].author].username || 'Unknown User'}</b>
                     <time data-timestamp={commentsData[comment].createTime}>{handleTime(commentsData[comment].createTime)}</time>
+                    <a if={commentsData[comment].author == userId} onclick={handleEdit} data-id={comment}>Edit</a>
                     <a if={commentsData[comment].author == userId} onclick={handleRemove} data-id={comment}>Delete</a>
                 </span>
             </div>
@@ -158,6 +159,30 @@
                     //Handle error
                 }
             });
+        }
+        this.handleEdit = (event) => {
+            event.preventDefault();
+            let textBox = event.target.parentNode.parentNode.nextElementSibling;
+            let currentText = textBox.innerText;
+            if(textBox.hasAttribute('contenteditable')) {
+                textBox.removeAttribute('contenteditable');
+                textBox.classList.remove('editable');
+                event.target.innerText = 'Edit';
+                if(textBox.innerText != '') {
+                    editReply(event.target.dataset.id, textBox.innerText, function(response) {
+                        if(response.success) {
+                            self.handleContent();
+                        } else {
+                            //Handle error
+                        }
+                    });
+                }
+            } else {
+                textBox.contentEditable = true;
+                textBox.focus();
+                event.target.innerText = 'Save';
+                textBox.classList.add('editable');
+            }
         }
         this.handleRemove = (event) => {
             event.preventDefault();

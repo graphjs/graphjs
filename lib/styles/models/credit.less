@@ -29,8 +29,10 @@
             .regular-font;
         }
         a {
-            .text-color-states(@danger-color);
             .regular-font;
+            &:last-of-type {
+                .text-color-states(@danger-color);
+            }
             &::before {
                 content: '\00b7';
                 display: inline;
