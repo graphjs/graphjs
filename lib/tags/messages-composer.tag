@@ -9,10 +9,16 @@
             </svg>
         </a>
     </div>
+    <div class="graphjs-warning" if={failMessages.length > 0}>
+        <ul if={failMessages.length > 0} class="graphjs-fail">
+            <li each={failMessage in failMessages}>{failMessage}</li>
+        </ul>
+    </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <div if={recipient} class={'graphjs-recipient' + (recipient ? '' : ' graphjs-unknown')}>{profile ? profile.username : 'No recipient'}</div>
+        <div if={recipient && !anonymity} class={'graphjs-recipient' + (recipient ? '' : ' graphjs-unknown')}>{profile ? profile.username : 'No recipient'}</div>
+        <input if={anonymity && !userId} ref="email" type="text" placeholder="Enter your email address"/>
         <form>
-            <textarea ref="message" placeholder="Write your message here..."></textarea>
+            <textarea ref="message" placeholder={opts.placeholder || 'Write your message here...'}></textarea>
             <button onclick={handleMessage}>Send Message</button>
             <button if={opts.clear} onclick={handleClear} class="graphjs-danger">Clear</button>
         </form>
@@ -48,14 +54,21 @@
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
         import sendMessage from '../scripts/sendMessage.js';
+        import sendAnonymousMessage from '../scripts/sendAnonymousMessage.js';
         import hideOverlay from '../scripts/hideOverlay.js';
         import showLogin from '../scripts/showLogin.js';
 
-        this.recipient = opts.to;
         this.loaded = false;
+        this.failMessages = [];
+        this.recipient = opts.to;
+        this.anonymity = opts.anonymity == 'enabled' ? true : false;
 
         this.on('before-mount', function() {
-            this.handleUser();
+            if(this.anonymity) {
+                this.handleRecipient();
+            } else {
+                this.handleUser();
+            }
             //GraphJSCallbacks
             if(!window.GraphJSCallbacks) {
                 window.GraphJSCallbacks = {};
@@ -78,9 +91,11 @@
                     self.userId = response.id;
                     self.handleRecipient();
                 } else {
-                    self.loaded = false;
-                    self.blocked = true;
-                    self.update();
+                    if(self.anonymity != true) {
+                        self.loaded = false;
+                        self.blocked = true;
+                        self.update();
+                    }
                     //Handle errors
                 }
             });
@@ -101,14 +116,27 @@
             let self = this;
             event.preventDefault();
             let value = self.refs.message.value.replace(/\n+/g, '\n'); // Removes repetitive line breaks
-            sendMessage(self.recipient, value, function(response) {
-                if(response.success) {
-                    self.checked = true;
-                    self.update();
-                } else {
-                    //Handle errors
+            if(self.anonymity != true) {
+                sendMessage(self.recipient, value, function(response) {
+                    if(response.success) {
+                        self.checked = true;
+                        self.update();
+                    } else {
+                        //Handle errors
+                    }
+                });
+            } else {
+                if(self.checkEmailPattern()) {
+                    sendAnonymousMessage(self.refs.email.value, self.recipient, value, function(response) {
+                        if(response.success) {
+                            self.checked = true;
+                            self.update();
+                        } else {
+                            //Handle errors
+                        }
+                    });
                 }
-            });
+            }
         }
         this.handleClear = (event) => {
             event.preventDefault();
@@ -120,6 +148,19 @@
             showLogin({
                 action: 'updateMessagesComposer'
             });
+        }
+        this.checkEmailPattern = () => {
+            let failMessage = 'Email is invalid. Valid format: user@site.com';
+            let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if(emailPattern.test(this.refs.email.value)) {
+                this.refs.email.classList.remove('graphjs-error');
+                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
+                return true;
+            } else {
+                this.refs.email.classList.add('graphjs-error');
+                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
+                return false;
+            }
         }
         this.handleOverlay = () => hideOverlay();
     </script>

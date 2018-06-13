@@ -1,19 +1,34 @@
-<graphjs-comments class="graphjs-root graphjs-box" style={
+<graphjs-feedback class="graphjs-root graphjs-box" style={
     (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
     (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
     (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
     (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
 }>
     <div class="graphjs-header" if={opts.title}>
-        <div class="graphjs-title">{opts.title || 'Comments'}</div>
+        <div class="graphjs-title">{opts.title || 'Feedback'}</div>
     </div>
     <div class="graphjs-content" ref="scrollingContent">
-        <div class="graphjs-synopsis" if={comments.length <= 0}>
-            Not comments yet. Be the first person to comment!
+        <div class="graphjs-synopsis" if={feedbacks.length <= 0}>
+            No feedback yet. Be the first person to leave feedback!
         </div>
-        <div class={'graphjs-comment' + (userId ? '' : ' graphjs-loading graphjs-blocked')}>
-            <textarea ref="composer" placeholder="Write your comment here..."></textarea>
-            <button ref="submit" onclick={handleComment}>Send Comment</button>
+        <div class="graphjs-synopsis"if={feedbacks.length > 0}>
+            {feedbacks.length <= 1 ? feedbacks.length + ' feedback' : feedbacks.length + ' feedback'}
+        </div>
+        <div each={feedback in feedbacks} data-id={feedback} class="graphjs-item">
+            <div class="graphjs-credit" if={authorsData.hasOwnProperty(feedbacksData[feedback].author)}>
+                <img src={downsizeImage(authorsData[feedbacksData[feedback].author].avatar, 50) || 'lib/images/avatars/user.png'} />
+                <span>
+                    <b>{authorsData[feedbacksData[feedback].author].username || 'Unknown User'}</b>
+                    <time data-timestamp={feedbacksData[feedback].createTime}>{handleTime(feedbacksData[feedback].createTime)}</time>
+                    <a if={feedbacksData[feedback].author == userId} onclick={handleEdit} data-id={feedback}>Edit</a>
+                    <a if={feedbacksData[feedback].author == userId} onclick={handleRemove} data-id={feedback}>Delete</a>
+                </span>
+            </div>
+            <p>{feedbacksData[feedback].content}</p>
+        </div>
+        <div class={'graphjs-feedback' + (userId ? '' : ' graphjs-loading graphjs-blocked')}>
+            <textarea ref="composer" placeholder="Write your feedback here..."></textarea>
+            <button ref="submit" onclick={handleFeedback}>Send Feedback</button>
             <button onclick={handleClear} class="graphjs-danger">Clear</button>
             <div if={!loaded && !blocked} class="graphjs-inline graphjs-loader">
                 <div class="graphjs-dots">
@@ -22,22 +37,7 @@
                     <span></span>
                 </div>
             </div>
-            <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to write a comment</button>
-        </div>
-        <div class="graphjs-synopsis"if={comments.length > 0}>
-            {comments.length <= 1 ? comments.length + ' comment' : comments.length + ' comments'}
-        </div>
-        <div each={comment in comments} data-id={comment} class="graphjs-item">
-            <div class="graphjs-credit" if={authorsData.hasOwnProperty(commentsData[comment].author)}>
-                <img src={downsizeImage(authorsData[commentsData[comment].author].avatar, 50) || 'lib/images/avatars/user.png'} />
-                <span>
-                    <b>{authorsData[commentsData[comment].author].username || 'Unknown User'}</b>
-                    <time data-timestamp={commentsData[comment].createTime}>{handleTime(commentsData[comment].createTime)}</time>
-                    <a if={commentsData[comment].author == userId} onclick={handleEdit} data-id={comment}>Edit</a>
-                    <a if={commentsData[comment].author == userId} onclick={handleRemove} data-id={comment}>Delete</a>
-                </span>
-            </div>
-            <p>{commentsData[comment].content}</p>
+            <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to write a feedback</button>
         </div>
     </div>
     <a class="graphjs-promo graphjs-top graphjs-right" href="http://graphjs.com" target="_blank">
@@ -51,13 +51,13 @@
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
         @import '../styles/options.less';
-        @import '../styles/components/comments.less';
+        @import '../styles/components/feedbacks.less';
     </style>
     <script>
         import getSession from '../scripts/getSession.js';
-        import getComments from '../scripts/getComments.js';
-        import addComment from '../scripts/addComment.js';
-        import removeComment from '../scripts/removeComment.js';
+        import getFeedbacks from '../scripts/getFeedbacks.js';
+        import addFeedback from '../scripts/addFeedback.js';
+        import removeFeedback from '../scripts/removeFeedback.js';
         import getProfile from '../scripts/getProfile.js';
         import showLogin from '../scripts/showLogin.js';
 
@@ -67,8 +67,8 @@
         this.blocked = false;
         this.page = 1;
         this.pageLimit = 10;
-        this.comments = [];
-        this.commentsData = {};
+        this.feedbacks = [];
+        this.feedbacksData = {};
         this.authorsData = {};
 
         this.on('before-mount', function() {
@@ -80,7 +80,7 @@
                 window.GraphJSCallbacks = {};
             }
             let self = this;
-            window.GraphJSCallbacks['updateComments'] = function() {
+            window.GraphJSCallbacks['updateFeedback'] = function() {
                 self.blocked = false;
                 self.update();
                 self.handleUser();
@@ -107,17 +107,17 @@
         this.handleContent = (callback) => {
             let self = this;
             let url = window.location.href.replace(/\/$/, "");
-            getComments(url, function(response) {
+            getFeedbacks(url, function(response) {
                 if(response.success) {
-                    self.comments = [];
-                    for(let comment of response.comments) {
-                        let key = Object.keys(comment)[0];
-                        self.comments.push(key);
-                        self.commentsData[key] = comment[key];
+                    self.feedbacks = [];
+                    for(let feedback of response.feedbacks) {
+                        let key = Object.keys(feedback)[0];
+                        self.feedbacks.push(key);
+                        self.feedbacksData[key] = feedback[key];
                         callback && callback();
-                        getProfile(comment[key].author, function(response) {
+                        getProfile(feedback[key].author, function(response) {
                             if(response.success) {
-                                self.authorsData[comment[key].author] = response.profile;
+                                self.authorsData[feedback[key].author] = response.profile;
                             }
                             self.update();
                         });
@@ -133,7 +133,7 @@
         this.handleBlock = (event) => {
             event.preventDefault();
             showLogin({
-                action: 'updateComments'
+                action: 'updateFeedback'
             });
         }
         this.handleClear = (event) => {
@@ -141,12 +141,12 @@
             this.refs.composer.value = '';
             this.refs.composer.focus();
         }
-        this.handleComment = (event) => {
+        this.handleFeedback = (event) => {
             event.preventDefault();
             let self = this;
             self.refs.submit.classList.add('graphjs-loading');
             let url = window.location.href.replace(/\/$/, "");
-            addComment(url, self.refs.composer.value, function(response) {
+            addFeedback(url, self.refs.composer.value, function(response) {
                 if(response.success) {
                     self.refs.submit.classList.remove('graphjs-loading');
                     self.handleContent(function() {
@@ -192,7 +192,7 @@
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
                 self.update();
-                removeComment(event.target.dataset.id, function(response) {
+                removeFeedback(event.target.dataset.id, function(response) {
                     if(response.success) {
                         self.handleContent();
                     } else {
@@ -213,7 +213,7 @@
         }
         */
         this.handleTimeUpdate = () => {
-            let items = document.querySelectorAll('graphjs-comments time');
+            let items = document.querySelectorAll('graphjs-feedbacks time');
             for(let item of items) {
                 if(item.dataset.hasOwnProperty('timestamp')) {
                     let timestamp = item.dataset.timestamp;
@@ -269,4 +269,4 @@
             'December'
         ];
     </script>
-</graphjs-comments>
+</graphjs-feedback>
