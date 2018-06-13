@@ -466,6 +466,7 @@
         ];
         //Components
         this.components = [
+            {"label": "Summary", "component": "summary"},
             {"label": "Auth", "component": "auth", "toggle": true},
             {"label": "Auth", "component": "auth", "parent": "auth"},
             {"label": "Auth: State", "component": "auth-state", "parent": "auth"},

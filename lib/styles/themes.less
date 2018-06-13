@@ -181,6 +181,12 @@
                         color: @text-color-normal;
                     }
                 }
+                p {
+                    &.@{prefix}-editable {
+                        border-color: fade(@default-color, 15%);
+                        background-color: @contrast-color;
+                    }
+                }
             }
         }
     }
@@ -226,6 +232,12 @@
                         .@{prefix}-credit {
                             span {
                                 color: @text-color-normal;
+                            }
+                        }
+                        p {
+                            &.@{prefix}-editable {
+                                border-color: fade(@default-color, 15%);
+                                background-color: @contrast-color;
                             }
                         }
                     }

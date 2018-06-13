@@ -19,11 +19,11 @@
             </g>
         </svg>
     </a>
-    <div class="graphjs-information" if={profile}>
+    <a class="graphjs-information" data-link="profile" data-id={id} onclick={handleShow} if={profile}>
         <img src={profile.avatar || 'lib/images/avatars/user.png'} />
-        <a class="graphjs-title">{profile.fullName || profile.username}</a>
+        <b class="graphjs-title">{profile.fullName || profile.username}</b>
         <p class="graphjs-description">{profile.about}</p>
-    </div>
+    </a>
     <button if={profile} data-link="profile" data-id={id} onclick={handleShow}>View Profile</button>
     <div if={!loaded} class="graphjs-placeholder graphjs-loader">
         <div class="graphjs-information">

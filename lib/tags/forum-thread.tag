@@ -269,7 +269,7 @@
             let currentText = textBox.innerText;
             if(textBox.hasAttribute('contenteditable')) {
                 textBox.removeAttribute('contenteditable');
-                textBox.classList.remove('editable');
+                textBox.classList.remove('graphjs-editable');
                 event.target.innerText = 'Edit';
                 if(textBox.innerText != '') {
                     editReply(event.target.dataset.id, textBox.innerText, function(response) {
@@ -284,7 +284,7 @@
                 textBox.contentEditable = true;
                 textBox.focus();
                 event.target.innerText = 'Save';
-                textBox.classList.add('editable');
+                textBox.classList.add('graphjs-editable');
             }
         }
         this.handleRemove = (event) => {

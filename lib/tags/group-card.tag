@@ -1,9 +1,9 @@
 <graphjs-group-card class={'graphjs-root graphjs-card graphjs-box' + (loaded ? '' : ' graphjs-loading')}>
-    <div class="graphjs-information" if={group}>
+    <a class="graphjs-information" data-link="group" data-id={id} onclick={handleShow} if={group}>
         <img src={downsizeImage(group.cover, 240) || 'lib/images/covers/group.png'} />
-        <a data-link="group" data-id={id} onclick={handleShow} if={group}>{group.title}</a>
+        <b if={group}>{group.title}</b>
         <p>{group.count == 1 ? group.count + ' Member' : group.count + ' Members'}</p>
-    </div>
+    </a>
     <button if={(!group || !joinInformation) && loaded}>&middot; &middot; &middot;</button>
     <button if={(group && joinInformation) && loaded} onclick={joined ? handleLeave : handleJoin}>{joined ? 'Leave Group' : 'Join Group'}</button>
     <div if={!loaded} class="graphjs-placeholder graphjs-loader">
