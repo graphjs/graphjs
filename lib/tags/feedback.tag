@@ -1,4 +1,4 @@
-<graphjs-feedback class="graphjs-root graphjs-box" style={
+<graphjs-feedback class={'graphjs-root' + (opts.type == 'inline' ? ' graphjs-inline' : ' graphjs-box')} style={
     (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
     (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
     (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
@@ -11,33 +11,64 @@
         <div class="graphjs-synopsis" if={feedbacks.length <= 0}>
             No feedback yet. Be the first person to leave feedback!
         </div>
-        <div class="graphjs-synopsis"if={feedbacks.length > 0}>
-            {feedbacks.length <= 1 ? feedbacks.length + ' feedback' : feedbacks.length + ' feedback'}
-        </div>
-        <div each={feedback in feedbacks} data-id={feedback} class="graphjs-item">
-            <div class="graphjs-credit" if={authorsData.hasOwnProperty(feedbacksData[feedback].author)}>
-                <img src={downsizeImage(authorsData[feedbacksData[feedback].author].avatar, 50) || 'lib/images/avatars/user.png'} />
-                <span>
-                    <b>{authorsData[feedbacksData[feedback].author].username || 'Unknown User'}</b>
-                    <time data-timestamp={feedbacksData[feedback].createTime}>{handleTime(feedbacksData[feedback].createTime)}</time>
-                    <a if={feedbacksData[feedback].author == userId} onclick={handleEdit} data-id={feedback}>Edit</a>
-                    <a if={feedbacksData[feedback].author == userId} onclick={handleRemove} data-id={feedback}>Delete</a>
+        <div each={feedback in feedbacks} data-id={feedback} class="graphjs-item" if={feedbacks}>
+            <img class="graphjs-author" src={downsizeImage(authorsData[feedbacksData[feedback].author].avatar, 50) || 'lib/images/avatars/user.png'} if={authorsData.hasOwnProperty(feedbacksData[feedback].author)} />
+            <div class="graphjs-memo">
+                <span class="graphjs-rating">
+                     <svg each={item, index in Array(5)} viewBox="0 -4 80 80">
+                         <path fill={index < feedbacksData[feedback].rating ? 'rgb(239, 191, 23)' : 'rgb(175, 175, 175)'} d="M 40.000 60.000 L 63.511 72.361 L 59.021 46.180 L 78.042 27.639 L 51.756 23.820 L 40.000 0.000 L 28.244 23.820 L 1.958 27.639 L 20.979 46.180 L 16.489 72.361 L 40.000 60.000"></path>
+                     </svg>
                 </span>
+                <p>{feedbacksData[feedback].content}</p>
+                <b>{authorsData[feedbacksData[feedback].author].username}</b>
             </div>
-            <p>{feedbacksData[feedback].content}</p>
         </div>
-        <div class={'graphjs-feedback' + (userId ? '' : ' graphjs-loading graphjs-blocked')}>
-            <textarea ref="composer" placeholder="Write your feedback here..."></textarea>
-            <button ref="submit" onclick={handleFeedback}>Send Feedback</button>
-            <button onclick={handleClear} class="graphjs-danger">Clear</button>
-            <div if={!loaded && !blocked} class="graphjs-inline graphjs-loader">
-                <div class="graphjs-dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+        <div class={'graphjs-item graphjs-feedback'}>
+            <img class="graphjs-author" src={profile ? downsizeImage(profile.avatar, 50) : 'lib/images/avatars/user.png'} />
+            <div class={'graphjs-memo' + (userId ? '' : ' graphjs-loading graphjs-blocked')}>
+                <fieldset class="rating">
+                	<input id="rate-5" type="radio" name="rating" value={5}>
+                	<label for="rate-5">
+                		<svg viewBox="0 -4 80 80">
+                			<path d="M 40.000 60.000 L 63.511 72.361 L 59.021 46.180 L 78.042 27.639 L 51.756 23.820 L 40.000 0.000 L 28.244 23.820 L 1.958 27.639 L 20.979 46.180 L 16.489 72.361 L 40.000 60.000"></path>
+                		</svg>
+                	</label>
+                	<input id="rate-4" type="radio" name="rating" value={4}>
+                	<label for="rate-4">
+                		<svg viewBox="0 -4 80 80">
+                			<path d="M 40.000 60.000 L 63.511 72.361 L 59.021 46.180 L 78.042 27.639 L 51.756 23.820 L 40.000 0.000 L 28.244 23.820 L 1.958 27.639 L 20.979 46.180 L 16.489 72.361 L 40.000 60.000"></path>
+                		</svg>
+                	</label>
+                	<input id="rate-3" type="radio" name="rating" value={3}>
+                	<label for="rate-3">
+                		<svg viewBox="0 -4 80 80">
+                			<path d="M 40.000 60.000 L 63.511 72.361 L 59.021 46.180 L 78.042 27.639 L 51.756 23.820 L 40.000 0.000 L 28.244 23.820 L 1.958 27.639 L 20.979 46.180 L 16.489 72.361 L 40.000 60.000"></path>
+                		</svg>
+                	</label>
+                	<input id="rate-2" type="radio" name="rating" value={2}>
+                	<label for="rate-2">
+                		<svg viewBox="0 -4 80 80">
+                			<path d="M 40.000 60.000 L 63.511 72.361 L 59.021 46.180 L 78.042 27.639 L 51.756 23.820 L 40.000 0.000 L 28.244 23.820 L 1.958 27.639 L 20.979 46.180 L 16.489 72.361 L 40.000 60.000"></path>
+                		</svg>
+                	</label>
+                	<input id="rate-1" type="radio" name="rating" value={1}>
+                	<label for="rate-1">
+                		<svg viewBox="0 -4 80 80">
+                			<path d="M 40.000 60.000 L 63.511 72.361 L 59.021 46.180 L 78.042 27.639 L 51.756 23.820 L 40.000 0.000 L 28.244 23.820 L 1.958 27.639 L 20.979 46.180 L 16.489 72.361 L 40.000 60.000"></path>
+                		</svg>
+                	</label>
+                </fieldset>
+                <textarea ref="composer" placeholder="Write your own feedback here..."></textarea>
+                <a ref="submit" onclick={handleFeedback}>Send Feedback</a>
+                <div if={!loaded && !blocked} class="graphjs-inline graphjs-loader">
+                    <div class="graphjs-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
+                <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to leave feedback</button>
             </div>
-            <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to write a feedback</button>
         </div>
     </div>
     <a class="graphjs-promo graphjs-top graphjs-right" href="http://graphjs.com" target="_blank">
@@ -51,11 +82,132 @@
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
         @import '../styles/options.less';
-        @import '../styles/components/feedbacks.less';
+        @import '../styles/components/feedback.less';
+        @prefix: graphjs;
+
+        @{prefix}-feedback.@{prefix}-root {
+            display: block;
+            color: @text-color-normal;
+            .@{prefix}-content {
+                .@{prefix}-feedback {
+                    display: inline-block;
+                    width: 100%;
+                    textarea {
+                        width: 100%;
+                        height: 7.5em;
+                        &.@{prefix}-closed {
+                            height: 0;
+                            border: none;
+                        }
+                    }
+                    button {
+                        float: right;
+                        width: auto;
+                        margin-top: .5em;
+                        margin-left: .5em;
+                        font-size: .9em;
+                    }
+                    & + .@{prefix}-synopsis {
+                        margin-top: 2.5em;
+                    }
+                }
+                .@{prefix}-synopsis {
+                    display: inline-block;
+                    width: 100%;
+                    margin-bottom: 1.25em;
+                    button {
+                        float: right;
+                        width: auto;
+                        font-size: .75em;
+                    }
+                }
+                .@{prefix}-item {
+                    margin-bottom: 1.25em;
+                    .clearfix;
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                    .@{prefix}-author {
+                        float: left;
+                        width: 3em;
+                        height: 3em;
+                        .border-radius(@border-radius-full);
+                    }
+                    .@{prefix}-memo {
+                        float: left;
+                        display: block;
+                        position: relative;
+                        width: calc(100% - 4em);
+                        margin-left: 1em;
+                        padding: 1em;
+                        .border-radius(@border-radius-large);
+                        border: 1px solid fade(@default-color, 3%);
+                        background-color: white;
+                        .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
+                        &::before {
+                            content: "\0025C0";
+                            position: absolute;
+                            top: 1em;
+                            left: calc(-1em * 2 /3);
+                            color: white;
+                            font-size: 1em;
+                            text-shadow: -1px 0px 2px rgba(0, 0, 0, .15);
+                        }
+                        span {
+                            display: block;
+                            width: 100%;
+                            height: 1em;
+                            margin: 0;
+                            margin-bottom: 1em;
+                            padding: 0;
+                            svg {
+                                width: auto;
+                                height: inherit;
+                                vertical-align: top;
+                            }
+                        }
+                        fieldset {
+                            margin-bottom: 1em;
+                        }
+                        textarea {
+                            height: auto;
+                            margin: 0;
+                            padding: 0;
+                            border: none;
+                        }
+                        a {
+                            margin-right: 1em;
+                            .text-color-states(@text-color-normal);
+                            .bold-font;
+                            font-size: .9em;
+                            text-transform: uppercase;
+                            &:last-of-type {
+                                margin-right: 0;
+                            }
+                            &.graphjs-danger {
+                                .text-color-states(@danger-color);
+                            }
+                        }
+                        p {
+                            margin: 0;
+                            font-size: 1em;
+                            line-height: 150%;
+                        }
+                        b {
+                            display: inline-block;
+                            margin-top: .5em;
+                            &::before {
+                                content: "\2014";
+                            }
+                        }
+                    }
+                }
+            }
+        }
     </style>
     <script>
         import getSession from '../scripts/getSession.js';
-        import getFeedbacks from '../scripts/getFeedbacks.js';
+        import getFeedback from '../scripts/getFeedback.js';
         import addFeedback from '../scripts/addFeedback.js';
         import removeFeedback from '../scripts/removeFeedback.js';
         import getProfile from '../scripts/getProfile.js';
@@ -96,6 +248,7 @@
                 if(response.success) {
                     self.userId = response.id;
                     self.update();
+                    self.handleInformation();
                 } else {
                     self.loaded = false;
                     self.blocked = true;
@@ -104,13 +257,88 @@
                 }
             });
         }
+        this.handleInformation = () => {
+            let self = this;
+            self.userId && getProfile(self.userId, function(response) {
+                if(response.success) {
+                    self.profile = response.profile;
+                    console.log(self.profile)
+                    self.update();
+                } else {
+                    //Handle errors
+                }
+            });
+        }
         this.handleContent = (callback) => {
             let self = this;
             let url = window.location.href.replace(/\/$/, "");
-            getFeedbacks(url, function(response) {
+            //getFeedback(url, function(response) {
+                /*
+                #
+                #
+                #
+                */
+                let response = {
+                    "success":true,
+                    "feedback":[
+                        {
+                            "9eee25f7881b4a3a83b54fcba0091260": {
+                                "content": "The Mock Turtle's heavy sobs. Lastly, she pictured to herself how she was up to the game..",
+                                "rating": 3,
+                                "createTime": 1524747009,
+                                "author": "40ba20f42c49d289bc30af768b965a91"
+                            }
+                        },
+                        {
+                            "96112c5a5f2ba385324e7dfd50ffa4d5": {
+                                "content":"Caterpillar. Alice said to the jury, in a.",
+                                "rating": 1,
+                                "createTime": 1524747026,
+                                "author": "48b7cac56b5993b12d17c71797dc0f48"
+                            }
+                        },
+                        {
+                            "910b5c87cfd9188c5953188b64125dfd": {
+                                "content": "So she began again: 'Ou est ma chatte?' which was full of soup. 'There's.",
+                                "rating": 2,
+                                "createTime": 1524747053,
+                                "author": "48b7f95e51fa1eeb4098f57cead68d74"
+                            }
+                        },
+                        {
+                            "95e8bcc4a9f100c3b385f39b234e47be": {
+                                "content": "Alice. 'That's very.",
+                                "rating": 4,
+                                "createTime": 1524747100,
+                                "author": "4a19102be3dc61b31ee2783c3a0698c2"
+                            }
+                        },
+                        {
+                            "990997c3e253ed270075da7644ab2a12": {
+                                "content": "Yo!",
+                                "rating": 5,
+                                "createTime": 1525116051,
+                                "author": "48760696099368953dd71a90b727acba"
+                            }
+                        },
+                        {
+                            "9624104a8aeac0bdfa49d6315ee7f355": {
+                                "content": "This is a test comment.",
+                                "rating": 2,
+                                "createTime": 1525519888,
+                                "author": "48760696099368953dd71a90b727acba"
+                            }
+                        }
+                    ]
+                };
+                /*
+                #
+                #
+                #
+                */
                 if(response.success) {
                     self.feedbacks = [];
-                    for(let feedback of response.feedbacks) {
+                    for(let feedback of response.feedback) {
                         let key = Object.keys(feedback)[0];
                         self.feedbacks.push(key);
                         self.feedbacksData[key] = feedback[key];
@@ -127,7 +355,7 @@
                 } else {
                     //Handle errors
                 }
-            });
+            //});
             self.update();
         }
         this.handleBlock = (event) => {
@@ -160,30 +388,6 @@
                 }
             });
         }
-        this.handleEdit = (event) => {
-            event.preventDefault();
-            let textBox = event.target.parentNode.parentNode.nextElementSibling;
-            let currentText = textBox.innerText;
-            if(textBox.hasAttribute('contenteditable')) {
-                textBox.removeAttribute('contenteditable');
-                textBox.classList.remove('graphjs-editable');
-                event.target.innerText = 'Edit';
-                if(textBox.innerText != '') {
-                    editReply(event.target.dataset.id, textBox.innerText, function(response) {
-                        if(response.success) {
-                            self.handleContent();
-                        } else {
-                            //Handle error
-                        }
-                    });
-                }
-            } else {
-                textBox.contentEditable = true;
-                textBox.focus();
-                event.target.innerText = 'Save';
-                textBox.classList.add('graphjs-editable');
-            }
-        }
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
@@ -213,7 +417,7 @@
         }
         */
         this.handleTimeUpdate = () => {
-            let items = document.querySelectorAll('graphjs-feedbacks time');
+            let items = document.querySelectorAll('graphjs-feedback time');
             for(let item of items) {
                 if(item.dataset.hasOwnProperty('timestamp')) {
                     let timestamp = item.dataset.timestamp;

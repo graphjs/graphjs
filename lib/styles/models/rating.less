@@ -1,0 +1,49 @@
+@prefix: graphjs;
+
+.rating {
+	direction: rtl;
+	display: inline-block;
+	height: 1em;
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+
+.rating input {
+	display: none
+}
+
+.rating label {
+	float: right;
+	height: inherit;
+}
+
+.rating label svg {
+	width: auto;
+	height: inherit;
+}
+
+.rating label svg path {
+	fill: rgb(175, 175, 175);
+}
+
+.rating input:checked ~ label svg path {
+	fill: rgb(239, 191, 23);
+}
+
+.rating:hover input:checked ~ label svg path {
+	fill: rgb(155, 143, 101);
+}
+
+.rating:hover label:hover svg path,
+.rating:hover label:hover ~ label svg path {
+	fill: rgb(239, 191, 23);
+}
+
+.rating:hover input:checked ~ label:hover svg path,
+.rating:hover input:checked ~ label:hover ~ label svg path {
+	fill: rgb(239, 191, 23);
+}

@@ -57,6 +57,7 @@
         import getSession from '../scripts/getSession.js';
         import getComments from '../scripts/getComments.js';
         import addComment from '../scripts/addComment.js';
+        import editComment from '../scripts/editComment.js';
         import removeComment from '../scripts/removeComment.js';
         import getProfile from '../scripts/getProfile.js';
         import showLogin from '../scripts/showLogin.js';
@@ -169,7 +170,7 @@
                 textBox.classList.remove('graphjs-editable');
                 event.target.innerText = 'Edit';
                 if(textBox.innerText != '') {
-                    editReply(event.target.dataset.id, textBox.innerText, function(response) {
+                    editComment(event.target.dataset.id, textBox.innerText, function(response) {
                         if(response.success) {
                             self.handleContent();
                         } else {
