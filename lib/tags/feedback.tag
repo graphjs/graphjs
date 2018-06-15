@@ -217,8 +217,6 @@
         this.downsizeImage = downsizeImage;
 
         this.blocked = false;
-        this.page = 1;
-        this.pageLimit = 10;
         this.feedbacks = [];
         this.feedbacksData = {};
         this.authorsData = {};
@@ -226,7 +224,6 @@
         this.on('before-mount', function() {
             this.handleUser();
             this.handleContent();
-            this.frequentlyUpdateTime = setInterval(this.handleTimeUpdate,  60 * 1000);
             //GraphJSCallbacks
             if(!window.GraphJSCallbacks) {
                 window.GraphJSCallbacks = {};
@@ -237,9 +234,6 @@
                 self.update();
                 self.handleUser();
             }
-        });
-        this.on('unmount', function() {
-            clearInterval(this.frequentlyUpdateTime);
         });
 
         this.handleUser = () => {
@@ -405,72 +399,5 @@
                 });
             }
         }
-        /*
-        this.handleTime = (timestamp) => {
-            let date = new Date(parseInt(timestamp) * 1000);
-            let day = date.getDate();
-            let month = this.months[date.getMonth()];
-            let year = date.getFullYear();
-            let hour = date.getHours();
-            let minute = date.getMinutes();
-            return month + ' ' + day + ', ' + year + ' · ' + hour + ':' + minute;
-        }
-        */
-        this.handleTimeUpdate = () => {
-            let items = document.querySelectorAll('graphjs-feedback time');
-            for(let item of items) {
-                if(item.dataset.hasOwnProperty('timestamp')) {
-                    let timestamp = item.dataset.timestamp;
-                    item.innerHTML = this.handleTime(timestamp);
-                }
-            }
-        }
-        this.handleTime = (timestamp) => {
-            let text;
-            let time = Math.floor((Date.now() - (parseInt(timestamp) * 1000)) / 1000);
-            let amount;
-            if(time < 1) {
-                amount = time;
-                text = 'Now';
-            } else if(1 <= time && time < 60) {
-                amount = time;
-                text = amount == 1 ? amount + ' second ago' : amount + ' seconds ago';
-            } else if(60 <= time && time < 60 * 60) {
-                amount = Math.floor(time / 60);
-                text = amount == 1 ? amount + ' minute ago' : amount + ' minutes ago';
-            } else if(60 * 60 <= time && time < 60 * 60 * 24) {
-                amount = Math.floor(time / 60 / 60);
-                text = amount == 1 ? amount + ' hour ago' : amount + ' hours ago';
-            } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
-                amount = Math.floor(time / 60 / 60 / 24);
-                text = amount == 1 ? amount + ' day ago' : amount + ' days ago';
-            } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
-                amount = Math.floor(time / 60 / 60 / 24 / 7);
-                text = amount == 1 ? amount + ' week ago' : amount + ' weeks ago';
-            } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
-                amount = Math.floor(time / 60 / 60 / 24 / 30);
-                text = amount == 1 ? amount + ' month ago' : amount + ' months ago';
-            } else if(time >= 60 * 60 * 24 * 30 * 12) {
-                amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                text = amount == 1 ? amount + ' year ago' : amount + ' years ago';
-            } else {
-                //Handle errors
-            }
-            return text;
-        }
-        this.months = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December'
-        ];
     </script>
 </graphjs-feedback>

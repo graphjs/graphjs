@@ -4,13 +4,13 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-    entry: './lib/app.js',
+    entry: {
+        graph: './lib/app.js',
+        docs: './docs/index.js'
+    },
     output: {
-        library: "GraphJS",
-        libraryTarget: "window",
-        filename: "dist/graph.js",
-        publicPath: "",
-        auxiliaryComment: "Test Comment"
+        path: path.join(__dirname, "dist"),
+        filename: "[name].js",
     },
     devtool: 'inline-source-map',
     module: {
@@ -56,8 +56,5 @@ module.exports = {
         new CompressionPlugin({
             algorithm: 'gzip'
         })
-    ],
-    node: {
-        fs: "empty"
-    }
+    ]
 }

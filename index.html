@@ -5,21 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   	<title>Graph.js</title>
     <style>
-        /* TEMPORARY */
         body {
             overflow-x: hidden;
-        	position: relative;
-        	left: 0;
+            position: relative;
             margin: 0;
+            padding: 0;
             font-family: sans-serif;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
             -webkit-text-size-adjust: 100%;
             background-color: rgb(240, 243, 245);
-            -moz-transition: left .35s ease;
-            -o-transition: left .35s ease;
-            -webkit-transition: left .35s ease;
-            transition: left .35s ease;
         }
         body.graphjs-theme-light {
             color: rgba(0, 0, 0, .5);
@@ -29,10 +24,6 @@
             color: rgba(255, 255, 255, .5);
             background-color: rgb(47, 47, 47);
         }
-        h2 {
-            margin: 2em 0 1em;
-        }
-        /* Window Width < 1024 */
         @media only screen and (max-width: 1023px) {
             body.push {
                 left: 240px;
@@ -46,7 +37,7 @@
 </head>
 <body class="graphjs-theme-light">
 	<docs-index></docs-index>
-    <script src="dist/graph.js" charset="utf-8"></script>
+    <script src="dist/docs.js" charset="utf-8"></script>
     <script>
         if(window.location.href.replace(/\/$/, "") == 'http://docs.graphjs.com') {
             GraphJS.init("16D58CF2-FD88-4A49-972B-6F60054BF023");
