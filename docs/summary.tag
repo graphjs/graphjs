@@ -4,7 +4,7 @@
         <!--Introduction Block-->
         <div class="block">
             <h2 id="introduction-block">Introduction</h2>
-            <p>Graph.js is the ultimate client-side tool to create a social graph web site. It's built on robust Pho framework and it's open source. It only requires a few lines of code to create your own authentication, comments, messages, forum, groups, profiles etc.</p>
+            <p>Graph.js is a Javascript client-side library to help developers easily enable social features on their web sites. GraphJS is built upon the Pho framework, and it's open source. With only a few lines of code, you can easily add authentication, comments, messages, forum, groups, profiles etc. to your static web pages.</p>
         </div>
         <!--Getting Started Block-->
         <div class="block">
