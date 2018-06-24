@@ -20,7 +20,7 @@
         </svg>
     </a>
     <div class="graphjs-information vcard" if={profile}>
-        <img class="photo" src={downsizeImage(profile.avatar, 110) || 'lib/images/avatars/user.png'} />
+        <img class="photo" src={downsizeImage(profile.avatar, 110) || 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
         <a class="nickname">{profile.fullName || profile.username}</a>
         <p class="note">{profile.about}</p>
     </div>
@@ -101,7 +101,7 @@
         import showMessagesComposer from '../scripts/showMessagesComposer.js';
         import getSession from '../scripts/getSession.js';
         import getFollowing from '../scripts/getFollowing.js';
-        
+
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 

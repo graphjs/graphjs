@@ -17,13 +17,13 @@
             <input ref="searchForPartners" onkeyup={handleFilter} class={!newMessageOption ? 'graphjs-hidden' : ''} type="text" placeholder="Type a name..." />
             <div class="graphjs-suggestions" if={newMessageOption && matchedPartners.length > 0}>
                 <a each={matchedPartner in matchedPartners} data-id={matchedPartner.id} onclick={handleNewPartner}>
-                    <img src={downsizeImage(matchedPartner.avatar, 40) || 'lib/images/avatars/user.png'} />
+                    <img src={downsizeImage(matchedPartner.avatar, 40) || 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
                     <b>{matchedPartner.username}</b>
                 </a>
             </div>
             <div class="graphjs-list" ref="partners">
                 <a class={'graphjs-item' + (list[partner] && list[partner].is_read ? '' : ' graphjs-unread') + (activePartner == partner ? ' graphjs-active' : '')} each={partner in partners} data-partner={partner} onclick={handleDisplay}>
-                    <img src={list[partner] && list[partner].avatar ? downsizeImage(list[partner].avatar, 50) : 'lib/images/avatars/user.png'} />
+                    <img src={list[partner] && list[partner].avatar ? downsizeImage(list[partner].avatar, 50) : 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
                     <div>
                         <b>{list[partner] && list[partner].username}</b>
                         {list[partner] && list[partner].message}
@@ -159,7 +159,7 @@
         import sendMessage from '../scripts/sendMessage.js';
         import getMembers from '../scripts/getMembers.js';
         import showLogin from '../scripts/showLogin.js';
-        
+
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 

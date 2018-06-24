@@ -20,7 +20,7 @@
         </svg>
     </a>
     <a class="graphjs-information" data-link="profile" data-id={id} onclick={handleShow} if={profile}>
-        <img src={profile.avatar || 'lib/images/avatars/user.png'} />
+        <img src={profile.avatar || 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
         <b class="graphjs-title">{profile.fullName || profile.username}</b>
         <p class="graphjs-description">{profile.about}</p>
     </a>

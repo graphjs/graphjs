@@ -12,7 +12,7 @@
             No feedback yet. Be the first person to leave feedback!
         </div>
         <div each={feedback in feedbacks} data-id={feedback} class="graphjs-item" if={feedbacks}>
-            <img class="graphjs-author" src={downsizeImage(authorsData[feedbacksData[feedback].author].avatar, 50) || 'lib/images/avatars/user.png'} if={authorsData.hasOwnProperty(feedbacksData[feedback].author)} />
+            <img class="graphjs-author" src={downsizeImage(authorsData[feedbacksData[feedback].author].avatar, 50) || 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} if={authorsData.hasOwnProperty(feedbacksData[feedback].author)} />
             <div class="graphjs-memo">
                 <span class="graphjs-rating">
                      <svg each={item, index in Array(5)} viewBox="0 -4 80 80">
@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class={'graphjs-item graphjs-feedback'}>
-            <img class="graphjs-author" src={profile ? downsizeImage(profile.avatar, 50) : 'lib/images/avatars/user.png'} />
+            <img class="graphjs-author" src={profile ? downsizeImage(profile.avatar, 50) : 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
             <div class={'graphjs-memo' + (userId ? '' : ' graphjs-loading graphjs-blocked')}>
                 <fieldset class="rating">
                 	<input id="rate-5" type="radio" name="rating" value={5}>

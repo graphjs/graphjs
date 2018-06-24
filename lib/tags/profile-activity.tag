@@ -126,7 +126,7 @@
                 </div>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to display thread</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to display content</button>
     </div>
     <style type="less">
         @import '../styles/variables.less';

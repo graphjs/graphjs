@@ -26,7 +26,7 @@
             <div class="graphjs-replies">
                 <div each={entry, index in entries} data-id={entry.id} class="graphjs-item">
                     <div class="graphjs-credit" if={authorsData.hasOwnProperty(entry.author)}>
-                        <img src={downsizeImage(authorsData[entry.author].avatar, 50) || 'lib/images/avatars/user.png'} />
+                        <img src={downsizeImage(authorsData[entry.author].avatar, 50) || 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
                         <span>
                             <b>{authorsData[entry.author].username || 'Unknown User'}</b>
                             <time data-timestamp={entry.timestamp}>{handleTime(entry.timestamp)}</time>
