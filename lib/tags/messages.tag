@@ -17,7 +17,7 @@
             <input ref="searchForPartners" onkeyup={handleFilter} class={!newMessageOption ? 'graphjs-hidden' : ''} type="text" placeholder="Type a name..." />
             <div class="graphjs-suggestions" if={newMessageOption && matchedPartners.length > 0}>
                 <a each={matchedPartner in matchedPartners} data-id={matchedPartner.id} onclick={handleNewPartner}>
-                    <img src={downsizeImage(matchedPartner.avatar, 40) || 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+                    <img src={matchedPartner.avatar ? downsizeImage(matchedPartner.avatar, 40) : 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
                     <b>{matchedPartner.username}</b>
                 </a>
             </div>
@@ -422,8 +422,8 @@
                 message: message,
                 is_read: true
             };
-            let query = '.list a[data-partner="' + partner + '"]';
             this.update();
+            let query = 'a[data-partner="' + partner + '"]';
             document.querySelectorAll(query).length > 0 && document.querySelectorAll(query)[0].click();
         }
         this.handleTitle = (id) => {

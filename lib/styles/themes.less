@@ -147,26 +147,12 @@
     @{prefix}-auth-state.@{prefix}-root {
         background-color: @shade-color;
         .@{prefix}-content {
-            color: @text-color-normal;
             a {
-                border-right: 1px dotted fade(@default-color, 20%);
                 &:hover {
                     background-color: fade(@contrast-color, 50%);
                 }
-                &:last-of-type {
-                    border-right-color: transparent;
-                }
                 &.@{prefix}-active {
                     background-color: @contrast-color;
-                }
-            }
-            .@{prefix}-logged {
-                .@{prefix}-exit {
-                    svg {
-                        path {
-                            fill: @text-color-weak;
-                        }
-                    }
                 }
             }
         }
@@ -188,6 +174,25 @@
                     &.@{prefix}-editable {
                         border-color: fade(@default-color, 15%);
                         background-color: @contrast-color;
+                    }
+                }
+            }
+        }
+    }
+    @{prefix}-feedback.@{prefix}-root {
+        color: @text-color-normal;
+        .@{prefix}-content {
+            .@{prefix}-item {
+                .@{prefix}-memo {
+                    border: 1px solid fade(@default-color, 3%);
+                    background-color: @contrast-color;
+                    .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
+                    &::before {
+                        color: @contrast-color;
+                        text-shadow: -1px 0px 2px fade(black, 15%);
+                    }
+                    a {
+                        .text-color-states(@text-color-normal);
                     }
                 }
             }
@@ -311,6 +316,11 @@
                 .@{prefix}-list {
                     .@{prefix}-item {
                         border-bottom: 1px solid fade(@default-color, 2.5%);
+                        &.@{prefix}-unread {
+                            div {
+                                color: @text-color-weak;
+                            }
+                        }
                         &.@{prefix}-active {
                             background-color: @contrast-color !important;
                         }

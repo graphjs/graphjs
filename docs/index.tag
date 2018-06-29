@@ -446,7 +446,6 @@
             {"label": "getMessage", "function": "getMessage", "parent": "call"},
             {"label": "getOutbox", "function": "getOutbox", "parent": "call"},
             {"label": "sendMessage", "function": "sendMessage", "parent": "call"},
-            {"label": "getActivityToken", "function": "getActivityToken", "parent": "call"},
             {"label": "getProfile", "function": "getProfile", "parent": "call"},
             {"label": "listMemberships", "function": "listMemberships", "parent": "call"},
             {"label": "setAvatar", "function": "setAvatar", "parent": "call"},

@@ -63,7 +63,7 @@
             }
         }
         this.checkUsernameMaximumLength = () => {
-            let usernameMaximumLengthLimit = 12;
+            let usernameMaximumLengthLimit = 36;
             let failMessage = 'Username must be ' + usernameMaximumLengthLimit + ' characters maximum!';
             if(this.refs.username.value.length <= usernameMaximumLengthLimit) {
                 this.refs.username.classList.remove('graphjs-error');
@@ -90,7 +90,7 @@
         }
         this.checkEmailPattern = () => {
             let failMessage = 'Email is invalid. Valid format: user@site.com';
-            let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if(emailPattern.test(this.refs.email.value)) {
                 this.refs.email.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -115,7 +115,7 @@
             }
         }
         this.checkPasswordMaximumLength = () => {
-            let passwordMaximumLengthLimit = 15;
+            let passwordMaximumLengthLimit = 255;
             let failMessage = 'Password must be ' + passwordMaximumLengthLimit + ' characters maximum!';
             if(this.refs.password.value.length <= passwordMaximumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');

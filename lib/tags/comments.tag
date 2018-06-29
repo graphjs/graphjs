@@ -29,7 +29,7 @@
         </div>
         <div each={comment in comments} data-id={comment} class="graphjs-item">
             <div class="graphjs-credit" if={authorsData.hasOwnProperty(commentsData[comment].author)}>
-                <img src={downsizeImage(authorsData[commentsData[comment].author].avatar, 50) || 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+                <img src={authorsData[commentsData[comment].author].avatar ? downsizeImage(authorsData[commentsData[comment].author].avatar, 50) : 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
                 <span>
                     <b>{authorsData[commentsData[comment].author].username || 'Unknown User'}</b>
                     <time data-timestamp={commentsData[comment].createTime}>{handleTime(commentsData[comment].createTime)}</time>

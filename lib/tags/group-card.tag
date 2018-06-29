@@ -1,6 +1,6 @@
 <graphjs-group-card class={'graphjs-root graphjs-card graphjs-box' + (loaded ? '' : ' graphjs-loading')}>
     <a class="graphjs-information" data-link="group" data-id={id} onclick={handleShow} if={group}>
-        <img src={downsizeImage(group.cover, 240) || 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png'} />
+        <img src={group.cover ? downsizeImage(group.cover, 240) : 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png'} />
         <b if={group}>{group.title}</b>
         <p>{group.count == 1 ? group.count + ' Member' : group.count + ' Members'}</p>
     </a>

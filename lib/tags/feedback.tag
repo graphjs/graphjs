@@ -12,7 +12,7 @@
             No feedback yet. Be the first person to leave feedback!
         </div>
         <div each={feedback in feedbacks} data-id={feedback} class="graphjs-item" if={feedbacks}>
-            <img class="graphjs-author" src={downsizeImage(authorsData[feedbacksData[feedback].author].avatar, 50) || 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} if={authorsData.hasOwnProperty(feedbacksData[feedback].author)} />
+            <img class="graphjs-author" src={authorsData[feedbacksData[feedback].author].avatar ? downsizeImage(authorsData[feedbacksData[feedback].author].avatar, 50) : 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} if={authorsData.hasOwnProperty(feedbacksData[feedback].author)} />
             <div class="graphjs-memo">
                 <span class="graphjs-rating">
                      <svg each={item, index in Array(5)} viewBox="0 -4 80 80">
@@ -20,7 +20,7 @@
                      </svg>
                 </span>
                 <p>{feedbacksData[feedback].content}</p>
-                <b>{authorsData[feedbacksData[feedback].author].username}</b>
+                <b if={authorsData.length > 0}>{authorsData[feedbacksData[feedback].author].username}</b>
             </div>
         </div>
         <div class={'graphjs-item graphjs-feedback'}>
@@ -83,127 +83,6 @@
         @import '../styles/mixins.less';
         @import '../styles/options.less';
         @import '../styles/components/feedback.less';
-        @prefix: graphjs;
-
-        @{prefix}-feedback.@{prefix}-root {
-            display: block;
-            color: @text-color-normal;
-            .@{prefix}-content {
-                .@{prefix}-feedback {
-                    display: inline-block;
-                    width: 100%;
-                    textarea {
-                        width: 100%;
-                        height: 7.5em;
-                        &.@{prefix}-closed {
-                            height: 0;
-                            border: none;
-                        }
-                    }
-                    button {
-                        float: right;
-                        width: auto;
-                        margin-top: .5em;
-                        margin-left: .5em;
-                        font-size: .9em;
-                    }
-                    & + .@{prefix}-synopsis {
-                        margin-top: 2.5em;
-                    }
-                }
-                .@{prefix}-synopsis {
-                    display: inline-block;
-                    width: 100%;
-                    margin-bottom: 1.25em;
-                    button {
-                        float: right;
-                        width: auto;
-                        font-size: .75em;
-                    }
-                }
-                .@{prefix}-item {
-                    margin-bottom: 1.25em;
-                    .clearfix;
-                    &:last-child {
-                        margin-bottom: 0;
-                    }
-                    .@{prefix}-author {
-                        float: left;
-                        width: 3em;
-                        height: 3em;
-                        .border-radius(@border-radius-full);
-                    }
-                    .@{prefix}-memo {
-                        float: left;
-                        display: block;
-                        position: relative;
-                        width: calc(100% - 4em);
-                        margin-left: 1em;
-                        padding: 1em;
-                        .border-radius(@border-radius-large);
-                        border: 1px solid fade(@default-color, 3%);
-                        background-color: white;
-                        .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
-                        &::before {
-                            content: "\0025C0";
-                            position: absolute;
-                            top: 1em;
-                            left: calc(-1em * 2 /3);
-                            color: white;
-                            font-size: 1em;
-                            text-shadow: -1px 0px 2px rgba(0, 0, 0, .15);
-                        }
-                        span {
-                            display: block;
-                            width: 100%;
-                            height: 1em;
-                            margin: 0;
-                            margin-bottom: 1em;
-                            padding: 0;
-                            svg {
-                                width: auto;
-                                height: inherit;
-                                vertical-align: top;
-                            }
-                        }
-                        fieldset {
-                            margin-bottom: 1em;
-                        }
-                        textarea {
-                            height: auto;
-                            margin: 0;
-                            padding: 0;
-                            border: none;
-                        }
-                        a {
-                            margin-right: 1em;
-                            .text-color-states(@text-color-normal);
-                            .bold-font;
-                            font-size: .9em;
-                            text-transform: uppercase;
-                            &:last-of-type {
-                                margin-right: 0;
-                            }
-                            &.graphjs-danger {
-                                .text-color-states(@danger-color);
-                            }
-                        }
-                        p {
-                            margin: 0;
-                            font-size: 1em;
-                            line-height: 150%;
-                        }
-                        b {
-                            display: inline-block;
-                            margin-top: .5em;
-                            &::before {
-                                content: "\2014";
-                            }
-                        }
-                    }
-                }
-            }
-        }
     </style>
     <script>
         import getSession from '../scripts/getSession.js';
@@ -256,7 +135,6 @@
             self.userId && getProfile(self.userId, function(response) {
                 if(response.success) {
                     self.profile = response.profile;
-                    console.log(self.profile)
                     self.update();
                 } else {
                     //Handle errors

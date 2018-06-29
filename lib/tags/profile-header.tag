@@ -20,7 +20,7 @@
         </svg>
     </a>
     <div class="graphjs-information vcard" if={profile}>
-        <img class="photo" src={downsizeImage(profile.avatar, 110) || 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+        <img class="photo" src={profile.avatar ? downsizeImage(profile.avatar, 110) : 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
         <a class="nickname">{profile.fullName || profile.username}</a>
         <p class="note">{profile.about}</p>
     </div>
@@ -126,7 +126,7 @@
                     getFollowing(self.userId, function(response) {
                         if(response.success) {
                             let list = Object.keys(response.following);
-                            self.following = list.includes(self.id) ? true : false;
+                            self.following = list.includes(self.id);
                             self.update();
                         } else {
                             //Handle errors

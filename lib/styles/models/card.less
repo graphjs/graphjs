@@ -9,6 +9,9 @@
     .@{prefix}-information {
         display: block;
         height: 15em;
+        & > * {
+            pointer-events: none;
+        }
         b {
             .text-color-states(@theme-color);
         }

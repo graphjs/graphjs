@@ -15,7 +15,7 @@
         </ul>
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <div if={recipient && !anonymity} class={'graphjs-recipient' + (recipient ? '' : ' graphjs-unknown')}>{profile ? profile.username : 'No recipient'}</div>
+        <div if={recipient && userId} class={'graphjs-recipient' + (recipient ? '' : ' graphjs-unknown')}>{profile ? profile.username : 'No recipient'}</div>
         <input if={anonymity && !userId} ref="email" type="text" placeholder="Enter your email address"/>
         <form>
             <textarea ref="message" placeholder={opts.placeholder || 'Write your message here...'}></textarea>
@@ -64,11 +64,8 @@
         this.anonymity = opts.anonymity == 'enabled' ? true : false;
 
         this.on('before-mount', function() {
-            if(this.anonymity) {
-                this.handleRecipient();
-            } else {
-                this.handleUser();
-            }
+            this.handleUser();
+            this.handleRecipient();
             //GraphJSCallbacks
             if(!window.GraphJSCallbacks) {
                 window.GraphJSCallbacks = {};
@@ -89,9 +86,13 @@
             getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
-                    self.handleRecipient();
+                    self.loaded = true;
+                    self.update();
                 } else {
-                    if(self.anonymity != true) {
+                    if(self.anonymity) {
+                        self.loaded = true;
+                        self.update();
+                    } else {
                         self.loaded = false;
                         self.blocked = true;
                         self.update();
@@ -105,7 +106,6 @@
             self.recipient && getProfile(self.recipient, function(response) {
                 if(response.success) {
                     self.profile = response.profile;
-                    self.loaded = true;
                     self.update();
                 } else {
                     //Handle errors
@@ -151,7 +151,7 @@
         }
         this.checkEmailPattern = () => {
             let failMessage = 'Email is invalid. Valid format: user@site.com';
-            let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if(emailPattern.test(this.refs.email.value)) {
                 this.refs.email.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);

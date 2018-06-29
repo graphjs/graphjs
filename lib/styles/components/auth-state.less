@@ -8,22 +8,21 @@
     background-color: @shade-color;
     .@{prefix}-content {
         .no-padding !important;
-        color: @text-color-normal;
         .bold-font;
         font-size: 1.2em;
         background-color: transparent !important;
         a {
             float: left;
-            border-right: 1px dotted fade(@default-color, 20%);
+            color: @theme-color;
+            border-right-width: 1px;
+            border-right-style: dotted;
+            border-right-color: fade(@theme-color, 20%);
             background-color: transparent;
-            &:last-of-type {
-                border-right: none !important;
-            }
             &:hover {
                 background-color: fade(@contrast-color, 50%);
             }
             &:last-of-type {
-                border-right-color: transparent;
+                border-right-width: 0 !important;
             }
             &.@{prefix}-active {
                 background-color: @contrast-color;
@@ -44,7 +43,6 @@
             height: @bar-height;
             a {
                 display: inline-block;
-                color: @theme-color;
                 line-height: @bar-height;
                 .transition(background-color .35s ease);
             }
@@ -85,34 +83,31 @@
                     margin: (@bar-height * .32) 0;
                     vertical-align: top;
                     path {
-                        fill: @text-color-weak;
+                        fill: fade(@theme-color, 50%);
                         .transition(fill .35s ease);
                     }
                 }
             }
         }
     }
-    &.color {
+    &.@{prefix}-color {
         background-color: @theme-color;
         .@{prefix}-content {
             a {
-                color: white;
-                border-right: 1px dotted fade(white, 35%);
-                &:last-of-type {
-                    border-right: none;
-                }
+                color: white !important;
+                border-right-color: fade(white, 35%) !important;
                 &:hover {
-                    background-color: fade(black, 5%);
+                    background-color: fade(black, 5%) !important;
                 }
                 &.@{prefix}-active {
-                    background-color: fade(black, 10%);
+                    background-color: fade(black, 10%) !important;
                 }
             }
             .@{prefix}-logged {
                 .@{prefix}-exit {
                     svg {
                         path {
-                            fill: fade(white, 50%);
+                            fill: fade(white, 50%) !important;
                         }
                     }
                 }

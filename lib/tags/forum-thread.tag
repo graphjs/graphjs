@@ -26,7 +26,7 @@
             <div class="graphjs-replies">
                 <div each={entry, index in entries} data-id={entry.id} class="graphjs-item">
                     <div class="graphjs-credit" if={authorsData.hasOwnProperty(entry.author)}>
-                        <img src={downsizeImage(authorsData[entry.author].avatar, 50) || 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+                        <img src={authorsData[entry.author].avatar ? downsizeImage(authorsData[entry.author].avatar, 50) : 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
                         <span>
                             <b>{authorsData[entry.author].username || 'Unknown User'}</b>
                             <time data-timestamp={entry.timestamp}>{handleTime(entry.timestamp)}</time>
@@ -40,7 +40,7 @@
         </div>
         <div class="graphjs-reply" if={entries.length > 0}>
             <div onclick={handleComposer} class="graphjs-synopsis">
-                <b if={entries.length > 1}>{entries.length < 2 ? (entries.length - 1) + ' reply' : (entries.length - 1) + ' replies'}</b>
+                <b if={entries.length > 1}>{entries.length <= 2 ? (entries.length - 1) + ' reply' : (entries.length - 1) + ' replies'}</b>
                 <a if={!composerReady}>Write a Reply</a>
                 <a class={composerReady ? 'graphjs-icon' : 'graphjs-reverse graphjs-icon'}>
                     <svg viewBox="0 0 62 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -291,7 +291,7 @@
             event.preventDefault();
             let self = this;
             if (window.confirm('Are you sure to delete this reply?')) {
-                let query = '.replies [data-id="' + event.target.dataset.id + '"]';
+                let query = '[data-id="' + event.target.dataset.id + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
                 self.update();
@@ -303,7 +303,6 @@
                     }
                 });
             }
-
         }
         this.handleDestroy = (event) => {
             event.preventDefault();
@@ -311,10 +310,9 @@
             if (window.confirm('Are you sure to remove this thread?')) {
                 let query = '[data-link="list"]';
                 let element = document.querySelectorAll(query)[0];
-                element.click();
                 removeReply(event.target.dataset.id, function(response) {
                     if(response.success) {
-                        //Nothing to do
+                        element.click();
                     } else {
                         //Handle error
                     }
