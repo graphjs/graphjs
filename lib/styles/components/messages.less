@@ -13,7 +13,7 @@
             float: left;
         }
         .@{prefix}-sidebar {
-            overflow-y: scroll;
+            overflow-y: auto;
             width: 15em;
             height: 100%;
             .box-shadow(inset -2px 0px 2px 0px fade(black, 5%));
@@ -43,7 +43,7 @@
             }
             .@{prefix}-suggestions {
                 max-height: 17.5em;
-                overflow-y: scroll;
+                overflow-y: auto;
                 background-color: fade(black, 7.5%);
                 a {
                     display: block;
@@ -132,13 +132,13 @@
             }
         }
         .@{prefix}-main {
-            overflow-y: scroll;
+            overflow-y: auto;
             position: relative;
             width: calc(100% - 15em);
             height: 100%;
             background-color: @contrast-color;
             .@{prefix}-conversation {
-                overflow: scroll;
+                overflow: auto;
                 width: 100%;
                 height: calc(100% - 6.5em);
                 padding: 2em;
