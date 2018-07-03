@@ -8,7 +8,7 @@
         <div class="graphjs-logged" if={id}>
             <a if={!profile} class="graphjs-idle">&middot; &middot; &middot;</a>
             <a class="graphjs-details" if={profile}>
-                <img src={profile.avatar ? downsizeImage(profile.avatar, 40) : 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+                <img src={profile.avatar ? downsizeImage(profile.avatar, 40) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
                 <span>{profile.fullname || profile.username}</span>
             </a>
             <a class="graphjs-exit" if={profile} onclick={handleExit}>

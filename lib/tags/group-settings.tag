@@ -9,7 +9,7 @@
     </div>
     <div class="graphjs-content">
         <a ref="uploadWidget" class="graphjs-cover">
-            <img src={group && group.cover ? downsizeImage(group.cover, 320) : 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png'} />
+            <img src={group && group.cover ? downsizeImage(group.cover, 320) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png'} />
         </a>
         <form>
             <input ref="title" type="text" placeholder="Enter group title" value={group ? group.title : ''} />

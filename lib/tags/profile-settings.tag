@@ -9,7 +9,7 @@
     </div>
     <div class="graphjs-content">
         <a ref="uploadWidget" class="graphjs-avatar">
-            <img src={profile && profile.avatar ? downsizeImage(profile.avatar, 160) : 'http://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+            <img src={profile && profile.avatar ? downsizeImage(profile.avatar, 160) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
         </a>
         <h2>Profile</h2>
         <form>
