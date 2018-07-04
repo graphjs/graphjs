@@ -63,7 +63,9 @@
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                                 self.update();
-                                self.parent.tags.hasOwnProperty('graphjs-group-header') && self.parent.tags['graphjs-group-header'].updateInformation();
+                                if(self.parent && self.parent.tags.hasOwnProperty('graphjs-group-header')) {
+                                    self.parent.tags['graphjs-group-header'].updateInformation();
+                                }
                             } else {
                                 self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                 self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
@@ -171,7 +173,9 @@
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                                 self.refs.submitPassword.classList.remove('graphjs-loading');
                                 self.update();
-                                self.parent.tags.hasOwnProperty('graphjs-group-header') && self.parent.tags['graphjs-group-header'].updateInformation();
+                                if(self.parent && self.parent.tags.hasOwnProperty('graphjs-group-header')) {
+                                    self.parent.tags['graphjs-group-header'].updateInformation();
+                                }
                             } else {
                                 self.refs.title.classList.remove('graphjs-success');
                                 self.refs.title.classList.add('graphjs-error');
@@ -207,7 +211,9 @@
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                                 self.refs.submitPassword.classList.remove('graphjs-loading');
                                 self.update();
-                                self.parent.tags.hasOwnProperty('graphjs-group-header') && self.parent.tags['graphjs-group-header'].updateInformation();
+                                if(self.parent && self.parent.tags.hasOwnProperty('graphjs-group-header')) {
+                                    self.parent.tags['graphjs-group-header'].updateInformation();
+                                }
                             } else {
                                 self.refs.description.classList.remove('graphjs-success');
                                 self.refs.description.classList.add('graphjs-error');

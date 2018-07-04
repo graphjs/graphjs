@@ -60,7 +60,7 @@
                 if(response.success) {
                     self.list = response.members;
                     self.empty = self.list.length == 0 ? true : false;
-                    if(self.parent.tags.hasOwnProperty('graphjs-group-header')) {
+                    if(self.parent && self.parent.tags.hasOwnProperty('graphjs-group-header')) {
                         self.parent.tags['graphjs-group-header'].group.count = self.list.length;
                         self.parent.tags['graphjs-group-header'].update();
                     }

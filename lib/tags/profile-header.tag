@@ -67,7 +67,7 @@
         </li>
     </ul>
     <div class="graphjs-information" if={!profile}>
-        <img src="lib/images/avatars/user.png" />
+        <img src="https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png" />
         <a>User doesn't exist.</a>
         <p>We couldn't find any user matching this id.</p>
     </div>

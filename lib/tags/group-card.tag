@@ -39,7 +39,6 @@
 
         this.on('before-mount', function() {
             this.handleInformation();
-            this.handleMembers();
         });
         this.on('mount', function() {
             opts.theme && this.root.classList.add('graphjs-' + opts.theme);
@@ -52,6 +51,7 @@
                     self.group = response.group;
                     self.loaded = true;
                     self.update();
+                    self.handleMembers();
                 } else {
                     self.loaded = true;
                     //Handle errors
