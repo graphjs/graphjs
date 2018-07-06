@@ -61,7 +61,7 @@
         this.loaded = false;
         this.failMessages = [];
         this.recipient = opts.to;
-        this.anonymity = opts.anonymity == 'enabled' ? true : false;
+        this.anonymity = opts.anonymity == 'on' ? true : false;
 
         this.on('before-mount', function() {
             this.handleUser();

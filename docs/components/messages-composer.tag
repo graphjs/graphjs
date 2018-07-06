@@ -12,10 +12,10 @@
             <fieldset name="anonymity">
                 <legend>Anonymity</legend>
                 <div class="radiobutton">
-                    <input onclick={updateRadio} type="radio" name="anonymity" id="enabled" checked={specs.anonymity == 'enabled'} />
-                    <label for="enabled">Enabled</label>
-                    <input onclick={updateRadio} type="radio" name="anonymity" id="disabled" checked={specs.anonymity == 'disabled'} />
-                    <label for="disabled">Disabled</label>
+                    <input onclick={updateRadio} type="radio" name="anonymity" id="on" checked={specs.anonymity == 'on'} />
+                    <label for="on">On</label>
+                    <input onclick={updateRadio} type="radio" name="anonymity" id="off" checked={specs.anonymity == 'off'} />
+                    <label for="off">Off</label>
                 <div>
             </fieldset>
             <fieldset name="placeholder">
@@ -32,7 +32,7 @@
         this.input = '';
         this.specs = {
             "to": "48760696099368953dd71a90b727acba",
-            "anonymity": "disabled"
+            "anonymity": "off"
         }
         this.updateText = (event) => {
             let target = event.target.parentNode.name;
