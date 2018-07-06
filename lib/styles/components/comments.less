@@ -45,8 +45,14 @@
             .@{prefix}-credit {
                 .credit-metrics(3em);
                 margin-bottom: .25em;
+                img {
+                    cursor: pointer;
+                }
                 span {
                     color: @text-color-normal;
+                    b {
+                        cursor: pointer;
+                    }
                 }
             }
             p {
@@ -54,6 +60,7 @@
                 .regular-font;
                 font-size: .95em;
                 line-height: 150%;
+                white-space: pre-wrap;
                 &.@{prefix}-editable {
                     padding: .75em 1em;
                     border: 1px dashed fade(@default-color, 15%);

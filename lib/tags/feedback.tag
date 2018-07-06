@@ -12,7 +12,7 @@
             No feedback yet. Be the first person to leave feedback!
         </div>
         <div each={feedback in feedbacks} data-id={feedback} class="graphjs-item" if={feedbacks}>
-            <img class="graphjs-author" src={authorsData[feedbacksData[feedback].author].avatar ? downsizeImage(authorsData[feedbacksData[feedback].author].avatar, 50) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} if={authorsData.hasOwnProperty(feedbacksData[feedback].author)} />
+            <img class="graphjs-author" data-link="profile" data-id={feedbacksData[feedback].author} onclick={handleShow} src={authorsData[feedbacksData[feedback].author].avatar ? downsizeImage(authorsData[feedbacksData[feedback].author].avatar, 50) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} if={authorsData.hasOwnProperty(feedbacksData[feedback].author)} />
             <div class="graphjs-memo">
                 <span class="graphjs-rating">
                      <svg each={item, index in Array(5)} viewBox="0 -4 80 80">
@@ -90,6 +90,7 @@
         import addFeedback from '../scripts/addFeedback.js';
         import removeFeedback from '../scripts/removeFeedback.js';
         import getProfile from '../scripts/getProfile.js';
+        import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
 
         import {downsizeImage} from '../scripts/client.js';
@@ -275,6 +276,18 @@
                         //Handle error
                     }
                 });
+            }
+        }
+        this.handleShow = (event) => {
+            let self = this;
+            let dataset = event.target.dataset;
+            switch(dataset.link) {
+                case 'profile':
+                    showProfile({
+                        id: dataset.id,
+                        scroll: true
+                    });
+                    break;
             }
         }
     </script>

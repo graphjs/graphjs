@@ -29,9 +29,9 @@
         </div>
         <div each={comment in comments} data-id={comment} class="graphjs-item">
             <div class="graphjs-credit" if={authorsData.hasOwnProperty(commentsData[comment].author)}>
-                <img src={authorsData[commentsData[comment].author].avatar ? downsizeImage(authorsData[commentsData[comment].author].avatar, 50) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+                <img data-link="profile" data-id={commentsData[comment].author} onclick={handleShow} src={authorsData[commentsData[comment].author].avatar ? downsizeImage(authorsData[commentsData[comment].author].avatar, 50) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
                 <span>
-                    <b>{authorsData[commentsData[comment].author].username || 'Unknown User'}</b>
+                    <b data-link="profile" data-id={commentsData[comment].author} onclick={handleShow}>{authorsData[commentsData[comment].author].username || 'Unknown User'}</b>
                     <time data-timestamp={commentsData[comment].createTime}>{handleTime(commentsData[comment].createTime)}</time>
                     <a if={commentsData[comment].author == userId} onclick={handleEdit} data-id={comment}>Edit</a>
                     <a if={commentsData[comment].author == userId} onclick={handleRemove} data-id={comment}>Delete</a>
@@ -60,6 +60,7 @@
         import editComment from '../scripts/editComment.js';
         import removeComment from '../scripts/removeComment.js';
         import getProfile from '../scripts/getProfile.js';
+        import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
 
         import {downsizeImage} from '../scripts/client.js';
@@ -200,6 +201,18 @@
                         //Handle error
                     }
                 });
+            }
+        }
+        this.handleShow = (event) => {
+            let self = this;
+            let dataset = event.target.dataset;
+            switch(dataset.link) {
+                case 'profile':
+                    showProfile({
+                        id: dataset.id,
+                        scroll: true
+                    });
+                    break;
             }
         }
         /*

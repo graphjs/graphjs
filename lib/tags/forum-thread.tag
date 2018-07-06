@@ -26,9 +26,9 @@
             <div class="graphjs-replies">
                 <div each={entry, index in entries} data-id={entry.id} class="graphjs-item">
                     <div class="graphjs-credit" if={authorsData.hasOwnProperty(entry.author)}>
-                        <img src={authorsData[entry.author].avatar ? downsizeImage(authorsData[entry.author].avatar, 50) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+                        <img data-link="profile" data-id={entry.author} onclick={handleShow} src={authorsData[entry.author].avatar ? downsizeImage(authorsData[entry.author].avatar, 50) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
                         <span>
-                            <b>{authorsData[entry.author].username || 'Unknown User'}</b>
+                            <b data-link="profile" data-id={entry.author} onclick={handleShow}>{authorsData[entry.author].username || 'Unknown User'}</b>
                             <time data-timestamp={entry.timestamp}>{handleTime(entry.timestamp)}</time>
                             <a if={entry.author == userId} onclick={handleEdit} data-id={entry.id}>Edit</a>
                             <a if={entry.author == userId} onclick={index == 0 ? handleDestroy : handleRemove} data-id={entry.id}>Delete</a>
@@ -129,6 +129,7 @@
         import showForumList from '../scripts/showForumList.js';
         import editReply from '../scripts/editReply.js';
         import getProfile from '../scripts/getProfile.js';
+        import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
 
         import {downsizeImage} from '../scripts/client.js';
@@ -317,6 +318,18 @@
                         //Handle error
                     }
                 });
+            }
+        }
+        this.handleShow = (event) => {
+            let self = this;
+            let dataset = event.target.dataset;
+            switch(dataset.link) {
+                case 'profile':
+                    showProfile({
+                        id: dataset.id,
+                        scroll: true
+                    });
+                    break;
             }
         }
         /*
