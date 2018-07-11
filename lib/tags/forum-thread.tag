@@ -145,21 +145,16 @@
         this.on('before-mount', function() {
             this.handleUser();
             this.frequentlyUpdateTime = setInterval(this.handleTimeUpdate,  60 * 1000);
-            //GraphJSCallbacks
-            if(!window.GraphJSCallbacks) {
-                window.GraphJSCallbacks = {};
-            }
-            let self = this;
-            window.GraphJSCallbacks['updateForumThread'] = function() {
-                self.blocked = false;
-                self.update();
-                self.handleUser();
-            }
         });
         this.on('unmount', function() {
             clearInterval(this.frequentlyUpdateTime);
         });
 
+        this.restart = () => {
+            this.blocked = false;
+            this.update();
+            this.handleUser();
+        }
         this.handleUser = () => {
             let self = this;
             getSession(function(response) {

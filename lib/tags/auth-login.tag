@@ -1,4 +1,7 @@
-<graphjs-auth-login class={'graphjs-root graphjs-box' + (checked ? ' graphjs-checked' : '')}>
+<graphjs-auth-login
+    class={'graphjs-root graphjs-box' + (checked ? ' graphjs-checked' : '')}
+    style={opts.minor ? (opts.gap == 0 ? 'top: -1em);' : 'top: calc(' + opts.gap + ' + 1em);') : ''}
+>
     <div class="graphjs-header" if={opts.title}>
         <div class="graphjs-title">{opts.title || 'Login'}</div>
     </div>
@@ -120,14 +123,9 @@
                             self.checked = true;
                             self.refs.submit.classList.remove('graphjs-loading');
                             self.update();
-                            if(opts.action) {
-                                if(opts.action != 'handleState') {
-                                    window.GraphJSCallbacks[opts.action]();
-                                }
-                                if(window.GraphJSCallbacks.hasOwnProperty('handleState')) {
-                                    window.GraphJSCallbacks['handleState']();
-                                }
-                            }
+                            Array.from(document.getElementsByClassName('graphjs-root')).forEach((item) => {
+                                item._tag && item._tag.restart && item._tag.restart();
+                            });
                             if(opts.minor) {
                                 opts.callback();
                                 opts.refresh();

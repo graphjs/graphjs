@@ -26,7 +26,39 @@
             <p>You can customize the main color and define light/dark theme as your preference. To do this, you need to modify <span class="code-block">GraphJS.init</span> function.</p>
             <p>##### Add more text here...</p>
         </div>
+        <!--Test Block
+        <div class="block">
+            <h2 id="test-block">Test</h2>
+            <p>This block is here to test several Graph.js components together.</p>
+            <graphjs-auth></graphjs-auth>
+            <graphjs-comments></graphjs-comments>
+            <graphjs-forum></graphjs-forum>
+            <graphjs-forum default="list"></graphjs-forum>
+            <graphjs-forum default="thread" id="50a5a634eed9d6dad5f64daa3bef6587"></graphjs-forum>
+            <graphjs-forum default="composer"></graphjs-forum>
+            <graphjs-messages></graphjs-messages>
+            <graphjs-profile default="activity" id="48760696099368953dd71a90b727acba"></graphjs-profile>
+            <graphjs-profile default="followers" id="48760696099368953dd71a90b727acba"></graphjs-profile>
+            <graphjs-profile default="following" id="48760696099368953dd71a90b727acba"></graphjs-profile>
+            <graphjs-profile default="groups" id="48760696099368953dd71a90b727acba"></graphjs-profile>
+            <graphjs-group default="members" id="33365d758357b6e724c360272ebf8895"></graphjs-group>
+            <graphjs-star-list></graphjs-star-list>
+            <graphjs-feedback></graphjs-feedback>
+            <graphjs-list></graphjs-list>
+        </div>
+        -->
     </div>
+    <script>
+        import '../lib/tags/auth.tag';
+        import '../lib/tags/comments.tag';
+        import '../lib/tags/feedback.tag';
+        import '../lib/tags/forum.tag';
+        import '../lib/tags/group.tag';
+        import '../lib/tags/list.tag';
+        import '../lib/tags/messages.tag';
+        import '../lib/tags/profile.tag';
+        import '../lib/tags/star-list.tag';
+    </script>
     <style type="less">
         @import '../lib/styles/variables.less';
         @import '../lib/styles/mixins.less';
@@ -35,7 +67,7 @@
             letter-spacing: 0;
             .block {
                 margin-bottom: 2.5em;
-                p {
+                & > p {
                     font-size: 1.1em;
                     line-height: 165%;
                 }

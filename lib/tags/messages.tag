@@ -179,16 +179,6 @@
         this.on('before-mount', function() {
             this.handleUser();
             this.frequentlyUpdateTime = setInterval(this.handleTime,  60 * 1000);
-            //GraphJSCallbacks
-            if(!window.GraphJSCallbacks) {
-                window.GraphJSCallbacks = {};
-            }
-            let self = this;
-            window.GraphJSCallbacks['updateMessages'] = function() {
-                self.blocked = false;
-                self.update();
-                self.handleUser();
-            }
         });
         this.on('unmount', function() {
             clearInterval(this.frequentlyUpdateTime);
@@ -207,6 +197,11 @@
             this.refs.messages.scrollTop = this.refs.messages.scrollHeight;
         });
 
+        this.restart = () => {
+            this.blocked = false;
+            this.update();
+            this.handleUser();
+        }
         this.handleUser = () => {
             let self = this;
             getSession(function(response) {

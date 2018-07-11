@@ -19,7 +19,7 @@
         <input if={anonymity && !userId} ref="email" type="text" placeholder="Enter your email address"/>
         <form>
             <textarea ref="message" placeholder={opts.placeholder || 'Write your message here...'}></textarea>
-            <button onclick={handleMessage}>Send Message</button>
+            <button ref="submitMessage" onclick={handleMessage}>Send Message</button>
             <button if={opts.clear} onclick={handleClear} class="graphjs-danger">Clear</button>
         </form>
         <div if={!loaded && !blocked} class="graphjs-inline graphjs-loader">
@@ -66,21 +66,16 @@
         this.on('before-mount', function() {
             this.handleUser();
             this.handleRecipient();
-            //GraphJSCallbacks
-            if(!window.GraphJSCallbacks) {
-                window.GraphJSCallbacks = {};
-            }
-            let self = this;
-            window.GraphJSCallbacks['updateMessagesComposer'] = function() {
-                self.blocked = false;
-                self.update();
-                self.handleUser();
-            }
         });
         this.on('mount', function() {
             this.refs.message.focus();
         });
 
+        this.restart = () => {
+            this.blocked = false;
+            this.update();
+            this.handleUser();
+        }
         this.handleUser = () => {
             let self = this;
             getSession(function(response) {
@@ -115,12 +110,23 @@
         this.handleMessage = (event) => {
             let self = this;
             event.preventDefault();
+            self.refs.submitMessage.classList.add('graphjs-loading');
             let value = self.refs.message.value.replace(/\n+/g, '\n'); // Removes repetitive line breaks
             if(self.anonymity != true) {
                 sendMessage(self.recipient, value, function(response) {
                     if(response.success) {
+                        self.refs.submitMessage.classList.remove('graphjs-loading');
                         self.checked = true;
                         self.update();
+                        if(document.querySelector('graphjs-overlay')) {
+                            setTimeout(function() {
+                                self.handleOverlay();
+                            }, 2500);
+                        } else {
+                            setTimeout(function() {
+                                self.handleRestart();
+                            }, 5000);
+                        }
                     } else {
                         //Handle errors
                     }
@@ -129,8 +135,13 @@
                 if(self.checkEmailPattern()) {
                     sendAnonymousMessage(self.refs.email.value, self.recipient, value, function(response) {
                         if(response.success) {
+                            self.refs.submitMessage.classList.remove('graphjs-loading');
                             self.checked = true;
                             self.update();
+                            setTimeout(function() {
+                                self.handleRestart();
+                                self.hideOverlay();
+                            }, 5000);
                         } else {
                             //Handle errors
                         }
@@ -142,6 +153,14 @@
             event.preventDefault();
             this.refs.message.value = '';
             this.refs.message.focus();
+        }
+        this.handleRestart = () => {
+            if(this.refs.email) {
+                this.refs.email.value = '';
+            }
+            this.refs.message.value = '';
+            this.checked = false;
+            this.update();
         }
         this.handleBlock = (event) => {
             event.preventDefault();

@@ -66,18 +66,13 @@
 
         this.on('before-mount', function() {
             this.handleUser();
-            //GraphJSCallbacks
-            if(!window.GraphJSCallbacks) {
-                window.GraphJSCallbacks = {};
-            }
-            let self = this;
-            window.GraphJSCallbacks['updateForumCompose'] = function() {
-                self.blocked = false;
-                self.update();
-                self.handleUser();
-            }
         });
 
+        this.restart = () => {
+            this.blocked = false;
+            this.update();
+            this.handleUser();
+        }
         this.handleUser = () => {
             let self = this;
             getSession(function(response) {

@@ -4,12 +4,15 @@
     display: inline-block;
     box-sizing: content-box !important;
     height: @bar-height;
+    line-height: @bar-height;
     border: none;
     background-color: @shade-color;
     .@{prefix}-content {
+        height: inherit;
         .no-padding !important;
         .bold-font;
         font-size: 1.2em;
+        line-height: inherit;
         background-color: transparent !important;
         a {
             float: left;
@@ -29,59 +32,63 @@
             }
         }
         .@{prefix}-not-logged {
-            height: @bar-height;
-            line-height: @bar-height;
+            height: inherit;
+            line-height: inherit;
             text-align: center;
             a {
                 display: inline-block;
-                padding: 0 15px;
-                line-height: @bar-height;
+                padding: 0 1em;
+                line-height: inherit;
 
             }
         }
         .@{prefix}-logged {
-            height: @bar-height;
+            height: inherit;
+            line-height: inherit;
             a {
                 display: inline-block;
-                line-height: @bar-height;
+                line-height: inherit;
                 .transition(background-color .35s ease);
             }
             .@{prefix}-idle {
-                padding: 0 15px;
+                padding: 0 1em;
             }
             .@{prefix}-details {
                 float: left;
-                height: @bar-height;
+                height: inherit;
                 padding: 5px;
                 & > * {
                     float: left;
+                    pointer-events: none;
                 }
                 img {
-                    width: calc(@bar-height - 10px);
-                    height: calc(@bar-height - 10px);
+                    width: auto;
+                    height: 100%;
                     .border-radius(@border-radius-medium);
                 }
                 span {
-                    height: 100%;
-                    max-width: 150px;
-                    margin-left: 5px;
-                    padding: 0 10px;
-                    line-height: calc(@bar-height - 10px);
+                    position: relative;
+                    top: -5px;
+                    height: inherit;
+                    max-width: 10em;
+                    padding: 0 .75em;
+                    line-height: inherit;
                     .single-line-text;
                     vertical-align: middle;
                 }
             }
             .@{prefix}-exit {
                 float: right;
-                width: @bar-height;
-                height: @bar-height;
+                width: auto;
+                height: 100%;
                 text-align: center;
                 svg {
+                    display: inline-block;
                     position: relative;
+                    top: -1px;
                     width: auto;
-                    height: @bar-height * .36;
-                    margin: (@bar-height * .32) 0;
-                    vertical-align: top;
+                    height: inherit;
+                    padding: 30%;
                     path {
                         fill: fade(@theme-color, 50%);
                         .transition(fill .35s ease);

@@ -26,19 +26,14 @@
 
         this.on('before-mount', function() {
             this.handleUser();
-            //GraphJSCallbacks
-            if(!window.GraphJSCallbacks) {
-                window.GraphJSCallbacks = {};
-            }
-            let self = this;
-            window.GraphJSCallbacks['updateGroupMembers'] = function() {
-                self.loaded = true;
-                self.blocked = false;
-                self.update();
-                self.handleUser();
-            }
         });
 
+        this.restart = () => {
+            this.loaded = true;
+            this.blocked = false;
+            this.update();
+            this.handleUser();
+        }
         this.handleUser = () => {
             let self = this;
             getSession(function(response) {

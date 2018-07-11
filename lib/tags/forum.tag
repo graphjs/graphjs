@@ -39,8 +39,8 @@
         import './forum-thread.tag'
         import './forum-composer.tag'
 
-        this.active = 'list';
-        this.id = undefined;
+        this.active = opts.default || 'list';
+        this.id = opts.id;
         this.changeProperties = (properties) => {
             this.active = properties.link || undefined;
             this.id = properties.id || undefined;

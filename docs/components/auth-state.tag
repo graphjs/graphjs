@@ -23,6 +23,10 @@
                     <label for="color">Color</label>
                 <div>
             </fieldset>
+            <fieldset name="height">
+                <legend>Height</legend>
+                <input onkeyup={updateText} type="text" value={specs.height} />
+            </fieldset>
         </form>
     </section>
     <h2>Code</h2>
@@ -32,7 +36,13 @@
         this.input = '';
         this.specs = {
             "type": "standalone",
-            "theme": "default"
+            "theme": "default",
+            "height": "50px"
+        }
+        this.updateText = (event) => {
+            let target = event.target.parentNode.name;
+            this.specs[target] = event.target.value;
+            this.handleCode();
         }
         this.updateRadio = (event) => {
             let target = event.target.parentNode.parentNode.name;

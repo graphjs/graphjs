@@ -150,19 +150,14 @@
         this.on('before-mount', function() {
             this.handleUser();
             this.handleInformation();
-            //GraphJSCallbacks
-            if(!window.GraphJSCallbacks) {
-                window.GraphJSCallbacks = {};
-            }
-            let self = this;
-            window.GraphJSCallbacks['updateProfileActivity'] = function() {
-                self.blocked = true;
-                self.update();
-                self.handleUser();
-                self.handleInformation();
-            }
         });
 
+        this.restart = () => {
+            this.blocked = false;
+            this.update();
+            this.handleUser();
+            this.handleInformation();
+        }
         this.handleUser = () => {
             let self = this;
             getSession(function(response) {

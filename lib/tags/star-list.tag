@@ -141,16 +141,11 @@
 
         this.on('before-mount', function() {
             this.handleContent();
-            //GraphJSCallbacks
-            if(!window.GraphJSCallbacks) {
-                window.GraphJSCallbacks = {};
-            }
-            let self = this;
-            window.GraphJSCallbacks['updateStarList'] = function() {
-                self.handleContent();
-            }
         });
 
+        this.restart = () => {
+            this.handleContent();
+        }
         this.handleContent = () => {
             let self = this;
             this.scope == 'user'

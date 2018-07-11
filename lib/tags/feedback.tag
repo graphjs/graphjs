@@ -25,7 +25,7 @@
         </div>
         <div class={'graphjs-item graphjs-feedback'}>
             <img class="graphjs-author" src={profile ? downsizeImage(profile.avatar, 50) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
-            <div class={'graphjs-memo' + (userId ? '' : ' graphjs-loading graphjs-blocked')}>
+            <div class={'graphjs-memo' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
                 <fieldset class="rating">
                 	<input id="rate-5" type="radio" name="rating" value={5}>
                 	<label for="rate-5">
@@ -104,18 +104,13 @@
         this.on('before-mount', function() {
             this.handleUser();
             this.handleContent();
-            //GraphJSCallbacks
-            if(!window.GraphJSCallbacks) {
-                window.GraphJSCallbacks = {};
-            }
-            let self = this;
-            window.GraphJSCallbacks['updateFeedback'] = function() {
-                self.blocked = false;
-                self.update();
-                self.handleUser();
-            }
         });
 
+        this.restart = () => {
+            this.blocked = false;
+            this.update();
+            this.handleUser();
+        }
         this.handleUser = () => {
             let self = this;
             getSession(function(response) {

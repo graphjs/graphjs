@@ -11,7 +11,7 @@
         <div class="graphjs-synopsis" if={comments.length <= 0}>
             Not comments yet. Be the first person to comment!
         </div>
-        <div class={'graphjs-comment' + (userId ? '' : ' graphjs-loading graphjs-blocked')}>
+        <div class={'graphjs-comment' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
             <textarea ref="composer" placeholder="Write your comment here..."></textarea>
             <button ref="submit" onclick={handleComment}>Send Comment</button>
             <button onclick={handleClear} class="graphjs-danger">Clear</button>
@@ -77,21 +77,16 @@
             this.handleUser();
             this.handleContent();
             this.frequentlyUpdateTime = setInterval(this.handleTimeUpdate,  60 * 1000);
-            //GraphJSCallbacks
-            if(!window.GraphJSCallbacks) {
-                window.GraphJSCallbacks = {};
-            }
-            let self = this;
-            window.GraphJSCallbacks['updateComments'] = function() {
-                self.blocked = false;
-                self.update();
-                self.handleUser();
-            }
         });
         this.on('unmount', function() {
             clearInterval(this.frequentlyUpdateTime);
         });
 
+        this.restart = () => {
+            this.blocked = false;
+            this.update();
+            this.handleUser();
+        }
         this.handleUser = () => {
             let self = this;
             getSession(function(response) {

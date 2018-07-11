@@ -182,18 +182,13 @@
 
         this.on('before-mount', function() {
             this.handleUser();
-            //GraphJSCallbacks
-            if(!window.GraphJSCallbacks) {
-                window.GraphJSCallbacks = {};
-            }
-            let self = this;
-            window.GraphJSCallbacks['updateForumList'] = function() {
-                self.blocked = false;
-                self.update();
-                self.handleUser();
-            }
         });
 
+        this.restart = () => {
+            this.blocked = false;
+            this.update();
+            this.handleUser();
+        }
         this.handleUser = () => {
             let self = this;
             getSession(function(response) {
@@ -218,7 +213,7 @@
         this.handleBlock = (event) => {
             event.preventDefault();
             showLogin({
-                action: 'updateForumList'
+                //action: 'updateForumList'
             });
         }
         this.handleContent = () => {

@@ -1,10 +1,7 @@
 <graphjs-profile-settings class="graphjs-root graphjs-box">
-    <div class="graphjs-warning" if={failMessages.length > 0 || successMessages.length > 0}>
+    <div class="graphjs-warning" if={failMessages.length > 0}>
         <ul if={failMessages.length > 0} class="graphjs-fail">
             <li each={failMessage in failMessages}>{failMessage}</li>
-        </ul>
-        <ul if={successMessages.length > 0} class="graphjs-success">
-            <li each={successMessage in successMessages}>{successMessage}</li>
         </ul>
     </div>
     <div class="graphjs-content">
@@ -202,7 +199,7 @@
             let passwordMinimumLengthLimit = 5;
             let failMessage = 'Password must be ' + passwordMinimumLengthLimit + ' characters minimum!';
             if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
-                this.refs.password.classList.remove('graphjs-error');
+                //this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
@@ -215,7 +212,7 @@
             let passwordMaximumLengthLimit = 255;
             let failMessage = 'Password must be ' + passwordMaximumLengthLimit + ' characters maximum!';
             if(this.refs.password.value.length <= passwordMaximumLengthLimit) {
-                this.refs.password.classList.remove('graphjs-error');
+                //this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
@@ -227,10 +224,12 @@
         this.checkPasswordMatch = () => {
             let failMessage = 'Passwords do not match.';
             if(this.refs.password.value == this.refs.confirmation.value) {
+                this.refs.password.classList.remove('graphjs-error');
                 this.refs.confirmation.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
             } else {
+                this.refs.password.classList.add('graphjs-error');
                 this.refs.confirmation.classList.add('graphjs-error');
                 this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
@@ -257,11 +256,11 @@
             }
         }
         this.validatePassword = () => {
+            let validPasswordMatch = this.checkPasswordMatch();
             let validPasswordMinimumLength = this.checkPasswordMinimumLength();
             let validPasswordMaximumLength = this.checkPasswordMaximumLength();
-            let validPasswordMatch = this.checkPasswordMatch();
             if(
-                validPasswordMinimumLength && validPasswordMaximumLength && validPasswordMatch // Password
+                validPasswordMatch && validPasswordMinimumLength && validPasswordMaximumLength // Password
             ) {
                 return true;
             } else {

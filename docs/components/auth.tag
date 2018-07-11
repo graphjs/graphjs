@@ -36,6 +36,10 @@
                     <label for="bottomright">B.Right</label>
                 <div>
             </fieldset>
+            <fieldset name="height">
+                <legend>Height</legend>
+                <input onkeyup={updateText} type="text" value={specs.height} />
+            </fieldset>
         </form>
     </section>
     <h2>Code</h2>
@@ -46,7 +50,13 @@
         this.specs = {
             "type": "standalone",
             "theme": "default",
-            "position": "topleft"
+            "position": "topleft",
+            "height": "50px"
+        }
+        this.updateText = (event) => {
+            let target = event.target.parentNode.name;
+            this.specs[target] = event.target.value;
+            this.handleCode();
         }
         this.updateTextWithCheckbox = (event) => {
             let target = event.target.parentNode.name;

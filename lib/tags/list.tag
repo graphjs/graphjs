@@ -36,19 +36,14 @@
             opts.access == 'private'
             ? this.handleUser()
             : this.handleContent();
-            //GraphJSCallbacks
-            if(!window.GraphJSCallbacks) {
-                window.GraphJSCallbacks = {};
-            }
-            let self = this;
-            window.GraphJSCallbacks['updateList'] = function() {
-                self.loaded = true;
-                self.blocked = false;
-                self.update();
-                self.handleUser();
-            }
         });
 
+        this.restart = () => {
+            this.loaded = true;
+            this.blocked = false;
+            this.update();
+            this.handleUser();
+        }
         this.handleUser = () => {
             let self = this;
             getSession(function(response) {
