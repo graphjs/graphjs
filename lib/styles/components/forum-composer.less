@@ -6,7 +6,7 @@
     .@{prefix}-content {
         form {
             .clearfix;
-            input {
+            input, input[type] {
                 width: 60%;
             }
             textarea {
@@ -32,10 +32,10 @@
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    @{prefix}-forum-compose.@{prefix}-root {
+    @{prefix}-forum-composer.@{prefix}-root {
         .@{prefix}-content {
             form {
-                input {
+                input, input[type] {
                     width: 100%;
                 }
                 textarea {
@@ -60,10 +60,10 @@
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    @{prefix}-forum-compose.@{prefix}-root {
+    @{prefix}-forum-composer.@{prefix}-root {
         .@{prefix}-content {
             form {
-                input {
+                input, input[type] {
                     width: 80%;
                 }
                 textarea {

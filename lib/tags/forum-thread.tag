@@ -250,6 +250,7 @@
         }
         this.handleShow = (event) => {
             event.preventDefault();
+            console.log('yo')
             let dataset = event.currentTarget.dataset;
             switch(dataset.link) {
                 case 'list':

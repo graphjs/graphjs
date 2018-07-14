@@ -36,7 +36,7 @@
                         }
                     }
                 }
-                input {
+                input, input[type] {
                     width: calc(100% - 3.5em);
                     height: 3.5em;
                     .no-padding;
@@ -272,7 +272,7 @@
                 }
                 .@{prefix}-title {
                     display: block;
-                    width: 100%;
+                    width: calc(100% - 7.3em);
                     height: .9em;
                     max-width: 30em;
                     margin: .55em;
@@ -288,7 +288,7 @@
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    @{prefix}-star-list {
+    @{prefix}-star-list.@{prefix}-root {
         .@{prefix}-content {
             .@{prefix}-list {
                 .@{prefix}-item {
@@ -303,7 +303,7 @@
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    @{prefix}-star-list {
+    @{prefix}-star-list.@{prefix}-root {
         .@{prefix}-content {
             .@{prefix}-list {
                 .@{prefix}-item {

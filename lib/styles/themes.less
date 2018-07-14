@@ -12,12 +12,10 @@
 
     .@{prefix}-root {
         color: @text-color-normal;
-        * {
-            .placeholder-color(tint(@default-color, 50%));
-        }
-        input, textarea {
-            color: tint(@default-color, 50%);
+        input, input[type], textarea {
+            color: @text-color-normal;
             background-color: @contrast-color;
+            .placeholder-color(@text-color-weak);
         }
         form {
             .@{prefix}-option {
@@ -27,7 +25,7 @@
             }
         }
     }
-    .@{prefix}-box {
+    .@{prefix}-box.@{prefix}-root {
         border: 1px solid fade(@default-color, 3%);
         background-color: @shade-color;
         .@{prefix}-header {
@@ -46,7 +44,7 @@
             background-color: @shade-color;
         }
     }
-    .@{prefix}-card {
+    .@{prefix}-card.@{prefix}-root {
         background-color: @contrast-color;
         b {
             .text-color-states(@default-color);
@@ -58,6 +56,7 @@
                 color: @text-color-weak;
             }
             a {
+                color: @text-color-weak;
                 &::before {
                     color: @text-color-weak;
                 }
@@ -98,12 +97,15 @@
                     }
                 }
             }
+            p {
+                color: @text-color-normal;
+            }
         }
     }
     .@{prefix}-promo {
         background-color: fade(@default-color, 85%);
     }
-    .@{prefix}-wallet {
+    .@{prefix}-wallet.@{prefix}-root {
         .@{prefix}-content {
             & > p {
                 color: @text-color-strong;
@@ -143,6 +145,16 @@
     }
     @{prefix}-auth-reset.@{prefix}-root {
         color: @text-color-normal;
+        .@{prefix}-content {
+            form {
+                b {
+                    color: @text-color-strong;
+                }
+                p {
+                    color: @text-color-normal;
+                }
+            }
+        }
     }
     @{prefix}-auth-state.@{prefix}-root {
         background-color: @shade-color;
@@ -155,6 +167,13 @@
                     background-color: @contrast-color;
                 }
             }
+            .@{prefix}-logged {
+                .@{prefix}-details {
+                    span {
+                        color: @theme-color;
+                    }
+                }
+            }
         }
     }
     @{prefix}-auth.@{prefix}-root {
@@ -164,6 +183,9 @@
         color: @text-color-normal;
         background-color: @shade-color;
         .@{prefix}-content {
+            .@{prefix}-synopsis {
+                color: @text-color-normal;
+            }
             .@{prefix}-item {
                 .@{prefix}-credit {
                     span {
@@ -194,6 +216,9 @@
                     a {
                         .text-color-states(@text-color-normal);
                     }
+                    p {
+                        color: @text-color-normal;
+                    }
                 }
             }
         }
@@ -207,7 +232,7 @@
             .@{prefix}-bar {
                 .@{prefix}-search {
                     border-right: 2px solid @contrast-color;
-                    input {
+                    input, input[type] {
                         background-color: transparent;
                     }
                 }
@@ -220,6 +245,9 @@
                     }
                     .@{prefix}-title {
                         color: @text-color-strong;
+                    }
+                    time {
+                        color: @text-color-normal;
                     }
                 }
             }
@@ -243,7 +271,9 @@
                             }
                         }
                         p {
+                            color: @text-color-normal;
                             &.@{prefix}-editable {
+                                color: @text-color-normal;
                                 border-color: fade(@default-color, 15%);
                                 background-color: @contrast-color;
                             }
@@ -253,6 +283,11 @@
             }
             .@{prefix}-reply {
                 background-color: @contrast-color;
+                .@{prefix}-synopsis {
+                    & > b {
+                        color: @text-color-normal;
+                    }
+                }
             }
         }
     }
@@ -276,6 +311,23 @@
         }
         ul {
             border-top: 2px solid fade(@default-color, 10%);
+            li {
+                &:hover {
+                    a {
+                        color: @text-color-normal;
+                    }
+                }
+                &.@{prefix}-active {
+                    a {
+                        color: @text-color-normal;
+                    }
+                }
+                a {
+                    span {
+                        color: @text-color-normal;
+                    }
+                }
+            }
         }
     }
     @{prefix}-group-settings.@{prefix}-root {
@@ -293,7 +345,7 @@
                     color: @text-color-normal;
                 }
             }
-            input {
+            input, input[type] {
                 color: @text-color-strong;
             }
             form {
@@ -360,6 +412,10 @@
                 li {
                     border-left: 2px dotted fade(@text-color-normal, 35%);
                     div {
+                        color: @text-color-normal;
+                        b {
+                            color: @text-color-normal;
+                        }
                         time {
                             color: @text-color-weak;
                         }
@@ -392,6 +448,24 @@
         }
         ul {
             border-top: 2px solid fade(@default-color, 10%);
+            li {
+                &:hover {
+                    a {
+                        color: @text-color-normal;
+                    }
+                }
+                &.@{prefix}-active {
+                    a {
+                        color: @text-color-normal;
+                    }
+                }
+                a {
+                    color: @text-color-normal;
+                    span {
+                        color: @text-color-normal;
+                    }
+                }
+            }
         }
     }
     @{prefix}-profile-settings.@{prefix}-root {
@@ -408,7 +482,7 @@
         }
         .@{prefix}-content {
             a {
-                .text {
+                .@{prefix}-text {
                     color: @text-color-normal;
                 }
             }
@@ -459,6 +533,7 @@
                         background-color: @contrast-color;
                     }
                     a {
+                        color: @text-color-normal;
                         &.@{prefix}-count, &.@{prefix}-label {
                             &::after {
                                 color: @text-color-weak;

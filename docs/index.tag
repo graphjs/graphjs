@@ -1,4 +1,4 @@
-<docs-index class="graphjs-root">
+<docs-index>
     <aside ref="menuContainer">
         <docs-menu callback={changeProperties} components={components} functions={functions}></docs-menu>
         <a onclick={toggleMenu}>

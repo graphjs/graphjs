@@ -37,7 +37,7 @@
                         }
                     }
                 }
-                input {
+                input, input[type] {
                     width: calc(100% - 3.5em);
                     height: 3.5em;
                     .no-padding;
@@ -67,6 +67,9 @@
                         fill: white;
                         .transition(fill .35s ease);
                     }
+                }
+                span {
+                    color: white;
                 }
             }
         }
@@ -122,6 +125,7 @@
                 */
                 time {
                     width: calc(4em / .9);
+                    color: @text-color-normal;
                     font-size: .9em;
                 }
                 .@{prefix}-contributors {

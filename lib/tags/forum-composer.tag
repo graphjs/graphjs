@@ -27,7 +27,7 @@
             <input ref="title" type="text" placeholder="Enter your post title here..." />
             <textarea ref="body" placeholder="Compose your post here..."></textarea>
             <span style="visibility: hidden">
-                <b>Supported formats:</b> Markdown
+                <b style="visibility: hidden">Supported formats:</b> Markdown
             </span>
             <button ref="submit" data-link="thread" onclick={handleSubmit}>Publish</button>
             <button data-link="list" onclick={opts.minor ? handleCallback : handleShow} class="graphjs-danger">Cancel</button>

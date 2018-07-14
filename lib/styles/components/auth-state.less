@@ -38,8 +38,8 @@
             a {
                 display: inline-block;
                 padding: 0 1em;
+                .bold-font;
                 line-height: inherit;
-
             }
         }
         .@{prefix}-logged {
@@ -72,6 +72,8 @@
                     height: inherit;
                     max-width: 10em;
                     padding: 0 .75em;
+                    color: @theme-color;
+                    .bold-font;
                     line-height: inherit;
                     .single-line-text;
                     vertical-align: middle;
@@ -111,6 +113,11 @@
                 }
             }
             .@{prefix}-logged {
+                a {
+                    span {
+                        color: white !important;
+                    }
+                }
                 .@{prefix}-exit {
                     svg {
                         path {

@@ -12,7 +12,7 @@
 	cursor: pointer;
 }
 
-.rating input {
+.rating input, .rating input[type] {
 	display: none
 }
 
@@ -30,11 +30,11 @@
 	fill: rgb(175, 175, 175);
 }
 
-.rating input:checked ~ label svg path {
+.rating input:checked ~ label svg path, .rating input[type]:checked ~ label svg path {
 	fill: rgb(239, 191, 23);
 }
 
-.rating:hover input:checked ~ label svg path {
+.rating:hover input:checked ~ label svg path, .rating:hover input[type]:checked ~ label svg path {
 	fill: rgb(155, 143, 101);
 }
 
@@ -43,7 +43,7 @@
 	fill: rgb(239, 191, 23);
 }
 
-.rating:hover input:checked ~ label:hover svg path,
-.rating:hover input:checked ~ label:hover ~ label svg path {
+.rating:hover input:checked ~ label:hover svg path, .rating:hover input[type]:checked ~ label:hover svg path,
+.rating:hover input:checked ~ label:hover ~ label svg path, .rating:hover input[type]:checked ~ label:hover ~ label svg path {
 	fill: rgb(239, 191, 23);
 }

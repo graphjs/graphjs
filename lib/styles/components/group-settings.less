@@ -6,7 +6,7 @@
     text-align: center;
     .@{prefix}-content {
         h2 {
-            color: @default-color;
+            color: @theme-color;
         }
         .@{prefix}-cover {
             overflow: hidden;
@@ -49,7 +49,7 @@
         form {
             max-width: 24em;
             margin: 0 auto;
-            input {
+            input, input[type] {
                 &.@{prefix}-success {
                     border: 1px solid @success-color;
                     &::after {

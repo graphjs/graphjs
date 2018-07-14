@@ -80,12 +80,14 @@
                     }
                     p {
                         margin-left: 3em * 1.2;
+                        color: @text-color-normal;
                         .regular-font;
                         font-size: 1em;
                         line-height: 150%;
                         white-space: pre-wrap;
                         &.@{prefix}-editable {
                             padding: .75em 1em;
+                            color: @text-color-normal;
                             border: 1px dashed fade(@default-color, 15%);
                             background-color: @contrast-color;
                             outline: none;
@@ -115,6 +117,9 @@
                 padding: calc(1em - 1px) 0;
                 border-bottom: 1px dotted fade(black, 15%);
                 cursor: pointer;
+                & > b {
+                    color: @text-color-normal;
+                }
                 & > a {
                     display: inline-block;
                     height: 1em;

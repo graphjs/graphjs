@@ -81,11 +81,13 @@
             &:hover {
                 a {
                     opacity: 1;
+                    color: @text-color-normal;
                 }
             }
             &.@{prefix}-active {
                 a {
                     opacity: 1;
+                    color: @text-color-normal;
                     pointer-events: none;
                 }
             }
@@ -94,7 +96,7 @@
                 opacity: .75;
                 padding: 0 1em;
                 cursor: pointer;
-                .text-color-states(@theme-color);
+                color: @text-color-normal;
                 font-size: @font-size-default * 1.1;
                 .bold-font;
                 line-height: 2.5em;
@@ -102,6 +104,10 @@
                     &::before {
                         content: attr(data-count);
                     }
+                }
+                span {
+                    color: @text-color-normal;
+                    .bold-font;
                 }
                 svg {
                     display: none;
@@ -178,7 +184,7 @@
     @{prefix}-profile-header.@{prefix}-root {
         ul {
             display: flex;
-            border-top: none;
+            border-top: none !important;
             li {
                 flex-grow: 1;
                 border-top: 1px solid fade(black, 5%);
@@ -244,7 +250,7 @@
     @{prefix}-profile-header.@{prefix}-root {
         ul {
             display: flex;
-            border-top: none;
+            border-top: none !important;
             li {
                 flex-grow: 1;
                 border-top: 1px solid fade(black, 5%);

@@ -1,5 +1,5 @@
 <graphjs-auth-state
-    class={'graphjs-root' + (opts.type == 'inline' ? ' graphjs-inline' : ' graphjs-box')}
+    class={'graphjs-root graphjs-' + theme + (opts.type == 'inline' ? ' graphjs-inline' : ' graphjs-box')}
     style={'height: ' + height + '; line-height: ' + height + ';'}
 >
     <div class="graphjs-content">
@@ -42,14 +42,12 @@
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
+        this.theme = opts.theme || 'default';
         this.height = opts.height || '50px';
         this.failMessages = [];
 
         this.on('before-mount', function() {
             this.handleState();
-        });
-        this.on('mount', function() {
-            opts.theme && this.root.classList.add('graphjs-' + opts.theme);
         });
 
         this.restart = () => {

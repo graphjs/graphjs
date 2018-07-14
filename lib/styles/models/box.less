@@ -1,6 +1,6 @@
 @prefix: graphjs;
 
-.@{prefix}-box {
+.@{prefix}-box.@{prefix}-root {
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
@@ -8,6 +8,9 @@
     border: 1px solid fade(@default-color, 3%);
     background-color: @shade-color;
     .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
+    &:hover, &:active, &:focus {
+        .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
+    }
     .@{prefix}-header {
         position: relative;
         width: 100%;
@@ -89,6 +92,8 @@
             }
             li {
                 margin-bottom: .25em;
+                color: inherit;
+                list-style: none;
                 &:last-child {
                     margin-bottom: 0;
                 }
@@ -104,8 +109,6 @@
         background-color: @shade-color;
         p {
             margin: 0;
-            font-size: @font-size-default;
-            line-height: 150%;
         }
     }
     .@{prefix}-check {
@@ -186,7 +189,7 @@
 
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
-    .@{prefix}-box {
+    .@{prefix}-box.@{prefix}-root {
         .@{prefix}-content {
             padding: 1.5em;
         }
@@ -195,7 +198,7 @@
 
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    .@{prefix}-box {
+    .@{prefix}-box.@{prefix}-root {
         .@{prefix}-content {
             padding: 2em;
         }

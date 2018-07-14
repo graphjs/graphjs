@@ -6,6 +6,12 @@
 	box-shadow:         @string;
 }
 
+.text-shadow(@string) {
+	-webkit-text-shadow: @string;
+	-moz-text-shadow:    @string;
+	text-shadow:         @string;
+}
+
 .box-sizing(@type: border-box) {
 	-webkit-box-sizing: @type;
 	-moz-box-sizing:    @type;
@@ -109,10 +115,12 @@
 
 .placeholder-color(@color) {
     &::-webkit-input-placeholder, &::placeholder {
+		opacity: 1;
         color: @color;
     }
     &::-moz-placeholder, &:-ms-input-placeholder, &:-moz-placeholder { //Temporary bug fix: Placeholders for other browsers had to be separated from webkit version
-        color: @color;
+        opacity: 1;
+		color: @color;
     }
 	&:focus::-webkit-input-placeholder, &:focus::placeholder {
         opacity: .5;

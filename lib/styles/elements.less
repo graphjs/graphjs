@@ -8,9 +8,8 @@
     color: @text-color-normal;
     .regular-font;
     letter-spacing: -.0075em;
-    * {
+    *, *[type] {
         .box-sizing(border-box);
-        .placeholder-color(tint(@default-color, 50%));
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -webkit-text-size-adjust: 100%;
@@ -23,23 +22,32 @@
     b {
         .bold-font;
     }
+    h1 {
+        .bold-font;
+        font-size: 1.65em;
+    }
+    h2 {
+        .bold-font;
+        font-size: 1.35em;
+    }
     svg {
         pointer-events: none;
     }
-    input, textarea, button {
+    input, input[type], textarea, button {
         width: 100%;
         padding: .75em 1em;
         border: none;
         .border-radius(@border-radius-small);
         outline: none;
     }
-    input, textarea {
-        color: tint(@default-color, 50%);
+    input, input[type], textarea {
+        color: @text-color-normal;
         .regular-font;
         font-size: @font-size-default;
         line-height: @font-size-default;
         border: 1px solid fade(black, 10%);
         background-color: @contrast-color;
+        .placeholder-color(@text-color-weak);
     }
     textarea {
         resize: none;
@@ -66,7 +74,7 @@
         }
     }
     form {
-        input, textarea {
+        input, input[type], textarea {
             position: relative;
             margin-bottom: .5em;
             .transition(border-color .35s ease);
@@ -116,7 +124,7 @@
     .@{prefix}-root {
         font-size: @font-size-xsmall;
         line-height: @font-size-xsmall;
-        input, textarea {
+        input, input[type], textarea {
             font-size: @font-size-xsmall;
             line-height: @font-size-xsmall;
         }
@@ -139,7 +147,7 @@
     .@{prefix}-root {
         font-size: @font-size-xsmall;
         line-height: @font-size-xsmall;
-        input, textarea {
+        input, input[type], textarea {
             font-size: @font-size-xsmall;
             line-height: @font-size-xsmall;
         }
@@ -162,7 +170,7 @@
     .@{prefix}-root {
         font-size: @font-size-small;
         line-height: @font-size-small;
-        input, textarea {
+        input, input[type], textarea {
             font-size: @font-size-small;
             line-height: @font-size-small;
         }
@@ -180,7 +188,7 @@
     .@{prefix}-root {
         font-size: @font-size-medium;
         line-height: @font-size-medium;
-        input, textarea {
+        input, input[type], textarea {
             font-size: @font-size-medium;
             line-height: @font-size-medium;
         }
@@ -198,7 +206,7 @@
     .@{prefix}-root {
         font-size: @font-size-medium;
         line-height: @font-size-medium;
-        input, textarea {
+        input, input[type], textarea {
             font-size: @font-size-medium;
             line-height: @font-size-medium;
         }
@@ -216,7 +224,7 @@
     .@{prefix}-root {
         font-size: @font-size-large;
         line-height: @font-size-large;
-        input, textarea {
+        input, input[type], textarea {
             font-size: @font-size-large;
             line-height: @font-size-large;
         }
@@ -234,7 +242,7 @@
     .@{prefix}-root {
         font-size: @font-size-large;
         line-height: @font-size-large;
-        input, textarea {
+        input, input[type], textarea {
             font-size: @font-size-large;
             line-height: @font-size-large;
         }
@@ -252,7 +260,7 @@
     .@{prefix}-root {
         font-size: @font-size-xlarge;
         line-height: @font-size-xlarge;
-        input, textarea {
+        input, input[type], textarea {
             font-size: @font-size-xlarge;
             line-height: @font-size-xlarge;
         }
