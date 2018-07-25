@@ -24,6 +24,7 @@ import './components/profile.tag';
 import './components/profile-card.tag';
 import './components/feedback.tag';
 import './components/list.tag';
+import './components/feed.tag';
 import './functions/show/showAlert.tag';
 import './functions/show/showAuth.tag';
 import './functions/show/showLogin.tag';

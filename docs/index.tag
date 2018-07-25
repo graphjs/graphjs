@@ -489,7 +489,8 @@
             {"label": "Star: Button", "component": "star-button", "parent": "star"},
             {"label": "Star: List", "component": "star-list", "parent": "star"},
             {"label": "Feedback", "component": "feedback"},
-            {"label": "List", "component": "list"}
+            {"label": "List", "component": "list"},
+            {"label": "Feed", "component": "feed"}
         ];
         this.activeItem = 'introduction';
         this.toggleMenu = (event) => {
