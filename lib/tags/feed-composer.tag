@@ -4,21 +4,13 @@
     (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
     (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
 }>
-    <div class="graphjs-content">
-        <div class={'graphjs-entry' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
+    <div class={'graphjs-content' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
+        <div class="graphjs-entry">
             <textarea ref="composer" placeholder="What's on your mind?"></textarea>
             <div class="graphjs-media" if={media.length > 0}>
                 <div class={'graphjs-' + item.resource_type} each={item in media} style={'background-image: url(' + downsizeImage(item.url, 100) + ');'}>
                 </div>
             </div>
-            <div if={!loaded && !blocked} class="graphjs-inline graphjs-loader">
-                <div class="graphjs-dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-            <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to write a comment</button>
         </div>
         <div class="graphjs-options">
             <a ref="addPhoto">
@@ -33,8 +25,16 @@
                 </svg>
                 Upload Video
             </a>
-            <button ref="submit" disabled="disabled">Post</button>
+            <button ref="submit" onClick={handleSubmit} disabled="disabled">Post</button>
         </div>
+        <div if={!loaded && !blocked} class="graphjs-inline graphjs-loader">
+            <div class="graphjs-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to post updates</button>
     </div>
     <a class="graphjs-promo graphjs-top graphjs-right" href="https://graphjs.com" target="_blank">
         <svg viewBox="0 0 200 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -142,6 +142,8 @@
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
+        import addPhoto from '../scripts/addPhoto.js';
+        import addVideo from '../scripts/addVideo.js';
         import '../vendor/cloudinary/upload-widget.js';
 
         import {downsizeImage} from '../scripts/client.js';
@@ -233,6 +235,22 @@
             event.preventDefault();
             showLogin();
         }
+        this.checkMedia = () => {
+            let mediaMinimumLimit = 1;
+            if(this.media.length >= mediaMinimumLimit) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        this.checkMessage = () => {
+            let messageMinimumLengthLimit = 1;
+            if(this.message.length >= messageMinimumLengthLimit) {
+                return true;
+            } else {
+                return false;
+            }
+        }
         this.handleButton = () => {
             if(this.message.length > 0 || this.media.length > 0) {
                 this.refs.submit.removeAttribute('disabled');
@@ -240,6 +258,48 @@
                 this.refs.submit.setAttribute('disabled', 'disabled');
             }
             this.update();
+        }
+        this.handleSubmit = (event) => {
+            let self = this;
+            self.failMessages = [];
+            self.refs.submit.classList.add('graphjs-loading');
+            if(self.checkMessage() || self.checkMedia()) {
+                let type = self.media.length > 1 ? 'album' : 'single';
+                let message = self.message;
+                let content;
+                if(type == 'single') {
+                    content = self.media[0].url;
+                } else {
+                    content = [];
+                    self.media.forEach(function(item) {
+                        content.push(item.url);
+                    });
+                }
+                addPhoto(
+                    type,
+                    message,
+                    content,
+                    function(response) {
+                        if(response.success) {
+                            self.checked = true;
+                            self.refs.submit.classList.remove('graphjs-loading');
+                            self.update();
+                            Array.from(document.getElementsByClassName('graphjs-root')).forEach((item) => {
+                                item._tag && item._tag.restart && item._tag.restart();
+                            });
+                        } else {
+                            let failMessage = response.reason || 'Posting failed!';
+                            self.failMessages = [];
+                            self.failMessages.push(failMessage);
+                            self.refs.submit.classList.remove('graphjs-loading');
+                            self.update();
+                        }
+                    }
+                );
+            } else {
+                self.refs.submit.classList.add('graphjs-loading');
+                self.refs.submit.setAttribute('disabled', 'disabled');
+            }
         }
         this.handleShow = (event) => {
             let self = this;
