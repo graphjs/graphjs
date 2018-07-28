@@ -139,8 +139,10 @@
                             self.checked = true;
                             self.update();
                             setTimeout(function() {
+                                if(document.querySelector('graphjs-overlay')) {
+                                    self.hideOverlay();
+                                }
                                 self.handleRestart();
-                                self.hideOverlay();
                             }, 5000);
                         } else {
                             //Handle errors
