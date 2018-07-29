@@ -9,7 +9,7 @@
     </div>
     <div class="graphjs-content" ref="scrollingContent">
         <div class="graphjs-synopsis" if={comments.length <= 0}>
-            Not comments yet. Be the first person to comment!
+            No comments yet. Be the first person to comment!
         </div>
         <div class={'graphjs-comment' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
             <textarea ref="composer" placeholder="Write your comment here..."></textarea>
