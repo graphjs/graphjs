@@ -11,7 +11,15 @@
     @text-color-weak:   fade(@theme-text-color-strong, 50%);
 
     .@{prefix}-root {
+        *, *[type] {
+            &::selection {
+                background-color: fade(@text-color-strong, 15%);
+            }
+        }
         color: @text-color-normal;
+        &::selection {
+            background-color: fade(@text-color-strong, 15%);
+        }
         input, input[type], textarea {
             color: @text-color-normal;
             background-color: @contrast-color;

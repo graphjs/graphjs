@@ -30,8 +30,12 @@
         .bold-font;
         font-size: 1.35em;
     }
+    img {
+        .disable-selection;
+    }
     svg {
         pointer-events: none;
+        .disable-selection;
     }
     input, input[type], textarea, button {
         width: 100%;
@@ -61,6 +65,7 @@
         text-transform: uppercase;
         .transition(background-color .35s ease);
         .background-color-states(@theme-color);
+        .disable-selection;
         &[disabled] {
             opacity: .5;
         }
