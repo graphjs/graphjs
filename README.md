@@ -1,14 +1,16 @@
 # GraphJS
 
-Graph.js is a Javascript client-side library to help developers easily enable social features on their web sites. GraphJS is built upon the [Pho framework](https://github.com/phonetworks/pho-microkernel), and it's open source. With only a few lines of code, you can easily add authentication, comments, messages, forum, groups, profiles etc. to your static web pages.
+GraphJS is a Javascript client-side library to help developers easily enable social features on their web sites. GraphJS is built upon the [Pho framework](https://github.com/phonetworks/pho-microkernel), and it's open source. With only a few lines of code, you can easily add authentication, comments, messages, forum, groups, profiles etc. to your static web pages. 
+
+GraphJS depends on [Riot.js](https://riot.js.org/). 
 
 ## Building
 
 Make sure you have [npm](https://www.npmjs.com/) installed. Simply type in:
 
 ```
-npm install
-npm run build
+npm install # to install Riot.js and other dependencies
+npm run build # to form graph.js file
 ```
 
 After compilation, you will get a ```graph.js``` file which would be served through HTTPS. Then, you should include this file in all of your web pages where you want to take advantage of GraphJS functionality. 
