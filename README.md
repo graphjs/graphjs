@@ -4,20 +4,14 @@ Graph.js is a Javascript client-side library to help developers easily enable so
 
 ## Building
 
-Make sure you have [npm](https://www.npmjs.com/) installed. Then for development,  simply type in:
+Make sure you have [npm](https://www.npmjs.com/) installed. Simply type in:
 
 ```
 npm install
-npm run start:development
+npm run build
 ```
 
-For production:
-
-```
-npm run start:production
-```
-
-After compilation, you will get a ```graph.js``` file which would be served through HTTP or HTTPS using a node.js server. You should include this file in all of your web pages where you want to take advantage of GraphJS functionality. 
+After compilation, you will get a ```graph.js``` file which would be served through HTTPS. Then, you should include this file in all of your web pages where you want to take advantage of GraphJS functionality. 
 
 ## Getting Started
 
