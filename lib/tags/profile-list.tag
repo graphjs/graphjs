@@ -91,4 +91,4 @@
             });
         }
     </script>
-</graphjs-list>
+</graphjs-profile-list>
