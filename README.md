@@ -39,6 +39,10 @@ GraphJS.init("{{YOUR-PUBLIC-ID}}", {
 </script>
 ```
 
+## Tips & Tricks
+
+* CSS: To disable highlighting, use .disable-selection
+
 ## License
 
 GNU Affero General Public License v3.0, see [LICENSE](https://github.com/phonetworks/graphjs/blob/master/LICENSE).
