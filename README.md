@@ -36,6 +36,9 @@ GraphJS.init("{{YOUR-PUBLIC-ID}}", {
 ## Tips & Tricks
 
 * CSS: To disable highlighting, use .disable-selection
+* CSS: see the usage of .graphjs-loading and .graphjs-blocked classes in https://github.com/phonetworks/graphjs/blob/master/lib/tags/profile-followers.tag
+* CSS: all tags to start with .graphjs-root
+* CSS: .graphjs-wallet for lists
 
 ## License
 
