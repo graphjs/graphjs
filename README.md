@@ -17,18 +17,24 @@ For production:
 npm run start:production
 ```
 
+After compilation, you will get a ```graph.js``` file which would be served through HTTP or HTTPS using a node.js server. You should include this file in all of your web pages where you want to take advantage of GraphJS functionality. 
+
 ## Getting Started
 
-To get started with Graph.js, you need to include graph.js file to your project. Then you can initiate it with GraphJS.init function.
+To get started with Graph.js, you need to include graph.js file (created above) to your project. Then you can initiate it with GraphJS.init function.
 
-Simply, add this code into your HTML, just before the end of body tag. Don't forget to replace your public ID, theme, and color options. Your public ID should be a string which can be provided by Graph.js after Setup process. Theme option should be a string, and it has to be either 'light' or 'dark'. Color option should be a string representing any color of your preference in HEX format.
+The ```init``` function comes with three options:
+* **host**: a URL pointing to your instance of [GraphJS-Server](https://github.com/phonetworks/graphjs-server)
+* **theme**: either 'light' or 'dark'
+* **color**: a string representing any color of your preference in HEX format
 
+Example:
 ```html
-<script src="https://graphjs.com/graph.js"></script>
 <script>
-GraphJS.init("YOUR-PUBLIC-ID", {
-        theme: "YOUR-THEME-PREFERENCE",
-        color: "YOUR-COLOR-PREFERENCE"
+GraphJS.init("{{YOUR-PUBLIC-ID}}", {
+        host:  "{{URL-OF-GRAPHJS-INSTANCE}}",
+        theme: "{{YOUR-THEME-PREFERENCE}}",
+        color: "{{YOUR-COLOR-PREFERENCE}}"
 })
 </script>
 ```
