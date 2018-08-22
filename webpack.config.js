@@ -5,11 +5,10 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     entry: {
-        graph: './lib/app.js',
-        // docs: './docs/index.js'
+        graph: './lib/app.js'
     },
     output: {
-        path: __dirname + '/dist', // path.join(__dirname, "dist"),
+        path: __dirname + "/dist",
         filename: "[name].js",
     },
     devtool: 'inline-source-map',
