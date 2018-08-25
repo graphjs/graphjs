@@ -9,12 +9,12 @@
     </div>
     <div class="graphjs-content" ref="scrollingContent">
         <div class="graphjs-synopsis" if={comments.length <= 0}>
-            No comments yet. Be the first person to comment!
+            No comments yet. Be the first person to say something.
         </div>
         <div class={'graphjs-comment' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
             <textarea ref="composer" placeholder="Write your comment here..."></textarea>
-            <button ref="submit" onclick={handleComment}>Send Comment</button>
-            <button onclick={handleClear} class="graphjs-danger">Clear</button>
+            <button ref="submit" onclick={handleComment}>Continue</button>
+            <button hide={true} onclick={handleClear} class="graphjs-danger">Clear</button>
             <div if={!loaded && !blocked} class="graphjs-inline graphjs-loader">
                 <div class="graphjs-dots">
                     <span></span>
@@ -33,7 +33,7 @@
                 <span>
                     <b data-link="profile" data-id={commentsData[comment].author} onclick={handleShow}>{authorsData[commentsData[comment].author].username || 'Unknown User'}</b>
                     <time data-timestamp={commentsData[comment].createTime}>{handleTime(commentsData[comment].createTime)}</time>
-                    <a if={commentsData[comment].author == userId} onclick={handleEdit} data-id={comment}>Edit</a>
+                    <a hide={true} if={commentsData[comment].author == userId} onclick={handleEdit} data-id={comment}>Edit</a>
                     <a if={commentsData[comment].author == userId} onclick={handleRemove} data-id={comment}>Delete</a>
                 </span>
             </div>
