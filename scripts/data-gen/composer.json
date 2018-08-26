@@ -1,6 +1,0 @@
-{
-    "require": {
-        "fzaninotto/faker": "^1.7",
-        "guzzlehttp/guzzle": "~6.0@dev"
-    }
-}
