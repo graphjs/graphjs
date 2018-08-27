@@ -1,4 +1,4 @@
-<graphjs-profile class="graphjs-root">
+<graphjs-profile class="graphjs-element graphjs-root">
     <graphjs-profile-header
         id={opts.id}
         active={active}

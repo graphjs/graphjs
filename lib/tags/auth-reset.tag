@@ -1,4 +1,4 @@
-<graphjs-auth-reset class={'graphjs-root graphjs-box' + (checked ? ' graphjs-checked' : '')}>
+<graphjs-auth-reset class={'graphjs-element graphjs-root graphjs-box' + (checked ? ' graphjs-checked' : '')}>
     <div class="graphjs-header" if={opts.title}>
         <div class="graphjs-title">{opts.title || 'Reset Password'}</div>
     </div>

@@ -1,4 +1,4 @@
-<graphjs-feedback class={'graphjs-root' + (opts.type == 'inline' ? ' graphjs-inline' : ' graphjs-box')} style={
+<graphjs-feedback class={'graphjs-element graphjs-root' + (opts.type == 'inline' ? ' graphjs-inline' : ' graphjs-box')} style={
     (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
     (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
     (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +

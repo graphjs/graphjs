@@ -1,4 +1,4 @@
-<graphjs-profile-header class={'graphjs-root graphjs-box' + (loaded ? '' : ' graphjs-loading')}>
+<graphjs-profile-header class={'graphjs-element graphjs-root graphjs-box' + (loaded ? '' : ' graphjs-loading')}>
     <a onclick={following ? handleUnfollow : handleFollow} class="graphjs-left graphjs-option" if={profile && userId && userId != id}>
         <svg if={!following} viewBox="0 0 24 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

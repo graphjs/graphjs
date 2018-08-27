@@ -1,5 +1,5 @@
 <graphjs-auth-login
-    class={'graphjs-root graphjs-box' + (checked ? ' graphjs-checked' : '')}
+    class={'graphjs-element graphjs-root graphjs-box' + (checked ? ' graphjs-checked' : '')}
     style={opts.minor ? (opts.gap == 0 ? 'top: -1em);' : 'top: calc(' + opts.gap + ' + 1em);') : ''}
 >
     <div class="graphjs-header" if={opts.title}>
@@ -123,7 +123,7 @@
                             self.checked = true;
                             self.refs.submit.classList.remove('graphjs-loading');
                             self.update();
-                            Array.from(document.getElementsByClassName('graphjs-root')).forEach((item) => {
+                            Array.from(document.getElementsByClassName('graphjs-element')).forEach((item) => {
                                 item._tag && item._tag.restart && item._tag.restart();
                             });
                             if(opts.minor) {

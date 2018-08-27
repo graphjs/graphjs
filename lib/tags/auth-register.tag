@@ -1,4 +1,4 @@
-<graphjs-auth-register class={'graphjs-root graphjs-box' + (checked ? ' graphjs-checked' : '')}>
+<graphjs-auth-register class={'graphjs-element graphjs-root graphjs-box' + (checked ? ' graphjs-checked' : '')}>
     <div class="graphjs-header" if={opts.title}>
         <div class="graphjs-title">{opts.title || 'Register'}</div>
     </div>
@@ -185,7 +185,7 @@
                                         self.checked = true;
                                         self.refs.submit.classList.remove('graphjs-loading');
                                         self.update();
-                                        Array.from(document.getElementsByClassName('graphjs-root')).forEach((item) => {
+                                        Array.from(document.getElementsByClassName('graphjs-element')).forEach((item) => {
                                             item._tag && item._tag.restart && item._tag.restart();
                                         });
                                         if(opts.minor) {

@@ -1,5 +1,5 @@
 <graphjs-forum-composer
-    class={'graphjs-root' + (opts.minor ? '' : ' graphjs-box')}
+    class={'graphjs-element graphjs-root' + (opts.minor ? '' : ' graphjs-box')}
     style={
         (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
         (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
@@ -155,6 +155,8 @@
                     } else {
                         self.refs.submit.classList.remove('graphjs-loading');
                         self.update();
+                        if(response.reason)
+                            window.alert("Cannot post: " + response.reason);
                         //Handle error
                     }
                 }

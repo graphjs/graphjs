@@ -1,4 +1,4 @@
-<graphjs-group-settings class="graphjs-root graphjs-box">
+<graphjs-group-settings class="graphjs-element graphjs-root graphjs-box">
     <div class="graphjs-warning" if={failMessages.length > 0}>
         <ul if={failMessages.length > 0} class="graphjs-fail">
             <li each={failMessage in failMessages}>{failMessage}</li>

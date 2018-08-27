@@ -1,4 +1,4 @@
-<graphjs-profile-activity class="graphjs-root graphjs-box">
+<graphjs-profile-activity class="graphjs-element graphjs-root graphjs-box">
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <ul if={activity.length > 0}>
             <li each={item in activity}>

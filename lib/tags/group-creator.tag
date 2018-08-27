@@ -1,4 +1,4 @@
-<graphjs-group-creator class="graphjs-root graphjs-box">
+<graphjs-group-creator class="graphjs-element graphjs-root graphjs-box">
     <div class="graphjs-header">
         <div class="graphjs-title">{opts.title || 'Create Group'}</div>
         <a class="graphjs-option graphjs-right" onclick={handleOverlay}>

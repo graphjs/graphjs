@@ -51,9 +51,10 @@ This ensures that the HTTP server renders in proper format. If you don't have Py
 
 ## Tips & Tricks
 
+* JS: it's the ```restart``` call which ensures that the "widget" is updated once the session status changes. See: private-content.tag for more information.
 * CSS: To disable highlighting, use .disable-selection
 * CSS: see the usage of .graphjs-loading and .graphjs-blocked classes in https://github.com/phonetworks/graphjs/blob/master/lib/tags/profile-followers.tag
-* CSS: all tags to start with .graphjs-root
+* CSS: all tags to start with .graphjs-element. There is also .graphjs-root which is not CSS neutral.
 * CSS: .graphjs-wallet for lists
 
 ## License
