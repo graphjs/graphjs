@@ -1,4 +1,4 @@
-<graphjs-profile-followers class="graphjs-root graphjs-wallet">
+<graphjs-profile-followers class="graphjs-element graphjs-root graphjs-wallet">
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <p if={empty}>This user has no followers.</p>
         <!--

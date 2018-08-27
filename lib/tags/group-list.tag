@@ -1,4 +1,4 @@
-<graphjs-group-list class="graphjs-root graphjs-wallet">
+<graphjs-group-list class="graphjs-element graphjs-root graphjs-wallet">
     <!-- the only difference from list is the tag itself and this.content = 'groups'; -->
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <graphjs-profile-card if={content == 'users'} each={id in list} id={id}></graphjs-profile-card>

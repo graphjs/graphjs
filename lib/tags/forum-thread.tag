@@ -1,5 +1,5 @@
 <graphjs-forum-thread
-    class={'graphjs-root graphjs-composer' + (opts.minor ? '' : ' graphjs-box')}
+    class={'graphjs-element graphjs-root graphjs-composer' + (opts.minor ? '' : ' graphjs-box')}
     style={
         (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
         (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +

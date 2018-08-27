@@ -1,4 +1,4 @@
-<graphjs-group-header class={'graphjs-root graphjs-box' + (loaded ? '' : ' graphjs-loading')}>
+<graphjs-group-header class={'graphjs-element graphjs-root graphjs-box' + (loaded ? '' : ' graphjs-loading')}>
     <div class="graphjs-information" if={group}>
         <div class="graphjs-cover" style={'background-image: url(' + (group && group.cover ? downsizeImage(group.cover, 770) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png') + ');'}></div>
         <a>{group.title}</a>

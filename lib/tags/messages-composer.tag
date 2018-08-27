@@ -1,4 +1,4 @@
-<graphjs-messages-composer class={'graphjs-root graphjs-box' + (checked ? ' graphjs-checked' : '')}>
+<graphjs-messages-composer class={'graphjs-element graphjs-root graphjs-box' + (checked ? ' graphjs-checked' : '')}>
     <div class="graphjs-header">
         <div class="graphjs-title">Send Message</div>
         <a if={opts.close} class="graphjs-option graphjs-right" onclick={handleOverlay}>

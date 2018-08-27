@@ -1,5 +1,5 @@
 <graphjs-auth
-    class={'graphjs-root graphjs-' + position}
+    class={'graphjs-element graphjs-root graphjs-' + position}
     style={'height: ' + height + '; line-height: ' + height + '; '}
 >
     <graphjs-auth-state

@@ -1,5 +1,5 @@
 <graphjs-auth-state
-    class={'graphjs-root graphjs-' + theme + (opts.type == 'inline' ? ' graphjs-inline' : ' graphjs-box')}
+    class={'graphjs-element graphjs-root graphjs-' + theme + (opts.type == 'inline' ? ' graphjs-inline' : ' graphjs-box')}
     style={'height: ' + height + '; line-height: ' + height + ';'}
 >
     <div class="graphjs-content">
@@ -109,7 +109,7 @@
                 if(response.success) {
                     self.id = undefined;
                     self.update();
-                    Array.from(document.getElementsByClassName('graphjs-root')).forEach((item) => {
+                    Array.from(document.getElementsByClassName('graphjs-element')).forEach((item) => {
                         item._tag && item._tag.mount && item._tag.mount();
                     });
                 } else {

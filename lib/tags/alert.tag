@@ -1,4 +1,4 @@
-<graphjs-alert class="graphjs-root graphjs-box">
+<graphjs-alert class="graphjs-element graphjs-root graphjs-box">
     <div class="graphjs-header" if={opts.title}>
         <div class="graphjs-title">{opts.title}</div>
     </div>

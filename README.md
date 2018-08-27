@@ -35,11 +35,26 @@ GraphJS.init("{{YOUR-PUBLIC-ID}}", {
 </script>
 ```
 
+## Testing
+
+You can try your custom tags simply by editing the html files in the ```dist``` directory. The files are self-explanatory, indicating what parts are to edit. 
+
+To test, build your graph.js file as documented above. 
+
+Then, if you have Python installed (like most Macs and Linux machines), run:
+
+```
+python -c "import SimpleHTTPServer; m = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map; m[''] = 'text/plain'; m.update(dict([(k, v + ';charset=UTF-8') for k, v in m.items()])); SimpleHTTPServer.test();" 8080
+```
+
+This ensures that the HTTP server renders in proper format. If you don't have Python, use another UTF-8 capable HTTP server, and serve through port 8080 in order to avoid Access-Control errors.
+
 ## Tips & Tricks
 
+* JS: it's the ```restart``` call which ensures that the "widget" is updated once the session status changes. See: private-content.tag for more information.
 * CSS: To disable highlighting, use .disable-selection
 * CSS: see the usage of .graphjs-loading and .graphjs-blocked classes in https://github.com/phonetworks/graphjs/blob/master/lib/tags/profile-followers.tag
-* CSS: all tags to start with .graphjs-root
+* CSS: all tags to start with .graphjs-element. There is also .graphjs-root which is not CSS neutral.
 * CSS: .graphjs-wallet for lists
 
 ## License

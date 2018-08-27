@@ -1,4 +1,4 @@
-<graphjs-star-button class="graphjs-root graphjs-box"}>
+<graphjs-star-button class="graphjs-element graphjs-root graphjs-box"}>
     <div class="graphjs-content">
         <a class={active ? 'graphjs-active' : ''} onclick={handleStar}>
             <div class={'graphjs-' + type + ' graphjs-icon'}>

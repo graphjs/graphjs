@@ -1,4 +1,4 @@
-<graphjs-group-members class="graphjs-root graphjs-wallet">
+<graphjs-group-members class="graphjs-element graphjs-root graphjs-wallet">
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <p if={empty}>This group has no followers.</p>
         <graphjs-profile-card each={id in list} id={id}></graphjs-profile-card>
