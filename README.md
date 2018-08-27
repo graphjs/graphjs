@@ -41,7 +41,7 @@ You can try your custom tags simply by editing the html files in the ```dist``` 
 
 To test, build your graph.js file as documented above. 
 
-Then, if you have Python installed (like most Macs and Linux machines), run:
+Then, if you have Python **2** installed (like most Macs and Linux machines), run:
 
 ```
 python -c "import SimpleHTTPServer; m = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map; m[''] = 'text/plain'; m.update(dict([(k, v + ';charset=UTF-8') for k, v in m.items()])); SimpleHTTPServer.test();" 8080
