@@ -14,6 +14,7 @@
     "watch": "webpack --watch"
   },
   "dependencies": {
+    "@types/nanoevents": "^1.0.0",
     "axios": "0.17.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
