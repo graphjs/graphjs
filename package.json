@@ -26,6 +26,7 @@
     "getstream": "^3.15.0",
     "less": "^3.0.1",
     "less-loader": "^4.0.5",
+    "nanoevents": "^1.0.5",
     "riot": "^3.7.4",
     "riot-hot-reload": "1.0.0",
     "riot-tag-loader": "^2.0.0",
