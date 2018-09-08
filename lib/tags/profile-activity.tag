@@ -186,11 +186,11 @@
         }
         this.handleContent = () => {
             let self = this;
-            getActivityToken('wall', self.id, function(response) {
+            getActivityToken('user', self.id, function(response) {
             	if(response.success) {
                     self.activity = [];
             		let client = stream.connect('7aeupnd8y7ag');
-            		let user = client.feed('wall', self.id, response.token);
+            		let user = client.feed('user', self.id, response.token);
             		user.get(/* { limit: 10, offset: 0} */)
             		.then((response) => {
                         for(let result of response.results) {
