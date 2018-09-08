@@ -1,8 +1,6 @@
 @prefix: graphjs;
 
 .@{prefix}-box.@{prefix}-root {
-    overflow-x: hidden;
-    overflow-y: auto;
     position: relative;
     .border-radius(@border-radius-large);
     border: 1px solid fade(@default-color, 3%);
@@ -102,7 +100,6 @@
     }
     .@{prefix}-content {
         overflow: hidden;
-        display: inline-block;
         width: 100%;
         padding: 2.5em;
         vertical-align: middle;
