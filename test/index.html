@@ -1,15 +1,40 @@
 <html>
     <body>
         <!-- Test Tags start here -->
+
+        <!-- ### Testing Auth -->
         <graphjs-auth></graphjs-auth>
-        <div style="width:300px;height:300px;">
-                <graphjs-private-content id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+
+        <!-- ### Testing Private Content -->
+        <div style="width: 500px;">
+            <h2>Placeholders</h2>
+            <h3>Text</h3>
+            <graphjs-private-content placeholder="text" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+            <h3>Image</h3>
+            <graphjs-private-content placeholder="image" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+            <h3>Video</h3>
+            <graphjs-private-content placeholder="video" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+            <h3>Album</h3>
+            <graphjs-private-content placeholder="album" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+            <h3>Mixed</h3>
+            <graphjs-private-content placeholder="mixed" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+            <h3>Custom</h3>
+            <graphjs-private-content placeholder="custom" id="585d867a5a7304faafc434a7479e3250">
+                <div style="text-align: center;">
+                    <img style="width: 150px; height: auto; margin-bottom: 25px;" src="https://res.cloudinary.com/graphjs/image/upload/graphjs.com/identity/graphjs-mascot.png" />
+                    <h1>This is our mascot</h1>
+                </div>
+            </graphjs-private-content>
+            <br /><br />
         </div>
-        <graphjs-forum></graphjs-forum>
+
+        <!-- ### Testing Forum -->
+        <graphjs-comments></graphjs-comments>
+
         <!-- Test Tags finish here -->
         <script src="../dist/graph.js"></script>
         <script>
-            GraphJS.init("16D58CF2-FD88-4A49-972B-6F60054BF023");
+            GraphJS.init("79982844-6a27-4b3b-b77f-419a79be0e10");
         </script>
     </body>
 </html>

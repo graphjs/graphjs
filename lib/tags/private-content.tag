@@ -1,13 +1,86 @@
-<graphjs-private-content class={'graphjs-element ' + (blocked ? "graphjs-root graphjs-loading" : "")}>
-    <div hide={blocked} ref="privateContent"></div>
-    <div if={blocked} class="graphjs-content graphjs-blocked">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae lorem aliquet, egestas metus ac, iaculis erat. Aenean quis est placerat leo lobortis hendrerit vel ut erat. Duis ultricies pellentesque ultrices. Nam eget commodo ex. Mauris facilisis, diam id semper auctor, enim ligula placerat nibh, ac accumsan eros nisl eu nibh. Aliquam aliquam felis quis erat posuere suscipit. Vestibulum ut pharetra nulla. Donec tempus varius neque ut egestas.</p>
-        <p>Phasellus pretium a neque congue facilisis. Sed lacinia nulla lacus, non gravida odio consequat at. Suspendisse aliquet pellentesque nisi, id accumsan erat auctor in. Suspendisse elementum consectetur lectus ut malesuada. Curabitur vestibulum blandit orci, sit amet efficitur nisl sollicitudin at. Nulla et fringilla neque. Mauris vel nulla justo. Integer in feugiat quam. Etiam ligula tortor, tristique at lacinia vel, pretium non urna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis vitae risus posuere, condimentum sapien sit amet, pretium velit. Aliquam quam odio, molestie ac congue non, pulvinar at sem. Integer et tristique felis, vitae ornare mauris. Mauris at risus sem. Aenean id laoreet felis.</p>
-        <p>Cras fringilla, nisi sit amet tincidunt cursus, erat sapien viverra leo, at pretium lectus nulla eu felis. Maecenas eros turpis, vestibulum id velit malesuada, consequat ultrices sem. Proin placerat et lectus ac vehicula. Sed commodo condimentum purus, sit amet ultricies sapien. In feugiat viverra semper. Maecenas molestie maximus nisl, ac dignissim mauris feugiat iaculis. Proin sollicitudin nibh eget convallis placerat. Nunc nec ultricies felis. Aliquam finibus, quam non eleifend suscipit, dui augue consequat orci, vitae semper nisl lectus et nulla. Nulla bibendum turpis nec scelerisque vulputate. Praesent in arcu dapibus, pellentesque nunc at, luctus tortor. Sed ornare efficitur tortor sit amet sagittis. Praesent fermentum, neque non pretium ultricies, ipsum libero commodo sem, vitae mollis arcu dui a sem. Curabitur ornare fringilla finibus.</p>
-        <p>Morbi sed placerat turpis, dictum congue ipsum. Nullam vel dictum justo, ac pulvinar mauris. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras eu consectetur felis, quis consequat risus. Donec dictum consectetur arcu ac hendrerit. Nullam eros diam, mattis quis pellentesque a, tristique quis mi. Integer posuere ullamcorper diam eu iaculis. Pellentesque vel rhoncus augue, ut viverra orci. Fusce semper libero non est vestibulum sagittis. Sed rutrum purus eget porttitor tincidunt. Donec ornare vestibulum turpis, at ornare lacus accumsan eu. In eu eros sed neque condimentum malesuada et in elit. Proin sit amet lectus accumsan, fermentum sem ut, ornare leo. Mauris vel ligula porttitor, ornare ipsum in, euismod augue. Integer vestibulum gravida urna sed lacinia.</p>
-        <p>Vivamus volutpat luctus velit, id blandit lacus accumsan in. Integer at ligula varius, accumsan erat et, convallis turpis. Duis tellus ante, volutpat at purus ac, vulputate interdum lacus. Nunc dignissim auctor nibh a faucibus. Suspendisse consequat sem vitae sapien scelerisque, sit amet ultrices leo finibus. Pellentesque dictum dolor rutrum est maximus cursus. Pellentesque tincidunt velit cursus justo mollis, quis egestas quam gravida. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ut leo lorem. Suspendisse in maximus augue, sit amet bibendum nisl. Aliquam erat volutpat. Quisque in maximus sapien. Nulla facilisi. Vestibulum nec quam dui.</p>
+<graphjs-private-content class="graphjs-element graphjs-root">
+    <div if={!contentReady} ref="content" class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
+        <div class="graphjs-placeholder">
+            <div if={type === 'text'} class="graphjs-text">
+                <div
+                    class="graphjs-text-wrapper"
+                    style="
+                        filter: url(#light-blur);
+                    "
+                >
+                    <h1>Private Content</h1>
+                    <h2>This is a private content.</h2>
+                    <p>Phasellus vitae lorem aliquet, egestas metus ac, iaculis erat. Aenean quis est placerat leo lobortis hendrerit vel ut erat. Duis ultricies pellentesque ultrices. Nam eget commodo ex.</p>
+                    <p>Mauris facilisis, diam id semper auctor, enim ligula placerat nibh, ac accumsan eros nisl eu nibh. Aliquam aliquam felis quis erat posuere suscipit. Vestibulum ut pharetra nulla. Donec tempus varius neque ut egestas. Phasellus pretium a neque congue facilisis.</p>
+                    <p>Sed lacinia nulla lacus, non gravida odio consequat at. Suspendisse aliquet pellentesque nisi, id accumsan erat auctor in. Suspendisse elementum consectetur lectus ut malesuada.</p>
+                    <p>Curabitur vestibulum blandit orci, sit amet efficitur nisl sollicitudin at. Nulla et fringilla neque. Mauris vel nulla justo. Integer in feugiat quam. Etiam ligula tortor, tristique at lacinia vel, pretium non urna.</p>
+                    <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis vitae risus posuere, condimentum sapien sit amet, pretium velit. Aliquam quam odio, molestie ac congue non, pulvinar at sem. Integer et tristique felis, vitae ornare mauris. Mauris at risus sem. Aenean id laoreet felis.</p>
+                </div>
+            </div>
+            <div if={type === 'image'} class="graphjs-image">
+                <div
+                    class="graphjs-media-wrapper"
+                    style="
+                        filter: url(#hard-blur);
+                        background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/placeholders/single-image.png);
+                    "
+                ></div>
+            </div>
+            <div if={type === 'video'} class="graphjs-video">
+                <div
+                    class="graphjs-media-wrapper"
+                    style="
+                        filter: url(#hard-blur);
+                        background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/placeholders/single-video.png);
+                    "
+                ></div>
+            </div>
+            <div if={type === 'album'} class="graphjs-album">
+                <div
+                    each={item in Array(6)}
+                    class="graphjs-media-wrapper"
+                    style="
+                        filter: url(#hard-blur);
+                        background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/placeholders/single-image.png);
+                    "
+                ></div>
+            </div>
+            <div if={type === 'mixed'} class="graphjs-mixed">
+                <div
+                    class="graphjs-mixed-wrapper"
+                    style="
+                        filter: url(#light-blur);
+                    "
+                >
+                    <h1>Private Content</h1>
+                    <h2>This is a private content.</h2>
+                    <div
+                        class="graphjs-media-wrapper"
+                        style="background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/placeholders/single-image.png);"
+                    ></div>
+                    <p>Phasellus vitae lorem aliquet, egestas metus ac, iaculis erat. Aenean quis est placerat leo lobortis hendrerit vel ut erat. Duis ultricies pellentesque ultrices. Nam eget commodo ex.</p>
+                    <p>Mauris facilisis, diam id semper auctor, enim ligula placerat nibh, ac accumsan eros nisl eu nibh. Aliquam aliquam felis quis erat posuere suscipit. Vestibulum ut pharetra nulla. Donec tempus varius neque ut egestas. Phasellus pretium a neque congue facilisis.</p>
+                    <p>Sed lacinia nulla lacus, non gravida odio consequat at. Suspendisse aliquet pellentesque nisi, id accumsan erat auctor in. Suspendisse elementum consectetur lectus ut malesuada.</p>
+                    <p>Curabitur vestibulum blandit orci, sit amet efficitur nisl sollicitudin at. Nulla et fringilla neque. Mauris vel nulla justo. Integer in feugiat quam. Etiam ligula tortor, tristique at lacinia vel, pretium non urna.</p>
+                    <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis vitae risus posuere, condimentum sapien sit amet, pretium velit. Aliquam quam odio, molestie ac congue non, pulvinar at sem. Integer et tristique felis, vitae ornare mauris. Mauris at risus sem. Aenean id laoreet felis.</p>
+                </div>
+            </div>
+            <div if={type === 'custom'} class="graphjs-custom" style="filter: url(#hard-blur);">
+                <yield />
+            </div>
+        </div>
+        <button ref="blockageButton" if={blocked} onclick={handleBlock} class="graphjs-blockage">Log in to view this content</button>
+        <svg class="graphjs-filter">
+            <defs>
+                <filter id="light-blur">
+                    <feGaussianBlur stdDeviation="7.5" />
+                </filter>
+                <filter id="hard-blur">
+                    <feGaussianBlur stdDeviation="10" />
+                </filter>
+            </defs>
+        </svg>
     </div>
-    <button ref="blockageButton" if={blocked} onclick={handleBlock} class="graphjs-blockage">Log in to view this content</button>
     <style type="less">
         @import '../styles/variables.less';
         @import '../styles/mixins.less';
@@ -21,18 +94,24 @@
 
         this.blocked = true;
         this.invalid = false;
+        this.type = opts.placeholder || 'mixed';
 
         this.on('before-mount', function() {
             this.handleSession();
         });
         this.handleBlock = (event) => {
             event.preventDefault();
-            if(!this.invalid)
-                showLogin({});
+            if(!this.invalid) {
+                showLogin({
+                    action: 'updatePrivateContent'
+                });
+            }
         };
         this.restart = () => {
+            this.loading = true;
             this.blocked = true;
             this.update();
+            this.contentReady && this.removeContent();
             this.handleSession();
         };
         this.handleSession = () => {
@@ -46,20 +125,38 @@
                 }
             });
         };
+        this.addContent = (content) => {
+            let parser = new DOMParser();
+            let parsedHTML = parser.parseFromString(
+                '<div class="graphjs-unlocked-content">' + content + '</div>',
+                'text/html'
+            );
+            let extractedHTML = parsedHTML.getElementsByClassName('graphjs-unlocked-content')[0];
+            this.root.appendChild(extractedHTML);
+            this.loading = false;
+            this.blocked = false;
+            this.invalid = false;
+            this.contentReady = true;
+            this.update();
+        }
+        this.removeContent = () => {
+            let unlockedHTML = this.root.getElementsByClassName('graphjs-unlocked-content')[0];
+            this.root.removeChild(unlockedHTML);
+            this.loading = true;
+            this.blocked = true;
+            this.contentReady = false;
+            this.update();
+        }
         this.fetchContent = () => {
             let self = this;
             let content_id = opts.id;
             getPrivateContent(content_id, function(response) {
                 if(response.success) {
-                    //window.alert("hello "+response.contents);
-                    self.refs.privateContent.innerHTML = response.contents;
-                    self.blocked = false;
-                    self.invalid = false;
-                    self.update();
+                    self.addContent(response.contents);
                 }
                 else {
-                    if(response.reason&&response.reason=="Invalid ID") {
-                        self.refs.blockageButton.innerText = "You can't view this content right now";
+                    if(response.reason && response.reason == 'Invalid ID') {
+                        self.refs.blockageButton.innerText = 'You can\'t view this content right now';
                         self.invalid = true;
                     }
                     self.blocked = true;
