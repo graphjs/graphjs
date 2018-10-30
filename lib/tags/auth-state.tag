@@ -110,7 +110,7 @@
                     self.id = undefined;
                     self.update();
                     Array.from(document.getElementsByClassName('graphjs-element')).forEach((item) => {
-                        item._tag && item._tag.mount && item._tag.mount();
+                        item._tag && item._tag.restart && item._tag.restart();
                     });
                 } else {
                     //Handle errors
