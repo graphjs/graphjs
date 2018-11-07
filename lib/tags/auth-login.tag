@@ -47,8 +47,8 @@
         import showReset from '../scripts/showReset.js';
         import hideOverlay from '../scripts/hideOverlay.js';
         
-        import TagsContent from '../content/tags/auth-login';
-        let content = TagsContent[window.GraphJSConfig.language];
+        import TagsContent from '../content';
+        let content = TagsContent[window.GraphJSConfig.language]['auth-login'];
         content = {...content,...opts}
         this.content = content;
         
@@ -59,7 +59,7 @@
 
         this.checkUsernameMinimumLength = () => {
             let usernameMinimumLengthLimit = 1;
-            let failMessage = content.usernameLengthErrorText';
+            let failMessage = content.usernameLengthErrorText;
             if(this.refs.username.value.length >= usernameMinimumLengthLimit) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
