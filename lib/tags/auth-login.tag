@@ -12,12 +12,12 @@
     </div>
     <div class="graphjs-content">
         <form>
-            <input ref="username" type="text" placeholder="Enter your username" />
-            <input ref="password" type="password" placeholder="Enter your password" />
-            <button ref="submit" onclick={handleSubmit}>Login</button>
+            <input ref="username" type="text" placeholder={content.usernamePlaceholder} />
+            <input ref="password" type="password" placeholder={content.passwordPlaceholder}/>
+            <button ref="submit" onclick={handleSubmit}>{content.submitButtonText}</button>
             <div class="graphjs-option graphjs-double">
-                <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>Not registered?</a>
-                <a data-link="reset" onclick={opts.minor ? opts.callback : handleResetBox}>Forgot Password</a>
+                <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>{content.registerLinkText}</a>
+                <a data-link="reset" onclick={opts.minor ? opts.callback : handleResetBox}>{content.resetLinkText}</a>
             </div>
         </form>
     </div>
@@ -46,7 +46,12 @@
         import showRegister from '../scripts/showRegister.js';
         import showReset from '../scripts/showReset.js';
         import hideOverlay from '../scripts/hideOverlay.js';
-
+        
+        import TagsContent from '../content/tags/auth-login';
+        let content = TagsContent[window.GraphJSConfig.language];
+        content = {...content,...opts}
+        this.content = content;
+        
         this.handleRegisterBox = () => showRegister();
         this.handleResetBox = () => showReset();
 
@@ -54,7 +59,7 @@
 
         this.checkUsernameMinimumLength = () => {
             let usernameMinimumLengthLimit = 1;
-            let failMessage = 'Username is too short!';
+            let failMessage = content.usernameLengthErrorText';
             if(this.refs.username.value.length >= usernameMinimumLengthLimit) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -66,7 +71,7 @@
             }
         }
         this.checkUsernamePattern = () => {
-            let failMessage = 'Username is invalid. Valid characters are letters, numbers, hyphens, and underscores.';
+            let failMessage = content.usernamePatternErrorText;
             let usernamePattern = /^[a-zA-Z0-9-_]+$/;
             if(usernamePattern.test(this.refs.username.value)) {
                 this.refs.username.classList.remove('graphjs-error');
@@ -80,7 +85,8 @@
         }
         this.checkPasswordMinimumLength = () => {
             let passwordMinimumLengthLimit = 5;
-            let failMessage = 'Password must be ' + passwordMinimumLengthLimit + ' characters minimum!';
+            let failMessage = content.passwordErrorText.replace('%s',passwordMinimumLengthLimit);
+            
             if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
