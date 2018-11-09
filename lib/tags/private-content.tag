@@ -1,4 +1,12 @@
-<graphjs-private-content class="graphjs-element graphjs-root">
+<graphjs-private-content
+    class="graphjs-element graphjs-root"
+    style={
+        (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
+        (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
+        (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
+        (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
+    }
+>
     <div if={!contentReady} ref="content" class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <div class="graphjs-placeholder">
             <div if={type === 'text'} class="graphjs-text">
@@ -24,7 +32,7 @@
                         filter: url(#hard-blur);
                         background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/placeholders/single-image.png);
                     "
-                ></div>
+                > </div>
             </div>
             <div if={type === 'video'} class="graphjs-video">
                 <div
@@ -33,7 +41,7 @@
                         filter: url(#hard-blur);
                         background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/placeholders/single-video.png);
                     "
-                ></div>
+                > </div>
             </div>
             <div if={type === 'album'} class="graphjs-album">
                 <div
@@ -43,7 +51,7 @@
                         filter: url(#hard-blur);
                         background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/placeholders/single-image.png);
                     "
-                ></div>
+                > </div>
             </div>
             <div if={type === 'mixed'} class="graphjs-mixed">
                 <div
@@ -57,7 +65,7 @@
                     <div
                         class="graphjs-media-wrapper"
                         style="background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/placeholders/single-image.png);"
-                    ></div>
+                    > </div>
                     <p>Phasellus vitae lorem aliquet, egestas metus ac, iaculis erat. Aenean quis est placerat leo lobortis hendrerit vel ut erat. Duis ultricies pellentesque ultrices. Nam eget commodo ex.</p>
                     <p>Mauris facilisis, diam id semper auctor, enim ligula placerat nibh, ac accumsan eros nisl eu nibh. Aliquam aliquam felis quis erat posuere suscipit. Vestibulum ut pharetra nulla. Donec tempus varius neque ut egestas. Phasellus pretium a neque congue facilisis.</p>
                     <p>Sed lacinia nulla lacus, non gravida odio consequat at. Suspendisse aliquet pellentesque nisi, id accumsan erat auctor in. Suspendisse elementum consectetur lectus ut malesuada.</p>
