@@ -9,13 +9,13 @@
     </div>
     <div class="graphjs-content">
         <form>
-            <input ref="username" type="text" placeholder="Choose a nickname"/>
-            <input ref="email" type="text" placeholder="Enter email address"/>
-            <input ref="password" type="password" placeholder="Set password"/>
-            <input ref="confirmation" type="password" placeholder="Confirm password"/>
-            <button ref="submit" onclick={handleSubmit}>Register</button>
+            <input ref="username" type="text" placeholder={content.usernamePlaceholder}/>
+            <input ref="email" type="text" placeholder={content.emailPlaceholder}/>
+            <input ref="password" type="password" placeholder={content.passwordPlaceholder}/>
+            <input ref="confirmation" type="password" placeholder={content.confirmPasswordPlaceholder}/>
+            <button ref="submit" onclick={handleSubmit}>{content.submitButtonText}</button>
             <div class="graphjs-option graphjs-single">
-                <a data-link="login" onclick={opts.minor ? opts.callback : handleLoginBox}>Already a member?</a>
+                <a data-link="login" onclick={opts.minor ? opts.callback : handleLoginBox}>{content.loginLinkText}</a>
             </div>
         </form>
     </div>
@@ -44,14 +44,19 @@
         import showAlert from '../scripts/showAlert.js';
         import showLogin from '../scripts/showLogin.js';
         import hideOverlay from '../scripts/hideOverlay.js';
-
+ 
+        import TagsContent from '../content';
+        let content = TagsContent[window.GraphJSConfig.language]['auth-register'];
+        content = {...content,...opts}
+        this.content = content;
+        
         this.handleLoginBox = () => showLogin();
 
         this.failMessages = [];
 
         this.checkUsernameMinimumLength = () => {
             let usernameMinimumLengthLimit = 1;
-            let failMessage = 'Username is too short!';
+            let failMessage = content.usernameMinLengthErrorText;
             if(this.refs.username.value.length >= usernameMinimumLengthLimit) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -64,7 +69,7 @@
         }
         this.checkUsernameMaximumLength = () => {
             let usernameMaximumLengthLimit = 36;
-            let failMessage = 'Username must be ' + usernameMaximumLengthLimit + ' characters maximum!';
+            let failMessage = content.usernameMaxLengthErrorText.replace('%s',usernameMaximumLengthLimit);
             if(this.refs.username.value.length <= usernameMaximumLengthLimit) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -76,7 +81,7 @@
             }
         }
         this.checkUsernamePattern = () => {
-            let failMessage = 'Username is invalid. Valid characters are letters, numbers, hyphens, and underscores.';
+            let failMessage = content.usernamePatternErrorText;
             let usernamePattern = /^[a-zA-Z0-9-_]+$/;
             if(usernamePattern.test(this.refs.username.value)) {
                 this.refs.username.classList.remove('graphjs-error');
@@ -89,7 +94,7 @@
             }
         }
         this.checkEmailPattern = () => {
-            let failMessage = 'Email is invalid. Valid format: user@site.com';
+            let failMessage = content.emailPatternErrorText;
             let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if(emailPattern.test(this.refs.email.value)) {
                 this.refs.email.classList.remove('graphjs-error');
@@ -103,7 +108,7 @@
         }
         this.checkPasswordMinimumLength = () => {
             let passwordMinimumLengthLimit = 5;
-            let failMessage = 'Password must be ' + passwordMinimumLengthLimit + ' characters minimum!';
+            let failMessage = content.passwordMinErrorText.replace('%s',passwordMinimumLengthLimit);
             if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -116,7 +121,7 @@
         }
         this.checkPasswordMaximumLength = () => {
             let passwordMaximumLengthLimit = 255;
-            let failMessage = 'Password must be ' + passwordMaximumLengthLimit + ' characters maximum!';
+            let failMessage = content.passwordMaxLengthErrorText.replace('%s',passwordMaximumLengthLimit);
             if(this.refs.password.value.length <= passwordMaximumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -128,7 +133,7 @@
             }
         }
         this.checkPasswordMatch = () => {
-            let failMessage = 'Passwords do not match.';
+            let failMessage = content.passwordMatchErrorText;
             if(this.refs.password.value == this.refs.confirmation.value) {
                 this.refs.confirmation.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);

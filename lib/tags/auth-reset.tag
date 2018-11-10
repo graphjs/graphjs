@@ -9,28 +9,28 @@
     </div>
     <div class="graphjs-content">
         <form if={next == 'provideEmail'}>
-            <b>Step 1</b>
-            <p>Please enter your email address.</p>
-            <input ref="email" type="text" placeholder="Email address"/>
-            <button ref="submitEmail" onclick={handleEmailSubmit}>Continue</button>
+            <b>{content.stepOneHeader}</b>
+            <p>{content.stepOneText}</p>
+            <input ref="email" type="text" placeholder={content.emailPlaceholder}/>
+            <button ref="submitEmail" onclick={handleEmailSubmit}>{content.submitEmailButtonText}</button>
             <div class="graphjs-option graphjs-single">
-                <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>Not registered?</a>
+                <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>{content.registerLinkText}</a>
             </div>
         </form>
         <form class="graphjs-code" if={next == 'verifyCode'}>
-            <b>Step 2</b>
-            <p>Please enter the 6-digit code we sent to your email.</p>
+            <b>{content.stepTwoHeader}</b>
+            <p>{content.stepTwoText}</p>
             <div ref="code">
                 <input each={item in Array(codeCharacterCount)} onkeyup={handleCodeInput} type="text" maxlength="1" />
             </div>
-            <button ref="submitCode" onclick={handleCodeSubmit}>Continue</button>
+            <button ref="submitCode" onclick={handleCodeSubmit}>{content.submitCodeButtonText}</button>
         </form>
         <form class="graphjs-code" if={next == 'updatePassword'}>
-            <b>Step 3</b>
-            <p>Please enter new password.</p>
-            <input ref="password" type="password" placeholder="Enter new password" />
-            <input ref="confirmation" type="password" placeholder="Confirm new password" />
-            <button ref="submitPassword" onclick={handlePasswordSubmit}>Update Password</button>
+            <b>{content.stepThreeHeader}</b>
+            <p>{content.stepThreeText}</p>
+            <input ref="password" type="password" placeholder={content.passwordPlaceholder} />
+            <input ref="confirmation" type="password" placeholder={content.confirmPasswordPlaceholder} />
+            <button ref="submitPassword" onclick={handlePasswordSubmit}>{content.submitPasswordButtonText}</button>
         </form>
     </div>
     <div class="graphjs-check">
@@ -59,7 +59,12 @@
         import showRegister from '../scripts/showRegister.js';
         import setPassword from '../scripts/setPassword.js';
         import hideOverlay from '../scripts/hideOverlay.js';
-
+ 
+        import TagsContent from '../content';
+        let content = TagsContent[window.GraphJSConfig.language]['auth-reset'];
+        content = {...content,...opts}
+        this.content = content;
+        
         //this.next = 'provideEmail';
         this.next = 'provideEmail';
         this.codeCharacterCount = 6;
@@ -69,7 +74,7 @@
         this.handleRegisterBox = () => showRegister();
         //Step 1: provideEmail
         this.checkEmailPattern = () => {
-            let failMessage = 'Email is invalid. Valid format: user@site.com';
+            let failMessage = content.emailPatternErrorText;
             let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if(emailPattern.test(this.refs.email.value)) {
                 this.refs.email.classList.remove('graphjs-error');
@@ -133,7 +138,7 @@
         this.checkCodeCharacterLength = () => {
             let self = this;
             let characters = Array.from(self.refs.code.children);
-            let failMessage = 'All ' + self.codeCharacterCount + ' characters must be entered!';
+            let failMessage = content.checkCodeErrorText.replace('%s',self.codeCharacterCount)
             let result = true;
             characters.forEach(function(item) {
                 if(item.value.length != 1) {
@@ -220,7 +225,7 @@
         //Step 3: updatePassword
         this.checkPasswordMinimumLength = () => {
             let passwordMinimumLengthLimit = 5;
-            let failMessage = 'Password must be ' + passwordMinimumLengthLimit + ' characters minimum!';
+            let failMessage = content.passwordMinLengthErrorText.replace('%s',passwordMinimumLengthLimit);
             if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -233,7 +238,7 @@
         }
         this.checkPasswordMaximumLength = () => {
             let passwordMaximumLengthLimit = 255;
-            let failMessage = 'Password must be ' + passwordMaximumLengthLimit + ' characters maximum!';
+            let failMessage = content.passwordMaxLengthErrorText.replace('%s',passwordMaximumLengthLimit);;
             if(this.refs.password.value.length <= passwordMaximumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -245,7 +250,7 @@
             }
         }
         this.checkPasswordMatch = () => {
-            let failMessage = 'Passwords do not match.';
+            let failMessage = content.passwordMatchErrorText;
             if(this.refs.password.value == this.refs.confirmation.value) {
                 this.refs.confirmation.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);

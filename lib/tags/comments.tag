@@ -9,12 +9,12 @@
     </div>
     <div class="graphjs-content" ref="scrollingContent">
         <div class="graphjs-synopsis" if={comments.length <= 0}>
-            No comments yet. Be the first person to say something.
+            {content.noCommentsMessageText}
         </div>
         <div class={'graphjs-comment' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
-            <textarea ref="composer" placeholder="Write your comment here..."></textarea>
-            <button ref="submit" onclick={handleComment}>Continue</button>
-            <button hide={true} onclick={handleClear} class="graphjs-danger">Clear</button>
+            <textarea ref="composer" placeholder={content.commentsInputPlaceholder}></textarea>
+            <button ref="submit" onclick={handleComment}>{content.submitButtonText}</button>
+            <button hide={true} onclick={handleClear} class="graphjs-danger">{content.clearButtonText}</button>
             <div if={!loaded && !blocked} class="graphjs-inline graphjs-loader">
                 <div class="graphjs-dots">
                     <span></span>
@@ -22,19 +22,19 @@
                     <span></span>
                 </div>
             </div>
-            <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to write a comment</button>
+            <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{content.loginButtonText}</button>
         </div>
         <div class="graphjs-synopsis"if={comments.length > 0}>
-            {comments.length <= 1 ? comments.length + ' comment' : comments.length + ' comments'}
+            {commentCountText.replace('%s',comments.length)}
         </div>
         <div each={comment in comments} data-id={comment} class="graphjs-item">
             <div class="graphjs-credit" if={authorsData.hasOwnProperty(commentsData[comment].author)}>
                 <img data-link="profile" data-id={commentsData[comment].author} onclick={handleShow} src={authorsData[commentsData[comment].author].avatar ? downsizeImage(authorsData[commentsData[comment].author].avatar, 50) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
                 <span>
-                    <b data-link="profile" data-id={commentsData[comment].author} onclick={handleShow}>{authorsData[commentsData[comment].author].username || 'Unknown User'}</b>
+                    <b data-link="profile" data-id={commentsData[comment].author} onclick={handleShow}>{authorsData[commentsData[comment].author].username || content.unknowUserText}</b>
                     <time data-timestamp={commentsData[comment].createTime}>{handleTime(commentsData[comment].createTime)}</time>
-                    <a hide={true} if={commentsData[comment].author == userId} onclick={handleEdit} data-id={comment}>Edit</a>
-                    <a if={commentsData[comment].author == userId} onclick={handleRemove} data-id={comment}>Delete</a>
+                    <a hide={true} if={commentsData[comment].author == userId} onclick={handleEdit} data-id={comment}>{content.commentEditButtonText}</a>
+                    <a if={commentsData[comment].author == userId} onclick={handleRemove} data-id={comment}>{content.commentDeleteButtonText}</a>
                 </span>
             </div>
             <p>{commentsData[comment].content}</p>
@@ -63,6 +63,11 @@
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
 
+        import TagsContent from '../content';
+        let content = TagsContent[window.GraphJSConfig.language]['comments'];
+        content = {...content,...opts}
+        this.content = content;
+        
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
@@ -164,7 +169,7 @@
             if(textBox.hasAttribute('contenteditable')) {
                 textBox.removeAttribute('contenteditable');
                 textBox.classList.remove('graphjs-editable');
-                event.target.innerText = 'Edit';
+                event.target.innerText = content.commentEditButtonText;
                 if(textBox.innerText != '') {
                     editComment(event.target.dataset.id, textBox.innerText, function(response) {
                         if(response.success) {
@@ -177,14 +182,14 @@
             } else {
                 textBox.contentEditable = true;
                 textBox.focus();
-                event.target.innerText = 'Save';
+                event.target.innerText = content.commentSaveButtonText;
                 textBox.classList.add('graphjs-editable');
             }
         }
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
-            if (window.confirm('Are you sure to delete this item?')) {
+            if (window.confirm(content.commentDeleteComfirmationText)) {
                 let query = '[data-id="' + event.target.dataset.id + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
@@ -236,28 +241,28 @@
             let amount;
             if(time < 1) {
                 amount = time;
-                text = 'Now';
+                text = content.commentTimeNowText;
             } else if(1 <= time && time < 60) {
                 amount = time;
-                text = amount == 1 ? amount + ' second ago' : amount + ' seconds ago';
+                text = content.commentTimeSecondsText.replace('%s',amount);
             } else if(60 <= time && time < 60 * 60) {
                 amount = Math.floor(time / 60);
-                text = amount == 1 ? amount + ' minute ago' : amount + ' minutes ago';
+                text = content.commentTimeMinutesText.replace('%s',amount);
             } else if(60 * 60 <= time && time < 60 * 60 * 24) {
                 amount = Math.floor(time / 60 / 60);
-                text = amount == 1 ? amount + ' hour ago' : amount + ' hours ago';
+                text = content.commentTimeHoursText.replace('%s',amount);
             } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
                 amount = Math.floor(time / 60 / 60 / 24);
-                text = amount == 1 ? amount + ' day ago' : amount + ' days ago';
+                text = content.commentTimeDaysText.replace('%s',amount);
             } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
                 amount = Math.floor(time / 60 / 60 / 24 / 7);
-                text = amount == 1 ? amount + ' week ago' : amount + ' weeks ago';
+                text = content.commentTimeWeeksText.replace('%s',amount);
             } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30);
-                text = amount == 1 ? amount + ' month ago' : amount + ' months ago';
+                text = content.commentTimeMonthsText.replace('%s',amount);
             } else if(time >= 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                text = amount == 1 ? amount + ' year ago' : amount + ' years ago';
+                text = content.commentTimeYearsText.replace('%s',amount);
             } else {
                 //Handle errors
             }
