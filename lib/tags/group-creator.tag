@@ -1,6 +1,6 @@
 <graphjs-group-creator class="graphjs-element graphjs-root graphjs-box">
     <div class="graphjs-header">
-        <div class="graphjs-title">{opts.title || 'Create Group'}</div>
+        <div class="graphjs-title">{content.title}</div>
         <a class="graphjs-option graphjs-right" onclick={handleOverlay}>
             <svg viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g transform="translate(-755.000000, -15.000000)" fill="black" fill-rule="nonzero">
@@ -19,9 +19,9 @@
     </div>
     <div class="graphjs-content">
         <form>
-            <input ref="title" type="text" placeholder="Enter group title" />
-            <input ref="description" type="text" placeholder="Describe your group" />
-            <button ref="submit" onclick={handleSubmit}>Create Group</button>
+            <input ref="title" type="text" placeholder={content.titlePlaceholder} />
+            <input ref="description" type="text" placeholder={content.descriptionPlaceholder} />
+            <button ref="submit" onclick={handleSubmit}>{content.submitButtonText}</button>
         </form>
     </div>
     <style type="less">
@@ -37,13 +37,18 @@
         import showAlert from '../scripts/showAlert.js';
         import '../vendor/cloudinary/upload-widget.js';
 
+        import TagsContent from '../content';
+        let content = TagsContent[window.GraphJSConfig.language]['group-creator'];
+        content = {...content,...opts}
+        this.content = content;
+        
         this.id = opts.id;
         this.failMessages = [];
         this.successMessages = [];
 
         this.checkTitleMinimumLength = () => {
             let titleMinimumLengthLimit = 2;
-            let failMessage = 'Title must be ' + titleMinimumLengthLimit + ' characters minimum!';
+            let failMessage = content.titleMinLengthError.replace("%s",titleMinimumLengthLimit);
             if(this.refs.title.value.length >= titleMinimumLengthLimit) {
                 this.refs.title.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -56,7 +61,7 @@
         }
         this.checkTitleMaximumLength = () => {
             let titleMaximumLengthLimit = 80;
-            let failMessage = 'Title must be ' + titleMaximumLengthLimit + ' characters maximum!';
+            let failMessage = content.titleMaxLengthError.replace("%s",titleMaximumLengthLimit);
             if(this.refs.title.value.length <= titleMaximumLengthLimit) {
                 this.refs.title.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -69,7 +74,7 @@
         }
         this.checkDescriptionMinimumLength = () => {
             let descriptionMinimumLengthLimit = 10;
-            let failMessage = 'Description must be ' + descriptionMinimumLengthLimit + ' characters minimum!';
+            let failMessage = content.descriptionMaxLengthError.replace("%s",titleMaximumLengthLimit);
             if(this.refs.description.value.length >= descriptionMinimumLengthLimit) {
                 this.refs.description.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -82,7 +87,7 @@
         }
         this.checkDescriptionMaximumLength = () => {
             let descriptionMaximumLengthLimit = 255;
-            let failMessage = 'Description must be ' + descriptionMaximumLengthLimit + ' characters maximum!';
+            let failMessage = content.descriptionMaxLengthError.replace("%s",titleMaximumLengthLimit);
             if(this.refs.description.value.length <= descriptionMaximumLengthLimit) {
                 this.refs.description.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -123,8 +128,8 @@
                     title,
                     description,
                     function(response) {
-                        let failMessage = 'Group couldn\'t be created.';
-                        let successMessage = 'Group has been created successfully.';
+                        let failMessage = content.failMessage;
+                        let successMessage = content.successMessage;
                         if(response.success) {
                             self.refs.title.classList.remove('graphjs-error');
                             self.refs.title.classList.add('graphjs-success');

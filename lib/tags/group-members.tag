@@ -1,6 +1,6 @@
 <graphjs-group-members class="graphjs-element graphjs-root graphjs-wallet">
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <p if={empty}>This group has no followers.</p>
+        <p if={empty}>{content.noFollowersText}</p>
         <graphjs-profile-card each={id in list} id={id}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
@@ -8,7 +8,7 @@
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to display content</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{content.loginButtonText}</button>
     </div>
     <style type="less">
         @import '../styles/variables.less';
