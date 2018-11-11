@@ -9,9 +9,9 @@
             <img src={group && group.cover ? downsizeImage(group.cover, 320) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png'} />
         </a>
         <form>
-            <input ref="title" type="text" placeholder="Enter group title" value={group ? group.title : ''} />
-            <input ref="description" type="text" placeholder="Describe your group" value={group ? group.description : ''} />
-            <button ref="submit" onclick={handleInformationSubmit}>Update Group</button>
+            <input ref="title" type="text" placeholder={content.titleInputPlaceholder} value={group ? group.title : ''} />
+            <input ref="description" type="text" placeholder={content.descriptionInputPlaceholder} value={group ? group.description : ''} />
+            <button ref="submit" onclick={handleInformationSubmit}>{content.submitButtonText}</button>
         </form>
     </div>
     <style type="less">
@@ -28,6 +28,11 @@
         import showAlert from '../scripts/showAlert.js';
         import '../vendor/cloudinary/upload-widget.js';
 
+        import TagsContent from '../content';
+        let content = TagsContent[window.GraphJSConfig.language]['group-settings'];
+        content = {...content,...opts}
+        this.content = content;
+        
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
@@ -51,8 +56,8 @@
                     theme: 'minimal'
                 },
                 function(error, result) {
-                    let failMessage = 'Cover photo couldn\'t be set.';
-                    let successMessage = 'Cover photo has been set successfully.';
+                    let failMessage = content.failMessage;
+                    let successMessage = content.successMessage;
                     if(result) {
                         setGroupCover(self.id, result[0].url, function(response) {
                             if(response.success) {
@@ -93,7 +98,7 @@
         }
         this.checkTitleMinimumLength = () => {
             let titleMinimumLengthLimit = 2;
-            let failMessage = 'Title must be ' + titleMinimumLengthLimit + ' characters minimum!';
+            let failMessage = content.titleMinLengthError.replace("%s",titleMinimumLengthLimit);
             if(this.refs.title.value.length >= titleMinimumLengthLimit) {
                 this.refs.title.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -106,7 +111,7 @@
         }
         this.checkTitleMaximumLength = () => {
             let titleMaximumLengthLimit = 80;
-            let failMessage = 'Title must be ' + titleMaximumLengthLimit + ' characters maximum!';
+            let failMessage = content.titleMaxLengthError.replace("%s",titleMaximumLengthLimit);
             if(this.refs.title.value.length <= titleMaximumLengthLimit) {
                 this.refs.title.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -119,7 +124,7 @@
         }
         this.checkDescriptionMaximumLength = () => {
             let descriptionMaximumLengthLimit = 255;
-            let failMessage = 'Description must be ' + descriptionMaximumLengthLimit + ' characters maximum!';
+            let failMessage = content.descriptionMaxLengthError.replace("%s",descriptionMaximumLengthLimit);
             if(this.refs.description.value.length <= descriptionMaximumLengthLimit) {
                 this.refs.description.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -160,8 +165,8 @@
                         self.id,
                         title,
                         function(response) {
-                            let failMessage = 'Title couldn\'t be set.';
-                            let successMessage = 'Title has been set successfully.';
+                            let failMessage = content.titleFailMessage;
+                            let successMessage = content.titleSuccessMessage;
                             if(response.success) {
                                 self.group.title = title;
                                 self.refs.title.classList.remove('graphjs-error');
@@ -184,8 +189,8 @@
                         }
                     );
                 } else {
-                    let failMessage = 'Title couldn\'t be set.';
-                    let successMessage = 'Title has been set successfully.';
+                    let failMessage = content.titleFailMessage;
+                    let successMessage = content.titleSuccessMessage;
                     self.refs.title.classList.remove('graphjs-error');
                     self.refs.title.classList.add('graphjs-success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
@@ -198,8 +203,8 @@
                         self.id,
                         description,
                         function(response) {
-                            let failMessage = 'Description couldn\'t be set.';
-                            let successMessage = 'Description has been set successfully.';
+                            let failMessage = content.descriptionFailMessage;
+                            let successMessage = content.descriptionSuccessMessage;
                             if(response.success) {
                                 self.group.description = description;
                                 self.refs.description.classList.remove('graphjs-error');
@@ -222,8 +227,8 @@
                         }
                     );
                 } else {
-                    let failMessage = 'Description couldn\'t be set.';
-                    let successMessage = 'Description has been set successfully.';
+                    let failMessage = content.descriptionFailMessage;
+                    let successMessage = content.descriptionSuccessMessage;
                     self.refs.description.classList.remove('graphjs-error');
                     self.refs.description.classList.add('graphjs-success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
