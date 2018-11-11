@@ -9,7 +9,7 @@
     </div>
     <div class="graphjs-content" ref="scrollingContent">
         <div class="graphjs-synopsis" if={feedbacks.length <= 0}>
-            No feedback yet. Be the first person to leave feedback!
+            {content.noFeedbackMessageText}
         </div>
         <div each={feedback in feedbacks} data-id={feedback} class="graphjs-item" if={feedbacks}>
             <img class="graphjs-author" data-link="profile" data-id={feedbacksData[feedback].author} onclick={handleShow} src={authorsData[feedbacksData[feedback].author].avatar ? downsizeImage(authorsData[feedbacksData[feedback].author].avatar, 50) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} if={authorsData.hasOwnProperty(feedbacksData[feedback].author)} />
@@ -58,8 +58,8 @@
                 		</svg>
                 	</label>
                 </fieldset>
-                <textarea ref="composer" placeholder="Write your own feedback here..."></textarea>
-                <a ref="submit" onclick={handleFeedback}>Send Feedback</a>
+                <textarea ref="composer" placeholder={content.feedbackInputPlaceholder}></textarea>
+                <a ref="submit" onclick={handleFeedback}>{content.submitButtonText}</a>
                 <div if={!loaded && !blocked} class="graphjs-inline graphjs-loader">
                     <div class="graphjs-dots">
                         <span></span>
@@ -67,7 +67,7 @@
                         <span></span>
                     </div>
                 </div>
-                <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to leave feedback</button>
+                <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{content.loginButtonText}</button>
             </div>
         </div>
     </div>
@@ -93,6 +93,11 @@
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
 
+        import TagsContent from '../content';
+        let content = TagsContent[window.GraphJSConfig.language]['feedback'];
+        content = {...content,...opts}
+        this.content = content;
+        
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
@@ -259,7 +264,7 @@
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
-            if (window.confirm('Are you sure to delete this item?')) {
+            if (window.confirm(content.feedbackDeleteComfirmationText)) {
                 let query = '[data-id="' + event.target.dataset.id + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
