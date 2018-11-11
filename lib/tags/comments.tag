@@ -189,7 +189,7 @@
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
-            if (window.confirm(content.commentDeleteComfirmationText)) {
+            if (window.confirm(content.commentDeleteConfirmationText)) {
                 let query = '[data-id="' + event.target.dataset.id + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
