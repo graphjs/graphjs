@@ -2,10 +2,10 @@
     <a class="graphjs-information" data-link="group" data-id={id} onclick={handleShow} if={group}>
         <img src={group.cover ? downsizeImage(group.cover, 240) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png'} />
         <b if={group}>{group.title}</b>
-        <p>{group.count == 1 ? group.count + ' Member' : group.count + ' Members'}</p>
+        <p>{ content.membersCountText.replace("%s",group.count) }</p>
     </a>
     <button if={(!group || !joinInformation) && loaded}>&middot; &middot; &middot;</button>
-    <button if={(group && joinInformation) && loaded} onclick={joined ? handleLeave : handleJoin}>{joined ? 'Leave Group' : 'Join Group'}</button>
+    <button if={(group && joinInformation) && loaded} onclick={joined ? handleLeave : handleJoin}>{joined ? content.leaveGroupText : content.joinGroupText}</button>
     <div if={!loaded} class="graphjs-placeholder graphjs-loader">
         <div class="graphjs-information">
             <div class="graphjs-cover graphjs-rectangle graphjs-fill"></div>
@@ -31,6 +31,11 @@
         import getSession from '../scripts/getSession.js';
         import listMembers from '../scripts/listMembers.js';
 
+        import TagsContent from '../content';
+        let content = TagsContent[window.GraphJSConfig.language]['group-card'];
+        content = {...content,...opts}
+        this.content = content;
+        
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 

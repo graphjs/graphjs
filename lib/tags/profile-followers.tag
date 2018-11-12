@@ -1,6 +1,6 @@
 <graphjs-profile-followers class="graphjs-element graphjs-root graphjs-wallet">
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <p if={empty}>This user has no followers.</p>
+        <p if={empty}>{content.noUsersText}</p>
         <!--
         <p if={list.length > 0}>{list.length + ' Follower' + (list.length > 1 ? 's' : '')}</p>
         -->
@@ -11,7 +11,7 @@
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to display content</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{content.loginButtonText}</button>
     </div>
     <style type="less">
         @import '../styles/variables.less';
@@ -23,6 +23,11 @@
         import getSession from '../scripts/getSession.js';
         import showLogin from '../scripts/showLogin.js';
 
+        import TagsContent from '../content';
+        let content = TagsContent[window.GraphJSConfig.language]['profile-followers'];
+        content = {...content,...opts}
+        this.content = content;
+        
         this.id = opts.id;
         this.list = [];
         this.loaded = true;

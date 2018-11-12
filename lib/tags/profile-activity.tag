@@ -16,7 +16,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    followed
+                    {content.followed}
                     <a data-link="profile" data-id={item.object.id} onclick={handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'create'}>
@@ -25,7 +25,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    created a new group called
+                    {content.createText}
                     <a data-link="group" data-id={item.object.id} onclick={handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'join'}>
@@ -34,7 +34,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    joined the group
+                    {content.joinText}
                     <a data-link="group" data-id={item.object.id} onclick={handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'comment'}>
@@ -43,7 +43,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    commented on
+                    {content.commentText}
                     <a href={item.object.label}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'start'}>
@@ -52,7 +52,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    started a new thread
+                    {content.startText}
                     <a data-link="thread" data-id={item.object.id} onclick={handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'reply'}>
@@ -61,7 +61,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    replied the thread
+                    {content.replyText}
                     <a data-link="thread" data-id={item.object.id} onclick={handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'star'}>
@@ -70,7 +70,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    starred a page
+                    {content.starText}
                 </div>
             </li>
         </ul>
@@ -126,7 +126,7 @@
                 </div>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to display content</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{content.loginButtonText}</button>
     </div>
     <style type="less">
         @import '../styles/variables.less';
@@ -144,6 +144,11 @@
         import getActivityToken from '../scripts/getActivityToken.js';
         import stream from 'getstream';
 
+        import TagsContent from '../content';
+        let content = TagsContent[window.GraphJSConfig.language]['profile-activity'];
+        content = {...content,...opts}
+        this.content = content;
+        
         this.id = opts.id;
         this.activity = [];
 
@@ -259,28 +264,28 @@
             let amount;
             if(time < 1) {
                 amount = time;
-                text = 'Now';
+                text = content.activityTimeNowText;
             } else if(1 <= time && time < 60) {
                 amount = time;
-                text = amount == 1 ? amount + ' second ago' : amount + ' seconds ago';
+                text = content.activityTimeSecondsText.replace('%s',amount);
             } else if(60 <= time && time < 60 * 60) {
                 amount = Math.floor(time / 60);
-                text = amount == 1 ? amount + ' minute ago' : amount + ' minutes ago';
+                text = content.activityTimeMinutesText.replace('%s',amount);
             } else if(60 * 60 <= time && time < 60 * 60 * 24) {
                 amount = Math.floor(time / 60 / 60);
-                text = amount == 1 ? amount + ' hour ago' : amount + ' hours ago';
+                text = content.activityTimeHoursText.replace('%s',amount);
             } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
                 amount = Math.floor(time / 60 / 60 / 24);
-                text = amount == 1 ? amount + ' day ago' : amount + ' days ago';
+                text = content.activityTimeDaysText.replace('%s',amount);
             } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
                 amount = Math.floor(time / 60 / 60 / 24 / 7);
-                text = amount == 1 ? amount + ' week ago' : amount + ' weeks ago';
+                text = content.activityTimeWeeksText.replace('%s',amount);
             } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30);
-                text = amount == 1 ? amount + ' month ago' : amount + ' months ago';
+                text = content.activityTimeMonthsText.replace('%s',amount);
             } else if(time >= 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                text = amount == 1 ? amount + ' year ago' : amount + ' years ago';
+                text = content.activityTimeYearsText.replace('%s',amount);
             } else {
                 //Handle errors
             }

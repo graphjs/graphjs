@@ -8,19 +8,19 @@
         <a ref="uploadWidget" class="graphjs-avatar">
             <img src={profile && profile.avatar ? downsizeImage(profile.avatar, 160) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
         </a>
-        <h2>Profile</h2>
+        <h2>{content.profileTitle}</h2>
         <form>
-            <input ref="username" type="text" placeholder="Enter username" value={profile ? profile.username : ''} />
-            <input ref="email" type="text" placeholder="Enter email address" value={profile ? profile.email : ''} />
-            <input ref="bio" type="text" placeholder="Enter a short bio" value={profile ? profile.about : ''} />
-            <input ref="birthday" type="text" placeholder="Enter birthday (MM/DD/YYYY)" value={profile ? profile.birthday : ''} />
-            <button ref="submitProfile" onclick={handleProfileSubmit}>Update Profile</button>
+            <input ref="username" type="text" placeholder={content.usernamePlaceholder} value={profile ? profile.username : ''} />
+            <input ref="email" type="text" placeholder={content.emailPlaceholder} value={profile ? profile.email : ''} />
+            <input ref="bio" type="text" placeholder={content.bioPlaceholder} value={profile ? profile.about : ''} />
+            <input ref="birthday" type="text" placeholder={content.birthdayPlaceholder} value={profile ? profile.birthday : ''} />
+            <button ref="submitProfile" onclick={handleProfileSubmit}>{content.submitButtonText}</button>
         </form>
-        <h2>Password</h2>
+        <h2>{content.passwordTitle}</h2>
         <form>
-            <input ref="password" type="password" placeholder="Enter new password" />
-            <input ref="confirmation" type="password" placeholder="Confirm new password" />
-            <button ref="submitPassword" onclick={handlePasswordSubmit}>Change Password</button>
+            <input ref="password" type="password" placeholder={content.passwordPlaceholder} />
+            <input ref="confirmation" type="password" placeholder={content.confirmationPlaceholder} />
+            <button ref="submitPassword" onclick={handlePasswordSubmit}>{content.passwordSubmitButtonText}</button>
         </form>
     </div>
     <style type="less">
@@ -41,6 +41,11 @@
         import showAlert from '../scripts/showAlert.js';
         import '../vendor/cloudinary/upload-widget.js';
 
+        import TagsContent from '../content';
+        let content = TagsContent[window.GraphJSConfig.language]['profile-settings'];
+        content = {...content,...opts}
+        this.content = content;
+        
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
@@ -63,8 +68,8 @@
                     theme: 'minimal'
                 },
                 function(error, result) {
-                    let failMessage = 'Avatar couldn\'t be set.';
-                    let successMessage = 'Avatar has been set successfully.';
+                    let failMessage = content.failMessage;
+                    let successMessage = content.successMessage;
                     if(result) {
                         setAvatar(result[0].url, function(response) {
                             if(response.success) {
@@ -105,7 +110,7 @@
         }
         this.checkUsernameMinimumLength = () => {
             let usernameMinimumLengthLimit = 1;
-            let failMessage = 'Username is too short!';
+            let failMessage = content.usernameMinLengthError;
             if(this.refs.username.value.length >= usernameMinimumLengthLimit) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -118,7 +123,7 @@
         }
         this.checkUsernameMaximumLength = () => {
             let usernameMaximumLengthLimit = 36;
-            let failMessage = 'Username must be ' + usernameMaximumLengthLimit + ' characters maximum!';
+            let failMessage = content.usernameMaxLengthError.replace("%s",usernameMaximumLengthLimit);
             if(this.refs.username.value.length <= usernameMaximumLengthLimit) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -130,7 +135,7 @@
             }
         }
         this.checkUsernamePattern = () => {
-            let failMessage = 'Username is invalid. Valid characters are letters, numbers, hyphens, and underscores.';
+            let failMessage = content.usernamePatternError;
             let usernamePattern = /^[a-zA-Z0-9-_]+$/;
             if(usernamePattern.test(this.refs.username.value)) {
                 this.refs.username.classList.remove('graphjs-error');
@@ -143,7 +148,7 @@
             }
         }
         this.checkEmailPattern = () => {
-            let failMessage = 'Email is invalid. Valid format: user@site.com';
+            let failMessage = content.emailPatternError;
             let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if(emailPattern.test(this.refs.email.value)) {
                 this.refs.email.classList.remove('graphjs-error');
@@ -157,7 +162,7 @@
         }
         this.checkBioMaximumLength = () => {
             let bioMaximumLengthLimit = 255;
-            let failMessage = 'Bio must be ' + bioMaximumLengthLimit + ' characters maximum!';
+            let failMessage = content.bioMaxError.replace("%s",bioMaximumLengthLimit);
             if(this.refs.bio.value.length <= bioMaximumLengthLimit) {
                 this.refs.bio.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -169,7 +174,7 @@
             }
         }
         this.checkBirthdayFormat = () => {
-            let failMessage = 'Invalid birthday! Correct format: MM/DD/YYYY';
+            let failMessage = content.birthdayFormatError;
             let birthdayPattern = /^\d{2}\/\d{2}\/\d{4}$/;
             if(birthdayPattern.test(this.refs.birthday.value)) {
                 this.refs.birthday.classList.remove('graphjs-error');
@@ -183,7 +188,7 @@
         }
         this.checkBirthdayLimit = () => {
             let birthdayLimit = 13;
-            let failMessage = 'You must be at least ' + birthdayLimit + ' years old to register!';
+            let failMessage = content.birthdayLimitError.replace("%s",birthdayLimit);
             let birthYear = parseInt(this.refs.birthday.value.split('/')[2]);
             if(((new Date()).getFullYear() - birthYear) >= birthdayLimit) {
                 this.refs.birthday.classList.remove('graphjs-error');
@@ -197,7 +202,7 @@
         }
         this.checkPasswordMinimumLength = () => {
             let passwordMinimumLengthLimit = 5;
-            let failMessage = 'Password must be ' + passwordMinimumLengthLimit + ' characters minimum!';
+            let failMessage = content.passwordMinLengthError.replace("%s",passwordMinimumLengthLimit);
             if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
                 //this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -210,7 +215,7 @@
         }
         this.checkPasswordMaximumLength = () => {
             let passwordMaximumLengthLimit = 255;
-            let failMessage = 'Password must be ' + passwordMaximumLengthLimit + ' characters maximum!';
+            let failMessage = content.passwordMaxLengthError.replace("%s",passwordMaximumLengthLimit);;
             if(this.refs.password.value.length <= passwordMaximumLengthLimit) {
                 //this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -222,7 +227,7 @@
             }
         }
         this.checkPasswordMatch = () => {
-            let failMessage = 'Passwords do not match.';
+            let failMessage = content.passwordMatchError;
             if(this.refs.password.value == this.refs.confirmation.value) {
                 this.refs.password.classList.remove('graphjs-error');
                 this.refs.confirmation.classList.remove('graphjs-error');
@@ -285,8 +290,8 @@
                     setUsername(
                         username,
                         function(response) {
-                            let failMessage = 'Username couldn\'t be set.';
-                            let successMessage = 'Username has been set successfully.';
+                            let failMessage = content.usernameFailMessage;
+                            let successMessage = content.usernameSuccessMessage;
                             if(response.success) {
                                 self.profile.username = username;
                                 self.refs.username.classList.remove('graphjs-error');
@@ -307,8 +312,8 @@
                         }
                     );
                 } else {
-                    let failMessage = 'Username couldn\'t be set.';
-                    let successMessage = 'Username has been set successfully.';
+                    let failMessage = content.usernameFailMessage;
+                    let successMessage = content.usernameSuccessMessage;
                     self.refs.username.classList.remove('graphjs-error');
                     self.refs.username.classList.add('graphjs-success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
@@ -320,8 +325,8 @@
                     setEmail(
                         email,
                         function(response) {
-                            let failMessage = 'Email couldn\'t be set.';
-                            let successMessage = 'Email has been set successfully.';
+                            let failMessage = content.emailFailMessage;
+                            let successMessage = content.emailSuccessMessage;
                             if(response.success) {
                                 self.profile.email = email;
                                 self.refs.email.classList.remove('graphjs-error');
@@ -342,8 +347,8 @@
                         }
                     );
                 } else {
-                    let failMessage = 'Email couldn\'t be set.';
-                    let successMessage = 'Email has been set successfully.';
+                    let failMessage = content.emailFailMessage;
+                    let successMessage = content.emailSuccessMessage;
                     self.refs.email.classList.remove('graphjs-error');
                     self.refs.email.classList.add('graphjs-success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
@@ -354,8 +359,8 @@
                 setBio(
                     bio,
                     function(response) {
-                        let failMessage = 'Bio couldn\'t be set.';
-                        let successMessage = 'Bio has been set successfully.';
+                        let failMessage = content.bioFailMessage;
+                        let successMessage = content.bioSuccessMessage;
                         if(response.success) {
                             self.profile.about = bio;
                             self.refs.bio.classList.remove('graphjs-error');
@@ -378,8 +383,8 @@
                 setBirthday(
             		birthday,
                     function(response) {
-                        let failMessage = 'Birthday couldn\'t be set.';
-                        let successMessage = 'Birthday has been set successfully.';
+                        let failMessage = content.birthdayFailMessage;
+                        let successMessage = content.birthdaySuccessMessage;
                         if(response.success) {
                             self.profile.birthday = birthday;
                             self.refs.birthday.classList.remove('graphjs-error');
@@ -414,8 +419,8 @@
                 setPassword(
                     password,
                     function(response) {
-                        let failMessage = 'Password couldn\'t be set.';
-                        let successMessage = 'Password has been set successfully.';
+                        let failMessage = content.passwordFailMessage;
+                        let successMessage = content.passwordSuccessMessage;
                         if(response.success) {
                             self.profile.password = password;
                             self.refs.password.classList.remove('graphjs-error');

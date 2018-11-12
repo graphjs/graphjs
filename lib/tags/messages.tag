@@ -14,7 +14,7 @@
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <div class="graphjs-sidebar">
-            <input ref="searchForPartners" onkeyup={handleFilter} class={!newMessageOption ? 'graphjs-hidden' : ''} type="text" placeholder="Type a name..." />
+            <input ref="searchForPartners" onkeyup={handleFilter} class={!newMessageOption ? 'graphjs-hidden' : ''} type="text" placeholder={content.nameSearchPlaceholder} />
             <div class="graphjs-suggestions" if={newMessageOption && matchedPartners.length > 0}>
                 <a each={matchedPartner in matchedPartners} data-id={matchedPartner.id} onclick={handleNewPartner}>
                     <img src={matchedPartner.avatar ? downsizeImage(matchedPartner.avatar, 40) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
@@ -40,7 +40,7 @@
                     <time data-timestamp={activeMessages[message].timestamp}></time>
                 </div>
             </div>
-            <textarea onkeyup={handleSubmit} placeholder="Write your message here..."></textarea>
+            <textarea onkeyup={handleSubmit} placeholder={content.messageInputPlaceholder}></textarea>
         </div>
         <div if={!loaded} class="graphjs-placeholder graphjs-loader">
             <div class="graphjs-left">
@@ -136,7 +136,7 @@
                 </div>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to display messages</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{content.loginButtonText}</button>
     </div>
     <a class="graphjs-promo graphjs-bottom graphjs-right" href="https://graphjs.com" target="_blank">
         <svg viewBox="0 0 200 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -160,6 +160,11 @@
         import getMembers from '../scripts/getMembers.js';
         import showLogin from '../scripts/showLogin.js';
 
+        import TagsContent from '../content';
+        let content = TagsContent[window.GraphJSConfig.language]['messages'];
+        content = {...content,...opts}
+        this.content = content;
+        
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
@@ -282,33 +287,33 @@
                     let amount;
                     if(time < 1) {
                         amount = time;
-                        text = 'Now';
+                        text = content.messageTimeNowText;
                     } else if(1 <= time && time < 60) {
                         amount = time;
-                        text = amount == 1 ? amount + ' second' : amount + ' seconds';
+                        text = content.messageTimeSecondsText.replace('%s',amount);
                     } else if(60 <= time && time < 60 * 60) {
                         amount = Math.floor(time / 60);
-                        text = amount == 1 ? amount + ' minute' : amount + ' minutes';
+                        text = content.messageTimeMinutesText.replace('%s',amount);
                     } else if(60 * 60 <= time && time < 60 * 60 * 24) {
                         amount = Math.floor(time / 60 / 60);
-                        text = amount == 1 ? amount + ' hour' : amount + ' hours';
+                        text = content.messageTimeHoursText.replace('%s',amount);
                     } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
                         amount = Math.floor(time / 60 / 60 / 24);
-                        text = amount == 1 ? amount + ' day' : amount + ' days';
+                        text = content.messageTimeDaysText.replace('%s',amount);
                     } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
                         amount = Math.floor(time / 60 / 60 / 24 / 7);
-                        text = amount == 1 ? amount + ' week' : amount + ' weeks';
+                        text = content.messageTimeWeeksText.replace('%s',amount);
                     } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
                         amount = Math.floor(time / 60 / 60 / 24 / 30);
-                        text = amount == 1 ? amount + ' month' : amount + ' months';
+                        text = content.messageTimeMonthsText.replace('%s',amount);
                     } else if(time >= 60 * 60 * 24 * 30 * 12) {
                         amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                        text = amount == 1 ? amount + ' year' : amount + ' years';
+                        text = content.messageTimeYearsText.replace('%s',amount);
                     } else {
                         //Handle errors
                     }
                 } else {
-                    text = 'Error: Couldn\'t send message';
+                    text = content.failErrorText;
                     item.classList.add('graphjs-error');
                 }
                 item.innerHTML = text;

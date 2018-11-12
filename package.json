@@ -34,5 +34,9 @@
     "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0"
   }
 }
