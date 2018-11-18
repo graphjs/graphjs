@@ -4,14 +4,48 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Test GraphJS Components</title>
+        <style>
+            body {
+              margin: 0;
+              padding: 0;
+            }
+        </style>
     </head>
     <body>
-        <!-- Test Tags start here -->
+        <!--
+        // Blog -->
+        
+        <!--
+        <div style="width: 960px; margin: 50px auto;">
+            <graphjs-blog-composer></graphjs-blog-composer>
+        </div>
+        -->
+        <hr />
+        <div style="width: 960px; margin: 50px auto;">
+            <graphjs-blog-composer id="5bb50ab339b354f3aec1942040ca6f64"></graphjs-blog-composer>
+        </div>
+        <hr />
+        <!--
+        <div style="width: 960px; margin: 50px auto;">
+            <graphjs-blog-list></graphjs-blog-list>
+        </div>
+        <hr />
+        <div style="width: 960px; margin: 50px auto;">
+            <graphjs-blog-post></graphjs-blog-post>
+        </div>
+        <hr />
+        <div style="width: 960px; margin: 50px auto;">
+            <graphjs-blog></graphjs-blog>
+        </div>
+        -->
 
-        <!-- ### Testing Auth -->
+        <!--
+        // Auth
         <graphjs-auth></graphjs-auth>
-
-        <!-- ### Testing Private Content -->
+        -->
+         
+        <!-- 
+        // Private Content
         <div style="width: 500px;">
             <h2>Placeholders</h2>
             <h3>Text</h3>
@@ -33,14 +67,18 @@
             </graphjs-private-content>
             <br /><br />
         </div>
+        -->
 
-        <!-- ### Testing Forum -->
+        <!--
+        // Testing Forum
         <graphjs-forum></graphjs-forum>
-
-        <!-- Test Tags finish here -->
+        -->
+        
         <script src="../dist/graph.js"></script>
         <script>
-            GraphJS.init("79982844-6a27-4b3b-b77f-419a79be0e10");
+            GraphJS.init("79982844-6a27-4b3b-b77f-419a79be0e10", {
+                host: "https://gjs-singlesignon.herokuapp.com"
+            });
         </script>
     </body>
 </html>
