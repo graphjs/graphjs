@@ -2,26 +2,52 @@
 
 @{prefix}-blog-list.@{prefix}-root {
     display: block;
+    position: relative;
+    padding-bottom: 3.6em;
     color: @text-color-normal;
     .@{prefix}-content {
         min-height: 21em;
         .no-padding !important;
+        &.@{prefix}-pagination {
+            .@{prefix}-controls {
+                position: relative;
+                left: unset;
+                right: unset;
+                bottom: unset;
+                height: auto;
+                padding: 0;
+                background-color: transparent;
+            }
+        }
         .@{prefix}-list {
-            display: inline-block;
+            display: block;
             width: 100%;
             height: auto;
             vertical-align: middle;
             .@{prefix}-item {
-                display: table;
+                display: inline-block;
                 width: 100%;
+                height: auto;
+                margin-bottom: 1.5em;
                 color: @text-color-normal;
-                line-height: 3.5em;
-                border-bottom: 1px solid fade(black, 10%);
-                &:last-child {
-                    border-bottom: none;
-                }
                 &:hover {
                     background-color: fade(@theme-color, 5%);
+                }
+                &:first-child {
+                    font-size: 1.2em;
+                    .graphjs-summary {
+                        display: inline-block;
+                    }
+                }
+                &:nth-child(2), &:nth-child(3) {
+                    width: calc((100% - 1.5em) / 2);
+                    font-size: 1.1em;
+                    .graphjs-summary {
+                        display: inline-block;
+                    }
+                }
+                &:nth-child(3) {
+                    margin-left: 1.5em;
                 }
                 &.@{prefix}-hidden {
                     display: none !important;
@@ -30,22 +56,72 @@
                     color: @text-color-weak;
                     text-align: center;
                 }
-                & > * {
-                    float: left;
-                    &:first-child {
-                        border-left: none;
+                .@{prefix}-title {
+                    width: 100%;
+                    height: auto;
+                    margin-bottom: 0;
+                    padding: 0;
+                    color: @text-color-strong;
+                    font-size: 1.6em;
+                    .bold-font;
+                    line-height: 1.2em;
+                    border: none;
+                    border-radius: 0;
+                }
+                .@{prefix}-information {
+                    width: 100%;
+                    margin-top: .25em;
+                    color: @text-color-weak;
+                    font-size: .9em;
+                    & > * {
+                        display: inline;
+                        float: none;
+                        color: inherit;
+                        line-height: 1em;
+                        &:first-child {
+                            &::before {
+                                display: none !important;
+                            }
+                        }
+                        &::before {
+                            content: "\B7";
+                            display: inline;
+                            color: #9fafbf;
+                        }
+                        & > a {
+                            color: @text-color-normal;
+                            .bold-font;
+                            &::before {
+                                color: @text-color-weak;
+                                .regular-font;
+                            }
+                        }
+                    }
+                    .@{prefix}-author {
+                        a {
+                            .bold-font;
+                            &::before {
+                                content: "by";
+                                display: inline;
+                                margin-right: .25em;
+                                .regular-font;
+                            }
+                        }
+                    }
+                    .@{prefix}-time {
+                        time {
+                            color: inherit;
+                        }
                     }
                 }
-                .@{prefix}-title {
-                    width: calc(100% - 16em);
-                    padding: 0 1.5em;
-                    color: @text-color-strong;
-                    .single-line-text;
-                }
-                time {
-                    width: calc(4em / .9);
-                    color: @text-color-normal;
-                    font-size: .9em;
+                .@{prefix}-summary {
+                    display: none;
+                    width: 100%;
+                    margin-top: 1em;
+                    font-size: 1.1em;
+                    line-height: 1.5em;
+                    height: 4.5em;
+                    overflow: hidden;
                 }
             }
         }

@@ -2,10 +2,15 @@
 
 @{prefix}-blog-composer.@{prefix}-root {
     display: block;
+    position: relative;
+    padding-bottom: 3.6em;
     color: @text-color-normal;
     .@{prefix}-content {
         .no-padding !important;
         background-color: transparent;
+        & > p {
+            text-align: center;
+        }
         form {
             .clearfix;
             input, input[type] {
@@ -263,12 +268,8 @@
             .@{prefix}-body {
                 min-height: 21.5em;
                 margin-top: 1.25em;
-                font-size: 1.1em;
-                line-height: 1.5em;
-                text-align: left;
                 border: none;
                 outline: none;
-                padding: 0;
                 &:empty::before {
                     content: attr(placeholder);
                     display: block;
@@ -277,95 +278,6 @@
                 &:focus {
                     &:empty::before {
                         opacity: .5;
-                    }
-                }
-                h2 {
-                    color: @text-color-strong;
-                    font-size: 1.5em;
-                    line-height: 1.25em;
-                    .bold-font;
-                }
-                h3 {
-                    color: @text-color-strong;
-                    font-size: 1.25em;
-                    line-height: 1.25em;
-                    .bold-font;
-                }
-                a {
-                    color: @theme-color;
-                    border-bottom-width: 1px;
-                    border-bottom-style: dotted;
-                    border-bottom-color: @text-color-weak;
-                }
-                b, strong {
-                    .bold-font();
-                }
-                i {
-                    font-style: italic;
-                }
-                u {
-                    text-decoration: underline;
-                }
-                s, strike, del {
-                    text-decoration: line-through;
-                }
-                img {
-                    width: auto;
-                    max-width: 100%;
-                }
-                ol {
-                    li {
-                        list-style-type: decimal;
-                        &::before {
-                            content: "";
-                            width: .5em;
-                            display: inline-block;
-                        }
-                    }
-                }
-                li {
-                    list-style-position: inside;
-                }
-                pre {
-                    display: inline-block;
-                    padding: .5em .75em;
-                    border-width: 1px;
-                    border-style: solid;
-                    border-color: fade(@default-color, 25%);
-                    background-color: fade(@default-color, 10%);
-                }
-                blockquote{
-                    position: relative;
-                    padding: 1em;
-                    padding-left: 3em;
-                    font-size: 1.25em;
-                    font-style: italic;
-                    line-height: 1.5em;
-                    border-left-width: .5em;
-                    border-left-style: solid;
-                    border-left-color: @text-color-weak;
-                    background-color: fade(@default-color, 10%);
-                    &::before{
-                        content: "\00201D";
-                        position: absolute;
-                        left: calc(1em / 3);
-                        top: calc(1em / 3.25); // Visually centers the super script character
-                        color: @text-color-weak;
-                        font-size: 3em;
-                        font-family: Arial, sans-serif;
-                        font-style: normal;
-                        font-weight: bold;
-                        line-height: 1em;
-                        vertical-align: middle;
-                    }
-                    &::after{
-                        content: "";
-                    }
-                    span {
-                        display: block;
-                        margin-top: 1em;
-                        color: @text-color-normal;
-                        .bold-font
                     }
                 }
             }

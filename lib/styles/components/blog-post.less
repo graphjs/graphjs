@@ -2,6 +2,8 @@
 
 @{prefix}-blog-post.@{prefix}-root {
     display: block;
+    position: relative;
+    padding-bottom: 3.6em;
     color: @text-color-normal;
     &.@{prefix}-composer {
         .@{prefix}-content {
@@ -19,25 +21,111 @@
         min-height: 28.5em;
         .no-padding !important;
         vertical-align: middle;
-        .@{prefix}-thread {
+        .@{prefix}-nonexistent {
+            p {
+                text-align: center;
+            }
+        }
+        .@{prefix}-post {
             overflow-y: auto;
             position: relative;
-            max-height: 47em;
-            margin-bottom: 3em;
             /*.transition(margin-bottom .35s ease);*/
             .@{prefix}-title {
-                display: none;
-                position: relative;
-                z-index: 2;
-                padding: 1.5em 2.5em 0;
-                line-height: 100%;
-                h1 {
-                    .no-margin;
-                    color: @text-color-strong;
-                    .regular-font;
-                    font-size: 1.75em;
-                    line-height: 150%;
+                width: 100%;
+                height: 1em;
+                margin-bottom: 0;
+                padding: 0;
+                color: @text-color-strong;
+                font-size: 2em;
+                .bold-font;
+                line-height: 1em;
+                border: none;
+                border-radius: 0;
+            }
+            .@{prefix}-information {
+                color: @text-color-weak;
+                font-size: .9em;
+                margin-top: .75em;
+                & > * {
+                    display: inline;
+                    float: none;
+                    color: inherit;
+                    line-height: 1em;
+                    &:first-child {
+                        &::before {
+                            display: none !important;
+                        }
+                    }
+                    &::before {
+                        content: "\B7";
+                        display: inline;
+                        color: #9fafbf;
+                    }
+                    & > a {
+                        color: @text-color-normal;
+                        .bold-font;
+                        &::before {
+                            color: @text-color-weak;
+                            .regular-font;
+                        }
+                    }
                 }
+                .@{prefix}-author {
+                    a {
+                        .bold-font;
+                        &::before {
+                            content: "by";
+                            display: inline;
+                            margin-right: .25em;
+                            .regular-font;
+                        }
+                    }
+                }
+                .@{prefix}-time {
+                    time {
+                        color: inherit;
+                        &::before {
+                            content: "Published in";
+                            margin-right: .25em;
+                        }
+                        &.@{prefix}-edited {
+                            &::before {
+                                content: "Last edited on";
+                            }
+                        }
+                    }
+                }
+                .@{prefix}-action {
+                    &::before {
+                        display: none;
+                    }
+                    & > * {
+                        color: @text-color-strong;
+                        .bold-font;
+                        .transition(all .15s ease);
+                        &::before {
+                            content: "\B7";
+                            display: inline;
+                            color: @text-color-weak;
+                            .regular-font;
+                            margin-right: .25em;
+                        }
+                        &.graphjs-danger {
+                            color: @danger-color;
+                        }
+                        &.graphjs-success {
+                            color: @success-color;
+                        }
+                        &[disabled] {
+                            pointer-events: none;
+                            cursor: not-allowed;
+                        }
+                    }
+                }
+            }
+            .@{prefix}-body {
+                min-height: 21.5em;
+                margin-top: 1.25em;
             }
             .@{prefix}-replies {
                 padding-right: 2.5em;
