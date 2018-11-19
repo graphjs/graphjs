@@ -136,7 +136,6 @@
             this.frequentlyUpdateTime = setInterval(this.handleTimeUpdate,  60 * 1000);
         });
         this.on('mount', function() {
-            console.log('L',this.loaded)
             this.loaded && !this.rendered && this.handleRender();
         });
         this.on('unmount', function() {
@@ -203,7 +202,6 @@
             });
         }
         this.handleRender = () => {
-            console.log('worked!')
             if(this.body && !this.rendered) {
                 this.refs.body.innerHTML = this.body;
             }

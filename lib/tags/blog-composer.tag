@@ -73,7 +73,7 @@
         this.blocked = false;
         this.warningMessages = [];
         
-        this.post = opts.id;
+        this.id = opts.id;
         this.editable = false;
         this.saved = false;
         this.autosave = true;
@@ -121,17 +121,17 @@
         this.grantAccess = () => {
             getUser(function(response) {
                 if(response.success) {
-                    if(response.admin) {
+                    //if(response.admin) {
                         self.editable = true;
                         self.update();
-                    }
+                    //}
                 }
             });
         }
         this.initiate = () => {
-            if(this.post) {
+            if(this.id) {
                 // Existing Post
-                getBlogPost(this.post, function(response) {
+                getBlogPost(this.id, function(response) {
                     if(response.success) {
                         self.title = response.blog.title;
                         self.body = response.blog.summary;
@@ -149,7 +149,7 @@
                 // New Post
                 startBlogPost('Unnamed', 'Dummy content...', function(response) {
                     if(response.success) {
-                        self.post = response.id;
+                        self.id = response.id;
                         self.createTime = loggedTime;
                         self.lastEditTime = loggedTime;
                         getProfile(self.userId, function(response) {
@@ -173,7 +173,6 @@
             pell.init({
                 element: self.refs.form,
                 onChange: html => {
-                    console.log('html', html)
                     self.body = html;
                     self.saved = false;
                     self.update();
@@ -256,10 +255,10 @@
             this.watch();
         }
         this.watch = () => {
+            let form = this.refs.form;
+            let title = form.querySelector('input.graphjs-title');
+            let body = form.querySelector('div.graphjs-body');
             if(!this.published) {
-                let form = this.refs.form;
-                let title = form.querySelector('input.graphjs-title');
-                let body = form.querySelector('div.graphjs-body');
                 title.addEventListener('change', function() {
                     self.title = title.value;
                     self.saved = false;
@@ -274,6 +273,15 @@
                 */
                 this.autosave();
             }
+            /*
+            body.addEventListener('focus', function() {
+                console.log('focused')
+                console.log(navigator.clipboard)
+                let copied = navigator.clipboard.readHTML();
+                let parsed = copied.replace(/<[^/].*?>/g, i => i.split(/[ >]/g)[0] + '>').trim();
+                navigator.clipboard.writeHTML(parsed);
+            });
+            */
         }
         this.save = (event) => {
             let link = this.refs.save;
@@ -282,7 +290,7 @@
                     event.currentTarget.setAttribute('disabled', 'disabled');
                     event.currentTarget.innerHTML = 'Saving...';
                 }
-                editBlogPost(self.post, self.title, self.body, function(response) {
+                editBlogPost(self.id, self.title, self.body, function(response) {
                     if(response.success) {
                         self.saved = true;
                         self.update();
@@ -312,13 +320,13 @@
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
             link.innerHTML = 'Publishing...';
-            publishBlogPost(self.post, function(response) {
+            publishBlogPost(self.id, function(response) {
                 if(response.success) {
                     self.published = true;
                     self.update();
                     opts.minor && self.handleCallback({
                         link: 'post',
-                        id: self.post
+                        id: self.id
                     });
                 } else {
                     if(link) {
@@ -336,7 +344,7 @@
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
             link.innerHTML = 'Unpublishing...';
-            unpublishBlogPost(self.post, function(response) {
+            unpublishBlogPost(self.id, function(response) {
                 if(response.success) {
                     self.published = false;
                     self.update();

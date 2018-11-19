@@ -5,33 +5,36 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Test GraphJS Components</title>
         <style>
+            /* Reset margins and paddings */
             body {
               margin: 0;
               padding: 0;
             }
         </style>
     </head>
-    <body>
+    <body style="background-color: rgb(55, 63, 71)"><!-- Custom dark background -->
         <!--
-        // Blog -->
+        // Display blog -->
         <div style="width: 80%; margin: 50px auto 0 auto;">
             <graphjs-blog></graphjs-blog>
         </div>
-        <!--
-        <hr />
-        <div style="width: 960px; margin: 50px auto 0 auto;">
+        <!-- Show blog posts
+        <div style="width: 80%; margin: 50px auto 0 auto;">
             <graphjs-blog-list></graphjs-blog-list>
         </div>
-        <hr />
-        <div style="width: 960px; margin: 50px auto 0 auto;">
+        -->
+        <!-- Start a blog post
+        <div style="width: 80%; margin: 50px auto 0 auto;">
             <graphjs-blog-composer></graphjs-blog-composer>
         </div>
-        <hr />
-        <div style="width: 960px; margin: 50px auto 0 auto;">
+        -->
+        <!-- Edit a blog post
+        <div style="width: 80%; margin: 50px auto 0 auto;">
             <graphjs-blog-composer id="5bb50ab339b354f3aec1942040ca6f64"></graphjs-blog-composer>
         </div>
-        <hr />
-        <div style="width: 960px; margin: 50px auto 0 auto;">
+        -->
+        <!-- Read a blog post
+        <div style="width: 80%; margin: 50px auto 0 auto;">
             <graphjs-blog-post id="5bb50ab339b354f3aec1942040ca6f64"></graphjs-blog-post>
         </div>
         <hr />
@@ -75,7 +78,9 @@
         <script src="../dist/graph.js"></script>
         <script>
             GraphJS.init("79982844-6a27-4b3b-b77f-419a79be0e10", {
-                host: "https://gjs-singlesignon.herokuapp.com"
+                host: "https://gjs-singlesignon.herokuapp.com",
+                theme: "dark", // Dark theme
+                color: "rgb(77, 220, 121)" // Custom color
             });
         </script>
     </body>

@@ -5,6 +5,9 @@
     line-height: 1.5em;
     text-align: left;
     padding: 0;
+    * {
+        color: @text-color-normal;
+    }
     h2 {
         color: @text-color-strong;
         font-size: 1.5em;
@@ -24,6 +27,7 @@
         border-bottom-color: @text-color-weak;
     }
     b, strong {
+        color: @text-color-strong;
         .bold-font();
     }
     i {
@@ -33,6 +37,7 @@
         text-decoration: underline;
     }
     s, strike, del {
+        color: @text-color-weak;
         text-decoration: line-through;
     }
     img {
@@ -60,7 +65,7 @@
         border-color: fade(@default-color, 25%);
         background-color: fade(@default-color, 10%);
     }
-    blockquote{
+    blockquote {
         position: relative;
         padding: 1em;
         padding-left: 3em;
@@ -69,14 +74,14 @@
         line-height: 1.5em;
         border-left-width: .5em;
         border-left-style: solid;
-        border-left-color: @text-color-weak;
+        border-left-color: @theme-color;
         background-color: fade(@default-color, 10%);
         &::before{
             content: "\00201D";
             position: absolute;
             left: calc(1em / 3);
             top: calc(1em / 3.25); // Visually centers the super script character
-            color: @text-color-weak;
+            color: @theme-color;
             font-size: 3em;
             font-family: Arial, sans-serif;
             font-style: normal;

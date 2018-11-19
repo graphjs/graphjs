@@ -35,7 +35,7 @@
                 height: 1em;
                 margin-bottom: 0;
                 padding: 0;
-                color: @text-color-strong;
+                color: @theme-color;
                 font-size: 2em;
                 .bold-font;
                 line-height: 1em;
@@ -59,7 +59,7 @@
                     &::before {
                         content: "\B7";
                         display: inline;
-                        color: #9fafbf;
+                        color: @text-color-weak;
                     }
                     & > a {
                         color: @text-color-normal;
@@ -100,7 +100,7 @@
                         display: none;
                     }
                     & > * {
-                        color: @text-color-strong;
+                        .text-color-states(@text-color-strong);
                         .bold-font;
                         .transition(all .15s ease);
                         &::before {
@@ -111,10 +111,10 @@
                             margin-right: .25em;
                         }
                         &.graphjs-danger {
-                            color: @danger-color;
+                            .text-color-states(@danger-color) !important;
                         }
                         &.graphjs-success {
-                            color: @success-color;
+                            .text-color-states(@success-color) !important;
                         }
                         &[disabled] {
                             pointer-events: none;

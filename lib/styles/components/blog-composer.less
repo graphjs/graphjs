@@ -18,7 +18,7 @@
                 height: 1em;
                 margin-bottom: 0;
                 padding: 0;
-                color: @text-color-strong;
+                color: @theme-color;
                 font-size: 2em;
                 .bold-font;
                 border: none;
@@ -26,6 +26,10 @@
                 border-radius: 0;
                 background-color: transparent;
                 outline: none;
+                &::placeholder {
+                    opacity: .5;
+                    color: @theme-color;
+                }
             }
             .@{prefix}-information {
                 color: @text-color-weak;
@@ -44,7 +48,7 @@
                     &::before {
                         content: "\B7";
                         display: inline;
-                        color: #9fafbf;
+                        color: @text-color-weak;
                     }
                     & > a {
                         color: @text-color-normal;
@@ -85,7 +89,7 @@
                         display: none;
                     }
                     & > * {
-                        color: @text-color-strong;
+                        .text-color-states(@text-color-strong);
                         .bold-font;
                         .transition(all .15s ease);
                         &::before {
@@ -96,7 +100,7 @@
                             margin-right: .25em;
                         }
                         &.success {
-                            color: @success-color;
+                            .text-color-states(@success-color);
                         }
                         &[disabled] {
                             pointer-events: none;
@@ -123,6 +127,7 @@
                     margin: 0;
                     padding-left: .5em;
                     padding-right: .5em;
+                    color: @text-color-normal;
                     font-size: 1em;
                     line-height: calc(2em - 2px);
                     border-width: 1px;
@@ -255,6 +260,12 @@
                         & > svg {
                             width: .9em;
                             margin: 1px 0 -1px 0;
+                        }
+                    }
+                    & > * {
+                        color: @text-color-normal;
+                        & > * {
+                            color: @text-color-normal;
                         }
                     }
                     & > svg {

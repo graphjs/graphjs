@@ -31,9 +31,6 @@
                 margin-bottom: 1.5em;
                 color: @text-color-normal;
                 cursor: pointer;
-                &:hover {
-                    background-color: fade(@theme-color, 5%);
-                }
                 &:first-child {
                     font-size: 1.2em;
                     .graphjs-summary {
@@ -62,7 +59,7 @@
                     height: auto;
                     margin-bottom: 0;
                     padding: 0;
-                    color: @text-color-strong;
+                    .text-color-states(@theme-color);
                     font-size: 1.6em;
                     .bold-font;
                     line-height: 1.2em;
@@ -87,7 +84,7 @@
                         &::before {
                             content: "\B7";
                             display: inline;
-                            color: #9fafbf;
+                            color: @text-color-weak;
                         }
                         & > a {
                             color: @text-color-normal;
@@ -119,6 +116,7 @@
                     display: none;
                     width: 100%;
                     margin-top: 1em;
+                    color: @text-color-normal;
                     font-size: 1.1em;
                     line-height: 1.5em;
                     height: 4.5em;

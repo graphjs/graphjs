@@ -10,14 +10,12 @@
     <graphjs-blog-list
         minor={true}
         title={opts.title}
-        access={opts.access}
         callback={changeProperties}
         if={this.active == 'list'}
     />
     <graphjs-blog-post
         minor={true}
         title={opts.title}
-        access={opts.access}
         id={id}
         callback={changeProperties}
         if={this.active == 'post'}
@@ -25,6 +23,7 @@
     <graphjs-blog-composer
         minor={true}
         title={opts.title}
+        id={id}
         callback={changeProperties}
         if={this.active == 'composer'}
     />
