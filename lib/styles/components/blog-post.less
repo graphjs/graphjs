@@ -254,51 +254,29 @@
     }
     /* Placeholder */
     .@{prefix}-placeholder {
-        padding: 0 2.5em;
+        background-color: transparent !important;
         .@{prefix}-title {
-            display: none !important;
             position: relative;
-            width: calc(50% - 2.5em);
-            margin-top: 2.5em;
+            width: 50%;
+            margin-top: .2em;
             padding: 0;
-            height: 1.5em;
-            .border-radius(calc(1.5em / 2));
+            height: 1.6em;
+            .border-radius(calc(1.6em / 2));
         }
-        .@{prefix}-creator {
-            display: block;
-            height: 3em;
-            margin-top: 1.5em;
-            .clearfix;
-            & > * {
-                float: left;
-            }
-            .@{prefix}-avatar {
-                display: block;
-                width: 3em;
-                height: 3em;
-            }
-            .@{prefix}-information {
-                display: block;
-                width: calc(35% - 2.5em);
-                height: 3em;
-                padding: .5em;
-                .@{prefix}-line {
-                    height: .8em;
-                    .border-radius(calc(.8em / 2));
-                    &:first-child {
-                        width: 80%;
-                        margin-bottom: .4em;
-                    }
-                }
-            }
+        .@{prefix}-information {
+            position: relative;
+            width: 30%;
+            height: .8em;
+            margin-top: .8em;
+            padding: 0;
+            .border-radius(calc(.8em / 2));
         }
         .@{prefix}-text {
             display: block;
             width: 100%;
             height: 6em;
-            margin-top: .75em;
+            margin-top: 2.1em;
             margin-bottom: 1em;
-            padding-left: calc(3em * 1.2);
             .@{prefix}-line {
                 height: .85em;
                 margin-bottom: .65em;
@@ -357,19 +335,11 @@
         }
         /* Placeholder */
         .@{prefix}-placeholder {
-            padding: 0 1.5em;
             .@{prefix}-title {
-                display: block;
-                width: calc(90% - 2.5em);
-                margin-top: 1.25em;
+                width: 100%;
             }
-            .@{prefix}-text {
-                padding-left: 0;
-            }
-            .@{prefix}-creator {
-                .@{prefix}-information {
-                    width: calc(45% - 2.5em);
-                }
+            .@{prefix}-information {
+                width: 80%;
             }
         }
     }
@@ -422,19 +392,11 @@
         }
         /* Placeholder */
         .@{prefix}-placeholder {
-            padding: 0 2em;
             .@{prefix}-title {
-                display: block;
-                width: calc(70% - 2.5em);
-                margin-top: 2em
+                width: 75%;
             }
-            .@{prefix}-text {
-                padding-left: 0;
-            }
-            .@{prefix}-creator {
-                .@{prefix}-information {
-                    width: calc(40% - 2.5em);
-                }
+            .@{prefix}-information {
+                width: 60%;
             }
         }
     }
