@@ -121,10 +121,10 @@
         this.grantAccess = () => {
             getUser(function(response) {
                 if(response.success) {
-                    //if(response.admin) {
+                    if(response.admin) {
                         self.editable = true;
                         self.update();
-                    //}
+                    }
                 }
             });
         }
@@ -258,30 +258,23 @@
             let form = this.refs.form;
             let title = form.querySelector('input.graphjs-title');
             let body = form.querySelector('div.graphjs-body');
-            if(!this.published) {
-                title.addEventListener('change', function() {
-                    self.title = title.value;
-                    self.saved = false;
-                    self.update();
-                });
-                /*
-                body.addEventListener('input', function() {
-                    self.body = body.innerHTML;
-                    self.saved = false;
-                    self.update();
-                });
-                */
-                this.autosave();
-            }
-            /*
-            body.addEventListener('focus', function() {
-                console.log('focused')
-                console.log(navigator.clipboard)
-                let copied = navigator.clipboard.readHTML();
-                let parsed = copied.replace(/<[^/].*?>/g, i => i.split(/[ >]/g)[0] + '>').trim();
-                navigator.clipboard.writeHTML(parsed);
+            title.addEventListener('change', function() {
+                self.title = title.value;
+                self.saved = false;
+                self.update();
             });
-            */
+            body.addEventListener('paste', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                let paste = (event.clipboardData || window.clipboardData).getData('text');
+                if(paste) {
+                    paste = paste.replace(/<[^/].*?>/g, i => i.split(/[ >]/g)[0] + '>').trim();
+                    const selection = window.getSelection();
+                    if (!selection.rangeCount) return false;
+                    selection.getRangeAt(0).insertNode(document.createTextNode(paste));
+                }
+            });
+            !this.published && this.autosave();
         }
         this.save = (event) => {
             let link = this.refs.save;
