@@ -16,8 +16,8 @@
                         filter: url(#light-blur);
                     "
                 >
-                    <h1>Private Content</h1>
-                    <h2>This is a private content.</h2>
+                    <h1>{content.title}</h1>
+                    <h2>{content.subTitle}</h2>
                     <p>Phasellus vitae lorem aliquet, egestas metus ac, iaculis erat. Aenean quis est placerat leo lobortis hendrerit vel ut erat. Duis ultricies pellentesque ultrices. Nam eget commodo ex.</p>
                     <p>Mauris facilisis, diam id semper auctor, enim ligula placerat nibh, ac accumsan eros nisl eu nibh. Aliquam aliquam felis quis erat posuere suscipit. Vestibulum ut pharetra nulla. Donec tempus varius neque ut egestas. Phasellus pretium a neque congue facilisis.</p>
                     <p>Sed lacinia nulla lacus, non gravida odio consequat at. Suspendisse aliquet pellentesque nisi, id accumsan erat auctor in. Suspendisse elementum consectetur lectus ut malesuada.</p>
@@ -60,8 +60,8 @@
                         filter: url(#light-blur);
                     "
                 >
-                    <h1>Private Content</h1>
-                    <h2>This is a private content.</h2>
+                    <h1>{content.title}</h1>
+                    <h2>{content.subTitle}</h2>
                     <div
                         class="graphjs-media-wrapper"
                         style="background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/placeholders/single-image.png);"
@@ -77,7 +77,7 @@
                 <yield />
             </div>
         </div>
-        <button ref="blockageButton" if={blocked} onclick={handleBlock} class="graphjs-blockage">Log in to view this content</button>
+        <button ref="blockageButton" if={blocked} onclick={handleBlock} class="graphjs-blockage">{content.loginButtonText}</button>
         <svg class="graphjs-filter">
             <defs>
                 <filter id="light-blur">
@@ -100,6 +100,11 @@
         import getPrivateContent from '../scripts/getPrivateContent.js';
         import showLogin from '../scripts/showLogin.js';
 
+        import TagsContent from '../content';
+        let content = TagsContent[window.GraphJSConfig.language]['private-content'];
+        content = {...content,...opts}
+        this.content = content;
+        
         this.blocked = true;
         this.invalid = false;
         this.type = opts.placeholder || 'mixed';
@@ -164,7 +169,7 @@
                 }
                 else {
                     if(response.reason && response.reason == 'Invalid ID') {
-                        self.refs.blockageButton.innerText = 'You can\'t view this content right now';
+                        self.refs.blockageButton.innerText = content.errorText;
                         self.invalid = true;
                     }
                     self.blocked = true;
