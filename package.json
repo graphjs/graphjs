@@ -31,6 +31,7 @@
     "riot": "^3.7.4",
     "riot-hot-reload": "1.0.0",
     "riot-tag-loader": "^2.0.0",
+    "sanitize-html": "^1.19.1",
     "style-loader": "^0.20.2",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^0.6.2",

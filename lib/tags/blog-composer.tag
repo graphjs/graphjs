@@ -55,6 +55,7 @@
     </style>
     <script>
         import pell from 'pell';
+        import sanitizeHTML from 'sanitize-html';
         import getSession from '../scripts/getSession.js';
         import getUser from '../scripts/getUser.js';
         import getProfile from '../scripts/getProfile.js';
@@ -69,10 +70,10 @@
         import login from '../scripts/login.js';
 
         let loggedTime = (new Date()).getTime();
-        
+
         this.blocked = false;
         this.warningMessages = [];
-        
+
         this.id = opts.id;
         this.editable = false;
         this.saved = false;
@@ -80,8 +81,7 @@
         this.published = false;
         this.timeText = '';
         this.title = '';
-        this.body = '';
-        
+
         let self = this;
 
         this.on('before-mount', function() {
@@ -90,7 +90,7 @@
         this.on('mount', function() {
             this.loaded && this.initiate();
         });
-        
+
         this.restart = () => {
             this.blocked = false;
             this.update();
@@ -263,6 +263,7 @@
                 self.saved = false;
                 self.update();
             });
+            /*
             body.addEventListener('paste', function(event) {
                 event.preventDefault();
                 event.stopPropagation();
@@ -272,6 +273,53 @@
                     const selection = window.getSelection();
                     if (!selection.rangeCount) return false;
                     selection.getRangeAt(0).insertNode(document.createTextNode(paste));
+                }
+            });
+            */
+            body.addEventListener('paste', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                let paste = (event.clipboardData || window.clipboardData).getData('text/html');
+                if(paste) {
+                    console.log(1, paste)
+                    paste = sanitizeHTML(paste, {
+                        allowedTags: [
+                            'br', // New line
+                            'b', 'i', 'u', 'strike', // Styled text
+                            'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', // Title & paragraph
+                            'ul', 'ol', 'li', // List
+                            'a', 'pre', 'blockquote', 'img' // Others
+                        ],
+                        allowedAttributes: {
+                            'a': ['href', 'target'],
+                            'img': ['src', 'alt']
+                        },
+                        selfClosing: ['img', 'br', 'hr'],
+                        allowedSchemes: ['http', 'https', 'ftp', 'mailto'],
+                        allowedSchemesAppliedToAttributes: ['href', 'src'],
+                        allowProtocolRelative: true,
+                        allowedIframeHostnames: ['www.youtube.com', 'player.vimeo.com'],
+                        transformTags: {
+                            'h1': 'h2',
+                            'h2': 'h3',
+                            'h3': 'h4',
+                            'h4': 'h4',
+                            'h5': 'h4',
+                            'h6': 'h4',
+                            'em': 'b',
+                            'strong': 'b',
+                            's': 'strike',
+                            'del': 'strike',
+                            'code': 'pre',
+                            'xmp': 'pre'
+                        }
+                    });
+                    console.log(2, paste)
+                    let selection = window.getSelection();
+                    if (!selection.rangeCount) return false;
+                    let element = document.createElement('span');
+                    element.innerHTML = paste;
+                    selection.getRangeAt(0).insertNode(element);
                 }
             });
             !this.published && this.autosave();
@@ -437,7 +485,7 @@
             'November',
             'December'
         ];
-        
+
         const icons = {
             unorderedList: '<svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M2 13c0 .59 0 1-.59 1H.59C0 14 0 13.59 0 13c0-.59 0-1 .59-1h.81c.59 0 .59.41.59 1H2zm2.59-9h6.81c.59 0 .59-.41.59-1 0-.59 0-1-.59-1H4.59C4 2 4 2.41 4 3c0 .59 0 1 .59 1zM1.41 7H.59C0 7 0 7.41 0 8c0 .59 0 1 .59 1h.81c.59 0 .59-.41.59-1 0-.59 0-1-.59-1h.01zm0-5H.59C0 2 0 2.41 0 3c0 .59 0 1 .59 1h.81c.59 0 .59-.41.59-1 0-.59 0-1-.59-1h.01zm10 5H4.59C4 7 4 7.41 4 8c0 .59 0 1 .59 1h6.81c.59 0 .59-.41.59-1 0-.59 0-1-.59-1h.01zm0 5H4.59C4 12 4 12.41 4 13c0 .59 0 1 .59 1h6.81c.59 0 .59-.41.59-1 0-.59 0-1-.59-1h.01z"></path></svg>',
             orderedList: '<svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M12 12.99c0 .589 0 .998-.59.998H4.597c-.59 0-.59-.41-.59-.999 0-.59 0-.999.59-.999H11.4c.59 0 .59.41.59 1H12zM4.596 3.996H11.4c.59 0 .59-.41.59-1 0-.589 0-.999-.59-.999H4.596c-.59 0-.59.41-.59 1 0 .589 0 .999.59.999zM11.4 6.994H4.596c-.59 0-.59.41-.59 1 0 .589 0 .999.59.999H11.4c.59 0 .59-.41.59-1 0-.59 0-.999-.59-.999zM2.008 1h-.72C.99 1.19.71 1.25.26 1.34V2h.75v2.138H.17v.859h2.837v-.86h-.999V1zm.25 8.123c-.17 0-.45.03-.66.06.53-.56 1.14-1.249 1.14-1.888-.02-.78-.56-1.299-1.36-1.299-.589 0-.968.2-1.378.64l.58.579c.19-.19.38-.38.639-.38.28 0 .48.16.48.52 0 .53-.77 1.199-1.699 2.058v.58h2.998l-.09-.88h-.66l.01.01zm-.08 3.777v-.03c.44-.19.64-.47.64-.859 0-.7-.56-1.11-1.44-1.11-.479 0-.888.19-1.278.52l.55.64c.25-.2.44-.31.689-.31.27 0 .42.13.42.36 0 .27-.2.44-.86.44v.749c.83 0 .98.17.98.47 0 .25-.23.38-.58.38-.28 0-.56-.14-.81-.38l-.479.659c.3.36.77.56 1.409.56.83 0 1.529-.41 1.529-1.16 0-.5-.31-.809-.77-.939v.01z"></path></svg>',
