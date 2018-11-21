@@ -121,7 +121,7 @@
         this.grantAccess = () => {
             getUser(function(response) {
                 if(response.success) {
-                    if(response.admin) {
+                    if(response.editor) {
                         self.editable = true;
                         self.update();
                     }
