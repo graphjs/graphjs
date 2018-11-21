@@ -10,8 +10,10 @@
 
         <!-- ### Testing Auth -->
         <graphjs-auth></graphjs-auth>
-
-        <!-- ### Testing Private Content -->
+        -->
+         
+        <!-- 
+        // Private Content
         <div style="width: 500px;">
             <h2>Placeholders</h2>
             <h3>Text</h3>
@@ -33,6 +35,7 @@
             </graphjs-private-content>
             <br /><br />
         </div>
+        -->
 
         <!-- ### Testing Forum -->
         <graphjs-forum></graphjs-forum>
@@ -40,7 +43,11 @@
         <!-- Test Tags finish here -->
         <script src="../dist/graph.js"></script>
         <script>
-            GraphJS.init("79982844-6a27-4b3b-b77f-419a79be0e10");
+            GraphJS.init("79982844-6a27-4b3b-b77f-419a79be0e10", {
+                host: "https://gjs-singlesignon.herokuapp.com",
+                theme: "dark", // Dark theme
+                color: "rgb(77, 220, 121)" // Custom color
+            });
         </script>
     </body>
 </html>

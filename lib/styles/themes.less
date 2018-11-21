@@ -33,6 +33,41 @@
             }
         }
     }
+    .@{prefix}-article {
+        * {
+            color: @text-color-normal;
+        }
+        h2 {
+            color: @text-color-strong;
+        }
+        h3 {
+            color: @text-color-strong;
+        }
+        a {
+            color: @theme-color;
+            border-bottom-color: @text-color-weak;
+        }
+        b, strong {
+            color: @text-color-strong;
+        }
+        s, strike, del {
+            color: @text-color-weak;
+        }
+        pre {
+            border-color: fade(@default-color, 25%);
+            background-color: fade(@default-color, 10%);
+        }
+        blockquote {
+            border-left-color: @theme-color;
+            background-color: fade(@default-color, 10%);
+            &::before{
+                color: @theme-color;
+            }
+            span {
+                color: @text-color-normal;
+            }
+        }
+    }
     .@{prefix}-box.@{prefix}-root {
         border: 1px solid fade(@default-color, 3%);
         background-color: @shade-color;
@@ -186,6 +221,177 @@
     }
     @{prefix}-auth.@{prefix}-root {
         color: @text-color-normal;
+    }
+    @{prefix}-blog-composer.@{prefix}-root {
+        color: @text-color-normal;
+        .@{prefix}-content {
+            & > p {
+                color: @text-color-normal;
+            }
+            form {
+                input, input[type] {
+                    color: @theme-color;
+                    border-bottom: 1px dotted @text-color-weak;
+                    &::placeholder {
+                        opacity: .5;
+                        color: @theme-color;
+                    }
+                }
+                .@{prefix}-information {
+                    color: @text-color-weak;
+                    & > * {
+                        &::before {
+                            color: @text-color-weak;
+                        }
+                        & > a {
+                            color: @text-color-normal;
+                            &::before {
+                                color: @text-color-weak;
+                            }
+                        }
+                    }
+                    .@{prefix}-action {
+                        & > * {
+                            .text-color-states(@text-color-strong);
+                            &::before {
+                                color: @text-color-weak;
+                            }
+                        }
+                    }
+                }
+                .@{prefix}-toolbar {
+                    &:hover {
+                        .@{prefix}-tool {
+                            border-color: fade(@default-color, 25%);
+                        }
+                    }
+                    .@{prefix}-tool {
+                        color: @text-color-normal;
+                        border-color: fade(@default-color, 15%);
+                        &:hover {
+                            background-color: fade(@default-color, 15%);
+                        }
+                        & > * {
+                            color: @text-color-normal;
+                            & > * {
+                                color: @text-color-normal;
+                            }
+                        }
+                        & > svg {
+                            & > * {
+                                fill: @text-color-normal;
+                            }
+                        }
+                    }
+                }
+                .@{prefix}-body {
+                    &:empty::before {
+                        color: @text-color-weak;
+                    }
+                }
+            }
+        }
+    }
+    @{prefix}-blog-list.@{prefix}-root {
+        color: @text-color-normal;
+        .@{prefix}-content {
+            .@{prefix}-list {
+                .@{prefix}-item {
+                    color: @text-color-normal;
+                    &.@{prefix}-placeholder {
+                        color: @text-color-weak;
+                    }
+                    .@{prefix}-title {
+                        .text-color-states(@theme-color);
+                    }
+                    .@{prefix}-information {
+                        color: @text-color-weak;
+                        & > * {
+                            &::before {
+                                color: @text-color-weak;
+                            }
+                            & > a {
+                                color: @text-color-normal;
+                                &::before {
+                                    color: @text-color-weak;
+                                }
+                            }
+                        }
+                    }
+                    .@{prefix}-summary {
+                        color: @text-color-normal;
+                    }
+                }
+            }
+        }
+    }
+    @{prefix}-blog-post.@{prefix}-root {
+        color: @text-color-normal;
+        .@{prefix}-content {
+            .@{prefix}-post {
+                .@{prefix}-title {
+                    color: @theme-color;
+                }
+                .@{prefix}-information {
+                    color: @text-color-weak;
+                    & > * {
+                        &::before {
+                            color: @text-color-weak;
+                        }
+                        & > a {
+                            color: @text-color-normal;
+                            &::before {
+                                color: @text-color-weak;
+                            }
+                        }
+                    }
+                    .@{prefix}-action {
+                        & > * {
+                            .text-color-states(@text-color-strong);
+                            &::before {
+                                color: @text-color-weak;
+                            }
+                        }
+                    }
+                }
+                .@{prefix}-replies {
+                    background-color: @shade-color;
+                    .@{prefix}-item {
+                        .@{prefix}-credit {
+                            span {
+                                color: @text-color-normal;
+                            }
+                        }
+                        p {
+                            color: @text-color-normal;
+                            &.@{prefix}-editable {
+                                color: @text-color-normal;
+                                border: 1px dashed fade(@default-color, 15%);
+                                background-color: @contrast-color;
+                            }
+                        }
+                    }
+                }
+            }
+            .@{prefix}-reply {
+                border-top: 2px solid @theme-color;
+                background-color: @contrast-color;
+                .@{prefix}-synopsis {
+                    & > b {
+                        color: @text-color-normal;
+                    }
+                    & > a {
+                        &.@{prefix}-icon {
+                            svg {
+                                path {
+                                    fill: @theme-color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     @{prefix}-comments.@{prefix}-root {
         color: @text-color-normal;
