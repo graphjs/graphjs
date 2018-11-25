@@ -429,6 +429,7 @@
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
                 return true;
             } else {
+                this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
                 return false;
             }
         }
