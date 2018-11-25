@@ -10,12 +10,12 @@
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '') + (matchedPosts.length > pageLimit ? ' graphjs-pagination' : '')}>
         <div class="graphjs-list" if={loaded}>
             <div if={postsData[matchedPost]} each={matchedPost, index in matchedPosts} class={'graphjs-item' + ((index + 1 > (page - 1) * pageLimit && index + 1 <= Math.min(matchedPosts.length, page * pageLimit)) ? '' : ' graphjs-hidden')} data-link="post" data-id={matchedPost} onclick={opts.minor ? handleCallback : handleShow}>
-                <h1 class="graphjs-title">{postsData[matchedPost].title}</h1>
+                <h1 class="graphjs-title">#{postsData[matchedPost].title}</h1>
                 <ul class="graphjs-information">
                     <li class="graphjs-author">
                         <a data-link="profile" data-id={postsData[matchedPost].author.id} onclick={handleShow}>{postsData[matchedPost].author.username}</a>
                     </li>
-                    <li class="graphjs-time" if={createTime && lastEditTime}>
+                    <li class="graphjs-time" if={postsData[matchedPost].timestamp}>
                         <time>{printTime(postsData[matchedPost].timestamp)}</time>
                     </li>
                 </ul>

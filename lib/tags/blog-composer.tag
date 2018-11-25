@@ -18,6 +18,7 @@
             <ul class="graphjs-information">
                 <li if={author} class="graphjs-author">
                     <a data-link="profile" data-id={author.id} onclick={handleShow}>{author.username}</a>
+                    <b if={saved && title.length > 0 && body.length > 0}>[DRAFT]</b>
                 </li>
                 <li class="graphjs-time" if={createTime && lastEditTime}>
                     <time if={createTime === lastEditTime}>{timeText}</time>
@@ -81,6 +82,7 @@
         this.published = false;
         this.timeText = '';
         this.title = '';
+        this.body = '';
 
         let self = this;
 
@@ -281,7 +283,6 @@
                 event.stopPropagation();
                 let paste = (event.clipboardData || window.clipboardData).getData('text/html');
                 if(paste) {
-                    console.log(1, paste)
                     paste = sanitizeHTML(paste, {
                         allowedTags: [
                             'br', // New line
@@ -314,7 +315,6 @@
                             'xmp': 'pre'
                         }
                     });
-                    console.log(2, paste)
                     let selection = window.getSelection();
                     if (!selection.rangeCount) return false;
                     let element = document.createElement('span');
@@ -429,7 +429,6 @@
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
                 return true;
             } else {
-                this.warningMessages.includes(warningMessage) || this.warningMessages.push(warningMessage);
                 return false;
             }
         }
