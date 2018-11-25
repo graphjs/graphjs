@@ -15,6 +15,7 @@
                     <li class="graphjs-author">
                         <a data-link="profile" data-id={postsData[matchedPost].author.id} onclick={handleShow}>{postsData[matchedPost].author.username}</a>
                     </li>
+                    <li><b if={saved && title.length > 0 && body.length > 0}>[DRAFT]</b></li>
                     <li class="graphjs-time" if={postsData[matchedPost].timestamp}>
                         <time>{printTime(postsData[matchedPost].timestamp)}</time>
                     </li>
@@ -166,6 +167,7 @@
                             author: post.author,
                             timestamp: post.publish_time,
                             published: !post.is_draft,
+                            isDraft: (self.userId && post.is_draft)
                             summary: index >= 3
                                 ? ''
                                 : post.summary

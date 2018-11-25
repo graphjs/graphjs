@@ -18,7 +18,6 @@
             <ul class="graphjs-information">
                 <li if={author} class="graphjs-author">
                     <a data-link="profile" data-id={author.id} onclick={handleShow}>{author.username}</a>
-                    <b if={saved && title.length > 0 && body.length > 0}>[DRAFT]</b>
                 </li>
                 <li class="graphjs-time" if={createTime && lastEditTime}>
                     <time if={createTime === lastEditTime}>{timeText}</time>
