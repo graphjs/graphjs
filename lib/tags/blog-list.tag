@@ -9,13 +9,21 @@
 >
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '') + (matchedPosts.length > pageLimit ? ' graphjs-pagination' : '')}>
         <div class="graphjs-list" if={loaded}>
-            <div if={postsData[matchedPost]} each={matchedPost, index in matchedPosts} class={'graphjs-item' + ((index + 1 > (page - 1) * pageLimit && index + 1 <= Math.min(matchedPosts.length, page * pageLimit)) ? '' : ' graphjs-hidden')} data-link="post" data-id={matchedPost} onclick={opts.minor ? handleCallback : handleShow}>
+            <div 
+                if={postsData[matchedPost]} 
+                each={matchedPost, index in matchedPosts}
+                class={'graphjs-item' + ((index + 1 > (page - 1) * pageLimit && index + 1 <= Math.min(matchedPosts.length, page * pageLimit)) ? '' : ' graphjs-hidden')} 
+                data-link="post" 
+                data-id={matchedPost}
+                data-title={postsData[matchedPost].title}
+                onclick={opts.minor ? handleCallback : handleShow}
+            >
                 <h1 class="graphjs-title">#{postsData[matchedPost].title}</h1>
                 <ul class="graphjs-information">
                     <li class="graphjs-author">
                         <a data-link="profile" data-id={postsData[matchedPost].author.id} onclick={handleShow}>{postsData[matchedPost].author.username}</a>
                     </li>
-                    <li><b if={postsData[matchedPost].isDraft}>[DRAFT]</b></li>
+                    <li  if={postsData[matchedPost].isDraft}><b>[DRAFT]</b></li>
                     <li class="graphjs-time" if={postsData[matchedPost].timestamp}>
                         <time>{printTime(postsData[matchedPost].timestamp)}</time>
                     </li>
@@ -157,6 +165,14 @@
         }
         this.handleContent = () => {
             let self = this;
+            if(window.location.hash){
+                let dataset={
+                    link: "post", 
+                    id: window.location.hash.substring(1).split("-")[1]
+                }
+                opts.callback(dataset);
+                return;
+            }
             getBlogPosts(function(response) {
                 if(response.success) {
                     for(let [index, post] of response.blogs.entries()) {
@@ -192,6 +208,7 @@
             if(properties.target) {
                 properties.preventDefault();
                 let dataset = Object.assign({}, properties.currentTarget.dataset);
+                window.location.href += ('#'+dataset.title.replace(" ","_")+"-"+dataset.id);
                 opts.callback(dataset);
             } else {
                 opts.callback(properties);
