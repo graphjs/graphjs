@@ -24,7 +24,7 @@
                 <li class="graphjs-action">
                     <a ref="edit" if={opts.minor} onclick={edit}>Edit</a>
                     <a ref="publish" if={!published} onclick={publish}>Publish</a>
-                    <a ref="unpublish" if={published} class="graphjs-danger">Unpublish</a>
+                    <a ref="unpublish" if={published} onclick={unpublish} class="graphjs-danger">Unpublish</a>
                     <a ref="delete" onclick={delete} class="graphjs-danger">Delete</a>
                 </li>
             </ul>
@@ -117,7 +117,8 @@
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
         import showBlogList from '../scripts/showBlogList.js';
-
+        import removeBlogPost from '../scripts/removeBlogPost.js';
+        
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 

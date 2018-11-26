@@ -81,6 +81,7 @@
         this.published = false;
         this.timeText = '';
         this.title = '';
+        this.body = '';
 
         let self = this;
 
@@ -281,7 +282,6 @@
                 event.stopPropagation();
                 let paste = (event.clipboardData || window.clipboardData).getData('text/html');
                 if(paste) {
-                    console.log(1, paste)
                     paste = sanitizeHTML(paste, {
                         allowedTags: [
                             'br', // New line
@@ -314,7 +314,6 @@
                             'xmp': 'pre'
                         }
                     });
-                    console.log(2, paste)
                     let selection = window.getSelection();
                     if (!selection.rangeCount) return false;
                     let element = document.createElement('span');
