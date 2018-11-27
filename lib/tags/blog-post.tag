@@ -18,7 +18,7 @@
                     <a data-link="profile" data-id={author.id} onclick={handleShow}>{author.username}</a>
                 </li>
                 <li if={time} class="graphjs-time">
-                    <time if={published && time.published}>{timeText}</time>
+                    <time if={published && time.published}><a href={window.location.href}>{timeText}</a></time>
                     <time if={!published && time.lastEdited} class="graphjs-edited">{timeText}</time>
                 </li>
                 <li class="graphjs-action">
