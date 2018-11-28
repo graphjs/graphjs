@@ -2,10 +2,10 @@
     <a class="graphjs-information" data-link="group" data-id={id} onclick={handleShow} if={group}>
         <img src={group.cover ? downsizeImage(group.cover, 240) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png'} />
         <b if={group}>{group.title}</b>
-        <p>{ content.membersCountText.replace("%s",group.count) }</p>
+        <p>{ i18n.membersCountText.replace("%s",group.count) }</p>
     </a>
     <button if={(!group || !joinInformation) && loaded}>&middot; &middot; &middot;</button>
-    <button if={(group && joinInformation) && loaded} onclick={joined ? handleLeave : handleJoin}>{joined ? content.leaveGroupText : content.joinGroupText}</button>
+    <button if={(group && joinInformation) && loaded} onclick={joined ? handleLeave : handleJoin}>{joined ? i18n.leaveGroupText : i18n.joinGroupText}</button>
     <div if={!loaded} class="graphjs-placeholder graphjs-loader">
         <div class="graphjs-information">
             <div class="graphjs-cover graphjs-rectangle graphjs-fill"></div>
@@ -31,10 +31,10 @@
         import getSession from '../scripts/getSession.js';
         import listMembers from '../scripts/listMembers.js';
 
-        import TagsContent from '../content';
-        let content = TagsContent[window.GraphJSConfig.language]['group-card'];
-        content = {...content,...opts}
-        this.content = content;
+        import internationalization from '../i18n';
+        let i18n = internationalization[window.GraphJSConfig.language]['group-card'];
+        i18n = {...i18n,...opts}
+        this.i18n = i18n;
         
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;

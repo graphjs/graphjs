@@ -15,8 +15,8 @@
                 </g>
             </svg>
         </a>
-        <div if={window.innerWidth < 768} class="graphjs-title">{content.title.replace("%s",(currentAuthor || content.defaultUser))}</div>
-        <div if={window.innerWidth >= 768} class="graphjs-title">{content.title.replace("%s",(currentAuthor || content.defaultUser))}</div>
+        <div if={window.innerWidth < 768} class="graphjs-title">{i18n.title.replace("%s",(currentAuthor || i18n.defaultUser))}</div>
+        <div if={window.innerWidth >= 768} class="graphjs-title">{i18n.title.replace("%s",(currentAuthor || i18n.defaultUser))}</div>
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <div class="graphjs-thread" ref="scrollingContent">
@@ -28,10 +28,10 @@
                     <div class="graphjs-credit" if={authorsData.hasOwnProperty(entry.author)}>
                         <img data-link="profile" data-id={entry.author} onclick={handleShow} src={authorsData[entry.author].avatar ? downsizeImage(authorsData[entry.author].avatar, 50) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
                         <span>
-                            <b data-link="profile" data-id={entry.author} onclick={handleShow}>{authorsData[entry.author].username || content.unknowUserText}</b>
+                            <b data-link="profile" data-id={entry.author} onclick={handleShow}>{authorsData[entry.author].username || i18n.unknowUserText}</b>
                             <time data-timestamp={entry.timestamp}>{handleTime(entry.timestamp)}</time>
-                            <a if={entry.author == userId} onclick={handleEdit} data-id={entry.id}>{content.threadEditButtonText}</a>
-                            <a if={entry.author == userId} onclick={index == 0 ? handleDestroy : handleRemove} data-id={entry.id}>{content.threadDeleteButtonText}</a>
+                            <a if={entry.author == userId} onclick={handleEdit} data-id={entry.id}>{i18n.threadEditButtonText}</a>
+                            <a if={entry.author == userId} onclick={index == 0 ? handleDestroy : handleRemove} data-id={entry.id}>{i18n.threadDeleteButtonText}</a>
                         </span>
                     </div>
                     <p>{entry.content}</p>
@@ -40,8 +40,8 @@
         </div>
         <div class="graphjs-reply" if={entries.length > 0}>
             <div onclick={handleComposer} class="graphjs-synopsis">
-                <b if={entries.length > 1}>{entries.length <= 2 ? content.repliesNumberText.replace("%s",(entries.length - 1))}</b>
-                <a if={!composerReady}>{content.replyLinkText}</a>
+                <b if={entries.length > 1}>{entries.length <= 2 ? i18n.repliesNumberText.replace("%s",(entries.length - 1))}</b>
+                <a if={!composerReady}>{i18n.replyLinkText}</a>
                 <a class={composerReady ? 'graphjs-icon' : 'graphjs-reverse graphjs-icon'}>
                     <svg viewBox="0 0 62 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <path transform="translate(-19.000000, 0.000000)" d="M78.5,2.4 C81.1,5 81.1,9.1 78.5,11.6 L54.6,35.6 C52,38.2 47.9,38.2 45.4,35.6 L21.5,11.7 C18.9,9.1 18.9,5 21.5,2.5 C24.1,-0.1 28.2,-0.1 30.7,2.5 L50,21.7 L69.3,2.4 C71.8,-0.1 76,-0.1 78.5,2.4 Z"></path>
@@ -49,9 +49,9 @@
                 </a>
             </div>
             <form class={userId ? '' : 'graphjs-loading graphjs-blocked'}>
-                <textarea ref="composer" placeholder={content.composerInputPlaceholder}></textarea>
-                <button ref="submit" onclick={handleReply}>{content.submitButtonText}</button>
-                <button onclick={handleClear} class="graphjs-danger">{content.clearButtonText}</button>
+                <textarea ref="composer" placeholder={i18n.composerInputPlaceholder}></textarea>
+                <button ref="submit" onclick={handleReply}>{i18n.submitButtonText}</button>
+                <button onclick={handleClear} class="graphjs-danger">{i18n.clearButtonText}</button>
                 <div if={!loaded} class="graphjs-inline graphjs-loader">
                     <div class="graphjs-dots">
                         <span></span>
@@ -106,7 +106,7 @@
                 <div class="graphjs-line graphjs-fill"></div>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{content.loginDisplayButtonText}</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginDisplayButtonText}</button>
     </div>
     <a class="graphjs-promo graphjs-bottom graphjs-left" href="https://graphjs.com" target="_blank">
         <svg viewBox="0 0 200 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -132,10 +132,10 @@
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
 
-        import TagsContent from '../content';
-        let content = TagsContent[window.GraphJSConfig.language]['forum-thread'];
-        content = {...content,...opts}
-        this.content = content;
+        import internationalization from '../i18n';
+        let i18n = internationalization[window.GraphJSConfig.language]['forum-thread'];
+        i18n = {...i18n,...opts}
+        this.i18n = i18n;
         
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
@@ -189,7 +189,7 @@
             let self = this;
             self.id && getThread(self.id, function(response) {
                 if(response.success) {
-                    content.title = response.title;
+                    i18n.title = response.title;
                     self.title = response.title;
                     self.entries = response.messages;
                     self.update();
@@ -272,7 +272,7 @@
             if(textBox.hasAttribute('contenteditable')) {
                 textBox.removeAttribute('contenteditable');
                 textBox.classList.remove('graphjs-editable');
-                event.target.innerText = content.threadEditButtonText;
+                event.target.innerText = i18n.threadEditButtonText;
                 if(textBox.innerText != '') {
                     editReply(event.target.dataset.id, textBox.innerText, function(response) {
                         if(response.success) {
@@ -285,14 +285,14 @@
             } else {
                 textBox.contentEditable = true;
                 textBox.focus();
-                event.target.innerText = content.threadSaveButtonText;
+                event.target.innerText = i18n.threadSaveButtonText;
                 textBox.classList.add('graphjs-editable');
             }
         }
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
-            if (window.confirm(content.replyDeleteConfirmationText)) {
+            if (window.confirm(i18n.replyDeleteConfirmationText)) {
                 let query = '[data-id="' + event.target.dataset.id + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
@@ -309,7 +309,7 @@
         this.handleDestroy = (event) => {
             event.preventDefault();
             let self = this;
-            if (window.confirm(content.threadDeleteConfirmationText)) {
+            if (window.confirm(i18n.threadDeleteConfirmationText)) {
                 let query = '[data-link="list"]';
                 let element = document.querySelectorAll(query)[0];
                 removeReply(event.target.dataset.id, function(response) {
@@ -359,28 +359,28 @@
             let amount;
             if(time < 1) {
                 amount = time;
-                text = content.commentTimeNowText;
+                text = i18n.commentTimeNowText;
             } else if(1 <= time && time < 60) {
                 amount = time;
-                text = content.commentTimeSecondsText.replace('%s',amount);
+                text = i18n.commentTimeSecondsText.replace('%s',amount);
             } else if(60 <= time && time < 60 * 60) {
                 amount = Math.floor(time / 60);
-                text = content.commentTimeMinutesText.replace('%s',amount);
+                text = i18n.commentTimeMinutesText.replace('%s',amount);
             } else if(60 * 60 <= time && time < 60 * 60 * 24) {
                 amount = Math.floor(time / 60 / 60);
-                text = content.commentTimeHoursText.replace('%s',amount);
+                text = i18n.commentTimeHoursText.replace('%s',amount);
             } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
                 amount = Math.floor(time / 60 / 60 / 24);
-                text = content.commentTimeDaysText.replace('%s',amount);
+                text = i18n.commentTimeDaysText.replace('%s',amount);
             } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
                 amount = Math.floor(time / 60 / 60 / 24 / 7);
-                text = content.commentTimeWeeksText.replace('%s',amount);
+                text = i18n.commentTimeWeeksText.replace('%s',amount);
             } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30);
-                text = content.commentTimeMonthsText.replace('%s',amount);
+                text = i18n.commentTimeMonthsText.replace('%s',amount);
             } else if(time >= 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                text = content.commentTimeYearsText.replace('%s',amount);
+                text = i18n.commentTimeYearsText.replace('%s',amount);
             } else {
                 //Handle errors
             }

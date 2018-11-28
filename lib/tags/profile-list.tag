@@ -15,7 +15,7 @@
         <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
         <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
         <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{content.loginButtonText}</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
     </div>
     <style type="less">
         @import '../styles/variables.less';
@@ -28,10 +28,10 @@
         import getSession from '../scripts/getSession.js';
         import showLogin from '../scripts/showLogin.js';
 
-        import TagsContent from '../content';
-        let content = TagsContent[window.GraphJSConfig.language]['profile-list'];
-        content = {...content,...opts}
-        this.content = content;
+        import internationalization from '../i18n';
+        let i18n = internationalization[window.GraphJSConfig.language]['profile-list'];
+        i18n = {...i18n,...opts}
+        this.i18n = i18n;
         
         this.content = 'users';
         this.list = [];

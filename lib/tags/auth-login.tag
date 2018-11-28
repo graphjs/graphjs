@@ -12,12 +12,12 @@
     </div>
     <div class="graphjs-content">
         <form>
-            <input ref="username" type="text" placeholder={content.usernamePlaceholder} />
-            <input ref="password" type="password" placeholder={content.passwordPlaceholder}/>
-            <button ref="submit" onclick={handleSubmit}>{content.submitButtonText}</button>
+            <input ref="username" type="text" placeholder={i18n.usernamePlaceholder} />
+            <input ref="password" type="password" placeholder={i18n.passwordPlaceholder}/>
+            <button ref="submit" onclick={handleSubmit}>{i18n.submitButtonText}</button>
             <div class="graphjs-option graphjs-double">
-                <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>{content.registerLinkText}</a>
-                <a data-link="reset" onclick={opts.minor ? opts.callback : handleResetBox}>{content.resetLinkText}</a>
+                <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>{i18n.registerLinkText}</a>
+                <a data-link="reset" onclick={opts.minor ? opts.callback : handleResetBox}>{i18n.resetLinkText}</a>
             </div>
         </form>
     </div>
@@ -50,10 +50,10 @@
 
         analytics("auth-login");
         
-        import TagsContent from '../content';
-        let content = TagsContent[window.GraphJSConfig.language]['auth-login'];
-        content = {...content,...opts}
-        this.content = content;
+        import internationalization from '../i18n';
+        let i18n = internationalization[window.GraphJSConfig.language]['auth-login'];
+        i18n = {...i18n,...opts}
+        this.i18n = i18n;
         
         this.handleRegisterBox = () => showRegister();
         this.handleResetBox = () => showReset();
@@ -62,7 +62,7 @@
 
         this.checkUsernameMinimumLength = () => {
             let usernameMinimumLengthLimit = 1;
-            let failMessage = content.usernameLengthErrorText;
+            let failMessage = i18n.usernameLengthErrorText;
             if(this.refs.username.value.length >= usernameMinimumLengthLimit) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -74,7 +74,7 @@
             }
         }
         this.checkUsernamePattern = () => {
-            let failMessage = content.usernamePatternErrorText;
+            let failMessage = i18n.usernamePatternErrorText;
             let usernamePattern = /^[a-zA-Z0-9-_]+$/;
             if(usernamePattern.test(this.refs.username.value)) {
                 this.refs.username.classList.remove('graphjs-error');
@@ -88,7 +88,7 @@
         }
         this.checkPasswordMinimumLength = () => {
             let passwordMinimumLengthLimit = 5;
-            let failMessage = content.passwordErrorText.replace('%s',passwordMinimumLengthLimit);
+            let failMessage = i18n.passwordErrorText.replace('%s',passwordMinimumLengthLimit);
             
             if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');
