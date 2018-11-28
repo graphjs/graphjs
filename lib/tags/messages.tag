@@ -14,7 +14,7 @@
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <div class="graphjs-sidebar">
-            <input ref="searchForPartners" onkeyup={handleFilter} class={!newMessageOption ? 'graphjs-hidden' : ''} type="text" placeholder={content.nameSearchPlaceholder} />
+            <input ref="searchForPartners" onkeyup={handleFilter} class={!newMessageOption ? 'graphjs-hidden' : ''} type="text" placeholder={i18n.nameSearchPlaceholder} />
             <div class="graphjs-suggestions" if={newMessageOption && matchedPartners.length > 0}>
                 <a each={matchedPartner in matchedPartners} data-id={matchedPartner.id} onclick={handleNewPartner}>
                     <img src={matchedPartner.avatar ? downsizeImage(matchedPartner.avatar, 40) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
@@ -40,7 +40,7 @@
                     <time data-timestamp={activeMessages[message].timestamp}></time>
                 </div>
             </div>
-            <textarea onkeyup={handleSubmit} placeholder={content.messageInputPlaceholder}></textarea>
+            <textarea onkeyup={handleSubmit} placeholder={i18n.messageInputPlaceholder}></textarea>
         </div>
         <div if={!loaded} class="graphjs-placeholder graphjs-loader">
             <div class="graphjs-left">
@@ -136,7 +136,7 @@
                 </div>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{content.loginButtonText}</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
     </div>
     <a class="graphjs-promo graphjs-bottom graphjs-right" href="https://graphjs.com" target="_blank">
         <svg viewBox="0 0 200 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -160,10 +160,10 @@
         import getMembers from '../scripts/getMembers.js';
         import showLogin from '../scripts/showLogin.js';
 
-        import TagsContent from '../content';
-        let content = TagsContent[window.GraphJSConfig.language]['messages'];
-        content = {...content,...opts}
-        this.content = content;
+        import internationalization from '../i18n';
+        let i18n = internationalization[window.GraphJSConfig.language]['messages'];
+        i18n = {...i18n,...opts}
+        this.i18n = i18n;
         
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
@@ -287,33 +287,33 @@
                     let amount;
                     if(time < 1) {
                         amount = time;
-                        text = content.messageTimeNowText;
+                        text = i18n.messageTimeNowText;
                     } else if(1 <= time && time < 60) {
                         amount = time;
-                        text = content.messageTimeSecondsText.replace('%s',amount);
+                        text = i18n.messageTimeSecondsText.replace('%s',amount);
                     } else if(60 <= time && time < 60 * 60) {
                         amount = Math.floor(time / 60);
-                        text = content.messageTimeMinutesText.replace('%s',amount);
+                        text = i18n.messageTimeMinutesText.replace('%s',amount);
                     } else if(60 * 60 <= time && time < 60 * 60 * 24) {
                         amount = Math.floor(time / 60 / 60);
-                        text = content.messageTimeHoursText.replace('%s',amount);
+                        text = i18n.messageTimeHoursText.replace('%s',amount);
                     } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
                         amount = Math.floor(time / 60 / 60 / 24);
-                        text = content.messageTimeDaysText.replace('%s',amount);
+                        text = i18n.messageTimeDaysText.replace('%s',amount);
                     } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
                         amount = Math.floor(time / 60 / 60 / 24 / 7);
-                        text = content.messageTimeWeeksText.replace('%s',amount);
+                        text = i18n.messageTimeWeeksText.replace('%s',amount);
                     } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
                         amount = Math.floor(time / 60 / 60 / 24 / 30);
-                        text = content.messageTimeMonthsText.replace('%s',amount);
+                        text = i18n.messageTimeMonthsText.replace('%s',amount);
                     } else if(time >= 60 * 60 * 24 * 30 * 12) {
                         amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                        text = content.messageTimeYearsText.replace('%s',amount);
+                        text = i18n.messageTimeYearsText.replace('%s',amount);
                     } else {
                         //Handle errors
                     }
                 } else {
-                    text = content.failErrorText;
+                    text = i18n.failErrorText;
                     item.classList.add('graphjs-error');
                 }
                 item.innerHTML = text;

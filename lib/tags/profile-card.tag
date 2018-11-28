@@ -24,7 +24,7 @@
         <b class="graphjs-title">{profile.fullName || profile.username}</b>
         <p class="graphjs-description">{profile.about}</p>
     </a>
-    <button if={profile} data-link="profile" data-id={id} onclick={handleShow}>{content.profileButton}</button>
+    <button if={profile} data-link="profile" data-id={id} onclick={handleShow}>{i18n.profileButton}</button>
     <div if={!loaded} class="graphjs-placeholder graphjs-loader">
         <div class="graphjs-information">
             <div class="graphjs-avatar graphjs-circle graphjs-fill"></div>
@@ -51,10 +51,10 @@
         import getSession from '../scripts/getSession.js';
         import getFollowing from '../scripts/getFollowing.js';
 
-        import TagsContent from '../content';
-        let content = TagsContent[window.GraphJSConfig.language]['profile-card'];
-        content = {...content,...opts}
-        this.content = content;
+        import internationalization from '../i18n';
+        let i18n = internationalization[window.GraphJSConfig.language]['profile-card'];
+        i18n = {...i18n,...opts}
+        this.i18n = i18n;
         
         this.id = opts.id;
         this.following = false;
