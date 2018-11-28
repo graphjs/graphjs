@@ -143,7 +143,7 @@
             this.handleUser();
         }
         this.handleUser = () => {
-            let self = this;
+            let self=this;
             getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
@@ -214,6 +214,20 @@
                 opts.callback(properties);
             }
         }
+        window.addEventListener('popstate', function(event)
+        {
+            let dataset={
+                link: "list", 
+                id: ""
+            }
+            if(window.location.hash){
+                dataset={
+                    link: "post", 
+                    id: window.location.hash.substring(1).split("-")[1]
+                }
+            }
+            opts.callback(dataset);
+        });
         this.handleShow = (event) => {
             event.preventDefault();
             let dataset = event.currentTarget.dataset;
