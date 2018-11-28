@@ -27,11 +27,11 @@
         import listGroups from '../scripts/listGroups.js';
         import getSession from '../scripts/getSession.js';
         import showLogin from '../scripts/showLogin.js';
-
-        import TagsContent from '../content';
-        let content = TagsContent[window.GraphJSConfig.language]['group-list'];
-        content = {...content,...opts}
-        this.content = content;
+        
+        import internationalization from '../i18n';
+        let i18n = internationalization[window.GraphJSConfig.language]['star-list'];
+        i18n = {...i18n,...opts}
+        this.i18n = i18n;
         
         this.content = 'groups';
         this.list = [];
