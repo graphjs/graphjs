@@ -9,7 +9,7 @@
     </div>
     <div class="graphjs-content" ref="scrollingContent">
         <div class="graphjs-synopsis" if={feedbacks.length <= 0}>
-            {content.noFeedbackMessageText}
+            {i18n.noFeedbackMessageText}
         </div>
         <div each={feedback in feedbacks} data-id={feedback} class="graphjs-item" if={feedbacks}>
             <img class="graphjs-author" data-link="profile" data-id={feedbacksData[feedback].author} onclick={handleShow} src={authorsData[feedbacksData[feedback].author].avatar ? downsizeImage(authorsData[feedbacksData[feedback].author].avatar, 50) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} if={authorsData.hasOwnProperty(feedbacksData[feedback].author)} />
@@ -58,8 +58,8 @@
                 		</svg>
                 	</label>
                 </fieldset>
-                <textarea ref="composer" placeholder={content.feedbackInputPlaceholder}></textarea>
-                <a ref="submit" onclick={handleFeedback}>{content.submitButtonText}</a>
+                <textarea ref="composer" placeholder={i18n.feedbackInputPlaceholder}></textarea>
+                <a ref="submit" onclick={handleFeedback}>{i18n.submitButtonText}</a>
                 <div if={!loaded && !blocked} class="graphjs-inline graphjs-loader">
                     <div class="graphjs-dots">
                         <span></span>
@@ -67,7 +67,7 @@
                         <span></span>
                     </div>
                 </div>
-                <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{content.loginButtonText}</button>
+                <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
             </div>
         </div>
     </div>
@@ -93,10 +93,10 @@
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
 
-        import TagsContent from '../content';
-        let content = TagsContent[window.GraphJSConfig.language]['feedback'];
-        content = {...content,...opts}
-        this.content = content;
+        import internationalization from '../i18n';
+        let i18n = internationalization[window.GraphJSConfig.language]['feedback'];
+        i18n = {...i18n,...opts}
+        this.i18n = i18n;
         
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
@@ -264,7 +264,7 @@
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
-            if (window.confirm(content.feedbackDeleteComfirmationText)) {
+            if (window.confirm(i18n.feedbackDeleteComfirmationText)) {
                 let query = '[data-id="' + event.target.dataset.id + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);

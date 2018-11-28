@@ -8,7 +8,7 @@
     }
 >
     <div class="graphjs-header">
-        <div class="graphjs-title">{content.title}</div>
+        <div class="graphjs-title">{i18n.title}</div>
         <a class="graphjs-option graphjs-right" data-link="list" onclick={opts.minor ? handleCallback : handleShow}>
             <svg viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g transform="translate(-755.000000, -15.000000)" fill="black" fill-rule="nonzero">
@@ -24,13 +24,13 @@
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <form>
-            <input ref="title" type="text" placeholder={content.titleInputPlaceholder} />
-            <textarea ref="body" placeholder={content.composerInputPlaceholder}></textarea>
+            <input ref="title" type="text" placeholder={i18n.titleInputPlaceholder} />
+            <textarea ref="body" placeholder={i18n.composerInputPlaceholder}></textarea>
             <span style="visibility: hidden">
                 <b style="visibility: hidden">Supported formats:</b> Markdown
             </span>
-            <button ref="submit" data-link="thread" onclick={handleSubmit}>{content.submitButtonText}</button>
-            <button data-link="list" onclick={opts.minor ? handleCallback : handleShow} class="graphjs-danger">{content.cancelButtonText}</button>
+            <button ref="submit" data-link="thread" onclick={handleSubmit}>{i18n.submitButtonText}</button>
+            <button data-link="list" onclick={opts.minor ? handleCallback : handleShow} class="graphjs-danger">{i18n.cancelButtonText}</button>
         </form>
         <div if={!loaded && !blocked} class="graphjs-inline graphjs-loader">
             <div class="graphjs-dots">
@@ -39,7 +39,7 @@
                 <span></span>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{content.loginButtonText}</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
     </div>
     <a class="graphjs-promo graphjs-bottom graphjs-right" href="https://graphjs.com" target="_blank">
         <svg viewBox="0 0 200 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -61,10 +61,10 @@
         import showForumThread from '../scripts/showForumThread.js';
         import showLogin from '../scripts/showLogin.js';
  
-        import TagsContent from '../content';
-        let content = TagsContent[window.GraphJSConfig.language]['forum-composer'];
-        content = {...content,...opts}
-        this.content = content;
+        import internationalization from '../i18n';
+        let i18n = internationalization[window.GraphJSConfig.language]['forum-composer'];
+        i18n = {...i18n,...opts}
+        this.i18n = i18n;
         
         this.blocked = false;
         this.warningMessages = [];
@@ -100,7 +100,7 @@
             });
         }
         this.checkTitle = () => {
-            let warningMessage = content.titleWarningText;
+            let warningMessage = i18n.titleWarningText;
             if(this.refs.title.value.length >= 1) {
                 this.refs.title.classList.remove('graphjs-error');
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
@@ -112,7 +112,7 @@
             }
         }
         this.checkTextBody = () => {
-            let warningMessage = content.textWarningText;
+            let warningMessage = i18n.textWarningText;
             if(this.refs.body.value.length >= 1) {
                 this.refs.body.classList.remove('graphjs-error');
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
@@ -161,7 +161,7 @@
                         self.refs.submit.classList.remove('graphjs-loading');
                         self.update();
                         if(response.reason)
-                            window.alert(content.serverErrorText.replace('%s',response.reason));
+                            window.alert(i18n.serverErrorText.replace('%s',response.reason));
                         //Handle error
                     }
                 }
