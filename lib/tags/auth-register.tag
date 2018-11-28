@@ -108,7 +108,7 @@
         }
         this.checkPasswordMinimumLength = () => {
             let passwordMinimumLengthLimit = 5;
-            let failMessage = i18n.passwordMinErrorText.replace('%s',passwordMinimumLengthLimit);
+            let failMessage = i18n.passwordMinLengthErrorText.replace('%s',passwordMinimumLengthLimit);
             if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
