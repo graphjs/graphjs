@@ -42,12 +42,15 @@
         @import '../styles/components/profile.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import './profile-header.tag';
         import './profile-activity.tag';
         import './profile-followers.tag';
         import './profile-following.tag';
         import './profile-groups.tag';
         import './profile-settings.tag';
+
+        analytics("profile");
 
         this.active = opts.default || 'activity';
         this.changeProperties = (event) => {

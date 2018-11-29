@@ -54,6 +54,7 @@
         @import '../styles/components/comments.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';    
         import getSession from '../scripts/getSession.js';
         import getComments from '../scripts/getComments.js';
         import addComment from '../scripts/addComment.js';
@@ -62,6 +63,8 @@
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
+
+        analytics("comemnts");
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['comments'];

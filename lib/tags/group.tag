@@ -30,10 +30,13 @@
         @import '../styles/components/group.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import './group-header.tag';
         import './group-activity.tag';
         import './group-members.tag';
         import './group-settings.tag';
+
+        analytics("group");
 
         this.active = opts.default || 'members';
         this.changeProperties = (event) => {

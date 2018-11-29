@@ -32,12 +32,15 @@
         @import '../styles/components/auth-state.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
         import logout from '../scripts/logout.js'
         import showLogin from '../scripts/showLogin.js';
         import showRegister from '../scripts/showRegister.js';
         import showProfile from '../scripts/showProfile.js';
+
+        analytics("auth-state");
         
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['auth-state'];

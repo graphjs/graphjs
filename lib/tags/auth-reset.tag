@@ -53,12 +53,15 @@
         @import '../styles/components/auth-reset.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import reset from '../scripts/reset.js';
         import verify from '../scripts/verify.js';
         import showAlert from '../scripts/showAlert.js';
         import showRegister from '../scripts/showRegister.js';
         import setPassword from '../scripts/setPassword.js';
         import hideOverlay from '../scripts/hideOverlay.js';
+
+        analytics("auth-reset");
  
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['auth-reset'];
