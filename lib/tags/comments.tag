@@ -64,7 +64,7 @@
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
 
-        analytics("comemnts");
+        analytics("comments");
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['comments'];
