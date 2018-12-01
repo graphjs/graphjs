@@ -14,12 +14,6 @@
             <button ref="submit" onclick={handleInformationSubmit}>{i18n.submitButtonText}</button>
         </form>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/group-settings.less';
-    </style>
     <script>
         import getGroup from '../scripts/getGroup.js';
         import setGroupCover from '../scripts/setGroupCover.js';

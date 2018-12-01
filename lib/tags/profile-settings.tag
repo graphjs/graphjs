@@ -23,12 +23,6 @@
             <button ref="submitPassword" onclick={handlePasswordSubmit}>{i18n.passwordSubmitButtonText}</button>
         </form>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/profile-settings.less';
-    </style>
     <script>
         import getProfile from '../scripts/getProfile.js';
         import setProfile from '../scripts/setProfile.js';

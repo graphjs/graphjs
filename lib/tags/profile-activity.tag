@@ -128,12 +128,6 @@
         </div>
         <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/profile-activity.less';
-    </style>
     <script>
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';

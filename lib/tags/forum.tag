@@ -28,12 +28,6 @@
         callback={changeProperties}
         if={this.active == 'compose'}
     />
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/forum.less';
-    </style>
     <script>
         import './forum-list.tag'
         import './forum-thread.tag'

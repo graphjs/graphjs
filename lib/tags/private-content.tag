@@ -89,12 +89,6 @@
             </defs>
         </svg>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/private-content.less';
-    </style>
     <script>
         import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';

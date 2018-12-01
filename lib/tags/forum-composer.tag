@@ -48,12 +48,6 @@
             </g>
         </svg>
     </a>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/forum-composer.less';
-    </style>
     <script>
         import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';

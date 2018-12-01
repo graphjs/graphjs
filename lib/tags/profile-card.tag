@@ -36,12 +36,6 @@
             <div class="graphjs-button graphjs-rectangle graphjs-fill"></div>
         </div>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/profile-card.less';
-    </style>
     <script>
         import analytics from '../scripts/analytics.js';
         import getProfile from '../scripts/getProfile.js';

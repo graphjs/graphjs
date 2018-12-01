@@ -10,11 +10,6 @@
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
         <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-    </style>
     <script>
         import listMembers from '../scripts/listMembers.js';
         import getSession from '../scripts/getSession.js';

@@ -32,12 +32,6 @@
             </g>
         </svg>
     </a>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/auth-register.less';
-    </style>
     <script>
         import analytics from '../scripts/analytics.js';
         import register from '../scripts/register.js';

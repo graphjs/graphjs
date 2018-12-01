@@ -119,12 +119,6 @@
             </g>
         </svg>
     </a>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/star-list.less';
-    </style>
     <script>
         import analytics from '../scripts/analytics.js';
         import getStars from '../scripts/getStars.js';

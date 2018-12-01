@@ -87,12 +87,6 @@
             </g>
         </svg>
     </a>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/profile-header.less';
-    </style>
     <script>
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';

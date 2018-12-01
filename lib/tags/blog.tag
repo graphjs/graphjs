@@ -27,12 +27,6 @@
         callback={changeProperties}
         if={this.active == 'composer'}
     />
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/blog.less';
-    </style>
     <script>
         import './blog-list.tag';
         import './blog-post.tag';

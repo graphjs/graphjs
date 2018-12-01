@@ -35,12 +35,6 @@
         callback={changeProperties}
         if={active == 'settings'}
     />
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/profile.less';
-    </style>
     <script>
         import analytics from '../scripts/analytics.js';
         import './profile-header.tag';

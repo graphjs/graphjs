@@ -70,12 +70,6 @@
             </g>
         </svg>
     </a>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/group-header.less';
-    </style>
     <script>
         import getGroup from '../scripts/getGroup.js';
         import joinGroup from '../scripts/joinGroup.js';

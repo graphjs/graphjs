@@ -20,12 +20,6 @@
             </p>
         </a>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/star-button.less';
-    </style>
     <script>
         import analytics from '../scripts/analytics.js';
         import star from '../scripts/star.js';

@@ -34,12 +34,6 @@
         refresh={refreshState}
         if={active == 'reset'}
     />
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/auth.less';
-    </style>
     <script>
         import './auth-state.tag';
         import './auth-login.tag';
