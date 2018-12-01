@@ -18,7 +18,7 @@
                 data-title={postsData[matchedPost].title}
                 onclick={opts.minor ? handleCallback : handleShow}
             >
-                <h1 class="graphjs-title">#{postsData[matchedPost].title}</h1>
+                <h1 class="graphjs-title">{postsData[matchedPost].title}</h1>
                 <ul class="graphjs-information">
                     <li class="graphjs-author">
                         <a data-link="profile" data-id={postsData[matchedPost].author.id} onclick={handleShow}>{postsData[matchedPost].author.username}</a>

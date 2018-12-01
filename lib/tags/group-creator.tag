@@ -1,6 +1,6 @@
 <graphjs-group-creator class="graphjs-element graphjs-root graphjs-box">
     <div class="graphjs-header">
-        <div class="graphjs-title">{content.title}</div>
+        <div class="graphjs-title">{i18n.title}</div>
         <a class="graphjs-option graphjs-right" onclick={handleOverlay}>
             <svg viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g transform="translate(-755.000000, -15.000000)" fill="black" fill-rule="nonzero">
@@ -19,9 +19,9 @@
     </div>
     <div class="graphjs-content">
         <form>
-            <input ref="title" type="text" placeholder={content.titlePlaceholder} />
-            <input ref="description" type="text" placeholder={content.descriptionPlaceholder} />
-            <button ref="submit" onclick={handleSubmit}>{content.submitButtonText}</button>
+            <input ref="title" type="text" placeholder={i18n.titlePlaceholder} />
+            <input ref="description" type="text" placeholder={i18n.descriptionPlaceholder} />
+            <button ref="submit" onclick={handleSubmit}>{i18n.submitButtonText}</button>
         </form>
     </div>
     <style type="less">
@@ -37,10 +37,10 @@
         import showAlert from '../scripts/showAlert.js';
         import '../vendor/cloudinary/upload-widget.js';
 
-        import TagsContent from '../content';
-        let content = TagsContent[window.GraphJSConfig.language]['group-creator'];
-        content = {...content,...opts}
-        this.content = content;
+        import internationalization from '../i18n';
+        let i18n = internationalization[window.GraphJSConfig.language]['group-creator'];
+        i18n = {...i18n,...opts}
+        this.i18n = i18n;
         
         this.id = opts.id;
         this.failMessages = [];
@@ -48,7 +48,7 @@
 
         this.checkTitleMinimumLength = () => {
             let titleMinimumLengthLimit = 2;
-            let failMessage = content.titleMinLengthError.replace("%s",titleMinimumLengthLimit);
+            let failMessage = i18n.titleMinLengthError.replace("%s",titleMinimumLengthLimit);
             if(this.refs.title.value.length >= titleMinimumLengthLimit) {
                 this.refs.title.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -61,7 +61,7 @@
         }
         this.checkTitleMaximumLength = () => {
             let titleMaximumLengthLimit = 80;
-            let failMessage = content.titleMaxLengthError.replace("%s",titleMaximumLengthLimit);
+            let failMessage = i18n.titleMaxLengthError.replace("%s",titleMaximumLengthLimit);
             if(this.refs.title.value.length <= titleMaximumLengthLimit) {
                 this.refs.title.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -74,7 +74,7 @@
         }
         this.checkDescriptionMinimumLength = () => {
             let descriptionMinimumLengthLimit = 10;
-            let failMessage = content.descriptionMaxLengthError.replace("%s",titleMaximumLengthLimit);
+            let failMessage = i18n.descriptionMaxLengthError.replace("%s",titleMaximumLengthLimit);
             if(this.refs.description.value.length >= descriptionMinimumLengthLimit) {
                 this.refs.description.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -87,7 +87,7 @@
         }
         this.checkDescriptionMaximumLength = () => {
             let descriptionMaximumLengthLimit = 255;
-            let failMessage = content.descriptionMaxLengthError.replace("%s",titleMaximumLengthLimit);
+            let failMessage = i18n.descriptionMaxLengthError.replace("%s",titleMaximumLengthLimit);
             if(this.refs.description.value.length <= descriptionMaximumLengthLimit) {
                 this.refs.description.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -128,8 +128,8 @@
                     title,
                     description,
                     function(response) {
-                        let failMessage = content.failMessage;
-                        let successMessage = content.successMessage;
+                        let failMessage = i18n.failMessage;
+                        let successMessage = i18n.successMessage;
                         if(response.success) {
                             self.refs.title.classList.remove('graphjs-error');
                             self.refs.title.classList.add('graphjs-success');

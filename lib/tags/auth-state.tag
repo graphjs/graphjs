@@ -5,8 +5,8 @@
     <div class="graphjs-content">
         <div class="graphjs-not-logged" if={!id}>
             <a if={!stateInformation} class="graphjs-idle">&middot; &middot; &middot;</a>
-            <a if={stateInformation} class={opts.minor && opts.active == 'login' ? 'graphjs-active' : ''} data-link="login" onclick={opts.minor ? handleCallback : handleLoginBox}>{content.loginButtonText}</a>
-            <a if={stateInformation} class={opts.minor && opts.active == 'register' ? 'graphjs-active' : ''} data-link="register" onclick={opts.minor ? handleCallback : handleRegisterBox}>{content.registerButtonText}</a>
+            <a if={stateInformation} class={opts.minor && opts.active == 'login' ? 'graphjs-active' : ''} data-link="login" onclick={opts.minor ? handleCallback : handleLoginBox}>{i18n.loginButtonText}</a>
+            <a if={stateInformation} class={opts.minor && opts.active == 'register' ? 'graphjs-active' : ''} data-link="register" onclick={opts.minor ? handleCallback : handleRegisterBox}>{i18n.registerButtonText}</a>
         </div>
         <div class="graphjs-logged" if={id}>
             <a if={!profile} class="graphjs-idle">&middot; &middot; &middot;</a>
@@ -39,10 +39,10 @@
         import showRegister from '../scripts/showRegister.js';
         import showProfile from '../scripts/showProfile.js';
         
-        import TagsContent from '../content';
-        let content = TagsContent[window.GraphJSConfig.language]['auth-state'];
-        content = {...content,...opts}
-        this.content = content;
+        import internationalization from '../i18n';
+        let i18n = internationalization[window.GraphJSConfig.language]['auth-state'];
+        i18n = {...i18n,...opts}
+        this.i18n = i18n;
         
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
