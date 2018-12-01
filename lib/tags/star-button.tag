@@ -27,10 +27,13 @@
         @import '../styles/components/star-button.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import star from '../scripts/star.js';
         import getStar from '../scripts/getStar.js';
         import getStars from '../scripts/getStars.js';
         import removeStar from '../scripts/removeStar.js';
+
+        analytics("star-button");
 
         this.active = false;
         this.type = opts.type || 'default';

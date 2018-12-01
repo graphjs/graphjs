@@ -152,6 +152,7 @@
         @import '../styles/components/messages.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import getConversations from '../scripts/getConversations.js';
         import getConversation from '../scripts/getConversation.js';
         import getSession from '../scripts/getSession.js';
@@ -159,6 +160,8 @@
         import sendMessage from '../scripts/sendMessage.js';
         import getMembers from '../scripts/getMembers.js';
         import showLogin from '../scripts/showLogin.js';
+
+        analytics("messages");
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['messages'];

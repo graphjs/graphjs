@@ -51,12 +51,15 @@
         @import '../styles/components/messages-composer.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
         import sendMessage from '../scripts/sendMessage.js';
         import sendAnonymousMessage from '../scripts/sendAnonymousMessage.js';
         import hideOverlay from '../scripts/hideOverlay.js';
         import showLogin from '../scripts/showLogin.js';
+
+        analytics("messages-composer");
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['messages-composer'];

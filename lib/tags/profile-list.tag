@@ -23,10 +23,13 @@
         @import '../styles/options.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import getMembers from '../scripts/getMembers.js';
         import listGroups from '../scripts/listGroups.js';
         import getSession from '../scripts/getSession.js';
         import showLogin from '../scripts/showLogin.js';
+
+        analytics("profile-list");
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['profile-list'];

@@ -85,6 +85,7 @@
         @import '../styles/components/feedback.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';
         import getFeedback from '../scripts/getFeedback.js';
         import addFeedback from '../scripts/addFeedback.js';
@@ -92,6 +93,8 @@
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
+
+        analytics("feedback");
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['feedback'];

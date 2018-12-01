@@ -24,12 +24,15 @@
         @import '../styles/components/group-card.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import getGroup from '../scripts/getGroup.js';
         import joinGroup from '../scripts/joinGroup.js';
         import leaveGroup from '../scripts/leaveGroup.js';
         import showGroup from '../scripts/showGroup.js';
         import getSession from '../scripts/getSession.js';
         import listMembers from '../scripts/listMembers.js';
+
+        analytics("group-card");
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['group-card'];

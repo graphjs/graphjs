@@ -41,11 +41,14 @@
         @import '../styles/components/auth-login.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import login from '../scripts/login.js';
         import showAlert from '../scripts/showAlert.js';
         import showRegister from '../scripts/showRegister.js';
         import showReset from '../scripts/showReset.js';
         import hideOverlay from '../scripts/hideOverlay.js';
+
+        analytics("auth-login");
         
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['auth-login'];

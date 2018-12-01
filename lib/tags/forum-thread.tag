@@ -122,6 +122,7 @@
         @import '../styles/components/forum-thread.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';
         import getThread from '../scripts/getThread.js';
         import replyThread from '../scripts/replyThread.js';
@@ -131,6 +132,8 @@
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
+
+        analytics("forum-thread");
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['forum-thread'];

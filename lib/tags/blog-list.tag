@@ -115,12 +115,15 @@
         @import '../styles/components/blog-list.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';
         import getBlogPosts from '../scripts/getBlogPosts.js';
         import showBlogComposer from '../scripts/showBlogComposer.js';
         import showBlogPost from '../scripts/showBlogPost.js';
         import showLogin from '../scripts/showLogin.js';
         import showProfile from '../scripts/showProfile.js';
+
+        analytics("blog-list");
 
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;

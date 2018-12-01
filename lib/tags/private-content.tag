@@ -96,9 +96,12 @@
         @import '../styles/components/private-content.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';
         import getPrivateContent from '../scripts/getPrivateContent.js';
         import showLogin from '../scripts/showLogin.js';
+
+        analytics("private-content");
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['private-i18n'];

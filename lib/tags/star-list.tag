@@ -126,10 +126,13 @@
         @import '../styles/components/star-list.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import getStars from '../scripts/getStars.js';
         import getUserStars from '../scripts/getUserStars.js';
         import removeStar from '../scripts/removeStar.js';
         import showLogin from '../scripts/showLogin.js';
+
+        analytics("star-list");
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['star-list'];

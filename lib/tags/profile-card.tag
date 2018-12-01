@@ -43,6 +43,7 @@
         @import '../styles/components/profile-card.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
         import follow from '../scripts/follow.js';
@@ -50,6 +51,8 @@
         import showMessagesComposer from '../scripts/showMessagesComposer.js';
         import getSession from '../scripts/getSession.js';
         import getFollowing from '../scripts/getFollowing.js';
+
+        analytics("profile-card");
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['profile-card'];

@@ -39,11 +39,14 @@
         @import '../styles/components/auth-register.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import register from '../scripts/register.js';
         import login from '../scripts/login.js';
         import showAlert from '../scripts/showAlert.js';
         import showLogin from '../scripts/showLogin.js';
         import hideOverlay from '../scripts/hideOverlay.js';
+
+        analytics("auth-register");
  
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['auth-register'];

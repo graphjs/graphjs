@@ -107,6 +107,7 @@
         @import '../styles/components/blog-post.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';
         import getBlogPost from '../scripts/getBlogPost.js';
         import commentBlogPost from '../scripts/commentBlogPost.js';
@@ -117,6 +118,9 @@
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
         import showBlogList from '../scripts/showBlogList.js';
+
+        analytics("blog-post");
+
         import removeBlogPost from '../scripts/removeBlogPost.js';
         
         import {downsizeImage} from '../scripts/client.js';

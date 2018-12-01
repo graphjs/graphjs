@@ -54,6 +54,7 @@
         @import '../styles/components/blog-composer.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import pell from 'pell';
         import sanitizeHTML from 'sanitize-html';
         import getSession from '../scripts/getSession.js';
@@ -68,6 +69,8 @@
         import showBlogPost from '../scripts/showBlogPost.js';
         import showLogin from '../scripts/showLogin.js';
         import login from '../scripts/login.js';
+
+        analytics("blog-composer");
 
         let loggedTime = (new Date()).getTime();
 

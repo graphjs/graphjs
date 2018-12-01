@@ -163,11 +163,14 @@
         @import '../styles/components/forum-list.less';
     </style>
     <script>
+        import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';
         import getThreads from '../scripts/getThreads.js';
         import showForumCompose from '../scripts/showForumComposer.js';
         import showForumThread from '../scripts/showForumThread.js';
         import showLogin from '../scripts/showLogin.js';
+
+        analytics("forum-list");
  
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['forum-list'];
