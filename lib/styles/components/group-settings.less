@@ -26,7 +26,7 @@
                 }
             }
             &::before {
-                content: "Change\00000aCover Photo";
+                content: attr(data-coverphototext);
                 display: inline-block;
                 position: absolute;
                 top: 0;
@@ -53,7 +53,7 @@
                 &.@{prefix}-success {
                     border: 1px solid @success-color;
                     &::after {
-                        content: "OK";
+                        content: attr(data-savesuccesstext);
                         display: block;
                         position: absolute;
                         top: 0;

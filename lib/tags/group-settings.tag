@@ -5,7 +5,7 @@
         </ul>
     </div>
     <div class="graphjs-content">
-        <a ref="uploadWidget" class="graphjs-cover">
+        <a ref="uploadWidget" class="graphjs-cover" data-coverphototext="{i18n.coverPhotoText}">
             <img src={group && group.cover ? downsizeImage(group.cover, 320) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png'} />
         </a>
         <form>
@@ -171,6 +171,7 @@
                                 self.group.title = title;
                                 self.refs.title.classList.remove('graphjs-error');
                                 self.refs.title.classList.add('graphjs-success');
+                                self.refs.title.setAttribute('data-savesuccesstext', i18n.saveSuccessText);
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                                 self.refs.submitPassword.classList.remove('graphjs-loading');
@@ -180,6 +181,7 @@
                                 }
                             } else {
                                 self.refs.title.classList.remove('graphjs-success');
+                                self.refs.title.removeAttribute('data-savesuccesstext');
                                 self.refs.title.classList.add('graphjs-error');
                                 self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                 self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
@@ -193,6 +195,7 @@
                     let successMessage = i18n.titleSuccessMessage;
                     self.refs.title.classList.remove('graphjs-error');
                     self.refs.title.classList.add('graphjs-success');
+                    self.refs.title.setAttribute('data-savesuccesstext', i18n.saveSuccessText);
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                     self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                     self.refs.submitPassword.classList.remove('graphjs-loading');
@@ -209,6 +212,7 @@
                                 self.group.description = description;
                                 self.refs.description.classList.remove('graphjs-error');
                                 self.refs.description.classList.add('graphjs-success');
+                                self.refs.description.setAttribute('data-savesuccesstext', i18n.saveSuccessText);
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                                 self.refs.submitPassword.classList.remove('graphjs-loading');
@@ -218,6 +222,7 @@
                                 }
                             } else {
                                 self.refs.description.classList.remove('graphjs-success');
+                                self.refs.description.removeAttribute('data-savesuccesstext');
                                 self.refs.description.classList.add('graphjs-error');
                                 self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                 self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
@@ -231,6 +236,7 @@
                     let successMessage = i18n.descriptionSuccessMessage;
                     self.refs.description.classList.remove('graphjs-error');
                     self.refs.description.classList.add('graphjs-success');
+                    self.refs.description.setAttribute('data-savesuccesstext', i18n.saveSuccessText);
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                     self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                     self.refs.submitPassword.classList.remove('graphjs-loading');

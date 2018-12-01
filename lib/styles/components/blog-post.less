@@ -74,7 +74,7 @@
                     a {
                         .bold-font;
                         &::before {
-                            content: "by";
+                            content: attr(data-authorbeforetext);
                             display: inline;
                             margin-right: .25em;
                             .regular-font;
@@ -85,12 +85,12 @@
                     time {
                         color: inherit;
                         &::before {
-                            content: "Published in";
+                            content: attr(data-publishedtimebeforetext);
                             margin-right: .25em;
                         }
                         &.@{prefix}-edited {
                             &::before {
-                                content: "Last edited on";
+                                content: attr(data-edittimebeforetext);
                             }
                         }
                     }

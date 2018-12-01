@@ -5,7 +5,7 @@
         </ul>
     </div>
     <div class="graphjs-content">
-        <a ref="uploadWidget" class="graphjs-avatar">
+        <a ref="uploadWidget" class="graphjs-avatar" data-changeavatartext={i18n.changeAvatarText}>
             <img src={profile && profile.avatar ? downsizeImage(profile.avatar, 160) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
         </a>
         <h2>{i18n.profileTitle}</h2>
@@ -296,6 +296,7 @@
                                 self.profile.username = username;
                                 self.refs.username.classList.remove('graphjs-error');
                                 self.refs.username.classList.add('graphjs-success');
+                                self.refs.username.setAttribute('data-savesuccesstext', i18n.saveSuccessText);
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                                 self.refs.submitProfile.classList.remove('graphjs-loading');
@@ -303,6 +304,7 @@
                                 self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                             } else {
                                 self.refs.username.classList.remove('graphjs-success');
+                                self.refs.username.removeAttribute('data-savesuccesstext');
                                 self.refs.username.classList.add('graphjs-error');
                                 self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                 self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
@@ -316,6 +318,7 @@
                     let successMessage = i18n.usernameSuccessMessage;
                     self.refs.username.classList.remove('graphjs-error');
                     self.refs.username.classList.add('graphjs-success');
+                    self.refs.username.setAttribute('data-savesuccesstext', i18n.saveSuccessText);
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                     self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                     self.refs.submitProfile.classList.remove('graphjs-loading');
@@ -331,6 +334,7 @@
                                 self.profile.email = email;
                                 self.refs.email.classList.remove('graphjs-error');
                                 self.refs.email.classList.add('graphjs-success');
+                                self.refs.email.setAttribute('data-savesuccesstext', i18n.saveSuccessText);
                                 self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                 self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                                 self.refs.submitProfile.classList.remove('graphjs-loading');
@@ -338,6 +342,7 @@
                                 self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                             } else {
                                 self.refs.email.classList.remove('graphjs-success');
+                                self.refs.email.removeAttribute('data-savesuccesstext');
                                 self.refs.email.classList.add('graphjs-error');
                                 self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                 self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
@@ -351,6 +356,7 @@
                     let successMessage = i18n.emailSuccessMessage;
                     self.refs.email.classList.remove('graphjs-error');
                     self.refs.email.classList.add('graphjs-success');
+                    self.refs.email.setAttribute('data-savesuccesstext', i18n.saveSuccessText);
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                     self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                     self.refs.submitProfile.classList.remove('graphjs-loading');
@@ -365,6 +371,7 @@
                             self.profile.about = bio;
                             self.refs.bio.classList.remove('graphjs-error');
                             self.refs.bio.classList.add('graphjs-success');
+                            self.refs.bio.setAttribute('data-savesuccesstext', i18n.saveSuccessText);
                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                             self.refs.submitProfile.classList.remove('graphjs-loading');
@@ -372,6 +379,7 @@
                             self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                         } else {
                             self.refs.bio.classList.remove('graphjs-success');
+                            self.refs.bio.removeAttribute('data-savesuccesstext');
                             self.refs.bio.classList.add('graphjs-error');
                             self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                             self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
@@ -389,6 +397,7 @@
                             self.profile.birthday = birthday;
                             self.refs.birthday.classList.remove('graphjs-error');
                             self.refs.birthday.classList.add('graphjs-success');
+                            self.refs.birthday.setAttribute('data-savesuccesstext', i18n.saveSuccessText);
                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                             self.refs.submitProfile.classList.remove('graphjs-loading');
@@ -396,6 +405,7 @@
                             self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                         } else {
                             self.refs.birthday.classList.remove('graphjs-success');
+                            self.refs.birthday.removeAttribute('data-savesuccesstext');
                             self.refs.birthday.classList.add('graphjs-error');
                             self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                             self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
@@ -426,7 +436,9 @@
                             self.refs.password.classList.remove('graphjs-error');
                             self.refs.confirmation.classList.remove('graphjs-error');
                             self.refs.password.classList.add('graphjs-success');
+                            self.refs.password.setAttribute('data-savesuccesstext', i18n.saveSuccessText);
                             self.refs.confirmation.classList.add('graphjs-success');
+                            self.refs.confirmation.setAttribute('data-savesuccesstext', i18n.saveSuccessText);
                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                             self.refs.submitPassword.classList.remove('graphjs-loading');
@@ -434,6 +446,8 @@
                         } else {
                             self.refs.password.classList.remove('graphjs-success');
                             self.refs.confirmation.classList.remove('graphjs-success');
+                            self.refs.password.removeAttribute('data-savesuccesstext');
+                            self.refs.confirmation.removeAttribute('data-savesuccesstext');
                             self.refs.password.classList.add('graphjs-error');
                             self.refs.confirmation.classList.add('graphjs-error');
                             self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);

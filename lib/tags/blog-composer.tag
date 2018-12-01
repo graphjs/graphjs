@@ -14,19 +14,19 @@
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <form ref="form" if={editable}>
-            <input ref="title" class="graphjs-title" type="text" placeholder="Enter your post title here..." />
+            <input ref="title" class="graphjs-title" type="text" placeholder={i18n.titlePlaceholder} />
             <ul class="graphjs-information">
-                <li if={author} class="graphjs-author">
+                <li if={author} class="graphjs-author" data-authorbeforetext={i18n.authorBeforeText}>
                     <a data-link="profile" data-id={author.id} onclick={handleShow}>{author.username}</a>
                 </li>
-                <li class="graphjs-time" if={createTime && lastEditTime}>
+                <li class="graphjs-time" if={createTime && lastEditTime} data-createdtimebeforetext={i18n.createdTimeBeforeText} data-edittimebeforetext={i18n.editTimeBeforeText}>
                     <time if={createTime === lastEditTime}>{timeText}</time>
                     <time if={createTime !== lastEditTime} class="graphjs-edited">{timeText}</time>
                 </li>
                 <li class="graphjs-action">
-                    <a ref="save" if={!saved && title.length > 0 && body.length > 0} onclick={save}>Save</a>
-                    <a if={saved && title.length > 0 && body.length > 0} disabled="disabled">Saved</a>
-                    <a ref="publish" if={saved === true} onclick={publish}>Publish</a>
+                    <a ref="save" if={!saved && title.length > 0 && body.length > 0} onclick={save}>{i18n.saveLinkText}</a>
+                    <a if={saved && title.length > 0 && body.length > 0} disabled="disabled">{i18n.savedLinkText}</a>
+                    <a ref="publish" if={saved === true} onclick={publish}>{i18n.publishLinkText}</a>
                 </li>
             </ul>
         </form>
@@ -38,7 +38,7 @@
                 <span></span>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to start a post</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
     </div>
     <a if={loaded} class="graphjs-promo graphjs-bottom graphjs-center graphjs-rounded graphjs-detached" href="https://graphjs.com" target="_blank">
         <svg viewBox="0 0 200 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -70,6 +70,11 @@
         import showLogin from '../scripts/showLogin.js';
         import login from '../scripts/login.js';
 
+        import internationalization from '../i18n';
+        let i18n = internationalization[window.GraphJSConfig.language]['blog-composer'];
+        i18n = {...i18n,...opts}
+        this.i18n = i18n;
+        
         analytics("blog-composer");
 
         let loggedTime = (new Date()).getTime();
@@ -150,7 +155,7 @@
                 });
             } else {
                 // New Post
-                startBlogPost('Unnamed', 'Dummy content...', function(response) {
+                startBlogPost(i18n.dummyUserText, i18n.dummyContentText, function(response) {
                     if(response.success) {
                         self.id = response.id;
                         self.createTime = loggedTime;
@@ -217,7 +222,7 @@
                         icon: icons.link,
                         title: 'Link',
                         result: () => {
-                            let url = prompt('Enter the link URL');
+                            let url = prompt(i18n.linkPromptText);
                             if(url) pell.exec('createLink', url);
                         }
                     },
@@ -238,7 +243,7 @@
                         icon: icons.image,
                         title: 'Image',
                         result: () => {
-                            let url = prompt('Enter the image URL');
+                            let url = prompt(i18n.imagePromptText);
                             if(url) pell.exec('insertImage', url);
                         }
                     }
@@ -332,7 +337,7 @@
             if(this.validateForm) {
                 if(event) {
                     event.currentTarget.setAttribute('disabled', 'disabled');
-                    event.currentTarget.innerHTML = 'Saving...';
+                    event.currentTarget.innerHTML = i18n.editProgessText;
                 }
                 editBlogPost(self.id, self.title, self.body, function(response) {
                     if(response.success) {
@@ -341,10 +346,10 @@
                     } else {
                         if(link) {
                             link.setAttribute('disabled', 'disabled');
-                            link.innerHTML = 'Couldn\'t be saved!';
+                            link.innerHTML = i18n.editErrorText;
                             setTimeout(function() {
                                 link.removeAttribute('disabled');
-                                link.innerHTML = 'Save';
+                                link.innerHTML = i18n.saveLinkText;
                             }, 2500);
                         }
                     }
@@ -363,7 +368,7 @@
         this.publish = (event) => {
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
-            link.innerHTML = 'Publishing...';
+            link.innerHTML = i18n.publishProgressText;
             publishBlogPost(self.id, function(response) {
                 if(response.success) {
                     self.published = true;
@@ -375,10 +380,10 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = 'Couldn\'t be published!';
+                        link.innerHTML = i18n.publishErrorText;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
-                            link.innerHTML = 'Publish';
+                            link.innerHTML = i18n.publishLinkText;
                         }, 2500);
                     }
                 }
@@ -387,7 +392,7 @@
         this.unpublish = (event) => {
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
-            link.innerHTML = 'Unpublishing...';
+            link.innerHTML = i18n.unpublishProgressText;
             unpublishBlogPost(self.id, function(response) {
                 if(response.success) {
                     self.published = false;
@@ -395,10 +400,10 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = 'Couldn\'t be unpublished!';
+                        link.innerHTML = i18n.unpublishErrorText;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
-                            link.innerHTML = 'Unpublish';
+                            link.innerHTML = 'unpublishLinkText';
                         }, 2500);
                     }
                 }
@@ -415,7 +420,7 @@
             }
         }
         this.checkTitle = () => {
-            let warningMessage = 'Title is too short.';
+            let warningMessage = i18n.titleLengthErrorText;
             if(this.refs.title.value.length >= 1) {
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
                 return true;
@@ -425,7 +430,7 @@
             }
         }
         this.checkTextBody = () => {
-            let warningMessage = 'Blog post cannot be empty.';
+            let warningMessage = i18n.postLengthErrorText;
             let form = self.refs.form;
             let body = form.querySelector('div.graphjs-body');
             if(body.innerHTML.length >= 1) {
