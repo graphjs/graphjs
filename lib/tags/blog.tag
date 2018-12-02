@@ -41,6 +41,8 @@
         this.active = opts.default || 'list';
         this.id = opts.id;
         this.changeProperties = (properties) => {
+            console.log(properties)
+            console.log("ChangeProps");
             this.active = properties.link || undefined;
             this.id = properties.id || undefined;
             this.update();

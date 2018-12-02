@@ -12,7 +12,14 @@
             <p>This post is no longer available!</p>
         </div>
         <div if={!deleted} class="graphjs-post" ref="scrollingContent">
-            <h1 if={title} class="graphjs-title">{title}</h1>
+            
+            <h1 if={title} class="graphjs-title">
+                <img
+                    onclick={handleShowList} 
+                    src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9naIXpJLLihziHneyDcr7BlAaUbQ1t2lEbVT2rEwr0pmShytIKg' 
+                />
+                {title}
+            </h1>
             <ul if={loaded} class="graphjs-information">
                 <li if={author} class="graphjs-author">
                     <a data-link="profile" data-id={author.id} onclick={handleShow}>{author.username}</a>
@@ -257,6 +264,18 @@
                     }
                 }
             });
+        }
+        this.handleShowList = () => {
+            if(window.location.hash){
+                window.location.href=window.location.href.split("#")[0];
+            }else{
+                let dataset={
+                    link: "list", 
+                    id: ""
+                }
+                opts.callback(dataset);
+            }
+            
         }
         this.delete = (event) => {
             let link = event.currentTarget;
