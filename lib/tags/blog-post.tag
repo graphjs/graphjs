@@ -14,10 +14,16 @@
         <div if={!deleted} class="graphjs-post" ref="scrollingContent">
             
             <h1 if={title} class="graphjs-title">
-                <img
+                <a
+                    if={window.location.hash}
                     onclick={handleShowList} 
-                    src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9naIXpJLLihziHneyDcr7BlAaUbQ1t2lEbVT2rEwr0pmShytIKg' 
-                />
+                >
+                <svg fill="blue" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g transform="translate(-15.000000, -15.000000)" fill="black" fill-rule="nonzero">
+                        <path d="M29.9834254,15 C38.2707182,15 45,21.6961326 45,29.9834254 C45,38.2707182 38.2707182,45 29.9834254,45 C21.6961326,45 15,38.2707182 15,29.9834254 C15,21.6961326 21.6961326,15 29.9834254,15 Z M29.9834254,42.3480663 C36.7790055,42.3480663 42.3480663,36.8121547 42.3480663,29.9834254 C42.3480663,23.1878453 36.8121547,17.6187845 29.9834254,17.6187845 C23.1878453,17.6187845 17.6187845,23.1546961 17.6187845,29.9834254 C17.6519337,36.7790055 23.1878453,42.3480663 29.9834254,42.3480663 Z M25.4088398,29.9834254 L31.6077348,36.1823204 L33.4972376,34.2928177 L29.1546961,29.9834254 L33.4972376,25.640884 L31.6077348,23.7513812 L25.4088398,29.9834254 Z"></path>
+                    </g>
+                </svg>
+                </a>
                 {title}
             </h1>
             <ul if={loaded} class="graphjs-information">
@@ -265,17 +271,9 @@
                 }
             });
         }
-        this.handleShowList = () => {
-            if(window.location.hash){
-                window.location.href=window.location.href.split("#")[0];
-            }else{
-                let dataset={
-                    link: "list", 
-                    id: ""
-                }
-                opts.callback(dataset);
-            }
-            
+        this.handleShowList = (e) => {
+            e.preventDefault();
+            window.location.href=window.location.href.split("#")[0];
         }
         this.delete = (event) => {
             let link = event.currentTarget;
