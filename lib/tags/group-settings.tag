@@ -5,7 +5,7 @@
         </ul>
     </div>
     <div class="graphjs-content">
-        <a ref="uploadWidget" class="graphjs-cover" data-coverphototext="{i18n.coverPhotoText}">
+        <a ref="uploadWidget" class="graphjs-cover" data-coverphototextlineone={i18n.coverPhotoTextLineOne} data-coverphototextlinetwo={i18n.coverPhotoTextLineTwo}>
             <img src={group && group.cover ? downsizeImage(group.cover, 320) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png'} />
         </a>
         <form>

@@ -5,7 +5,7 @@
         </ul>
     </div>
     <div class="graphjs-content">
-        <a ref="uploadWidget" class="graphjs-avatar" data-changeavatartext={i18n.changeAvatarText}>
+        <a ref="uploadWidget" class="graphjs-avatar" data-changeavatartextlineone={i18n.changeAvatarTextLineOne} data-changeavatartextlinetwo={i18n.changeAvatarTextLineTwo}>
             <img src={profile && profile.avatar ? downsizeImage(profile.avatar, 160) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
         </a>
         <h2>{i18n.profileTitle}</h2>
