@@ -13,7 +13,14 @@
                 <h1 class="graphjs-title">{postsData[matchedPost].title}</h1>
                 <ul class="graphjs-information">
                     <li class="graphjs-author">
-                        <a data-link="profile" data-id={postsData[matchedPost].author.id} onclick={handleShow}>{postsData[matchedPost].author.username}</a>
+                        <a 
+                            data-link="profile"
+                            data-id={postsData[matchedPost].author.id} 
+                            data-authorbeforetext={i18n.authorBeforeText}
+                            onclick={handleShow}
+                        >
+                            {postsData[matchedPost].author.username}
+                        </a>
                     </li>
                     <li class="graphjs-time" if={createTime && lastEditTime}>
                         <time>{printTime(postsData[matchedPost].timestamp)}</time>
@@ -22,7 +29,7 @@
                 <div class="graphjs-summary">{postsData[matchedPost].summary}</div>
             </div>
             <div class="graphjs-placeholder graphjs-item" if={loaded && matchedPosts.length <= 0}>
-                There isn't any post available.
+                {i18n.noPostText}
             </div>
         </div>
         <div class="graphjs-controls" if={matchedPosts.length > pageLimit}>
@@ -116,6 +123,11 @@
 
         analytics("blog-list");
 
+        import internationalization from '../i18n';
+        let i18n = internationalization[window.GraphJSConfig.language]['blog-list'];
+        i18n = {...i18n,...opts}
+        this.i18n = i18n;
+        
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
