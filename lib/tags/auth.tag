@@ -1,5 +1,5 @@
 <graphjs-auth
-    class={'graphjs-element graphjs-root graphjs-' + position}
+    class={'graphjs-element graphjs-root ' + boxStyle + ' graphjs-' + position}
     style={'height: ' + height + '; line-height: ' + height + '; '}
 >
     <graphjs-auth-state
@@ -42,6 +42,7 @@
 
         this.active = opts.default || undefined;
         this.height = opts.height || '50px';
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.position = (opts.position && ['topleft', 'topright', 'bottomleft', 'bottomright'].includes(opts.position)) ? opts.position : 'topleft';
         this.changeProperties = (event) => {
             this.active = event ? event.currentTarget.dataset.link : undefined;

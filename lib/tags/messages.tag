@@ -1,4 +1,4 @@
-<graphjs-messages class={'graphjs-element graphjs-root graphjs-box'} style={
+<graphjs-messages class={'graphjs-element graphjs-root ' + boxStyle} style={
     (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
     (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
     (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
@@ -177,6 +177,7 @@
         this.list = [];
         this.frequentlyUpdateTime;
         this.newMessageOption = false;
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
 
         this.on('before-mount', function() {
             this.handleUser();

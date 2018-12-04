@@ -1,4 +1,4 @@
-<graphjs-group-settings class="graphjs-element graphjs-root graphjs-box">
+<graphjs-group-settings class={'graphjs-element graphjs-root ' + boxStyle}>
     <div class="graphjs-warning" if={failMessages.length > 0}>
         <ul if={failMessages.length > 0} class="graphjs-fail">
             <li each={failMessage in failMessages}>{failMessage}</li>
@@ -31,6 +31,7 @@
         this.downsizeImage = downsizeImage;
 
         this.id = opts.id;
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.failMessages = [];
         this.successMessages = [];
 

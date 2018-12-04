@@ -1,9 +1,12 @@
-<graphjs-feedback class={'graphjs-element graphjs-root' + (opts.type == 'inline' ? ' graphjs-inline' : ' graphjs-box')} style={
-    (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
-    (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
-    (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
-    (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
-}>
+<graphjs-feedback
+    class={'graphjs-element graphjs-root ' + boxStyle}
+    style={
+        (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
+        (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
+        (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
+        (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
+    }
+>
     <div class="graphjs-header" if={opts.title}>
         <div class="graphjs-title">{opts.title || 'Feedback'}</div>
     </div>
@@ -99,6 +102,7 @@
         this.downsizeImage = downsizeImage;
 
         this.blocked = false;
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.feedbacks = [];
         this.feedbacksData = {};
         this.authorsData = {};

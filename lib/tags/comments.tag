@@ -1,9 +1,12 @@
-<graphjs-comments class="graphjs-element graphjs-root graphjs-box" style={
-    (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
-    (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
-    (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
-    (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
-}>
+<graphjs-comments
+    class={'graphjs-element graphjs-root ' + boxStyle}
+    style={
+        (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
+        (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
+        (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
+        (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
+    }
+>
     <div class="graphjs-header" if={opts.title}>
         <div class="graphjs-title">{opts.title || 'Comments'}</div>
     </div>
@@ -71,6 +74,7 @@
         this.blocked = false;
         this.page = opts.page ? parseInt(opts.page) : 1;
         this.pageLimit = opts.limit ? parseInt(opts.limit) : 10;
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.comments = [];
         this.commentsData = {};
         this.authorsData = {};

@@ -1,5 +1,5 @@
 <graphjs-blog
-    class="graphjs-element graphjs-root"
+    class={'graphjs-element graphjs-root ' + boxStyle}
     style={
         (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
         (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
@@ -10,6 +10,7 @@
     <graphjs-blog-list
         minor={true}
         title={opts.title}
+        box="disabled"
         callback={changeProperties}
         if={this.active == 'list'}
     />
@@ -17,6 +18,7 @@
         minor={true}
         title={opts.title}
         id={id}
+        box="disabled"
         callback={changeProperties}
         if={this.active == 'post'}
     />
@@ -24,6 +26,7 @@
         minor={true}
         title={opts.title}
         id={id}
+        box="disabled"
         callback={changeProperties}
         if={this.active == 'composer'}
     />
@@ -34,6 +37,7 @@
 
         this.active = opts.default || 'list';
         this.id = opts.id;
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.changeProperties = (properties) => {
             this.active = properties.link || undefined;
             this.id = properties.id || undefined;

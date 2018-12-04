@@ -1,4 +1,4 @@
-<graphjs-auth-reset class={'graphjs-element graphjs-root graphjs-box' + (checked ? ' graphjs-checked' : '')}>
+<graphjs-auth-reset class={'graphjs-element graphjs-root ' + boxStyle + (checked ? ' graphjs-checked' : '')}>
     <div class="graphjs-header" if={opts.title}>
         <div class="graphjs-title">{opts.title || 'Reset Password'}</div>
     </div>
@@ -61,6 +61,8 @@
         let i18n = internationalization[window.GraphJSConfig.language]['auth-reset'];
         i18n = {...i18n,...opts}
         this.i18n = i18n;
+        
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         
         //this.next = 'provideEmail';
         this.next = 'provideEmail';

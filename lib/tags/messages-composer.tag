@@ -1,4 +1,4 @@
-<graphjs-messages-composer class={'graphjs-element graphjs-root graphjs-box' + (checked ? ' graphjs-checked' : '')}>
+<graphjs-messages-composer class={'graphjs-element graphjs-root ' + boxStyle + (checked ? ' graphjs-checked' : '')}>
     <div class="graphjs-header">
         <div class="graphjs-title">{i18n.title}</div>
         <a if={opts.close} class="graphjs-option graphjs-right" onclick={handleOverlay}>
@@ -64,6 +64,7 @@
         this.failMessages = [];
         this.recipient = opts.to;
         this.anonymity = opts.anonymity == 'on' ? true : false;
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
 
         this.on('before-mount', function() {
             this.handleUser();

@@ -1,5 +1,5 @@
 <graphjs-blog-list
-    class={"graphjs-element graphjs-root"}
+    class={'graphjs-element graphjs-root ' + boxStyle}
     style={
         (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
         (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
@@ -117,6 +117,7 @@
         this.access = opts.access || 'public';
         this.page = opts.page ? parseInt(opts.page) : 1;
         this.pageLimit = opts.limit ? parseInt(opts.limit) : 10;
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.posts = [];
         this.postsData = {};
         this.matchedPosts = [];

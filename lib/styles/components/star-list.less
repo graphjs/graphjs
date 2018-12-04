@@ -191,52 +191,6 @@
                 }
             }
         }
-        .@{prefix}-controls {
-            width: 100%;
-            height: 3em;
-            padding: .5em;
-            color: @text-color-strong;
-            line-height: 2em;
-            text-align: center;
-            vertical-align: middle;
-            background-color: fade(@default-color, 10%);
-            .disable-selection;
-            & > * {
-                .disable-selection;
-            }
-            a {
-                display: inline-block;
-                opacity: .65;
-                width: auto;
-                height: 2em;
-                padding: 0 .35em;
-                font-size: 1em;
-                text-align: center;
-                vertical-align: middle;
-                .transition(opacity .35s ease);
-                &:hover {
-                    opacity: 1;
-                }
-                &.@{prefix}-disabled {
-                    opacity: .35;
-                    pointer-events: none;
-                }
-                svg {
-                    height: .8em;
-                    vertical-align: middle;
-                    path {
-                        fill: @text-color-strong;
-                    }
-                }
-            }
-            p {
-                display: inline-block;
-                opacity: .65;
-                padding: 0 .65em;
-                font-size: .9em;
-                line-height: inherit;
-            }
-        }
     }
     /* Placeholder */
     .@{prefix}-placeholder {
@@ -315,34 +269,4 @@
             }
         }
     }
-}
-
-/* 768 ≤ Window Width < 1024 */
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-
-}
-
-/* 1024 ≤ Window Width < 1152 */
-@media only screen and (min-width: 1024px) and (max-width: 1151px) {
-
-}
-
-/* 1152 ≤ Window Width < 1280 */
-@media only screen and (min-width: 1152px) and (max-width: 1280px) {
-
-}
-
-/* 1280 ≤ Window Width < 1440 */
-@media only screen and (min-width: 1280px) and (max-width: 1439px) {
-
-}
-
-/* 1440 ≤ Window Width < 1680 */
-@media only screen and (min-width: 1440px) and (max-width: 1679px) {
-
-}
-
-/* 1680 ≤ Window Width */
-@media only screen and (min-width: 1680px) {
-
 }

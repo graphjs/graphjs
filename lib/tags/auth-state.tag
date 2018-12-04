@@ -1,5 +1,5 @@
 <graphjs-auth-state
-    class={'graphjs-element graphjs-root graphjs-' + theme + (opts.type == 'inline' ? ' graphjs-inline' : ' graphjs-box')}
+    class={'graphjs-element graphjs-root ' + boxStyle + ' graphjs-' + theme}
     style={'height: ' + height + '; line-height: ' + height + ';'}
 >
     <div class="graphjs-content">
@@ -46,6 +46,7 @@
 
         this.theme = opts.theme || 'default';
         this.height = opts.height || '50px';
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.failMessages = [];
 
         this.on('before-mount', function() {

@@ -3,11 +3,13 @@
         id={opts.id}
         active={active}
         minor={true}
+        box={opts.box}
         callback={changeProperties}
     />
     <graphjs-group-activity
         id={opts.id}
         minor={true}
+        box={opts.box}
         callback={changeProperties}
         if={active == 'activity'}
     />
@@ -20,6 +22,7 @@
     <graphjs-group-settings
         id={opts.id}
         minor={true}
+        box={opts.box}
         callback={changeProperties}
         if={active == 'settings'}
     />

@@ -1,5 +1,5 @@
 <graphjs-forum-composer
-    class={'graphjs-element graphjs-root' + (opts.minor ? '' : ' graphjs-box')}
+    class={'graphjs-element graphjs-root' + boxStyle}
     style={
         (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
         (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
@@ -64,6 +64,7 @@
         this.i18n = i18n;
         
         this.blocked = false;
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.warningMessages = [];
 
         this.on('before-mount', function() {

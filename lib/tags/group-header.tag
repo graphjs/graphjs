@@ -1,4 +1,4 @@
-<graphjs-group-header class={'graphjs-element graphjs-root graphjs-box' + (loaded ? '' : ' graphjs-loading')}>
+<graphjs-group-header class={'graphjs-element graphjs-root ' + boxStyle + (loaded ? '' : ' graphjs-loading')}>
     <div class="graphjs-information" if={group}>
         <div class="graphjs-cover" style={'background-image: url(' + (group && group.cover ? downsizeImage(group.cover, 770) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png') + ');'}></div>
         <a>{group.title}</a>
@@ -88,6 +88,7 @@
         this.downsizeImage = downsizeImage;
 
         this.id = opts.id;
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.userId = undefined;
         this.blocked = true;
 

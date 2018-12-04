@@ -1,5 +1,5 @@
 <graphjs-forum-list
-    class={'graphjs-root' + (opts.minor ? '' : ' graphjs-box')}
+    class={'graphjs-root ' + boxStyle}
     style={
         (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
         (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
@@ -178,6 +178,7 @@
         this.access = opts.access || 'public';
         this.page = opts.page ? parseInt(opts.page) : 1;
         this.pageLimit = opts.limit ? parseInt(opts.limit) : 10;
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.threads = [];
         this.threadsData = {};
         this.matchedThreads = [];

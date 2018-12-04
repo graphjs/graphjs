@@ -1,5 +1,5 @@
 <graphjs-forum-thread
-    class={'graphjs-element graphjs-root graphjs-composer' + (opts.minor ? '' : ' graphjs-box')}
+    class={'graphjs-element graphjs-root graphjs-composer ' + boxStyle}
     style={
         (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
         (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
@@ -140,6 +140,7 @@
         this.blocked = false;
         this.access = opts.access || 'public';
         this.id = opts.id;
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.entries = [];
         this.authorsData = {};
         this.composerReady = true;

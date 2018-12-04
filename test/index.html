@@ -5,48 +5,135 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Test GraphJS Components</title>
     </head>
-    <body>
+    <body style="background-color: yellow">
         <!-- Test Tags start here -->
 
+        <!-- ### Testing Alert -->
+        <h2>Alert</h2>
+        <graphjs-alert title="Login Required" message="You need to login to view the group details." affirmative="Login" negative="Cancel" show="login"></graphjs-alert>
+
         <!-- ### Testing Auth -->
-        <graphjs-auth-login></graphjs-auth-login>
+        <h2>Auth</h2>
+        <graphjs-auth type="standalone" theme="default" position="topleft"></graphjs-auth>
+
+        <!-- ### Testing Blog -->
+        <h2>Blog</h2>
+        <h3>Box</h3>
+        <graphjs-blog></graphjs-blog>
+        <h3>Inline</h3>
+        <graphjs-blog box="disabled"></graphjs-blog>
+
+        <!-- ### Testing Comments -->
+        <h2>Comments</h2>
+        <h3>Box</h3>
+        <graphjs-comments></graphjs-comments>
+        <h3>Inline</h3>
+        <graphjs-comments box="disabled"></graphjs-comments>
+
+        <!-- ### Testing Feedback -->
+        <h2>Feedback</h2>
+        <h3>Box</h3>
+        <graphjs-feedback></graphjs-feedback>
+        <h3>Inline</h3>
+        <graphjs-feedback box="disabled"></graphjs-feedback>
         
-         
-        <!-- 
+        <!-- ### Testing Forum -->
+        <h2>Forum</h2>
+        <h3>Box</h3>
+        <graphjs-forum access="public"></graphjs-forum>
+        <h3>Inline</h3>
+        <graphjs-forum access="public" box="disabled"></graphjs-forum>
+
+        <!-- ### Testing Group -->
+        <h2>Group</h2>
+        <h3>Box</h3>
+        <graphjs-group id="33365d758357b6e724c360272ebf8895"></graphjs-group>
+        <h3>Inline</h3>
+        <graphjs-group id="33365d758357b6e724c360272ebf8895" box="disabled"></graphjs-group>
+        
+        <!-- ### Testing Group: Creator -->
+        <h2>Group: Creator</h2>
+        <h3>Box</h3>
+        <graphjs-group-creator></graphjs-group-creator>
+        <h3>Inline</h3>
+        <graphjs-group-creator box="disabled"></graphjs-group-creator>
+
+        <!-- ### Testing Group: Card -->
+        <h2>Group: Card</h2>
+        <h3>Box (Only option)</h3>
+        <graphjs-group-card id="33365d758357b6e724c360272ebf8895"></graphjs-group-card>
+
+        <!-- ### Testing Messages -->
+        <h2>Messages</h2>
+        <h3>Box</h3>
+        <graphjs-messages></graphjs-messages>
+        <h3>Inline</h3>
+        <graphjs-messages box="disabled"></graphjs-messages>
+
+        <!-- ### Testing Messages: Composer -->
+        <h2>Messages: Composer</h2>
+        <graphjs-messages-composer to="48760696099368953dd71a90b727acba" anonymity="off"></graphjs-messages-composer>
+
+        <!-- ### Testing Private Content -->
+        <h2>Private Content</h2>
+        <h3>Text</h3>
+        <graphjs-private-content placeholder="text" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+        <h3>Image</h3>
+        <graphjs-private-content placeholder="image" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+        <h3>Video</h3>
+        <graphjs-private-content placeholder="video" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+        <h3>Album</h3>
+        <graphjs-private-content placeholder="album" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+        <h3>Mixed</h3>
+        <graphjs-private-content placeholder="mixed" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+        <h3>Custom</h3>
+        <graphjs-private-content placeholder="custom" id="585d867a5a7304faafc434a7479e3250">
+            <div style="text-align: center;">
+                <img style="width: 150px; height: auto; margin-bottom: 25px;" src="https://res.cloudinary.com/graphjs/image/upload/graphjs.com/identity/graphjs-mascot.png" />
+                <h1>This is our mascot</h1>
+            </div>
+        </graphjs-private-content>
+
+        <!-- ### Testing Profile -->
+        <h2>Profile</h2>
+        <h3>Box</h3>
+        <graphjs-profile id="48760696099368953dd71a90b727acba"></graphjs-profile>
+        <h3>Inline</h3>
+        <graphjs-profile id="48760696099368953dd71a90b727acba" box="disabled"></graphjs-profile>
+
+        <!-- ### Testing Profile: Card -->
+        <h2>Profile</h2>
+        <graphjs-profile-card id="48760696099368953dd71a90b727acba"></graphjs-profile-card>
+
+        <!-- ### Testing Star: Button -->
+        <h2>Star: Button</h2>
+        <h3>Box</h3>
+        <graphjs-star-button type="default"></graphjs-star-button>
+        <h3>Inline</h3>
+        <graphjs-star-button type="default" box="disabled"></graphjs-star-button>
+
+        <!-- ### Testing Star: List -->
+        <h2>Star: List</h2>
+        <h3>Box</h3>
+        <graphjs-star-list scope="global" type="default"></graphjs-star-list>
+        <h3>Inline</h3>
+        <graphjs-star-list scope="global" type="default" box="disabled"></graphjs-star-list>
+
+
+
+
+        <!--
         // Private Content
-        <div style="width: 500px;">
             <h2>Placeholders</h2>
-            <h3>Text</h3>
-            <graphjs-private-content placeholder="text" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
-            <h3>Image</h3>
-            <graphjs-private-content placeholder="image" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
-            <h3>Video</h3>
-            <graphjs-private-content placeholder="video" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
-            <h3>Album</h3>
-            <graphjs-private-content placeholder="album" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
-            <h3>Mixed</h3>
-            <graphjs-private-content placeholder="mixed" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
-            <h3>Custom</h3>
-            <graphjs-private-content placeholder="custom" id="585d867a5a7304faafc434a7479e3250">
-                <div style="text-align: center;">
-                    <img style="width: 150px; height: auto; margin-bottom: 25px;" src="https://res.cloudinary.com/graphjs/image/upload/graphjs.com/identity/graphjs-mascot.png" />
-                    <h1>This is our mascot</h1>
-                </div>
-            </graphjs-private-content>
-            <br /><br />
+            
         </div>
         -->
-
-        <!-- ### Testing Forum -->
-        <graphjs-forum></graphjs-forum>
 
         <!-- Test Tags finish here -->
         <script src="../dist/graph.js"></script>
         <script>
             GraphJS.init("79982844-6a27-4b3b-b77f-419a79be0e10", {
-                host: "https://gjs-singlesignon.herokuapp.com",
-                theme: "dark", // Dark theme
-                color: "rgb(77, 220, 121)" // Custom color
+                host: "https://build.phonetworks.com"
             });
         </script>
     </body>

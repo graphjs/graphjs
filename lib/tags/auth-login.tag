@@ -1,5 +1,5 @@
 <graphjs-auth-login
-    class={'graphjs-element graphjs-root graphjs-box' + (checked ? ' graphjs-checked' : '')}
+    class={'graphjs-element graphjs-root ' + boxStyle + (checked ? ' graphjs-checked' : '')}
     style={opts.minor ? (opts.gap == 0 ? 'top: -1em);' : 'top: calc(' + opts.gap + ' + 1em);') : ''}
 >
     <div class="graphjs-header" if={opts.title}>
@@ -48,6 +48,8 @@
         let i18n = internationalization[window.GraphJSConfig.language]['auth-login'];
         i18n = {...i18n,...opts}
         this.i18n = i18n;
+        
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         
         this.handleRegisterBox = () => showRegister();
         this.handleResetBox = () => showReset();

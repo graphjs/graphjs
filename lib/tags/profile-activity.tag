@@ -1,4 +1,4 @@
-<graphjs-profile-activity class="graphjs-element graphjs-root graphjs-box">
+<graphjs-profile-activity class={'graphjs-element graphjs-root ' + boxStyle}>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <ul if={activity.length > 0}>
             <li each={item in activity}>
@@ -144,6 +144,7 @@
         this.i18n = i18n;
         
         this.id = opts.id;
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.activity = [];
 
         this.on('before-mount', function() {

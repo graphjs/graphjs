@@ -1,4 +1,4 @@
-<graphjs-star-list class="graphjs-element graphjs-root graphjs-box" style={
+<graphjs-star-list class={'graphjs-element graphjs-root ' + boxStyle} style={
     (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
     (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
     (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
@@ -135,8 +135,9 @@
         
         this.type = opts.type || 'default';
         this.scope = opts.scope || 'global';
-        this.page = 1;
         this.pageLimit = opts.pageLimit || 10;
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
+        this.page = 1;
         this.stars = [];
         this.starsData = {};
         this.matchedStars = [];
