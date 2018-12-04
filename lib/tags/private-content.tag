@@ -104,7 +104,7 @@
         analytics("private-content");
 
         import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['private-i18n'];
+        let i18n = internationalization[window.GraphJSConfig.language]['private-content'];
         i18n = {...i18n,...opts}
         this.i18n = i18n;
         
