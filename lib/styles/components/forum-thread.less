@@ -3,6 +3,20 @@
 @{prefix}-forum-thread.@{prefix}-root {
     display: block;
     color: @text-color-normal;
+    &.@{prefix}-box {
+      .@{prefix}-content {
+          .@{prefix}-placeholder {
+              padding: 0 2.5em;
+          }
+      }
+    }
+    &.@{prefix}-inline {
+        .@{prefix}-content {
+            .@{prefix}-placeholder {
+                padding: 0;
+            }
+        }
+    }
     &.@{prefix}-composer {
         .@{prefix}-content {
             .@{prefix}-thread {
@@ -16,7 +30,7 @@
     }
     .@{prefix}-content {
         position: relative;
-        min-height: 28.5em;
+        min-height: 37em;
         .no-padding !important;
         vertical-align: middle;
         .@{prefix}-thread {
@@ -182,7 +196,6 @@
     }
     /* Placeholder */
     .@{prefix}-placeholder {
-        padding: 0 2.5em;
         .@{prefix}-title {
             display: none !important;
             position: relative;

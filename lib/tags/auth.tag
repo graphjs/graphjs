@@ -1,11 +1,11 @@
 <graphjs-auth
-    class={'graphjs-element graphjs-root ' + boxStyle + ' graphjs-' + position}
+    class={'graphjs-element graphjs-root graphjs-' + position}
     style={'height: ' + height + '; line-height: ' + height + '; '}
 >
     <graphjs-auth-state
         minor={true}
         callback={changeProperties}
-        type={opts.type}
+        box={opts.box}
         theme={opts.theme}
         active={active}
         height={opts.height}

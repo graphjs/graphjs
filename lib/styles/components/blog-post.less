@@ -3,8 +3,23 @@
 @{prefix}-blog-post.@{prefix}-root {
     display: block;
     position: relative;
-    padding-bottom: 3.6em;
     color: @text-color-normal;
+    &.@{prefix}-box {
+      .@{prefix}-content {
+          min-height: 32em;
+          .@{prefix}-placeholder {
+              padding: 2.5em;
+          }
+      }
+    }
+    &.@{prefix}-inline {
+        .@{prefix}-content {
+            min-height: 27em;
+            .@{prefix}-placeholder {
+                padding: 0;
+            }
+        }
+    }
     &.@{prefix}-composer {
         .@{prefix}-content {
             .@{prefix}-thread {
@@ -18,7 +33,6 @@
     }
     .@{prefix}-content {
         position: relative;
-        min-height: 28.5em;
         vertical-align: middle;
         .@{prefix}-nonexistent {
             p {
@@ -253,6 +267,7 @@
     }
     /* Placeholder */
     .@{prefix}-placeholder {
+        padding: 2.5em;
         background-color: transparent !important;
         .@{prefix}-title {
             position: relative;

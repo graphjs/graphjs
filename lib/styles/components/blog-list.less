@@ -3,10 +3,24 @@
 @{prefix}-blog-list.@{prefix}-root {
     display: block;
     position: relative;
-    padding-bottom: 3.6em;
     color: @text-color-normal;
+    &.@{prefix}-box {
+      .@{prefix}-content {
+          min-height: 40.5em;
+          .@{prefix}-placeholder {
+              padding: 2.5em;
+          }
+      }
+    }
+    &.@{prefix}-inline {
+        .@{prefix}-content {
+            min-height: 35.5em;
+            .@{prefix}-placeholder {
+                padding: 0;
+            }
+        }
+    }
     .@{prefix}-content {
-        min-height: 21em;
         &.@{prefix}-pagination {
             .@{prefix}-controls {
                 position: relative;
@@ -126,6 +140,7 @@
     }
     /* Placeholder */
     .@{prefix}-placeholder {
+        padding: 2.5em;
         background-color: transparent !important;
         .@{prefix}-items {
             display: block;

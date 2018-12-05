@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Test GraphJS Components</title>
     </head>
-    <body style="background-color: yellow">
+    <body style="background-color: oldlace">
         <!-- Test Tags start here -->
 
         <!-- ### Testing Alert -->
@@ -14,7 +14,38 @@
 
         <!-- ### Testing Auth -->
         <h2>Auth</h2>
+        <h3>Box</h3>
         <graphjs-auth type="standalone" theme="default" position="topleft"></graphjs-auth>
+        <h3>Inline</h3>
+        <graphjs-auth type="standalone" theme="default" position="topleft" box="disabled"></graphjs-auth>
+
+        <!-- ### Testing Auth: State -->
+        <h2>Auth: State</h2>
+        <h3>Box</h3>
+        <graphjs-auth-state type="standalone" theme="default" position="topleft"></graphjs-auth-state>
+        <h3>Inline</h3>
+        <graphjs-auth-state type="standalone" theme="default" position="topleft" box="disabled"></graphjs-auth-state>
+
+        <!-- ### Testing Auth: Register -->
+        <h2>Auth: Register</h2>
+        <h3>Box</h3>
+        <graphjs-auth-register></graphjs-auth-register>
+        <h3>Inline</h3>
+        <graphjs-auth-register box="disabled"></graphjs-auth-register>
+
+        <!-- ### Testing Auth: Login -->
+        <h2>Auth: Login</h2>
+        <h3>Box</h3>
+        <graphjs-auth-login></graphjs-auth-login>
+        <h3>Inline</h3>
+        <graphjs-auth-login box="disabled"></graphjs-auth-login>
+
+        <!-- ### Testing Auth: Reset -->
+        <h2>Auth: Reset</h2>
+        <h3>Box</h3>
+        <graphjs-auth-reset></graphjs-auth-reset>
+        <h3>Inline</h3>
+        <graphjs-auth-reset box="disabled"></graphjs-auth-reset>
 
         <!-- ### Testing Blog -->
         <h2>Blog</h2>
@@ -22,6 +53,28 @@
         <graphjs-blog></graphjs-blog>
         <h3>Inline</h3>
         <graphjs-blog box="disabled"></graphjs-blog>
+
+        <!-- ### Testing Blog: Composer -->
+        <h2>Blog: Composer</h2>
+        <h3>Box</h3>
+        <graphjs-blog-composer></graphjs-blog-composer>
+        <h3>Inline</h3>
+        <graphjs-blog-composer box="disabled"></graphjs-blog-composer>
+
+        <!-- ### Testing Blog: List -->
+        <h2>Blog: List</h2>
+        <h3>Box</h3>
+        <graphjs-blog-list></graphjs-blog-list>
+        <h3>Inline</h3>
+        <graphjs-blog-list box="disabled"></graphjs-blog-list>
+
+        <!-- ### Testing Blog: Post -->
+        <h2>Blog: Post</h2>
+        <h3>Box</h3>
+        <graphjs-blog-post id="5a5b77c638fe706999a9f65c8820f6b1"></graphjs-blog-post>
+        <h3>Inline</h3>
+        <graphjs-blog-post id="5a5b77c638fe706999a9f65c8820f6b1" box="disabled"></graphjs-blog-post>
+
 
         <!-- ### Testing Comments -->
         <h2>Comments</h2>
@@ -36,7 +89,7 @@
         <graphjs-feedback></graphjs-feedback>
         <h3>Inline</h3>
         <graphjs-feedback box="disabled"></graphjs-feedback>
-        
+
         <!-- ### Testing Forum -->
         <h2>Forum</h2>
         <h3>Box</h3>
@@ -44,13 +97,34 @@
         <h3>Inline</h3>
         <graphjs-forum access="public" box="disabled"></graphjs-forum>
 
+        <!-- ### Testing Forum: Composer -->
+        <h2>Forum: Composer</h2>
+        <h3>Box</h3>
+        <graphjs-forum-composer></graphjs-forum-composer>
+        <h3>Inline</h3>
+        <graphjs-forum-composer box="disabled"></graphjs-forum-composer>
+
+        <!-- ### Testing Forum: List -->
+        <h2>Forum: List</h2>
+        <h3>Box</h3>
+        <graphjs-forum-list></graphjs-forum-list>
+        <h3>Inline</h3>
+        <graphjs-forum-list box="disabled"></graphjs-forum-list>
+
+        <!-- ### Testing Forum: Thread -->
+        <h2>Forum: Thread</h2>
+        <h3>Box</h3>
+        <graphjs-forum-thread access="public"></graphjs-forum-thread>
+        <h3>Inline</h3>
+        <graphjs-forum-thread access="public" box="disabled"></graphjs-forum-thread>
+
         <!-- ### Testing Group -->
         <h2>Group</h2>
         <h3>Box</h3>
         <graphjs-group id="33365d758357b6e724c360272ebf8895"></graphjs-group>
         <h3>Inline</h3>
         <graphjs-group id="33365d758357b6e724c360272ebf8895" box="disabled"></graphjs-group>
-        
+
         <!-- ### Testing Group: Creator -->
         <h2>Group: Creator</h2>
         <h3>Box</h3>
@@ -125,7 +199,7 @@
         <!--
         // Private Content
             <h2>Placeholders</h2>
-            
+
         </div>
         -->
 
