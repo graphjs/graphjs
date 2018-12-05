@@ -137,7 +137,7 @@
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['forum-thread'];
-        i18n = {...i18n,...opts}
+        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
         
         import {downsizeImage} from '../scripts/client.js';
