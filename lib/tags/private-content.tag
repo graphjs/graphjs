@@ -104,8 +104,8 @@
         analytics("private-content");
 
         import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['private-i18n'];
-        i18n = {...i18n,...opts}
+        let i18n = internationalization[window.GraphJSConfig.language]['private-content'];
+        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
         
         this.blocked = true;

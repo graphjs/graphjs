@@ -146,7 +146,7 @@
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['profile-activity'];
-        i18n = {...i18n,...opts}
+        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
         
         this.id = opts.id;
