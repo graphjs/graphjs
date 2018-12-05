@@ -40,7 +40,7 @@
         </div>
         <div class="graphjs-reply" if={entries.length > 0}>
             <div onclick={handleComposer} class="graphjs-synopsis">
-                <b if={entries.length > 1}>{entries.length <= 2 ? i18n.repliesNumberText.replace("%s",(entries.length - 1))}</b>
+                <b if={entries.length > 1}>{i18n.repliesNumberText.replace("%s",(entries.length - 1))}</b>
                 <a if={!composerReady}>{i18n.replyLinkText}</a>
                 <a class={composerReady ? 'graphjs-icon' : 'graphjs-reverse graphjs-icon'}>
                     <svg viewBox="0 0 62 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -59,7 +59,7 @@
                         <span></span>
                     </div>
                 </div>
-                <button if={!userId} onclick={handleBlock} class="graphjs-blockage">{cotent.loginButtonText}</button>
+                <button if={!userId} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
             <form>
         </div>
         <div if={!loaded} class="graphjs-placeholder graphjs-loader">
