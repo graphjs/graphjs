@@ -8,7 +8,6 @@
     </a>
     <script>
         this.classes = 'graphjs-root';
-        console.log('result:', opts.box, opts.box === 'disabled')
         let properties = opts.detach === true
             ? 'bottom center rounded detached'
             : (opts.properties || '');
