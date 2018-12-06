@@ -80,7 +80,7 @@
             <div class="graphjs-list graphjs-rectangle graphjs-centered graphjs-fill"></div>
         </div>
     </div>
-    <graphjs-promo properties="bottom right"></graphjs-promo>
+    <graphjs-promo properties="top right"></graphjs-promo>
     <script>
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';

@@ -13,7 +13,6 @@
     .@{prefix}-information {
         height: auto;
         padding-bottom: 2em;
-        background-color: @contrast-color;
         .@{prefix}-cover {
             display: block;
             width: 100%;
@@ -88,7 +87,9 @@
                 height: 100%;
                 line-height: 2.5em;
                 vertical-align: middle;
-                border-left: 1px dotted white;
+                border-left-width: 1px;
+                border-left-style: dotted;
+                border-left-color: white;
                 background-color: fade(black, 10%);
             }
         }
@@ -97,9 +98,10 @@
         margin: 0;
         .no-padding;
         font-size: 0;
-        border-top: 2px solid fade(@default-color, 10%);
+        border-top-width: 2px;
+        border-top-style: solid;
+        border-top-color: fade(@default-color, 10%);
         .border-radius(0);
-        background-color: @shade-color;
         list-style: none;
         li {
             display: inline-block;
@@ -157,7 +159,9 @@
         }
         .@{prefix}-information {
             img {
-                border: 4px solid white;
+                border-width: 4px;
+                border-style: solid;
+                border-color: white;
             }
         }
     }
@@ -231,7 +235,9 @@
                 width: 6.5em;
                 img, span {
                     margin-right: -.9em;
-                    border: 2px solid @contrast-color;
+                    border-width: 2px;
+                    border-style: solid;
+                    border-color: @contrast-color;
                     box-shadow: 0 0 2px fade(black, 65%);
                 }
             }
@@ -241,8 +247,12 @@
             border-top: none !important;
             li {
                 flex-grow: 1;
-                border-top: 1px solid fade(black, 5%);
-                border-right: 1px solid fade(black, 5%);
+                border-top-width: 1px;
+                border-top-style: solid;
+                border-top-color: fade(black, 5%);
+                border-right-width: 1px;
+                border-right-style: solid;
+                border-right-color: fade(black, 5%);
                 vertical-align: middle;
                 &:last-of-type {
                     border-right: none;
@@ -324,7 +334,9 @@
                 width: 8.5em;
                 img, span {
                     margin-right: -.4em;
-                    border: 2px solid @contrast-color;
+                    border-width: 2px;
+                    border-style: solid;
+                    border-color: @contrast-color;
                     box-shadow: 0 0 2px fade(black, 65%);
                 }
             }
@@ -334,8 +346,12 @@
             border-top: none !important;
             li {
                 flex-grow: 1;
-                border-top: 1px solid fade(black, 5%);
-                border-right: 1px solid fade(black, 5%);
+                border-top-width: 1px;
+                border-top-style: solid;
+                border-top-color: fade(black, 5%);
+                border-right-width: 1px;
+                border-right-style: solid;
+                border-right-color: fade(black, 5%);
                 vertical-align: middle;
                 &:last-of-type {
                     border-right: none;

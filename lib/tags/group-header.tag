@@ -63,7 +63,7 @@
             <div class="graphjs-list graphjs-rectangle graphjs-centered graphjs-fill"></div>
         </div>
     </div>
-    <graphjs-promo properties="bottom right"></graphjs-promo>
+    <graphjs-promo properties="top right"></graphjs-promo>
     <script>
         import getGroup from '../scripts/getGroup.js';
         import joinGroup from '../scripts/joinGroup.js';

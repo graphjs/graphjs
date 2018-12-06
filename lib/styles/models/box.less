@@ -5,14 +5,18 @@
     position: relative;
     overflow: hidden;
     .border-radius(@border-radius-large);
-    border: 1px solid fade(@default-color, 3%);
+    border: 1px;
+    border-style: solid;
+    border-color: fade(@default-color, 3%);
     background-color: @shade-color;
     .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
     &:hover, &:active, &:focus {
         .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
     }
     .@{prefix}-header {
-        border-bottom: 2px solid fade(@default-color, 10%);
+        border-bottom-width: 2px;
+        border-bottom-style: solid;
+        border-bottom-color: fade(@default-color, 10%);
         background-color: @contrast-color;
     }
     .@{prefix}-content {
@@ -109,7 +113,9 @@
     display: inline-block;
     width: 100%;
     text-align: center;
-    border-bottom: 1px solid fade(@default-color, 15%);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: fade(@default-color, 15%);
     ul {
         list-style: none;
         width: 100%;
@@ -164,7 +170,7 @@
             stroke: white;
             stroke-width: 2;
             stroke-miterlimit: 10;
-            box-shadow: inset 0px 0px 0px @success-color;
+            box-shadow: inset 0 0 0 @success-color;
             //.transform(translate(-50%, -50%));
             .animation(e("fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both"));
         }
@@ -202,7 +208,7 @@
     }
     @keyframes fill {
         100% {
-            box-shadow: inset 0px 0px 0px 30px @success-color;
+            box-shadow: inset 0 0 0 2em @success-color;
         }
     }
 }

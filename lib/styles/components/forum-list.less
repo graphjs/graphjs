@@ -30,7 +30,9 @@
             }
             .@{prefix}-search {
                 width: calc(100% - 12em);
-                border-right: 2px solid @contrast-color;
+                border-right-width: 2px;
+                border-right-style: solid;
+                border-right-color: @contrast-color;
                 background-color: desaturate(tint(@theme-color, 20%), 5%);
                 & > * {
                     float: left;
@@ -97,7 +99,9 @@
                 width: 100%;
                 color: @text-color-normal;
                 line-height: 3.5em;
-                border-bottom: 1px solid fade(black, 10%);
+                border-bottom-width: 1px;
+                border-bottom-style: solid;
+                border-bottom-color: fade(black, 10%);
                 &:last-child {
                     border-bottom: none;
                 }
@@ -237,7 +241,9 @@
                         width: 6.5em;
                         img {
                             margin-right: -.9em;
-                            border: 2px solid @contrast-color;
+                            border-width: 2px;
+                            border-style: solid;
+                            border-color: @contrast-color;
                             box-shadow: 0 0 2px fade(black, 65%);
                         }
                     }
@@ -291,7 +297,9 @@
                         width: 8.5em;
                         img {
                             margin-right: -.4em;
-                            border: 2px solid @contrast-color;
+                            border-width: 2px;
+                            border-style: solid;
+                            border-color: @contrast-color;
                         }
                     }
                 }

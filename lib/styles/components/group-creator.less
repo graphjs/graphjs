@@ -11,7 +11,9 @@
             margin: 0 auto;
             input, input[type] {
                 &.@{prefix}-success {
-                    border: 1px solid @success-color;
+                    border-width: 1px;
+                    border-style: solid;
+                    border-color: @success-color;
                     &::after {
                         content: "OK";
                         display: block;

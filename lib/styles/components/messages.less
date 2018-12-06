@@ -51,7 +51,9 @@
                     height: 3.5em;
                     padding: .5em;
                     color: white;
-                    border-top: 1px solid fade(black, 5%);
+                    border-top-width: 1px;
+                    border-top-style: solid;
+                    border-top-color: fade(black, 5%);
                     .clearfix;
                     & > * {
                         float: left;
@@ -78,8 +80,12 @@
                     height: 4.5em;
                     padding-top: calc(.75em - 1px);
                     padding-left: calc(.75em - 1px);
-                    border-top: 1px solid fade(black, 2.5%);
-                    border-bottom: 1px solid fade(@default-color, 2.5%);
+                    border-top-width: 1px;
+                    border-top-style: solid;
+                    border-top-color: fade(black, 2.5%);
+                    border-bottom-width: 1px;
+                    border-bottom-style: solid;
+                    border-bottom-color: fade(@default-color, 2.5%);
                     .clearfix;
                     &:hover {
                         background-color: fade(black, 5%);
@@ -136,7 +142,6 @@
             position: relative;
             width: calc(100% - 15em);
             height: 100%;
-            //background-color: @contrast-color;
             .@{prefix}-conversation {
                 overflow: auto;
                 width: 100%;
