@@ -142,7 +142,7 @@
         import showGroup from '../scripts/showGroup.js';
         import showLogin from '../scripts/showLogin.js';
         import getActivityToken from '../scripts/getActivityToken.js';
-        import stream from 'getstream';
+        import stream from 'getstream-pho';
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['profile-activity'];
@@ -194,7 +194,14 @@
             getActivityToken('user', self.id, function(response) {
             	if(response.success) {
                     self.activity = [];
-            		let client = stream.connect('7aeupnd8y7ag');
+            		let client = stream.connect(
+                        window.GraphJSConfig["streamId"], 
+                        null, // we don't give out secret in client-side
+                        null, // app id
+                        {
+                            "baseUrl": window.GraphJSConfig["streamHost"]
+                        }
+                    );
             		let user = client.feed('user', self.id, response.token);
             		user.get(/* { limit: 10, offset: 0} */)
             		.then((response) => {
