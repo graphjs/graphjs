@@ -16,11 +16,6 @@
         <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
         <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to display content</button>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-    </style>
     <script>
         import getMembers from '../scripts/getMembers.js';
         import listGroups from '../scripts/listGroups.js';

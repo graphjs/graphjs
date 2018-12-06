@@ -2,12 +2,10 @@
 
 @{prefix}-alert.@{prefix}-root {
     display: block;
-    width: 320px;
-    color: @text-color-normal;
-    background-color: @contrast-color !important;
+    width: 20em;
     .clearfix;
     .@{prefix}-content {
-        background-color: @contrast-color !important;
+        padding: 2em 1.5em;
         p {
             text-align: center;
             font-size: 1.1em;
@@ -18,16 +16,16 @@
         border-top: 2px solid fade(@default-color, 10%);
         border-top-left-radius: 0;
         border-top-right-radius: 0;
-        background-color: @contrast-color !important;
+        background-color: @contrast-color;
         &:not(.@{prefix}-danger) {
-            color: @theme-color !important;
+            color: @theme-color;
         }
         &:hover {
-            background-color: @contrast-color !important;
+            background-color: @contrast-color;
         }
         &.@{prefix}-danger {
-            color: @danger-color !important;
-            background-color: @contrast-color;
+            .text-color-states(@danger-color);
+            .background-color-states(@contrast-color);
         }
         &.@{prefix}-full {
             width: 100%;

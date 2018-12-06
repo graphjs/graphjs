@@ -4,7 +4,7 @@
     display: block;
     color: @text-color-normal;
     .@{prefix}-content {
-        min-height: 21em;
+        min-height: 24.5em;
         .no-padding !important;
         .@{prefix}-bar {
             display: table;
@@ -191,52 +191,6 @@
                 }
             }
         }
-        .@{prefix}-controls {
-            width: 100%;
-            height: 3em;
-            padding: .5em;
-            color: @text-color-strong;
-            line-height: 2em;
-            text-align: center;
-            vertical-align: middle;
-            background-color: fade(@default-color, 10%);
-            .disable-selection;
-            & > * {
-                .disable-selection;
-            }
-            a {
-                display: inline-block;
-                opacity: .65;
-                width: auto;
-                height: 2em;
-                padding: 0 .35em;
-                font-size: 1em;
-                text-align: center;
-                vertical-align: middle;
-                .transition(opacity .35s ease);
-                &:hover {
-                    opacity: 1;
-                }
-                &.@{prefix}-disabled {
-                    opacity: .35;
-                    pointer-events: none;
-                }
-                svg {
-                    height: .8em;
-                    vertical-align: middle;
-                    path {
-                        fill: @text-color-strong;
-                    }
-                }
-            }
-            p {
-                display: inline-block;
-                opacity: .65;
-                padding: 0 .65em;
-                font-size: .9em;
-                line-height: inherit;
-            }
-        }
     }
     /* Placeholder */
     .@{prefix}-placeholder {
@@ -267,7 +221,7 @@
                     display: block;
                     width: 4em;
                     height: 2em;
-                    margin-left: 1.75em;
+                    margin-left: .5em;
                     font-size: 1em;
                     .border-radius(calc(1em / 2));
                 }
@@ -277,7 +231,7 @@
                     height: .9em;
                     max-width: 30em;
                     margin: .55em;
-                    margin-left: 1em;
+                    margin-left: 2.25em;
                     .border-radius(calc(.9em / 2));
                 }
             }
@@ -315,34 +269,4 @@
             }
         }
     }
-}
-
-/* 768 ≤ Window Width < 1024 */
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-
-}
-
-/* 1024 ≤ Window Width < 1152 */
-@media only screen and (min-width: 1024px) and (max-width: 1151px) {
-
-}
-
-/* 1152 ≤ Window Width < 1280 */
-@media only screen and (min-width: 1152px) and (max-width: 1280px) {
-
-}
-
-/* 1280 ≤ Window Width < 1440 */
-@media only screen and (min-width: 1280px) and (max-width: 1439px) {
-
-}
-
-/* 1440 ≤ Window Width < 1680 */
-@media only screen and (min-width: 1440px) and (max-width: 1679px) {
-
-}
-
-/* 1680 ≤ Window Width */
-@media only screen and (min-width: 1680px) {
-
 }

@@ -1,4 +1,4 @@
-<graphjs-profile-activity class="graphjs-element graphjs-root graphjs-box">
+<graphjs-profile-activity class={'graphjs-element graphjs-root ' + boxStyle}>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <ul if={activity.length > 0}>
             <li each={item in activity}>
@@ -128,12 +128,6 @@
         </div>
         <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/profile-activity.less';
-    </style>
     <script>
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
@@ -150,6 +144,7 @@
         this.i18n = i18n;
         
         this.id = opts.id;
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.activity = [];
 
         this.on('before-mount', function() {

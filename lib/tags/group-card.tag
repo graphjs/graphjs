@@ -17,12 +17,6 @@
             <div class="graphjs-button graphjs-rectangle graphjs-fill"></div>
         </div>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/group-card.less';
-    </style>
     <script>
         import analytics from '../scripts/analytics.js';
         import getGroup from '../scripts/getGroup.js';
