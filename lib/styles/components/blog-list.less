@@ -4,6 +4,11 @@
     display: block;
     position: relative;
     color: @text-color-normal;
+    &.@{prefix}-inline {
+        .@{prefix}-header {
+            border-color: transparent;
+        }
+    }
     &.@{prefix}-box {
       .@{prefix}-content {
           min-height: 40.5em;
@@ -13,6 +18,9 @@
       }
     }
     &.@{prefix}-inline {
+        .@{prefix}-header {
+            border-color: transparent;
+        }
         .@{prefix}-content {
             min-height: 35.5em;
             .@{prefix}-placeholder {

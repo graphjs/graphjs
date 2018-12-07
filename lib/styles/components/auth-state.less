@@ -6,13 +6,16 @@
     height: @bar-height;
     line-height: @bar-height;
     border: none;
+    &.@{prefix}-box {
+        background-color: @background-color-contrast;
+    }
     .@{prefix}-content {
         height: inherit;
         .no-padding !important;
         .bold-font;
         font-size: 1.2em;
         line-height: inherit;
-        background-color: transparent !important;
+        background-color: transparent;
         a {
             float: left;
             color: @primary-color;
@@ -22,13 +25,13 @@
             background-color: transparent;
             .disable-selection;
             &:hover {
-                background-color: fade(@background-color-contrast, 50%);
+                background-color: fade(black, 2.5%);
             }
             &:last-of-type {
                 border-right-width: 0 !important;
             }
             &.@{prefix}-active {
-                background-color: @background-color-contrast;
+                background-color: fade(black, 5%);
             }
         }
         .@{prefix}-not-logged {

@@ -3,6 +3,11 @@
 @{prefix}-feedback.@{prefix}-root {
     display: block;
     color: @text-color-normal;
+    &.@{prefix}-inline {
+        .@{prefix}-header {
+            border-color: transparent;
+        }
+    }
     .@{prefix}-content {
         .@{prefix}-feedback {
             display: inline-block;

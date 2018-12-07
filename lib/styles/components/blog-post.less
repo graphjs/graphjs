@@ -7,12 +7,18 @@
     &.@{prefix}-box {
       .@{prefix}-content {
           min-height: 32em;
+          .@{prefix}-reply {
+              background-color: @background-color-contrast;
+          }
           .@{prefix}-placeholder {
               padding: 2.5em;
           }
       }
     }
     &.@{prefix}-inline {
+        .@{prefix}-header {
+            border-color: transparent;
+        }
         .@{prefix}-content {
             min-height: 27em;
             .@{prefix}-placeholder {

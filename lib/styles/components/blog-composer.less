@@ -4,6 +4,11 @@
     display: block;
     position: relative;
     color: @text-color-normal;
+    &.@{prefix}-inline {
+        .@{prefix}-header {
+            border-color: transparent;
+        }
+    }
     .@{prefix}-content {
         background-color: transparent;
         & > p {

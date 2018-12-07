@@ -1,5 +1,5 @@
 <graphjs-auth-state
-    class={'graphjs-element graphjs-root ' + boxStyle + ' graphjs-' + theme}
+    class={'graphjs-element graphjs-root ' + boxStyle}
     style={'height: ' + height + '; line-height: ' + height + ';'}
 >
     <div class="graphjs-content">
@@ -35,16 +35,15 @@
         import showProfile from '../scripts/showProfile.js';
 
         analytics("auth-state");
-        
+
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['auth-state'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
-        
+
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
-        this.theme = opts.theme || 'default';
         this.height = opts.height || '50px';
         this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.failMessages = [];
