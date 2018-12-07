@@ -4,6 +4,7 @@
     overflow: hidden;
     display: block;
     width: 100%;
+    min-height: 17.5em;
     color: @text-color-normal;
     text-align: center;
     &.@{prefix}-box {
@@ -75,7 +76,6 @@
     ul {
         margin: 0;
         .no-padding;
-        font-size: 0;
         border-top-width: 2px;
         border-top-style: solid;
         border-top-color: fade(black, 5%);
@@ -104,7 +104,6 @@
                 padding: 0 1em;
                 cursor: pointer;
                 color: @text-color-normal;
-                font-size: @font-size-default * 1.1;
                 .bold-font;
                 line-height: 2.5em;
                 .disable-selection;
@@ -128,7 +127,7 @@
     }
     /* Placeholder */
     .@{prefix}-placeholder {
-        .@{prefix}-information {
+        .@{prefix}-card {
             display: block;
             width: 100%;
             height: 15em;
@@ -155,7 +154,7 @@
                 width: 90%;
                 height: .85em;
                 margin: 0 5%;
-                margin-top: 1.5em;
+                margin-top: 1.15em;
                 .border-radius(calc(.85em / 2));
             }
         }
@@ -166,7 +165,7 @@
             left: 0;
             right: 0;
             width: 100%;
-            height: 2.75em;
+            height: 2.5em;
         }
     }
 }
@@ -176,6 +175,26 @@
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
     @{prefix}-profile-header.@{prefix}-root {
+        min-height: 18.75em;
+        &.@{prefix}-box {
+            ul {
+                li {
+                    &.@{prefix}-active {
+                        background-color: @background-color-contrast;
+                    }
+                }
+            }
+        }
+        &.@{prefix}-inline {
+            ul {
+                li {
+                    background-color: fade(black, 5%);
+                    &.@{prefix}-active {
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
         ul {
             display: flex;
             border-top: none !important;
@@ -199,8 +218,7 @@
                     position: relative;
                     width: 100%;
                     padding: 1.25em 0;
-                    font-size: @font-size-default * 1.1;
-                    line-height: .85em;
+                    line-height: 1em;
                     &.@{prefix}-count{
                         &::before {
                             display: none;
@@ -237,7 +255,7 @@
         /* Placeholder */
         .@{prefix}-placeholder {
             .@{prefix}-list {
-                height: 5em;
+                height: 3.75em;
             }
         }
     }
@@ -246,6 +264,26 @@
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
     @{prefix}-profile-header.@{prefix}-root {
+        min-height: 19.5em;
+        &.@{prefix}-box {
+            ul {
+                li {
+                    &.@{prefix}-active {
+                        background-color: @background-color-contrast;
+                    }
+                }
+            }
+        }
+        &.@{prefix}-inline {
+            ul {
+                li {
+                    background-color: fade(black, 5%);
+                    &.@{prefix}-active {
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
         ul {
             display: flex;
             border-top: none !important;
@@ -269,8 +307,8 @@
                     position: relative;
                     width: 100%;
                     padding: 1.25em 0;
-                    font-size: @font-size-default * 1.1;
-                    line-height: .85em;
+                    font-size: 1.2em;
+                    line-height: 1em;
                     &.@{prefix}-count {
                         &::before {
                             display: none;
@@ -307,7 +345,7 @@
         /* Placeholder */
         .@{prefix}-placeholder {
             .@{prefix}-list {
-                height: 5em;
+                height: 4.5em;
             }
         }
     }

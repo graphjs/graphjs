@@ -13,7 +13,7 @@
         <div class="graphjs-title">{'Messages' + (activePartnerName != '' ? ' with ' +  activePartnerName : '')}</div>
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <div class="graphjs-sidebar">
+        <div class="graphjs-sidebar" style={loaded ? '' : 'display: none;'}>
             <input ref="searchForPartners" onkeyup={handleFilter} class={!newMessageOption ? 'graphjs-hidden' : ''} type="text" placeholder={i18n.nameSearchPlaceholder} />
             <div class="graphjs-suggestions" if={newMessageOption && matchedPartners.length > 0}>
                 <a each={matchedPartner in matchedPartners} data-id={matchedPartner.id} onclick={handleNewPartner}>
@@ -31,7 +31,7 @@
                 </a>
             </div>
         </div>
-        <div class="graphjs-main">
+        <div class="graphjs-main" style={loaded ? '' : 'display: none;'}>
             <div class="graphjs-conversation" ref="messages">
                 <div class={activeMessages[message].to == userId ? 'graphjs-inbound graphjs-item' : 'graphjs-outbound graphjs-item'} each={message in messages} data-message={message}>
                     <div>

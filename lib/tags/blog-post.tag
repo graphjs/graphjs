@@ -11,7 +11,7 @@
         <div if={notExisting} class="graphjs-nonexistent">
             <p>This post is no longer available!</p>
         </div>
-        <div if={!deleted} class="graphjs-post" ref="scrollingContent">
+        <div if={loaded && !deleted} class="graphjs-post" ref="scrollingContent">
             <h1 if={title} class="graphjs-title">{title}</h1>
             <ul if={loaded} class="graphjs-information">
                 <li if={author} class="graphjs-author">

@@ -19,7 +19,7 @@
         <div if={window.innerWidth >= 768} class="graphjs-title">{i18n.title.replace("%s",(currentAuthor || i18n.defaultUser))}</div>
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <div class="graphjs-thread" ref="scrollingContent">
+        <div if={loaded} class="graphjs-thread" ref="scrollingContent">
             <div class="graphjs-title" if={title}>
                 <h1>{title}</h1>
             </div>
@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="graphjs-reply" if={entries.length > 0}>
+        <div if={loaded} class="graphjs-reply" if={entries.length > 0}>
             <div onclick={handleComposer} class="graphjs-synopsis">
                 <b if={entries.length > 1}>{i18n.repliesNumberText.replace("%s",(entries.length - 1))}</b>
                 <a if={!composerReady}>{i18n.replyLinkText}</a>

@@ -4,6 +4,7 @@
     overflow: hidden;
     display: block;
     width: 100%;
+    min-height: 27.75em;
     color: @text-color-normal;
     text-align: center;
     &.@{prefix}-box {
@@ -101,7 +102,6 @@
     ul {
         margin: 0;
         .no-padding;
-        font-size: 0;
         border-top-width: 2px;
         border-top-style: solid;
         border-top-color: fade(black, 5%);
@@ -130,7 +130,6 @@
                 padding: 0 1em;
                 cursor: pointer;
                 color: @text-color-normal;
-                font-size: @font-size-default * 1.1;
                 .bold-font;
                 line-height: 2.5em;
                 .disable-selection;
@@ -155,7 +154,7 @@
     }
     /* Placeholder */
     .@{prefix}-placeholder {
-        .@{prefix}-information {
+        .@{prefix}-card {
             display: block;
             width: 100%;
             height: 15em;
@@ -180,12 +179,13 @@
                 width: 60%;
                 height: .85em;
                 margin: 0 20%;
-                margin-top: 1.5em;
+                margin-top: 1.15em;
                 .border-radius(calc(.85em / 2));
             }
             .@{prefix}-members {
                 width: 10.5em;
                 height: 2em;
+                margin: 0 auto;
                 margin-top: 1.25em;
                 .no-padding;
                 .clearfix;
@@ -208,7 +208,7 @@
             left: 0;
             right: 0;
             width: 100%;
-            height: 2.75em;
+            height: 2.5em;
         }
     }
 }
@@ -218,6 +218,26 @@
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
     @{prefix}-group-header.@{prefix}-root {
+        min-height: 29em;
+        &.@{prefix}-box {
+            ul {
+                li {
+                    &.@{prefix}-active {
+                        background-color: @background-color-contrast;
+                    }
+                }
+            }
+        }
+        &.@{prefix}-inline {
+            ul {
+                li {
+                    background-color: fade(black, 5%);
+                    &.@{prefix}-active {
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
         .@{prefix}-information {
             .@{prefix}-members {
                 img, span {
@@ -246,14 +266,12 @@
                 }
                 &.@{prefix}-active {
                     border-top: none;
-                    background-color: @background-color-contrast;
                 }
                 a {
                     position: relative;
                     width: 100%;
                     padding: 1.25em 0;
-                    font-size: @font-size-default * 1.1;
-                    line-height: .85em;
+                    line-height: 1em;
                     &.@{prefix}-count, &.@{prefix}-label {
                         &::before {
                             display: none;
@@ -298,7 +316,7 @@
         }
         /* Placeholder */
         .@{prefix}-placeholder {
-            .@{prefix}-information {
+            .@{prefix}-card {
                 .@{prefix}-members {
                     width: 6.5em;
                     .@{prefix}-avatar {
@@ -307,7 +325,7 @@
                 }
             }
             .@{prefix}-list {
-                height: 5em;
+                height: 3.75em;
             }
         }
     }
@@ -316,6 +334,26 @@
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
     @{prefix}-group-header.@{prefix}-root {
+        min-height: 29.75em;
+        &.@{prefix}-box {
+            ul {
+                li {
+                    &.@{prefix}-active {
+                        background-color: @background-color-contrast;
+                    }
+                }
+            }
+        }
+        &.@{prefix}-inline {
+            ul {
+                li {
+                    background-color: fade(black, 5%);
+                    &.@{prefix}-active {
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
         .@{prefix}-information {
             .@{prefix}-members {
                 img, span {
@@ -350,8 +388,8 @@
                     position: relative;
                     width: 100%;
                     padding: 1.25em 0;
-                    font-size: @font-size-default * 1.1;
-                    line-height: .85em;
+                    font-size: 1.2em;
+                    line-height: 1em;
                     &.@{prefix}-count, &.@{prefix}-label {
                         &::before {
                             display: none;
@@ -397,7 +435,7 @@
         }
         /* Placeholder */
         .@{prefix}-placeholder {
-            .@{prefix}-information {
+            .@{prefix}-card {
                 .@{prefix}-members {
                     width: 8.5em;
                     .@{prefix}-avatar {
@@ -406,7 +444,7 @@
                 }
             }
             .@{prefix}-list {
-                height: 5em;
+                height: 4.5em;
             }
         }
     }
