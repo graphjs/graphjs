@@ -1,24 +1,24 @@
 @prefix: graphjs;
 
-@theme-color: transparent;
+@primary-color: transparent;
 
 .@{prefix}-custom-color {
     a {
-        .text-color-states(@theme-color);
+        .text-color-states(@primary-color);
     }
     button {
-        .background-color-states(@theme-color);
+        .background-color-states(@primary-color);
     }
     .@{prefix}-box {
         .@{prefix}-header {
             .@{prefix}-title {
-                color: @theme-color;
+                color: @primary-color;
             }
             .@{prefix}-option {
-                .icon-color-states(@theme-color);
+                .icon-color-states(@primary-color);
                 svg {
                     path {
-                        fill: @theme-color;
+                        fill: @primary-color;
                     }
                 }
             }
@@ -27,24 +27,24 @@
     .@{prefix}-card {
         .@{prefix}-information {
             a {
-                .text-color-states(@theme-color);
+                .text-color-states(@primary-color);
             }
         }
         button {
-            .background-color-states(@theme-color);
+            .background-color-states(@primary-color);
         }
         &.@{prefix}-color {
-            background-color: @theme-color;
+            background-color: @primary-color;
             button {
-                color: @theme-color;
+                color: @primary-color;
             }
         }
     }
     .@{prefix}-credit {
         span {
-            color: @theme-color;
+            color: @primary-color;
             b {
-                color: @theme-color;
+                color: @primary-color;
             }
         }
     }
@@ -53,7 +53,7 @@
             &.@{prefix}-inline {
                 .@{prefix}-dots {
                     & > span {
-                        background-color: @theme-color;
+                        background-color: @primary-color;
                     }
                 }
             }
@@ -62,7 +62,7 @@
     @{prefix}-alert.@{prefix}-root {
         & > button {
             &:not(.@{prefix}-danger) {
-                color: @theme-color;
+                color: @primary-color;
             }
         }
     }
@@ -70,28 +70,28 @@
         .@{prefix}-content {
             .@{prefix}-logged {
                 a {
-                    color: @theme-color;
+                    color: @primary-color;
                 }
             }
         }
         &.color {
-            background-color: @theme-color;
+            background-color: @primary-color;
         }
     }
     @{prefix}-forum-list.@{prefix}-root {
         .@{prefix}-content {
             .@{prefix}-bar {
                 .@{prefix}-search {
-                    background-color: desaturate(tint(@theme-color, 20%), 5%);
+                    background-color: desaturate(tint(@primary-color, 20%), 5%);
                 }
                 button {
-                    .background-color-states(@theme-color);
+                    .background-color-states(@primary-color);
                 }
             }
             .@{prefix}-list {
                 .@{prefix}-item {
                     &:hover {
-                        background-color: fade(@theme-color, 5%);
+                        background-color: fade(@primary-color, 5%);
                     }
                 }
             }
@@ -100,13 +100,13 @@
     @{prefix}-forum-thread.@{prefix}-root {
         .@{prefix}-content {
             .@{prefix}-reply {
-                border-top: 2px solid @theme-color;
+                border-top: 2px solid @primary-color;
                 .@{prefix}-synopsis {
                     & > a {
                         &.@{prefix}-icon {
                             svg {
                                 path {
-                                    fill: @theme-color;
+                                    fill: @primary-color;
                                 }
                             }
                         }
@@ -118,30 +118,30 @@
     @{prefix}-group-card.@{prefix}-root {
         .@{prefix}-information {
             a {
-                color: @theme-color;
-                .text-color-states(@theme-color);
+                color: @primary-color;
+                .text-color-states(@primary-color);
             }
         }
     }
     @{prefix}-group-header.@{prefix}-root {
         .@{prefix}-information {
             a {
-                color: @theme-color;
-                .text-color-states(@theme-color);
+                color: @primary-color;
+                .text-color-states(@primary-color);
             }
             .@{prefix}-members {
                 span {
-                    background-color: @theme-color;
+                    background-color: @primary-color;
                 }
             }
         }
         ul {
             li {
                 a {
-                    .text-color-states(@theme-color);
+                    .text-color-states(@primary-color);
                     svg {
                         path {
-                            fill: @theme-color;
+                            fill: @primary-color;
                         }
                     }
                 }
@@ -153,11 +153,11 @@
             .@{prefix}-cover {
                 &:hover {
                     &::before {
-                        background-color: fade(@theme-color, 90%);
+                        background-color: fade(@primary-color, 90%);
                     }
                 }
                 &::before {
-                    background-color: fade(@theme-color, 60%);
+                    background-color: fade(@primary-color, 60%);
                 }
             }
         }
@@ -166,17 +166,17 @@
         .@{prefix}-content {
             .@{prefix}-sidebar {
                 input, input[type] {
-                    background-color: @theme-color;
+                    background-color: @primary-color;
                 }
                 .@{prefix}-list {
                     .@{prefix}-item {
                         &.@{prefix}-unread {
-                            background-color: fade(@theme-color, 15%);
+                            background-color: fade(@primary-color, 15%);
                             div {
                                 b {
-                                    color: @theme-color !important;
+                                    color: @primary-color !important;
                                 }
-                                color: tint(desaturate(@theme-color, 40%), 20%);
+                                color: tint(desaturate(@primary-color, 40%), 20%);
                             }
                         }
                     }
@@ -187,7 +187,7 @@
                     .@{prefix}-item {
                         &.@{prefix}-outbound {
                             p {
-                                background-color: @theme-color;
+                                background-color: @primary-color;
                             }
                         }
                     }
@@ -200,12 +200,12 @@
             ul {
                 li {
                     &::before {
-                        background-color: @theme-color;
+                        background-color: @primary-color;
                     }
                     div {
                         svg {
                             path {
-                                fill: @theme-color;
+                                fill: @primary-color;
                             }
                         }
                     }
@@ -215,41 +215,41 @@
     }
     @{prefix}-profile-card.@{prefix}-root {
         .@{prefix}-option {
-            .icon-color-states(@theme-color);
+            .icon-color-states(@primary-color);
             svg {
                 path {
-                    fill: @theme-color;
+                    fill: @primary-color;
                 }
             }
         }
         .@{prefix}-information {
             a {
-                color: @theme-color;
-                .text-color-states(@theme-color);
+                color: @primary-color;
+                .text-color-states(@primary-color);
             }
         }
     }
     @{prefix}-profile-header.@{prefix}-root {
         .@{prefix}-option {
-            .icon-color-states(@theme-color);
+            .icon-color-states(@primary-color);
             svg {
                 path {
-                    fill: @theme-color;
+                    fill: @primary-color;
                 }
             }
         }
         .@{prefix}-information {
             a {
-                .text-color-states(@theme-color);
+                .text-color-states(@primary-color);
             }
         }
         ul {
             li {
                 a {
-                    .text-color-states(@theme-color);
+                    .text-color-states(@primary-color);
                     svg {
                         path {
-                            fill: @theme-color;
+                            fill: @primary-color;
                         }
                     }
                 }
@@ -261,11 +261,11 @@
             .@{prefix}-avatar {
                 &:hover {
                     &::before {
-                        background-color: fade(@theme-color, 90%);
+                        background-color: fade(@primary-color, 90%);
                     }
                 }
                 &::before {
-                    background-color: fade(@theme-color, 60%);
+                    background-color: fade(@primary-color, 60%);
                 }
             }
         }
@@ -274,13 +274,13 @@
         .@{prefix}-content {
             .@{prefix}-bar {
                 .@{prefix}-search {
-                    background-color: desaturate(tint(@theme-color, 20%), 5%);
+                    background-color: desaturate(tint(@primary-color, 20%), 5%);
                 }
             }
             .@{prefix}-list {
                 .@{prefix}-item {
                     &:hover {
-                        background-color: fade(@theme-color, 5%);
+                        background-color: fade(@primary-color, 5%);
                     }
                 }
             }

@@ -9,6 +9,7 @@
         p {
             text-align: center;
             font-size: 1.1em;
+            line-height: 1.5em;
         }
     }
     & > button {
@@ -18,16 +19,13 @@
         border-top-color: fade(@default-color, 10%);
         border-top-left-radius: 0;
         border-top-right-radius: 0;
-        background-color: @contrast-color;
+        .background-color-states(@background-color);
         &:not(.@{prefix}-danger) {
-            color: @theme-color;
-        }
-        &:hover {
-            background-color: @contrast-color;
+            .text-color-states(@primary-color);
         }
         &.@{prefix}-danger {
             .text-color-states(@danger-color);
-            .background-color-states(@contrast-color);
+            .background-color-states(@background-color);
         }
         &.@{prefix}-full {
             width: 100%;

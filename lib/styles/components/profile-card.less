@@ -4,6 +4,11 @@
     display: block;
     height: 18em;
     color: @text-color-normal;
+    &.@{prefix}-box {
+        .@{prefix}-information {
+            background-color: @background-color-contrast;
+        }
+    }
     .@{prefix}-option {
         display: inline-block;
         position: absolute;
@@ -11,7 +16,7 @@
         height: 3.75em;
         padding: 1em;
         text-align: center;
-        .icon-color-states(@theme-color);
+        .icon-color-states(@primary-color);
         &.@{prefix}-left {
             top: 0;
             left: 0;
@@ -26,7 +31,7 @@
             max-height: auto;
             vertical-align: middle;
             path {
-                fill: @theme-color;
+                fill: @primary-color;
                 .transition(fill .35s ease);
             }
         }
@@ -52,7 +57,7 @@
             font-size: 1.2em;
             line-height: 1.25em;
             .heavy-font;
-            .text-color-states(@theme-color);
+            .text-color-states(@primary-color);
         }
         p {
             display: inline-block;

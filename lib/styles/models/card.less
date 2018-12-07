@@ -12,7 +12,7 @@
             pointer-events: none;
         }
         b {
-            .text-color-states(@theme-color);
+            .text-color-states(@primary-color);
         }
     }
     button {
@@ -21,10 +21,10 @@
         .border-radius(0);
         color: white;
         font-size: 1em;
-        .background-color-states(@theme-color);
+        .background-color-states(@primary-color);
     }
     &.@{prefix}-color {
-        background-color: @theme-color;
+        background-color: @primary-color;
         .@{prefix}-option {
             svg {
                 path {
@@ -41,7 +41,7 @@
             }
         }
         button {
-            color: @theme-color;
+            color: @primary-color;
             .background-color-states(white);
         }
     }

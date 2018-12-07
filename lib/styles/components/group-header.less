@@ -6,7 +6,11 @@
     width: 100%;
     color: @text-color-normal;
     text-align: center;
-    .border-radius(@border-radius-large);
+    &.@{prefix}-box {
+        .@{prefix}-information {
+            background-color: @background-color-contrast;
+        }
+    }
     & + * {
         margin-top: 1.5em;
     }
@@ -27,11 +31,11 @@
             max-height: 2.5em;
             margin: 0 5%;
             margin-top: 1.5em;
-            color: @theme-color;
+            color: @primary-color;
             font-size: 1.2em;
             line-height: 1.25em;
             .heavy-font;
-            .text-color-states(@theme-color);
+            .text-color-states(@primary-color);
         }
         p {
             display: inline-block;
@@ -44,11 +48,11 @@
             line-height: 1.25em;
         }
         .@{prefix}-members {
-            width: 10.5em;
+            width: 100%;
             margin: 0 auto;
             margin-top: 1em;
             & > *:last-child {
-                margin-right: 0 !important;
+                margin-right: 0;
             }
             img, span {
                 width: 2em;
@@ -63,7 +67,7 @@
                 line-height: 2em;
                 text-align: center;
                 border: none !important;
-                background-color: @theme-color;
+                background-color: @primary-color;
                 small {
                     color: inherit;
                     font-size: .8em;
@@ -100,7 +104,7 @@
         font-size: 0;
         border-top-width: 2px;
         border-top-style: solid;
-        border-top-color: fade(@default-color, 10%);
+        border-top-color: fade(black, 5%);
         .border-radius(0);
         list-style: none;
         li {
@@ -143,7 +147,7 @@
                 svg {
                     display: none;
                     path {
-                        fill: @theme-color;
+                        fill: @primary-color;
                     }
                 }
             }
@@ -232,12 +236,11 @@
     @{prefix}-group-header.@{prefix}-root {
         .@{prefix}-information {
             .@{prefix}-members {
-                width: 6.5em;
                 img, span {
                     margin-right: -.9em;
                     border-width: 2px;
                     border-style: solid;
-                    border-color: @contrast-color;
+                    border-color: @background-color-contrast;
                     box-shadow: 0 0 2px fade(black, 65%);
                 }
             }
@@ -259,7 +262,7 @@
                 }
                 &.@{prefix}-active {
                     border-top: none;
-                    background-color: @contrast-color;
+                    background-color: @background-color-contrast;
                 }
                 a {
                     position: relative;
@@ -331,12 +334,11 @@
     @{prefix}-group-header.@{prefix}-root {
         .@{prefix}-information {
             .@{prefix}-members {
-                width: 8.5em;
                 img, span {
                     margin-right: -.4em;
                     border-width: 2px;
                     border-style: solid;
-                    border-color: @contrast-color;
+                    border-color: @background-color-contrast;
                     box-shadow: 0 0 2px fade(black, 65%);
                 }
             }
@@ -358,7 +360,7 @@
                 }
                 &.@{prefix}-active {
                     border-top: none;
-                    background-color: @contrast-color;
+                    background-color: @background-color-contrast;
                 }
                 a {
                     position: relative;

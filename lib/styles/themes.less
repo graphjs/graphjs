@@ -2,10 +2,10 @@
 
 .colorStructure(@theme-default-color, @theme-shade-color, @theme-contrast-color, @theme-text-color-strong) {
     @default-color:     @theme-default-color;
-    @theme-color:       tint(@default-color, 25%);
+    @primary-color:       tint(@default-color, 25%);
     @danger-color:      rgb(255, 79, 79);
-    @shade-color:       @theme-shade-color;
-    @contrast-color:    @theme-contrast-color;
+    @background-color-shade:       @theme-shade-color;
+    @background-color-contrast:    @theme-contrast-color;
     @text-color-strong: @theme-text-color-strong;
     @text-color-normal: fade(@theme-text-color-strong, 75%);
     @text-color-weak:   fade(@theme-text-color-strong, 50%);
@@ -22,7 +22,7 @@
         }
         input, input[type], textarea {
             color: @text-color-normal;
-            background-color: @contrast-color;
+            background-color: @background-color-contrast;
             .placeholder-color(@text-color-weak);
         }
         form {
@@ -44,7 +44,7 @@
             color: @text-color-strong;
         }
         a {
-            color: @theme-color;
+            color: @primary-color;
             border-bottom-color: @text-color-weak;
         }
         b, strong {
@@ -58,10 +58,10 @@
             background-color: fade(@default-color, 10%);
         }
         blockquote {
-            border-left-color: @theme-color;
+            border-left-color: @primary-color;
             background-color: fade(@default-color, 10%);
             &::before{
-                color: @theme-color;
+                color: @primary-color;
             }
             span {
                 color: @text-color-normal;
@@ -70,10 +70,10 @@
     }
     .@{prefix}-box.@{prefix}-root {
         border: 1px solid fade(@default-color, 3%);
-        background-color: @shade-color;
+        background-color: @background-color-shade;
         .@{prefix}-header {
             border-bottom: 2px solid fade(@default-color, 10%);
-            background-color: @contrast-color;
+            background-color: @background-color-contrast;
         }
         .@{prefix}-warning {
             border-bottom: 1px solid fade(@default-color, 15%);
@@ -81,11 +81,11 @@
     }
     .@{prefix}-checked {
         .@{prefix}-check {
-            background-color: @shade-color;
+            background-color: @background-color-shade;
         }
     }
     .@{prefix}-card.@{prefix}-root {
-        background-color: @contrast-color;
+        background-color: @background-color-contrast;
         b {
             .text-color-states(@default-color);
         }
@@ -106,15 +106,15 @@
     .@{prefix}-loading {
         &:hover {
             .@{prefix}-loader {
-                background-color: fade(@shade-color, 85%);
+                background-color: fade(@background-color-shade, 85%);
                 &.@{prefix}-placeholder {
-                    background-color: @shade-color;
+                    background-color: @background-color-shade;
                 }
             }
         }
         .@{prefix}-loader {
             &.@{prefix}-placeholder {
-                background-color: @shade-color;
+                background-color: @background-color-shade;
             }
         }
         .@{prefix}-blockage {
@@ -123,7 +123,7 @@
             &:hover {
                 color: @text-color-normal;
                 border-color: @text-color-normal;
-                background-color: @contrast-color !important;
+                background-color: @background-color-contrast !important;
             }
         }
     }
@@ -154,18 +154,18 @@
     }
     @{prefix}-alert.@{prefix}-root {
         color: @text-color-normal;
-        background-color: @contrast-color !important;
+        background-color: @background-color-contrast !important;
         .@{prefix}-content {
-            background-color: @contrast-color !important;
+            background-color: @background-color-contrast !important;
         }
         & > button {
             border-top: 2px solid fade(@default-color, 10%);
-            background-color: @contrast-color !important;
+            background-color: @background-color-contrast !important;
             &:hover {
-                background-color: @contrast-color !important;
+                background-color: @background-color-contrast !important;
             }
             &.@{prefix}-danger {
-                background-color: @contrast-color;
+                background-color: @background-color-contrast;
             }
             &.@{prefix}-half {
                 &:first-of-type {
@@ -197,20 +197,20 @@
         }
     }
     @{prefix}-auth-state.@{prefix}-root {
-        background-color: @shade-color;
+        background-color: @background-color-shade;
         .@{prefix}-content {
             a {
                 &:hover {
-                    background-color: fade(@contrast-color, 50%);
+                    background-color: fade(@background-color-contrast, 50%);
                 }
                 &.@{prefix}-active {
-                    background-color: @contrast-color;
+                    background-color: @background-color-contrast;
                 }
             }
             .@{prefix}-logged {
                 .@{prefix}-details {
                     span {
-                        color: @theme-color;
+                        color: @primary-color;
                     }
                 }
             }
@@ -227,11 +227,11 @@
             }
             form {
                 input, input[type] {
-                    color: @theme-color;
+                    color: @primary-color;
                     border-bottom: 1px dotted @text-color-weak;
                     &::placeholder {
                         opacity: .5;
-                        color: @theme-color;
+                        color: @primary-color;
                     }
                 }
                 .@{prefix}-information {
@@ -299,7 +299,7 @@
                         color: @text-color-weak;
                     }
                     .@{prefix}-title {
-                        .text-color-states(@theme-color);
+                        .text-color-states(@primary-color);
                     }
                     .@{prefix}-information {
                         color: @text-color-weak;
@@ -327,7 +327,7 @@
         .@{prefix}-content {
             .@{prefix}-post {
                 .@{prefix}-title {
-                    color: @theme-color;
+                    color: @primary-color;
                 }
                 .@{prefix}-information {
                     color: @text-color-weak;
@@ -352,7 +352,7 @@
                     }
                 }
                 .@{prefix}-replies {
-                    background-color: @shade-color;
+                    background-color: @background-color-shade;
                     .@{prefix}-item {
                         .@{prefix}-credit {
                             span {
@@ -364,15 +364,15 @@
                             &.@{prefix}-editable {
                                 color: @text-color-normal;
                                 border: 1px dashed fade(@default-color, 15%);
-                                background-color: @contrast-color;
+                                background-color: @background-color-contrast;
                             }
                         }
                     }
                 }
             }
             .@{prefix}-reply {
-                border-top: 2px solid @theme-color;
-                background-color: @contrast-color;
+                border-top: 2px solid @primary-color;
+                background-color: @background-color-contrast;
                 .@{prefix}-synopsis {
                     & > b {
                         color: @text-color-normal;
@@ -381,7 +381,7 @@
                         &.@{prefix}-icon {
                             svg {
                                 path {
-                                    fill: @theme-color;
+                                    fill: @primary-color;
                                 }
                             }
                         }
@@ -404,7 +404,7 @@
                 p {
                     &.@{prefix}-editable {
                         border-color: fade(@default-color, 15%);
-                        background-color: @contrast-color;
+                        background-color: @background-color-contrast;
                     }
                 }
             }
@@ -416,10 +416,10 @@
             .@{prefix}-item {
                 .@{prefix}-memo {
                     border: 1px solid fade(@default-color, 3%);
-                    background-color: @contrast-color;
+                    background-color: @background-color-contrast;
                     .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
                     &::before {
-                        color: @contrast-color;
+                        color: @background-color-contrast;
                         text-shadow: -1px 0px 2px fade(black, 15%);
                     }
                     a {
@@ -440,7 +440,7 @@
         .@{prefix}-content {
             .@{prefix}-bar {
                 .@{prefix}-search {
-                    border-right: 2px solid @contrast-color;
+                    border-right: 2px solid @background-color-contrast;
                     input, input[type] {
                         background-color: transparent;
                     }
@@ -472,7 +472,7 @@
                     }
                 }
                 .@{prefix}-replies {
-                    background-color: @shade-color;
+                    background-color: @background-color-shade;
                     .@{prefix}-item {
                         .@{prefix}-credit {
                             span {
@@ -484,14 +484,14 @@
                             &.@{prefix}-editable {
                                 color: @text-color-normal;
                                 border-color: fade(@default-color, 15%);
-                                background-color: @contrast-color;
+                                background-color: @background-color-contrast;
                             }
                         }
                     }
                 }
             }
             .@{prefix}-reply {
-                background-color: @contrast-color;
+                background-color: @background-color-contrast;
                 .@{prefix}-synopsis {
                     & > b {
                         color: @text-color-normal;
@@ -513,7 +513,7 @@
     @{prefix}-group-header.@{prefix}-root {
         color: @text-color-normal;
         .@{prefix}-information {
-            background-color: @contrast-color;
+            background-color: @background-color-contrast;
             p {
                 color: @text-color-normal;
             }
@@ -558,7 +558,7 @@
                 color: @text-color-strong;
             }
             form {
-                background-color: @contrast-color;
+                background-color: @background-color-contrast;
                 .clearfix;
             }
         }
@@ -583,7 +583,7 @@
                             }
                         }
                         &.@{prefix}-active {
-                            background-color: @contrast-color !important;
+                            background-color: @background-color-contrast !important;
                         }
                         div {
                             color: @text-color-normal;
@@ -595,13 +595,13 @@
                 }
             }
             .@{prefix}-main {
-                background-color: @contrast-color;
+                background-color: @background-color-contrast;
                 .@{prefix}-conversation {
                     .@{prefix}-item {
                         &.@{prefix}-inbound {
                             p {
                                 color: @text-color-normal;
-                                background-color: @shade-color;
+                                background-color: @background-color-shade;
                             }
                         }
                         time {
@@ -647,7 +647,7 @@
     @{prefix}-profile-header.@{prefix}-root {
         color: @text-color-normal;
         .@{prefix}-information {
-            background-color: @contrast-color;
+            background-color: @background-color-contrast;
             img {
                 border: 4px solid fade(@default-color, 15%);
             }
@@ -687,7 +687,7 @@
     @{prefix}-star-button.@{prefix}-root {
         color: @text-color-normal;
         &:hover {
-            background-color: @contrast-color;
+            background-color: @background-color-contrast;
         }
         .@{prefix}-content {
             a {
@@ -740,14 +740,14 @@
             .@{prefix}-information {
                 .@{prefix}-members {
                     img, span {
-                        border: 2px solid @contrast-color;
+                        border: 2px solid @background-color-contrast;
                     }
                 }
             }
             ul {
                 li {
                     &.@{prefix}-active {
-                        background-color: @contrast-color;
+                        background-color: @background-color-contrast;
                     }
                     a {
                         color: @text-color-normal;
@@ -764,7 +764,7 @@
             ul {
                 li {
                     &.@{prefix}-active {
-                        background-color: @contrast-color;
+                        background-color: @background-color-contrast;
                     }
                     a {
                         &.@{prefix}-count{
@@ -784,14 +784,14 @@
             .@{prefix}-information {
                 .@{prefix}-members {
                     img, span {
-                        border: 2px solid @contrast-color;
+                        border: 2px solid @background-color-contrast;
                     }
                 }
             }
             ul {
                 li {
                     &.@{prefix}-active {
-                        background-color: @contrast-color;
+                        background-color: @background-color-contrast;
                     }
                     a {
                         &.@{prefix}-count, &.@{prefix}-label {
@@ -807,7 +807,7 @@
             ul {
                 li {
                     &.@{prefix}-active {
-                        background-color: @contrast-color;
+                        background-color: @background-color-contrast;
                     }
                     a {
                         &.@{prefix}-count {

@@ -4,6 +4,11 @@
     display: block;
     height: 18em;
     color: @text-color-normal;
+    &.@{prefix}-box {
+        .@{prefix}-information {
+            background-color: @background-color-contrast;
+        }
+    }
     .@{prefix}-information {
         img {
             width: 15em;
@@ -17,11 +22,11 @@
             max-height: 2.5em;
             margin: 0 5%;
             margin-top: .5em;
-            color: @theme-color;
+            color: @primary-color;
             font-size: 1.2em;
             line-height: 1.25em;
             .heavy-font;
-            .text-color-states(@theme-color);
+            .text-color-states(@primary-color);
         }
         p {
             display: inline-block;

@@ -16,7 +16,7 @@
     }
     a {
         cursor: pointer;
-        .text-color-states(@theme-color);
+        .text-color-states(@primary-color);
         text-decoration: none;
     }
     b {
@@ -52,7 +52,7 @@
         border-width: 1px;
         border-style: solid;
         border-color: fade(black, 10%);
-        background-color: @contrast-color;
+        background-color: @input-color;
         .placeholder-color(@text-color-weak);
     }
     textarea {
@@ -66,7 +66,7 @@
         .single-line-text;
         text-transform: uppercase;
         .transition(background-color .35s ease);
-        .background-color-states(@theme-color);
+        .background-color-states(@primary-color);
         .disable-selection;
         &[disabled] {
             opacity: .5;

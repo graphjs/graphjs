@@ -29,11 +29,9 @@
                 border-radius: 0;
             }
             .@{prefix}-search {
-                width: calc(100% - 12em);
-                border-right-width: 2px;
-                border-right-style: solid;
-                border-right-color: @contrast-color;
-                background-color: desaturate(tint(@theme-color, 20%), 5%);
+                width: calc(100% - 12em - 2px); // 2px creates the space for pseudo-border
+                margin-right: 2px; // Simulating a 2px border
+                background-color: desaturate(tint(@primary-color, 20%), 5%);
                 & > * {
                     float: left;
                     border-radius: 0;
@@ -72,7 +70,7 @@
                 .regular-font;
                 font-size: 1em;
                 text-transform: none;
-                .background-color-states(@theme-color);
+                .background-color-states(@primary-color);
                 svg {
                     position: relative;
                     width: auto;
@@ -106,7 +104,7 @@
                     border-bottom: none;
                 }
                 &:hover {
-                    background-color: fade(@theme-color, 5%);
+                    background-color: fade(@primary-color, 5%);
                 }
                 &.@{prefix}-hidden {
                     display: none !important;
@@ -243,7 +241,7 @@
                             margin-right: -.9em;
                             border-width: 2px;
                             border-style: solid;
-                            border-color: @contrast-color;
+                            border-color: @background-color-contrast;
                             box-shadow: 0 0 2px fade(black, 65%);
                         }
                     }
@@ -299,7 +297,7 @@
                             margin-right: -.4em;
                             border-width: 2px;
                             border-style: solid;
-                            border-color: @contrast-color;
+                            border-color: @background-color-contrast;
                         }
                     }
                 }

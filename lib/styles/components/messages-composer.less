@@ -4,6 +4,27 @@
     display: block;
     width: 100%;
     max-width: 29em;
+    &.@{prefix}-box {
+        .@{prefix}-content {
+            form {
+                background-color: @background-color-contrast;
+            }
+        }
+    }
+    &.@{prefix}-inline {
+        .@{prefix}-content {
+            input, input[type] {
+                padding: .75em 0;
+                border-bottom-width: 1px;
+                border-bottom-style: dotted;
+                border-bottom-color: fade(black, 10%);
+            }
+            form {
+                padding: 0;
+                padding-top: 1em;
+            }
+        }
+    }
     .@{prefix}-content {
         .no-padding !important;
         .@{prefix}-recipient {
@@ -29,7 +50,6 @@
         form {
             width: 100%;
             padding: 1em;
-            background-color: @contrast-color;
             .clearfix;
             textarea {
                 width: 100%;
@@ -39,6 +59,7 @@
                 .no-padding;
                 vertical-align: middle;
                 border: none;
+                background-color: transparent;
             }
             button {
                 float: right;

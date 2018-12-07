@@ -48,7 +48,7 @@
                 height: 1em;
                 margin-bottom: 0;
                 padding: 0;
-                color: @theme-color;
+                color: @primary-color;
                 font-size: 2em;
                 .bold-font;
                 line-height: 1em;
@@ -143,7 +143,6 @@
             .@{prefix}-replies {
                 padding-right: 2.5em;
                 padding-left: 2.5em;
-                background-color: @shade-color;
                 .@{prefix}-item {
                     padding: 1.5em 0;
                     border-top-width: 1px;
@@ -178,7 +177,7 @@
                             border-width: 1px;
                             border-style: dashed;
                             border-color: fade(@default-color, 15%);
-                            background-color: @contrast-color;
+                            background-color: @background-color-contrast;
                             outline: none;
                         }
                     }
@@ -197,8 +196,8 @@
             padding-top: 0;
             border-top-width: 2px;
             border-top-style: solid;
-            border-top-color: @theme-color;
-            background-color: @contrast-color;
+            border-top-color: @primary-color;
+            background-color: @background-color-contrast;
             .box-shadow(0 -2px 1px 0px fade(black, 7.5%));
             /*.transition(bottom .35s ease);*/
             .@{prefix}-synopsis {
@@ -239,7 +238,7 @@
                             height: .8em;
                             padding: .1em 0;
                             path {
-                                fill: @theme-color;
+                                fill: @primary-color;
                             }
                         }
                     }

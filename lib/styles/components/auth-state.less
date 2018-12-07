@@ -15,20 +15,20 @@
         background-color: transparent !important;
         a {
             float: left;
-            color: @theme-color;
+            color: @primary-color;
             border-right-width: 1px;
             border-right-style: dotted;
-            border-right-color: fade(@theme-color, 20%);
+            border-right-color: fade(@primary-color, 20%);
             background-color: transparent;
             .disable-selection;
             &:hover {
-                background-color: fade(@contrast-color, 50%);
+                background-color: fade(@background-color-contrast, 50%);
             }
             &:last-of-type {
                 border-right-width: 0 !important;
             }
             &.@{prefix}-active {
-                background-color: @contrast-color;
+                background-color: @background-color-contrast;
             }
         }
         .@{prefix}-not-logged {
@@ -72,7 +72,7 @@
                     height: inherit;
                     max-width: 10em;
                     padding: 0 .75em;
-                    color: @theme-color;
+                    color: @primary-color;
                     .bold-font;
                     line-height: inherit;
                     .single-line-text;
@@ -92,7 +92,7 @@
                     width: auto;
                     height: inherit;
                     path {
-                        fill: fade(@theme-color, 50%);
+                        fill: fade(@primary-color, 50%);
                         .transition(fill .35s ease);
                     }
                 }
@@ -100,7 +100,7 @@
         }
     }
     &.@{prefix}-color {
-        background-color: @theme-color;
+        background-color: @primary-color;
         .@{prefix}-content {
             a {
                 color: white !important;

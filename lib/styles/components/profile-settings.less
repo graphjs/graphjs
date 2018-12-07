@@ -6,7 +6,7 @@
     text-align: center;
     .@{prefix}-content {
         h2 {
-            color: @theme-color;
+            color: @primary-color;
             margin: 2em 0 1em;
         }
         .@{prefix}-avatar {
@@ -23,7 +23,7 @@
             &:hover {
                 &::before {
                     padding-top: 3.6em;
-                    background-color: fade(@theme-color, 90%);
+                    background-color: fade(@primary-color, 90%);
                 }
             }
             &::before {
@@ -38,7 +38,7 @@
                 color: white;
                 line-height: 1.4em;
                 vertical-align: middle;
-                background-color: fade(@theme-color, 60%);
+                background-color: fade(@primary-color, 60%);
                 white-space: pre;
                 .transition(all .35s ease);
             }

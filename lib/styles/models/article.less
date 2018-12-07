@@ -34,7 +34,7 @@
         font-size: 1em;
     }
     a {
-        color: @theme-color;
+        color: @primary-color;
         border-bottom-width: 1px;
         border-bottom-style: dotted;
         border-bottom-color: @text-color-weak;
@@ -94,14 +94,14 @@
         line-height: 1.5em;
         border-left-width: .5em;
         border-left-style: solid;
-        border-left-color: @theme-color;
+        border-left-color: @primary-color;
         background-color: fade(@default-color, 10%);
         &::before{
             content: "\00201D";
             position: absolute;
             left: calc(1em / 3);
             top: calc(1em / 3.25); // Visually centers the super script character
-            color: @theme-color;
+            color: @primary-color;
             font-size: 3em;
             font-family: Arial, sans-serif;
             font-style: normal;

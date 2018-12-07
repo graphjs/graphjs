@@ -1,28 +1,39 @@
-// Colors
+// Main colors
+@text-color:       dimgray;//rgb(111, 135, 159);
+@primary-color:    #a085c6; // @default-color;
+@background-color: beige;
 
-@default-color:  tint(rgb(63, 95, 127), 25%);
-@theme-color:    @default-color;
+@default-color: @primary-color;
+
+// Default colors
 @success-color:  rgb(0, 223, 95);
 @danger-color:   rgb(255, 79, 79);
-@shade-color:    tint(@default-color, 95%);
-@contrast-color: white;
 
-@text-color-strong: rgb(63, 95, 127);
-@text-color-normal: tint(@text-color-strong, 25%);
-@text-color-weak:   tint(@text-color-strong, 50%);
+// Text colors
+@text-color-strong: @text-color;
+@text-color-normal: fade(@text-color, 75%);
+@text-color-weak:   fade(@text-color, 50%);
 
-// Metrics
+// Background colors
+@background-color-shade:    shade(@background-color, 10% / 3);
+@background-color-contrast: @background-color;
 
+// Input colors
+@input-color:    tint(@background-color, 15%);
+
+// Corner roundings
 @border-radius-large:  9px;
 @border-radius-medium: 6px;
 @border-radius-small:  3px;
 @border-radius-full:   50%;
 
-@font-size-xsmall:  12px;
-@font-size-small:   13px;
-@font-size-medium:  14px;
-@font-size-large:   15px;
-@font-size-xlarge:  16px;
+// Font sizes
+@font-size-xsmall: 12px;
+@font-size-small:  13px;
+@font-size-medium: 14px;
+@font-size-large:  15px;
+@font-size-xlarge: 16px;
 @font-size-default: @font-size-medium;
 
+// Bar sizes
 @bar-height: 50px;

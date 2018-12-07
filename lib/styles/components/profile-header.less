@@ -6,7 +6,11 @@
     width: 100%;
     color: @text-color-normal;
     text-align: center;
-    .border-radius(@border-radius-large);
+    &.@{prefix}-box {
+        .@{prefix}-information {
+            background-color: @background-color-contrast;
+        }
+    }
     & + * {
         margin-top: 1.5em;
     }
@@ -16,7 +20,7 @@
         height: 3.75em;
         padding: 1em;
         text-align: center;
-        .icon-color-states(@theme-color);
+        .icon-color-states(@primary-color);
         &.@{prefix}-left {
             float: left;
         }
@@ -29,7 +33,7 @@
             max-height: auto;
             vertical-align: middle;
             path {
-                fill: @theme-color;
+                fill: @primary-color;
                 .transition(fill .35s ease);
             }
         }
@@ -52,7 +56,7 @@
             max-height: 2.5em;
             margin: 0 5%;
             margin-top: .5em;
-            .text-color-states(@theme-color);
+            .text-color-states(@primary-color);
             font-size: 1.2em;
             line-height: 1.25em;
             .heavy-font;
@@ -74,7 +78,7 @@
         font-size: 0;
         border-top-width: 2px;
         border-top-style: solid;
-        border-top-color: fade(@default-color, 10%);
+        border-top-color: fade(black, 5%);
         .border-radius(0);
         list-style: none;
         li {
@@ -116,7 +120,7 @@
                 svg {
                     display: none;
                     path {
-                        fill: @theme-color;
+                        fill: @primary-color;
                     }
                 }
             }
@@ -205,7 +209,7 @@
                 }
                 &.@{prefix}-active {
                     border-top: none;
-                    background-color: @contrast-color;
+                    background-color: @background-color-contrast;
                 }
                 a {
                     position: relative;
@@ -275,7 +279,7 @@
                 }
                 &.@{prefix}-active {
                     border-top: none;
-                    background-color: @contrast-color;
+                    background-color: @background-color-contrast;
                 }
                 a {
                     position: relative;

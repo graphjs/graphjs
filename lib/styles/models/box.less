@@ -8,7 +8,7 @@
     border: 1px;
     border-style: solid;
     border-color: fade(@default-color, 3%);
-    background-color: @shade-color;
+    background-color: @background-color-shade;
     .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
     &:hover, &:active, &:focus {
         .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
@@ -16,8 +16,8 @@
     .@{prefix}-header {
         border-bottom-width: 2px;
         border-bottom-style: solid;
-        border-bottom-color: fade(@default-color, 10%);
-        background-color: @contrast-color;
+        border-bottom-color: fade(black, 7.5%);
+        background-color: @background-color-contrast;
     }
     .@{prefix}-content {
         overflow: hidden;
@@ -26,10 +26,13 @@
 }
 
 // Inline
-.@{prefix}-root.@{prefix}-inline {
+.@{prefix}-inline.@{prefix}-root {
     position: relative;
     &.@{prefix}-promo-pad {
         padding-bottom: 3.6em;
+    }
+    input, input[type], textarea {
+        background-color: transparent;
     }
 }
 
@@ -48,7 +51,7 @@
         bottom: 0;
         left: 2.5em;
         width: auto;
-        color: @theme-color;
+        color: @primary-color;
         font-size: 1.2em;
         .single-line-text;
     }
@@ -57,7 +60,7 @@
         width: 3.5em;
         height: 3.5em;
         text-align: center;
-        .icon-color-states(@theme-color);
+        .icon-color-states(@primary-color);
         &.@{prefix}-left {
             float: left;
         }
@@ -75,7 +78,7 @@
             vertical-align: middle;
             .transition(transform .35s ease);
             path {
-                fill: @theme-color;
+                fill: @primary-color;
                 .transition(fill .35s ease);
             }
         }
@@ -156,7 +159,7 @@
         bottom: 0;
         width: 100%;
         height: 100%;
-        background-color: @shade-color;
+        background-color: @background-color-shade;
         .@{prefix}-checkmark {
             display: block;
             position: absolute;
