@@ -102,33 +102,4 @@
             }
         }
     }
-    &.@{prefix}-color {
-        background-color: @primary-color;
-        .@{prefix}-content {
-            a {
-                color: white !important;
-                border-right-color: fade(white, 35%) !important;
-                &:hover {
-                    background-color: fade(black, 5%) !important;
-                }
-                &.@{prefix}-active {
-                    background-color: fade(black, 10%) !important;
-                }
-            }
-            .@{prefix}-logged {
-                a {
-                    span {
-                        color: white !important;
-                    }
-                }
-                .@{prefix}-exit {
-                    svg {
-                        path {
-                            fill: fade(white, 50%) !important;
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
