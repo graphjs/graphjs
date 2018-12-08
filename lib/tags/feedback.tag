@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class={'graphjs-item graphjs-feedback'}>
-            <img class="graphjs-author" src={profile ? downsizeImage(profile.avatar, 50) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+            <img class="graphjs-author" src={profile ? downsizeImage(profile.avatar, 50) : defaultAvatar} />
             <div class={'graphjs-memo' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
                 <fieldset class="rating">
                 	<input id="rate-5" type="radio" name="rating" value={5}>
@@ -91,6 +91,7 @@
         let i18n = internationalization[window.GraphJSConfig.language]['feedback'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
+        this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;

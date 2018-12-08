@@ -5,6 +5,7 @@
         minor={true}
         box={opts.box}
         callback={changeProperties}
+        default-avatar={opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar}
     />
     <graphjs-group-activity
         id={opts.id}

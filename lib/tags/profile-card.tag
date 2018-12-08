@@ -20,7 +20,7 @@
         </svg>
     </a>
     <a class="graphjs-information" data-link="profile" data-id={id} onclick={handleShow} if={profile}>
-        <img src={profile.avatar || 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+        <img src={profile.avatar || defaultAvatar} />
         <b class="graphjs-title">{profile.fullName || profile.username}</b>
         <p class="graphjs-description">{profile.about}</p>
     </a>
@@ -52,6 +52,7 @@
         let i18n = internationalization[window.GraphJSConfig.language]['profile-card'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
+        this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
         
         this.id = opts.id;
         this.following = false;

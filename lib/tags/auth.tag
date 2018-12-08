@@ -9,6 +9,7 @@
         theme={opts.theme}
         active={active}
         height={opts.height}
+        default-avatar={opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar}
     />
     <graphjs-auth-login
         minor={true}

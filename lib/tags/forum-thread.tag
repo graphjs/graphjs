@@ -26,7 +26,7 @@
             <div class="graphjs-replies">
                 <div each={entry, index in entries} data-id={entry.id} class="graphjs-item">
                     <div class="graphjs-credit" if={authorsData.hasOwnProperty(entry.author)}>
-                        <img data-link="profile" data-id={entry.author} onclick={handleShow} src={authorsData[entry.author].avatar ? downsizeImage(authorsData[entry.author].avatar, 50) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+                        <img data-link="profile" data-id={entry.author} onclick={handleShow} src={authorsData[entry.author].avatar ? downsizeImage(authorsData[entry.author].avatar, 50) : defaultAvatar} />
                         <span>
                             <b data-link="profile" data-id={entry.author} onclick={handleShow}>{authorsData[entry.author].username || i18n.unknowUserText}</b>
                             <time data-timestamp={entry.timestamp}>{handleTime(entry.timestamp)}</time>
@@ -127,6 +127,7 @@
         let i18n = internationalization[window.GraphJSConfig.language]['forum-thread'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
+        this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
