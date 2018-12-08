@@ -96,7 +96,7 @@
             height: auto;
             vertical-align: middle;
             .@{prefix}-item {
-                display: table;
+                display: inline-block;
                 width: 100%;
                 color: @text-color-normal;
                 line-height: 3.5em;
@@ -223,7 +223,7 @@
         .@{prefix}-content {
             .@{prefix}-bar {
                 .@{prefix}-search {
-                    width: calc(100% - 3.5em);
+                    width: calc(100% - 3.5em - 2px); // 2px creates the space for pseudo-border
                 }
                 button {
                     width: 3.5em;
@@ -282,7 +282,7 @@
         .@{prefix}-content {
             .@{prefix}-bar {
                 .@{prefix}-search {
-                    width: calc(100% - 10em);
+                    width: calc(100% - 10em - 2px); // 2px creates the space for pseudo-border
                 }
                 button {
                     width: 10em;

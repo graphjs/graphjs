@@ -4,8 +4,8 @@
         <b if={group}>{group.title}</b>
         <p>{ i18n.membersCountText.replace("%s",group.count) }</p>
     </a>
-    <button if={(!group || !joinInformation) && loaded}>&middot; &middot; &middot;</button>
-    <button if={(group && joinInformation) && loaded} onclick={joined ? handleLeave : handleJoin}>{joined ? i18n.leaveGroupText : i18n.joinGroupText}</button>
+    <button if={loaded && (!group || !joinInformation)}>&middot; &middot; &middot;</button>
+    <button if={loaded && group && joinInformation} onclick={joined ? handleLeave : handleJoin}>{joined ? i18n.leaveGroupText : i18n.joinGroupText}</button>
     <div if={!loaded} class="graphjs-placeholder graphjs-loader">
         <div class="graphjs-link">
             <div class="graphjs-cover graphjs-rectangle graphjs-fill"></div>
@@ -14,8 +14,8 @@
                 <div class="graphjs-line graphjs-fill"></div>
             </div>
             <div class="graphjs-description graphjs-line graphjs-centered graphjs-fill"></div>
-            <div class="graphjs-button graphjs-rectangle graphjs-fill"></div>
         </div>
+        <div class="graphjs-button graphjs-rectangle graphjs-fill"></div>
     </div>
     <script>
         import analytics from '../scripts/analytics.js';

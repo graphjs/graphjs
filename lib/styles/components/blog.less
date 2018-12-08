@@ -7,8 +7,39 @@
         // If it is wrapped with boxed Blog component
         .@{prefix}-inline {
             .@{prefix}-content {
+                min-height: 41em;
                 .@{prefix}-placeholder {
                     padding: 2.5em;
+                }
+            }
+        }
+    }
+}
+
+// Responsive
+
+/* Window Width < 480 */
+@media only screen and (max-width: 479px) {
+    @{prefix}-blog.@{prefix}-root {
+        &.@{prefix}-box {
+            // If it is wrapped with boxed Blog component
+            .@{prefix}-inline {
+                .@{prefix}-content {
+                    min-height: 38.5em;
+                }
+            }
+        }
+    }
+}
+
+/* 480 ≤ Window Width < 768 */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    @{prefix}-blog.@{prefix}-root {
+        &.@{prefix}-box {
+            // If it is wrapped with boxed Blog component
+            .@{prefix}-inline {
+                .@{prefix}-content {
+                    min-height: 38.5em;
                 }
             }
         }
