@@ -7,6 +7,9 @@
         (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
     }
 >
+    <div class="graphjs-header" if={opts.title}>
+        <div class="graphjs-title">{opts.title || 'New Blog Post'}</div>
+    </div>
     <div class="graphjs-warning" if={warningMessages.length > 0}>
         <ul if={warningMessages.length > 0} class="graphjs-fail">
             <li each={warningMessage in warningMessages}>{warningMessage}</li>
