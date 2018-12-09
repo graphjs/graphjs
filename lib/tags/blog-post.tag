@@ -12,19 +12,32 @@
             <p>This post is no longer available!</p>
         </div>
         <div if={!deleted} class="graphjs-post" ref="scrollingContent">
-            <h1 if={title} class="graphjs-title">{title}</h1>
+            
+            <h1 if={title} class="graphjs-title">
+                <a
+                    if={window.location.hash}
+                    onclick={handleShowList} 
+                >
+                <svg fill="blue" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g transform="translate(-15.000000, -15.000000)" fill="black" fill-rule="nonzero">
+                        <path d="M29.9834254,15 C38.2707182,15 45,21.6961326 45,29.9834254 C45,38.2707182 38.2707182,45 29.9834254,45 C21.6961326,45 15,38.2707182 15,29.9834254 C15,21.6961326 21.6961326,15 29.9834254,15 Z M29.9834254,42.3480663 C36.7790055,42.3480663 42.3480663,36.8121547 42.3480663,29.9834254 C42.3480663,23.1878453 36.8121547,17.6187845 29.9834254,17.6187845 C23.1878453,17.6187845 17.6187845,23.1546961 17.6187845,29.9834254 C17.6519337,36.7790055 23.1878453,42.3480663 29.9834254,42.3480663 Z M25.4088398,29.9834254 L31.6077348,36.1823204 L33.4972376,34.2928177 L29.1546961,29.9834254 L33.4972376,25.640884 L31.6077348,23.7513812 L25.4088398,29.9834254 Z"></path>
+                    </g>
+                </svg>
+                </a>
+                {title}
+            </h1>
             <ul if={loaded} class="graphjs-information">
                 <li if={author} class="graphjs-author">
                     <a data-link="profile" data-id={author.id} onclick={handleShow}>{author.username}</a>
                 </li>
                 <li if={time} class="graphjs-time">
-                    <time if={published && time.published}>{timeText}</time>
+                    <time if={published && time.published}><a href={window.location.href}>{timeText}</a></time>
                     <time if={!published && time.lastEdited} class="graphjs-edited">{timeText}</time>
                 </li>
                 <li class="graphjs-action">
                     <a ref="edit" if={opts.minor} onclick={edit}>Edit</a>
                     <a ref="publish" if={!published} onclick={publish}>Publish</a>
-                    <a ref="unpublish" if={published} class="graphjs-danger">Unpublish</a>
+                    <a ref="unpublish" if={published} onclick={unpublish} class="graphjs-danger">Unpublish</a>
                     <a ref="delete" onclick={delete} class="graphjs-danger">Delete</a>
                 </li>
             </ul>
@@ -109,6 +122,8 @@
 
         analytics("blog-post");
 
+        import removeBlogPost from '../scripts/removeBlogPost.js';
+        
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
@@ -247,6 +262,10 @@
                     }
                 }
             });
+        }
+        this.handleShowList = (e) => {
+            e.preventDefault();
+            window.location.href=window.location.href.split("#")[0];
         }
         this.delete = (event) => {
             let link = event.currentTarget;

@@ -54,6 +54,12 @@
                 line-height: 1em;
                 border: none;
                 border-radius: 0;
+                a {
+                    svg {
+                        width: 1.2em;
+                        cursor:pointer;
+                    }
+                }
             }
             .@{prefix}-information {
                 color: @text-color-weak;
@@ -97,9 +103,11 @@
                 .@{prefix}-time {
                     time {
                         color: inherit;
+                        .bold-font;
                         &::before {
                             content: "Published in";
                             margin-right: .25em;
+                            .regular-font;
                         }
                         &.@{prefix}-edited {
                             &::before {

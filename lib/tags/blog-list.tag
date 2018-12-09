@@ -9,13 +9,22 @@
 >
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '') + (matchedPosts.length > pageLimit ? ' graphjs-pagination' : '')}>
         <div class="graphjs-list" if={loaded}>
-            <div if={postsData[matchedPost]} each={matchedPost, index in matchedPosts} class={'graphjs-item' + ((index + 1 > (page - 1) * pageLimit && index + 1 <= Math.min(matchedPosts.length, page * pageLimit)) ? '' : ' graphjs-hidden')} data-link="post" data-id={matchedPost} onclick={opts.minor ? handleCallback : handleShow}>
+            <div 
+                if={postsData[matchedPost]} 
+                each={matchedPost, index in matchedPosts}
+                class={'graphjs-item' + ((index + 1 > (page - 1) * pageLimit && index + 1 <= Math.min(matchedPosts.length, page * pageLimit)) ? '' : ' graphjs-hidden')} 
+                data-link="post" 
+                data-id={matchedPost}
+                data-title={postsData[matchedPost].title}
+                onclick={opts.minor ? handleCallback : handleShow}
+            >
                 <h1 class="graphjs-title">{postsData[matchedPost].title}</h1>
                 <ul class="graphjs-information">
                     <li class="graphjs-author">
                         <a data-link="profile" data-id={postsData[matchedPost].author.id} onclick={handleShow}>{postsData[matchedPost].author.username}</a>
                     </li>
-                    <li class="graphjs-time" if={createTime && lastEditTime}>
+                    <li  if={postsData[matchedPost].isDraft}><b>[DRAFT]</b></li>
+                    <li class="graphjs-time" if={postsData[matchedPost].timestamp}>
                         <time>{printTime(postsData[matchedPost].timestamp)}</time>
                     </li>
                 </ul>
@@ -129,7 +138,7 @@
             this.handleUser();
         }
         this.handleUser = () => {
-            let self = this;
+            let self=this;
             getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
@@ -151,6 +160,14 @@
         }
         this.handleContent = () => {
             let self = this;
+            if(window.location.hash){
+                let dataset={
+                    link: "post", 
+                    id: window.location.hash.substring(1).split("-")[1]
+                }
+                opts.callback(dataset);
+                return;
+            }
             getBlogPosts(function(response) {
                 if(response.success) {
                     for(let [index, post] of response.blogs.entries()) {
@@ -160,7 +177,8 @@
                             title: post.title,
                             author: post.author,
                             timestamp: post.publish_time,
-                            published: !post.is_draft,
+                            published: post.publish_time !== "0",
+                            isDraft: (self.userId && post.is_draft),
                             summary: index >= 3
                                 ? ''
                                 : post.summary
@@ -170,7 +188,7 @@
                                     .trim()
                         }
                     }
-                    self.matchedPosts = self.posts.filter(item => self.postsData[item].published);
+                    self.matchedPosts = self.posts.filter(item => (self.postsData[item].published || self.postsData[item].isDraft));
                     self.loaded = true;
                     self.blocked = false;
                     self.update();
@@ -185,11 +203,26 @@
             if(properties.target) {
                 properties.preventDefault();
                 let dataset = Object.assign({}, properties.currentTarget.dataset);
+                window.location.href += ('#'+dataset.title.replace(" ","_")+"-"+dataset.id);
                 opts.callback(dataset);
             } else {
                 opts.callback(properties);
             }
         }
+        window.addEventListener('popstate', function(event)
+        {
+            let dataset={
+                link: "list", 
+                id: ""
+            }
+            if(window.location.hash){
+                dataset={
+                    link: "post", 
+                    id: window.location.hash.substring(1).split("-")[1]
+                }
+            }
+            opts.callback(dataset);
+        });
         this.handleShow = (event) => {
             event.preventDefault();
             let dataset = event.currentTarget.dataset;
