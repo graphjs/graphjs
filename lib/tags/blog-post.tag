@@ -34,7 +34,7 @@
                     <time if={published && time.published}><a href={window.location.href}>{timeText}</a></time>
                     <time if={!published && time.lastEdited} class="graphjs-edited">{timeText}</time>
                 </li>
-                <li class="graphjs-action">
+                <li class="graphjs-action" if={author.is_editor}>
                     <a ref="edit" if={opts.minor} onclick={edit}>Edit</a>
                     <a ref="publish" if={!published} onclick={publish}>Publish</a>
                     <a ref="unpublish" if={published} onclick={unpublish} class="graphjs-danger">Unpublish</a>
@@ -161,6 +161,7 @@
         }
         this.handleUser = (callback) => {
             getSession(function(response) {
+                console.log(response);
                 if(response.success) {
                     self.userId = response.id;
                     self.update();
@@ -188,6 +189,12 @@
                     };
                     self.published = !response.blog.is_draft;
                     self.loaded = true;
+                    getProfile(self.userId, function(response) {
+                        if(response.success) {
+                            self.author.is_editor=response.profile.is_editor 
+                        }
+                        self.update();
+                    });
                     self.update();
                     self.handleRender();
                     let time = response.blog.is_draft ? response.blog.last_edit : response.blog.publish_time;

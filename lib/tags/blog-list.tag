@@ -178,7 +178,7 @@
                             author: post.author,
                             timestamp: post.publish_time,
                             published: post.publish_time !== "0",
-                            isDraft: (self.userId && post.is_draft),
+                            isDraft: (self.userId && post.author && self.userId === post.author.id && post.is_draft),
                             summary: index >= 3
                                 ? ''
                                 : post.summary
