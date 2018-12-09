@@ -89,12 +89,6 @@
             </defs>
         </svg>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/private-content.less';
-    </style>
     <script>
         import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';
@@ -104,8 +98,8 @@
         analytics("private-content");
 
         import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['private-i18n'];
-        i18n = {...i18n,...opts}
+        let i18n = internationalization[window.GraphJSConfig.language]['private-content'];
+        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
         
         this.blocked = true;

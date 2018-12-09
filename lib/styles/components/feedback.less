@@ -48,13 +48,16 @@
                 height: 3em;
                 .border-radius(@border-radius-full);
                 cursor: pointer;
+                & + .@{prefix}-memo {
+                    width: calc(100% - 4em);
+                    margin-left: 1em;
+                }
             }
             .@{prefix}-memo {
                 float: left;
                 display: block;
                 position: relative;
-                width: calc(100% - 4em);
-                margin-left: 1em;
+                width: 100%;
                 padding: 1em;
                 .border-radius(@border-radius-large);
                 border: 1px solid fade(@default-color, 3%);
@@ -120,46 +123,4 @@
             }
         }
     }
-}
-
-// Responsive
-
-/* Window Width < 480 */
-@media only screen and (max-width: 479px) {
-
-}
-
-/* 480 ≤ Window Width < 768 */
-@media only screen and (min-width: 480px) and (max-width: 767px) {
-
-}
-
-/* 768 ≤ Window Width < 1024 */
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-
-}
-
-/* 1024 ≤ Window Width < 1152 */
-@media only screen and (min-width: 1024px) and (max-width: 1151px) {
-
-}
-
-/* 1152 ≤ Window Width < 1280 */
-@media only screen and (min-width: 1152px) and (max-width: 1280px) {
-
-}
-
-/* 1280 ≤ Window Width < 1440 */
-@media only screen and (min-width: 1280px) and (max-width: 1439px) {
-
-}
-
-/* 1440 ≤ Window Width < 1680 */
-@media only screen and (min-width: 1440px) and (max-width: 1679px) {
-
-}
-
-/* 1680 ≤ Window Width */
-@media only screen and (min-width: 1680px) {
-
 }

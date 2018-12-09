@@ -5,7 +5,7 @@
     <graphjs-auth-state
         minor={true}
         callback={changeProperties}
-        type={opts.type}
+        box={opts.box}
         theme={opts.theme}
         active={active}
         height={opts.height}
@@ -34,12 +34,6 @@
         refresh={refreshState}
         if={active == 'reset'}
     />
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/auth.less';
-    </style>
     <script>
         import './auth-state.tag';
         import './auth-login.tag';
@@ -48,6 +42,7 @@
 
         this.active = opts.default || undefined;
         this.height = opts.height || '50px';
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.position = (opts.position && ['topleft', 'topright', 'bottomleft', 'bottomright'].includes(opts.position)) ? opts.position : 'topleft';
         this.changeProperties = (event) => {
             this.active = event ? event.currentTarget.dataset.link : undefined;

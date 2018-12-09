@@ -1,4 +1,4 @@
-<graphjs-profile-activity class="graphjs-element graphjs-root graphjs-box">
+<graphjs-profile-activity class={'graphjs-element graphjs-root ' + boxStyle}>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <ul if={activity.length > 0}>
             <li each={item in activity}>
@@ -128,12 +128,6 @@
         </div>
         <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/profile-activity.less';
-    </style>
     <script>
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
@@ -142,14 +136,15 @@
         import showGroup from '../scripts/showGroup.js';
         import showLogin from '../scripts/showLogin.js';
         import getActivityToken from '../scripts/getActivityToken.js';
-        import stream from 'getstream';
+        import stream from 'getstream-pho';
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['profile-activity'];
-        i18n = {...i18n,...opts}
+        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
         
         this.id = opts.id;
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.activity = [];
 
         this.on('before-mount', function() {
@@ -194,7 +189,14 @@
             getActivityToken('user', self.id, function(response) {
             	if(response.success) {
                     self.activity = [];
-            		let client = stream.connect('7aeupnd8y7ag');
+            		let client = stream.connect(
+                        window.GraphJSConfig["streamId"], 
+                        null, // we don't give out secret in client-side
+                        null, // app id
+                        {
+                            "baseUrl": window.GraphJSConfig["streamHost"]
+                        }
+                    );
             		let user = client.feed('user', self.id, response.token);
             		user.get(/* { limit: 10, offset: 0} */)
             		.then((response) => {

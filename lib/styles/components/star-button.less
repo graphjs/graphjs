@@ -3,13 +3,9 @@
 @{prefix}-star-button.@{prefix}-root {
     display: inline-block;
     width: auto;
-    height: 50px;
+    height: 3em;
     color: @text-color-normal;
     vertical-align: middle;
-    .transition(background-color .35s ease);
-    &:hover {
-        background-color: @contrast-color;
-    }
     .@{prefix}-content {
         .no-padding !important;
         background-color: transparent !important;
@@ -17,15 +13,15 @@
             display: inline-block;
             overflow: hidden;
             width: auto;
-            height: 48px;
+            height: inherit;
             vertical-align: middle;
             .border-radius(inherit);
             .@{prefix}-icon {
                 display: block;
                 float: left;
                 position: relative;
-                width: 48px;
-                height: 48px;
+                width: 3em;
+                height: 3em;
                 text-align: center;
                 .border-radius(inherit);
                 &.@{prefix}-default {
@@ -89,13 +85,15 @@
             .@{prefix}-text {
                 display: block;
                 float: left;
+                position: relative;
+                top: 1px; // To visually improve vertical centering
                 width: auto;
-                height: 50px;
+                height: 2em;
                 margin: 0;
-                margin-right: 15px;
+                margin-right: .5em;
                 color: @text-color-normal;
-                font-size: 1.6em;
-                line-height: 51px;
+                font-size: 1.5em;
+                line-height: 2em;
                 letter-spacing: .015em;
                 .disable-selection;
             }

@@ -3,8 +3,23 @@
 @{prefix}-blog-post.@{prefix}-root {
     display: block;
     position: relative;
-    padding-bottom: 3.6em;
     color: @text-color-normal;
+    &.@{prefix}-box {
+      .@{prefix}-content {
+          min-height: 32em;
+          .@{prefix}-placeholder {
+              padding: 2.5em;
+          }
+      }
+    }
+    &.@{prefix}-inline {
+        .@{prefix}-content {
+            min-height: 27em;
+            .@{prefix}-placeholder {
+                padding: 0;
+            }
+        }
+    }
     &.@{prefix}-composer {
         .@{prefix}-content {
             .@{prefix}-thread {
@@ -18,8 +33,6 @@
     }
     .@{prefix}-content {
         position: relative;
-        min-height: 28.5em;
-        .no-padding !important;
         vertical-align: middle;
         .@{prefix}-nonexistent {
             p {
@@ -262,6 +275,7 @@
     }
     /* Placeholder */
     .@{prefix}-placeholder {
+        padding: 2.5em;
         background-color: transparent !important;
         .@{prefix}-title {
             position: relative;
@@ -408,34 +422,4 @@
             }
         }
     }
-}
-
-/* 768 ≤ Window Width < 1024 */
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-
-}
-
-/* 1024 ≤ Window Width < 1152 */
-@media only screen and (min-width: 1024px) and (max-width: 1151px) {
-
-}
-
-/* 1152 ≤ Window Width < 1280 */
-@media only screen and (min-width: 1152px) and (max-width: 1280px) {
-
-}
-
-/* 1280 ≤ Window Width < 1440 */
-@media only screen and (min-width: 1280px) and (max-width: 1439px) {
-
-}
-
-/* 1440 ≤ Window Width < 1680 */
-@media only screen and (min-width: 1440px) and (max-width: 1679px) {
-
-}
-
-/* 1680 ≤ Window Width */
-@media only screen and (min-width: 1680px) {
-
 }

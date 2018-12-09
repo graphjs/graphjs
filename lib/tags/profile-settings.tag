@@ -1,4 +1,4 @@
-<graphjs-profile-settings class="graphjs-element graphjs-root graphjs-box">
+<graphjs-profile-settings class={'graphjs-element graphjs-root ' + boxStyle}>
     <div class="graphjs-warning" if={failMessages.length > 0}>
         <ul if={failMessages.length > 0} class="graphjs-fail">
             <li each={failMessage in failMessages}>{failMessage}</li>
@@ -23,12 +23,6 @@
             <button ref="submitPassword" onclick={handlePasswordSubmit}>{i18n.passwordSubmitButtonText}</button>
         </form>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/profile-settings.less';
-    </style>
     <script>
         import getProfile from '../scripts/getProfile.js';
         import setProfile from '../scripts/setProfile.js';
@@ -43,12 +37,13 @@
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['profile-settings'];
-        i18n = {...i18n,...opts}
+        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
         
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.failMessages = [];
         this.successMessages = [];
 

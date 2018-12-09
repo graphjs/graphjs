@@ -1,5 +1,5 @@
 <graphjs-auth-state
-    class={'graphjs-element graphjs-root graphjs-' + theme + (opts.type == 'inline' ? ' graphjs-inline' : ' graphjs-box')}
+    class={'graphjs-element graphjs-root ' + boxStyle + ' graphjs-' + theme}
     style={'height: ' + height + '; line-height: ' + height + ';'}
 >
     <div class="graphjs-content">
@@ -25,12 +25,6 @@
             </a>
         </div>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/auth-state.less';
-    </style>
     <script>
         import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';
@@ -44,7 +38,7 @@
         
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['auth-state'];
-        i18n = {...i18n,...opts}
+        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
         
         import {downsizeImage} from '../scripts/client.js';
@@ -52,6 +46,7 @@
 
         this.theme = opts.theme || 'default';
         this.height = opts.height || '50px';
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.failMessages = [];
 
         this.on('before-mount', function() {

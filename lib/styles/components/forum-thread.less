@@ -3,6 +3,20 @@
 @{prefix}-forum-thread.@{prefix}-root {
     display: block;
     color: @text-color-normal;
+    &.@{prefix}-box {
+      .@{prefix}-content {
+          .@{prefix}-placeholder {
+              padding: 0 2.5em;
+          }
+      }
+    }
+    &.@{prefix}-inline {
+        .@{prefix}-content {
+            .@{prefix}-placeholder {
+                padding: 0;
+            }
+        }
+    }
     &.@{prefix}-composer {
         .@{prefix}-content {
             .@{prefix}-thread {
@@ -16,7 +30,7 @@
     }
     .@{prefix}-content {
         position: relative;
-        min-height: 28.5em;
+        min-height: 37em;
         .no-padding !important;
         vertical-align: middle;
         .@{prefix}-thread {
@@ -42,7 +56,6 @@
             .@{prefix}-replies {
                 padding-right: 2.5em;
                 padding-left: 2.5em;
-                background-color: @shade-color;
                 .@{prefix}-item {
                     padding: 1.5em 0;
                     border-top: 1px dotted fade(black, 15%);
@@ -182,7 +195,6 @@
     }
     /* Placeholder */
     .@{prefix}-placeholder {
-        padding: 0 2.5em;
         .@{prefix}-title {
             display: none !important;
             position: relative;
@@ -366,34 +378,4 @@
             }
         }
     }
-}
-
-/* 768 ≤ Window Width < 1024 */
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-
-}
-
-/* 1024 ≤ Window Width < 1152 */
-@media only screen and (min-width: 1024px) and (max-width: 1151px) {
-
-}
-
-/* 1152 ≤ Window Width < 1280 */
-@media only screen and (min-width: 1152px) and (max-width: 1280px) {
-
-}
-
-/* 1280 ≤ Window Width < 1440 */
-@media only screen and (min-width: 1280px) and (max-width: 1439px) {
-
-}
-
-/* 1440 ≤ Window Width < 1680 */
-@media only screen and (min-width: 1440px) and (max-width: 1679px) {
-
-}
-
-/* 1680 ≤ Window Width */
-@media only screen and (min-width: 1680px) {
-
 }

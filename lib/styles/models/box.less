@@ -1,7 +1,9 @@
 @prefix: graphjs;
 
+// Box
 .@{prefix}-box.@{prefix}-root {
     position: relative;
+    overflow: hidden;
     .border-radius(@border-radius-large);
     border: 1px solid fade(@default-color, 3%);
     background-color: @shade-color;
@@ -10,110 +12,132 @@
         .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
     }
     .@{prefix}-header {
-        position: relative;
-        width: 100%;
-        height: 3.5em;
-        .medium-font;
-        line-height: 3.5em;
-        text-align: center;
         border-bottom: 2px solid fade(@default-color, 10%);
         background-color: @contrast-color;
-        .@{prefix}-title {
-            position: absolute;
-            top: 0;
-            right: 2.5em;
-            bottom: 0;
-            left: 2.5em;
-            width: auto;
-            color: @theme-color;
-            font-size: 1.2em;
-            .single-line-text;
-        }
-        .@{prefix}-option {
-            display: inline-block;
-            width: 3.5em;
-            height: 3.5em;
-            text-align: center;
-            .icon-color-states(@theme-color);
-            &.@{prefix}-left {
-                float: left;
-            }
-            &.@{prefix}-right {
-                float: right;
-            }
-            svg {
-                &.@{prefix}-new {
-                    .transform(rotate(45deg));
-                }
-                position: relative;
-                top: -1px;
-                width: 1.75em;
-                height: 1.75em;
-                vertical-align: middle;
-                .transition(transform .35s ease);
-                path {
-                    fill: @theme-color;
-                    .transition(fill .35s ease);
-                }
-            }
-        }
-        + .@{prefix}-warning {
-            border-bottom: none;
-            ul {
-                &.@{prefix}-fail {
-                    background-color: @danger-color;
-                }
-                &.@{prefix}-success {
-                    background-color: @success-color;
-                }
-                li {
-                    color: white !important;
-                }
-            }
-        }
-    }
-    .@{prefix}-warning {
-        display: inline-block;
-        width: 100%;
-        text-align: center;
-        border-bottom: 1px solid fade(@default-color, 15%);
-        ul {
-            list-style: none;
-            width: 100%;
-            margin: 0;
-            padding: .75em 5%;
-            &.@{prefix}-fail {
-                color: @danger-color;
-            }
-            &.@{prefix}-success {
-                color: @success-color;
-            }
-            li {
-                margin-bottom: .25em;
-                color: inherit;
-                list-style: none;
-                &:last-child {
-                    margin-bottom: 0;
-                }
-            }
-        }
     }
     .@{prefix}-content {
         overflow: hidden;
-        display: inline-block;
-        width: 100%;
         padding: 2.5em;
-        vertical-align: middle;
-        background-color: @shade-color;
-        p {
-            margin: 0;
+    }
+}
+
+// Inline
+.@{prefix}-root.@{prefix}-inline {
+    position: relative;
+    &.@{prefix}-promo-pad {
+        padding-bottom: 3.6em;
+    }
+}
+
+// Header
+.@{prefix}-header {
+    position: relative;
+    width: 100%;
+    height: 3.5em;
+    .medium-font;
+    line-height: 3.5em;
+    text-align: center;
+    .@{prefix}-title {
+        position: absolute;
+        top: 0;
+        right: 2.5em;
+        bottom: 0;
+        left: 2.5em;
+        width: auto;
+        color: @theme-color;
+        font-size: 1.2em;
+        .single-line-text;
+    }
+    .@{prefix}-option {
+        display: inline-block;
+        width: 3.5em;
+        height: 3.5em;
+        text-align: center;
+        .icon-color-states(@theme-color);
+        &.@{prefix}-left {
+            float: left;
+        }
+        &.@{prefix}-right {
+            float: right;
+        }
+        svg {
+            &.@{prefix}-new {
+                .transform(rotate(45deg));
+            }
+            position: relative;
+            top: -1px;
+            width: 1.75em;
+            height: 1.75em;
+            vertical-align: middle;
+            .transition(transform .35s ease);
+            path {
+                fill: @theme-color;
+                .transition(fill .35s ease);
+            }
         }
     }
-    .@{prefix}-check {
-        display: none;
-        background-color: transparent;
-        .transition(background-color .35s ease);
+    + .@{prefix}-warning {
+        border-bottom: none;
+        ul {
+            &.@{prefix}-fail {
+                background-color: @danger-color;
+            }
+            &.@{prefix}-success {
+                background-color: @success-color;
+            }
+            li {
+                color: white !important;
+            }
+        }
     }
+}
+
+// Content
+
+.@{prefix}-content {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+    p {
+        margin: 0;
+    }
+}
+
+// Warning
+
+.@{prefix}-warning {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid fade(@default-color, 15%);
+    ul {
+        list-style: none;
+        width: 100%;
+        margin: 0;
+        padding: .75em 5%;
+        &.@{prefix}-fail {
+            color: @danger-color;
+        }
+        &.@{prefix}-success {
+            color: @success-color;
+        }
+        li {
+            margin-bottom: .25em;
+            color: inherit;
+            list-style: none;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+// Check
+
+.@{prefix}-check {
+    display: none;
+    background-color: transparent;
+    .transition(background-color .35s ease);
 }
 
 .@{prefix}-checked {
@@ -201,34 +225,4 @@
             padding: 2em;
         }
     }
-}
-
-/* 768 ≤ Window Width < 1024 */
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-
-}
-
-/* 1024 ≤ Window Width < 1152 */
-@media only screen and (min-width: 1024px) and (max-width: 1151px) {
-
-}
-
-/* 1152 ≤ Window Width < 1280 */
-@media only screen and (min-width: 1152px) and (max-width: 1280px) {
-
-}
-
-/* 1280 ≤ Window Width < 1440 */
-@media only screen and (min-width: 1280px) and (max-width: 1439px) {
-
-}
-
-/* 1440 ≤ Window Width < 1680 */
-@media only screen and (min-width: 1440px) and (max-width: 1679px) {
-
-}
-
-/* 1680 ≤ Window Width */
-@media only screen and (min-width: 1680px) {
-
 }
