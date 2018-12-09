@@ -111,6 +111,9 @@
                     &::before {
                         content: attr(data-count);
                     }
+                    &::after {
+                        color: @text-color-weak;
+                    }
                 }
                 span {
                     color: @text-color-normal;
@@ -212,7 +215,6 @@
                 }
                 &.@{prefix}-active {
                     border-top: none;
-                    background-color: @background-color-contrast;
                 }
                 a {
                     position: relative;
@@ -230,7 +232,6 @@
                             top: 4.25em;
                             left: 0;
                             width: 100%;
-                            color: @text-color-weak;
                             font-size: .6em;
                             line-height: 1.25em;
                             text-align: center;
@@ -301,7 +302,6 @@
                 }
                 &.@{prefix}-active {
                     border-top: none;
-                    background-color: @background-color-contrast;
                 }
                 a {
                     position: relative;
@@ -320,7 +320,6 @@
                             top: 4.25em;
                             left: 0;
                             width: 100%;
-                            color: @text-color-weak;
                             font-size: .6em;
                             line-height: 1.25em;
                             text-align: center;
