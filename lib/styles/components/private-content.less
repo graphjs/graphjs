@@ -11,7 +11,8 @@
         &.@{prefix}-blocked {
             border-width: 1px;
             border-style: dashed;
-            border-color: @text-color-weak;
+            // ThemeOption: border-color: @text-color-weak;
+            border-color: transparent; // ThemeFix
             border-radius: @border-radius-large;
         }
         .@{prefix}-placeholder {

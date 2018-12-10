@@ -6,25 +6,25 @@
     text-align: left;
     padding: 0;
     * {
-        color: @text-color-normal;
+        // ThemeOption: color: @text-color-normal;
     }
     h2 {
         margin-bottom: 1em;
-        color: @text-color-strong;
+        // ThemeOption: color: @text-color-strong;
         font-size: 1.5em;
         line-height: 1.25em;
         .bold-font;
     }
     h3 {
         margin-bottom: 1em;
-        color: @text-color-strong;
+        // ThemeOption: color: @text-color-strong;
         font-size: 1.25em;
         line-height: 1.25em;
         .bold-font;
     }
     h4 {
         margin-bottom: 1em;
-        color: @text-color-strong;
+        // ThemeOption: color: @text-color-strong;
         font-size: 1.125em;
         line-height: 1.25em;
         .bold-font;
@@ -34,13 +34,13 @@
         font-size: 1em;
     }
     a {
-        color: @primary-color;
+        // ThemeOption: color: @primary-color;
         border-bottom-width: 1px;
         border-bottom-style: dotted;
-        border-bottom-color: @text-color-weak;
+        // ThemeOption: border-bottom-color: @text-color-weak;
     }
     b, strong {
-        color: @text-color-strong;
+        // ThemeOption: color: @text-color-strong;
         .bold-font();
     }
     i {
@@ -50,7 +50,7 @@
         text-decoration: underline;
     }
     s, strike, del {
-        color: @text-color-weak;
+        // ThemeOption: color: @text-color-weak;
         text-decoration: line-through;
     }
     img {
@@ -81,8 +81,9 @@
         padding: .5em .75em;
         border-width: 1px;
         border-style: solid;
-        border-color: fade(@default-color, 25%);
-        background-color: fade(@default-color, 10%);
+        // ThemeOption: border-color: fade(@default-color, 25%);
+        border-color: transparent; // ThemeFix
+        // ThemeOption: background-color: fade(@default-color, 10%);
     }
     blockquote {
         position: relative;
@@ -94,14 +95,14 @@
         line-height: 1.5em;
         border-left-width: .5em;
         border-left-style: solid;
-        border-left-color: @primary-color;
-        background-color: fade(@default-color, 10%);
+        // ThemeOption: border-left-color: @primary-color;
+        // ThemeOption: background-color: fade(@default-color, 10%);
         &::before{
             content: "\00201D";
             position: absolute;
             left: calc(1em / 3);
             top: calc(1em / 3.25); // Visually centers the super script character
-            color: @primary-color;
+            // ThemeOption: color: @primary-color;
             font-size: 3em;
             font-family: Arial, sans-serif;
             font-style: normal;
@@ -115,7 +116,7 @@
         span {
             display: block;
             margin-top: 1em;
-            color: @text-color-normal;
+            // ThemeOption: color: @text-color-normal;
             .bold-font
         }
     }

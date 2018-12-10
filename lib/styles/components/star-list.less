@@ -2,7 +2,7 @@
 
 @{prefix}-star-list.@{prefix}-root {
     display: block;
-    color: @text-color-normal;
+    // ThemeOption: color: @text-color-normal;
     .@{prefix}-header {
         border-color: transparent;
     }
@@ -19,7 +19,7 @@
             }
             .@{prefix}-search {
                 width: 100%;
-                background-color: desaturate(tint(@primary-color, 20%), 5%);
+                // ThemeOption: background-color: desaturate(tint(@primary-color, 20%), 5%);
                 & > * {
                     float: left;
                     border-radius: 0;
@@ -60,7 +60,7 @@
             .@{prefix}-item {
                 display: table;
                 width: 100%;
-                color: @text-color-normal;
+                // ThemeOption: color: @text-color-normal;
                 line-height: 3.5em;
                 border-bottom-width: 1px;
                 border-bottom-style: solid;
@@ -78,7 +78,7 @@
                     display: none !important;
                 }
                 &.@{prefix}-placeholder {
-                    color: @text-color-weak;
+                    // ThemeOption: color: @text-color-weak;
                     text-align: center;
                 }
                 & > * {
@@ -167,7 +167,7 @@
                 .@{prefix}-title {
                     cursor: pointer;
                     width: calc(100% - 7.5em);
-                    color: @text-color-strong;
+                    // ThemeOption: color: @text-color-strong;
                     .single-line-text;
                     &:hover {
                         &::after {

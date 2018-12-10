@@ -2,11 +2,11 @@
 
 @{prefix}-forum-thread.@{prefix}-root {
     display: block;
-    color: @text-color-normal;
+    // ThemeOption: color: @text-color-normal;
     &.@{prefix}-box {
       .@{prefix}-content {
           .@{prefix}-reply {
-              background-color: @background-color-contrast;
+              // ThemeOption: background-color: @background-color-contrast;
           }
       }
     }
@@ -41,7 +41,7 @@
                 line-height: 100%;
                 h1 {
                     .no-margin;
-                    color: @text-color-strong;
+                    // ThemeOption: color: @text-color-strong;
                     .regular-font;
                     font-size: 1.75em;
                     line-height: 150%;
@@ -81,7 +81,7 @@
                             cursor: pointer;
                         }
                         span {
-                            color: @text-color-normal;
+                            // ThemeOption: color: @text-color-normal;
                             b {
                                 cursor: pointer;
                             }
@@ -89,18 +89,19 @@
                     }
                     p {
                         margin-left: 3em * 1.2;
-                        color: @text-color-normal;
+                        // ThemeOption: color: @text-color-normal;
                         .regular-font;
                         font-size: 1em;
                         line-height: 150%;
                         white-space: pre-wrap;
                         &.@{prefix}-editable {
                             padding: .75em 1em;
-                            color: @text-color-normal;
+                            // ThemeOption: color: @text-color-normal;
                             border-width: 1px;
                             border-style: dashed;
-                            border-color: fade(@default-color, 15%);
-                            background-color: @background-color-contrast;
+                            // ThemeOption: border-color: fade(@default-color, 15%);
+                            border-color: transparent; // ThemeFix
+                            // ThemeOption: background-color: @background-color-contrast;
                             outline: none;
                         }
                     }
@@ -119,7 +120,7 @@
             padding-top: 0;
             border-top-width: 2px;
             border-top-style: solid;
-            border-top-color: @primary-color;
+            // ThemeOption: border-top-color: @primary-color;
             .box-shadow(0 -2px 1px 0px fade(black, 7.5%));
             /*.transition(bottom .35s ease);*/
             .@{prefix}-synopsis {
@@ -132,7 +133,7 @@
                 border-bottom-color: fade(black, 15%);
                 cursor: pointer;
                 & > b {
-                    color: @text-color-normal;
+                    // ThemeOption: color: @text-color-normal;
                 }
                 & > a {
                     display: inline-block;
@@ -160,7 +161,7 @@
                             height: .8em;
                             padding: .1em 0;
                             path {
-                                fill: @primary-color;
+                                // ThemeOption: fill: @primary-color;
                             }
                         }
                     }

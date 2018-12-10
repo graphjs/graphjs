@@ -2,7 +2,7 @@
 
 @{prefix}-forum-list.@{prefix}-root {
     display: block;
-    color: @text-color-normal;
+    // ThemeOption: color: @text-color-normal;
     &.@{prefix}-box {
       .@{prefix}-content {
           .@{prefix}-placeholder {
@@ -34,7 +34,7 @@
             .@{prefix}-search {
                 width: calc(100% - 12em - 2px); // 2px creates the space for pseudo-border
                 margin-right: 2px; // Simulating a 2px border
-                background-color: desaturate(tint(@primary-color, 20%), 5%);
+                // ThemeOption: background-color: desaturate(tint(@primary-color, 20%), 5%);
                 & > * {
                     float: left;
                     border-radius: 0;
@@ -73,7 +73,7 @@
                 .regular-font;
                 font-size: 1em;
                 text-transform: none;
-                .background-color-states(@primary-color);
+                // ThemeOption: .background-color-states(@primary-color);
                 svg {
                     position: relative;
                     width: auto;
@@ -98,7 +98,7 @@
             .@{prefix}-item {
                 display: inline-block;
                 width: 100%;
-                color: @text-color-normal;
+                // ThemeOption: color: @text-color-normal;
                 line-height: 3.5em;
                 border-bottom-width: 1px;
                 border-bottom-style: solid;
@@ -113,7 +113,7 @@
                     display: none !important;
                 }
                 &.@{prefix}-placeholder {
-                    color: @text-color-weak;
+                    // ThemeOption: color: @text-color-weak;
                     text-align: center;
                 }
                 & > * {
@@ -125,7 +125,7 @@
                 .@{prefix}-title {
                     width: calc(100% - 16em);
                     padding: 0 1.5em;
-                    color: @text-color-strong;
+                    // ThemeOption: color: @text-color-strong;
                     .single-line-text;
                 }
                 /*
@@ -137,14 +137,14 @@
                         height: .75em;
                         margin-right: .25em;
                         path {
-                            fill: @text-color-normal;
+                            // ThemeOption: fill: @text-color-normal;
                         }
                     }
                 }
                 */
                 time {
                     width: calc(4em / .9);
-                    color: @text-color-normal;
+                    // ThemeOption: color: @text-color-normal;
                     font-size: .9em;
                 }
                 .@{prefix}-contributors {
@@ -157,7 +157,8 @@
                         margin-right: .1em;
                         border-width: 0;
                         border-style: solid;
-                        border-color: @background-color-contrast;
+                        // ThemeOption: border-color: @background-color-contrast;
+                        border-color: transparent; // ThemeFix
                         .border-radius(@border-radius-full);
                     }
                 }

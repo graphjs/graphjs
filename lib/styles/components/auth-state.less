@@ -7,7 +7,7 @@
     line-height: @bar-height;
     border: none;
     &.@{prefix}-box {
-        background-color: @background-color-contrast;
+        // ThemeOption: background-color: @background-color-contrast;
     }
     .@{prefix}-content {
         height: inherit;
@@ -18,10 +18,10 @@
         background-color: transparent;
         a {
             float: left;
-            color: @primary-color;
+            // ThemeOption: color: @primary-color;
             border-right-width: 1px;
             border-right-style: dotted;
-            border-right-color: fade(@primary-color, 20%);
+            // ThemeOption: border-right-color: fade(@primary-color, 20%);
             background-color: transparent;
             .disable-selection;
             &:hover {
@@ -75,7 +75,7 @@
                     height: inherit;
                     max-width: 10em;
                     padding: 0 .75em;
-                    color: @primary-color;
+                    // ThemeOption: color: @primary-color;
                     .bold-font;
                     line-height: inherit;
                     .single-line-text;
@@ -95,7 +95,7 @@
                     width: auto;
                     height: inherit;
                     path {
-                        fill: fade(@primary-color, 50%);
+                        // ThemeOption: fill: fade(@primary-color, 50%);
                         .transition(fill .35s ease);
                     }
                 }

@@ -5,11 +5,11 @@
     display: block;
     width: 100%;
     min-height: 17.5em;
-    color: @text-color-normal;
+    // ThemeOption: color: @text-color-normal;
     text-align: center;
     &.@{prefix}-box {
         .@{prefix}-information {
-            background-color: @background-color-contrast;
+            // ThemeOption: background-color: @background-color-contrast;
         }
     }
     & + * {
@@ -21,7 +21,7 @@
         height: 3.75em;
         padding: 1em;
         text-align: center;
-        .icon-color-states(@primary-color);
+        // ThemeOption: .icon-color-states(@primary-color);
         &.@{prefix}-left {
             float: left;
         }
@@ -34,7 +34,7 @@
             max-height: auto;
             vertical-align: middle;
             path {
-                fill: @primary-color;
+                // ThemeOption: fill: @primary-color;
                 .transition(fill .35s ease);
             }
         }
@@ -47,7 +47,8 @@
             height: 6.5em;
             border-width: 4px;
             border-style: solid;
-            border-color: fade(@default-color, 15%);
+            // ThemeOption: border-color: fade(@default-color, 15%);
+            border-color: transparent; // ThemeFix
             .border-radius(@border-radius-full);
         }
         a {
@@ -57,7 +58,7 @@
             max-height: 2.5em;
             margin: 0 5%;
             margin-top: .5em;
-            .text-color-states(@primary-color);
+            // ThemeOption: .text-color-states(@primary-color);
             font-size: 1.2em;
             line-height: 1.25em;
             .heavy-font;
@@ -69,7 +70,7 @@
             max-height: 2.5em;
             margin: 0 5%;
             margin-top: .75em;
-            color: @text-color-normal;
+            // ThemeOption: color: @text-color-normal;
             line-height: 1.25em;
         }
     }
@@ -88,13 +89,13 @@
             &:hover {
                 a {
                     opacity: 1;
-                    color: @text-color-normal;
+                    // ThemeOption: color: @text-color-normal;
                 }
             }
             &.@{prefix}-active {
                 a {
                     opacity: 1;
-                    color: @text-color-normal;
+                    // ThemeOption: color: @text-color-normal;
                     pointer-events: none;
                 }
             }
@@ -103,7 +104,7 @@
                 opacity: .75;
                 padding: 0 1em;
                 cursor: pointer;
-                color: @text-color-normal;
+                // ThemeOption: color: @text-color-normal;
                 .bold-font;
                 line-height: 2.5em;
                 .disable-selection;
@@ -112,17 +113,17 @@
                         content: attr(data-count);
                     }
                     &::after {
-                        color: @text-color-weak;
+                        // ThemeOption: color: @text-color-weak;
                     }
                 }
                 span {
-                    color: @text-color-normal;
+                    // ThemeOption: color: @text-color-normal;
                     .bold-font;
                 }
                 svg {
                     display: none;
                     path {
-                        fill: @primary-color;
+                        // ThemeOption: fill: @primary-color;
                     }
                 }
             }
@@ -183,7 +184,7 @@
             ul {
                 li {
                     &.@{prefix}-active {
-                        background-color: @background-color-contrast;
+                        // ThemeOption: background-color: @background-color-contrast;
                     }
                 }
             }
@@ -270,7 +271,7 @@
             ul {
                 li {
                     &.@{prefix}-active {
-                        background-color: @background-color-contrast;
+                        // ThemeOption: background-color: @background-color-contrast;
                     }
                 }
             }
