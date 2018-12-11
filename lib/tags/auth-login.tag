@@ -1,6 +1,5 @@
 <graphjs-auth-login
     class={'graphjs-element graphjs-root ' + boxStyle + (checked ? ' graphjs-checked' : '')}
-    style={opts.minor ? (opts.gap == 0 ? 'top: -1em);' : 'top: calc(' + opts.gap + ' + 1em);') : ''}
 >
     <div class="graphjs-header" if={opts.title}>
         <div class="graphjs-title">{opts.title || 'Login'}</div>

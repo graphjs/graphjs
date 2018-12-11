@@ -1,6 +1,6 @@
 <graphjs-auth
     class={'graphjs-element graphjs-root graphjs-' + position}
-    style={'height: ' + height + '; line-height: ' + height + '; '}
+    style={'font-size: calc(' + height + ' * 2 / 7);'}
 >
     <graphjs-auth-state
         minor={true}
@@ -8,12 +8,15 @@
         box={opts.box}
         active={active}
         height={opts.height}
+        color={opts.color}
     />
     <graphjs-auth-login
         minor={true}
         title={opts.title}
         callback={changeProperties}
-        gap={(position == 'topleft' || position == 'topright') ? height : 0}
+        style={(position == 'topleft' || position == 'topright')
+            ? 'top: calc(' + height + ' + 1em);'
+            : 'top: -1em'}
         refresh={refreshState}
         if={active == 'login'}
     />
@@ -21,7 +24,9 @@
         minor={true}
         title={opts.title}
         callback={changeProperties}
-        gap={(position == 'topleft' || position == 'topright') ? height : 0}
+        style={(position == 'topleft' || position == 'topright')
+            ? 'top: calc(' + height + ' + 1em);'
+            : 'top: -1em'}
         refresh={refreshState}
         if={active == 'register'}
     />
@@ -29,7 +34,9 @@
         minor={true}
         title={opts.title}
         callback={changeProperties}
-        gap={(position == 'topleft' || position == 'topright') ? height : 0}
+        style={(position == 'topleft' || position == 'topright')
+            ? 'top: calc(' + height + ' + 1em);'
+            : 'top: -1em'}
         refresh={refreshState}
         if={active == 'reset'}
     />

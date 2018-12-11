@@ -3,8 +3,8 @@
 @{prefix}-auth-state.@{prefix}-root {
     display: inline-block;
     box-sizing: content-box !important;
-    height: @bar-height;
-    line-height: @bar-height;
+    height: 3.5em;
+    line-height: 3.5em;
     border: none;
     &.@{prefix}-box {
         // ThemeOption: background-color: @background-color-contrast;
@@ -15,6 +15,7 @@
         .bold-font;
         font-size: 1.2em;
         line-height: inherit;
+        vertical-align: unset;
         background-color: transparent;
         a {
             float: left;
@@ -59,7 +60,8 @@
             .@{prefix}-details {
                 float: left;
                 height: inherit;
-                padding: 5px;
+                padding: calc(1em / 3);
+                padding-right: 0;
                 & > * {
                     float: left;
                     pointer-events: none;
