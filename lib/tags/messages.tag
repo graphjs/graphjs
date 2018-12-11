@@ -228,7 +228,7 @@
             let self = this;
             getConversations(function(response) {
                 if(response.success) {
-                    self.handleList({}/*response.messages*/);
+                    self.handleList(response.messages);
                 } else {
                     //Handle errors
                 }
