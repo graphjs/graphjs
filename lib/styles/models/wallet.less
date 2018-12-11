@@ -1,16 +1,15 @@
 @prefix: graphjs;
 
 .@{prefix}-wallet.@{prefix}-root {
-    display: block;
     width: auto;
     margin-top: .75em;
-    margin-left: -.75em;
-    margin-right: -.75em;
-    .clearfix;
+    margin-left: auto;
+    margin-right: auto;
     .@{prefix}-content {
-        .clearfix;
+        .flex;
+        .justify-content(center);
+        .flex-wrap(wrap);
         & > * {
-            float: left;
             margin: .75em;
         }
         & > p {
@@ -31,8 +30,6 @@
 @media only screen and (max-width: 479px) {
     .@{prefix}-wallet.@{prefix}-root {
         margin-top: .25em;
-        margin-left: -.25em;
-        margin-right: -.25em;
         .@{prefix}-content {
             & > * {
                 margin: .25em;
@@ -48,8 +45,6 @@
 @media only screen and (min-width: 480px) and (max-width: 767px) {
     .@{prefix}-wallet.@{prefix}-root {
         margin-top: .25em;
-        margin-left: -.25em;
-        margin-right: -.25em;
         .@{prefix}-content {
             & > * {
                 margin: .25em;

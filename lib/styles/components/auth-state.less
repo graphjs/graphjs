@@ -26,7 +26,7 @@
             background-color: transparent;
             .disable-selection;
             &:hover {
-                background-color: fade(black, 2.5%);
+                background-color: fade(black, 3.5%);
             }
             &:last-of-type {
                 border-right-width: 0 !important;
@@ -60,7 +60,7 @@
             .@{prefix}-details {
                 float: left;
                 height: inherit;
-                padding: calc(1em / 3);
+                padding: .35em;
                 padding-right: 0;
                 & > * {
                     float: left;
@@ -73,13 +73,12 @@
                 }
                 span {
                     position: relative;
-                    top: -5px;
-                    height: inherit;
+                    height: 2.3em;
                     max-width: 10em;
                     padding: 0 .75em;
                     // ThemeOption: color: @primary-color;
                     .bold-font;
-                    line-height: inherit;
+                    line-height: 2.3em;
                     .single-line-text;
                     vertical-align: middle;
                 }
@@ -87,15 +86,15 @@
             .@{prefix}-exit {
                 float: right;
                 width: auto;
-                height: 100%;
                 text-align: center;
-                padding: 15px;
                 svg {
                     display: inline-block;
                     position: relative;
                     top: -1px;
                     width: auto;
-                    height: inherit;
+                    height: 1em;
+                    padding: 0 1em;
+                    vertical-align: middle;
                     path {
                         // ThemeOption: fill: fade(@primary-color, 50%);
                         .transition(fill .35s ease);

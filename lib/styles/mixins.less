@@ -55,6 +55,35 @@
 	animation:         @property;
 }
 
+.align-items(@property) {
+	-webkit-box-align:   @property;
+	-moz-box-align:      @property;
+	-ms-flex-align:      @property;
+	-webkit-align-items: @property;
+	align-items:         @property;
+}
+
+.justify-content(@property) {
+	-webkit-justify-content: @property;
+  justify-content:         @property;
+  -moz-box-pack:           @property;
+  box-pack:                @property;
+}
+
+.flex-wrap(@property) {
+	-webkit-flex-wrap: @property;
+	-ms-flex-wrap:     @property;
+  flex-wrap:         @property;
+}
+
+.flex() {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+
 .sticky() {
 	position: -webkit-sticky;
 	position: -moz-sticky;

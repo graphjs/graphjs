@@ -2,22 +2,16 @@
 
 @{prefix}-profile.@{prefix}-root {
     display: block;
-    width: 48em;
+    width: 100%;
     margin: 0 auto;
-}
-
-// Responsive
-
-/* Window Width < 480 */
-@media only screen and (max-width: 479px) {
-    @{prefix}-profile.@{prefix}-root {
-        width: 22.5em;
-    }
-}
-
-/* 480 ≤ Window Width < 768 */
-@media only screen and (min-width: 480px) and (max-width: 767px) {
-    @{prefix}-profile.@{prefix}-root {
-        width: 38.5em;
+    @{prefix}-profile-header {
+        width: 100%;
+        & + * {
+            display: block;
+            width: 100%;
+            max-width: 66em;
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
 }

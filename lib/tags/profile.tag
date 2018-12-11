@@ -1,4 +1,9 @@
-<graphjs-profile class="graphjs-element graphjs-root">
+<graphjs-profile class="graphjs-element graphjs-root" style={
+    (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
+    (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
+    (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
+    (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
+}>
     <graphjs-profile-header
         id={opts.id}
         active={active}
