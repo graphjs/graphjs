@@ -1,5 +1,5 @@
 <graphjs-group-card class={'graphjs-element graphjs-root graphjs-card graphjs-box' + (loaded ? '' : ' graphjs-loading')}>
-    <a if={loaded && group} class="graphjs-information" data-link="group" data-id={id} onclick={handleShow}>
+    <a if={loaded && group} class="graphjs-information" data-link="group" data-id={id} onclick={target ? handleTarget : handleShow}>
         <img src={group.cover ? downsizeImage(group.cover, 240) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png'} />
         <b if={group}>{group.title}</b>
         <p>{ i18n.membersCountText.replace("%s",group.count) }</p>
@@ -38,6 +38,9 @@
 
         this.id = opts.id;
         this.members = opts.id;
+        this.target = opts.target
+        ? opts.target.replace('[[id]]', this.id)
+        : undefined;
 
         this.on('before-mount', function() {
             this.handleInformation();
@@ -91,6 +94,10 @@
                     });
                     break;
             }
+        }
+        this.handleTarget = (event) => {
+            event.preventDefault();
+            document.location.href = this.target;
         }
         this.handleJoin = () => {
             let self = this;

@@ -27,7 +27,7 @@
             <a if={profile} data-link="profile" data-id={id}
                 class="graphjs-details"
                 style={opts.color ? 'color: ' + opts.color + ' !important' : ''}
-                onclick={handleShow}
+                onclick={target ? handleTarget : handleShow}
             >
                 <img src={profile.avatar ? downsizeImage(profile.avatar, 40) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
                 <span
@@ -89,6 +89,9 @@
             getSession(function(response) {
                 if(response.success) {
                     self.id = response.id;
+                    self.target = opts.target
+                    ? opts.target.replace('[[id]]', self.id)
+                    : undefined;
                     self.handleInformation(self.id);
                 } else {
                     //Handle errors
@@ -127,6 +130,10 @@
                     });
                     break;
             }
+        }
+        this.handleTarget = (event) => {
+            event.preventDefault();
+            document.location.href = this.target;
         }
         this.handleExit = () => {
             let self = this;

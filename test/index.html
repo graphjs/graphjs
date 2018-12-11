@@ -14,31 +14,44 @@
     <body>
         <!-- Test Tags start here -->
 
-        <!-- ### Testing Auth -->
+        <h1>Test Elements with Target Option</h2>
+        <!-- ### Testing Auth options -->
         <h2>Auth</h2>
         <h3>Box</h3>
-        <graphjs-auth color="red" height="40px" position="topleft"></graphjs-auth>
-        <graphjs-auth color="orange" height="50px" position="topright"></graphjs-auth>
-        <graphjs-auth color="green" height="60px" position="bottomleft"></graphjs-auth>
-        <graphjs-auth color="blue" height="70px" position="bottomright"></graphjs-auth>
+        <graphjs-auth target="?page=profile&id=[[id]]" color="red" height="40px" position="topleft"></graphjs-auth>
+        <graphjs-auth target="?page=profile&id=[[id]]" color="orange" height="50px" position="topright"></graphjs-auth>
+        <graphjs-auth target="?page=profile&id=[[id]]" color="green" height="60px" position="bottomleft"></graphjs-auth>
+        <graphjs-auth target="?page=profile&id=[[id]]" color="blue" height="70px" position="bottomright"></graphjs-auth>
         <h3>Inline</h3>
-        <graphjs-auth color="red" height="40px" position="topleft" box="disabled"></graphjs-auth>
-        <graphjs-auth color="orange" height="50px" position="topright" box="disabled"></graphjs-auth>
-        <graphjs-auth color="green" height="60px" position="bottomleft" box="disabled"></graphjs-auth>
-        <graphjs-auth color="blue" height="70px" position="bottomright" box="disabled"></graphjs-auth>
+        <graphjs-auth target="?page=profile&id=[[id]]" color="red" height="40px" position="topleft" box="disabled"></graphjs-auth>
+        <graphjs-auth target="?page=profile&id=[[id]]" color="orange" height="50px" position="topright" box="disabled"></graphjs-auth>
+        <graphjs-auth target="?page=profile&id=[[id]]" color="green" height="60px" position="bottomleft" box="disabled"></graphjs-auth>
+        <graphjs-auth target="?page=profile&id=[[id]]" color="blue" height="70px" position="bottomright" box="disabled"></graphjs-auth>
 
-        <!-- ### Testing Auth: State -->
         <h2>Auth: State</h2>
         <h3>Box</h3>
-        <graphjs-auth-state color="red" height="40px" position="topleft"></graphjs-auth-state>
-        <graphjs-auth-state color="orange" height="50px" position="topright"></graphjs-auth-state>
-        <graphjs-auth-state color="green" height="60px" position="bottomleft"></graphjs-auth-state>
-        <graphjs-auth-state color="blue" height="70px" position="bottomright"></graphjs-auth-state>
+        <graphjs-auth-state target="?page=profile&id=[[id]]" color="red" height="40px" position="topleft"></graphjs-auth-state>
+        <graphjs-auth-state target="?page=profile&id=[[id]]" color="orange" height="50px" position="topright"></graphjs-auth-state>
+        <graphjs-auth-state target="?page=profile&id=[[id]]" color="green" height="60px" position="bottomleft"></graphjs-auth-state>
+        <graphjs-auth-state target="?page=profile&id=[[id]]" color="blue" height="70px" position="bottomright"></graphjs-auth-state>
         <h3>Inline</h3>
-        <graphjs-auth-state color="red" height="40px" position="topleft" box="disabled"></graphjs-auth-state>
-        <graphjs-auth-state color="orange" height="50px" position="topright" box="disabled"></graphjs-auth-state>
-        <graphjs-auth-state color="green" height="60px" position="bottomleft" box="disabled"></graphjs-auth-state>
-        <graphjs-auth-state color="blue" height="70px" position="bottomright" box="disabled"></graphjs-auth-state>
+        <graphjs-auth-state target="?page=profile&id=[[id]]" color="red" height="40px" position="topleft" box="disabled"></graphjs-auth-state>
+        <graphjs-auth-state target="?page=profile&id=[[id]]" color="orange" height="50px" position="topright" box="disabled"></graphjs-auth-state>
+        <graphjs-auth-state target="?page=profile&id=[[id]]" color="green" height="60px" position="bottomleft" box="disabled"></graphjs-auth-state>
+        <graphjs-auth-state target="?page=profile&id=[[id]]" color="blue" height="70px" position="bottomright" box="disabled"></graphjs-auth-state>
+
+        <!-- ### Testing Cards -->
+        <h2>Profile: Card</h2>
+        <graphjs-profile-card target="?page=profile&id=[[id]]" id="4371996e166e6cc3771f2dbbb2b09c52"></graphjs-profile-card>
+        <h2>Group: Card</h2>
+        <graphjs-group-card target="?page=group&id=[[id]]" id="33365d758357b6e724c360272ebf8895"></graphjs-group-card>
+
+
+        <!-- ### Testing Lists -->
+        <h2>Profile: List</h2>
+        <graphjs-profile-list target="?page=profile&id=[[id]]"></graphjs-profile-list>
+        <h2>Group: List</h2>
+        <graphjs-group-list target="?page=group&id=[[id]]"></graphjs-group-list>
 
         <!-- Test Tags finish here -->
 

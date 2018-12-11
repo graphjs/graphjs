@@ -7,6 +7,7 @@
         callback={changeProperties}
         box={opts.box}
         active={active}
+        target={opts.target}
         height={opts.height}
         color={opts.color}
     />

@@ -19,7 +19,7 @@
             </g>
         </svg>
     </a>
-    <a class="graphjs-information" data-link="profile" data-id={id} onclick={handleShow} if={loaded && profile}>
+    <a class="graphjs-information" data-link="profile" data-id={id} onclick={target ? handleTarget : handleShow} if={loaded && profile}>
         <img src={profile.avatar || 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
         <b class="graphjs-title">{profile.fullName || profile.username}</b>
         <p class="graphjs-description">{profile.about}</p>
@@ -54,6 +54,9 @@
         this.i18n = i18n;
 
         this.id = opts.id;
+        this.target = opts.target
+        ? opts.target.replace('[[id]]', this.id)
+        : undefined;
         this.following = false;
         this.userId = undefined;
 
@@ -110,6 +113,10 @@
                     });
                     break;
             }
+        }
+        this.handleTarget = (event) => {
+            event.preventDefault();
+            document.location.href = this.target;
         }
         this.handleFollow = () => {
             let self = this;
