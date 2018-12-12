@@ -39,6 +39,8 @@
         this.id = opts.id;
         this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.changeProperties = (properties) => {
+            console.log(properties)
+            console.log("ChangeProps");
             this.active = properties.link || undefined;
             this.id = properties.id || undefined;
             this.update();

@@ -20,7 +20,11 @@
         </svg>
     </a>
     <div class="graphjs-information vcard" if={profile}>
+<<<<<<< HEAD
         <img class="photo" src={profile.avatar ? downsizeImage(profile.avatar, 110) : defaultAvatar} />
+=======
+        <img class="photo" src={profile.avatar ? downsizeImage(profile.avatar, 110) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/user.png'} />
+>>>>>>> fcabf90cea7c2ec3e1a6812a2acf9011310d675d
         <a class="nickname">{profile.fullName || profile.username}</a>
         <p class="note">{profile.about}</p>
     </div>

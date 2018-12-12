@@ -30,7 +30,7 @@
                     class="graphjs-media-wrapper"
                     style="
                         filter: url(#hard-blur);
-                        background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/placeholders/single-image.png);
+                        background-image: url(https://raw.githubusercontent.com/phonetworks/graphjs/master/static/single-image.png);
                     "
                 > </div>
             </div>
@@ -39,7 +39,7 @@
                     class="graphjs-media-wrapper"
                     style="
                         filter: url(#hard-blur);
-                        background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/placeholders/single-video.png);
+                        background-image: url(https://raw.githubusercontent.com/phonetworks/graphjs/master/static/single-video.png);
                     "
                 > </div>
             </div>
@@ -49,7 +49,7 @@
                     class="graphjs-media-wrapper"
                     style="
                         filter: url(#hard-blur);
-                        background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/placeholders/single-image.png);
+                        background-image: url(https://raw.githubusercontent.com/phonetworks/graphjs/master/static/single-image.png);
                     "
                 > </div>
             </div>
@@ -64,7 +64,7 @@
                     <h2>{i18n.subTitle}</h2>
                     <div
                         class="graphjs-media-wrapper"
-                        style="background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/placeholders/single-image.png);"
+                        style="background-image: url(https://raw.githubusercontent.com/phonetworks/graphjs/master/static/single-image.png);"
                     > </div>
                     <p>Phasellus vitae lorem aliquet, egestas metus ac, iaculis erat. Aenean quis est placerat leo lobortis hendrerit vel ut erat. Duis ultricies pellentesque ultrices. Nam eget commodo ex.</p>
                     <p>Mauris facilisis, diam id semper auctor, enim ligula placerat nibh, ac accumsan eros nisl eu nibh. Aliquam aliquam felis quis erat posuere suscipit. Vestibulum ut pharetra nulla. Donec tempus varius neque ut egestas. Phasellus pretium a neque congue facilisis.</p>

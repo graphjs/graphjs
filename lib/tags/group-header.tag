@@ -1,6 +1,6 @@
 <graphjs-group-header class={'graphjs-element graphjs-root ' + boxStyle + (loaded ? '' : ' graphjs-loading')}>
     <div class="graphjs-information" if={group}>
-        <div class="graphjs-cover" style={'background-image: url(' + (group && group.cover ? downsizeImage(group.cover, 770) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png') + ');'}></div>
+        <div class="graphjs-cover" style={'background-image: url(' + (group && group.cover ? downsizeImage(group.cover, 770) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/group.png') + ');'}></div>
         <a>{group.title}</a>
         <p>{group.description}</p>
         <div class="graphjs-members" if={avatars}>
@@ -43,7 +43,7 @@
         </li>
     </ul>
     <div class="graphjs-information" if={!group}>
-        <div class="graphjs-cover" style="background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png)"></div>
+        <div class="graphjs-cover" style="background-image: url(https://raw.githubusercontent.com/phonetworks/graphjs/master/static/group.png)"></div>
         <a>{i18n.groupErrorTextOne}</a>
         <p>{i18n.groupErrorTextTwo}</p>
         <button onclick={handleUpdate}>{i18n.refreshButtonText}</button>
