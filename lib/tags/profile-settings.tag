@@ -6,7 +6,7 @@
     </div>
     <div class="graphjs-content">
         <a ref="uploadWidget" class="graphjs-avatar">
-            <img src={profile && profile.avatar ? downsizeImage(profile.avatar, 160) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+            <img src={profile && profile.avatar ? downsizeImage(profile.avatar, 160) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/user.png'} />
         </a>
         <h2>{i18n.profileTitle}</h2>
         <form>
