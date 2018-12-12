@@ -20,7 +20,7 @@
         </svg>
     </a>
     <div class="graphjs-information vcard" if={profile}>
-        <img class="photo" src={profile.avatar ? downsizeImage(profile.avatar, 110) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+        <img class="photo" src={profile.avatar ? downsizeImage(profile.avatar, 110) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/user.png'} />
         <a class="nickname">{profile.fullName || profile.username}</a>
         <p class="note">{profile.about}</p>
     </div>
@@ -67,7 +67,7 @@
         </li>
     </ul>
     <div class="graphjs-information" if={!profile}>
-        <img src="https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png" />
+        <img src="https://raw.githubusercontent.com/phonetworks/graphjs/master/static/user.png" />
         <a>{i18n.notFoundErrorOne}</a>
         <p>{i18n.notFoundErrorTwo}</p>
     </div>

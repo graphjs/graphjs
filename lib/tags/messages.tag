@@ -17,13 +17,13 @@
             <input ref="searchForPartners" onkeyup={handleFilter} class={!newMessageOption ? 'graphjs-hidden' : ''} type="text" placeholder={i18n.nameSearchPlaceholder} />
             <div class="graphjs-suggestions" if={newMessageOption && matchedPartners.length > 0}>
                 <a each={matchedPartner in matchedPartners} data-id={matchedPartner.id} onclick={handleNewPartner}>
-                    <img src={matchedPartner.avatar ? downsizeImage(matchedPartner.avatar, 40) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+                    <img src={matchedPartner.avatar ? downsizeImage(matchedPartner.avatar, 40) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/user.png'} />
                     <b>{matchedPartner.username}</b>
                 </a>
             </div>
             <div class="graphjs-list" ref="partners">
                 <a class={'graphjs-item' + (list[partner] && list[partner].is_read ? '' : ' graphjs-unread') + (activePartner == partner ? ' graphjs-active' : '')} each={partner in partners} data-partner={partner} onclick={handleDisplay}>
-                    <img src={list[partner] && list[partner].avatar ? downsizeImage(list[partner].avatar, 50) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+                    <img src={list[partner] && list[partner].avatar ? downsizeImage(list[partner].avatar, 50) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/user.png'} />
                     <div>
                         <b>{list[partner] && list[partner].username}</b>
                         {list[partner] && list[partner].message}

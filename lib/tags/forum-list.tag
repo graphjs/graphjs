@@ -46,7 +46,7 @@
                     {threadsData[matchedThread] && handleTime(threadsData[matchedThread].timestamp)}
                 </time>
                 <div class="graphjs-contributors" if={threadsData[matchedThread].contributors}>
-                    <img each={contributor, index in threadsData[matchedThread].contributors} src={contributor.avatar ? downsizeImage(contributor.avatar, 30) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+                    <img each={contributor, index in threadsData[matchedThread].contributors} src={contributor.avatar ? downsizeImage(contributor.avatar, 30) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/user.png'} />
                 </div>
             </a>
             <div class="graphjs-placeholder graphjs-item" if={matchedThreads.length <= 0}>
