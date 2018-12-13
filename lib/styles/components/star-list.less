@@ -3,6 +3,9 @@
 @{prefix}-star-list.@{prefix}-root {
     display: block;
     color: @text-color-normal;
+    .@{prefix}-header {
+        border-color: transparent;
+    }
     .@{prefix}-content {
         min-height: 24.5em;
         .no-padding !important;
@@ -16,7 +19,7 @@
             }
             .@{prefix}-search {
                 width: 100%;
-                background-color: desaturate(tint(@theme-color, 20%), 5%);
+                background-color: desaturate(tint(@primary-color, 20%), 5%);
                 & > * {
                     float: left;
                     border-radius: 0;
@@ -49,6 +52,7 @@
             }
         }
         .@{prefix}-list {
+            overflow: hidden;
             display: inline-block;
             width: 100%;
             height: auto;
@@ -58,12 +62,14 @@
                 width: 100%;
                 color: @text-color-normal;
                 line-height: 3.5em;
-                border-bottom: 1px solid fade(black, 10%);
+                border-bottom-width: 1px;
+                border-bottom-style: solid;
+                border-bottom-color: fade(black, 10%);
                 &:last-child {
                     border-bottom: none;
                 }
                 &:hover {
-                    background-color: fade(@theme-color, 5%);
+                    background-color: fade(black, 2.5%);
                     .@{prefix}-remove {
                         display: block;
                     }

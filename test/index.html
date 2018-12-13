@@ -4,8 +4,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Test GraphJS Components</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
     </head>
-    <body style="background-color: oldlace">
+    <body>
         <!-- Test Tags start here -->
 
         <!-- ### Testing Alert -->
@@ -93,9 +99,9 @@
         <!-- ### Testing Forum -->
         <h2>Forum</h2>
         <h3>Box</h3>
-        <graphjs-forum access="public"></graphjs-forum>
+        <graphjs-forum access="private"></graphjs-forum>
         <h3>Inline</h3>
-        <graphjs-forum access="public" box="disabled"></graphjs-forum>
+        <graphjs-forum access="private" box="disabled"></graphjs-forum>
 
         <!-- ### Testing Forum: Composer -->
         <h2>Forum: Composer</h2>
@@ -107,16 +113,16 @@
         <!-- ### Testing Forum: List -->
         <h2>Forum: List</h2>
         <h3>Box</h3>
-        <graphjs-forum-list></graphjs-forum-list>
+        <graphjs-forum-list access="private"></graphjs-forum-list>
         <h3>Inline</h3>
-        <graphjs-forum-list box="disabled"></graphjs-forum-list>
+        <graphjs-forum-list access="private" box="disabled"></graphjs-forum-list>
 
         <!-- ### Testing Forum: Thread -->
         <h2>Forum: Thread</h2>
         <h3>Box</h3>
-        <graphjs-forum-thread access="public" id="50a5a634eed9d6dad5f64daa3bef6587"></graphjs-forum-thread>
+        <graphjs-forum-thread access="private" id="50a5a634eed9d6dad5f64daa3bef6587"></graphjs-forum-thread>
         <h3>Inline</h3>
-        <graphjs-forum-thread access="public" id="50a5a634eed9d6dad5f64daa3bef6587" box="disabled"></graphjs-forum-thread>
+        <graphjs-forum-thread access="private" id="50a5a634eed9d6dad5f64daa3bef6587" box="disabled"></graphjs-forum-thread>
 
         <!-- ### Testing Group -->
         <h2>Group</h2>
@@ -146,7 +152,10 @@
 
         <!-- ### Testing Messages: Composer -->
         <h2>Messages: Composer</h2>
-        <graphjs-messages-composer to="48760696099368953dd71a90b727acba" anonymity="off"></graphjs-messages-composer>
+        <h3>Box</h3>
+        <graphjs-messages-composer to="48760696099368953dd71a90b727acba" anonymity="on"></graphjs-messages-composer>
+        <h3>Inline</h3>
+        <graphjs-messages-composer to="48760696099368953dd71a90b727acba" anonymity="on" box="disabled"></graphjs-messages-composer>
 
         <!-- ### Testing Private Content -->
         <h2>Private Content</h2>
@@ -207,7 +216,12 @@
         <script src="../dist/graph.js"></script>
         <script>
             GraphJS.init("79982844-6a27-4b3b-b77f-419a79be0e10", {
-                host: "https://build.phonetworks.com"
+                host: "https://build.phonetworks.com",
+                theme: {
+                    primaryColor: 'cornflowerblue',
+                    backgroundColor: 'white',
+                    textColor: '#555'
+                }
             });
         </script>
     </body>
