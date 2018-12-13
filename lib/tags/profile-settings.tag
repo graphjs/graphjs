@@ -1,10 +1,10 @@
-<graphjs-profile-settings class={'graphjs-element graphjs-root ' + boxStyle}>
+<graphjs-profile-settings class={'graphjs-element graphjs-root ' + boxStyle} style={!authorized ? 'display: none;' : ''}>
     <div class="graphjs-warning" if={failMessages.length > 0}>
         <ul if={failMessages.length > 0} class="graphjs-fail">
             <li each={failMessage in failMessages}>{failMessage}</li>
         </ul>
     </div>
-    <div class="graphjs-content">
+    <div if={authorized} class="graphjs-content">
         <a ref="uploadWidget" class="graphjs-avatar">
             <img src={profile && profile.avatar ? downsizeImage(profile.avatar, 160) : defaultAvatar} />
         </a>'} />
@@ -24,6 +24,7 @@
         </form>
     </div>
     <script>
+        import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
         import setProfile from '../scripts/setProfile.js';
         import setAvatar from '../scripts/setAvatar.js';
@@ -49,7 +50,7 @@
         this.successMessages = [];
 
         this.on('before-mount', function() {
-            this.handleInformation(opts.id);
+            this.handleAuthorization();
         });
         this.on('mount', function() {
             let self = this;
@@ -90,6 +91,18 @@
                 });
             }, false);
         });
+
+        this.handleAuthorization = () => {
+            let self = this;
+            getSession(response => {
+                if(response.success) {
+                    if(response.id) {
+                        self.authorized = true;
+                        self.handleInformation(response.id);
+                    }
+                }
+            });
+        }
 
         this.handleInformation = (id) => {
             let self = this;

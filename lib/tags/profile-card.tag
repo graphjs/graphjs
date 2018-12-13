@@ -19,7 +19,7 @@
             </g>
         </svg>
     </a>
-    <a class="graphjs-information" data-link="profile" data-id={id} onclick={handleShow} if={loaded && profile}>
+    <a class="graphjs-information" data-link="profile" data-id={id} onclick={target ? handleTarget : handleShow} if={loaded && profile}>
         <img src={profile.avatar || defaultAvatar} />
         <b class="graphjs-title">{profile.fullName || profile.username}</b>
         <p class="graphjs-description">{profile.about}</p>
@@ -55,6 +55,9 @@
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         this.id = opts.id;
+        this.target = opts.target
+        ? opts.target.replace('[[id]]', this.id)
+        : undefined;
         this.following = false;
         this.userId = undefined;
 
@@ -111,6 +114,10 @@
                     });
                     break;
             }
+        }
+        this.handleTarget = (event) => {
+            event.preventDefault();
+            document.location.href = this.target;
         }
         this.handleFollow = () => {
             let self = this;

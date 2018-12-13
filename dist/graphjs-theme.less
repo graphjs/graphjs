@@ -1,15 +1,24 @@
+// Main colors
 @primary-color:             rgb(111, 135, 159);
 @text-color:                rgb(63, 95, 127);
 @background-color:          white;
 
+// Default colors
 @default-color:             @text-color;
+
+// Text colors
 @text-color-strong:         @text-color;
 @text-color-normal:         fade(@text-color, 75%);
 @text-color-weak:           fade(@text-color, 50%);
+
+// Background colors
 @background-color-shade:    shade(@background-color, 10% / 3);
 @background-color-contrast: @background-color;
+
+// Input colors
 @input-color:               tint(@background-color, 15%);
 
+// Prefix
 @prefix: graphjs;
 
 // reset.less
@@ -240,13 +249,6 @@
             color: @text-color-normal;
             border-color: @text-color-normal;
             background-color: @background-color-contrast;
-        }
-    }
-}
-.@{prefix}-blocked {
-    .@{prefix}-placeholder {
-        .@{prefix}-fill {
-            background-color: fade(black, 5%);
         }
     }
 }
@@ -681,7 +683,6 @@
     }
     .@{prefix}-information {
         b {
-            color: @primary-color;
             .text-color-states(@primary-color);
         }
         p {

@@ -5,11 +5,11 @@
     display: block;
     width: 100%;
     min-height: 27.75em;
-    color: @text-color-normal;
+    // ThemeOption: color: @text-color-normal;
     text-align: center;
     &.@{prefix}-box {
         .@{prefix}-information {
-            background-color: @background-color-contrast;
+            // ThemeOption: background-color: @background-color-contrast;
         }
     }
     & + * {
@@ -35,7 +35,7 @@
             font-size: 1.2em;
             line-height: 1.25em;
             .heavy-font;
-            .text-color-states(@primary-color);
+            // ThemeOption: .text-color-states(@primary-color);
         }
         p {
             display: inline-block;
@@ -44,7 +44,7 @@
             max-height: 2.5em;
             margin: 0 5%;
             margin-top: .75em;
-            color: @text-color-normal;
+            // ThemeOption: color: @text-color-normal;
             line-height: 1.25em;
         }
         .@{prefix}-members {
@@ -67,7 +67,7 @@
                 line-height: 2em;
                 text-align: center;
                 border: none !important;
-                background-color: @primary-color;
+                // ThemeOption: background-color: @primary-color;
                 small {
                     color: inherit;
                     font-size: .8em;
@@ -90,13 +90,13 @@
             &:hover {
                 a {
                     opacity: 1;
-                    color: @text-color-normal;
+                    // ThemeOption: color: @text-color-normal;
                 }
             }
             &.@{prefix}-active {
                 a {
                     opacity: 1;
-                    color: @text-color-normal;
+                    // ThemeOption: color: @text-color-normal;
                     pointer-events: none;
                 }
             }
@@ -105,7 +105,7 @@
                 opacity: .75;
                 padding: 0 1em;
                 cursor: pointer;
-                color: @text-color-normal;
+                // ThemeOption: color: @text-color-normal;
                 .bold-font;
                 line-height: 2.5em;
                 .disable-selection;
@@ -116,13 +116,13 @@
                     }
                 }
                 span {
-                    color: @text-color-normal;
+                    // ThemeOption: color: @text-color-normal;
                     .bold-font;
                 }
                 svg {
                     display: none;
                     path {
-                        fill: @primary-color;
+                        // ThemeOption: fill: @primary-color;
                     }
                 }
             }
@@ -199,7 +199,7 @@
             ul {
                 li {
                     &.@{prefix}-active {
-                        background-color: @background-color-contrast;
+                        // ThemeOption: background-color: @background-color-contrast;
                     }
                 }
             }
@@ -220,7 +220,8 @@
                     margin-right: -.9em;
                     border-width: 2px;
                     border-style: solid;
-                    border-color: @background-color-contrast;
+                    // ThemeOption: border-color: @background-color-contrast;
+                    border-color: transparent; // ThemeFix
                     box-shadow: 0 0 2px fade(black, 65%);
                 }
             }
@@ -258,7 +259,7 @@
                             top: 4.25em;
                             left: 0;
                             width: 100%;
-                            color: @text-color-weak;
+                            // ThemeOption: color: @text-color-weak;
                             font-size: .6em;
                             line-height: 1.25em;
                             text-align: center;
@@ -315,7 +316,7 @@
             ul {
                 li {
                     &.@{prefix}-active {
-                        background-color: @background-color-contrast;
+                        // ThemeOption: background-color: @background-color-contrast;
                     }
                 }
             }
@@ -336,7 +337,8 @@
                     margin-right: -.4em;
                     border-width: 2px;
                     border-style: solid;
-                    border-color: @background-color-contrast;
+                    // ThemeOption: border-color: @background-color-contrast;
+                    border-color: transparent; // ThemeFix
                     box-shadow: 0 0 2px fade(black, 65%);
                 }
             }
@@ -375,7 +377,7 @@
                             top: 4.25em;
                             left: 0;
                             width: 100%;
-                            color: @text-color-weak;
+                            // ThemeOption: color: @text-color-weak;
                             font-size: .6em;
                             line-height: 1.25em;
                             text-align: center;
