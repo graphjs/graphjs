@@ -4,6 +4,14 @@
     display: block;
     position: relative;
     color: @text-color-normal;
+    &.@{prefix}-inline {
+        .@{prefix}-header {
+            border-color: transparent;
+        }
+        .@{prefix}-loading {
+            padding: 2.5em 0;
+        }
+    }
     .@{prefix}-content {
         background-color: transparent;
         & > p {
@@ -17,17 +25,19 @@
                 height: 1em;
                 margin-bottom: 0;
                 padding: 0;
-                color: @theme-color;
+                color: @primary-color;
                 font-size: 2em;
                 .bold-font;
                 border: none;
-                border-bottom: 1px dotted @text-color-weak;
+                border-bottom-width: 1px;
+                border-bottom-style: dotted;
+                border-bottom-color: @text-color-weak;
                 border-radius: 0;
                 background-color: transparent;
                 outline: none;
                 &::placeholder {
                     opacity: .5;
-                    color: @theme-color;
+                    color: @primary-color;
                 }
             }
             .@{prefix}-information {
@@ -280,14 +290,18 @@
                 margin-top: 1.25em;
                 border: none;
                 outline: none;
-                &:empty::before {
-                    content: attr(placeholder);
-                    display: block;
-                    color: @text-color-weak;
+                &:empty {
+                    &::before {
+                        content: attr(placeholder);
+                        display: block;
+                        color: @text-color-weak;
+                    }
                 }
                 &:focus {
-                    &:empty::before {
-                        opacity: .5;
+                    &:empty {
+                        &::before {
+                            opacity: .5;
+                        }
                     }
                 }
             }

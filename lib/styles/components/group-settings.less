@@ -6,7 +6,7 @@
     text-align: center;
     .@{prefix}-content {
         h2 {
-            color: @theme-color;
+            color: @primary-color;
         }
         .@{prefix}-cover {
             overflow: hidden;
@@ -22,7 +22,7 @@
             &:hover {
                 &::before {
                     padding-top: 3.6em;
-                    background-color: fade(@theme-color, 90%);
+                    background-color: fade(@primary-color, 90%);
                 }
             }
             &::before {
@@ -37,7 +37,7 @@
                 color: white;
                 line-height: 1.4em;
                 vertical-align: middle;
-                background-color: fade(@theme-color, 60%);
+                background-color: fade(@primary-color, 60%);
                 white-space: pre;
                 .transition(all .35s ease);
             }
@@ -51,7 +51,9 @@
             margin: 0 auto;
             input, input[type] {
                 &.@{prefix}-success {
-                    border: 1px solid @success-color;
+                    border-width: 1px;
+                    border-style: solid;
+                    border-color: @success-color;
                     &::after {
                         content: "OK";
                         display: block;

@@ -16,7 +16,9 @@
                 padding-left: 1em;
                 padding-bottom: .5em;
                 line-height: 1.35em;
-                border-left: 2px dotted fade(@text-color-normal, 35%);
+                border-left-width: 2px;
+                border-left-style: dotted;
+                border-left-color: fade(@text-color-normal, 35%);
                 &:last-of-type {
                     border-color: transparent;
                 }
@@ -28,7 +30,7 @@
                     width: .7em;
                     height: .7em;
                     border-radius: 50%;
-                    background-color: @theme-color;
+                    background-color: @primary-color;
                 }
                 div {
                     position: relative;
@@ -45,7 +47,7 @@
                         top: -.125em;
                         left: -4.5em;
                         path {
-                            fill: @theme-color;
+                            fill: @primary-color;
                         }
                     }
                     time {

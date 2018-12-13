@@ -6,7 +6,6 @@
         minor={true}
         callback={changeProperties}
         box={opts.box}
-        theme={opts.theme}
         active={active}
         height={opts.height}
     />

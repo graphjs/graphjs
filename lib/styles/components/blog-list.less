@@ -5,16 +5,19 @@
     position: relative;
     color: @text-color-normal;
     &.@{prefix}-box {
-      .@{prefix}-content {
-          min-height: 40.5em;
-          .@{prefix}-placeholder {
-              padding: 2.5em;
-          }
-      }
+        .@{prefix}-content {
+            min-height: 41em;
+            .@{prefix}-placeholder {
+                padding: 2.5em;
+            }
+        }
     }
     &.@{prefix}-inline {
+        .@{prefix}-header {
+            border-color: transparent;
+        }
         .@{prefix}-content {
-            min-height: 35.5em;
+            min-height: 36em;
             .@{prefix}-placeholder {
                 padding: 0;
             }
@@ -46,14 +49,14 @@
                 cursor: pointer;
                 &:first-child {
                     font-size: 1.2em;
-                    .graphjs-summary {
+                    .@{prefix}-summary {
                         display: inline-block;
                     }
                 }
                 &:nth-child(2), &:nth-child(3) {
                     width: calc((100% - 1.5em) / 2);
                     font-size: 1.1em;
-                    .graphjs-summary {
+                    .@{prefix}-summary {
                         display: inline-block;
                     }
                 }
@@ -72,7 +75,7 @@
                     height: auto;
                     margin-bottom: 0;
                     padding: 0;
-                    .text-color-states(@theme-color);
+                    .text-color-states(@primary-color);
                     font-size: 1.6em;
                     .bold-font;
                     line-height: 1.2em;
@@ -203,6 +206,16 @@
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
     @{prefix}-blog-list.@{prefix}-root {
+        &.@{prefix}-box {
+            .@{prefix}-content {
+                min-height: 38.5em;
+            }
+        }
+        &.@{prefix}-inline {
+            .@{prefix}-content {
+                min-height: 33.5em;
+            }
+        }
         .@{prefix}-content {
             .@{prefix}-list {
                 .@{prefix}-item {
@@ -246,6 +259,16 @@
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
     @{prefix}-blog-list.@{prefix}-root {
+        &.@{prefix}-box {
+            .@{prefix}-content {
+                min-height: 38.5em;
+            }
+        }
+        &.@{prefix}-inline {
+            .@{prefix}-content {
+                min-height: 33.5em;
+            }
+        }
         .@{prefix}-content {
             .@{prefix}-list {
                 .@{prefix}-item {

@@ -7,11 +7,14 @@
         (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
     }
 >
+    <div class="graphjs-header" if={opts.title}>
+        <div class="graphjs-title">{opts.title}</div>
+    </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <div if={notExisting} class="graphjs-nonexistent">
             <p>This post is no longer available!</p>
         </div>
-        <div if={!deleted} class="graphjs-post" ref="scrollingContent">
+        <div if={loaded && !deleted} class="graphjs-post" ref="scrollingContent">
             
             <h1 if={title} class="graphjs-title">
                 <a

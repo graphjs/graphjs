@@ -7,6 +7,9 @@
         (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
     }
 >
+    <div class="graphjs-header" if={opts.title}>
+        <div class="graphjs-title">{opts.title || 'Blog'}</div>
+    </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '') + (matchedPosts.length > pageLimit ? ' graphjs-pagination' : '')}>
         <div class="graphjs-list" if={loaded}>
             <div 

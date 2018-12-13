@@ -5,13 +5,20 @@
     width: 100%;
     max-width: 25em;
     text-align: center;
+    &.@{prefix}-inline {
+        .@{prefix}-header {
+            border-color: transparent;
+        }
+    }
     .@{prefix}-content {
         form {
             width: 100%;
             margin: 0 auto;
             input, input[type] {
                 &.@{prefix}-success {
-                    border: 1px solid @success-color;
+                    border-width: 1px;
+                    border-style: solid;
+                    border-color: @success-color;
                     &::after {
                         content: "OK";
                         display: block;

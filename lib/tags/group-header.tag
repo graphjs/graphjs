@@ -1,5 +1,5 @@
 <graphjs-group-header class={'graphjs-element graphjs-root ' + boxStyle + (loaded ? '' : ' graphjs-loading')}>
-    <div class="graphjs-information" if={group}>
+    <div class="graphjs-information" if={loaded && group}>
         <div class="graphjs-cover" style={'background-image: url(' + (group && group.cover ? downsizeImage(group.cover, 770) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/group.png') + ');'}></div>
         <a>{group.title}</a>
         <p>{group.description}</p>
@@ -10,7 +10,7 @@
             </span>
         </div>
     </div>
-    <ul if={group}>
+    <ul if={loaded && group}>
         <li class={opts.active == 'members' ? 'graphjs-active' : ''}>
             <a class={group.count > 1 ? 'graphjs-count' : ''} data-link="members" data-count={group.count || ''} onclick={opts.callback}>
                 <span>{i18n.membersText}</span>
@@ -42,14 +42,19 @@
             </a>
         </li>
     </ul>
+<<<<<<< HEAD
     <div class="graphjs-information" if={!group}>
         <div class="graphjs-cover" style="background-image: url(https://raw.githubusercontent.com/phonetworks/graphjs/master/static/group.png)"></div>
+=======
+    <div class="graphjs-information" if={loaded && !group}>
+        <div class="graphjs-cover" style="background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png)"></div>
+>>>>>>> ozanilbey_advanced-styling
         <a>{i18n.groupErrorTextOne}</a>
         <p>{i18n.groupErrorTextTwo}</p>
         <button onclick={handleUpdate}>{i18n.refreshButtonText}</button>
     </div>
     <div if={!loaded} class="graphjs-placeholder graphjs-loader">
-        <div class="graphjs-information">
+        <div class="graphjs-card">
             <div class="graphjs-cover graphjs-rectangle graphjs-fill"></div>
             <div class="graphjs-title graphjs-line graphjs-centered graphjs-fill"></div>
             <div class="graphjs-description graphjs-line graphjs-centered graphjs-fill"></div>
@@ -60,10 +65,10 @@
                 <div class="graphjs-avatar graphjs-circle graphjs-fill"></div>
                 <div class="graphjs-avatar graphjs-circle graphjs-fill"></div>
             </div>
-            <div class="graphjs-list graphjs-rectangle graphjs-centered graphjs-fill"></div>
         </div>
+        <div class="graphjs-list graphjs-rectangle graphjs-centered graphjs-fill"></div>
     </div>
-    <graphjs-promo properties="bottom right"></graphjs-promo>
+    <graphjs-promo if={loaded} properties="top right"></graphjs-promo>
     <script>
         import getGroup from '../scripts/getGroup.js';
         import joinGroup from '../scripts/joinGroup.js';

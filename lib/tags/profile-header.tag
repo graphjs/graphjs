@@ -1,5 +1,5 @@
 <graphjs-profile-header class={'graphjs-element graphjs-root ' + boxStyle + (loaded ? '' : ' graphjs-loading')}>
-    <a onclick={following ? handleUnfollow : handleFollow} class="graphjs-left graphjs-option" if={profile && userId && userId != id}>
+    <a onclick={following ? handleUnfollow : handleFollow} class="graphjs-left graphjs-option" if={loaded && profile && userId && userId != id}>
         <svg if={!following} viewBox="0 0 24 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g transform="translate(-22.000000, -20.000000)" fill="black" fill-rule="nonzero">
@@ -12,19 +12,19 @@
             <path d="M18.1535041,10.0629214 L19.947406,10.0876986 L19.9226288,6.01321143 C19.9150304,5.32595013 20.4469406,4.79403993 21.134202,4.80163833 C21.8214633,4.80923663 22.3652666,5.35303993 22.3728649,6.04030123 L22.3976421,10.1147883 L22.419074,12.0532803 C22.4221269,12.3294058 22.2007577,12.5557246 21.9246322,12.5587774 C21.9207531,12.5588203 21.9168737,12.558818 21.9129946,12.5587706 L18.1805938,12.5131575 C17.4933325,12.5055591 16.9495292,11.9617559 16.9419309,11.2744945 C16.9343325,10.5872332 17.4662427,10.055323 18.1535041,10.0629214 Z" id="Path" transform="translate(19.683291, 8.683291) rotate(45.000000) translate(-19.683291, -8.683291) "></path>
         </svg>
     </a>
-    <a class="graphjs-right graphjs-option" onclick={handleMessagesComposer} if={profile && userId && userId != id}>
+    <a class="graphjs-right graphjs-option" onclick={handleMessagesComposer} if={loaded && profile && userId && userId != id}>
         <svg viewBox="0 0 50 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <path d="M34.8236776,11.6342064 L4.78589421,11.6342064 C2.14105793,11.6342064 0,13.7752644 0,16.4201006 L0,36.0044835 C0,38.6493198 2.14105793,40.7903777 4.78589421,40.7903777 L19.5843829,40.7903777 L31.3602015,47.7803022 L30.7934509,40.7903777 L34.8866499,40.7903777 C37.5314861,40.7903777 39.6725441,38.6493198 39.6725441,36.0044835 L39.6725441,16.4201006 C39.6725441,13.7752644 37.4685139,11.6342064 34.8236776,11.6342064 Z M10.5478586,29.1405026 C9.22544054,29.1405026 8.12342545,28.0384875 8.12342545,26.7160694 C8.12342545,25.3936513 9.22544054,24.2916362 10.5478586,24.2916362 C11.8702767,24.2916362 12.9722918,25.3936513 12.9722918,26.7160694 C12.9722918,28.0384875 11.8702767,29.1405026 10.5478586,29.1405026 Z M19.8677586,29.1405026 C18.5453405,29.1405026 17.4433254,28.0384875 17.4433254,26.7160694 C17.4433254,25.3936513 18.5453405,24.2916362 19.8677586,24.2916362 C21.1901767,24.2916362 22.2921918,25.3936513 22.2921918,26.7160694 C22.2187241,28.0384875 21.1901767,29.1405026 19.8677586,29.1405026 Z M29.124686,29.1405026 C27.8022679,29.1405026 26.7002529,28.0384875 26.7002529,26.7160694 C26.7002529,25.3936513 27.8022679,24.2916362 29.124686,24.2916362 C30.4471041,24.2916362 31.5491192,25.3936513 31.5491192,26.7160694 C31.5491192,28.0384875 30.4471041,29.1405026 29.124686,29.1405026 Z M45.2141058,0.779999733 C47.8589421,0.779999733 50,2.9210577 50,5.56589402 L50,25.0873049 C50,27.7321412 47.8589421,29.8731992 45.2141058,29.8731992 L42.3803526,29.8731992 L42.4433249,16.523073 C42.4433249,12.3039294 39.0428212,8.90342556 34.8236776,8.90342556 L10.3904282,8.90342556 L10.3904282,5.56589402 C10.3904282,2.9210577 12.5314861,0.779999733 15.1763224,0.779999733 L45.2141058,0.779999733 Z"></path>
             </g>
         </svg>
     </a>
-    <div class="graphjs-information vcard" if={profile}>
-        <img class="photo" src={profile.avatar ? downsizeImage(profile.avatar, 110) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/user.png'} />
+    <div class="graphjs-information vcard" if={loaded && profile}>
+        <img class="photo" src={profile.avatar ? downsizeImage(profile.avatar, 110) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
         <a class="nickname">{profile.fullName || profile.username}</a>
         <p class="note">{profile.about}</p>
     </div>
-    <ul if={profile}>
+    <ul if={loaded && profile}>
         <li class={opts.active == 'activity' ? 'graphjs-active' : ''}>
             <a data-link="activity" onclick={opts.callback}>
                 <span>{i18n.activityText}</span>
@@ -66,21 +66,21 @@
             </a>
         </li>
     </ul>
-    <div class="graphjs-information" if={!profile}>
+    <div class="graphjs-information" if={loaded && !profile}>
         <img src="https://raw.githubusercontent.com/phonetworks/graphjs/master/static/user.png" />
         <a>{i18n.notFoundErrorOne}</a>
         <p>{i18n.notFoundErrorTwo}</p>
     </div>
     <button if={!profile} onclick={handleUpdate}>Refresh</button>
     <div if={!loaded} class="graphjs-placeholder graphjs-loader">
-        <div class="graphjs-information">
+        <div class="graphjs-card">
             <div class="graphjs-avatar graphjs-circle graphjs-centered graphjs-fill"></div>
             <div class="graphjs-title graphjs-line graphjs-centered graphjs-fill"></div>
             <div class="graphjs-description graphjs-line graphjs-centered graphjs-fill"></div>
-            <div class="graphjs-list graphjs-rectangle graphjs-centered graphjs-fill"></div>
         </div>
+        <div class="graphjs-list graphjs-rectangle graphjs-centered graphjs-fill"></div>
     </div>
-    <graphjs-promo properties="bottom right"></graphjs-promo>
+    <graphjs-promo if={loaded} properties="top right"></graphjs-promo>
     <script>
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';

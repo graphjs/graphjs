@@ -5,17 +5,10 @@
     color: @text-color-normal;
     &.@{prefix}-box {
       .@{prefix}-content {
-          .@{prefix}-placeholder {
-              padding: 0 2.5em;
+          .@{prefix}-reply {
+              background-color: @background-color-contrast;
           }
       }
-    }
-    &.@{prefix}-inline {
-        .@{prefix}-content {
-            .@{prefix}-placeholder {
-                padding: 0;
-            }
-        }
     }
     &.@{prefix}-composer {
         .@{prefix}-content {
@@ -29,6 +22,7 @@
         }
     }
     .@{prefix}-content {
+        overflow: hidden !important;
         position: relative;
         min-height: 37em;
         .no-padding !important;
@@ -58,7 +52,9 @@
                 padding-left: 2.5em;
                 .@{prefix}-item {
                     padding: 1.5em 0;
-                    border-top: 1px dotted fade(black, 15%);
+                    border-top-width: 1px;
+                    border-top-style: dotted;
+                    border-top-color: fade(black, 15%);
                     &:first-child {
                         border-top: none !important;
                     }
@@ -101,8 +97,10 @@
                         &.@{prefix}-editable {
                             padding: .75em 1em;
                             color: @text-color-normal;
-                            border: 1px dashed fade(@default-color, 15%);
-                            background-color: @contrast-color;
+                            border-width: 1px;
+                            border-style: dashed;
+                            border-color: fade(@default-color, 15%);
+                            background-color: @background-color-contrast;
                             outline: none;
                         }
                     }
@@ -119,8 +117,9 @@
             height: 18em;
             padding: 1.5em 2.5em;
             padding-top: 0;
-            border-top: 2px solid @theme-color;
-            background-color: @contrast-color;
+            border-top-width: 2px;
+            border-top-style: solid;
+            border-top-color: @primary-color;
             .box-shadow(0 -2px 1px 0px fade(black, 7.5%));
             /*.transition(bottom .35s ease);*/
             .@{prefix}-synopsis {
@@ -128,7 +127,9 @@
                 position: relative;
                 width: 100%;
                 padding: calc(1em - 1px) 0;
-                border-bottom: 1px dotted fade(black, 15%);
+                border-bottom-width: 1px;
+                border-bottom-style: dotted;
+                border-bottom-color: fade(black, 15%);
                 cursor: pointer;
                 & > b {
                     color: @text-color-normal;
@@ -159,7 +160,7 @@
                             height: .8em;
                             padding: .1em 0;
                             path {
-                                fill: @theme-color;
+                                fill: @primary-color;
                             }
                         }
                     }
@@ -178,6 +179,7 @@
                     .no-padding;
                     line-height: 150%;
                     border: none;
+                    background-color: transparent;
                     &.@{prefix}-closed {
                         height: 0;
                         border: none;
@@ -195,6 +197,7 @@
     }
     /* Placeholder */
     .@{prefix}-placeholder {
+        padding: 0 2.5em;
         .@{prefix}-title {
             display: none !important;
             position: relative;
