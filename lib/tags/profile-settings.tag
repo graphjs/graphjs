@@ -7,7 +7,7 @@
     <div if={authorized} class="graphjs-content">
         <a ref="uploadWidget" class="graphjs-avatar">
             <img src={profile && profile.avatar ? downsizeImage(profile.avatar, 160) : defaultAvatar} />
-        </a>'} />
+        </a>
         <h2>{i18n.profileTitle}</h2>
         <form>
             <input ref="username" type="text" placeholder={i18n.usernamePlaceholder} value={profile ? profile.username : ''} />
