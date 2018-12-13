@@ -46,7 +46,7 @@
                     {threadsData[matchedThread] && handleTime(threadsData[matchedThread].timestamp)}
                 </time>
                 <div class="graphjs-contributors" if={threadsData[matchedThread].contributors}>
-                    <img each={contributor, index in threadsData[matchedThread].contributors} src={contributor.avatar ? downsizeImage(contributor.avatar, 30) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/user.png'} />
+                    <img each={contributor, index in threadsData[matchedThread].contributors} src={contributor.avatar ? downsizeImage(contributor.avatar, 30) : defaultAvatar} />
                 </div>
             </a>
             <div class="graphjs-placeholder graphjs-item" if={matchedThreads.length <= 0}>
@@ -164,7 +164,8 @@
         let i18n = internationalization[window.GraphJSConfig.language]['forum-list'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
-
+        this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
+        
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 

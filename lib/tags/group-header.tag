@@ -4,7 +4,7 @@
         <a>{group.title}</a>
         <p>{group.description}</p>
         <div class="graphjs-members" if={avatars}>
-            <img each={avatar in avatars} src={avatar ? downsizeImage(avatar, 30) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/user.png'} />
+            <img each={avatar in avatars} src={avatar ? downsizeImage(avatar, 30) : defaultAvatar} />
             <span if={members && members.length >= 5}>
                 <small>{'+' + (members.length - 4)}</small>
             </span>
@@ -82,6 +82,7 @@
         let i18n = internationalization[window.GraphJSConfig.language]['group-header'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
+        this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;

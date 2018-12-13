@@ -49,7 +49,7 @@
             <div class="graphjs-replies">
                 <div each={entry, index in entries} data-id={entry.id} class="graphjs-item">
                     <div class="graphjs-credit" if={authorsData.hasOwnProperty(entry.author)}>
-                        <img data-link="profile" data-id={entry.author} onclick={handleShow} src={authorsData[entry.author].avatar ? downsizeImage(authorsData[entry.author].avatar, 50) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/user.png'} />
+                        <img data-link="profile" data-id={entry.author} onclick={handleShow} src={authorsData[entry.author].avatar ? downsizeImage(authorsData[entry.author].avatar, 50) : defaultAvatar} />
                         <span>
                             <b data-link="profile" data-id={entry.author} onclick={handleShow}>{authorsData[entry.author].username || 'Unknown User'}</b>
                             <time data-timestamp={entry.timestamp}>{handleTime(entry.timestamp)}</time>
@@ -122,6 +122,8 @@
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
         import showBlogList from '../scripts/showBlogList.js';
+
+        this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         analytics("blog-post");
 

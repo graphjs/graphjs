@@ -5,6 +5,7 @@
         minor={true}
         box={opts.box}
         callback={changeProperties}
+        default-avatar={opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar}
     />
     <graphjs-profile-activity
         id={opts.id}
@@ -37,6 +38,7 @@
         box={opts.box}
         callback={changeProperties}
         if={active == 'settings'}
+        default-avatar={opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar}
     />
     <script>
         import analytics from '../scripts/analytics.js';

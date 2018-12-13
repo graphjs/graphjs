@@ -20,7 +20,7 @@
         </svg>
     </a>
     <div class="graphjs-information vcard" if={loaded && profile}>
-        <img class="photo" src={profile.avatar ? downsizeImage(profile.avatar, 110) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+        <img class="photo" src={profile.avatar ? downsizeImage(profile.avatar, 110) : defaultAvatar} />
         <a class="nickname">{profile.fullName || profile.username}</a>
         <p class="note">{profile.about}</p>
     </div>
@@ -67,7 +67,7 @@
         </li>
     </ul>
     <div class="graphjs-information" if={loaded && !profile}>
-        <img src="https://raw.githubusercontent.com/phonetworks/graphjs/master/static/user.png" />
+        <img src={defaultAvatar} alt="Profile Image"/>
         <a>{i18n.notFoundErrorOne}</a>
         <p>{i18n.notFoundErrorTwo}</p>
     </div>
@@ -94,7 +94,8 @@
         let i18n = internationalization[window.GraphJSConfig.language]['profile-header'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
-
+        this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
+        
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 

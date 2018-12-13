@@ -6,8 +6,8 @@
     </div>
     <div class="graphjs-content">
         <a ref="uploadWidget" class="graphjs-avatar">
-            <img src={profile && profile.avatar ? downsizeImage(profile.avatar, 160) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/user.png'} />
-        </a>
+            <img src={profile && profile.avatar ? downsizeImage(profile.avatar, 160) : defaultAvatar} />
+        </a>'} />
         <h2>{i18n.profileTitle}</h2>
         <form>
             <input ref="username" type="text" placeholder={i18n.usernamePlaceholder} value={profile ? profile.username : ''} />
@@ -39,6 +39,7 @@
         let i18n = internationalization[window.GraphJSConfig.language]['profile-settings'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
+        this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
         
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
