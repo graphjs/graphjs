@@ -1,34 +1,29 @@
 <graphjs-group-card class={'graphjs-element graphjs-root graphjs-card graphjs-box' + (loaded ? '' : ' graphjs-loading')}>
-    <a class="graphjs-information" data-link="group" data-id={id} onclick={handleShow} if={group}>
-        <img src={group.cover ? downsizeImage(group.cover, 240) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png'} />
+    <a if={loaded && group} class="graphjs-information" data-link="group" data-id={id} onclick={handleShow}>
+        <img src={group.cover ? downsizeImage(group.cover, 240) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/group.png'} />
         <b if={group}>{group.title}</b>
         <p>{ i18n.membersCountText.replace("%s",group.count) }</p>
     </a>
-    <button if={(!group || !joinInformation) && loaded}>&middot; &middot; &middot;</button>
-    <button if={(group && joinInformation) && loaded} onclick={joined ? handleLeave : handleJoin}>{joined ? i18n.leaveGroupText : i18n.joinGroupText}</button>
+    <button if={loaded && (!group || !joinInformation)}>&middot; &middot; &middot;</button>
+    <button if={loaded && group && joinInformation} onclick={joined ? handleLeave : handleJoin}>{joined ? i18n.leaveGroupText : i18n.joinGroupText}</button>
     <div if={!loaded} class="graphjs-placeholder graphjs-loader">
-        <div class="graphjs-information">
+        <div class="graphjs-link">
             <div class="graphjs-cover graphjs-rectangle graphjs-fill"></div>
             <div class="graphjs-title graphjs-paragraph graphjs-centered">
                 <div class="graphjs-line graphjs-fill"></div>
                 <div class="graphjs-line graphjs-fill"></div>
             </div>
             <div class="graphjs-description graphjs-line graphjs-centered graphjs-fill"></div>
-            <div class="graphjs-button graphjs-rectangle graphjs-fill"></div>
         </div>
+        <div class="graphjs-button graphjs-rectangle graphjs-fill"></div>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/group-card.less';
-    </style>
     <script>
         import analytics from '../scripts/analytics.js';
         import getGroup from '../scripts/getGroup.js';
         import joinGroup from '../scripts/joinGroup.js';
         import leaveGroup from '../scripts/leaveGroup.js';
         import showGroup from '../scripts/showGroup.js';
+        import showLogin from '../scripts/showLogin.js';
         import getSession from '../scripts/getSession.js';
         import listMembers from '../scripts/listMembers.js';
 
@@ -36,9 +31,9 @@
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['group-card'];
-        i18n = {...i18n,...opts}
+        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
-        
+
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
@@ -97,6 +92,13 @@
                     });
                     break;
             }
+        }
+        this.handleLogin = () => showLogin({
+            action: 'updateState'
+        });
+        this.restart = () => {
+            this.update();
+            this.handleInformation();
         }
         this.handleJoin = () => {
             let self = this;

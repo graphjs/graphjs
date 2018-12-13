@@ -3,8 +3,25 @@
 @{prefix}-forum-list.@{prefix}-root {
     display: block;
     color: @text-color-normal;
+    &.@{prefix}-box {
+      .@{prefix}-content {
+          .@{prefix}-placeholder {
+              padding: 2.5em;
+          }
+      }
+    }
+    &.@{prefix}-inline {
+        .@{prefix}-content {
+            .@{prefix}-placeholder {
+                padding: 0;
+            }
+        }
+    }
+    .@{prefix}-header {
+        border-color: transparent;
+    }
     .@{prefix}-content {
-        min-height: 21em;
+        min-height: 25em;
         .no-padding !important;
         .@{prefix}-bar {
             display: table;
@@ -15,9 +32,9 @@
                 border-radius: 0;
             }
             .@{prefix}-search {
-                width: calc(100% - 12em);
-                border-right: 2px solid @contrast-color;
-                background-color: desaturate(tint(@theme-color, 20%), 5%);
+                width: calc(100% - 12em - 2px); // 2px creates the space for pseudo-border
+                margin-right: 2px; // Simulating a 2px border
+                background-color: desaturate(tint(@primary-color, 20%), 5%);
                 & > * {
                     float: left;
                     border-radius: 0;
@@ -56,7 +73,7 @@
                 .regular-font;
                 font-size: 1em;
                 text-transform: none;
-                .background-color-states(@theme-color);
+                .background-color-states(@primary-color);
                 svg {
                     position: relative;
                     width: auto;
@@ -79,16 +96,18 @@
             height: auto;
             vertical-align: middle;
             .@{prefix}-item {
-                display: table;
+                display: inline-block;
                 width: 100%;
                 color: @text-color-normal;
                 line-height: 3.5em;
-                border-bottom: 1px solid fade(black, 10%);
+                border-bottom-width: 1px;
+                border-bottom-style: solid;
+                border-bottom-color: fade(black, 10%);
                 &:last-child {
                     border-bottom: none;
                 }
                 &:hover {
-                    background-color: fade(@theme-color, 5%);
+                    background-color: fade(black, 2.5%);
                 }
                 &.@{prefix}-hidden {
                     display: none !important;
@@ -136,6 +155,9 @@
                         width: 2em;
                         height: 2em;
                         margin-right: .1em;
+                        border-width: 0;
+                        border-style: solid;
+                        border-color: @background-color-contrast;
                         .border-radius(@border-radius-full);
                     }
                 }
@@ -144,6 +166,7 @@
     }
     /* Placeholder */
     .@{prefix}-placeholder {
+        padding: 0 !important;
         .@{prefix}-bar {
             display: block;
             width: 100%;
@@ -203,7 +226,7 @@
         .@{prefix}-content {
             .@{prefix}-bar {
                 .@{prefix}-search {
-                    width: calc(100% - 3.5em);
+                    width: calc(100% - 3.5em - 2px); // 2px creates the space for pseudo-border
                 }
                 button {
                     width: 3.5em;
@@ -222,7 +245,7 @@
                         width: 6.5em;
                         img {
                             margin-right: -.9em;
-                            border: 2px solid @contrast-color;
+                            border-width: 2px;
                             box-shadow: 0 0 2px fade(black, 65%);
                         }
                     }
@@ -260,7 +283,7 @@
         .@{prefix}-content {
             .@{prefix}-bar {
                 .@{prefix}-search {
-                    width: calc(100% - 10em);
+                    width: calc(100% - 10em - 2px); // 2px creates the space for pseudo-border
                 }
                 button {
                     width: 10em;
@@ -276,7 +299,7 @@
                         width: 8.5em;
                         img {
                             margin-right: -.4em;
-                            border: 2px solid @contrast-color;
+                            border-width: 2px;
                         }
                     }
                 }
@@ -305,34 +328,4 @@
             }
         }
     }
-}
-
-/* 768 ≤ Window Width < 1024 */
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-
-}
-
-/* 1024 ≤ Window Width < 1152 */
-@media only screen and (min-width: 1024px) and (max-width: 1151px) {
-
-}
-
-/* 1152 ≤ Window Width < 1280 */
-@media only screen and (min-width: 1152px) and (max-width: 1280px) {
-
-}
-
-/* 1280 ≤ Window Width < 1440 */
-@media only screen and (min-width: 1280px) and (max-width: 1439px) {
-
-}
-
-/* 1440 ≤ Window Width < 1680 */
-@media only screen and (min-width: 1440px) and (max-width: 1679px) {
-
-}
-
-/* 1680 ≤ Window Width */
-@media only screen and (min-width: 1680px) {
-
 }

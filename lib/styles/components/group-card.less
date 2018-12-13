@@ -4,6 +4,11 @@
     display: block;
     height: 18em;
     color: @text-color-normal;
+    &.@{prefix}-box {
+        .@{prefix}-information {
+            background-color: @background-color-contrast;
+        }
+    }
     .@{prefix}-information {
         img {
             width: 15em;
@@ -17,11 +22,11 @@
             max-height: 2.5em;
             margin: 0 5%;
             margin-top: .5em;
-            color: @theme-color;
+            color: @primary-color;
             font-size: 1.2em;
             line-height: 1.25em;
             .heavy-font;
-            .text-color-states(@theme-color);
+            .text-color-states(@primary-color);
         }
         p {
             display: inline-block;
@@ -37,7 +42,7 @@
     }
     /* Placeholder */
     .@{prefix}-placeholder {
-        .@{prefix}-information {
+        .@{prefix}-link {
             display: inline-block;
             width: 100%;
             height: 15em;
@@ -74,7 +79,7 @@
             left: 0;
             right: 0;
             width: 100%;
-            height: 3.3em;
+            height: 3em;
         }
     }
 }
@@ -88,7 +93,7 @@
         .@{prefix}-information {
             img {
                 width: 11em;
-                height: 11em / 16 * 9;
+                height: calc(11em / 16 * 9);
             }
             b {
                 font-size: 1.1em;
@@ -101,10 +106,10 @@
         }
         /* Placeholder */
         .@{prefix}-placeholder {
-            .@{prefix}-information {
+            .@{prefix}-link {
                 height: 11em;
                 .@{prefix}-cover {
-                    width: 12.5em;
+                    width: 11em;
                     height: calc(11em / 16 * 9);
                 }
                 .@{prefix}-title {
@@ -135,7 +140,7 @@
         .@{prefix}-information {
             img {
                 width: 12.5em;
-                height: 12.5em / 16 * 9;
+                height: calc(12.5em / 16 * 9);
             }
             b {
                 font-size: 1.15em;
@@ -148,7 +153,7 @@
         }
         /* Placeholder */
         .@{prefix}-placeholder {
-            .@{prefix}-information {
+            .@{prefix}-link {
                 height: 12.5em;
                 .@{prefix}-cover {
                     width: 12.5em;
@@ -173,34 +178,4 @@
             }
         }
     }
-}
-
-/* 768 ≤ Window Width < 1024 */
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-
-}
-
-/* 1024 ≤ Window Width < 1152 */
-@media only screen and (min-width: 1024px) and (max-width: 1151px) {
-
-}
-
-/* 1152 ≤ Window Width < 1280 */
-@media only screen and (min-width: 1152px) and (max-width: 1280px) {
-
-}
-
-/* 1280 ≤ Window Width < 1440 */
-@media only screen and (min-width: 1280px) and (max-width: 1439px) {
-
-}
-
-/* 1440 ≤ Window Width < 1680 */
-@media only screen and (min-width: 1440px) and (max-width: 1679px) {
-
-}
-
-/* 1680 ≤ Window Width */
-@media only screen and (min-width: 1680px) {
-
 }

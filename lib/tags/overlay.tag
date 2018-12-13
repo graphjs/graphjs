@@ -1,11 +1,5 @@
 <graphjs-overlay class={'graphjs-element graphjs-root' + (opts.scroll ? ' graphjs-scroll' : '')} onclick={handleExit} if={overlayActive}>
     <div ref="container"></div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/overlay.less';
-    </style>
     <script>
         // Create tag
         let tag = document.createElement(opts.component);

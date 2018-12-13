@@ -3,11 +3,14 @@
         id={opts.id}
         active={active}
         minor={true}
+        box={opts.box}
         callback={changeProperties}
+        default-avatar={opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar}
     />
     <graphjs-group-activity
         id={opts.id}
         minor={true}
+        box={opts.box}
         callback={changeProperties}
         if={active == 'activity'}
     />
@@ -20,15 +23,10 @@
     <graphjs-group-settings
         id={opts.id}
         minor={true}
+        box={opts.box}
         callback={changeProperties}
         if={active == 'settings'}
     />
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/group.less';
-    </style>
     <script>
         import analytics from '../scripts/analytics.js';
         import './group-header.tag';

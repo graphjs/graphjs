@@ -8,12 +8,6 @@
     <button if={opts.affirmative == undefined || opts.affirmative == ''} onclick={handleButton}>Done</button>
     <button ref="custom" if={opts.affirmative} onclick={handleButton}>{opts.affirmative}</button>
     <button if={opts.affirmative && opts.negative} onclick={handleButton} class="graphjs-danger">{opts.negative}</button>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/alert.less';
-    </style>
     <script>
         import hideOverlay from '../scripts/hideOverlay.js';
         import showAuth from '../scripts/showAuth.js';

@@ -28,7 +28,7 @@
 .opacity(@opacity) {
 	-webkit-opacity: @opacity;
 	-moz-opacity: 	 @opacity;
-	opacity: 		 @opacity;
+	opacity: 		     @opacity;
 }
 
 .transform(@string){
@@ -115,14 +115,14 @@
 
 .placeholder-color(@color) {
     &::-webkit-input-placeholder, &::placeholder {
-		opacity: 1;
+				opacity: 1;
         color: @color;
     }
     &::-moz-placeholder, &:-ms-input-placeholder, &:-moz-placeholder { //Temporary bug fix: Placeholders for other browsers had to be separated from webkit version
         opacity: 1;
-		color: @color;
+				color: @color;
     }
-	&:focus::-webkit-input-placeholder, &:focus::placeholder {
+		&:focus::-webkit-input-placeholder, &:focus::placeholder {
         opacity: .5;
     }
     &:focus::-moz-placeholder, &:focus:-ms-input-placeholder, &:focus:-moz-placeholder { //Temporary bug fix: Placeholders for other browsers had to be separated from webkit version
@@ -139,18 +139,18 @@
         height: @height;
     }
     span {
-		color: red;
-        height: @height;
-        margin-left: @height * .2;
-        padding: @height * .125 0;
-		b {
-            font-size: @height * .35 !important;
-		}
-		small, time {
-            font-size: @height * .325 !important;
-		}
-		a {
-            font-size: @height * .325 !important;
-		}
+				color: red;
+				height: @height;
+				margin-left: @height * .2;
+				padding: @height * .125 0;
+				b {
+						font-size: @height * .35 !important;
+				}
+				small, time {
+						font-size: @height * .325 !important;
+				}
+				a {
+						font-size: @height * .325 !important;
+				}
     }
 }

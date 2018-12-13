@@ -34,7 +34,7 @@
         font-size: 1em;
     }
     a {
-        color: @theme-color;
+        color: @primary-color;
         border-bottom-width: 1px;
         border-bottom-style: dotted;
         border-bottom-color: @text-color-weak;
@@ -94,14 +94,14 @@
         line-height: 1.5em;
         border-left-width: .5em;
         border-left-style: solid;
-        border-left-color: @theme-color;
+        border-left-color: @primary-color;
         background-color: fade(@default-color, 10%);
         &::before{
             content: "\00201D";
             position: absolute;
             left: calc(1em / 3);
             top: calc(1em / 3.25); // Visually centers the super script character
-            color: @theme-color;
+            color: @primary-color;
             font-size: 3em;
             font-family: Arial, sans-serif;
             font-style: normal;
@@ -119,46 +119,4 @@
             .bold-font
         }
     }
-}
-
-// Responsive
-
-/* Window Width < 480 */
-@media only screen and (max-width: 479px) {
-
-}
-
-/* 480 ≤ Window Width < 768 */
-@media only screen and (min-width: 480px) and (max-width: 767px) {
-
-}
-
-/* 768 ≤ Window Width < 1024 */
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-
-}
-
-/* 1024 ≤ Window Width < 1152 */
-@media only screen and (min-width: 1024px) and (max-width: 1151px) {
-
-}
-
-/* 1152 ≤ Window Width < 1280 */
-@media only screen and (min-width: 1152px) and (max-width: 1280px) {
-
-}
-
-/* 1280 ≤ Window Width < 1440 */
-@media only screen and (min-width: 1280px) and (max-width: 1439px) {
-
-}
-
-/* 1440 ≤ Window Width < 1680 */
-@media only screen and (min-width: 1440px) and (max-width: 1679px) {
-
-}
-
-/* 1680 ≤ Window Width */
-@media only screen and (min-width: 1680px) {
-
 }

@@ -3,11 +3,14 @@
         id={opts.id}
         active={active}
         minor={true}
+        box={opts.box}
         callback={changeProperties}
+        default-avatar={opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar}
     />
     <graphjs-profile-activity
         id={opts.id}
         minor={true}
+        box={opts.box}
         callback={changeProperties}
         if={active == 'activity'}
     />
@@ -32,15 +35,11 @@
     <graphjs-profile-settings
         id={opts.id}
         minor={true}
+        box={opts.box}
         callback={changeProperties}
         if={active == 'settings'}
+        default-avatar={opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar}
     />
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/profile.less';
-    </style>
     <script>
         import analytics from '../scripts/analytics.js';
         import './profile-header.tag';

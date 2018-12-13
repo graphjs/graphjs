@@ -5,7 +5,6 @@
     width: 15em;
     text-align: center;
     .border-radius(@border-radius-large);
-    background-color: @contrast-color;
     .@{prefix}-information {
         display: block;
         height: 15em;
@@ -13,38 +12,15 @@
             pointer-events: none;
         }
         b {
-            .text-color-states(@theme-color);
+            .text-color-states(@primary-color);
         }
     }
     button {
         width: 100%;
         height: 3em;
         .border-radius(0);
-        color: white;
         font-size: 1em;
-        .background-color-states(@theme-color);
-    }
-    &.@{prefix}-color {
-        background-color: @theme-color;
-        .@{prefix}-option {
-            svg {
-                path {
-                    fill: white;
-                }
-            }
-        }
-        .@{prefix}-information {
-            b {
-                .text-color-states(white);
-            }
-            p {
-                color: fade(white, 65%);
-            }
-        }
-        button {
-            color: @theme-color;
-            .background-color-states(white);
-        }
+        .background-color-states(@primary-color);
     }
 }
 
@@ -76,34 +52,4 @@
             padding: .625em .875em;
         }
     }
-}
-
-/* 768 ≤ Window Width < 1024 */
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-
-}
-
-/* 1024 ≤ Window Width < 1152 */
-@media only screen and (min-width: 1024px) and (max-width: 1151px) {
-
-}
-
-/* 1152 ≤ Window Width < 1280 */
-@media only screen and (min-width: 1152px) and (max-width: 1280px) {
-
-}
-
-/* 1280 ≤ Window Width < 1440 */
-@media only screen and (min-width: 1280px) and (max-width: 1439px) {
-
-}
-
-/* 1440 ≤ Window Width < 1680 */
-@media only screen and (min-width: 1440px) and (max-width: 1679px) {
-
-}
-
-/* 1680 ≤ Window Width */
-@media only screen and (min-width: 1680px) {
-
 }

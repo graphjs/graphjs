@@ -6,30 +6,32 @@
     height: @bar-height;
     line-height: @bar-height;
     border: none;
-    background-color: @shade-color;
+    &.@{prefix}-box {
+        background-color: @background-color-contrast;
+    }
     .@{prefix}-content {
         height: inherit;
         .no-padding !important;
         .bold-font;
         font-size: 1.2em;
         line-height: inherit;
-        background-color: transparent !important;
+        background-color: transparent;
         a {
             float: left;
-            color: @theme-color;
+            color: @primary-color;
             border-right-width: 1px;
             border-right-style: dotted;
-            border-right-color: fade(@theme-color, 20%);
+            border-right-color: fade(@primary-color, 20%);
             background-color: transparent;
             .disable-selection;
             &:hover {
-                background-color: fade(@contrast-color, 50%);
+                background-color: fade(black, 2.5%);
             }
             &:last-of-type {
                 border-right-width: 0 !important;
             }
             &.@{prefix}-active {
-                background-color: @contrast-color;
+                background-color: fade(black, 5%);
             }
         }
         .@{prefix}-not-logged {
@@ -73,7 +75,7 @@
                     height: inherit;
                     max-width: 10em;
                     padding: 0 .75em;
-                    color: @theme-color;
+                    color: @primary-color;
                     .bold-font;
                     line-height: inherit;
                     .single-line-text;
@@ -93,45 +95,11 @@
                     width: auto;
                     height: inherit;
                     path {
-                        fill: fade(@theme-color, 50%);
+                        fill: fade(@primary-color, 50%);
                         .transition(fill .35s ease);
                     }
                 }
             }
         }
-    }
-    &.@{prefix}-color {
-        background-color: @theme-color;
-        .@{prefix}-content {
-            a {
-                color: white !important;
-                border-right-color: fade(white, 35%) !important;
-                &:hover {
-                    background-color: fade(black, 5%) !important;
-                }
-                &.@{prefix}-active {
-                    background-color: fade(black, 10%) !important;
-                }
-            }
-            .@{prefix}-logged {
-                a {
-                    span {
-                        color: white !important;
-                    }
-                }
-                .@{prefix}-exit {
-                    svg {
-                        path {
-                            fill: fade(white, 50%) !important;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    &.@{prefix}-inline {
-        border: none !important;
-        background-color: transparent !important;
-        box-shadow: none !important;
     }
 }

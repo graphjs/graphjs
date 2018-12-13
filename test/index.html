@@ -4,49 +4,224 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Test GraphJS Components</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
     </head>
     <body>
         <!-- Test Tags start here -->
 
+        <!-- ### Testing Alert -->
+        <h2>Alert</h2>
+        <graphjs-alert title="Login Required" message="You need to login to view the group details." affirmative="Login" negative="Cancel" show="login"></graphjs-alert>
+
         <!-- ### Testing Auth -->
+        <h2>Auth</h2>
+        <h3>Box</h3>
+        <graphjs-auth type="standalone" theme="default" position="topleft"></graphjs-auth>
+        <h3>Inline</h3>
+        <graphjs-auth type="standalone" theme="default" position="topleft" box="disabled"></graphjs-auth>
+
+        <!-- ### Testing Auth: State -->
+        <h2>Auth: State</h2>
+        <h3>Box</h3>
+        <graphjs-auth-state type="standalone" theme="default" position="topleft"></graphjs-auth-state>
+        <h3>Inline</h3>
+        <graphjs-auth-state type="standalone" theme="default" position="topleft" box="disabled"></graphjs-auth-state>
+
+        <!-- ### Testing Auth: Register -->
+        <h2>Auth: Register</h2>
+        <h3>Box</h3>
+        <graphjs-auth-register></graphjs-auth-register>
+        <h3>Inline</h3>
+        <graphjs-auth-register box="disabled"></graphjs-auth-register>
+
+        <!-- ### Testing Auth: Login -->
+        <h2>Auth: Login</h2>
+        <h3>Box</h3>
         <graphjs-auth-login></graphjs-auth-login>
-        
-         
-        <!-- 
-        // Private Content
-        <div style="width: 500px;">
-            <h2>Placeholders</h2>
-            <h3>Text</h3>
-            <graphjs-private-content placeholder="text" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
-            <h3>Image</h3>
-            <graphjs-private-content placeholder="image" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
-            <h3>Video</h3>
-            <graphjs-private-content placeholder="video" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
-            <h3>Album</h3>
-            <graphjs-private-content placeholder="album" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
-            <h3>Mixed</h3>
-            <graphjs-private-content placeholder="mixed" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
-            <h3>Custom</h3>
-            <graphjs-private-content placeholder="custom" id="585d867a5a7304faafc434a7479e3250">
-                <div style="text-align: center;">
-                    <img style="width: 150px; height: auto; margin-bottom: 25px;" src="https://res.cloudinary.com/graphjs/image/upload/graphjs.com/identity/graphjs-mascot.png" />
-                    <h1>This is our mascot</h1>
-                </div>
-            </graphjs-private-content>
-            <br /><br />
-        </div>
-        -->
+        <h3>Inline</h3>
+        <graphjs-auth-login box="disabled"></graphjs-auth-login>
+
+        <!-- ### Testing Auth: Reset -->
+        <h2>Auth: Reset</h2>
+        <h3>Box</h3>
+        <graphjs-auth-reset></graphjs-auth-reset>
+        <h3>Inline</h3>
+        <graphjs-auth-reset box="disabled"></graphjs-auth-reset>
+
+        <!-- ### Testing Blog -->
+        <h2>Blog</h2>
+        <h3>Box</h3>
+        <graphjs-blog></graphjs-blog>
+        <h3>Inline</h3>
+        <graphjs-blog box="disabled"></graphjs-blog>
+
+        <!-- ### Testing Blog: Composer -->
+        <h2>Blog: Composer</h2>
+        <h3>Box</h3>
+        <graphjs-blog-composer></graphjs-blog-composer>
+        <h3>Inline</h3>
+        <graphjs-blog-composer box="disabled"></graphjs-blog-composer>
+
+        <!-- ### Testing Blog: List -->
+        <h2>Blog: List</h2>
+        <h3>Box</h3>
+        <graphjs-blog-list></graphjs-blog-list>
+        <h3>Inline</h3>
+        <graphjs-blog-list box="disabled"></graphjs-blog-list>
+
+        <!-- ### Testing Blog: Post -->
+        <h2>Blog: Post</h2>
+        <h3>Box</h3>
+        <graphjs-blog-post id="5a5b77c638fe706999a9f65c8820f6b1"></graphjs-blog-post>
+        <h3>Inline</h3>
+        <graphjs-blog-post id="5a5b77c638fe706999a9f65c8820f6b1" box="disabled"></graphjs-blog-post>
+
+
+        <!-- ### Testing Comments -->
+        <h2>Comments</h2>
+        <h3>Box</h3>
+        <graphjs-comments></graphjs-comments>
+        <h3>Inline</h3>
+        <graphjs-comments box="disabled"></graphjs-comments>
+
+        <!-- ### Testing Feedback -->
+        <h2>Feedback</h2>
+        <h3>Box</h3>
+        <graphjs-feedback></graphjs-feedback>
+        <h3>Inline</h3>
+        <graphjs-feedback box="disabled"></graphjs-feedback>
 
         <!-- ### Testing Forum -->
-        <graphjs-forum></graphjs-forum>
+        <h2>Forum</h2>
+        <h3>Box</h3>
+        <graphjs-forum access="private"></graphjs-forum>
+        <h3>Inline</h3>
+        <graphjs-forum access="private" box="disabled"></graphjs-forum>
+
+        <!-- ### Testing Forum: Composer -->
+        <h2>Forum: Composer</h2>
+        <h3>Box</h3>
+        <graphjs-forum-composer></graphjs-forum-composer>
+        <h3>Inline</h3>
+        <graphjs-forum-composer box="disabled"></graphjs-forum-composer>
+
+        <!-- ### Testing Forum: List -->
+        <h2>Forum: List</h2>
+        <h3>Box</h3>
+        <graphjs-forum-list access="private"></graphjs-forum-list>
+        <h3>Inline</h3>
+        <graphjs-forum-list access="private" box="disabled"></graphjs-forum-list>
+
+        <!-- ### Testing Forum: Thread -->
+        <h2>Forum: Thread</h2>
+        <h3>Box</h3>
+        <graphjs-forum-thread access="private" id="50a5a634eed9d6dad5f64daa3bef6587"></graphjs-forum-thread>
+        <h3>Inline</h3>
+        <graphjs-forum-thread access="private" id="50a5a634eed9d6dad5f64daa3bef6587" box="disabled"></graphjs-forum-thread>
+
+        <!-- ### Testing Group -->
+        <h2>Group</h2>
+        <h3>Box</h3>
+        <graphjs-group id="33365d758357b6e724c360272ebf8895"></graphjs-group>
+        <h3>Inline</h3>
+        <graphjs-group id="33365d758357b6e724c360272ebf8895" box="disabled"></graphjs-group>
+
+        <!-- ### Testing Group: Creator -->
+        <h2>Group: Creator</h2>
+        <h3>Box</h3>
+        <graphjs-group-creator></graphjs-group-creator>
+        <h3>Inline</h3>
+        <graphjs-group-creator box="disabled"></graphjs-group-creator>
+
+        <!-- ### Testing Group: Card -->
+        <h2>Group: Card</h2>
+        <h3>Box (Only option)</h3>
+        <graphjs-group-card id="33365d758357b6e724c360272ebf8895"></graphjs-group-card>
+
+        <!-- ### Testing Messages -->
+        <h2>Messages</h2>
+        <h3>Box</h3>
+        <graphjs-messages></graphjs-messages>
+        <h3>Inline</h3>
+        <graphjs-messages box="disabled"></graphjs-messages>
+
+        <!-- ### Testing Messages: Composer -->
+        <h2>Messages: Composer</h2>
+        <h3>Box</h3>
+        <graphjs-messages-composer to="48760696099368953dd71a90b727acba" anonymity="on"></graphjs-messages-composer>
+        <h3>Inline</h3>
+        <graphjs-messages-composer to="48760696099368953dd71a90b727acba" anonymity="on" box="disabled"></graphjs-messages-composer>
+
+        <!-- ### Testing Private Content -->
+        <h2>Private Content</h2>
+        <h3>Text</h3>
+        <graphjs-private-content placeholder="text" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+        <h3>Image</h3>
+        <graphjs-private-content placeholder="image" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+        <h3>Video</h3>
+        <graphjs-private-content placeholder="video" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+        <h3>Album</h3>
+        <graphjs-private-content placeholder="album" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+        <h3>Mixed</h3>
+        <graphjs-private-content placeholder="mixed" id="585d867a5a7304faafc434a7479e3250"></graphjs-private-content>
+        <h3>Custom</h3>
+        <graphjs-private-content placeholder="custom" id="585d867a5a7304faafc434a7479e3250">
+            <div style="text-align: center;">
+                <img style="width: 150px; height: auto; margin-bottom: 25px;" src="https://raw.githubusercontent.com/phonetworks/graphjs/master/static/single-video.png" />
+                <h1>This is our mascot</h1>
+            </div>
+        </graphjs-private-content>
+
+        <!-- ### Testing Profile -->
+        <h2>Profile</h2>
+        <h3>Box</h3>
+        <graphjs-profile id="48760696099368953dd71a90b727acba"></graphjs-profile>
+        <h3>Inline</h3>
+        <graphjs-profile id="48760696099368953dd71a90b727acba" box="disabled"></graphjs-profile>
+
+        <!-- ### Testing Profile: Card -->
+        <h2>Profile</h2>
+        <graphjs-profile-card id="48760696099368953dd71a90b727acba"></graphjs-profile-card>
+
+        <!-- ### Testing Star: Button -->
+        <h2>Star: Button</h2>
+        <h3>Box</h3>
+        <graphjs-star-button type="default"></graphjs-star-button>
+        <h3>Inline</h3>
+        <graphjs-star-button type="default" box="disabled"></graphjs-star-button>
+
+        <!-- ### Testing Star: List -->
+        <h2>Star: List</h2>
+        <h3>Box</h3>
+        <graphjs-star-list scope="global" type="default"></graphjs-star-list>
+        <h3>Inline</h3>
+        <graphjs-star-list scope="global" type="default" box="disabled"></graphjs-star-list>
+
+
+
+
+        <!--
+        // Private Content
+            <h2>Placeholders</h2>
+
+        </div>
+        -->
 
         <!-- Test Tags finish here -->
         <script src="../dist/graph.js"></script>
         <script>
             GraphJS.init("79982844-6a27-4b3b-b77f-419a79be0e10", {
-                host: "https://gjs-singlesignon.herokuapp.com",
-                theme: "dark", // Dark theme
-                color: "rgb(77, 220, 121)" // Custom color
+                host: "https://build.phonetworks.com",
+                theme: {
+                    primaryColor: 'cornflowerblue',
+                    backgroundColor: 'white',
+                    textColor: '#555'
+                }
             });
         </script>
     </body>

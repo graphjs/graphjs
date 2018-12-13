@@ -2,32 +2,30 @@
 
 @{prefix}-alert.@{prefix}-root {
     display: block;
-    width: 320px;
-    color: @text-color-normal;
-    background-color: @contrast-color !important;
+    width: 20em;
     .clearfix;
     .@{prefix}-content {
-        background-color: @contrast-color !important;
+        padding: 2em 1.5em;
         p {
             text-align: center;
             font-size: 1.1em;
+            line-height: 1.5em;
         }
     }
     & > button {
         .bold-font;
-        border-top: 2px solid fade(@default-color, 10%);
+        border-top-width: 2px;
+        border-top-style: solid;
+        border-top-color: fade(@default-color, 10%);
         border-top-left-radius: 0;
         border-top-right-radius: 0;
-        background-color: @contrast-color !important;
+        .background-color-states(@background-color);
         &:not(.@{prefix}-danger) {
-            color: @theme-color !important;
-        }
-        &:hover {
-            background-color: @contrast-color !important;
+            .text-color-states(@primary-color);
         }
         &.@{prefix}-danger {
-            color: @danger-color !important;
-            background-color: @contrast-color;
+            .text-color-states(@danger-color);
+            .background-color-states(@background-color);
         }
         &.@{prefix}-full {
             width: 100%;
@@ -37,11 +35,15 @@
             width: 50%;
             &:first-of-type {
                 border-bottom-right-radius: 0;
-                border-right: 1px solid fade(@default-color, 10%);
+                border-right-width: 1px;
+                border-right-style: solid;
+                border-right-color: fade(@default-color, 10%);
             }
             &:last-of-type {
                 border-bottom-left-radius: 0;
-                border-left: 1px solid fade(@default-color, 10%);
+                border-left-width: 1px;
+                border-left-style: solid;
+                border-left-color: fade(@default-color, 10%);
             }
         }
     }

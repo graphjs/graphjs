@@ -1,4 +1,4 @@
-<graphjs-star-button class="graphjs-element graphjs-root graphjs-box"}>
+<graphjs-star-button class={'graphjs-element graphjs-root ' + boxStyle}>
     <div class="graphjs-content">
         <a class={active ? 'graphjs-active' : ''} onclick={handleStar}>
             <div class={'graphjs-' + type + ' graphjs-icon'}>
@@ -20,12 +20,6 @@
             </p>
         </a>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/star-button.less';
-    </style>
     <script>
         import analytics from '../scripts/analytics.js';
         import star from '../scripts/star.js';
@@ -37,6 +31,7 @@
 
         this.active = false;
         this.type = opts.type || 'default';
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.count = 0;
 
         this.on('before-mount', function() {

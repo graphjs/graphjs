@@ -1,20 +1,10 @@
 @prefix: graphjs;
 
 .@{prefix}-loading {
+    overflow: hidden;
     position: relative;
     z-index: 1;
     pointer-events: none;
-    &:hover {
-        .@{prefix}-loader {
-            background-color: fade(@shade-color, 85%);
-            &.@{prefix}-inline {
-                background-color: transparent;
-            }
-            &.@{prefix}-placeholder {
-                background-color: @shade-color;
-            }
-        }
-    }
     & > * {
         filter: blur(5px);
     }
@@ -34,7 +24,6 @@
         filter: none;
         .transition(all 1s ease);
         &.@{prefix}-placeholder {
-            background-color: @shade-color;
             .@{prefix}-fill {
                 .transition(background-color 2s linear);
                 .animation(loading-placeholder normal 2s infinite ease-in-out);
@@ -73,31 +62,29 @@
                 outline: none;
             }
         }
-        &.@{prefix}-inline {
-            .@{prefix}-dots {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                .transform(translate(-50%, -50%));
-                & > span {
-                    display: inline-block;
-                    width: .85em;
-                    height: .85em;
-                    margin-right: .15em;
-                    border-radius: 100%;
-                    background-color: @theme-color;
-                    animation-name: loading-dots;
-                    animation-duration: 2s;
-                    animation-iteration-count: infinite;
-                    animation-fill-mode: both;
-                    transition: opacity .125s linear;
-                    &:nth-child(2) {
-                        animation-delay: .5s;
-                    }
-                    &:nth-child(3) {
-                        animation-delay: 1s;
-                        margin-right: 0;
-                    }
+        .@{prefix}-dots {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            .transform(translate(-50%, -50%));
+            & > span {
+                display: inline-block;
+                width: .85em;
+                height: .85em;
+                margin-right: .15em;
+                border-radius: 100%;
+                background-color: @primary-color;
+                animation-name: loading-dots;
+                animation-duration: 2s;
+                animation-iteration-count: infinite;
+                animation-fill-mode: both;
+                transition: opacity .125s linear;
+                &:nth-child(2) {
+                    animation-delay: .5s;
+                }
+                &:nth-child(3) {
+                    animation-delay: 1s;
+                    margin-right: 0;
                 }
             }
         }
@@ -115,7 +102,7 @@
         border-style: solid;
         border-color: @text-color-weak;
         border-radius: .5em;
-        background-color: transparent !important;
+        background-color: @background-color-shade;
         .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
         pointer-events: all;
         cursor: pointer;
@@ -125,7 +112,7 @@
         &:hover {
             color: @text-color-normal;
             border-color: @text-color-normal;
-            background-color: @contrast-color !important;
+            background-color: @background-color-contrast;
         }
     }
 }

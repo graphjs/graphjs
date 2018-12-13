@@ -1,5 +1,5 @@
 <graphjs-auth-state
-    class={'graphjs-element graphjs-root graphjs-' + theme + (opts.type == 'inline' ? ' graphjs-inline' : ' graphjs-box')}
+    class={'graphjs-element graphjs-root ' + boxStyle}
     style={'height: ' + height + '; line-height: ' + height + ';'}
 >
     <div class="graphjs-content">
@@ -11,7 +11,7 @@
         <div class="graphjs-logged" if={id}>
             <a if={!profile} class="graphjs-idle">&middot; &middot; &middot;</a>
             <a class="graphjs-details" data-link="profile" data-id={id} onclick={handleShow} if={profile}>
-                <img src={profile.avatar ? downsizeImage(profile.avatar, 40) : 'https://res.cloudinary.com/graphjs/image/upload/graphjs/content/avatars/user.png'} />
+                <img src={profile.avatar ? downsizeImage(profile.avatar, 40) : defaultAvatar} />
                 <span>{profile.fullname || profile.username}</span>
             </a>
             <a class="graphjs-exit" if={profile} onclick={handleExit}>
@@ -25,12 +25,6 @@
             </a>
         </div>
     </div>
-    <style type="less">
-        @import '../styles/variables.less';
-        @import '../styles/mixins.less';
-        @import '../styles/options.less';
-        @import '../styles/components/auth-state.less';
-    </style>
     <script>
         import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';
@@ -41,17 +35,19 @@
         import showProfile from '../scripts/showProfile.js';
 
         analytics("auth-state");
-        
+
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['auth-state'];
-        i18n = {...i18n,...opts}
+        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
+        this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
         
+
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
-        this.theme = opts.theme || 'default';
         this.height = opts.height || '50px';
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.failMessages = [];
 
         this.on('before-mount', function() {

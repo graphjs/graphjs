@@ -1,29 +1,18 @@
 @prefix: graphjs;
 
-.@{prefix}-promo {
-    overflow: hidden;
-    display: inline-block;
+@{prefix}-promo.@{prefix}-root {
     position: absolute;
     z-index: 10;
     opacity: .5;
     width: auto;
     height: 1.6em;
     margin: 0 auto;
-    padding: 0 .4em;
-    color: white;
     font-size: .8em;
     line-height: 1.6em;
-    text-align: center;
-    background-color: fade(@default-color, 85%);
+    background-color: fade(black, 25%);
     .transition(all .35s ease);
     &:hover {
         opacity: 1;
-    }
-    &::before {
-        content: "\1F308\FE0F";
-        display: inline-block;
-        font-size: .9em;
-        letter-spacing: -.15em;
     }
     &.@{prefix}-top {
         top: 0;
@@ -51,14 +40,28 @@
     &.@{prefix}-rounded {
         border-radius: .5em !important;
     }
-    svg {
+    a {
+        overflow: hidden;
         display: inline-block;
         width: auto;
-        height: 1.8em;
-        padding-top: .4em;
-        vertical-align: middle;
-        path {
-            fill: white;
+        height: inherit;
+        padding: 0 .4em;
+        text-align: center;
+        &::before {
+            content: "\1F308\FE0F";
+            display: inline-block;
+            font-size: .9em;
+            letter-spacing: -.15em;
+        }
+        svg {
+            display: inline-block;
+            width: auto;
+            height: 1.85em;
+            padding-top: .4em;
+            vertical-align: middle;
+            path {
+                fill: white;
+            }
         }
     }
 }
