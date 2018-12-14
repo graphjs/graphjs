@@ -543,6 +543,51 @@
     }
 }
 
+// feed.less
+@{prefix}-feed.@{prefix}-root {
+    color: @text-color-normal;
+}
+
+// feed-activity.less
+@{prefix}-feed-activity.@{prefix}-root {
+    color: @text-color-normal;
+    .@{prefix}-content {
+        .@{prefix}-activity {
+            .@{prefix}-item {
+                border-color: fade(@default-color, 3%);
+                background-color: @background-color-shade;
+            }
+        }
+    }
+}
+
+// feed-composer.less
+@{prefix}-feed-composer.@{prefix}-root {
+    color: @text-color-normal;
+    &.@{prefix}-box {
+      .@{prefix}-content {
+          .@{prefix}-options {
+              background-color: @background-color-contrast;
+          }
+      }
+    }
+    .@{prefix}-content {
+        .@{prefix}-options {
+            a {
+                .text-color-states(@text-color-strong);
+                .icon-color-states(@text-color-strong);
+            }
+            button {
+                .background-color-states(@primary-color);
+            }
+        }
+    }
+}
+
+// feed.display.less
+@{prefix}-feed-display.@{prefix}-root {
+}
+
 // feedback.less
 @{prefix}-feedback.@{prefix}-root {
     color: @text-color-normal;

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Test GraphJS Components</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Test Tags start here -->
+
+        <!-- ### Testing Feed -->
+        <h2>Feed</h2>
+        <h3>Box</h3>
+        <graphjs-feed max-width="600px;"></graphjs-feed>
+        <h3>Inline</h3>
+        <graphjs-feed max-width="600px;" box="disabled"></graphjs-feed>
+
+
+        <br /><br /><hr /><br /><br />
+
+        <graphjs-auth></graphjs-auth>
+        <!--
+        // Private Content
+            <h2>Placeholders</h2>
+
+        </div>
+        -->
+
+        <!-- Test Tags finish here -->
+        <script src="../dist/graph.js"></script>
+        <script>
+            GraphJS.init("3D90D5DC-9D34-449D-9AB5-F34A2C4246F2", {
+                host: "https://gjd5dc9d34449d9ab5f34a2c4246f2.herokuapp.com",
+                theme: {
+                    primaryColor: 'cornflowerblue',
+                    backgroundColor: 'white',
+                    textColor: '#555'
+                }
+            });
+        </script>
+    </body>
+</html>
