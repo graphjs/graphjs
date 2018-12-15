@@ -64,7 +64,7 @@
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
-        
+
 
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;

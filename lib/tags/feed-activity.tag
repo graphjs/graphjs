@@ -21,12 +21,12 @@
                 <div class="graphjs-entry">
                     <div if={item.text} class="graphjs-text">{item.text}</div>
                     <div if={item.urls.length > 0 && item.type == 'photo'} class="graphjs-media graphjs-photo">
-                        <a onclick={handleDisplay}>
+                        <a data-id={item.id} onclick={handleDisplay}>
                             <img src={getThumbnail(item.urls[0], 600)} />
                         </a>
                     </div>
                     <div if={item.urls.length > 0 && item.type == 'video'} class="graphjs-media graphjs-video">
-                        <a onclick={handleDisplay}>
+                        <a data-id={item.id} onclick={handleDisplay}>
                             <svg viewBox="20 13 67 74">
                                 <path d="M82.8,43.5l-50.5-29C27.3,11.7,21,15.3,21,21V79c0,5.8,6.3,9.3,11.3,6.5l50.5-29C87.8,53.6,87.8,46.4,82.8,43.5z"/>
                             </svg>
@@ -34,7 +34,7 @@
                         </a>
                     </div>
                     <div if={item.urls.length > 0 && item.type == 'photoAlbum'} class="graphjs-media graphjs-photoalbum">
-                        <a each={url in item.urls} onclick={handleDisplay}>
+                        <a each={url, index in item.urls} data-id={item.id} data-index={index} onclick={handleDisplay}>
                             <div class="graphjs-container" style={'background-image: url(' + getThumbnail(url, 200) + ');'}></div>
                         </a>
                     </div>
@@ -86,8 +86,9 @@
         import showLogin from '../scripts/showLogin.js';
         import showDisplay from '../scripts/showDisplay.js';
 
-        import {downsizeImage} from '../scripts/client.js';
+        import {downsizeImage, getThumbnail} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
+        this.getThumbnail = getThumbnail;
 
         this.blocked = false;
         this.activity = [];
@@ -107,12 +108,6 @@
             this.blocked = false;
             this.update();
             this.handleUser();
-        }
-        this.getThumbnail = (url, size) => {
-            return downsizeImage(
-              url.substr(0, url.lastIndexOf('.')) + '.jpg',
-              size
-            );
         }
         this.handleUser = () => {
             let self = this;
@@ -169,18 +164,10 @@
         }
         this.handleDisplay = (event) => {
             event.preventDefault();
-            showDisplay('123123123', {
-                type: 'album',
-                owner: '48760696099368953dd71a90b727acba',
-                timestamp: 1524747012,
-                album: [
-                    'https://res.cloudinary.com/ozanilbey/image/upload/c_limit,fl_png8,w_360/favogue/cover.png',
-                    'https://res.cloudinary.com/ozanilbey/image/upload/c_limit,fl_png8,w_360/piccture/cover.png',
-                    'https://res.cloudinary.com/ozanilbey/image/upload/c_limit,fl_png8,w_360/cardz/cover.png',
-                    'https://res.cloudinary.com/ozanilbey/image/upload/c_limit,fl_png8,w_360/brush/cover.png',
-                    'https://res.cloudinary.com/ozanilbey/image/upload/c_limit,fl_png8,w_360/fihrist/cover.png'
-                ]
-            });
+            let id = event.currentTarget.dataset.id;
+            let index = event.currentTarget.dataset.index;
+            let data = this.activity.filter(item => item.id === id)[0];
+            data && showDisplay(data, index);
         }
         this.handleBlock = (event) => {
             event.preventDefault();

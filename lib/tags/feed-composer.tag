@@ -86,7 +86,6 @@
                 },
                 function(error, result) {
                     if(result) {
-                        console.log(result)
                         self.media = self.media.concat(result);
                         self.type = 'photo';
                         video.classList.add('disabled');
@@ -108,7 +107,6 @@
                 },
                 function(error, result) {
                     if(result) {
-                        console.log(result)
                         self.media = result;
                         self.type = 'video';
                         photo.classList.add('disabled');

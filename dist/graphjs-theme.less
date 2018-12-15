@@ -586,6 +586,37 @@
 
 // feed.display.less
 @{prefix}-feed-display.@{prefix}-root {
+    color: @text-color-normal;
+    .@{prefix}-content {
+        .@{prefix}-information {
+            background-color: @background-color-contrast;
+            .@{prefix}-credit {
+                span {
+                    color: @text-color-normal;
+                }
+            }
+            a {
+                svg {
+                    path {
+                        fill: @primary-color;
+                    }
+                }
+            }
+        }
+        .@{prefix}-display {
+            .@{prefix}-container {
+                .@{prefix}-media {
+                    & > * {
+                        &.@{prefix}-photoalbum {
+                            & > a {
+                                .icon-color-states(@primary-color);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 // feedback.less
