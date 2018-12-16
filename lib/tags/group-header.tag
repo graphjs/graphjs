@@ -42,13 +42,8 @@
             </a>
         </li>
     </ul>
-<<<<<<< HEAD
-    <div class="graphjs-information" if={!group}>
-        <div class="graphjs-cover" style="background-image: url(https://raw.githubusercontent.com/phonetworks/graphjs/master/static/group.png)"></div>
-=======
     <div class="graphjs-information" if={loaded && !group}>
-        <div class="graphjs-cover" style="background-image: url(https://res.cloudinary.com/graphjs/image/upload/graphjs/content/covers/group.png)"></div>
->>>>>>> ozanilbey_advanced-styling
+        <div class="graphjs-cover" style="background-image: url(https://raw.githubusercontent.com/phonetworks/graphjs/master/static/group.png)"></div>
         <a>{i18n.groupErrorTextOne}</a>
         <p>{i18n.groupErrorTextTwo}</p>
         <button onclick={handleUpdate}>{i18n.refreshButtonText}</button>
