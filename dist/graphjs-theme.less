@@ -163,6 +163,11 @@
                 color: @text-color-weak;
             }
         }
+        .@{prefix}-separated {
+            &::before {
+                color: @text-color-weak;
+            }
+        }
     }
 }
 
@@ -537,6 +542,131 @@
                 &.@{prefix}-editable {
                     border-color: fade(@default-color, 15%);
                     background-color: @background-color-contrast;
+                }
+            }
+        }
+    }
+}
+
+// feed.less
+@{prefix}-feed.@{prefix}-root {
+    color: @text-color-normal;
+}
+
+// feed-activity.less
+@{prefix}-feed-activity.@{prefix}-root {
+    color: @text-color-normal;
+    .@{prefix}-content {
+        .@{prefix}-activity {
+            .@{prefix}-item {
+                border-color: fade(@default-color, 3%);
+                background-color: @background-color-contrast;
+                .@{prefix}-interaction {
+                    .@{prefix}-synopsis {
+                        & > * {
+                            .@{prefix}-unauthorized {
+                                svg {
+                                    path {
+                                        fill: @text-color-weak !important;
+                                    }
+                                }
+                            }
+                        }
+                        .@{prefix}-rating-indicator {
+                            .@{prefix}-icon {
+                                svg {
+                                    path {
+                                        fill: desaturate(@text-color-weak, 65%);
+                                    }
+                                }
+                            }
+                        }
+                        .@{prefix}-comments-indicator {
+                            .@{prefix}-icon {
+                                svg {
+                                    path {
+                                        fill: desaturate(@text-color-weak, 65%);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .@{prefix}-comments {
+                    .@{prefix}-comment {
+                        &.@{prefix}-pseudo {
+                            background-color: fade(@primary-color, 15%);
+                        }
+                        .@{prefix}-credit {
+                            span {
+                                color: @text-color-normal;
+                            }
+                        }
+                        p {
+                            &.@{prefix}-editable {
+                                border-color: fade(@default-color, 15%);
+                                background-color: @background-color-contrast;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// feed-composer.less
+@{prefix}-feed-composer.@{prefix}-root {
+    color: @text-color-normal;
+    &.@{prefix}-box {
+      .@{prefix}-content {
+          .@{prefix}-options {
+              background-color: @background-color-contrast;
+          }
+      }
+    }
+    .@{prefix}-content {
+        .@{prefix}-options {
+            a {
+                .text-color-states(@text-color-strong);
+                .icon-color-states(@text-color-strong);
+            }
+            button {
+                .background-color-states(@primary-color);
+            }
+        }
+    }
+}
+
+// feed.display.less
+@{prefix}-feed-display.@{prefix}-root {
+    color: @text-color-normal;
+    .@{prefix}-content {
+        .@{prefix}-information {
+            background-color: @background-color-contrast;
+            .@{prefix}-credit {
+                span {
+                    color: @text-color-normal;
+                }
+            }
+            a {
+                svg {
+                    path {
+                        fill: @primary-color;
+                    }
+                }
+            }
+        }
+        .@{prefix}-display {
+            .@{prefix}-container {
+                .@{prefix}-media {
+                    & > * {
+                        &.@{prefix}-photoalbum {
+                            & > a {
+                                .icon-color-states(@primary-color);
+                            }
+                        }
+                    }
                 }
             }
         }
