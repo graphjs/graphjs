@@ -202,9 +202,6 @@
                         self.update();
                     }
                 });
-            } else {
-                self.refs.submit.classList.remove('graphjs-loading');
-                self.refs.submit.setAttribute('disabled', 'disabled');
             }
         }
         this.handleShow = (event) => {
