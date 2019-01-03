@@ -427,18 +427,17 @@
                 }
                 .@{prefix}-title {
                     .text-color-states(@primary-color);
+                    small {
+                        b {
+                            background-color: @primary-color;
+                        }
+                    }
                 }
                 .@{prefix}-information {
                     color: @text-color-weak;
                     & > * {
                         &::before {
                             color: @text-color-weak;
-                        }
-                        & > a {
-                            color: @text-color-normal;
-                            &::before {
-                                color: @text-color-weak;
-                            }
                         }
                     }
                 }
@@ -462,6 +461,13 @@
     }
     .@{prefix}-content {
         .@{prefix}-post {
+            .@{prefix}-action {
+                li {
+                    a {
+                        .text-color-states(@text-color-normal);
+                    }
+                }
+            }
             .@{prefix}-title {
                 color: @primary-color;
                 .@{prefix}-back {
@@ -476,14 +482,6 @@
                     }
                     & > a {
                         color: @text-color-normal;
-                        &::before {
-                            color: @text-color-weak;
-                        }
-                    }
-                }
-                .@{prefix}-action {
-                    & > * {
-                        .text-color-states(@text-color-strong);
                         &::before {
                             color: @text-color-weak;
                         }

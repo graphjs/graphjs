@@ -21,12 +21,14 @@
                 onclick={!opts.minor && handleShow}
                 href={opts.minor && '#' + postsData[matchedPost].title.replace(' ', '_') + '-' + matchedPost + '-GJS'}
             >
-                <h1 class="graphjs-title">{postsData[matchedPost].title}</h1>
+                <h1 class="graphjs-title">{postsData[matchedPost].title}<small if={postsData[matchedPost].isDraft}><b>Draft</b></small></h1>
                 <ul class="graphjs-information">
                     <li class="graphjs-author">
                         <span data-link="profile" data-id={postsData[matchedPost].author.id} onclick={handleShow}>{postsData[matchedPost].author.username}</span>
                     </li>
-                    <li  if={postsData[matchedPost].isDraft}><b>[DRAFT]</b></li>
+                    <li  if={postsData[matchedPost].isDraft}>
+                        <span>Draft</span>
+                    </li>
                     <li class="graphjs-time" if={postsData[matchedPost].timestamp}>
                         <time>{printTime(postsData[matchedPost].timestamp)}</time>
                     </li>

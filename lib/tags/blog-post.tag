@@ -15,6 +15,20 @@
             <p>This post is no longer available!</p>
         </div>
         <div if={loaded && !deleted} class="graphjs-post" ref="scrollingContent">
+            <ul class="graphjs-action" if={authorized}>
+                <li if={opts.minor}>
+                    <a ref="edit" onclick={edit}>Edit</a>
+                </li>
+                <li if={!published}>
+                    <a ref="publish" onclick={publish}>Publish</a>
+                </li>
+                <li if={published}>
+                    <a ref="unpublish" onclick={unpublish} class="graphjs-danger">Unpublish</a>
+                </li>
+                <li>
+                    <a ref="delete" onclick={delete} class="graphjs-danger">Delete</a>
+                </li>
+            </ul>
             <h1 if={title} class="graphjs-title">
                 <a if={opts.minor}  class="graphjs-back" onclick={handleCallback} data-link="list">
                     <svg fill="blue" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -35,12 +49,6 @@
                     </time>
                     <time if={published && time.published && !opts.minor}>{timeText}</time>
                     <time if={!published && time.lastEdited} class="graphjs-edited">{timeText}</time>
-                </li>
-                <li class="graphjs-action" if={author.is_editor}>
-                    <a ref="edit" if={opts.minor} onclick={edit}>Edit</a>
-                    <a ref="publish" if={!published} onclick={publish}>Publish</a>
-                    <a ref="unpublish" if={published} onclick={unpublish} class="graphjs-danger">Unpublish</a>
-                    <a ref="delete" onclick={delete} class="graphjs-danger">Delete</a>
                 </li>
             </ul>
             <div ref="body" if={body} class="graphjs-body graphjs-article"></div>
@@ -116,6 +124,7 @@
         import commentBlogPost from '../scripts/commentBlogPost.js';
         import publishBlogPost from '../scripts/publishBlogPost.js';
         import unpublishBlogPost from '../scripts/unpublishBlogPost.js';
+        import removeBlogPost from '../scripts/removeBlogPost.js';
         import removeBlogComment from '../scripts/removeBlogComment.js';
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
@@ -125,8 +134,6 @@
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         analytics("blog-post");
-
-        import removeBlogPost from '../scripts/removeBlogPost.js';
 
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
@@ -197,7 +204,7 @@
                     self.loaded = true;
                     getProfile(self.userId, function(response) {
                         if(response.success) {
-                            self.author.is_editor=response.profile.is_editor
+                            self.authorized = response.profile.is_editor;
                         }
                         self.update();
                     });

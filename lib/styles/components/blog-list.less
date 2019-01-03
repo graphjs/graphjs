@@ -82,6 +82,17 @@
                     border: none;
                     border-radius: 0;
                     pointer-events: none; // Fixed missed link clicks
+                    small {
+                        margin-left: .25em;
+                        b {
+                            padding: .25em .5em;
+                            color: white;
+                            font-size: .35em;
+                            text-transform: uppercase;
+                            .border-radius(@border-radius-small);
+                            // ThemeOption: background-color: @primary-color;
+                        }
+                    }
                 }
                 .@{prefix}-information {
                     width: 100%;
@@ -91,7 +102,6 @@
                     & > * {
                         display: inline;
                         float: none;
-                        color: inherit;
                         line-height: 1em;
                         &:first-child {
                             &::before {
@@ -103,17 +113,12 @@
                             display: inline;
                             // ThemeOption: color: @text-color-weak;
                         }
-                        & > a {
-                            // ThemeOption: color: @text-color-normal;
-                            .bold-font;
-                            &::before {
-                                // ThemeOption: color: @text-color-weak;
-                                .regular-font;
-                            }
-                        }
+                    }
+                    * {
+                        color: inherit;
                     }
                     .@{prefix}-author {
-                        a {
+                        span {
                             .bold-font;
                             &::before {
                                 content: "by";
