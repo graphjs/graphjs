@@ -60,11 +60,12 @@
                 line-height: 1em;
                 border: none;
                 border-radius: 0;
-                a {
-                    svg {
-                        width: 1em;
-                        cursor:pointer;
-                    }
+                .@{prefix}-back {
+                    width: 1em;
+                    height: 1em;
+                    display: inline-block;
+                    padding: .15em .3em .15em 0;
+                    // ThemeOption: .icon-color-states(@text-color-weak);
                 }
             }
             .@{prefix}-information {
@@ -119,6 +120,11 @@
                             &::before {
                                 content: "Last edited on";
                             }
+                        }
+                        a {
+                            color: inherit;
+                            font-size: inherit;
+                            font-weight: inherit;
                         }
                     }
                 }

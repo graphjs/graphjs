@@ -12,19 +12,19 @@
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '') + (matchedPosts.length > pageLimit ? ' graphjs-pagination' : '')}>
         <div class="graphjs-list" if={loaded}>
-            <div 
-                if={postsData[matchedPost]} 
+            <a
+                if={postsData[matchedPost]}
                 each={matchedPost, index in matchedPosts}
-                class={'graphjs-item' + ((index + 1 > (page - 1) * pageLimit && index + 1 <= Math.min(matchedPosts.length, page * pageLimit)) ? '' : ' graphjs-hidden')} 
-                data-link="post" 
+                class={'graphjs-item' + ((index + 1 > (page - 1) * pageLimit && index + 1 <= Math.min(matchedPosts.length, page * pageLimit)) ? '' : ' graphjs-hidden')}
+                data-link="post"
                 data-id={matchedPost}
-                data-title={postsData[matchedPost].title}
-                onclick={opts.minor ? handleCallback : handleShow}
+                onclick={!opts.minor && handleShow}
+                href={opts.minor && '#' + postsData[matchedPost].title.replace(' ', '_') + '-' + matchedPost + '-GJS'}
             >
                 <h1 class="graphjs-title">{postsData[matchedPost].title}</h1>
                 <ul class="graphjs-information">
                     <li class="graphjs-author">
-                        <a data-link="profile" data-id={postsData[matchedPost].author.id} onclick={handleShow}>{postsData[matchedPost].author.username}</a>
+                        <span data-link="profile" data-id={postsData[matchedPost].author.id} onclick={handleShow}>{postsData[matchedPost].author.username}</span>
                     </li>
                     <li  if={postsData[matchedPost].isDraft}><b>[DRAFT]</b></li>
                     <li class="graphjs-time" if={postsData[matchedPost].timestamp}>
@@ -32,7 +32,7 @@
                     </li>
                 </ul>
                 <div class="graphjs-summary">{postsData[matchedPost].summary}</div>
-            </div>
+            </a>
             <div class="graphjs-placeholder graphjs-item" if={loaded && matchedPosts.length <= 0}>
                 There isn't any post available.
             </div>
@@ -131,6 +131,8 @@
         this.postsData = {};
         this.matchedPosts = [];
 
+        let self = this;
+
         this.on('before-mount', function() {
             this.handleUser();
         });
@@ -163,14 +165,6 @@
         }
         this.handleContent = () => {
             let self = this;
-            if(window.location.hash){
-                let dataset={
-                    link: "post", 
-                    id: window.location.hash.substring(1).split("-")[1]
-                }
-                opts.callback(dataset);
-                return;
-            }
             getBlogPosts(function(response) {
                 if(response.success) {
                     for(let [index, post] of response.blogs.entries()) {
@@ -204,28 +198,15 @@
         }
         this.handleCallback = (properties) => {
             if(properties.target) {
-                properties.preventDefault();
+                if(!properties.target.href) {
+                    properties.preventDefault();
+                }
                 let dataset = Object.assign({}, properties.currentTarget.dataset);
-                window.location.href += ('#'+dataset.title.replace(" ","_")+"-"+dataset.id);
                 opts.callback(dataset);
             } else {
                 opts.callback(properties);
             }
         }
-        window.addEventListener('popstate', function(event)
-        {
-            let dataset={
-                link: "list", 
-                id: ""
-            }
-            if(window.location.hash){
-                dataset={
-                    link: "post", 
-                    id: window.location.hash.substring(1).split("-")[1]
-                }
-            }
-            opts.callback(dataset);
-        });
         this.handleShow = (event) => {
             event.preventDefault();
             let dataset = event.currentTarget.dataset;
