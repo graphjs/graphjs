@@ -149,7 +149,8 @@
             let self = this;
             showMessagesComposer({
                 "to": self.id,
-                "close": true
+                "close": true,
+                "autofocus": "on"
             });
         }
         this.handleUpdate = () => this.update();
