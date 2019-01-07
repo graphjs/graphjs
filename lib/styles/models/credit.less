@@ -14,28 +14,39 @@
         .box-sizing(border-box);
         display: inline-block;
         height: inherit;
-        color: @primary-color;
+        // ThemeOption: color: @primary-color;
         .bold-font;
         b {
             display: block;
             margin-bottom: .25em;
-            color: @primary-color;
+            // ThemeOption: color: @primary-color;
             line-height: 100%;
         }
         small, time {
             width: 100%;
-            color: @text-color-weak;
+            // ThemeOption: color: @text-color-weak;
             line-height: 100%;
             .regular-font;
         }
         a {
-            color: @text-color-weak;
+            // ThemeOption: color: @text-color-weak;
             .regular-font;
+            line-height: 1em;
             &::before {
                 content: '\00b7';
                 display: inline;
                 margin: 0 .25em;
-                color: @text-color-weak;
+                vertical-align: top;
+                // ThemeOption: color: @text-color-weak;
+            }
+        }
+        .@{prefix}-separated {
+            &::before {
+                content: '\00b7';
+                display: inline;
+                margin: 0 .25em;
+                vertical-align: top;
+                // ThemeOption: color: @text-color-weak;
             }
         }
     }

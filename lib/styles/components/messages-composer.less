@@ -7,7 +7,7 @@
     &.@{prefix}-box {
         .@{prefix}-content {
             form {
-                background-color: @background-color-contrast;
+                // ThemeOption: background-color: @background-color-contrast;
             }
         }
     }
@@ -24,7 +24,7 @@
         .no-padding !important;
         .@{prefix}-recipient {
             padding: .75em 1em;
-            color: @text-color-strong;
+            // ThemeOption: color: @text-color-strong;
             &.@{prefix}-unknown {
                 &::before {
                     display: none;
@@ -33,12 +33,12 @@
             &::before {
                 content: attr(data-recipientlabel);
                 margin-right: .25em;
-                color: @text-color-normal;
+                // ThemeOption: color: @text-color-normal;
             }
         }
         input, input[type] {
             padding: .75em 1em;
-            color: @text-color-strong;
+            // ThemeOption: color: @text-color-strong;
             border: none;
             background-color: transparent;
         }

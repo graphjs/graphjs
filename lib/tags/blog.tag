@@ -38,12 +38,34 @@
         this.active = opts.default || 'list';
         this.id = opts.id;
         this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
+
+        let self = this;
+
+        this.on('mount', function() {
+            this.changePropertiesUsingHash();
+            window.addEventListener('popstate', function() {
+                self.changePropertiesUsingHash();
+            });
+        });
+
         this.changeProperties = (properties) => {
-            console.log(properties)
-            console.log("ChangeProps");
             this.active = properties.link || undefined;
             this.id = properties.id || undefined;
             this.update();
+        }
+        this.changePropertiesUsingHash = () => {
+            let hash = window.location.hash;
+            if(hash) {
+                let parts = hash.split('-');
+                if(parts.length > 2) {
+                    if(parts[parts.length - 1] === 'GJS') {
+                        self.changeProperties({
+                            link: 'post',
+                            id: parts[parts.length - 2]
+                        });
+                    }
+                }
+            }
         }
     </script>
 </graphjs-blog>

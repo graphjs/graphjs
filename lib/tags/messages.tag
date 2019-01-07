@@ -10,7 +10,7 @@
                 <path transform="translate(-755.000000, -15.000000)" d="M768.138179,30.0276818 L763.8,25.6895028 L765.689503,23.8 L770.011119,28.1447263 L774.332735,23.8 L776.222238,25.6895028 L771.884059,30.0276818 L771.888398,30.0320442 L771.884064,30.0363784 L776.222238,34.3414365 L774.332735,36.2309392 L770.011119,31.9093232 L765.689503,36.2309392 L763.8,34.3414365 L768.138174,30.0363784 L768.13384,30.0320442 L768.138179,30.0276818 Z M769.983425,15 C778.270718,15 785,21.6961326 785,29.9834254 C785,38.2707182 778.270718,45 769.983425,45 C761.696133,45 755,38.2707182 755,29.9834254 C755,21.6961326 761.696133,15 769.983425,15 Z M769.983425,42.3480663 C776.779006,42.3480663 782.348066,36.8121547 782.348066,29.9834254 C782.348066,23.1878453 776.812155,17.6187845 769.983425,17.6187845 C763.187845,17.6187845 757.618785,23.1546961 757.618785,29.9834254 C757.651934,36.7790055 763.187845,42.3480663 769.983425,42.3480663 Z"></path>
             </svg>
         </a>
-        <div class="graphjs-title">{'Messages' + (activePartnerName != '' ? ' with ' +  activePartnerName : '')}</div>
+        <div class="graphjs-title">{opts.title || 'Messages' + (activePartnerName != '' ? ' with ' +  activePartnerName : '')}</div>
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <div class="graphjs-sidebar" style={loaded ? '' : 'display: none;'}>
@@ -21,6 +21,10 @@
                     <b>{matchedPartner.username}</b>
                 </a>
             </div>
+            <p if={partners.length === 0 && !newMessageOption}>
+                You have no messages.
+                <small>Click icon to start.</small>
+            </p>
             <div class="graphjs-list" ref="partners">
                 <a class={'graphjs-item' + (list[partner] && list[partner].is_read ? '' : ' graphjs-unread') + (activePartner == partner ? ' graphjs-active' : '')} each={partner in partners} data-partner={partner} onclick={handleDisplay}>
                     <img src={list[partner] && list[partner].avatar ? downsizeImage(list[partner].avatar, 50) : defaultAvatar} />
@@ -40,7 +44,7 @@
                     <time data-timestamp={activeMessages[message].timestamp}></time>
                 </div>
             </div>
-            <textarea onkeyup={handleSubmit} placeholder={i18n.messageInputPlaceholder}></textarea>
+            <textarea if={partners.length > 0 || newMessageOption} onkeyup={handleSubmit} placeholder={i18n.messageInputPlaceholder}></textarea>
         </div>
         <div if={!loaded} class="graphjs-placeholder graphjs-loader">
             <div class="graphjs-left">

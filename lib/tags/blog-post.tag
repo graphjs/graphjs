@@ -15,17 +15,27 @@
             <p>{i18n.noPostText}</p>
         </div>
         <div if={loaded && !deleted} class="graphjs-post" ref="scrollingContent">
-            
+            <ul class="graphjs-action" if={authorized}>
+                <li if={opts.minor}>
+                    <a ref="edit" onclick={edit}>Edit</a>
+                </li>
+                <li if={!published}>
+                    <a ref="publish" onclick={publish}>Publish</a>
+                </li>
+                <li if={published}>
+                    <a ref="unpublish" onclick={unpublish} class="graphjs-danger">Unpublish</a>
+                </li>
+                <li>
+                    <a ref="delete" onclick={delete} class="graphjs-danger">Delete</a>
+                </li>
+            </ul>
             <h1 if={title} class="graphjs-title">
-                <a
-                    if={window.location.hash}
-                    onclick={handleShowList} 
-                >
-                <svg fill="blue" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <g transform="translate(-15.000000, -15.000000)" fill="black" fill-rule="nonzero">
-                        <path d="M29.9834254,15 C38.2707182,15 45,21.6961326 45,29.9834254 C45,38.2707182 38.2707182,45 29.9834254,45 C21.6961326,45 15,38.2707182 15,29.9834254 C15,21.6961326 21.6961326,15 29.9834254,15 Z M29.9834254,42.3480663 C36.7790055,42.3480663 42.3480663,36.8121547 42.3480663,29.9834254 C42.3480663,23.1878453 36.8121547,17.6187845 29.9834254,17.6187845 C23.1878453,17.6187845 17.6187845,23.1546961 17.6187845,29.9834254 C17.6519337,36.7790055 23.1878453,42.3480663 29.9834254,42.3480663 Z M25.4088398,29.9834254 L31.6077348,36.1823204 L33.4972376,34.2928177 L29.1546961,29.9834254 L33.4972376,25.640884 L31.6077348,23.7513812 L25.4088398,29.9834254 Z"></path>
-                    </g>
-                </svg>
+                <a if={opts.minor}  class="graphjs-back" onclick={handleCallback} data-link="list">
+                    <svg fill="blue" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g transform="translate(-15.000000, -15.000000)" fill="black" fill-rule="nonzero">
+                            <path d="M29.9834254,15 C38.2707182,15 45,21.6961326 45,29.9834254 C45,38.2707182 38.2707182,45 29.9834254,45 C21.6961326,45 15,38.2707182 15,29.9834254 C15,21.6961326 21.6961326,15 29.9834254,15 Z M29.9834254,42.3480663 C36.7790055,42.3480663 42.3480663,36.8121547 42.3480663,29.9834254 C42.3480663,23.1878453 36.8121547,17.6187845 29.9834254,17.6187845 C23.1878453,17.6187845 17.6187845,23.1546961 17.6187845,29.9834254 C17.6519337,36.7790055 23.1878453,42.3480663 29.9834254,42.3480663 Z M25.4088398,29.9834254 L31.6077348,36.1823204 L33.4972376,34.2928177 L29.1546961,29.9834254 L33.4972376,25.640884 L31.6077348,23.7513812 L25.4088398,29.9834254 Z"></path>
+                        </g>
+                    </svg>
                 </a>
                 {title}
             </h1>
@@ -33,15 +43,12 @@
                 <li if={author} class="graphjs-author" data-authorbeforetext={i18n.authorBeforeText}>
                     <a data-link="profile" data-id={author.id} onclick={handleShow}>{author.username}</a>
                 </li>
-                <li if={time} class="graphjs-time"  data-publishedtimebeforetext={i18n.publishedTimeBeforeText} data-edittimebeforetext={i18n.editTimeBeforeText}>
-                    <time if={published && time.published}><a href={window.location.href}>{timeText}</a></time>
+                <li if={time} class="graphjs-time" data-publishedtimebeforetext={i18n.publishedTimeBeforeText} data-edittimebeforetext={i18n.editTimeBeforeText}>
+                    <time if={published && time.published && opts.minor}>
+                        <a href={window.location.href}>{timeText}</a>
+                    </time>
+                    <time if={published && time.published && !opts.minor}>{timeText}</time>
                     <time if={!published && time.lastEdited} class="graphjs-edited">{timeText}</time>
-                </li>
-                <li class="graphjs-action" if={author.is_editor}>
-                    <a ref="edit" if={opts.minor} onclick={edit}>Edit</a>
-                    <a ref="publish" if={!published} onclick={publish}>Publish</a>
-                    <a ref="unpublish" if={published} onclick={unpublish} class="graphjs-danger">Unpublish</a>
-                    <a ref="delete" onclick={delete} class="graphjs-danger">Delete</a>
                 </li>
             </ul>
             <div ref="body" if={body} class="graphjs-body graphjs-article"></div>
@@ -73,17 +80,10 @@
                 </a>
             </div>
             <form class={userId ? '' : 'graphjs-loading graphjs-blocked'}>
-<<<<<<< HEAD
                 <textarea ref="composer" placeholder={i18n.replyInputPlaceholder}></textarea>
                 <button ref="submit" onclick={handleReply}>{i18n.replyButtonText}</button>
                 <button onclick={handleClear} class="graphjs-danger">{i18n.clearButtonText}</button>
-                <div if={!loaded} class="graphjs-inline graphjs-loader">
-=======
-                <textarea ref="composer" placeholder="Write your reply here..."></textarea>
-                <button ref="submit" onclick={handleReply}>Send Reply</button>
-                <button onclick={handleClear} class="graphjs-danger">Clear</button>
                 <div if={!loaded} class="graphjs-loader">
->>>>>>> 996671d5827b927d67a003c3bdc25a538f53b0b6
                     <div class="graphjs-dots">
                         <span></span>
                         <span></span>
@@ -124,6 +124,7 @@
         import commentBlogPost from '../scripts/commentBlogPost.js';
         import publishBlogPost from '../scripts/publishBlogPost.js';
         import unpublishBlogPost from '../scripts/unpublishBlogPost.js';
+        import removeBlogPost from '../scripts/removeBlogPost.js';
         import removeBlogComment from '../scripts/removeBlogComment.js';
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
@@ -134,8 +135,6 @@
 
         analytics("blog-post");
 
-        import removeBlogPost from '../scripts/removeBlogPost.js';
-        
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
@@ -163,10 +162,13 @@
             this.frequentlyUpdateTime = setInterval(this.handleTimeUpdate,  60 * 1000);
         });
         this.on('mount', function() {
-            this.loaded && !this.rendered && this.handleRender();
+            this.loaded && this.handleRender();
         });
         this.on('unmount', function() {
             clearInterval(this.frequentlyUpdateTime);
+        });
+        this.on('before-unmount', function() {
+            this.removeHash();
         });
 
         this.restart = () => {
@@ -178,7 +180,6 @@
         }
         this.handleUser = (callback) => {
             getSession(function(response) {
-                console.log(response);
                 if(response.success) {
                     self.userId = response.id;
                     self.update();
@@ -208,7 +209,7 @@
                     self.loaded = true;
                     getProfile(self.userId, function(response) {
                         if(response.success) {
-                            self.author.is_editor=response.profile.is_editor 
+                            self.authorized = response.profile.is_editor;
                         }
                         self.update();
                     });
@@ -287,10 +288,6 @@
                 }
             });
         }
-        this.handleShowList = (e) => {
-            e.preventDefault();
-            window.location.href=window.location.href.split("#")[0];
-        }
         this.delete = (event) => {
             let link = event.currentTarget;
             if (window.confirm(i18n.deleteConfirmationText)) {
@@ -354,10 +351,16 @@
         this.handleCallback = (properties) => {
             if(properties.target) {
                 properties.preventDefault();
+                this.removeHash();
                 let dataset = Object.assign({}, properties.currentTarget.dataset);
                 opts.callback(dataset);
             } else {
                 opts.callback(properties);
+            }
+        }
+        this.removeHash = () => {
+            if(opts.minor && window.location.hash.includes(this.id + '-GJS')) {
+                history.pushState('', document.title, window.location.pathname + window.location.search);
             }
         }
         this.handleShow = (event) => {
@@ -366,6 +369,12 @@
             switch(dataset.link) {
                 case 'list':
                     showBlogPost({
+                        scroll: true
+                    });
+                    break;
+                case 'profile':
+                    showProfile({
+                        id: dataset.id,
                         scroll: true
                     });
                     break;
@@ -423,17 +432,6 @@
                         //Handle error
                     }
                 });
-            }
-        }
-        this.handleShow = (event) => {
-            let dataset = event.target.dataset;
-            switch(dataset.link) {
-                case 'profile':
-                    showProfile({
-                        id: dataset.id,
-                        scroll: true
-                    });
-                    break;
             }
         }
         this.handleTimeUpdate = () => {

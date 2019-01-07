@@ -1,0 +1,103 @@
+@prefix: graphjs;
+
+@{prefix}-feed-display.@{prefix}-root {
+    display: block;
+    z-index: 2147483647; // Maximum
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    // ThemeOption: color: @text-color-normal;
+    background-color: fade(black, 95%);
+    .@{prefix}-content {
+        .@{prefix}-information {
+            height: 3em;
+            // ThemeOption: background-color: @background-color-contrast;
+            .clearfix;
+            .@{prefix}-credit {
+                display: inline-block;
+                .credit-metrics(2.5em);
+                margin: .25em 0 .25em .5em;
+                img {
+                    cursor: pointer;
+                }
+                span {
+                    // ThemeOption: color: @text-color-normal;
+                    b {
+                        cursor: pointer;
+                    }
+                }
+            }
+            a {
+                display: inline-block;
+                float: right;
+                width: 3em;
+                height: 3em;
+                background-color: fade(black, 5%);
+                .transition(background-color .15s ease);
+                &:hover {
+                    background-color: fade(black, 7.5%);
+                }
+                svg {
+                    width: 20%;
+                    margin: 40%;
+                    path {
+                        // ThemeOption: fill: @primary-color;
+                    }
+                }
+            }
+        }
+        .@{prefix}-display {
+            display: table;
+            width: 100%;
+            height: calc(100vh - 3em);
+            .@{prefix}-container {
+                display: table-cell;
+                text-align: center;
+                vertical-align: middle;
+                .@{prefix}-media {
+                    display: inline-block;
+                    width: 100%;
+                    & > * {
+                        .flex;
+                        .align-items(center);
+                        height: calc(100vh - 3em);
+                        &.@{prefix}-photoalbum {
+                            position: relative;
+                            max-width: 100%;
+                            margin: 0 auto;
+                            padding: 0 4em;
+                            & > a {
+                                .flex;
+                                .align-items(center);
+                                position: absolute;
+                                top: 0;
+                                bottom: 0;
+                                width: 4em;
+                                height: 100%;
+                                // ThemeOption: .icon-color-states(@primary-color);
+                                &.@{prefix}-left {
+                                    left: 0;
+                                }
+                                &.@{prefix}-right {
+                                    right: 0;
+                                }
+                                svg {
+                                    width: 2em;
+                                    height: auto;
+                                    margin: 0 auto;
+                                }
+                            }
+                        }
+                        & > img, video {
+                            max-width: 100%;
+                            max-height: 100%;
+                            margin: 0 auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

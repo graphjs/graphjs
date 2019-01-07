@@ -7,21 +7,22 @@
     .border-radius(@border-radius-large);
     border: 1px;
     border-style: solid;
-    border-color: fade(@default-color, 3%);
-    background-color: @background-color-shade;
+    // ThemeOption: border-color: fade(@default-color, 3%);
+    border-color: transparent; // ThemeFix
+    // ThemeOption: background-color: @background-color-shade;
     .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
     &:hover, &:active, &:focus {
         .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
     }
     .@{prefix}-header {
-        background-color: @background-color-contrast;
+        // ThemeOption: background-color: @background-color-contrast;
     }
     .@{prefix}-content {
         overflow: hidden;
         padding: 2.5em;
     }
     input, input[type], textarea {
-        background-color: @input-color;
+        // ThemeOption: background-color: @input-color;
     }
 }
 
@@ -51,7 +52,7 @@
         bottom: 0;
         left: 2.5em;
         width: auto;
-        color: @primary-color;
+        // ThemeOption: color: @primary-color;
         font-size: 1.2em;
         .single-line-text;
     }
@@ -60,7 +61,7 @@
         width: 3.5em;
         height: 3.5em;
         text-align: center;
-        .icon-color-states(@primary-color);
+        // ThemeOption: .icon-color-states(@primary-color);
         &.@{prefix}-left {
             float: left;
         }
@@ -78,13 +79,14 @@
             vertical-align: middle;
             .transition(transform .35s ease);
             path {
-                fill: @primary-color;
+                // ThemeOption: fill: @primary-color;
                 .transition(fill .35s ease);
             }
         }
     }
-    + .@{prefix}-warning {
+    & + .@{prefix}-warning {
         border-bottom: none;
+        margin-bottom: 1em;
         ul {
             &.@{prefix}-fail {
                 background-color: @danger-color;
@@ -118,7 +120,7 @@
     text-align: center;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-bottom-color: fade(@default-color, 15%);
+    // ThemeOption: border-bottom-color: fade(@default-color, 15%);
     ul {
         list-style: none;
         width: 100%;
@@ -159,7 +161,7 @@
         bottom: 0;
         width: 100%;
         height: 100%;
-        background-color: @background-color-shade;
+        // ThemeOption: background-color: @background-color-shade;
         .@{prefix}-checkmark {
             display: block;
             position: absolute;

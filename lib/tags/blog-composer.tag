@@ -29,7 +29,7 @@
                 <li class="graphjs-action">
                     <a ref="save" if={!saved && title.length > 0 && body.length > 0} onclick={save}>{i18n.saveLinkText}</a>
                     <a if={saved && title.length > 0 && body.length > 0} disabled="disabled">{i18n.savedLinkText}</a>
-                    <a ref="publish" if={saved === true} onclick={publish}>{i18n.publishLinkText}</a>
+                    <a ref="publish" if={saved && !published} onclick={publish}>{i18n.publishLinkText}</a>
                 </li>
             </ul>
         </form>
@@ -365,12 +365,18 @@
             link.innerHTML = i18n.publishProgressText;
             publishBlogPost(self.id, function(response) {
                 if(response.success) {
-                    self.published = true;
-                    self.update();
-                    opts.minor && self.handleCallback({
-                        link: 'post',
-                        id: self.id
-                    });
+                    if(opts.minor) {
+                        self.handleCallback({
+                            link: 'post',
+                            id: self.id
+                        });
+                    } else {
+                        link.innerHTML = 'Published!';
+                        setTimeout(function() {
+                            self.published = true;
+                            self.update();
+                        }, 500);
+                    }
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');

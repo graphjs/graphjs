@@ -2,7 +2,7 @@
 
 @{prefix}-messages.@{prefix}-root {
     display: block;
-    color: @text-color-normal;
+    // ThemeOption: color: @text-color-normal;
     .regular-font;
     .@{prefix}-content {
         height: 36em;
@@ -16,6 +16,15 @@
             overflow-y: auto;
             width: 15em;
             height: 100%;
+            & > p {
+                padding: 1em;
+                small {
+                    display: block;
+                    margin-top: 1em;
+                    font-size: .8em;
+                    .bold-font;
+                }
+            }
             input, input[type] {
                 display: block;
                 width: 100%;
@@ -28,7 +37,7 @@
                 line-height: 3.5em;
                 border: none;
                 border-radius: 0;
-                background-color: @primary-color;
+                // ThemeOption: background-color: @primary-color;
                 .transition(height .35s ease);
                 .placeholder-color(fade(white, 75%));
                 &.@{prefix}-hidden {
@@ -63,7 +72,7 @@
                         .border-radius(@border-radius-full);
                     }
                     b {
-                        color: @text-color-normal;
+                        // ThemeOption: color: @text-color-normal;
                         height: 2.5em;
                         margin-left: .5em;
                         line-height: 2.5em;
@@ -88,14 +97,14 @@
                         border-bottom: none;
                     }
                     &.@{prefix}-unread {
-                        background-color: fade(@primary-color, 15%);
+                        // ThemeOption: background-color: fade(@primary-color, 15%);
                         &:hover {
-                            background-color: fade(@primary-color, 20%);
+                            // ThemeOption: background-color: fade(@primary-color, 20%);
                         }
                         div {
-                            color: @text-color-weak;
+                            // ThemeOption: color: @text-color-weak;
                             b {
-                                color: @primary-color;
+                                // ThemeOption: color: @primary-color;
                             }
                         }
                     }
@@ -121,13 +130,13 @@
                         width: 10em / .9;
                         height: 3em / .9;
                         margin-left: calc(.5em / .9);
-                        color: @text-color-normal;
+                        // ThemeOption: color: @text-color-normal;
                         font-size: .9em;
                         line-height: 1em / .9;
                         b {
                             display: block;
                             margin-bottom: .05em / .9;
-                            color: @text-color-strong;
+                            // ThemeOption: color: @text-color-strong;
                             font-size: .95em / .9;
                             line-height: .95em / .9;
                             .bold-font;
@@ -160,7 +169,7 @@
                             text-align: left;
                         }
                         p {
-                            color: @text-color-normal;
+                            // ThemeOption: color: @text-color-normal;
                             background-color: fade(black, 5%);
                         }
                         time {
@@ -174,7 +183,7 @@
                         }
                         p {
                             color: white;
-                            background-color: @primary-color;
+                            // ThemeOption: background-color: @primary-color;
                             .border-radius(@border-radius-medium);
                         }
                         time {
@@ -199,7 +208,7 @@
                         display: inline-block;
                         width: 100%;
                         padding: .5em;
-                        color: @text-color-weak;
+                        // ThemeOption: color: @text-color-weak;
                         font-size: .85em;
                         line-height: .85em;
                         &.@{prefix}-error {
@@ -319,7 +328,7 @@
                     left: 0;
                     right: 0;
                     a {
-                        background-color: @background-color-shade;
+                        // ThemeOption: background-color: @background-color-shade;
                     }
                 }
                 .@{prefix}-list {

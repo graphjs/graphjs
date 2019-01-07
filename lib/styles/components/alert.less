@@ -16,16 +16,16 @@
         .bold-font;
         border-top-width: 2px;
         border-top-style: solid;
-        border-top-color: fade(@default-color, 10%);
+        // ThemeOption: border-top-color: fade(@default-color, 10%);
         border-top-left-radius: 0;
         border-top-right-radius: 0;
-        .background-color-states(@background-color);
+        // ThemeOption: .background-color-states(@background-color);
         &:not(.@{prefix}-danger) {
-            .text-color-states(@primary-color);
+            // ThemeOption: .text-color-states(@primary-color);
         }
         &.@{prefix}-danger {
             .text-color-states(@danger-color);
-            .background-color-states(@background-color);
+            // ThemeOption: .background-color-states(@background-color);
         }
         &.@{prefix}-full {
             width: 100%;
@@ -37,13 +37,13 @@
                 border-bottom-right-radius: 0;
                 border-right-width: 1px;
                 border-right-style: solid;
-                border-right-color: fade(@default-color, 10%);
+                // ThemeOption: border-right-color: fade(@default-color, 10%);
             }
             &:last-of-type {
                 border-bottom-left-radius: 0;
                 border-left-width: 1px;
                 border-left-style: solid;
-                border-left-color: fade(@default-color, 10%);
+                // ThemeOption: border-left-color: fade(@default-color, 10%);
             }
         }
     }

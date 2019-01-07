@@ -35,7 +35,7 @@
         let i18n = internationalization[window.GraphJSConfig.language]['group-creator'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
-        
+
         this.id = opts.id;
         this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.failMessages = [];
@@ -69,7 +69,7 @@
         }
         this.checkDescriptionMinimumLength = () => {
             let descriptionMinimumLengthLimit = 10;
-            let failMessage = i18n.descriptionMaxLengthError.replace("%s",titleMaximumLengthLimit);
+            let failMessage = i18n.descriptionMinLengthError.replace("%s",descriptionMinimumLengthLimit);
             if(this.refs.description.value.length >= descriptionMinimumLengthLimit) {
                 this.refs.description.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -82,7 +82,7 @@
         }
         this.checkDescriptionMaximumLength = () => {
             let descriptionMaximumLengthLimit = 255;
-            let failMessage = i18n.descriptionMaxLengthError.replace("%s",titleMaximumLengthLimit);
+            let failMessage = i18n.descriptionMaxLengthError.replace("%s",descriptionMaximumLengthLimit);
             if(this.refs.description.value.length <= descriptionMaximumLengthLimit) {
                 this.refs.description.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -136,10 +136,15 @@
                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                             self.refs.submit.classList.remove('graphjs-loading');
                             self.update();
-                            showGroup({
-                                "id": response.id,
-                                "default": "settings"
-                            });
+                            if(opts.target) {
+                              let target = opts.target.replace('[[id]]', response.id);
+                              document.location.href = target;
+                            } else {
+                                showGroup({
+                                    "id": response.id,
+                                    "default": "settings"
+                                });
+                            }
                         } else {
                             self.refs.title.classList.remove('graphjs-success');
                             self.refs.title.removeAttribute('data-savesuccesstext');

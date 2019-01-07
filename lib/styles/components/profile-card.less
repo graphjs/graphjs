@@ -3,10 +3,10 @@
 @{prefix}-profile-card.@{prefix}-root {
     display: block;
     height: 18em;
-    color: @text-color-normal;
+    // ThemeOption: color: @text-color-normal;
     &.@{prefix}-box {
         .@{prefix}-information {
-            background-color: @background-color-contrast;
+            // ThemeOption: background-color: @background-color-contrast;
         }
     }
     .@{prefix}-option {
@@ -16,7 +16,7 @@
         height: 3.75em;
         padding: 1em;
         text-align: center;
-        .icon-color-states(@primary-color);
+        // ThemeOption: .icon-color-states(@primary-color);
         &.@{prefix}-left {
             top: 0;
             left: 0;
@@ -43,7 +43,8 @@
             vertical-align: middle;
             border-width: 4px;
             border-style: solid;
-            border-color: fade(@default-color, 15%);
+            // ThemeOption: border-color: fade(@default-color, 15%);
+            border-color: transparent; // ThemeFix
             .border-radius(@border-radius-full);
         }
         b {
@@ -56,7 +57,7 @@
             font-size: 1.2em;
             line-height: 1.25em;
             .heavy-font;
-            .text-color-states(@primary-color);
+            // ThemeOption: .text-color-states(@primary-color);
         }
         p {
             display: inline-block;
@@ -65,7 +66,7 @@
             max-height: 2.5em;
             margin: 0 5%;
             margin-top: .75em;
-            color: @text-color-normal;
+            // ThemeOption: color: @text-color-normal;
             font-size: .95em;
             line-height: 1.25em;
         }

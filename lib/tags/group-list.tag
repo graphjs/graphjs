@@ -1,20 +1,13 @@
 <graphjs-group-list class="graphjs-element graphjs-root graphjs-wallet">
     <!-- the only difference from list is the tag itself and this.content = 'groups'; -->
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <graphjs-profile-card if={content == 'users'} each={id in list} id={id}></graphjs-profile-card>
-        <graphjs-profile-card if={content == 'users' && list.length == 0}></graphjs-profile-card>
-        <graphjs-profile-card if={content == 'users' && list.length == 0}></graphjs-profile-card>
-        <graphjs-profile-card if={content == 'users' && list.length == 0}></graphjs-profile-card>
-        <graphjs-profile-card if={content == 'users' && list.length == 0}></graphjs-profile-card>
-        <graphjs-profile-card if={content == 'users' && list.length == 0}></graphjs-profile-card>
-        <graphjs-profile-card if={content == 'users' && list.length == 0}></graphjs-profile-card>
-        <graphjs-group-card if={content == 'groups'} each={id in list} id={id}></graphjs-group-card>
-        <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
-        <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
-        <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
-        <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
-        <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
-        <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
+        <graphjs-group-card each={id in list} id={id} target={target}></graphjs-group-card>
+        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
+        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
+        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
+        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
+        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
+        <graphjs-group-card if={list.length == 0}></graphjs-group-card>
         <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
     </div>
     <script>
@@ -25,16 +18,17 @@
         import showLogin from '../scripts/showLogin.js';
 
         analytics("group-list");
-        
+
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['star-list'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
-        
+
         this.content = 'groups';
         this.list = [];
         this.loaded = true;
         this.placeholderCount = 6;
+        this.target = opts.target;
 
         this.on('before-mount', function() {
             opts.access == 'private'

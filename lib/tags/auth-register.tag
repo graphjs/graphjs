@@ -1,4 +1,6 @@
-<graphjs-auth-register class={'graphjs-element graphjs-root ' + boxStyle + (checked ? ' graphjs-checked' : '')}>
+<graphjs-auth-register
+    class={'graphjs-element graphjs-root ' + boxStyle + (checked ? ' graphjs-checked' : '')}
+>
     <div class="graphjs-header" if={opts.title}>
         <div class="graphjs-title">{opts.title || 'Register'}</div>
     </div>

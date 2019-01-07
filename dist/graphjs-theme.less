@@ -1,15 +1,24 @@
+// Main colors
 @primary-color:             rgb(111, 135, 159);
 @text-color:                rgb(63, 95, 127);
 @background-color:          white;
 
+// Default colors
 @default-color:             @text-color;
+
+// Text colors
 @text-color-strong:         @text-color;
 @text-color-normal:         fade(@text-color, 75%);
 @text-color-weak:           fade(@text-color, 50%);
+
+// Background colors
 @background-color-shade:    shade(@background-color, 10% / 3);
 @background-color-contrast: @background-color;
+
+// Input colors
 @input-color:               tint(@background-color, 15%);
 
+// Prefix
 @prefix: graphjs;
 
 // reset.less
@@ -154,6 +163,11 @@
                 color: @text-color-weak;
             }
         }
+        .@{prefix}-separated {
+            &::before {
+                color: @text-color-weak;
+            }
+        }
     }
 }
 
@@ -240,13 +254,6 @@
             color: @text-color-normal;
             border-color: @text-color-normal;
             background-color: @background-color-contrast;
-        }
-    }
-}
-.@{prefix}-blocked {
-    .@{prefix}-placeholder {
-        .@{prefix}-fill {
-            background-color: fade(black, 5%);
         }
     }
 }
@@ -420,18 +427,17 @@
                 }
                 .@{prefix}-title {
                     .text-color-states(@primary-color);
+                    small {
+                        b {
+                            background-color: @primary-color;
+                        }
+                    }
                 }
                 .@{prefix}-information {
                     color: @text-color-weak;
                     & > * {
                         &::before {
                             color: @text-color-weak;
-                        }
-                        & > a {
-                            color: @text-color-normal;
-                            &::before {
-                                color: @text-color-weak;
-                            }
                         }
                     }
                 }
@@ -455,8 +461,18 @@
     }
     .@{prefix}-content {
         .@{prefix}-post {
+            .@{prefix}-action {
+                li {
+                    a {
+                        .text-color-states(@text-color-normal);
+                    }
+                }
+            }
             .@{prefix}-title {
                 color: @primary-color;
+                .@{prefix}-back {
+                    .icon-color-states(@text-color-weak);
+                }
             }
             .@{prefix}-information {
                 color: @text-color-weak;
@@ -466,14 +482,6 @@
                     }
                     & > a {
                         color: @text-color-normal;
-                        &::before {
-                            color: @text-color-weak;
-                        }
-                    }
-                }
-                .@{prefix}-action {
-                    & > * {
-                        .text-color-states(@text-color-strong);
                         &::before {
                             color: @text-color-weak;
                         }
@@ -535,6 +543,131 @@
                 &.@{prefix}-editable {
                     border-color: fade(@default-color, 15%);
                     background-color: @background-color-contrast;
+                }
+            }
+        }
+    }
+}
+
+// feed.less
+@{prefix}-feed.@{prefix}-root {
+    color: @text-color-normal;
+}
+
+// feed-activity.less
+@{prefix}-feed-activity.@{prefix}-root {
+    color: @text-color-normal;
+    .@{prefix}-content {
+        .@{prefix}-activity {
+            .@{prefix}-item {
+                border-color: fade(@default-color, 3%);
+                background-color: @background-color-contrast;
+                .@{prefix}-interaction {
+                    .@{prefix}-synopsis {
+                        & > * {
+                            .@{prefix}-unauthorized {
+                                svg {
+                                    path {
+                                        fill: @text-color-weak !important;
+                                    }
+                                }
+                            }
+                        }
+                        .@{prefix}-rating-indicator {
+                            .@{prefix}-icon {
+                                svg {
+                                    path {
+                                        fill: desaturate(@text-color-weak, 65%);
+                                    }
+                                }
+                            }
+                        }
+                        .@{prefix}-comments-indicator {
+                            .@{prefix}-icon {
+                                svg {
+                                    path {
+                                        fill: desaturate(@text-color-weak, 65%);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .@{prefix}-comments {
+                    .@{prefix}-comment {
+                        &.@{prefix}-pseudo {
+                            background-color: fade(@primary-color, 15%);
+                        }
+                        .@{prefix}-credit {
+                            span {
+                                color: @text-color-normal;
+                            }
+                        }
+                        p {
+                            &.@{prefix}-editable {
+                                border-color: fade(@default-color, 15%);
+                                background-color: @background-color-contrast;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// feed-composer.less
+@{prefix}-feed-composer.@{prefix}-root {
+    color: @text-color-normal;
+    &.@{prefix}-box {
+      .@{prefix}-content {
+          .@{prefix}-options {
+              background-color: @background-color-contrast;
+          }
+      }
+    }
+    .@{prefix}-content {
+        .@{prefix}-options {
+            a {
+                .text-color-states(@text-color-strong);
+                .icon-color-states(@text-color-strong);
+            }
+            button {
+                .background-color-states(@primary-color);
+            }
+        }
+    }
+}
+
+// feed.display.less
+@{prefix}-feed-display.@{prefix}-root {
+    color: @text-color-normal;
+    .@{prefix}-content {
+        .@{prefix}-information {
+            background-color: @background-color-contrast;
+            .@{prefix}-credit {
+                span {
+                    color: @text-color-normal;
+                }
+            }
+            a {
+                svg {
+                    path {
+                        fill: @primary-color;
+                    }
+                }
+            }
+        }
+        .@{prefix}-display {
+            .@{prefix}-container {
+                .@{prefix}-media {
+                    & > * {
+                        &.@{prefix}-photoalbum {
+                            & > a {
+                                .icon-color-states(@primary-color);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -681,7 +814,6 @@
     }
     .@{prefix}-information {
         b {
-            color: @primary-color;
             .text-color-states(@primary-color);
         }
         p {

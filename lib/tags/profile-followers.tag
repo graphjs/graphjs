@@ -22,7 +22,7 @@
         let i18n = internationalization[window.GraphJSConfig.language]['profile-followers'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
-        
+
         this.id = opts.id;
         this.list = [];
         this.loaded = true;

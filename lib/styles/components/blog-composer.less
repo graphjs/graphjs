@@ -3,7 +3,7 @@
 @{prefix}-blog-composer.@{prefix}-root {
     display: block;
     position: relative;
-    color: @text-color-normal;
+    // ThemeOption: color: @text-color-normal;
     &.@{prefix}-inline {
         .@{prefix}-header {
             border-color: transparent;
@@ -16,7 +16,7 @@
         background-color: transparent;
         & > p {
             text-align: center;
-            color: @text-color-normal;
+            // ThemeOption: color: @text-color-normal;
         }
         form {
             .clearfix;
@@ -25,23 +25,23 @@
                 height: 1em;
                 margin-bottom: 0;
                 padding: 0;
-                color: @primary-color;
+                // ThemeOption: color: @primary-color;
                 font-size: 2em;
                 .bold-font;
                 border: none;
                 border-bottom-width: 1px;
                 border-bottom-style: dotted;
-                border-bottom-color: @text-color-weak;
+                // ThemeOption: border-bottom-color: @text-color-weak;
                 border-radius: 0;
                 background-color: transparent;
                 outline: none;
                 &::placeholder {
                     opacity: .5;
-                    color: @primary-color;
+                    // ThemeOption: color: @primary-color;
                 }
             }
             .@{prefix}-information {
-                color: @text-color-weak;
+                // ThemeOption: color: @text-color-weak;
                 font-size: .9em;
                 margin-top: .75em;
                 & > * {
@@ -57,13 +57,13 @@
                     &::before {
                         content: "\B7";
                         display: inline;
-                        color: @text-color-weak;
+                        // ThemeOption: color: @text-color-weak;
                     }
                     & > a {
-                        color: @text-color-normal;
+                        // ThemeOption: color: @text-color-normal;
                         .bold-font;
                         &::before {
-                            color: @text-color-weak;
+                            // ThemeOption: color: @text-color-weak;
                             .regular-font;
                         }
                     }
@@ -98,13 +98,13 @@
                         display: none;
                     }
                     & > * {
-                        .text-color-states(@text-color-strong);
+                        // ThemeOption: .text-color-states(@text-color-strong);
                         .bold-font;
                         .transition(all .15s ease);
                         &::before {
                             content: "\B7";
                             display: inline;
-                            color: @text-color-weak;
+                            // ThemeOption: color: @text-color-weak;
                             .regular-font;
                             margin-right: .25em;
                         }
@@ -124,7 +124,8 @@
                 .clearfix;
                 &:hover {
                     .@{prefix}-tool {
-                        border-color: fade(@default-color, 25%);
+                        // ThemeOption: border-color: fade(@default-color, 25%);
+                        border-color: transparent; // ThemeFix
                     }
                 }
                 .@{prefix}-tool {
@@ -136,16 +137,17 @@
                     margin: 0;
                     padding-left: .5em;
                     padding-right: .5em;
-                    color: @text-color-normal;
+                    // ThemeOption: color: @text-color-normal;
                     font-size: 1em;
                     line-height: calc(2em - 2px);
                     border-width: 1px;
                     border-style: solid;
-                    border-color: fade(@default-color, 15%);
+                    // ThemeOption: border-color: fade(@default-color, 15%);
+                    border-color: transparent; // ThemeFix
                     background-color: transparent;
                     .transition(all .15s ease);
                     &:hover {
-                        background-color: fade(@default-color, 15%);
+                        // ThemeOption: background-color: fade(@default-color, 15%);
                     }
                     &:last-child {
                         margin-right: 0;
@@ -272,15 +274,15 @@
                         }
                     }
                     & > * {
-                        color: @text-color-normal;
+                        // ThemeOption: color: @text-color-normal;
                         & > * {
-                            color: @text-color-normal;
+                            // ThemeOption: color: @text-color-normal;
                         }
                     }
                     & > svg {
                         height: calc(2em - 2px);
                         & > * {
-                            fill: @text-color-normal;
+                            // ThemeOption: fill: @text-color-normal;
                         }
                     }
                 }
@@ -294,7 +296,7 @@
                     &::before {
                         content: attr(placeholder);
                         display: block;
-                        color: @text-color-weak;
+                        // ThemeOption: color: @text-color-weak;
                     }
                 }
                 &:focus {

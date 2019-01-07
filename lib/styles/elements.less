@@ -5,7 +5,7 @@
 .@{prefix}-root {
     font-size: @font-size-default;
     line-height: @font-size-default;
-    color: @text-color-normal;
+    // ThemeOption: color: @text-color-normal;
     .regular-font;
     letter-spacing: -.0075em;
     *, *[type] {
@@ -16,7 +16,7 @@
     }
     a {
         cursor: pointer;
-        .text-color-states(@primary-color);
+        // ThemeOption: .text-color-states(@primary-color);
         text-decoration: none;
     }
     b {
@@ -45,7 +45,7 @@
         outline: none;
     }
     input, input[type], textarea {
-        color: @text-color-normal;
+        // ThemeOption: color: @text-color-normal;
         .regular-font;
         font-size: @font-size-default;
         line-height: @font-size-default;
@@ -53,7 +53,7 @@
         border-style: solid;
         border-color: fade(black, 10%);
         background-color: fade(black, 5%);
-        .placeholder-color(@text-color-weak);
+        // ThemeOption: .placeholder-color(@text-color-weak);
     }
     textarea {
         resize: none;
@@ -66,7 +66,8 @@
         .single-line-text;
         text-transform: uppercase;
         .transition(background-color .35s ease);
-        .background-color-states(@primary-color);
+        // ThemeOption: .background-color-states(@primary-color);
+        background-color: black; // ThemeFix
         .disable-selection;
         &[disabled] {
             opacity: .5;
@@ -101,7 +102,7 @@
                 display: inline-block;
                 float: left;
                 opacity: 1;
-                color: @text-color-normal;
+                // ThemeOption: color: @text-color-normal;
                 font-size: .9em;
                 line-height: 3.3em / .9;
                 text-align: center;
