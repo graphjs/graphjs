@@ -65,7 +65,7 @@
             this.handleRecipient();
         });
         this.on('mount', function() {
-            this.refs.message.focus();
+            opts.autofocus === 'on' && this.refs.message.focus();
         });
 
         this.restart = () => {
