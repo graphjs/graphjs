@@ -144,6 +144,7 @@
             ? 'graphjs-inline'
             : 'graphjs-box';
 
+        this.authorized = false;
         this.entries = [];
         this.authorsData = {};
         this.composerReady = true;
@@ -173,6 +174,8 @@
 
         this.restart = () => {
             this.blocked = false;
+            this.authorized = false;
+            this.userId = false;
             this.update();
             this.handleUser(function() {
                 self.loaded && self.handleRender();

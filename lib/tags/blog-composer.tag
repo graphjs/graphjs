@@ -29,7 +29,7 @@
                 <li class="graphjs-action">
                     <a ref="save" if={!saved && title.length > 0 && body.length > 0} onclick={save}>{i18n.saveLinkText}</a>
                     <a if={saved && title.length > 0 && body.length > 0} disabled="disabled">{i18n.savedLinkText}</a>
-                    <a ref="publish" if={saved && !published} onclick={publish}>{i18n.publishLinkText}</a>
+                    <a ref="publish" if={saved && title.length > 0 && body.length > 0 && !published} onclick={publish}>{i18n.publishLinkText}</a>
                 </li>
             </ul>
         </form>
@@ -80,7 +80,7 @@
 
         this.editable = false;
         this.saved = false;
-        this.autosave = true;
+        this.autoSaveTime = opts.autosave || 20;
         this.published = false;
         this.timeText = '';
         this.title = '';
@@ -262,24 +262,11 @@
             let form = this.refs.form;
             let title = form.querySelector('input.graphjs-title');
             let body = form.querySelector('div.graphjs-body');
-            title.addEventListener('change', function() {
+            title.addEventListener('keyup', function() {
                 self.title = title.value;
                 self.saved = false;
                 self.update();
             });
-            /*
-            body.addEventListener('paste', function(event) {
-                event.preventDefault();
-                event.stopPropagation();
-                let paste = (event.clipboardData || window.clipboardData).getData('text');
-                if(paste) {
-                    paste = paste.replace(/<[^/].*?>/g, i => i.split(/[ >]/g)[0] + '>').trim();
-                    const selection = window.getSelection();
-                    if (!selection.rangeCount) return false;
-                    selection.getRangeAt(0).insertNode(document.createTextNode(paste));
-                }
-            });
-            */
             body.addEventListener('paste', function(event) {
                 event.preventDefault();
                 event.stopPropagation();
@@ -322,9 +309,11 @@
                     let element = document.createElement('span');
                     element.innerHTML = paste;
                     selection.getRangeAt(0).insertNode(element);
+                    self.body = document.querySelector('.graphjs-body').innerHTML;
+                    self.update();
                 }
             });
-            !this.published && this.autosave();
+            !this.published && this.autoSave();
         }
         this.save = (event) => {
             let link = this.refs.save;
@@ -350,14 +339,18 @@
                 });
             }
         }
-        this.autosave = () => {
-            let autosave = setInterval(function() {
-                if(!self.published) {
-                    if(!self.saved) self.save();
-                } else {
-                    clearInterval(autosave);
-                }
-            }, 30000);
+        this.autoSave = () => {
+            if(this.autoSaveTime > 0) {
+                let time = this.autoSaveTime > 20 ? this.autoSaveTime : 20;
+                let autoSave = setInterval(function() {
+                    if(!self.published) {
+                        if(!self.saved) self.save();
+                    } else {
+                        clearInterval(autoSave);
+                    }
+                }, time * 1000);
+            }
+
         }
         this.publish = (event) => {
             let link = event.currentTarget;
