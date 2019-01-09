@@ -16,12 +16,14 @@
         id={opts.id}
         minor={true}
         box={opts.box}
+        no-activity-text={opts.noActivityText}
         callback={changeProperties}
         if={active == 'activity'}
     />
     <graphjs-group-members
         id={opts.id}
         minor={true}
+        no-members-text={opts.noMembersText}
         callback={changeProperties}
         if={active == 'members'}
     />

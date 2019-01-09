@@ -1,5 +1,6 @@
 <graphjs-profile-activity class={'graphjs-element graphjs-root ' + boxStyle}>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
+        <p if={loaded && (!activity || activity.length <= 0)}>{noActivityText || 'There is no activity.'}</p>
         <ul if={activity.length > 0}>
             <li each={item in activity}>
                 <div if={item.type == '_construct'}>
@@ -142,9 +143,10 @@
         let i18n = internationalization[window.GraphJSConfig.language]['profile-activity'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
-        
+
         this.id = opts.id;
         this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
+        this.noActivityText = opts.noActivityText;
         this.activity = [];
 
         this.on('before-mount', function() {
@@ -190,7 +192,7 @@
             	if(response.success) {
                     self.activity = [];
             		let client = stream.connect(
-                        window.GraphJSConfig["streamId"], 
+                        window.GraphJSConfig["streamId"],
                         null, // we don't give out secret in client-side
                         null, // app id
                         {

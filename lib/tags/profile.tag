@@ -16,12 +16,14 @@
         id={id}
         minor={true}
         box={opts.box}
+        no-activity-text={opts.noActivityText}
         callback={changeProperties}
         if={active == 'activity'}
     />
     <graphjs-profile-followers
         id={id}
         minor={true}
+        no-followers-text={noFollowersText}
         callback={changeProperties}
         if={active == 'followers'}
     />
@@ -34,6 +36,7 @@
     <graphjs-profile-groups
         id={id}
         minor={true}
+        no-groups-text={noGroupsText}
         callback={changeProperties}
         if={active == 'groups'}
     />

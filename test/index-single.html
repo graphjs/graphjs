@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Test GraphJS Components</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Auth for session control -->
+        <graphjs-auth></graphjs-auth>
+        <br /><br /><br /><br /><br />
+
+        <!-- Test a single tag here -->
+        <graphjs-profile
+            no-activity-text="NO ACTIVITY 1"
+            no-followers-text="NO FOLLOWERS 2"
+            no-following-text="NO FOLLOWING 3"
+            no-groups-text="NO GROUPS 4"
+            id="4785d19a7a01cba87269cdbea7f8e7ec"
+        ></graphjs-profile>
+
+        <script src="../dist/graph.js"></script>
+        <script>
+            GraphJS.init("79982844-6a27-4b3b-b77f-419a79be0e10", {
+                host: "https://gjs-singlesignon.herokuapp.com",
+                theme: {
+                    primaryColor: 'cornflowerblue',
+                    backgroundColor: 'white',
+                    textColor: '#555'
+                }
+            });
+        </script>
+    </body>
+</html>

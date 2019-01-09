@@ -1,6 +1,6 @@
 <graphjs-profile-followers class="graphjs-element graphjs-root graphjs-wallet">
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <p if={empty}>{i18n.noUsersText}</p>
+        <p if={loaded && empty}>{noFollowersText || i18n.noUsersText}</p>
         <!--
         <p if={list.length > 0}>{list.length + ' Follower' + (list.length > 1 ? 's' : '')}</p>
         -->
@@ -24,6 +24,7 @@
         this.i18n = i18n;
 
         this.id = opts.id;
+        this.noFollowersText = opts.noFollowersText;
         this.list = [];
         this.loaded = true;
 
