@@ -151,7 +151,7 @@
                 });
             } else {
                 // New Post
-                startBlogPost(i18n.dummyUserText, i18n.dummyContentText, function(response) {
+                startBlogPost(i18n.dummyBlogTitle, i18n.dummyBlogContent, function(response) {
                     if(response.success) {
                         self.id = response.id;
                         self.createTime = loggedTime;
@@ -320,7 +320,7 @@
             if(this.validateForm) {
                 if(event) {
                     event.currentTarget.setAttribute('disabled', 'disabled');
-                    event.currentTarget.innerHTML = i18n.editProgessText;
+                    event.currentTarget.innerHTML = i18n.saveProgessText;
                 }
                 editBlogPost(self.id, self.title, self.body, function(response) {
                     if(response.success) {
@@ -329,7 +329,7 @@
                     } else {
                         if(link) {
                             link.setAttribute('disabled', 'disabled');
-                            link.innerHTML = i18n.editErrorText;
+                            link.innerHTML = i18n.saveErrorText;
                             setTimeout(function() {
                                 link.removeAttribute('disabled');
                                 link.innerHTML = i18n.saveLinkText;

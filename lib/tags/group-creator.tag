@@ -128,10 +128,8 @@
                         if(response.success) {
                             self.refs.title.classList.remove('graphjs-error');
                             self.refs.title.classList.add('graphjs-success');
-                            self.refs.title.setAttribute('data-savesuccesstext', i18n.saveSuccessText);
                             self.refs.description.classList.remove('graphjs-error');
                             self.refs.description.classList.add('graphjs-success');
-                            self.refs.description.setAttribute('data-savesuccesstext', i18n.saveSuccessText);
                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                             self.refs.submit.classList.remove('graphjs-loading');
@@ -147,10 +145,8 @@
                             }
                         } else {
                             self.refs.title.classList.remove('graphjs-success');
-                            self.refs.title.removeAttribute('data-savesuccesstext');
                             self.refs.title.classList.add('graphjs-error');
                             self.refs.description.classList.remove('graphjs-success');
-                            self.refs.description.removeAttribute('data-savesuccesstext');
                             self.refs.description.classList.add('graphjs-error');
                             self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                             self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
