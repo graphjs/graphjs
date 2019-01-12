@@ -340,6 +340,15 @@
 // blog.less
 @{prefix}-blog.@{prefix}-root {
     color: @text-color-normal;
+    &.@{prefix}-box {
+        .@{prefix}-inline {
+            .@{prefix}-content {
+                .@{prefix}-comments {
+                    background-color: @background-color-contrast;
+                }
+            }
+        }
+    }
 }
 
 // blog-composer.less
@@ -453,11 +462,11 @@
 @{prefix}-blog-post.@{prefix}-root {
     color: @text-color-normal;
     &.@{prefix}-box {
-      .@{prefix}-content {
-          .@{prefix}-reply {
-              background-color: @background-color-contrast;
-          }
-      }
+        .@{prefix}-content {
+            .@{prefix}-comments {
+                background-color: @background-color-contrast;
+            }
+        }
     }
     .@{prefix}-content {
         .@{prefix}-post {
@@ -488,38 +497,37 @@
                     }
                 }
             }
-            .@{prefix}-replies {
-                .@{prefix}-item {
-                    .@{prefix}-credit {
-                        span {
-                            color: @text-color-normal;
-                        }
-                    }
-                    p {
+        }
+        .@{prefix}-comments {
+            border-top-color: @primary-color;
+            .@{prefix}-comment {
+                .@{prefix}-synopsis {
+                    & > b {
                         color: @text-color-normal;
-                        &.@{prefix}-editable {
-                            color: @text-color-normal;
-                            border-color: fade(@default-color, 15%);
-                            background-color: @background-color-contrast;
+                    }
+                    & > a {
+                        &.@{prefix}-icon {
+                            svg {
+                                path {
+                                    fill: @primary-color;
+                                }
+                            }
                         }
                     }
                 }
             }
-        }
-        .@{prefix}-reply {
-            border-top-color: @primary-color;
-            background-color: @background-color-contrast;
-            .@{prefix}-synopsis {
-                & > b {
-                    color: @text-color-normal;
+            .@{prefix}-item {
+                .@{prefix}-credit {
+                    span {
+                        color: @text-color-normal;
+                    }
                 }
-                & > a {
-                    &.@{prefix}-icon {
-                        svg {
-                            path {
-                                fill: @primary-color;
-                            }
-                        }
+                p {
+                    color: @text-color-normal;
+                    &.@{prefix}-editable {
+                        color: @text-color-normal;
+                        border-color: fade(@default-color, 15%);
+                        background-color: @background-color-contrast;
                     }
                 }
             }

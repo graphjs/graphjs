@@ -11,7 +11,7 @@
         <div class="graphjs-title">{opts.title}</div>
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <div if={notExisting} class="graphjs-nonexistent">
+        <div if={loaded && notExisting} class="graphjs-nonexistent">
             <p>This post is no longer available!</p>
         </div>
         <div if={loaded && !deleted} class="graphjs-post" ref="scrollingContent">
@@ -52,46 +52,45 @@
                 </li>
             </ul>
             <div ref="body" if={body} class="graphjs-body graphjs-article"></div>
-            <!--
-            <div class="graphjs-replies">
-                <div each={entry, index in entries} data-id={entry.id} class="graphjs-item">
-                    <div class="graphjs-credit" if={authorsData.hasOwnProperty(entry.author)}>
-                        <img data-link="profile" data-id={entry.author} onclick={handleShow} src={authorsData[entry.author].avatar ? downsizeImage(authorsData[entry.author].avatar, 50) : defaultAvatar} />
-                        <span>
-                            <b data-link="profile" data-id={entry.author} onclick={handleShow}>{authorsData[entry.author].username || 'Unknown User'}</b>
-                            <time data-timestamp={entry.timestamp}>{handleTime(entry.timestamp)}</time>
-                            <a if={entry.author == userId} onclick={handleEdit} data-id={entry.id}>Edit</a>
-                            <a if={entry.author == userId} onclick={index == 0 ? handleDestroy : handleRemove} data-id={entry.id}>Delete</a>
-                        </span>
-                    </div>
-                    <p>{entry.content}</p>
-                </div>
-            </div>
-            -->
         </div>
-        <div class="graphjs-reply" if={entries.length > 0}>
-            <div onclick={handleComposer} class="graphjs-synopsis">
-                <b if={entries.length > 1}>{entries.length <= 2 ? (entries.length - 1) + ' reply' : (entries.length - 1) + ' replies'}</b>
-                <a if={!composerReady}>Write a Reply</a>
-                <a class={composerReady ? 'graphjs-icon' : 'graphjs-reverse graphjs-icon'}>
-                    <svg viewBox="0 0 62 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <path transform="translate(-19.000000, 0.000000)" d="M78.5,2.4 C81.1,5 81.1,9.1 78.5,11.6 L54.6,35.6 C52,38.2 47.9,38.2 45.4,35.6 L21.5,11.7 C18.9,9.1 18.9,5 21.5,2.5 C24.1,-0.1 28.2,-0.1 30.7,2.5 L50,21.7 L69.3,2.4 C71.8,-0.1 76,-0.1 78.5,2.4 Z"></path>
-                    </svg>
-                </a>
-            </div>
-            <form class={userId ? '' : 'graphjs-loading graphjs-blocked'}>
-                <textarea ref="composer" placeholder="Write your reply here..."></textarea>
-                <button ref="submit" onclick={handleReply}>Send Reply</button>
-                <button onclick={handleClear} class="graphjs-danger">Clear</button>
-                <div if={!loaded} class="graphjs-loader">
-                    <div class="graphjs-dots">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
+        <div class="graphjs-comments" if={loaded && showComments}>
+            <div class="graphjs-comment">
+                <div onclick={handleComposer} class="graphjs-synopsis">
+                    <b if={comments.length <= 0}>No Comments</b>
+                    <b if={comments.length > 0}>{comments.length + ' ' + (comments.length === 1 ? 'comment' : 'comments')}</b>
+                    <a if={!composerReady}>Write a Comment</a>
+                    <a class={composerReady ? 'graphjs-icon' : 'graphjs-reverse graphjs-icon'}>
+                        <svg viewBox="0 0 62 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <path transform="translate(-19.000000, 0.000000)" d="M78.5,2.4 C81.1,5 81.1,9.1 78.5,11.6 L54.6,35.6 C52,38.2 47.9,38.2 45.4,35.6 L21.5,11.7 C18.9,9.1 18.9,5 21.5,2.5 C24.1,-0.1 28.2,-0.1 30.7,2.5 L50,21.7 L69.3,2.4 C71.8,-0.1 76,-0.1 78.5,2.4 Z"></path>
+                        </svg>
+                    </a>
                 </div>
-                <button if={!userId} onclick={handleBlock} class="graphjs-blockage">Login to write a reply</button>
-            <form>
+                <form class={userId ? '' : 'graphjs-loading graphjs-blocked'}>
+                    <textarea ref="composer" placeholder="Write your comment here..."></textarea>
+                    <button ref="submit" onclick={handleComment}>Send Comment</button>
+                    <button onclick={handleClear} class="graphjs-danger">Clear</button>
+                    <div if={!loaded} class="graphjs-loader">
+                        <div class="graphjs-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <button if={!userId} onclick={handleBlock} class="graphjs-blockage">Login to write a comment</button>
+                <form>
+            </div>
+            <div each={comment, index in comments} data-id={comment.id} class="graphjs-item">
+                <div class="graphjs-credit" if={authorsData.hasOwnProperty(comment.author)}>
+                    <img data-link="profile" data-id={comment.author} onclick={handleShow} src={authorsData[comment.author].avatar ? downsizeImage(authorsData[comment.author].avatar, 50) : defaultAvatar} />
+                    <span>
+                        <b data-link="profile" data-id={comment.author} onclick={handleShow}>{authorsData[comment.author].username || 'Unknown User'}</b>
+                        <time data-timestamp={comment.timestamp}>{handleTime(comment.timestamp)}</time>
+                        <a if={comment.author == userId} onclick={handleEdit} data-id={comment.id}>Edit</a>
+                        <a if={comment.author == userId} onclick={index == 0 ? handleDestroy : handleRemove} data-id={comment.id}>Delete</a>
+                    </span>
+                </div>
+                <p>{comment.content}</p>
+            </div>
         </div>
         <div if={!loaded} class="graphjs-placeholder graphjs-loader">
             <div class="graphjs-title graphjs-line graphjs-fill"></div>
@@ -116,7 +115,7 @@
             </div>
         </div>
     </div>
-    <graphjs-promo if={loaded} properties="bottom right"></graphjs-promo>
+    <graphjs-promo if={loaded} properties="bottom left"></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';
@@ -125,6 +124,8 @@
         import publishBlogPost from '../scripts/publishBlogPost.js';
         import unpublishBlogPost from '../scripts/unpublishBlogPost.js';
         import removeBlogPost from '../scripts/removeBlogPost.js';
+        import getBlogComments from '../scripts/getBlogComments.js';
+        import editBlogComment from '../scripts/editBlogComment.js';
         import removeBlogComment from '../scripts/removeBlogComment.js';
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
@@ -139,15 +140,16 @@
         this.downsizeImage = downsizeImage;
 
         this.blocked = false;
+        this.showComments = !(opts.comments === 'disabled');
         this.id = opts.id;
         this.boxStyle = opts.box == 'disabled'
             ? 'graphjs-inline'
             : 'graphjs-box';
 
         this.authorized = false;
-        this.entries = [];
+        this.comments = [];
         this.authorsData = {};
-        this.composerReady = true;
+        this.composerReady = false;
         this.body = '';
         this.rendered = false;
 
@@ -215,19 +217,21 @@
                     self.handleRender();
                     let time = response.blog.is_draft ? response.blog.last_edit : response.blog.publish_time;
                     self.printTime(time * 1000);
-                    // getBlogComments
-                    /*
-                    for(let entry of self.entries) {
-                        getProfile(entry.author, function(response) {
-                            if(response.success) {
-                                self.currentAuthor = self.currentAuthor || response.profile.username;
-                                self.authorsData[entry.author] = response.profile;
+                    getBlogComments(self.id, function(response) {
+                        if(response.success) {
+                            self.comments = response.comments;
+                            let authors = Object.keys(self.authorsData);
+                            for(let comment of self.comments) {
+                                !authors.includes(comment.author) && getProfile(comment.author, function(response) {
+                                    if(response.success) {
+                                        self.authorsData[comment.author] = response.profile;
+                                    }
+                                    self.update();
+                                });
                             }
                             self.update();
-                        });
-                    }
-                    self.update();
-                    */
+                        }
+                    });
                 } else {
                     self.notExisting = true;
                     self.update();
@@ -326,7 +330,7 @@
             this.refs.composer.value = '';
             this.refs.composer.focus();
         }
-        this.handleReply = (event) => {
+        this.handleComment = (event) => {
             event.preventDefault();
             self.refs.submit.classList.add('graphjs-loading');
             commentBlogPost(self.id, self.refs.composer.value, function(response) {
@@ -404,7 +408,7 @@
         }
         this.handleRemove = (event) => {
             event.preventDefault();
-            if (window.confirm('Are you sure to delete this reply?')) {
+            if (window.confirm('Are you sure to delete this comment?')) {
                 let query = '[data-id="' + event.target.dataset.id + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
