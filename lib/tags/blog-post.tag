@@ -84,7 +84,7 @@
                     <img data-link="profile" data-id={comment.author} onclick={handleShow} src={authorsData[comment.author].avatar ? downsizeImage(authorsData[comment.author].avatar, 50) : defaultAvatar} />
                     <span>
                         <b data-link="profile" data-id={comment.author} onclick={handleShow}>{authorsData[comment.author].username || 'Unknown User'}</b>
-                        <time data-timestamp={comment.timestamp}>{handleTime(comment.timestamp)}</time>
+                        <time data-timestamp={comment.timestamp}>{handleTime(comment.createTime)}</time>
                         <a if={comment.author == userId} onclick={handleEdit} data-id={comment.id}>Edit</a>
                         <a if={comment.author == userId} onclick={index == 0 ? handleDestroy : handleRemove} data-id={comment.id}>Delete</a>
                     </span>
@@ -219,7 +219,13 @@
                     self.printTime(time * 1000);
                     getBlogComments(self.id, function(response) {
                         if(response.success) {
-                            self.comments = response.comments;
+                            self.comments = [];
+                            response.comments.forEach(comment => {
+                                let key = Object.keys(comment)[0];
+                                comment[key].id = key;
+                                self.comments.push(comment[key]);
+                            });
+                            self.update();
                             let authors = Object.keys(self.authorsData);
                             for(let comment of self.comments) {
                                 !authors.includes(comment.author) && getProfile(comment.author, function(response) {
