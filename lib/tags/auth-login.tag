@@ -43,7 +43,7 @@
         this.i18n = i18n;
 
         this.boxStyle = opts.box == 'disabled'
-            ? 'graphjs-inline' + (opts.box === 'disabled' ? ' graphjs-promo-pad' : '')
+            ? 'graphjs-inline graphjs-promo-pad'
             : 'graphjs-box';
 
         this.handleRegisterBox = () => showRegister();

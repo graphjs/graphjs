@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Test GraphJS Components</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Test Tags start here -->
+
+
+        <graphjs-auth></graphjs-auth>
+        <br /><br /><hr /><br /><br />
+
+        <graphjs-notifications></graphjs-notifications>
+        <graphjs-notifications max-width="1000px" box="disabled" color="red"></graphjs-notifications>
+
+        <h1>w/ Targets</h1>
+        <graphjs-notifications target="/asd"></graphjs-notifications>
+        <graphjs-notifications target-profile="?profile=[[id]]" target-feed-item="?feed=[[id]]" target-messages="/messages"></graphjs-notifications>
+
+        <h1>Button</h1>
+        <graphjs-notifications-button></graphjs-notifications-button>
+        <graphjs-notifications-button box="disabled" color="red"></graphjs-notifications-button>
+
+        <h1>List</h1>
+        <graphjs-notifications-list max-width="1000px"></graphjs-notifications-list>
+        <graphjs-notifications-list box="disabled"></graphjs-notifications-list>
+
+
+
+
+        <!-- Test Tags finish here -->
+        <script src="../dist/graph.js"></script>
+        <script>
+            GraphJS.init("79982844-6a27-4b3b-b77f-419a79be0e10", {
+                host: "https://gjs-singlesignon.herokuapp.com",
+                theme: {
+                    primaryColor: 'cornflowerblue',
+                    backgroundColor: 'white',
+                    textColor: '#555'
+                }
+            });
+        </script>
+    </body>
+</html>

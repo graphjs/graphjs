@@ -1,0 +1,57 @@
+@prefix: graphjs;
+
+@{prefix}-notifications-button.@{prefix}-root {
+    display: inline-block;
+    box-sizing: content-box !important;
+    height: 3.5em;
+    line-height: 3.5em;
+    vertical-align: middle;
+    border: none;
+    &.@{prefix}-box {
+        // ThemeOption: background-color: @background-color-contrast;
+    }
+    .@{prefix}-content {
+        height: inherit;
+        .no-padding !important;
+        font-size: 1.2em;
+        line-height: inherit;
+        vertical-align: unset;
+        background-color: transparent;
+        a {
+            display: inline-block;
+            width: auto;
+            padding: 0 calc(((3.5em - 1.2em) / 2) / 1.2);
+            line-height: inherit;
+            text-align: center;
+            background-color: transparent;
+            .transition(background-color .35s ease);
+            .disable-selection;
+            &:hover {
+                background-color: fade(black, 3.5%);
+            }
+            &.@{prefix}-active {
+                background-color: fade(black, 5%);
+            }
+            &.@{prefix}-disabled {
+                opacity: .5;
+                pointer-events: none;
+            }
+            .@{prefix}-icon {
+                display: inline-block;
+                position: relative;
+                top: -1px;
+                width: auto;
+                height: 1.2em;
+                vertical-align: middle;
+                path {
+                    // ThemeOption: fill: @primary-color;
+                    .transition(fill .35s ease);
+                }
+            }
+            .@{prefix}-count {
+                // ThemeOption: color: @primary-color;
+                .bold-font;
+            }
+        }
+    }
+}
