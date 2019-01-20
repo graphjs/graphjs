@@ -1,6 +1,6 @@
 @prefix: graphjs;
 
-@{prefix}-auth.@{prefix}-root {
+@{prefix}-notifications.@{prefix}-root {
     overflow: visible !important;
     display: inline-block;
     position: relative;
@@ -9,21 +9,21 @@
     line-height: 3.5em;
     // ThemeOption: color: @text-color-normal;
     &.@{prefix}-topleft {
-        @{prefix}-auth-state.@{prefix}-root {
+        @{prefix}-notifications-button.@{prefix}-root {
             & + * {
                 left: 0;
             }
         }
     }
     &.@{prefix}-topright {
-        @{prefix}-auth-state.@{prefix}-root {
+        @{prefix}-notifications-button.@{prefix}-root {
             & + * {
                 right: 0;
             }
         }
     }
     &.@{prefix}-bottomleft {
-        @{prefix}-auth-state.@{prefix}-root {
+        @{prefix}-notifications-button.@{prefix}-root {
             & + * {
                 left: 0;
                 .transform(translateY(-100%));
@@ -31,14 +31,14 @@
         }
     }
     &.@{prefix}-bottomright {
-        @{prefix}-auth-state.@{prefix}-root {
+        @{prefix}-notifications-button.@{prefix}-root {
             & + * {
                 right: 0;
                 .transform(translateY(-100%));
             }
         }
     }
-    @{prefix}-auth-state.@{prefix}-root {
+    @{prefix}-notifications-button.@{prefix}-root {
         & + * {
             position: absolute !important;
             z-index: 9;
