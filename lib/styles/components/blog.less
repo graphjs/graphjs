@@ -10,7 +10,9 @@
                 border-color: fade(black, 7.5%);
             }
             .@{prefix}-content {
-                min-height: 41em;
+                &.@{prefix}-stuffed {
+                    min-height: 41em;
+                }
                 .@{prefix}-comments {
                     margin: -2.5em;
                     margin-top: 2.5em;
@@ -34,7 +36,9 @@
             // If it is wrapped with boxed Blog component
             .@{prefix}-inline {
                 .@{prefix}-content {
-                    min-height: 38.5em;
+                    &.@{prefix}-stuffed {
+                        min-height: 38.5em;
+                    }
                     .@{prefix}-comments {
                         margin: -1.5em;
                         margin-top: 1.5em;

@@ -56,8 +56,8 @@
                 if(response.success) {
                     for(let group of response.groups) {
                         self.list.push(group.id);
-                        self.empty = self.list.length == 0 ? true : false;
                     }
+                    self.empty = self.list.length == 0 ? true : false;
                     if(self.parent.tags.hasOwnProperty('graphjs-profile-header')) {
                         self.parent.tags['graphjs-profile-header'].profile.membership_count = self.list.length;
                         self.parent.tags['graphjs-profile-header'].update();

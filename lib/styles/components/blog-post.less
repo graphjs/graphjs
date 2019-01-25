@@ -6,7 +6,9 @@
     // ThemeOption: color: @text-color-normal;
     &.@{prefix}-box {
         .@{prefix}-content {
-            min-height: 32em;
+            &.@{prefix}-stuffed {
+                min-height: 33em;
+            }
             .@{prefix}-comments {
                 margin: -2.5em;
                 margin-top: 2.5em;
@@ -23,7 +25,9 @@
             border-color: transparent;
         }
         .@{prefix}-content {
-            min-height: 27em;
+            &.@{prefix}-stuffed {
+                min-height: 28em;
+            }
             .@{prefix}-comments {
                 .box-shadow(none);
             }

@@ -109,8 +109,8 @@
             getProfile(id, function(response) {
                 if(response.success) {
                     self.profile = response.profile;
-                    //let timestamp = new Date(response.profile.birthday * 1000);
-                    //self.profile.birthday = (timestamp.getMonth() + 1) + '/' + timestamp.getDate() + '/' + timestamp.getFullYear();
+                    let timestamp = new Date(response.profile.birthday * 1000);
+                    self.profile.birthday = (timestamp.getMonth() + 1) + '/' + timestamp.getDate() + '/' + timestamp.getFullYear();
                     self.update();
                 } else {
                     //Handle errors

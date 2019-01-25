@@ -17,8 +17,8 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    {i18n.followed}
-                    <a data-link="profile" data-id={item.object.id} onclick={handleShow}>{item.object.label}</a>
+                    {i18n.followText}
+                    <a data-link="profile" data-id={item.object.id} onclick={opts.targetProfile ? handleTarget : handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'create'}>
                     <svg viewBox="0 0 101 82" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -27,7 +27,7 @@
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
                     {i18n.createText}
-                    <a data-link="group" data-id={item.object.id} onclick={handleShow}>{item.object.label}</a>
+                    <a data-link="group" data-id={item.object.id} onclick={opts.targetGroup ? handleTarget : handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'join'}>
                     <svg viewBox="0 0 101 82" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -36,7 +36,7 @@
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
                     {i18n.joinText}
-                    <a data-link="group" data-id={item.object.id} onclick={handleShow}>{item.object.label}</a>
+                    <a data-link="group" data-id={item.object.id} onclick={opts.targetGroup ? handleTarget : handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'comment'}>
                     <svg viewBox="0 0 80 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -54,7 +54,7 @@
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
                     {i18n.startText}
-                    <a data-link="thread" data-id={item.object.id} onclick={handleShow}>{item.object.label}</a>
+                    <a data-link="thread" data-id={item.object.id} onclick={opts.targetForumThread ? handleTarget : handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'reply'}>
                     <svg viewBox="0 0 80 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -63,7 +63,7 @@
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
                     {i18n.replyText}
-                    <a data-link="thread" data-id={item.object.id} onclick={handleShow}>{item.object.label}</a>
+                    <a data-link="thread" data-id={item.object.id} onclick={opts.targetForumThread ? handleTarget : handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'star'}>
                     <svg viewBox="0 0 62 58" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -227,6 +227,31 @@
             		//Handle errors
             	}
             });
+        }
+        this.handleTarget = event => {
+            event.preventDefault();
+            let dataset = event.target.dataset;
+            let target;
+            switch(dataset.link) {
+                case 'profile':
+                    target = opts.targetProfile.replace('[[id]]', dataset.id);
+                    break;
+                case 'group':
+                    target = opts.targetGroup.replace('[[id]]', dataset.id);
+                    break;
+                case 'comment':
+                    target = opts.targetComments.replace('[[id]]', dataset.id);
+                    break;
+                case 'feed':
+                    target = opts.targetFeedItem.replace('[[id]]', dataset.id);
+                    break;
+                case 'thread':
+                    target = opts.targetForumThread.replace('[[id]]', dataset.id);
+                    break;
+                default:
+                    target = opts.target;
+            }
+            if(target) document.location.href = target;
         }
         this.handleShow = (event) => {
             let self = this;

@@ -1,5 +1,5 @@
 <graphjs-blog-post
-    class={'graphjs-element graphjs-root ' + boxStyle}
+    class={'graphjs-element graphjs-root graphjs-composer ' + boxStyle}
     style={
         (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
         (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
@@ -10,7 +10,7 @@
     <div class="graphjs-header" if={opts.title}>
         <div class="graphjs-title">{opts.title}</div>
     </div>
-    <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
+    <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading graphjs-stuffed') + (blocked ? ' graphjs-blocked graphjs-stuffed' : '')}>
         <div if={loaded && notExisting} class="graphjs-nonexistent">
             <p>This post is no longer available!</p>
         </div>
@@ -115,7 +115,7 @@
             </div>
         </div>
     </div>
-    <graphjs-promo if={loaded} properties="bottom left"></graphjs-promo>
+    <graphjs-promo if={loaded} properties="bottom right"></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';
@@ -149,7 +149,7 @@
         this.authorized = false;
         this.comments = [];
         this.authorsData = {};
-        this.composerReady = false;
+        this.composerReady = true;
         this.body = '';
         this.rendered = false;
 
@@ -345,7 +345,6 @@
                     self.handleContent(function() {
                         self.refs.scrollingContent.scrollTop = self.refs.scrollingContent.scrollHeight;
                     });
-                    self.composerReady = false;
                     self.refs.composer.value = '';
                     self.root.classList.toggle('graphjs-composer');
                     self.update();

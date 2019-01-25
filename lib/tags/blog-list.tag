@@ -10,7 +10,7 @@
     <div class="graphjs-header" if={opts.title}>
         <div class="graphjs-title">{opts.title || 'Blog'}</div>
     </div>
-    <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '') + (matchedPosts.length > pageLimit ? ' graphjs-pagination' : '')}>
+    <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading graphjs-stuffed') + (blocked ? ' graphjs-blocked graphjs-stuffed' : '') + (matchedPosts.length > pageLimit ? ' graphjs-pagination' : '')}>
         <div class="graphjs-list" if={loaded}>
             <a
                 if={postsData[matchedPost]}
@@ -106,7 +106,7 @@
             </div>
         </div>
     </div>
-    <graphjs-promo if={loaded} properties="bottom right"></graphjs-promo>
+    <graphjs-promo if={loaded} properties="bottom right" detach={opts.box === 'disabled'}></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
         import getSession from '../scripts/getSession.js';
@@ -126,7 +126,7 @@
         this.page = opts.page ? parseInt(opts.page) : 1;
         this.pageLimit = opts.limit ? parseInt(opts.limit) : 10;
         this.boxStyle = opts.box == 'disabled'
-            ? 'graphjs-inline'
+            ? 'graphjs-inline graphjs-promo-pad'
             : 'graphjs-box';
 
         this.posts = [];
