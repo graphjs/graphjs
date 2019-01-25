@@ -6,7 +6,7 @@
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading')}>
         <div class={'graphjs-list' + (opts.minor ? ' graphjs-scrolling' : '')} if={loaded}>
-            <div each={item in notifications} class="graphjs-item">
+            <div each={item in notifications} if={item && notifications.length > 0} class="graphjs-item">
                 <a if={item.label === 'FollowNotification'} data-link="profile" data-id={item.actor.id} onclick={opts.targetProfile ? handleTarget : handleShow}>
                     <img class="graphjs-avatar" src={item.actor.avatar ? downsizeImage(item.actor.avatar, 50) : defaultAvatar} />
                     <div class="graphjs-text">
@@ -33,7 +33,13 @@
                 </a>
             </div>
             <div class="graphjs-placeholder graphjs-item" if={notifications.length <= 0}>
-                There isn't any active notification.
+                <a onclick={handleToggle}>
+                    <div class="graphjs-text">
+                        <p>
+                            No new notifications. You are all set!
+                        </p>
+                    </div>
+                </a>
             </div>
             <a if={count > limit} onclick={handleNotifications}>See more</a>
         </div>
@@ -95,7 +101,7 @@
         this.handleNotifications = () => {
             getNotifications(response => {
                 if(response.success) {
-                    self.notifications = self.notifications.concat(response.data);
+                    self.notifications = response.data ? self.notifications.concat(response.data) : [];
                     self.count = response.count;
                     self.loaded = true;
                     self.update();

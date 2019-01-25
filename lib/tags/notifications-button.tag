@@ -64,7 +64,7 @@
         this.handleCount = () => {
             getNotificationsCount(response => {
                 if(response.success) {
-                    self.count = 15;//response.count;
+                    self.count = response.count;
                     self.update();
                 }
             });
