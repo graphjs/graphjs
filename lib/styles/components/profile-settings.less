@@ -26,7 +26,7 @@
                 }
             }
             &::before {
-                content: "Change\00000aAvatar";
+                content: attr(data-changeavatartextlineone) "\00000a" attr(data-changeavatartextlinetwo);
                 display: inline-block;
                 position: absolute;
                 top: 0;
@@ -55,7 +55,7 @@
                     border-style: solid;
                     border-color: @success-color;
                     &::after {
-                        content: "OK";
+                        content: attr(data-savesuccesstext);
                         display: block;
                         position: absolute;
                         top: 0;

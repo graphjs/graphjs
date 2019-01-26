@@ -24,7 +24,14 @@
                 <h1 class="graphjs-title">{postsData[matchedPost].title}<small if={postsData[matchedPost].isDraft}><b>Draft</b></small></h1>
                 <ul class="graphjs-information">
                     <li class="graphjs-author">
-                        <span data-link="profile" data-id={postsData[matchedPost].author.id} onclick={handleShow}>{postsData[matchedPost].author.username}</span>
+                        <span 
+                            data-link="profile"
+                            data-id={postsData[matchedPost].author.id} 
+                            data-authorbeforetext={i18n.authorBeforeText}
+                            onclick={handleShow}
+                        >
+                            {postsData[matchedPost].author.username}
+                        </span>
                     </li>
                     <li  if={postsData[matchedPost].isDraft}>
                         <span>Draft</span>
@@ -36,7 +43,7 @@
                 <div class="graphjs-summary">{postsData[matchedPost].summary}</div>
             </a>
             <div class="graphjs-placeholder graphjs-item" if={loaded && matchedPosts.length <= 0}>
-                There isn't any post available.
+                {i18n.noPostText}
             </div>
         </div>
         <div class="graphjs-controls" if={loaded && matchedPosts.length > pageLimit}>
@@ -118,6 +125,11 @@
 
         analytics("blog-list");
 
+        import internationalization from '../i18n';
+        let i18n = internationalization[window.GraphJSConfig.language]['blog-list'];
+        i18n = {...i18n,...opts}
+        this.i18n = i18n;
+        
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 

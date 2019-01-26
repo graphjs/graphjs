@@ -5,7 +5,7 @@
         </ul>
     </div>
     <div if={authorized} class="graphjs-content">
-        <a ref="uploadWidget" class="graphjs-avatar">
+        <a ref="uploadWidget" class="graphjs-avatar" data-changeavatartextlineone={i18n.changeAvatarTextLineOne} data-changeavatartextlinetwo={i18n.changeAvatarTextLineTwo}>
             <img src={profile && profile.avatar ? downsizeImage(profile.avatar, 160) : defaultAvatar} />
         </a>
         <h2>{i18n.profileTitle}</h2>

@@ -12,7 +12,7 @@
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading graphjs-stuffed') + (blocked ? ' graphjs-blocked graphjs-stuffed' : '')}>
         <div if={loaded && notExisting} class="graphjs-nonexistent">
-            <p>This post is no longer available!</p>
+            <p>{i18n.noPostText}</p>
         </div>
         <div if={loaded && !deleted} class="graphjs-post" ref="scrollingContent">
             <ul class="graphjs-action" if={authorized}>
@@ -40,10 +40,10 @@
                 {title}
             </h1>
             <ul if={loaded} class="graphjs-information">
-                <li if={author} class="graphjs-author">
+                <li if={author} class="graphjs-author" data-authorbeforetext={i18n.authorBeforeText}>
                     <a data-link="profile" data-id={author.id} onclick={handleShow}>{author.username}</a>
                 </li>
-                <li if={time} class="graphjs-time">
+                <li if={time} class="graphjs-time" data-publishedtimebeforetext={i18n.publishedTimeBeforeText} data-edittimebeforetext={i18n.editTimeBeforeText}>
                     <time if={published && time.published && opts.minor}>
                         <a href={window.location.href}>{timeText}</a>
                     </time>
@@ -56,9 +56,9 @@
         <div class="graphjs-comments" if={loaded && showComments}>
             <div class="graphjs-comment">
                 <div onclick={handleComposer} class="graphjs-synopsis">
-                    <b if={comments.length <= 0}>No Comments</b>
-                    <b if={comments.length > 0}>{comments.length + ' ' + (comments.length === 1 ? 'comment' : 'comments')}</b>
-                    <a if={!composerReady}>Write a Comment</a>
+                    <b if={comments.length <= 0}>{i18n.noCommentText}</b>
+                    <b if={comments.length > 0}>{comments.length + ' ' + (comments.length === 1 ? singleCommentText : multipleCommentsText)}</b>
+                    <a if={!composerReady}>{i18n.replyComposerText}</a>
                     <a class={composerReady ? 'graphjs-icon' : 'graphjs-reverse graphjs-icon'}>
                         <svg viewBox="0 0 62 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <path transform="translate(-19.000000, 0.000000)" d="M78.5,2.4 C81.1,5 81.1,9.1 78.5,11.6 L54.6,35.6 C52,38.2 47.9,38.2 45.4,35.6 L21.5,11.7 C18.9,9.1 18.9,5 21.5,2.5 C24.1,-0.1 28.2,-0.1 30.7,2.5 L50,21.7 L69.3,2.4 C71.8,-0.1 76,-0.1 78.5,2.4 Z"></path>
@@ -66,9 +66,9 @@
                     </a>
                 </div>
                 <form class={userId ? '' : 'graphjs-loading graphjs-blocked'}>
-                    <textarea ref="composer" placeholder="Write your comment here..."></textarea>
-                    <button ref="submit" onclick={handleComment}>Send Comment</button>
-                    <button onclick={handleClear} class="graphjs-danger">Clear</button>
+                    <textarea ref="composer" placeholder={i18n.commentInputPlaceholder}></textarea>
+                    <button ref="submit" onclick={handleComment}>{i18n.commentButtonText}</button>
+                    <button onclick={handleClear} class ="graphjs-danger">{i18n.clearButtonText}</button>
                     <div if={!loaded} class="graphjs-loader">
                         <div class="graphjs-dots">
                             <span></span>
@@ -76,7 +76,7 @@
                             <span></span>
                         </div>
                     </div>
-                    <button if={!userId} onclick={handleBlock} class="graphjs-blockage">Login to write a comment</button>
+                    <button if={!userId} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
                 <form>
             </div>
             <div each={comment, index in comments} data-id={comment.id} class="graphjs-item">
@@ -155,6 +155,11 @@
 
         let self = this;
 
+        import internationalization from '../i18n';
+        let i18n = internationalization[window.GraphJSConfig.language]['blog-composer'];
+        i18n = {...i18n,...opts}
+        this.i18n = i18n;
+        
         this.on('before-mount', function() {
             this.handleUser();
             this.frequentlyUpdateTime = setInterval(this.handleTimeUpdate,  60 * 1000);
@@ -259,7 +264,7 @@
         this.publish = (event) => {
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
-            link.innerHTML = 'Publishing...';
+            link.innerHTML = i18n.publishProgressText;
             publishBlogPost(self.id, function(response) {
                 if(response.success) {
                     self.published = true;
@@ -267,10 +272,10 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = 'Couldn\'t be published!';
+                        link.innerHTML = i18n.publishErrorText;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
-                            link.innerHTML = 'Publish';
+                            link.innerHTML = i18n.publishLinkText;
                         }, 2500);
                     }
                 }
@@ -279,7 +284,7 @@
         this.unpublish = (event) => {
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
-            link.innerHTML = 'Unpublishing...';
+            link.innerHTML = i18n.unpublishProgressText;
             unpublishBlogPost(self.id, function(response) {
                 if(response.success) {
                     self.published = false;
@@ -287,10 +292,10 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = 'Couldn\'t be unpublished!';
+                        link.innerHTML = i18n.unpublishErrorText;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
-                            link.innerHTML = 'Unpublish';
+                            link.innerHTML = i18n.unpublishLinkText;
                         }, 2500);
                     }
                 }
@@ -298,9 +303,9 @@
         }
         this.delete = (event) => {
             let link = event.currentTarget;
-            if (window.confirm('Are you sure to delete this blog post?')) {
+            if (window.confirm(i18n.deleteConfirmationText)) {
                 link.setAttribute('disabled', 'disabled');
-                link.innerHTML = 'Deleting...';
+                link.innerHTML = i18n.deleteProgressText;
                 removeBlogPost(self.id, function(response) {
                     if(response.success) {
                         self.notExisting = true;
@@ -311,10 +316,10 @@
                     } else {
                         if(link) {
                             link.setAttribute('disabled', 'disabled');
-                            link.innerHTML = 'Couldn\'t be deleted!';
+                            link.innerHTML = i18n.deleteErrorText;
                             setTimeout(function() {
                                 link.removeAttribute('disabled');
-                                link.innerHTML = 'Delete';
+                                link.innerHTML = i18n.deleteLinkText;
                             }, 2500);
                         }
                     }
@@ -394,7 +399,7 @@
             if(textBox.hasAttribute('contenteditable')) {
                 textBox.removeAttribute('contenteditable');
                 textBox.classList.remove('graphjs-editable');
-                event.target.innerText = 'Edit';
+                event.target.innerText = i18n.editLinkText;
                 if(textBox.innerText != '') {
                     editBlogComment(event.target.dataset.id, textBox.innerText, function(response) {
                         if(response.success) {
@@ -407,13 +412,13 @@
             } else {
                 textBox.contentEditable = true;
                 textBox.focus();
-                event.target.innerText = 'Save';
+                event.target.innerText = i18n.saveLinkText;
                 textBox.classList.add('graphjs-editable');
             }
         }
         this.handleRemove = (event) => {
             event.preventDefault();
-            if (window.confirm('Are you sure to delete this comment?')) {
+            if (window.confirm(i18n.commentDeleteConfirmation)) {
                 let query = '[data-id="' + event.target.dataset.id + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
@@ -429,7 +434,7 @@
         }
         this.handleDestroy = (event) => {
             event.preventDefault();
-            if (window.confirm('Are you sure to remove this post?')) {
+            if (window.confirm(i18n.postDeleteConfirmation)) {
                 let query = '[data-link="list"]';
                 let element = document.querySelectorAll(query)[0];
                 removeBlogPost(event.target.dataset.id, function(response) {
@@ -456,28 +461,28 @@
             let amount;
             if(time < 1) {
                 amount = time;
-                text = 'Now';
+                text = i18n.commentTimeNowText;
             } else if(1 <= time && time < 60) {
                 amount = time;
-                text = amount == 1 ? amount + ' second ago' : amount + ' seconds ago';
+                text = i18n.commentTimeSecondsText.replace('%s',amount);
             } else if(60 <= time && time < 60 * 60) {
                 amount = Math.floor(time / 60);
-                text = amount == 1 ? amount + ' minute ago' : amount + ' minutes ago';
+                text = i18n.commentTimeMinutesText.replace('%s',amount);
             } else if(60 * 60 <= time && time < 60 * 60 * 24) {
                 amount = Math.floor(time / 60 / 60);
-                text = amount == 1 ? amount + ' hour ago' : amount + ' hours ago';
+                text = i18n.commentTimeHoursText.replace('%s',amount);
             } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
                 amount = Math.floor(time / 60 / 60 / 24);
-                text = amount == 1 ? amount + ' day ago' : amount + ' days ago';
+                text = i18n.commentTimeDaysText.replace('%s',amount);
             } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
                 amount = Math.floor(time / 60 / 60 / 24 / 7);
-                text = amount == 1 ? amount + ' week ago' : amount + ' weeks ago';
+                text = i18n.commentTimeWeeksText.replace('%s',amount);
             } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30);
-                text = amount == 1 ? amount + ' month ago' : amount + ' months ago';
+                text = i18n.commentTimeMonthsText.replace('%s',amount);
             } else if(time >= 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                text = amount == 1 ? amount + ' year ago' : amount + ' years ago';
+                text = i18n.commentTimeYearsText.replace('%s',amount);
             } else {
                 //Handle errors
             }

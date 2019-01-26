@@ -15,7 +15,7 @@
         </ul>
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <div if={recipient && userId} class={'graphjs-recipient' + (recipient ? '' : ' graphjs-unknown')}>{profile ? profile.username : i18n.noRecipientText}</div>
+        <div if={recipient && userId} class={'graphjs-recipient' + (recipient ? '' : ' graphjs-unknown')} data-recipientlabel={i18n.recipientLabel}>{profile ? profile.username : i18n.noRecipientText}</div>
         <input if={anonymity && !userId} ref="email" type="text" placeholder={i18n.emailPlaceholder}/>
         <form>
             <textarea ref="message" placeholder={opts.placeholder || i18n.messagePlaceholder}></textarea>

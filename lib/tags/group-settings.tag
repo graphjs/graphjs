@@ -5,7 +5,7 @@
         </ul>
     </div>
     <div class="graphjs-content">
-        <a ref="uploadWidget" class="graphjs-cover">
+        <a ref="uploadWidget" class="graphjs-cover" data-coverphototextlineone={i18n.coverPhotoTextLineOne} data-coverphototextlinetwo={i18n.coverPhotoTextLineTwo}>
             <img src={group && group.cover ? downsizeImage(group.cover, 320) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/group.png'} />
         </a>
         <form>
