@@ -28,7 +28,7 @@
             <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
         </div>
         <div class="graphjs-synopsis"if={comments.length > 0}>
-            {commentCountText.replace('%s',comments.length)}
+            {i18n.commentCountText.replace('%s',comments.length)}
         </div>
         <div each={comment in comments} data-id={comment} class="graphjs-item">
             <div class="graphjs-credit" if={authorsData.hasOwnProperty(commentsData[comment].author)}>
@@ -36,7 +36,7 @@
                 <span>
                     <b data-link="profile" data-id={commentsData[comment].author} onclick={handleShow}>{authorsData[commentsData[comment].author].username || i18n.unknowUserText}</b>
                     <time data-timestamp={commentsData[comment].createTime}>{handleTime(commentsData[comment].createTime)}</time>
-                    <a hide={true} if={commentsData[comment].author == userId} onclick={handleEdit} data-id={comment}>{i18n.commentEditButtonText}</a>
+                    <a if={commentsData[comment].author == userId} onclick={handleEdit} data-id={comment}>{i18n.commentEditButtonText}</a>
                     <a if={commentsData[comment].author == userId} onclick={handleRemove} data-id={comment}>{i18n.commentDeleteButtonText}</a>
                 </span>
             </div>

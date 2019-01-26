@@ -285,14 +285,14 @@
                             self.refs.submitPassword.classList.remove('graphjs-loading');
                             self.checked = true;
                             self.update();
-                            if(opts.minor) {
-                                opts.callback();
-                                opts.refresh();
-                            } else {
-                                setTimeout(function() {
+                            setTimeout(function() {
+                                if(opts.minor) {
+                                    opts.callback();
+                                    opts.refresh();
+                                } else {
                                     hideOverlay();
-                                }, 2500);
-                            }
+                                }
+                            }, 2500);
                         } else {
                             failMessage = response.reason || 'Please try entering your password again.';
                             self.refs.submitPassword.classList.remove('graphjs-loading');
