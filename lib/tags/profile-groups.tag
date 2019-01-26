@@ -1,6 +1,6 @@
 <graphjs-profile-groups class="graphjs-element graphjs-root graphjs-wallet">
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <p if={empty}>{i18n.noUsersText}</p>
+        <p if={loaded && empty}>{noGroupsText || i18n.noUsersText}</p>
         <graphjs-group-card each={id in list} id={id}></graphjs-group-card>
         <graphjs-group-card if={list.length == 0 && !empty}></graphjs-group-card>
         <graphjs-group-card if={list.length == 0 && !empty}></graphjs-group-card>
@@ -19,8 +19,9 @@
         let i18n = internationalization[window.GraphJSConfig.language]['profile-groups'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
-        
+
         this.id = opts.id;
+        this.noGroupsText = opts.noGroupsText;
         this.list = [];
         this.loaded = true;
 
@@ -55,8 +56,8 @@
                 if(response.success) {
                     for(let group of response.groups) {
                         self.list.push(group.id);
-                        self.empty = self.list.length == 0 ? true : false;
                     }
+                    self.empty = self.list.length == 0 ? true : false;
                     if(self.parent.tags.hasOwnProperty('graphjs-profile-header')) {
                         self.parent.tags['graphjs-profile-header'].profile.membership_count = self.list.length;
                         self.parent.tags['graphjs-profile-header'].update();

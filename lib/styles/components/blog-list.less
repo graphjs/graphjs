@@ -6,7 +6,9 @@
     // ThemeOption: color: @text-color-normal;
     &.@{prefix}-box {
         .@{prefix}-content {
-            min-height: 41em;
+            &.@{prefix}-stuffed {
+                min-height: 41em;
+            }
             .@{prefix}-placeholder {
                 padding: 2.5em;
             }
@@ -17,7 +19,9 @@
             border-color: transparent;
         }
         .@{prefix}-content {
-            min-height: 36em;
+            &.@{prefix}-stuffed {
+                min-height: 36em;
+            }
             .@{prefix}-placeholder {
                 padding: 0;
             }
@@ -68,6 +72,8 @@
                 }
                 &.@{prefix}-placeholder {
                     // ThemeOption: color: @text-color-weak;
+                    margin: 0;
+                    padding: 0;
                     text-align: center;
                 }
                 .@{prefix}-title {
@@ -214,12 +220,16 @@
     @{prefix}-blog-list.@{prefix}-root {
         &.@{prefix}-box {
             .@{prefix}-content {
-                min-height: 38.5em;
+                &.@{prefix}-stuffed {
+                    min-height: 38.5em;
+                }
             }
         }
         &.@{prefix}-inline {
             .@{prefix}-content {
-                min-height: 33.5em;
+                &.@{prefix}-stuffed {
+                    min-height: 33.5em;
+                }
             }
         }
         .@{prefix}-content {
@@ -267,12 +277,16 @@
     @{prefix}-blog-list.@{prefix}-root {
         &.@{prefix}-box {
             .@{prefix}-content {
-                min-height: 38.5em;
+                &.@{prefix}-stuffed {
+                    min-height: 38.5em;
+                }
             }
         }
         &.@{prefix}-inline {
             .@{prefix}-content {
-                min-height: 33.5em;
+                &.@{prefix}-stuffed {
+                    min-height: 33.5em;
+                }
             }
         }
         .@{prefix}-content {

@@ -1,6 +1,6 @@
 <graphjs-profile-following class="graphjs-element graphjs-root graphjs-wallet">
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <p if={empty}>{i18n.noUsersText}</p>
+        <p if={loaded && empty}>{noFollowingText || i18n.noUsersText}</p>
         <graphjs-profile-card each={id in list} id={id}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
@@ -19,8 +19,9 @@
         let i18n = internationalization[window.GraphJSConfig.language]['profile-following'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
-        
+
         this.id = opts.id;
+        this.noFollowingText = opts.noFollowingText;
         this.list = [];
         this.loaded = true;
 

@@ -109,8 +109,13 @@
             getProfile(id, function(response) {
                 if(response.success) {
                     self.profile = response.profile;
-                    //let timestamp = new Date(response.profile.birthday * 1000);
-                    //self.profile.birthday = (timestamp.getMonth() + 1) + '/' + timestamp.getDate() + '/' + timestamp.getFullYear();
+                    let timestamp = new Date(response.profile.birthday * 1000);
+                    let month = timestamp.getMonth() + 1;
+                    if(month < 10) month = '0' + month;
+                    let day = timestamp.getDate();
+                    if(day < 10) day = '0' + day;
+                    let year = timestamp.getFullYear();
+                    self.profile.birthday = month + '/' + day + '/' + year;
                     self.update();
                 } else {
                     //Handle errors
@@ -294,7 +299,7 @@
             self.refs.birthday.className = '';
             self.failMessages = [];
             self.successMessages = [];
-        	if(self.validateProfile()) {
+        	  if(self.validateProfile()) {
                 if(username != self.profile.username) {
                     setUsername(
                         username,

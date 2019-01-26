@@ -1,5 +1,6 @@
 <graphjs-profile-activity class={'graphjs-element graphjs-root ' + boxStyle}>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
+        <p if={loaded && (!activity || activity.length <= 0)}>{noActivityText || 'There is no activity.'}</p>
         <ul if={activity.length > 0}>
             <li each={item in activity}>
                 <div if={item.type == '_construct'}>
@@ -16,8 +17,8 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    {i18n.followed}
-                    <a data-link="profile" data-id={item.object.id} onclick={handleShow}>{item.object.label}</a>
+                    {i18n.followText}
+                    <a data-link="profile" data-id={item.object.id} onclick={opts.targetProfile ? handleTarget : handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'create'}>
                     <svg viewBox="0 0 101 82" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -26,7 +27,7 @@
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
                     {i18n.createText}
-                    <a data-link="group" data-id={item.object.id} onclick={handleShow}>{item.object.label}</a>
+                    <a data-link="group" data-id={item.object.id} onclick={opts.targetGroup ? handleTarget : handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'join'}>
                     <svg viewBox="0 0 101 82" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -35,7 +36,7 @@
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
                     {i18n.joinText}
-                    <a data-link="group" data-id={item.object.id} onclick={handleShow}>{item.object.label}</a>
+                    <a data-link="group" data-id={item.object.id} onclick={opts.targetGroup ? handleTarget : handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'comment'}>
                     <svg viewBox="0 0 80 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -53,7 +54,7 @@
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
                     {i18n.startText}
-                    <a data-link="thread" data-id={item.object.id} onclick={handleShow}>{item.object.label}</a>
+                    <a data-link="thread" data-id={item.object.id} onclick={opts.targetForumThread ? handleTarget : handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'reply'}>
                     <svg viewBox="0 0 80 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -62,7 +63,7 @@
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
                     {i18n.replyText}
-                    <a data-link="thread" data-id={item.object.id} onclick={handleShow}>{item.object.label}</a>
+                    <a data-link="thread" data-id={item.object.id} onclick={opts.targetForumThread ? handleTarget : handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'star'}>
                     <svg viewBox="0 0 62 58" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -142,9 +143,10 @@
         let i18n = internationalization[window.GraphJSConfig.language]['profile-activity'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
-        
+
         this.id = opts.id;
         this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
+        this.noActivityText = opts.noActivityText;
         this.activity = [];
 
         this.on('before-mount', function() {
@@ -190,7 +192,7 @@
             	if(response.success) {
                     self.activity = [];
             		let client = stream.connect(
-                        window.GraphJSConfig["streamId"], 
+                        window.GraphJSConfig["streamId"],
                         null, // we don't give out secret in client-side
                         null, // app id
                         {
@@ -225,6 +227,31 @@
             		//Handle errors
             	}
             });
+        }
+        this.handleTarget = event => {
+            event.preventDefault();
+            let dataset = event.target.dataset;
+            let target;
+            switch(dataset.link) {
+                case 'profile':
+                    target = opts.targetProfile.replace('[[id]]', dataset.id);
+                    break;
+                case 'group':
+                    target = opts.targetGroup.replace('[[id]]', dataset.id);
+                    break;
+                case 'comment':
+                    target = opts.targetComments.replace('[[id]]', dataset.id);
+                    break;
+                case 'feed':
+                    target = opts.targetFeedItem.replace('[[id]]', dataset.id);
+                    break;
+                case 'thread':
+                    target = opts.targetForumThread.replace('[[id]]', dataset.id);
+                    break;
+                default:
+                    target = opts.target;
+            }
+            if(target) document.location.href = target;
         }
         this.handleShow = (event) => {
             let self = this;

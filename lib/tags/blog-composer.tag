@@ -248,7 +248,7 @@
                     actionbar: 'graphjs-toolbar',
                     button: 'graphjs-tool',
                     selected: 'graphjs-selected',
-                    content: 'graphjs-body  graphjs-article'
+                    content: 'graphjs-body graphjs-article'
                 }
             });
             let form = this.refs.form;
@@ -270,8 +270,9 @@
             body.addEventListener('paste', function(event) {
                 event.preventDefault();
                 event.stopPropagation();
-                let paste = (event.clipboardData || window.clipboardData).getData('text/html');
-                if(paste) {
+                let copied = event.clipboardData || window.clipboardData;
+                let paste = copied.getData('text/html') || copied.getData('text');
+                if(copied.types.indexOf('text/html') !== -1) {
                     paste = sanitizeHTML(paste, {
                         allowedTags: [
                             'br', // New line
@@ -304,14 +305,20 @@
                             'xmp': 'pre'
                         }
                     });
-                    let selection = window.getSelection();
-                    if (!selection.rangeCount) return false;
-                    let element = document.createElement('span');
-                    element.innerHTML = paste;
-                    selection.getRangeAt(0).insertNode(element);
-                    self.body = document.querySelector('.graphjs-body').innerHTML;
-                    self.update();
                 }
+                let selection = window.getSelection();
+                if (!selection.rangeCount) return false;
+                let element = document.createElement('span');
+                element.innerHTML = paste;
+                let range = selection.getRangeAt(0);
+                range.insertNode(element);
+                range = range.cloneRange();
+                range.selectNodeContents(element);
+                range.collapse(false);
+                selection.removeAllRanges();
+                selection.addRange(range);
+                self.body = document.querySelector('.graphjs-body').innerHTML;
+                self.update();
             });
             !this.published && this.autoSave();
         }

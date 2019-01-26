@@ -5,22 +5,32 @@
     position: relative;
     // ThemeOption: color: @text-color-normal;
     &.@{prefix}-box {
-      .@{prefix}-content {
-          min-height: 32em;
-          .@{prefix}-reply {
-              // ThemeOption: background-color: @background-color-contrast;
-          }
-          .@{prefix}-placeholder {
-              padding: 2.5em;
-          }
-      }
+        .@{prefix}-content {
+            &.@{prefix}-stuffed {
+                min-height: 33em;
+            }
+            .@{prefix}-comments {
+                margin: -2.5em;
+                margin-top: 2.5em;
+                padding: 0 2.5em;
+                // ThemeOption: background-color: @background-color-contrast;
+            }
+            .@{prefix}-placeholder {
+                padding: 2.5em;
+            }
+        }
     }
     &.@{prefix}-inline {
         .@{prefix}-header {
             border-color: transparent;
         }
         .@{prefix}-content {
-            min-height: 27em;
+            &.@{prefix}-stuffed {
+                min-height: 28em;
+            }
+            .@{prefix}-comments {
+                .box-shadow(none);
+            }
             .@{prefix}-placeholder {
                 padding: 0;
             }
@@ -28,12 +38,13 @@
     }
     &.@{prefix}-composer {
         .@{prefix}-content {
-            .@{prefix}-thread {
-                max-height: 32em;
-                margin-bottom: 18em;
-            }
-            .@{prefix}-reply {
-                bottom: 0;
+            .@{prefix}-comments {
+                .@{prefix}-comment {
+                    height: auto;
+                    form {
+                        display: inline-block;
+                    }
+                }
             }
         }
     }
@@ -75,18 +86,19 @@
             }
             .@{prefix}-title {
                 width: 100%;
-                height: 1em;
                 margin-bottom: 0;
                 padding: 0;
                 // ThemeOption: color: @primary-color;
                 font-size: 2em;
                 .bold-font;
-                line-height: 1em;
+                line-height: 1.5em;
+                text-align: left;
                 border: none;
                 border-radius: 0;
                 .@{prefix}-back {
                     width: 1em;
                     height: 1em;
+                    margin-top: .25em;
                     display: inline-block;
                     padding: .15em .3em .15em 0;
                     // ThemeOption: .icon-color-states(@text-color-weak);
@@ -95,7 +107,7 @@
             .@{prefix}-information {
                 // ThemeOption: color: @text-color-weak;
                 font-size: .9em;
-                margin-top: .75em;
+                margin-top: .5em;
                 & > * {
                     display: inline;
                     float: none;
@@ -156,138 +168,134 @@
                 }
             }
             .@{prefix}-body {
-                min-height: 21.5em;
                 margin-top: 1.25em;
             }
-            .@{prefix}-replies {
-                padding-right: 2.5em;
-                padding-left: 2.5em;
-                .@{prefix}-item {
-                    padding: 1.5em 0;
-                    border-top-width: 1px;
-                    border-top-style: dotted;
-                    border-top-color: fade(black, 15%);
-                    &:first-child {
-                        border-top: none !important;
-                    }
-                    .@{prefix}-credit {
-                        .credit-metrics(3em);
-                        margin-bottom: .25em;
-                        img {
-                            cursor: pointer;
-                        }
-                        span {
-                            // ThemeOption: color: @text-color-normal;
-                            b {
-                                cursor: pointer;
-                            }
-                        }
-                    }
-                    p {
-                        margin-left: 3em * 1.2;
-                        // ThemeOption: color: @text-color-normal;
-                        .regular-font;
-                        font-size: 1em;
-                        line-height: 150%;
-                        white-space: pre-wrap;
-                        &.@{prefix}-editable {
-                            padding: .75em 1em;
-                            // ThemeOption: color: @text-color-normal;
-                            border-width: 1px;
-                            border-style: dashed;
-                            // ThemeOption: border-color: fade(@default-color, 15%);
-                            border-color: transparent; // ThemeFix
-                            // ThemeOption: background-color: @background-color-contrast;
-                            outline: none;
-                        }
-                    }
-                }
-            }
         }
-        .@{prefix}-reply {
-            display: inline-block;
-            position: absolute;
-            right: 0;
-            bottom: -15em;
-            left: 0;
-            width: 100%;
-            height: 18em;
-            padding: 1.5em 2.5em;
-            padding-top: 0;
+        .@{prefix}-comments {
+            margin-top: 2.5em;
             border-top-width: 2px;
             border-top-style: solid;
             // ThemeOption: border-top-color: @primary-color;
-            // ThemeOption: background-color: @background-color-contrast;
             .box-shadow(0 -2px 1px 0px fade(black, 7.5%));
-            /*.transition(bottom .35s ease);*/
-            .@{prefix}-synopsis {
+            .@{prefix}-comment {
+                overflow: hidden;
                 display: inline-block;
-                position: relative;
                 width: 100%;
-                padding: calc(1em - 1px) 0;
-                border-bottom-width: 1px;
-                border-bottom-style: dotted;
-                border-bottom-color: fade(black, 15%);
-                cursor: pointer;
-                & > b {
-                    // ThemeOption: color: @text-color-normal;
-                }
-                & > a {
+                height: calc(3em - 2px);
+                padding: 0;
+                .@{prefix}-synopsis {
                     display: inline-block;
-                    height: 1em;
-                    &:first-child {
-                        &::before {
-                            display: none;
-                        }
+                    position: relative;
+                    width: 100%;
+                    padding: calc(1em - 1px) 0;
+                    border-bottom-width: 1px;
+                    border-bottom-style: dotted;
+                    border-bottom-color: fade(black, 15%);
+                    cursor: pointer;
+                    & > b {
+                        // ThemeOption: color: @text-color-normal;
                     }
-                    &:last-child {
-                        &::before {
-                            display: none;
-                        }
-                    }
-                    &.@{prefix}-icon {
-                        float: right;
-                        position: relative;
-                        top: .1em;
-                        &.@{prefix}-reverse {
-                            top: -.1em;
-                            .transform(scaleY(-1));
-                        }
-                        svg {
-                            width: auto;
-                            height: .8em;
-                            padding: .1em 0;
-                            path {
-                                // ThemeOption: fill: @primary-color;
+                    & > a {
+                        display: inline-block;
+                        height: 1em;
+                        &:first-child {
+                            &::before {
+                                display: none;
                             }
                         }
+                        &:last-child {
+                            &::before {
+                                display: none;
+                            }
+                        }
+                        &.@{prefix}-icon {
+                            float: right;
+                            position: relative;
+                            top: .1em;
+                            &.@{prefix}-reverse {
+                                top: -.1em;
+                                .transform(scaleY(-1));
+                            }
+                            svg {
+                                width: auto;
+                                height: .8em;
+                                padding: .1em 0;
+                                path {
+                                    // ThemeOption: fill: @primary-color;
+                                }
+                            }
+                        }
+                        &::before {
+                            content: '\00b7';
+                            display: inline;
+                            margin: 0 .25em;
+                        }
                     }
-                    &::before {
-                        content: '\00b7';
-                        display: inline;
-                        margin: 0 .25em;
+                }
+                form {
+                    display: none;
+                    width: 100%;
+                    margin-bottom: 1.5em;
+                    textarea {
+                        width: 100%;
+                        height: 9em;
+                        margin-top: 1em;
+                        .no-padding;
+                        line-height: 150%;
+                        border: none;
+                        background-color: transparent;
+                        &.@{prefix}-closed {
+                            height: 0;
+                            border: none;
+                        }
+                    }
+                    button {
+                        float: right;
+                        width: auto;
+                        margin-top: .5em;
+                        margin-left: .5em;
+                        font-size: .9em;
                     }
                 }
             }
-            form {
-                textarea {
-                    width: 100%;
-                    height: 9em;
-                    margin-top: 1em;
-                    .no-padding;
-                    line-height: 150%;
-                    border: none;
-                    &.@{prefix}-closed {
-                        height: 0;
-                        border: none;
+            .@{prefix}-item {
+                padding: 1.5em 0;
+                border-top-width: 1px;
+                border-top-style: dotted;
+                border-top-color: fade(black, 15%);
+                &:first-child {
+                    border-top: none !important;
+                }
+                .@{prefix}-credit {
+                    .credit-metrics(3em);
+                    margin-bottom: .25em;
+                    img {
+                        cursor: pointer;
+                    }
+                    span {
+                        // ThemeOption: color: @text-color-normal;
+                        b {
+                            cursor: pointer;
+                        }
                     }
                 }
-                button {
-                    float: right;
-                    width: auto;
-                    margin-top: .5em;
-                    margin-left: .5em;
-                    font-size: .9em;
+                p {
+                    margin-left: 3em * 1.2;
+                    // ThemeOption: color: @text-color-normal;
+                    .regular-font;
+                    font-size: 1em;
+                    line-height: 150%;
+                    white-space: pre-wrap;
+                    &.@{prefix}-editable {
+                        padding: .75em 1em;
+                        // ThemeOption: color: @text-color-normal;
+                        border-width: 1px;
+                        border-style: dashed;
+                        // ThemeOption: border-color: fade(@default-color, 15%);
+                        border-color: transparent; // ThemeFix
+                        // ThemeOption: background-color: @background-color-contrast;
+                        outline: none;
+                    }
                 }
             }
         }
@@ -299,7 +307,7 @@
         .@{prefix}-title {
             position: relative;
             width: 50%;
-            margin-top: .2em;
+            margin-top: .75em;
             padding: 0;
             height: 1.6em;
             .border-radius(calc(1.6em / 2));
@@ -308,7 +316,7 @@
             position: relative;
             width: 30%;
             height: .8em;
-            margin-top: .8em;
+            margin-top: 1em;
             padding: 0;
             .border-radius(calc(.8em / 2));
         }
@@ -332,44 +340,38 @@
 /* Window Width < 480 */
 @media only screen and (max-width: 479px) {
     @{prefix}-blog-post.@{prefix}-root {
-        &.@{prefix}-composer {
+        &.@{prefix}-box {
             .@{prefix}-content {
-                .@{prefix}-thread {
-                    margin-bottom: 15em;
+                .@{prefix}-comments {
+                    margin: -1.5em;
+                    margin-top: 1.5em;
+                    padding: 0 1.5em;
                 }
             }
         }
         .@{prefix}-content {
-            .@{prefix}-thread {
+            .@{prefix}-post {
                 .@{prefix}-title {
-                    display: block;
-                    padding: 1em 1.5em 0;
-                    h1 {
-                        font-size: 1.55em;
-                    }
-                }
-                .@{prefix}-replies {
-                    padding-right: 1.5em;
-                    padding-left: 1.5em;
-                    .@{prefix}-item {
-                        padding: 1em 0;
-                        .@{prefix}-credit {
-                            margin-bottom: .75em;
-                        }
-                        p {
-                            margin-left: 0;
-                        }
-                    }
+                    font-size: 1.55em;
                 }
             }
-            .@{prefix}-reply {
-                bottom: -12em;
-                height: 15em;
-                padding: 1em 1.5em;
-                padding-top: 0;
-                form {
-                    textarea {
-                        height: 6em;
+            .@{prefix}-comments {
+                margin-top: 1.5em;
+                .@{prefix}-comment {
+                    form {
+                        margin-bottom: 1em;
+                        textarea {
+                            height: 6em;
+                        }
+                    }
+                }
+                .@{prefix}-item {
+                    padding: 1em 0;
+                    .@{prefix}-credit {
+                        margin-bottom: .75em;
+                    }
+                    p {
+                        margin-left: 0;
                     }
                 }
             }
@@ -389,44 +391,38 @@
 /* 480 ≤ Window Width < 768 */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
     @{prefix}-blog-post.@{prefix}-root {
-        &.@{prefix}-composer {
+        &.@{prefix}-box {
             .@{prefix}-content {
-                .@{prefix}-thread {
-                    margin-bottom: 16.5em;
+                .@{prefix}-comments {
+                    margin: -2em;
+                    margin-top: 2em;
+                    padding: 0 2em;
                 }
             }
         }
         .@{prefix}-content {
-            .@{prefix}-thread {
+            .@{prefix}-post {
                 .@{prefix}-title {
-                    display: block;
-                    padding: 1.25em 2em 0;
-                    h1 {
-                        font-size: 1.65em;
-                    }
-                }
-                .@{prefix}-replies {
-                    padding-right: 2em;
-                    padding-left: 2em;
-                    .@{prefix}-item {
-                        padding: 1.25em 0;
-                        .@{prefix}-credit {
-                            margin-bottom: .5em;
-                        }
-                        p {
-                            margin-left: 0;
-                        }
-                    }
+                    font-size: 1.65em;
                 }
             }
-            .@{prefix}-reply {
-                bottom: -13.5em;
-                height: 16.5em;
-                padding: 1.25em 2em;
-                padding-top: 0;
-                form {
-                    textarea {
-                        height: 7.5em;
+            .@{prefix}-comments {
+                margin-top: 2em;
+                .@{prefix}-comment {
+                    form {
+                        margin-bottom: 1.25em;
+                        textarea {
+                            height: 7.5em;
+                        }
+                    }
+                }
+                .@{prefix}-item {
+                    padding: 1.25em 0;
+                    .@{prefix}-credit {
+                        margin-bottom: .5em;
+                    }
+                    p {
+                        margin-left: 0;
                     }
                 }
             }

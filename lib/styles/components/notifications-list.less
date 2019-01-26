@@ -1,0 +1,70 @@
+@prefix: graphjs;
+
+@{prefix}-notifications-list.@{prefix}-root {
+    display: block;
+    min-width: 22.5em;
+    // ThemeOption: color: @text-color-normal;
+    &.@{prefix}-inline {
+        .@{prefix}-header {
+            border-color: transparent;
+        }
+    }
+    .@{prefix}-content {
+        min-height: 3.5em;
+        .no-padding !important;
+        .@{prefix}-list {
+            &.@{prefix}-scrolling {
+                overflow: auto;
+                max-height: 23em;
+            }
+            & > a {
+                display: block;
+                width: 100%;
+                padding: .5em;
+                // ThemeOption: .text-color-states(@primary-color);
+                text-align: center;
+                background-color: rgba(0, 0, 0, .05);
+            }
+            .@{prefix}-item {
+                width: 100%;
+                padding: .5em;
+                border-bottom-width: 1px;
+                border-bottom-style: solid;
+                border-bottom-color: fade(black, 5%);
+                &.@{prefix}-placeholder {
+                    a {
+                        .@{prefix}-text {
+                            text-align: center;
+                            width: 100%;
+                        }
+                    }
+                }
+                a {
+                    display: block;
+                    min-height: 2.5em;
+                    .clearfix;
+                    & > * {
+                        float: left;
+                    }
+                    .@{prefix}-avatar {
+                        width: 2.5em;
+                        margin-right: .5em;
+                        border-radius: 100%;
+                    }
+                    .@{prefix}-text {
+                        display: table;
+                        width: calc(100% - 3em);
+                        min-height: 2.5em;
+                        pointer-events: none;
+                        p {
+                            display: table-cell;
+                            line-height: 1.25em;
+                            vertical-align: middle;
+                            pointer-events: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

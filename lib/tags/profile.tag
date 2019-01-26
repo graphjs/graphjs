@@ -16,24 +16,33 @@
         id={id}
         minor={true}
         box={opts.box}
+        target-profile={opts.targetProfile}
+        target-group={opts.targetGroup}
+        target-comments={opts.targetComments}
+        target-feed-item={opts.targetFeedItem}
+        target-forum-thread={opts.targetForumThread}
+        no-activity-text={opts.noActivityText}
         callback={changeProperties}
         if={active == 'activity'}
     />
     <graphjs-profile-followers
         id={id}
         minor={true}
+        no-followers-text={opts.noFollowersText}
         callback={changeProperties}
         if={active == 'followers'}
     />
     <graphjs-profile-following
         id={id}
         minor={true}
+        no-following-text={opts.noFollowingText}
         callback={changeProperties}
         if={active == 'following'}
     />
     <graphjs-profile-groups
         id={id}
         minor={true}
+        no-groups-text={opts.noGroupsText}
         callback={changeProperties}
         if={active == 'groups'}
     />
