@@ -53,6 +53,8 @@ This ensures that the HTTP server renders in proper format. If you don't have Py
 
 Translation files can be found in the directory [/lib/content](https://github.com/phonetworks/graphjs/tree/master/lib/content). They are standard json files. Please make a pull request on our Github repo for us to include your contributions in the master branch.
 
+To fetch the latest translations, run `git submodule foreach 'git pull origin master'`
+
 ## Tips & Tricks
 
 * JS: it's the ```restart``` call which ensures that the "widget" is updated once the session status changes. See: private-content.tag for more information.
