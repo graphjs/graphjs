@@ -1,6 +1,6 @@
 <graphjs-profile-groups class="graphjs-element graphjs-root graphjs-wallet">
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <p if={loaded && empty}>{noGroupsText || i18n.noUsersText}</p>
+        <p if={loaded && empty}>{i18n.noGroupsText}</p>
         <graphjs-group-card each={id in list} id={id}></graphjs-group-card>
         <graphjs-group-card if={list.length == 0 && !empty}></graphjs-group-card>
         <graphjs-group-card if={list.length == 0 && !empty}></graphjs-group-card>
@@ -21,7 +21,6 @@
         this.i18n = i18n;
 
         this.id = opts.id;
-        this.noGroupsText = opts.noGroupsText;
         this.list = [];
         this.loaded = true;
 
