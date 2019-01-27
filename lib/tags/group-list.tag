@@ -20,7 +20,7 @@
         analytics("group-list");
 
         import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['star-list'];
+        let i18n = internationalization[window.GraphJSConfig.language]['group-list'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
 
