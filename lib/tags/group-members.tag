@@ -16,7 +16,7 @@
         import showLogin from '../scripts/showLogin.js';
 
         import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['forum-list'];
+        let i18n = internationalization[window.GraphJSConfig.language]['group-members'];
         i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
         this.i18n = i18n;
 
