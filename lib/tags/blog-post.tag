@@ -156,10 +156,10 @@
         let self = this;
 
         import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['blog-composer'];
+        let i18n = internationalization[window.GraphJSConfig.language]['blog-post'];
         i18n = {...i18n,...opts}
         this.i18n = i18n;
-        
+
         this.on('before-mount', function() {
             this.handleUser();
             this.frequentlyUpdateTime = setInterval(this.handleTimeUpdate,  60 * 1000);

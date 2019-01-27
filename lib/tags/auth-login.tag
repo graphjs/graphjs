@@ -2,7 +2,7 @@
     class={'graphjs-element graphjs-root ' + boxStyle + (checked ? ' graphjs-checked' : '')}
 >
     <div class="graphjs-header" if={opts.title}>
-        <div class="graphjs-title">{opts.title || 'Login'}</div>
+        <div class="graphjs-title">{language.title}</div>
     </div>
     <div class="graphjs-warning" if={failMessages.length > 0}>
         <ul if={failMessages.length > 0} class="graphjs-fail">
@@ -11,12 +11,12 @@
     </div>
     <div class="graphjs-content">
         <form>
-            <input ref="username" type="text" placeholder={i18n.usernamePlaceholder} />
-            <input ref="password" type="password" placeholder={i18n.passwordPlaceholder}/>
-            <button ref="submit" onclick={handleSubmit}>{i18n.submitButtonText}</button>
+            <input ref="username" type="text" placeholder={language.usernamePlaceholder} />
+            <input ref="password" type="password" placeholder={language.passwordPlaceholder}/>
+            <button ref="submit" onclick={handleSubmit}>{language.submitButton}</button>
             <div class="graphjs-option graphjs-double">
-                <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>{i18n.registerLinkText}</a>
-                <a data-link="reset" onclick={opts.minor ? opts.callback : handleResetBox}>{i18n.resetLinkText}</a>
+                <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>{language.registerLink}</a>
+                <a data-link="reset" onclick={opts.minor ? opts.callback : handleResetBox}>{language.resetLink}</a>
             </div>
         </form>
     </div>
@@ -29,18 +29,16 @@
     <graphjs-promo properties="bottom right" detach={opts.box === 'disabled'}></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import login from '../scripts/login.js';
         import showAlert from '../scripts/showAlert.js';
         import showRegister from '../scripts/showRegister.js';
         import showReset from '../scripts/showReset.js';
         import hideOverlay from '../scripts/hideOverlay.js';
 
-        analytics("auth-login");
+        analytics('auth-login');
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['auth-login'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('auth-login', opts);
 
         this.boxStyle = opts.box == 'disabled'
             ? 'graphjs-inline graphjs-promo-pad'
@@ -53,7 +51,7 @@
 
         this.checkUsernameMinimumLength = () => {
             let usernameMinimumLengthLimit = 1;
-            let failMessage = i18n.usernameLengthErrorText;
+            let failMessage = language.usernameLengthErrorText;
             if(this.refs.username.value.length >= usernameMinimumLengthLimit) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -65,7 +63,7 @@
             }
         }
         this.checkUsernamePattern = () => {
-            let failMessage = i18n.usernamePatternErrorText;
+            let failMessage = language.usernamePatternErrorText;
             let usernamePattern = /^[a-zA-Z0-9-_]+$/;
             if(usernamePattern.test(this.refs.username.value)) {
                 this.refs.username.classList.remove('graphjs-error');
@@ -79,7 +77,7 @@
         }
         this.checkPasswordMinimumLength = () => {
             let passwordMinimumLengthLimit = 5;
-            let failMessage = i18n.passwordErrorText.replace('%s',passwordMinimumLengthLimit);
+            let failMessage = language.passwordErrorText.replace('%s',passwordMinimumLengthLimit);
 
             if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');
