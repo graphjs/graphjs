@@ -1,6 +1,6 @@
 <graphjs-profile-activity class={'graphjs-element graphjs-root ' + boxStyle}>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <p if={loaded && (!activity || activity.length <= 0)}>{noActivityText || 'There is no activity.'}</p>
+        <p if={loaded && (!activity || activity.length <= 0)}>{i18n.noActivityText}</p>
         <ul if={activity.length > 0}>
             <li each={item in activity}>
                 <div if={item.type == '_construct'}>
@@ -9,7 +9,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    joined
+                    {i18n.userRegisteredText}
                 </div>
                 <div if={item.type == 'follow'}>
                     <svg viewBox="0 0 93 78" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -146,7 +146,6 @@
 
         this.id = opts.id;
         this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
-        this.noActivityText = opts.noActivityText;
         this.activity = [];
 
         this.on('before-mount', function() {
