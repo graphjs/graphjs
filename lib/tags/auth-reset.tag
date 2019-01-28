@@ -9,28 +9,28 @@
     </div>
     <div class="graphjs-content">
         <form if={next == 'provideEmail'}>
-            <b>{i18n.stepOneHeader}</b>
-            <p>{i18n.stepOneText}</p>
-            <input ref="email" type="text" placeholder={i18n.emailPlaceholder}/>
-            <button ref="submitEmail" onclick={handleEmailSubmit}>{i18n.submitEmailButtonText}</button>
+            <b>{language.stepOneHeader}</b>
+            <p>{language.stepOne}</p>
+            <input ref="email" type="text" placeholder={language.emailPlaceholder}/>
+            <button ref="submitEmail" onclick={handleEmailSubmit}>{language.submitEmailButton}</button>
             <div class="graphjs-option graphjs-single">
-                <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>{i18n.registerLinkText}</a>
+                <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>{language.registerLink}</a>
             </div>
         </form>
         <form class="graphjs-code" if={next == 'verifyCode'}>
-            <b>{i18n.stepTwoHeader}</b>
-            <p>{i18n.stepTwoText}</p>
+            <b>{language.stepTwoHeader}</b>
+            <p>{language.stepTwo}</p>
             <div ref="code">
                 <input each={item in Array(codeCharacterCount)} onkeyup={handleCodeInput} type="text" maxlength="1" />
             </div>
-            <button ref="submitCode" onclick={handleCodeSubmit}>{i18n.submitCodeButtonText}</button>
+            <button ref="submitCode" onclick={handleCodeSubmit}>{language.submitCodeButton}</button>
         </form>
         <form class="graphjs-code" if={next == 'updatePassword'}>
-            <b>{i18n.stepThreeHeader}</b>
-            <p>{i18n.stepThreeText}</p>
-            <input ref="password" type="password" placeholder={i18n.passwordPlaceholder} />
-            <input ref="confirmation" type="password" placeholder={i18n.confirmPasswordPlaceholder} />
-            <button ref="submitPassword" onclick={handlePasswordSubmit}>{i18n.submitPasswordButtonText}</button>
+            <b>{language.stepThreeHeader}</b>
+            <p>{language.stepThree}</p>
+            <input ref="password" type="password" placeholder={language.passwordPlaceholder} />
+            <input ref="confirmation" type="password" placeholder={language.confirmPasswordPlaceholder} />
+            <button ref="submitPassword" onclick={handlePasswordSubmit}>{language.submitPasswordButton}</button>
         </form>
     </div>
     <div class="graphjs-check">
@@ -42,6 +42,7 @@
     <graphjs-promo properties="bottom right" detach={opts.box === 'disabled'}></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import reset from '../scripts/reset.js';
         import verify from '../scripts/verify.js';
         import showAlert from '../scripts/showAlert.js';
@@ -51,10 +52,7 @@
 
         analytics("auth-reset");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['auth-reset'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('auth-reset', opts);
 
         this.boxStyle = opts.box == 'disabled'
             ? 'graphjs-inline graphjs-promo-pad'
@@ -69,7 +67,7 @@
         this.handleRegisterBox = () => showRegister();
         //Step 1: provideEmail
         this.checkEmailPattern = () => {
-            let failMessage = i18n.emailPatternErrorText;
+            let failMessage = language.emailPatternError;
             let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if(emailPattern.test(this.refs.email.value)) {
                 this.refs.email.classList.remove('graphjs-error');
@@ -133,7 +131,7 @@
         this.checkCodeCharacterLength = () => {
             let self = this;
             let characters = Array.from(self.refs.code.children);
-            let failMessage = i18n.checkCodeErrorText.replace('%s',self.codeCharacterCount)
+            let failMessage = language.checkCodeError.replace('%s',self.codeCharacterCount)
             let result = true;
             characters.forEach(function(item) {
                 if(item.value.length != 1) {
@@ -220,7 +218,7 @@
         //Step 3: updatePassword
         this.checkPasswordMinimumLength = () => {
             let passwordMinimumLengthLimit = 5;
-            let failMessage = i18n.passwordMinLengthErrorText.replace('%s',passwordMinimumLengthLimit);
+            let failMessage = language.passwordMinLengthError.replace('%s',passwordMinimumLengthLimit);
             if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -233,7 +231,7 @@
         }
         this.checkPasswordMaximumLength = () => {
             let passwordMaximumLengthLimit = 255;
-            let failMessage = i18n.passwordMaxLengthErrorText.replace('%s',passwordMaximumLengthLimit);;
+            let failMessage = language.passwordMaxLengthError.replace('%s',passwordMaximumLengthLimit);;
             if(this.refs.password.value.length <= passwordMaximumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -245,7 +243,7 @@
             }
         }
         this.checkPasswordMatch = () => {
-            let failMessage = i18n.passwordMatchErrorText;
+            let failMessage = language.passwordMatchError;
             if(this.refs.password.value == this.refs.confirmation.value) {
                 this.refs.confirmation.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);

@@ -17,19 +17,19 @@
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <form ref="form" if={editable}>
-            <input ref="title" class="graphjs-title" type="text" placeholder={i18n.titlePlaceholder} />
+            <input ref="title" class="graphjs-title" type="text" placeholder={language.titlePlaceholder} />
             <ul class="graphjs-information">
-                <li if={author} class="graphjs-author" data-authorbeforetext={i18n.authorBeforeText}>
+                <li if={author} class="graphjs-author" data-authorbeforetext={language.authorBefore}>
                     <a data-link="profile" data-id={author.id} onclick={handleShow}>{author.username}</a>
                 </li>
-                <li class="graphjs-time" if={createTime && lastEditTime} data-createdtimebeforetext={i18n.createdTimeBeforeText} data-edittimebeforetext={i18n.editTimeBeforeText}>
+                <li class="graphjs-time" if={createTime && lastEditTime} data-createdtimebeforetext={language.createdTimeBefore} data-edittimebeforetext={language.editTimeBefore}>
                     <time if={createTime === lastEditTime}>{timeText}</time>
                     <time if={createTime !== lastEditTime} class="graphjs-edited">{timeText}</time>
                 </li>
                 <li class="graphjs-action">
-                    <a ref="save" if={!saved && title.length > 0 && body.length > 0} onclick={save}>{i18n.saveLinkText}</a>
-                    <a if={saved && title.length > 0 && body.length > 0} disabled="disabled">{i18n.savedLinkText}</a>
-                    <a ref="publish" if={saved && title.length > 0 && body.length > 0 && !published} onclick={publish}>{i18n.publishLinkText}</a>
+                    <a ref="save" if={!saved && title.length > 0 && body.length > 0} onclick={save}>{language.saveLink}</a>
+                    <a if={saved && title.length > 0 && body.length > 0} disabled="disabled">{language.savedLink}</a>
+                    <a ref="publish" if={saved && title.length > 0 && body.length > 0 && !published} onclick={publish}>{language.publishLink}</a>
                 </li>
             </ul>
         </form>
@@ -41,11 +41,12 @@
                 <span></span>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
     </div>
     <graphjs-promo if={loaded} properties="bottom right"></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import pell from 'pell';
         import sanitizeHTML from 'sanitize-html';
         import getSession from '../scripts/getSession.js';
@@ -61,12 +62,9 @@
         import showLogin from '../scripts/showLogin.js';
         import login from '../scripts/login.js';
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['blog-composer'];
-        i18n = {...i18n,...opts}
-        this.i18n = i18n;
-        
         analytics("blog-composer");
+
+        this.language = language('blog-composer', opts);
 
         let loggedTime = (new Date()).getTime();
 
@@ -151,7 +149,7 @@
                 });
             } else {
                 // New Post
-                startBlogPost(i18n.dummyBlogTitle, i18n.dummyBlogContent, function(response) {
+                startBlogPost(language.dummyBlogTitle, language.dummyBlogContent, function(response) {
                     if(response.success) {
                         self.id = response.id;
                         self.createTime = loggedTime;
@@ -218,7 +216,7 @@
                         icon: icons.link,
                         title: 'Link',
                         result: () => {
-                            let url = prompt(i18n.linkPromptText);
+                            let url = prompt(language.linkPrompt);
                             if(url) pell.exec('createLink', url);
                         }
                     },
@@ -239,7 +237,7 @@
                         icon: icons.image,
                         title: 'Image',
                         result: () => {
-                            let url = prompt(i18n.imagePromptText);
+                            let url = prompt(language.imagePrompt);
                             if(url) pell.exec('insertImage', url);
                         }
                     }
@@ -327,7 +325,7 @@
             if(this.validateForm) {
                 if(event) {
                     event.currentTarget.setAttribute('disabled', 'disabled');
-                    event.currentTarget.innerHTML = i18n.saveProgessText;
+                    event.currentTarget.innerHTML = language.saveProgess;
                 }
                 editBlogPost(self.id, self.title, self.body, function(response) {
                     if(response.success) {
@@ -336,10 +334,10 @@
                     } else {
                         if(link) {
                             link.setAttribute('disabled', 'disabled');
-                            link.innerHTML = i18n.saveErrorText;
+                            link.innerHTML = language.saveError;
                             setTimeout(function() {
                                 link.removeAttribute('disabled');
-                                link.innerHTML = i18n.saveLinkText;
+                                link.innerHTML = language.saveLink;
                             }, 2500);
                         }
                     }
@@ -362,7 +360,7 @@
         this.publish = (event) => {
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
-            link.innerHTML = i18n.publishProgressText;
+            link.innerHTML = language.publishProgress;
             publishBlogPost(self.id, function(response) {
                 if(response.success) {
                     if(opts.minor) {
@@ -380,10 +378,10 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = i18n.publishErrorText;
+                        link.innerHTML = language.publishError;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
-                            link.innerHTML = i18n.publishLinkText;
+                            link.innerHTML = language.publishLink;
                         }, 2500);
                     }
                 }
@@ -392,7 +390,7 @@
         this.unpublish = (event) => {
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
-            link.innerHTML = i18n.unpublishProgressText;
+            link.innerHTML = language.unpublishProgress;
             unpublishBlogPost(self.id, function(response) {
                 if(response.success) {
                     self.published = false;
@@ -400,10 +398,10 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = i18n.unpublishErrorText;
+                        link.innerHTML = language.unpublishError;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
-                            link.innerHTML = 'unpublishLinkText';
+                            link.innerHTML = 'unpublishLink';
                         }, 2500);
                     }
                 }
@@ -420,7 +418,7 @@
             }
         }
         this.checkTitle = () => {
-            let warningMessage = i18n.titleLengthErrorText;
+            let warningMessage = language.titleLengthError;
             if(this.refs.title.value.length >= 1) {
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
                 return true;
@@ -430,7 +428,7 @@
             }
         }
         this.checkTextBody = () => {
-            let warningMessage = i18n.postLengthErrorText;
+            let warningMessage = language.postLengthError;
             let form = self.refs.form;
             let body = form.querySelector('div.graphjs-body');
             if(body.innerHTML.length >= 1) {

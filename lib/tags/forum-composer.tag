@@ -8,7 +8,7 @@
     }
 >
     <div class="graphjs-header">
-        <div class="graphjs-title">{i18n.title}</div>
+        <div class="graphjs-title">{language.title}</div>
         <a class="graphjs-option graphjs-right" data-link="list" onclick={opts.minor ? handleCallback : handleShow}>
             <svg viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g transform="translate(-755.000000, -15.000000)" fill="black" fill-rule="nonzero">
@@ -24,13 +24,13 @@
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <form>
-            <input ref="title" type="text" placeholder={i18n.titleInputPlaceholder} />
-            <textarea ref="body" placeholder={i18n.composerInputPlaceholder}></textarea>
+            <input ref="title" type="text" placeholder={language.titleInputPlaceholder} />
+            <textarea ref="body" placeholder={language.composerInputPlaceholder}></textarea>
             <span style="visibility: hidden">
                 <b style="visibility: hidden">Supported formats:</b> Markdown
             </span>
-            <button ref="submit" data-link="thread" onclick={handleSubmit}>{i18n.submitButtonText}</button>
-            <button data-link="list" onclick={opts.minor ? handleCallback : handleShow} class="graphjs-danger">{i18n.cancelButtonText}</button>
+            <button ref="submit" data-link="thread" onclick={handleSubmit}>{language.submitButton}</button>
+            <button data-link="list" onclick={opts.minor ? handleCallback : handleShow} class="graphjs-danger">{language.cancelButton}</button>
         </form>
         <div if={!loaded && !blocked} class="graphjs-loader">
             <div class="graphjs-dots">
@@ -39,11 +39,12 @@
                 <span></span>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
     </div>
     <graphjs-promo if={loaded} properties="bottom left"></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import startThread from '../scripts/startThread.js';
         import showForumList from '../scripts/showForumList.js';
@@ -52,10 +53,7 @@
 
         analytics("forum-composer");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['forum-composer'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('forum-composer', opts);
 
         this.blocked = false;
         this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
@@ -92,7 +90,7 @@
             });
         }
         this.checkTitle = () => {
-            let warningMessage = i18n.titleWarningText;
+            let warningMessage = language.titleWarning;
             if(this.refs.title.value.length >= 1) {
                 this.refs.title.classList.remove('graphjs-error');
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
@@ -104,7 +102,7 @@
             }
         }
         this.checkTextBody = () => {
-            let warningMessage = i18n.textWarningText;
+            let warningMessage = language.textWarning;
             if(this.refs.body.value.length >= 1) {
                 this.refs.body.classList.remove('graphjs-error');
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
@@ -153,7 +151,7 @@
                         self.refs.submit.classList.remove('graphjs-loading');
                         self.update();
                         if(response.reason)
-                            window.alert(i18n.serverErrorText.replace('%s',response.reason));
+                            window.alert(language.serverError.replace('%s',response.reason));
                         //Handle error
                     }
                 }

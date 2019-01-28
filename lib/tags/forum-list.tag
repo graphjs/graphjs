@@ -8,7 +8,7 @@
     }
 >
     <div class="graphjs-header">
-        <div class="graphjs-title">{i18n.title}</div>
+        <div class="graphjs-title">{language.title}</div>
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '') + (matchedThreads.length > pageLimit ? ' graphjs-pagination' : '')}>
         <div class="graphjs-bar" if={loaded}>
@@ -20,7 +20,7 @@
                         </g>
                     </svg>
                 </div>
-                <input onkeyup={handleFilter} type="text" placeholder={i18n.searchInputPlaceholder} />
+                <input onkeyup={handleFilter} type="text" placeholder={language.searchInputPlaceholder} />
             </div>
             <button data-link="compose" onclick={opts.minor ? handleCallback : handleShow}>
                 <svg viewBox="0 0 21 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -28,7 +28,7 @@
                         <path d="M38.1489476,17 L22.6361271,17 C21.3968108,17 20.3925373,18.0239842 20.3925373,19.2876244 L20.3925373,30.4860904 C20.3925373,31.7497305 21.3968108,32.7737148 22.6361271,32.7737148 L24.7515117,32.7737148 L24.7515117,36.5428483 C24.7515117,36.9132256 25.1574946,37.1310946 25.4566399,36.9132256 L31.4609134,32.7737148 L38.1489476,32.7737148 C39.3882638,32.7737148 40.3925373,31.7497305 40.3925373,30.4860904 L40.3925373,19.2876244 C40.3925373,18.0239842 39.3882638,17 38.1489476,17 Z M31.2728027,25.8802653 L31.2728027,28.6472015 L29.1594735,28.6472015 L29.1594735,25.8802653 L26.3925373,25.8802653 L26.3925373,23.7669362 L29.1594735,23.7669362 L29.1594735,21 L31.2728027,21 L31.2728027,23.7669362 L34.0397388,23.7669362 L34.0397388,25.8802653 L31.2728027,25.8802653 Z"></path>
                     </g>
                 </svg>
-                <span>{i18n.newthreadButtonText}</span>
+                <span>{language.newthreadButton}</span>
             </button>
         </div>
         <div class="graphjs-list" if={loaded}>
@@ -50,7 +50,7 @@
                 </div>
             </a>
             <div class="graphjs-placeholder graphjs-item" if={matchedThreads.length <= 0}>
-                {i18n.noThreadsMessageText}
+                {language.noThreadsMessage}
             </div>
         </div>
         <div class="graphjs-controls" if={loaded && matchedThreads.length > pageLimit}>
@@ -147,11 +147,12 @@
                 </div>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
     </div>
     <graphjs-promo if={loaded} properties="bottom left"></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getThreads from '../scripts/getThreads.js';
         import showForumCompose from '../scripts/showForumComposer.js';
@@ -160,10 +161,7 @@
 
         analytics("forum-list");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['forum-list'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('forum-list', opts);        
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         import {downsizeImage} from '../scripts/client.js';

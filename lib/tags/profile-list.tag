@@ -8,10 +8,11 @@
         <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0}></graphjs-profile-card>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
     </div>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import getMembers from '../scripts/getMembers.js';
         import listGroups from '../scripts/listGroups.js';
         import getSession from '../scripts/getSession.js';
@@ -19,10 +20,7 @@
 
         analytics("profile-list");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['profile-list'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('profile-list', opts);                
 
         this.content = 'users';
         this.list = [];

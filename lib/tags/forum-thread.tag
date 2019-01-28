@@ -15,8 +15,8 @@
                 </g>
             </svg>
         </a>
-        <div if={window.innerWidth < 768} class="graphjs-title">{i18n.title.replace("%s",(currentAuthor || i18n.defaultUser))}</div>
-        <div if={window.innerWidth >= 768} class="graphjs-title">{i18n.title.replace("%s",(currentAuthor || i18n.defaultUser))}</div>
+        <div if={window.innerWidth < 768} class="graphjs-title">{language.title.replace("%s",(currentAuthor || language.defaultUser))}</div>
+        <div if={window.innerWidth >= 768} class="graphjs-title">{language.title.replace("%s",(currentAuthor || language.defaultUser))}</div>
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <div if={loaded} class="graphjs-thread" ref="scrollingContent">
@@ -28,10 +28,10 @@
                     <div class="graphjs-credit" if={authorsData.hasOwnProperty(entry.author)}>
                         <img data-link="profile" data-id={entry.author} onclick={handleShow} src={authorsData[entry.author].avatar ? downsizeImage(authorsData[entry.author].avatar, 50) : defaultAvatar} />
                         <span>
-                            <b data-link="profile" data-id={entry.author} onclick={handleShow}>{authorsData[entry.author].username || i18n.unknowUserText}</b>
+                            <b data-link="profile" data-id={entry.author} onclick={handleShow}>{authorsData[entry.author].username || language.unknowUser}</b>
                             <time data-timestamp={entry.timestamp}>{handleTime(entry.timestamp)}</time>
-                            <a if={entry.author == userId} onclick={handleEdit} data-id={entry.id}>{i18n.threadEditButtonText}</a>
-                            <a if={entry.author == userId} onclick={index == 0 ? handleDestroy : handleRemove} data-id={entry.id}>{i18n.threadDeleteButtonText}</a>
+                            <a if={entry.author == userId} onclick={handleEdit} data-id={entry.id}>{language.threadEditButton}</a>
+                            <a if={entry.author == userId} onclick={index == 0 ? handleDestroy : handleRemove} data-id={entry.id}>{language.threadDeleteButton}</a>
                         </span>
                     </div>
                     <p>{entry.content}</p>
@@ -40,8 +40,8 @@
         </div>
         <div if={loaded} class="graphjs-reply" if={entries.length > 0}>
             <div onclick={handleComposer} class="graphjs-synopsis">
-                <b if={entries.length > 1}>{i18n.repliesNumberText.replace("%s",(entries.length - 1))}</b>
-                <a if={!composerReady}>{i18n.replyLinkText}</a>
+                <b if={entries.length > 1}>{language.repliesNumber.replace("%s",(entries.length - 1))}</b>
+                <a if={!composerReady}>{language.replyLink}</a>
                 <a class={composerReady ? 'graphjs-icon' : 'graphjs-reverse graphjs-icon'}>
                     <svg viewBox="0 0 62 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <path transform="translate(-19.000000, 0.000000)" d="M78.5,2.4 C81.1,5 81.1,9.1 78.5,11.6 L54.6,35.6 C52,38.2 47.9,38.2 45.4,35.6 L21.5,11.7 C18.9,9.1 18.9,5 21.5,2.5 C24.1,-0.1 28.2,-0.1 30.7,2.5 L50,21.7 L69.3,2.4 C71.8,-0.1 76,-0.1 78.5,2.4 Z"></path>
@@ -49,9 +49,9 @@
                 </a>
             </div>
             <form class={userId ? '' : 'graphjs-loading graphjs-blocked'}>
-                <textarea ref="composer" placeholder={i18n.composerInputPlaceholder}></textarea>
-                <button ref="submit" onclick={handleReply}>{i18n.submitButtonText}</button>
-                <button onclick={handleClear} class="graphjs-danger">{i18n.clearButtonText}</button>
+                <textarea ref="composer" placeholder={language.composerInputPlaceholder}></textarea>
+                <button ref="submit" onclick={handleReply}>{language.submitButton}</button>
+                <button onclick={handleClear} class="graphjs-danger">{language.clearButton}</button>
                 <div if={!loaded} class="graphjs-loader">
                     <div class="graphjs-dots">
                         <span></span>
@@ -59,7 +59,7 @@
                         <span></span>
                     </div>
                 </div>
-                <button if={!userId} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
+                <button if={!userId} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
             <form>
         </div>
         <div if={!loaded} class="graphjs-placeholder graphjs-loader">
@@ -106,11 +106,12 @@
                 <div class="graphjs-line graphjs-fill"></div>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginDisplayButtonText}</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{language.loginDisplayButton}</button>
     </div>
     <graphjs-promo if={loaded} properties="bottom left"></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getThread from '../scripts/getThread.js';
         import replyThread from '../scripts/replyThread.js';
@@ -123,10 +124,7 @@
 
         analytics("forum-thread");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['forum-thread'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('forum-thread', opts);
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         import {downsizeImage} from '../scripts/client.js';
@@ -182,7 +180,7 @@
             let self = this;
             self.id && getThread(self.id, function(response) {
                 if(response.success) {
-                    i18n.title = response.title;
+                    language.title = response.title;
                     self.title = response.title;
                     self.entries = response.messages;
                     self.update();
@@ -265,7 +263,7 @@
             if(textBox.hasAttribute('contenteditable')) {
                 textBox.removeAttribute('contenteditable');
                 textBox.classList.remove('graphjs-editable');
-                event.target.innerText = i18n.threadEditButtonText;
+                event.target.innerText = language.threadEditButton;
                 if(textBox.innerText != '') {
                     editReply(event.target.dataset.id, textBox.innerText, function(response) {
                         if(response.success) {
@@ -278,14 +276,14 @@
             } else {
                 textBox.contentEditable = true;
                 textBox.focus();
-                event.target.innerText = i18n.threadSaveButtonText;
+                event.target.innerText = language.threadSaveButton;
                 textBox.classList.add('graphjs-editable');
             }
         }
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
-            if (window.confirm(i18n.replyDeleteConfirmationText)) {
+            if (window.confirm(language.replyDeleteConfirmation)) {
                 let query = '[data-id="' + event.target.dataset.id + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
@@ -302,7 +300,7 @@
         this.handleDestroy = (event) => {
             event.preventDefault();
             let self = this;
-            if (window.confirm(i18n.threadDeleteConfirmationText)) {
+            if (window.confirm(language.threadDeleteConfirmation)) {
                 let query = '[data-link="list"]';
                 let element = document.querySelectorAll(query)[0];
                 removeReply(event.target.dataset.id, function(response) {
@@ -352,28 +350,28 @@
             let amount;
             if(time < 1) {
                 amount = time;
-                text = i18n.commentTimeNowText;
+                text = language.commentTimeNow;
             } else if(1 <= time && time < 60) {
                 amount = time;
-                text = i18n.commentTimeSecondsText.replace('%s',amount);
+                text = language.commentTimeSeconds.replace('%s',amount);
             } else if(60 <= time && time < 60 * 60) {
                 amount = Math.floor(time / 60);
-                text = i18n.commentTimeMinutesText.replace('%s',amount);
+                text = language.commentTimeMinutes.replace('%s',amount);
             } else if(60 * 60 <= time && time < 60 * 60 * 24) {
                 amount = Math.floor(time / 60 / 60);
-                text = i18n.commentTimeHoursText.replace('%s',amount);
+                text = language.commentTimeHours.replace('%s',amount);
             } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
                 amount = Math.floor(time / 60 / 60 / 24);
-                text = i18n.commentTimeDaysText.replace('%s',amount);
+                text = language.commentTimeDays.replace('%s',amount);
             } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
                 amount = Math.floor(time / 60 / 60 / 24 / 7);
-                text = i18n.commentTimeWeeksText.replace('%s',amount);
+                text = language.commentTimeWeeks.replace('%s',amount);
             } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30);
-                text = i18n.commentTimeMonthsText.replace('%s',amount);
+                text = language.commentTimeMonths.replace('%s',amount);
             } else if(time >= 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                text = i18n.commentTimeYearsText.replace('%s',amount);
+                text = language.commentTimeYears.replace('%s',amount);
             } else {
                 //Handle errors
             }

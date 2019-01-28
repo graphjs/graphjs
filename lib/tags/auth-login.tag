@@ -51,7 +51,7 @@
 
         this.checkUsernameMinimumLength = () => {
             let usernameMinimumLengthLimit = 1;
-            let failMessage = language.usernameLengthErrorText;
+            let failMessage = language.usernameLengthError;
             if(this.refs.username.value.length >= usernameMinimumLengthLimit) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -63,7 +63,7 @@
             }
         }
         this.checkUsernamePattern = () => {
-            let failMessage = language.usernamePatternErrorText;
+            let failMessage = language.usernamePatternError;
             let usernamePattern = /^[a-zA-Z0-9-_]+$/;
             if(usernamePattern.test(this.refs.username.value)) {
                 this.refs.username.classList.remove('graphjs-error');
@@ -77,7 +77,7 @@
         }
         this.checkPasswordMinimumLength = () => {
             let passwordMinimumLengthLimit = 5;
-            let failMessage = language.passwordErrorText.replace('%s',passwordMinimumLengthLimit);
+            let failMessage = language.passwordError.replace('%s',passwordMinimumLengthLimit);
 
             if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');

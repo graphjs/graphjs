@@ -12,12 +12,12 @@
                 class={opts.minor && opts.active == 'login' ? 'graphjs-active' : ''}
                 style={opts.color ? 'color: ' + opts.color + ' !important' : ''}
                 onclick={opts.minor ? handleCallback : handleLoginBox}
-            >{i18n.loginButtonText}</a>
+            >{language.loginButton}</a>
             <a if={stateInformation} data-link="register"
                 class={opts.minor && opts.active == 'register' ? 'graphjs-active' : ''}
                 style={opts.color ? 'color: ' + opts.color + ' !important' : ''}
                 onclick={opts.minor ? handleCallback : handleRegisterBox}
-            >{i18n.registerButtonText}</a>
+            >{language.registerButton}</a>
         </div>
         <div class="graphjs-logged" if={id}>
             <a if={!profile}
@@ -50,6 +50,7 @@
     </div>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
         import logout from '../scripts/logout.js'
@@ -59,12 +60,7 @@
 
         analytics("auth-state");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['auth-state'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
-        this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
-
+        this.language = language('auth-state', opts);
 
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;

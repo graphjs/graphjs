@@ -24,7 +24,7 @@
         <b class="graphjs-title">{profile.fullName || profile.username}</b>
         <p class="graphjs-description">{profile.about}</p>
     </a>
-    <button if={loaded && profile} data-link="profile" data-id={id} onclick={handleShow}>{i18n.profileButton}</button>
+    <button if={loaded && profile} data-link="profile" data-id={id} onclick={handleShow}>{language.profileButton}</button>
     <div if={!loaded} class="graphjs-placeholder graphjs-loader">
         <div class="graphjs-link">
             <div class="graphjs-avatar graphjs-circle graphjs-fill"></div>
@@ -38,6 +38,7 @@
     </div>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
         import follow from '../scripts/follow.js';
@@ -48,10 +49,7 @@
 
         analytics("profile-card");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['profile-card'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('profile-card', opts);
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         this.id = opts.id;
