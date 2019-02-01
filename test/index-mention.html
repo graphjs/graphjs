@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Test GraphJS Components</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Test Tags start here -->
+
+
+        <graphjs-auth></graphjs-auth>
+        <br /><br /><hr /><br /><br />
+
+        <h1>Autocomplete</h1>
+        <graphjs-autocomplete type="users" autofocus="on" max-width="10em;"></graphjs-autocomplete>
+
+        <h1>Feed Composer</h1>
+        <graphjs-feed-composer></graphjs-feed-composer>
+
+        <h1>Feed Item</h1>
+        <graphjs-feed-item id="56a6a9ea75d739c3172620ec554855be"></graphjs-feed-item>
+
+
+        <!-- Test Tags finish here -->
+        <script src="../dist/graph.js"></script>
+        <script>
+            GraphJS.init("79982844-6a27-4b3b-b77f-419a79be0e10", {
+                host: "https://graphjs-server-test.herokuapp.com",
+                theme: {
+                    primaryColor: 'cornflowerblue',
+                    backgroundColor: 'white',
+                    textColor: '#666'
+                }
+            });
+        </script>
+    </body>
+</html>

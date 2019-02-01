@@ -10,6 +10,7 @@
     <div class={'graphjs-content' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
         <div class="graphjs-entry">
             <textarea ref="composer" placeholder="What's on your mind?"></textarea>
+            <graphjs-autocomplete if={autocomplete} type={autocomplete.type} autofocus="on" autoclose="on" max-width="10em;" callback={finalizeAutocomplete}></graphjs-autocomplete>
             <div class="graphjs-media" if={media.length > 0}>
                 <div each={item in media} class={'graphjs-item graphjs-' + item.resource_type}>
                     <img class="graphjs-thumbnail" src={item.thumbnail_url} />
@@ -52,6 +53,8 @@
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
+        let self = this;
+
         this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.blocked = false;
         this.button = false;
@@ -64,18 +67,28 @@
         });
 
         this.on('mount', function() {
-            let self = this;
             let id = GraphJSConfig.id;
             let text = this.refs.composer;
             let photo = this.refs.addPhoto;
             let video = this.refs.addVideo;
-            text.addEventListener("input", function() {
-                text.style.height = "";
-                text.style.height = text.scrollHeight + "px";
+            text.addEventListener('input', function() {
+                text.style.height = '';
+                text.style.height = text.scrollHeight + 'px';
                 self.message = text.value;
                 self.handleButton();
             }, false);
-            photo.addEventListener("click", function() {
+            text.addEventListener('keyup', function(event) {
+                if(event.key === '@' || event.key === '#') {
+                    event.preventDefault();
+                    let caretPosition = event.srcElement.selectionEnd;
+                    let value = event.target.value;
+                    let previousCharacter = value.charAt(caretPosition - 2);
+                    if(caretPosition === 1 || previousCharacter === ' ' || previousCharacter === '\n') {
+                        self.initiateAutocomplete(event.key, caretPosition);
+                    }
+                }
+            });
+            photo.addEventListener('click', function() {
                 cloudinary.openUploadWidget({
                     cloud_name: 'graphjs',
                     upload_preset: 'n69lnkqb',
@@ -96,7 +109,7 @@
                     }
                 });
             }, false);
-            video.addEventListener("click", function() {
+            video.addEventListener('click', function() {
                 cloudinary.openUploadWidget({
                     cloud_name: 'graphjs',
                     upload_preset: 'wsvzsotw',
@@ -126,7 +139,6 @@
             this.handleUser();
         }
         this.handleUser = () => {
-            let self = this;
             getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
@@ -167,12 +179,11 @@
             } else {
                 this.button = false;
                 this.update();
-                this.refs.submit.setAttribute('disabled', 'disabled');
+                this.refs.submit && this.refs.submit.setAttribute('disabled', 'disabled');
             }
             this.update();
         }
         this.handleSubmit = (event) => {
-            let self = this;
             self.failMessages = [];
             self.refs.submit.classList.add('graphjs-loading');
             if(self.checkMessage() || self.checkMedia()) {
@@ -205,7 +216,6 @@
             }
         }
         this.handleShow = (event) => {
-            let self = this;
             let dataset = event.target.dataset;
             switch(dataset.link) {
                 case 'profile':
@@ -215,6 +225,27 @@
                     });
                     break;
             }
+        }
+        this.initiateAutocomplete = (key, position) => {
+            this.autocomplete = {
+                type: key === '@' ? 'users' : 'groups',
+                position: position
+            }
+            this.update();
+        }
+        this.finalizeAutocomplete = (data) => {
+            if(this.autocomplete) {
+                let value = this.refs.composer.value;
+                let position = this.autocomplete.position;
+                let newValue = value.slice(0, position) + data.label + ' ' + value.slice(position, value.length - 1);
+                this.refs.composer.value = newValue;
+                this.refs.composer.focus();
+            }
+            this.cancelAutocomplete();
+        }
+        this.cancelAutocomplete = () => {
+            this.autocomplete = false;
+            this.update();
         }
     </script>
 </graphjs-feed-composer>
