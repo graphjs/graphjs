@@ -138,7 +138,7 @@
                         self.list.push(id);
                         self.empty = self.list.length === 0;
                         self.data[id] = {};
-                        self.data[id] = group.label;
+                        self.data[id].label = group.title;
                         if(index === response.groups.length - 1) self.loaded = true;
                     });
                     self.update();
