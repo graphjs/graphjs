@@ -7,6 +7,35 @@
         .no-padding !important;
         min-width: 10em;
         min-height: 2em;
+        &.@{prefix}-closable {
+            .@{prefix}-input {
+                .@{prefix}-symbol {
+                    & + input, & + input[type] {
+                        width: calc(100% - 4em);
+                        min-width: 6em;
+                    }
+                }
+                .@{prefix}-close {
+                    width: 2em;
+                    height: 2em;
+                    &:hover {
+                        svg {
+                            path {
+                                opacity: 1;
+                            }
+                        }
+                    }
+                    svg {
+                        margin: calc(100% / 3);
+                        path {
+                            fill: white;
+                            opacity: .5;
+                            .transition(opacity .15s ease);
+                        }
+                    }
+                }
+            }
+        }
         .@{prefix}-input {
             display: block;
             width: 100%;
@@ -30,7 +59,6 @@
             .@{prefix}-symbol {
                 width: 2em;
                 height: 2em;
-
                 line-height: 2em;
                 text-align: center;
                 vertical-align: middle;
@@ -63,7 +91,6 @@
         .@{prefix}-results {
             overflow: auto;
             width: 100%;
-            max-height: 10.5em;
             padding: .25em 0;
             .@{prefix}-item {
                 display: block;

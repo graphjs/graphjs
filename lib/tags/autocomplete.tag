@@ -4,16 +4,24 @@
         (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
         (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
         (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
-        (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
+        (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '') +
+        (opts.top ? 'top: ' + opts.top + '; ' : '') +
+        (opts.left ? 'left: ' + opts.left + '; ' : '') +
+        (opts.width ? 'width: ' + opts.width + '; ' : '')
     }
 >
-    <div class={'graphjs-content'}>
+    <div class={'graphjs-content' + (closing ? ' graphjs-closable' : '')}>
         <div class={'graphjs-input' + (loaded ? '' : ' graphjs-loading')}>
             <div if={loaded && symbol} class="graphjs-symbol">
                 <b if={type === 'users' || type === 'members'}>@</b>
                 <b if={type === 'groups'}>#</b>
             </div>
             <input if={loaded && list.length > 0} ref="input" placeholder={inputPlaceholder} type="text" onkeyup={handleInput} style={loaded ? '' : 'visibility: hidden;'}>
+            <a if={closing} class="graphjs-close">
+                <svg viewBox="15 15 70 70">
+                    <path d="M19.8,80.2c1.6,1.6,3.6,2.3,5.7,2.3s4.1-0.8,5.7-2.3L50,61.3l18.8,18.8c1.6,1.6,3.6,2.3,5.7,2.3s4.1-0.8,5.7-2.3   c3.1-3.1,3.1-8.2,0-11.3L61.3,50l18.8-18.8c3.1-3.1,3.1-8.2,0-11.3c-3.1-3.1-8.2-3.1-11.3,0L50,38.7L31.2,19.8   c-3.1-3.1-8.2-3.1-11.3,0c-3.1,3.1-3.1,8.2,0,11.3L38.7,50L19.8,68.8C16.7,72,16.7,77,19.8,80.2z"/>
+                </svg>
+            </a>
             <div if={!loaded && !blocked} class="graphjs-loader">
                 <div class="graphjs-dots">
                     <span></span>
@@ -22,7 +30,10 @@
                 </div>
             </div>
         </div>
-        <div if={loaded && data && matchedItems.length > 0} class="graphjs-results">
+        <div
+            class="graphjs-results"
+            if={loaded && data && matchedItems.length > 0}
+            style={opts.limit ? 'max-height: calc((' + limit + ' * 2em) + .5em);' : ''}>
             <a each={matchedItem in matchedItems} class="graphjs-item" data-id={matchedItem} data-label={data[matchedItem].label} onclick={handleCallback}>
                 <img if={type === 'users' || type === 'members'} src={data[matchedItem].image ? downsizeImage(data[matchedItem].image, 40) : defaultAvatar} />
                 <b>{data[matchedItem].label}</b>
@@ -48,10 +59,12 @@
 
         this.type = opts.type || 'users';
         this.symbol = !(opts.symbol === 'disabled');
+        this.limit = opts.limit || 10;
         this.list = [];
         this.matchedItems = [];
         this.data = {};
         this.loaded = false;
+        this.closing = opts.closing === 'on';
         this.inputPlaceholder = 'Type a name';
 
         this.on('before-mount', function() {
@@ -214,7 +227,11 @@
         }
         this.handleAutoclose = (event) => {
             if(!self.refs.input.contains(event.target)) {
-                this.unmount();
+                if(self.parent && self.parent.cancelAutocomplete) {
+                    self.parent.cancelAutocomplete();
+                } else {
+                    this.unmount();
+                }
             }
         }
     </script>

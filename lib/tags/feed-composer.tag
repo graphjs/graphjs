@@ -10,7 +10,19 @@
     <div class={'graphjs-content' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
         <div class="graphjs-entry">
             <textarea ref="composer" placeholder="What's on your mind?"></textarea>
-            <graphjs-autocomplete if={autocomplete} type={autocomplete.type} autofocus="on" autoclose="on" max-width="10em;" callback={finalizeAutocomplete}></graphjs-autocomplete>
+            <graphjs-autocomplete
+                if={autocomplete}
+                type={autocomplete.type}
+                top={'calc(' + autocomplete.position.top + 'px - .5em)'}
+                left={'calc(' + autocomplete.position.left + 'px - 1em)'}
+                width={autocomplete.width + 'px'}
+                closing="on"
+                autoclose="on"
+                autofocus="on"
+                limit="5"
+                max-width="10em;"
+                callback={finalizeAutocomplete}
+            ></graphjs-autocomplete>
             <div class="graphjs-media" if={media.length > 0}>
                 <div each={item in media} class={'graphjs-item graphjs-' + item.resource_type}>
                     <img class="graphjs-thumbnail" src={item.thumbnail_url} />
@@ -48,6 +60,7 @@
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
         import updateStatus from '../scripts/updateStatus.js';
+        import getCaretCoordinates from 'textarea-caret';
         import '../vendor/cloudinary/upload-widget.js';
 
         import {downsizeImage} from '../scripts/client.js';
@@ -55,7 +68,7 @@
 
         let self = this;
 
-        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline graphjs-overflown' : 'graphjs-box graphjs-overflown';
         this.blocked = false;
         this.button = false;
         this.type = 'text';
@@ -80,11 +93,11 @@
             text.addEventListener('keyup', function(event) {
                 if(event.key === '@' || event.key === '#') {
                     event.preventDefault();
-                    let caretPosition = event.srcElement.selectionEnd;
+                    let caretIndex = event.srcElement.selectionEnd;
                     let value = event.target.value;
-                    let previousCharacter = value.charAt(caretPosition - 2);
-                    if(caretPosition === 1 || previousCharacter === ' ' || previousCharacter === '\n') {
-                        self.initiateAutocomplete(event.key, caretPosition);
+                    let previousCharacter = value.charAt(caretIndex - 2);
+                    if(caretIndex === 1 || previousCharacter === ' ' || previousCharacter === '\n') {
+                        self.initiateAutocomplete(event.key, caretIndex);
                     }
                 }
             });
@@ -226,25 +239,34 @@
                     break;
             }
         }
-        this.initiateAutocomplete = (key, position) => {
+        this.initiateAutocomplete = (key, index) => {
+            let width = '150'; // This will be the width of autocomplete box (px)
+            let textbox = this.refs.composer;
+            let caret = getCaretCoordinates(textbox, textbox.selectionEnd);
+            let top = caret.top;
+            let left = textbox.offsetWidth - caret.left > width
+                ? caret.left
+                : caret.left + textbox.offsetWidth - caret.left - width;
             this.autocomplete = {
                 type: key === '@' ? 'users' : 'groups',
-                position: position
+                index,
+                width,
+                position: {top, left}
             }
             this.update();
         }
         this.finalizeAutocomplete = (data) => {
             if(this.autocomplete) {
                 let value = this.refs.composer.value;
-                let position = this.autocomplete.position;
-                let newValue = value.slice(0, position) + data.label + ' ' + value.slice(position, value.length - 1);
+                let index = this.autocomplete.index;
+                let newValue = value.slice(0, index) + data.label + ' ' + value.slice(index, value.length - 1);
                 this.refs.composer.value = newValue;
                 this.refs.composer.focus();
             }
             this.cancelAutocomplete();
         }
         this.cancelAutocomplete = () => {
-            this.autocomplete = false;
+            this.autocomplete = null;
             this.update();
         }
     </script>
