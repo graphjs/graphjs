@@ -19,7 +19,6 @@
         this.language = language('profile-groups', opts);
 
         this.id = opts.id;
-        this.noGroupsText = opts.noGroupsText;
         this.list = [];
         this.loaded = true;
 
