@@ -14,7 +14,7 @@
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <div class="graphjs-sidebar" style={loaded ? '' : 'display: none;'}>
-            <input ref="searchForPartners" onkeyup={handleFilter} class={!newMessageOption ? 'graphjs-hidden' : ''} type="text" placeholder={i18n.nameSearchPlaceholder} />
+            <input ref="searchForPartners" onkeyup={handleFilter} class={!newMessageOption ? 'graphjs-hidden' : ''} type="text" placeholder={language.nameSearchPlaceholder} />
             <div class="graphjs-suggestions" if={newMessageOption && matchedPartners.length > 0}>
                 <a each={matchedPartner in matchedPartners} data-id={matchedPartner.id} onclick={handleNewPartner}>
                     <img src={matchedPartner.avatar ? downsizeImage(matchedPartner.avatar, 40) : defaultAvatar} />
@@ -44,7 +44,7 @@
                     <time data-timestamp={activeMessages[message].timestamp}></time>
                 </div>
             </div>
-            <textarea if={partners.length > 0 || newMessageOption} onkeyup={handleSubmit} placeholder={i18n.messageInputPlaceholder}></textarea>
+            <textarea if={partners.length > 0 || newMessageOption} onkeyup={handleSubmit} placeholder={language.messageInputPlaceholder}></textarea>
         </div>
         <div if={!loaded} class="graphjs-placeholder graphjs-loader">
             <div class="graphjs-left">
@@ -140,11 +140,12 @@
                 </div>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
     </div>
     <graphjs-promo properties="bottom right"></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import getConversations from '../scripts/getConversations.js';
         import getConversation from '../scripts/getConversation.js';
         import getSession from '../scripts/getSession.js';
@@ -155,10 +156,7 @@
 
         analytics("messages");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['messages'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('messages', opts);
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         import {downsizeImage} from '../scripts/client.js';
@@ -284,33 +282,33 @@
                     let amount;
                     if(time < 1) {
                         amount = time;
-                        text = i18n.messageTimeNowText;
+                        text = language.messageTimeNow;
                     } else if(1 <= time && time < 60) {
                         amount = time;
-                        text = i18n.messageTimeSecondsText.replace('%s',amount);
+                        text = language.messageTimeSeconds.replace('%s',amount);
                     } else if(60 <= time && time < 60 * 60) {
                         amount = Math.floor(time / 60);
-                        text = i18n.messageTimeMinutesText.replace('%s',amount);
+                        text = language.messageTimeMinutes.replace('%s',amount);
                     } else if(60 * 60 <= time && time < 60 * 60 * 24) {
                         amount = Math.floor(time / 60 / 60);
-                        text = i18n.messageTimeHoursText.replace('%s',amount);
+                        text = language.messageTimeHours.replace('%s',amount);
                     } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
                         amount = Math.floor(time / 60 / 60 / 24);
-                        text = i18n.messageTimeDaysText.replace('%s',amount);
+                        text = language.messageTimeDays.replace('%s',amount);
                     } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
                         amount = Math.floor(time / 60 / 60 / 24 / 7);
-                        text = i18n.messageTimeWeeksText.replace('%s',amount);
+                        text = language.messageTimeWeeks.replace('%s',amount);
                     } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
                         amount = Math.floor(time / 60 / 60 / 24 / 30);
-                        text = i18n.messageTimeMonthsText.replace('%s',amount);
+                        text = language.messageTimeMonths.replace('%s',amount);
                     } else if(time >= 60 * 60 * 24 * 30 * 12) {
                         amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                        text = i18n.messageTimeYearsText.replace('%s',amount);
+                        text = language.messageTimeYears.replace('%s',amount);
                     } else {
                         //Handle errors
                     }
                 } else {
-                    text = i18n.failErrorText;
+                    text = language.failError;
                     item.classList.add('graphjs-error');
                 }
                 item.innerHTML = text;

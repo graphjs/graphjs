@@ -12,12 +12,12 @@
     </div>
     <div class="graphjs-content" ref="scrollingContent">
         <div class="graphjs-synopsis" if={comments.length <= 0}>
-            {i18n.noCommentsMessageText}
+            {language.noCommentsMessage}
         </div>
         <div class={'graphjs-comment' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
-            <textarea ref="composer" placeholder={i18n.commentsInputPlaceholder}></textarea>
-            <button ref="submit" onclick={handleComment}>{i18n.submitButtonText}</button>
-            <button hide={true} onclick={handleClear} class="graphjs-danger">{i18n.clearButtonText}</button>
+            <textarea ref="composer" placeholder={language.commentsInputPlaceholder}></textarea>
+            <button ref="submit" onclick={handleComment}>{language.submitButton}</button>
+            <button hide={true} onclick={handleClear} class="graphjs-danger">{language.clearButton}</button>
             <div if={!loaded && !blocked} class="graphjs-loader">
                 <div class="graphjs-dots">
                     <span></span>
@@ -25,19 +25,19 @@
                     <span></span>
                 </div>
             </div>
-            <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
+            <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
         </div>
         <div class="graphjs-synopsis"if={comments.length > 0}>
-            {i18n.commentCountText.replace('%s',comments.length)}
+            {language.commentCount.replace('%s',comments.length)}
         </div>
         <div each={comment in comments} data-id={comment} class="graphjs-item">
             <div class="graphjs-credit" if={authorsData.hasOwnProperty(commentsData[comment].author)}>
                 <img data-link="profile" data-id={commentsData[comment].author} onclick={handleShow} src={authorsData[commentsData[comment].author].avatar ? downsizeImage(authorsData[commentsData[comment].author].avatar, 50) : defaultAvatar} />
                 <span>
-                    <b data-link="profile" data-id={commentsData[comment].author} onclick={handleShow}>{authorsData[commentsData[comment].author].username || i18n.unknowUserText}</b>
+                    <b data-link="profile" data-id={commentsData[comment].author} onclick={handleShow}>{authorsData[commentsData[comment].author].username || language.unknowUser}</b>
                     <time data-timestamp={commentsData[comment].createTime}>{handleTime(commentsData[comment].createTime)}</time>
-                    <a if={commentsData[comment].author == userId} onclick={handleEdit} data-id={comment}>{i18n.commentEditButtonText}</a>
-                    <a if={commentsData[comment].author == userId} onclick={handleRemove} data-id={comment}>{i18n.commentDeleteButtonText}</a>
+                    <a if={commentsData[comment].author == userId} onclick={handleEdit} data-id={comment}>{language.commentEditButton}</a>
+                    <a if={commentsData[comment].author == userId} onclick={handleRemove} data-id={comment}>{language.commentDeleteButton}</a>
                 </span>
             </div>
             <p>{commentsData[comment].content}</p>
@@ -46,6 +46,7 @@
     <graphjs-promo if={!loaded} properties="top right"></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getComments from '../scripts/getComments.js';
         import addComment from '../scripts/addComment.js';
@@ -57,10 +58,8 @@
 
         analytics("comments");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['comments'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('comments', opts);
+
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         import {downsizeImage} from '../scripts/client.js';
@@ -165,7 +164,7 @@
             if(textBox.hasAttribute('contenteditable')) {
                 textBox.removeAttribute('contenteditable');
                 textBox.classList.remove('graphjs-editable');
-                event.target.innerText = i18n.commentEditButtonText;
+                event.target.innerText = language.commentEditButton;
                 if(textBox.innerText != '') {
                     editComment(event.target.dataset.id, textBox.innerText, function(response) {
                         if(response.success) {
@@ -178,14 +177,14 @@
             } else {
                 textBox.contentEditable = true;
                 textBox.focus();
-                event.target.innerText = i18n.commentSaveButtonText;
+                event.target.innerText = language.commentSaveButton;
                 textBox.classList.add('graphjs-editable');
             }
         }
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
-            if (window.confirm(i18n.commentDeleteConfirmationText)) {
+            if (window.confirm(language.commentDeleteConfirmation)) {
                 let query = '[data-id="' + event.target.dataset.id + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
@@ -237,28 +236,28 @@
             let amount;
             if(time < 1) {
                 amount = time;
-                text = i18n.commentTimeNowText;
+                text = language.commentTimeNow;
             } else if(1 <= time && time < 60) {
                 amount = time;
-                text = i18n.commentTimeSecondsText.replace('%s',amount);
+                text = language.commentTimeSeconds.replace('%s',amount);
             } else if(60 <= time && time < 60 * 60) {
                 amount = Math.floor(time / 60);
-                text = i18n.commentTimeMinutesText.replace('%s',amount);
+                text = language.commentTimeMinutes.replace('%s',amount);
             } else if(60 * 60 <= time && time < 60 * 60 * 24) {
                 amount = Math.floor(time / 60 / 60);
-                text = i18n.commentTimeHoursText.replace('%s',amount);
+                text = language.commentTimeHours.replace('%s',amount);
             } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
                 amount = Math.floor(time / 60 / 60 / 24);
-                text = i18n.commentTimeDaysText.replace('%s',amount);
+                text = language.commentTimeDays.replace('%s',amount);
             } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
                 amount = Math.floor(time / 60 / 60 / 24 / 7);
-                text = i18n.commentTimeWeeksText.replace('%s',amount);
+                text = language.commentTimeWeeks.replace('%s',amount);
             } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30);
-                text = i18n.commentTimeMonthsText.replace('%s',amount);
+                text = language.commentTimeMonths.replace('%s',amount);
             } else if(time >= 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                text = i18n.commentTimeYearsText.replace('%s',amount);
+                text = language.commentTimeYears.replace('%s',amount);
             } else {
                 //Handle errors
             }

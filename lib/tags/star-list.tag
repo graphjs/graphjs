@@ -17,7 +17,7 @@
                         </g>
                     </svg>
                 </div>
-                <input onkeyup={handleFilter} type="text" placeholder={i18n.searchPlaceholder}/>
+                <input onkeyup={handleFilter} type="text" placeholder={language.searchPlaceholder}/>
             </div>
         </div>
         <div if={loaded} class="graphjs-list">
@@ -55,7 +55,7 @@
                 </a>
             </div>
             <div class="graphjs-placeholder graphjs-item" if={matchedStars.length <= 0}>
-                {i18n.noStarText}
+                {language.noStar}
             </div>
         </div>
         <div class="graphjs-controls" if={loaded && matchedStars.length > pageLimit}>
@@ -110,10 +110,11 @@
                 </div>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
     </div>
     <graphjs-promo properties="bottom right"></graphjs-promo>
     <script>
+        import language from '../scripts/language.js';
         import analytics from '../scripts/analytics.js';
         import getStars from '../scripts/getStars.js';
         import getUserStars from '../scripts/getUserStars.js';
@@ -122,10 +123,7 @@
 
         analytics("star-list");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['star-list'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('star-list', opts);
 
         this.type = opts.type || 'default';
         this.scope = opts.scope || 'global';
@@ -187,7 +185,7 @@
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
-            if (window.confirm(i18n.removeConfirmationText)) {
+            if (window.confirm(language.removeConfirmation)) {
                 event.target.parentNode.parentNode.removeChild(event.target.parentNode);
                 removeStar(event.target.dataset.id, function(response) {
                     if(response.success) {

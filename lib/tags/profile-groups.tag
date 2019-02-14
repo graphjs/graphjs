@@ -1,6 +1,6 @@
 <graphjs-profile-groups class="graphjs-element graphjs-root graphjs-wallet">
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <p if={loaded && empty}>{i18n.noGroupsText}</p>
+        <p if={loaded && empty}>{language.noGroups}</p>
         <graphjs-group-card each={id in list} id={id}></graphjs-group-card>
         <graphjs-group-card if={list.length == 0 && !empty}></graphjs-group-card>
         <graphjs-group-card if={list.length == 0 && !empty}></graphjs-group-card>
@@ -8,17 +8,15 @@
         <graphjs-group-card if={list.length == 0 && !empty}></graphjs-group-card>
         <graphjs-group-card if={list.length == 0 && !empty}></graphjs-group-card>
         <graphjs-group-card if={list.length == 0 && !empty}></graphjs-group-card>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
     </div>
     <script>
+        import language from '../scripts/language.js';
         import listMemberships from '../scripts/listMemberships.js';
         import getSession from '../scripts/getSession.js';
         import showLogin from '../scripts/showLogin.js';
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['profile-groups'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('profile-groups', opts);
 
         this.id = opts.id;
         this.list = [];

@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="graphjs-comment" if={loaded && userId}>
-                        <textarea data-id={item.id} onkeyup={handleComment} placeholder={i18n.commentsInputPlaceholder}></textarea>
+                        <textarea data-id={item.id} onkeyup={handleComment} placeholder={language.commentsInputPlaceholder}></textarea>
                         <div if={!loaded} class="graphjs-loader">
                             <div class="graphjs-dots">
                                 <span></span>
@@ -84,12 +84,12 @@
                         <div class="graphjs-credit" if={authorsData.hasOwnProperty(item.commentsData[comment].author)}>
                             <img data-link="profile" data-id={item.commentsData[comment].author} onclick={handleShow} src={authorsData[item.commentsData[comment].author].avatar ? downsizeImage(authorsData[item.commentsData[comment].author].avatar, 50) : defaultAvatar} />
                             <span>
-                                <b data-link="profile" data-id={item.commentsData[comment].author} onclick={handleShow}>{authorsData[item.commentsData[comment].author].username || i18n.unknowUserText}</b>
+                                <b data-link="profile" data-id={item.commentsData[comment].author} onclick={handleShow}>{authorsData[item.commentsData[comment].author].username || language.unknowUser}</b>
                                 <time data-timestamp={item.commentsData[comment].createTime}>{handleTime(item.commentsData[comment].createTime)}</time>
                                 <small if={item.commentsData[comment].pseudo} class="graphjs-separated">Sending...</small>
                                 <small if={item.commentsData[comment].failed} class="graphjs-separated">Couldn't send!</small>
-                                <a hide={true} if={!item.commentsData[comment].pseudo && item.commentsData[comment].author == userId} onclick={handleEdit} data-id={comment}>{i18n.commentEditButtonText}</a>
-                                <a if={!item.commentsData[comment].pseudo && item.commentsData[comment].author == userId} onclick={handleRemoveComment} data-id={comment} data-parent={item.id}>{i18n.commentDeleteButtonText}</a>
+                                <a hide={true} if={!item.commentsData[comment].pseudo && item.commentsData[comment].author == userId} onclick={handleEdit} data-id={comment}>{language.commentEditButton}</a>
+                                <a if={!item.commentsData[comment].pseudo && item.commentsData[comment].author == userId} onclick={handleRemoveComment} data-id={comment} data-parent={item.id}>{language.commentDeleteButton}</a>
                             </span>
                         </div>
                         <p>{item.commentsData[comment].content}</p>
@@ -99,6 +99,7 @@
         </div>
     </div>
     <script>
+        import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getStatusUpdates from '../scripts/getStatusUpdates.js';
         import getStatusUpdate from '../scripts/getStatusUpdate.js';
@@ -114,10 +115,7 @@
         import showLogin from '../scripts/showLogin.js';
         import showDisplay from '../scripts/showDisplay.js';
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['comments'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('comments', opts);
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         import {downsizeImage, getThumbnail} from '../scripts/client.js';

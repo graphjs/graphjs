@@ -1,6 +1,6 @@
 <graphjs-profile-following class="graphjs-element graphjs-root graphjs-wallet">
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <p if={loaded && empty}>{noFollowingText || i18n.noUsersText}</p>
+        <p if={loaded && empty}>{noFollowingText || language.noUsers}</p>
         <graphjs-profile-card each={id in list} id={id}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
@@ -8,17 +8,15 @@
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
         <graphjs-profile-card if={list.length == 0 && !empty}></graphjs-profile-card>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
     </div>
     <script>
+        import language from '../scripts/language.js';
         import getFollowing from '../scripts/getFollowing.js';
         import getSession from '../scripts/getSession.js';
         import showLogin from '../scripts/showLogin.js';
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['profile-following'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('profile-following', opts);
 
         this.id = opts.id;
         this.noFollowingText = opts.noFollowingText;

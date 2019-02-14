@@ -1,6 +1,6 @@
 <graphjs-group-creator class={'graphjs-element graphjs-root ' + boxStyle}>
     <div class="graphjs-header">
-        <div class="graphjs-title">{i18n.title}</div>
+        <div class="graphjs-title">{language.title}</div>
         <a if={opts.close} class="graphjs-option graphjs-right" onclick={handleOverlay}>
             <svg viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g transform="translate(-755.000000, -15.000000)" fill="black" fill-rule="nonzero">
@@ -19,22 +19,20 @@
     </div>
     <div class="graphjs-content">
         <form>
-            <input ref="title" type="text" placeholder={i18n.titlePlaceholder} />
-            <input ref="description" type="text" placeholder={i18n.descriptionPlaceholder} />
-            <button ref="submit" onclick={handleSubmit}>{i18n.submitButtonText}</button>
+            <input ref="title" type="text" placeholder={language.titlePlaceholder} />
+            <input ref="description" type="text" placeholder={language.descriptionPlaceholder} />
+            <button ref="submit" onclick={handleSubmit}>{language.submitButton}</button>
         </form>
     </div>
     <script>
+        import language from '../scripts/language.js';
         import createGroup from '../scripts/createGroup.js';
         import showGroup from '../scripts/showGroup.js';
         import hideOverlay from '../scripts/hideOverlay.js';
         import showAlert from '../scripts/showAlert.js';
         import '../vendor/cloudinary/upload-widget.js';
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['group-creator'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('group-creator', opts);        
 
         this.id = opts.id;
         this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
@@ -43,7 +41,7 @@
 
         this.checkTitleMinimumLength = () => {
             let titleMinimumLengthLimit = 2;
-            let failMessage = i18n.titleMinLengthError.replace("%s",titleMinimumLengthLimit);
+            let failMessage = language.titleMinLengthError.replace("%s",titleMinimumLengthLimit);
             if(this.refs.title.value.length >= titleMinimumLengthLimit) {
                 this.refs.title.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -56,7 +54,7 @@
         }
         this.checkTitleMaximumLength = () => {
             let titleMaximumLengthLimit = 80;
-            let failMessage = i18n.titleMaxLengthError.replace("%s",titleMaximumLengthLimit);
+            let failMessage = language.titleMaxLengthError.replace("%s",titleMaximumLengthLimit);
             if(this.refs.title.value.length <= titleMaximumLengthLimit) {
                 this.refs.title.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -69,7 +67,7 @@
         }
         this.checkDescriptionMinimumLength = () => {
             let descriptionMinimumLengthLimit = 10;
-            let failMessage = i18n.descriptionMinLengthError.replace("%s",descriptionMinimumLengthLimit);
+            let failMessage = language.descriptionMinLengthError.replace("%s",descriptionMinimumLengthLimit);
             if(this.refs.description.value.length >= descriptionMinimumLengthLimit) {
                 this.refs.description.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -82,7 +80,7 @@
         }
         this.checkDescriptionMaximumLength = () => {
             let descriptionMaximumLengthLimit = 255;
-            let failMessage = i18n.descriptionMaxLengthError.replace("%s",descriptionMaximumLengthLimit);
+            let failMessage = language.descriptionMaxLengthError.replace("%s",descriptionMaximumLengthLimit);
             if(this.refs.description.value.length <= descriptionMaximumLengthLimit) {
                 this.refs.description.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -123,8 +121,8 @@
                     title,
                     description,
                     function(response) {
-                        let failMessage = i18n.failMessage;
-                        let successMessage = i18n.successMessage;
+                        let failMessage = language.failMessage;
+                        let successMessage = language.successMessage;
                         if(response.success) {
                             self.refs.title.classList.remove('graphjs-error');
                             self.refs.title.classList.add('graphjs-success');
