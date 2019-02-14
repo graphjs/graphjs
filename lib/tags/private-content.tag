@@ -16,8 +16,8 @@
                         filter: url(#light-blur);
                     "
                 >
-                    <h1>{i18n.title}</h1>
-                    <h2>{i18n.subTitle}</h2>
+                    <h1>{language.title}</h1>
+                    <h2>{language.subTitle}</h2>
                     <p>Phasellus vitae lorem aliquet, egestas metus ac, iaculis erat. Aenean quis est placerat leo lobortis hendrerit vel ut erat. Duis ultricies pellentesque ultrices. Nam eget commodo ex.</p>
                     <p>Mauris facilisis, diam id semper auctor, enim ligula placerat nibh, ac accumsan eros nisl eu nibh. Aliquam aliquam felis quis erat posuere suscipit. Vestibulum ut pharetra nulla. Donec tempus varius neque ut egestas. Phasellus pretium a neque congue facilisis.</p>
                     <p>Sed lacinia nulla lacus, non gravida odio consequat at. Suspendisse aliquet pellentesque nisi, id accumsan erat auctor in. Suspendisse elementum consectetur lectus ut malesuada.</p>
@@ -60,8 +60,8 @@
                         filter: url(#light-blur);
                     "
                 >
-                    <h1>{i18n.title}</h1>
-                    <h2>{i18n.subTitle}</h2>
+                    <h1>{language.title}</h1>
+                    <h2>{language.subTitle}</h2>
                     <div
                         class="graphjs-media-wrapper"
                         style="background-image: url(https://raw.githubusercontent.com/phonetworks/graphjs/master/static/single-image.png);"
@@ -77,7 +77,7 @@
                 <yield />
             </div>
         </div>
-        <button ref="blockageButton" if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
+        <button ref="blockageButton" if={blocked} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
         <svg class="graphjs-filter">
             <defs>
                 <filter id="light-blur">
@@ -91,16 +91,14 @@
     </div>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getPrivateContent from '../scripts/getPrivateContent.js';
         import showLogin from '../scripts/showLogin.js';
 
         analytics("private-content");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['private-content'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('private-content', opts);
         
         this.blocked = true;
         this.invalid = false;
@@ -166,7 +164,7 @@
                 }
                 else {
                     if(response.reason && response.reason == 'Invalid ID') {
-                        self.refs.blockageButton.innerText = i18n.errorText;
+                        self.refs.blockageButton.innerText = language.error;
                         self.invalid = true;
                     }
                     self.blocked = true;

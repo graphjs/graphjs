@@ -2,10 +2,10 @@
     <a if={loaded && group} class="graphjs-information" data-link="group" data-id={id} onclick={target ? handleTarget : handleShow}>
         <img src={group.cover ? downsizeImage(group.cover, 240) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/group.png'} />
         <b if={group}>{group.title}</b>
-        <p>{ i18n.membersCountText.replace("%s",group.count) }</p>
+        <p>{ language.membersCount.replace("%s",group.count) }</p>
     </a>
     <button if={loaded && (!group || !joinInformation)}>&middot; &middot; &middot;</button>
-    <button if={loaded && group && joinInformation} onclick={joined ? handleLeave : handleJoin}>{joined ? i18n.leaveGroupText : i18n.joinGroupText}</button>
+    <button if={loaded && group && joinInformation} onclick={joined ? handleLeave : handleJoin}>{joined ? language.leaveGroup : language.joinGroup}</button>
     <div if={!loaded} class="graphjs-placeholder graphjs-loader">
         <div class="graphjs-link">
             <div class="graphjs-cover graphjs-rectangle graphjs-fill"></div>
@@ -19,6 +19,7 @@
     </div>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import getGroup from '../scripts/getGroup.js';
         import joinGroup from '../scripts/joinGroup.js';
         import leaveGroup from '../scripts/leaveGroup.js';
@@ -29,10 +30,7 @@
 
         analytics("group-card");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['group-card'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('group-card', opts);
 
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;

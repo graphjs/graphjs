@@ -1,6 +1,6 @@
 <graphjs-messages-composer class={'graphjs-element graphjs-root ' + boxStyle + (checked ? ' graphjs-checked' : '')}>
     <div class="graphjs-header">
-        <div class="graphjs-title">{i18n.title}</div>
+        <div class="graphjs-title">{language.title}</div>
         <a if={opts.close} class="graphjs-option graphjs-right" onclick={handleOverlay}>
             <svg viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g transform="translate(-755.000000, -15.000000)" fill="black" fill-rule="nonzero">
@@ -15,12 +15,12 @@
         </ul>
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <div if={recipient && userId} class={'graphjs-recipient' + (recipient ? '' : ' graphjs-unknown')} data-recipientlabel={i18n.recipientLabel}>{profile ? profile.username : i18n.noRecipientText}</div>
-        <input if={anonymity && !userId} ref="email" type="text" placeholder={i18n.emailPlaceholder}/>
+        <div if={recipient && userId} class={'graphjs-recipient' + (recipient ? '' : ' graphjs-unknown')} data-recipientlabel={language.recipientLabel}>{profile ? profile.username : language.noRecipient}</div>
+        <input if={anonymity && !userId} ref="email" type="text" placeholder={language.emailPlaceholder}/>
         <form>
-            <textarea ref="message" placeholder={opts.placeholder || i18n.messagePlaceholder}></textarea>
-            <button ref="submitMessage" onclick={handleMessage}>{i18n.submitButtonText}</button>
-            <button if={opts.clear} onclick={handleClear} class="graphjs-danger">{i18n.clearButtonText}</button>
+            <textarea ref="message" placeholder={opts.placeholder || language.messagePlaceholder}></textarea>
+            <button ref="submitMessage" onclick={handleMessage}>{language.submitButton}</button>
+            <button if={opts.clear} onclick={handleClear} class="graphjs-danger">{language.clearButton}</button>
         </form>
         <div if={!loaded && !blocked} class="graphjs-loader">
             <div class="graphjs-dots">
@@ -29,7 +29,7 @@
                 <span></span>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
     </div>
     <div class="graphjs-check">
         <svg class="graphjs-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
@@ -40,6 +40,7 @@
     <graphjs-promo properties="bottom left"></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
         import sendMessage from '../scripts/sendMessage.js';
@@ -49,10 +50,7 @@
 
         analytics("messages-composer");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['messages-composer'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('messages-composer', opts);
 
         this.loaded = false;
         this.failMessages = [];
@@ -168,7 +166,7 @@
             });
         }
         this.checkEmailPattern = () => {
-            let failMessage = i18n.emailPatternErrorText;
+            let failMessage = language.emailPatternError;
             let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if(emailPattern.test(this.refs.email.value)) {
                 this.refs.email.classList.remove('graphjs-error');

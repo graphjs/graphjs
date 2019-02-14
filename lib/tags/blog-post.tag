@@ -12,7 +12,7 @@
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading graphjs-stuffed') + (blocked ? ' graphjs-blocked graphjs-stuffed' : '')}>
         <div if={loaded && notExisting} class="graphjs-nonexistent">
-            <p>{i18n.noPostText}</p>
+            <p>{language.noPost}</p>
         </div>
         <div if={loaded && !deleted} class="graphjs-post" ref="scrollingContent">
             <ul class="graphjs-action" if={authorized}>
@@ -40,10 +40,10 @@
                 {title}
             </h1>
             <ul if={loaded} class="graphjs-information">
-                <li if={author} class="graphjs-author" data-authorbeforetext={i18n.authorBeforeText}>
+                <li if={author} class="graphjs-author" data-authorbeforetext={language.authorBefore}>
                     <a data-link="profile" data-id={author.id} onclick={handleShow}>{author.username}</a>
                 </li>
-                <li if={time} class="graphjs-time" data-publishedtimebeforetext={i18n.publishedTimeBeforeText} data-edittimebeforetext={i18n.editTimeBeforeText}>
+                <li if={time} class="graphjs-time" data-publishedtimebeforetext={language.publishedTimeBefore} data-edittimebeforetext={language.editTimeBefore}>
                     <time if={published && time.published && opts.minor}>
                         <a href={window.location.href}>{timeText}</a>
                     </time>
@@ -56,9 +56,9 @@
         <div class="graphjs-comments" if={loaded && showComments}>
             <div class="graphjs-comment">
                 <div onclick={handleComposer} class="graphjs-synopsis">
-                    <b if={comments.length <= 0}>{i18n.noCommentText}</b>
-                    <b if={comments.length > 0}>{comments.length + ' ' + (comments.length === 1 ? singleCommentText : multipleCommentsText)}</b>
-                    <a if={!composerReady}>{i18n.replyComposerText}</a>
+                    <b if={comments.length <= 0}>{language.noComment}</b>
+                    <b if={comments.length > 0}>{comments.length + ' ' + (comments.length === 1 ? language.singleComment : language.multipleComments)}</b>
+                    <a if={!composerReady}>{language.replyComposer}</a>
                     <a class={composerReady ? 'graphjs-icon' : 'graphjs-reverse graphjs-icon'}>
                         <svg viewBox="0 0 62 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <path transform="translate(-19.000000, 0.000000)" d="M78.5,2.4 C81.1,5 81.1,9.1 78.5,11.6 L54.6,35.6 C52,38.2 47.9,38.2 45.4,35.6 L21.5,11.7 C18.9,9.1 18.9,5 21.5,2.5 C24.1,-0.1 28.2,-0.1 30.7,2.5 L50,21.7 L69.3,2.4 C71.8,-0.1 76,-0.1 78.5,2.4 Z"></path>
@@ -66,9 +66,9 @@
                     </a>
                 </div>
                 <form class={userId ? '' : 'graphjs-loading graphjs-blocked'}>
-                    <textarea ref="composer" placeholder={i18n.commentInputPlaceholder}></textarea>
-                    <button ref="submit" onclick={handleComment}>{i18n.commentButtonText}</button>
-                    <button onclick={handleClear} class ="graphjs-danger">{i18n.clearButtonText}</button>
+                    <textarea ref="composer" placeholder={language.commentInputPlaceholder}></textarea>
+                    <button ref="submit" onclick={handleComment}>{language.commentButton}</button>
+                    <button onclick={handleClear} class ="graphjs-danger">{language.clearButton}</button>
                     <div if={!loaded} class="graphjs-loader">
                         <div class="graphjs-dots">
                             <span></span>
@@ -76,7 +76,7 @@
                             <span></span>
                         </div>
                     </div>
-                    <button if={!userId} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
+                    <button if={!userId} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
                 <form>
             </div>
             <div each={comment, index in comments} data-id={comment.id} class="graphjs-item">
@@ -118,6 +118,7 @@
     <graphjs-promo if={loaded} properties="bottom right"></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getBlogPost from '../scripts/getBlogPost.js';
         import commentBlogPost from '../scripts/commentBlogPost.js';
@@ -135,6 +136,8 @@
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         analytics("blog-post");
+
+        this.language = language('blog-post', opts);
 
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
@@ -154,11 +157,6 @@
         this.rendered = false;
 
         let self = this;
-
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['blog-post'];
-        i18n = {...i18n,...opts}
-        this.i18n = i18n;
 
         this.on('before-mount', function() {
             this.handleUser();
@@ -264,7 +262,7 @@
         this.publish = (event) => {
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
-            link.innerHTML = i18n.publishProgressText;
+            link.innerHTML = language.publishProgress;
             publishBlogPost(self.id, function(response) {
                 if(response.success) {
                     self.published = true;
@@ -272,10 +270,10 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = i18n.publishErrorText;
+                        link.innerHTML = language.publishError;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
-                            link.innerHTML = i18n.publishLinkText;
+                            link.innerHTML = language.publishLink;
                         }, 2500);
                     }
                 }
@@ -284,7 +282,7 @@
         this.unpublish = (event) => {
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
-            link.innerHTML = i18n.unpublishProgressText;
+            link.innerHTML = language.unpublishProgress;
             unpublishBlogPost(self.id, function(response) {
                 if(response.success) {
                     self.published = false;
@@ -292,10 +290,10 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = i18n.unpublishErrorText;
+                        link.innerHTML = language.unpublishError;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
-                            link.innerHTML = i18n.unpublishLinkText;
+                            link.innerHTML = language.unpublishLink;
                         }, 2500);
                     }
                 }
@@ -303,9 +301,9 @@
         }
         this.delete = (event) => {
             let link = event.currentTarget;
-            if (window.confirm(i18n.deleteConfirmationText)) {
+            if (window.confirm(language.deleteConfirmation)) {
                 link.setAttribute('disabled', 'disabled');
-                link.innerHTML = i18n.deleteProgressText;
+                link.innerHTML = language.deleteProgress;
                 removeBlogPost(self.id, function(response) {
                     if(response.success) {
                         self.notExisting = true;
@@ -316,10 +314,10 @@
                     } else {
                         if(link) {
                             link.setAttribute('disabled', 'disabled');
-                            link.innerHTML = i18n.deleteErrorText;
+                            link.innerHTML = language.deleteError;
                             setTimeout(function() {
                                 link.removeAttribute('disabled');
-                                link.innerHTML = i18n.deleteLinkText;
+                                link.innerHTML = language.deleteLink;
                             }, 2500);
                         }
                     }
@@ -399,7 +397,7 @@
             if(textBox.hasAttribute('contenteditable')) {
                 textBox.removeAttribute('contenteditable');
                 textBox.classList.remove('graphjs-editable');
-                event.target.innerText = i18n.editLinkText;
+                event.target.innerText = language.editLinkText;
                 if(textBox.innerText != '') {
                     editBlogComment(event.target.dataset.id, textBox.innerText, function(response) {
                         if(response.success) {
@@ -412,13 +410,13 @@
             } else {
                 textBox.contentEditable = true;
                 textBox.focus();
-                event.target.innerText = i18n.saveLinkText;
+                event.target.innerText = language.saveLink;
                 textBox.classList.add('graphjs-editable');
             }
         }
         this.handleRemove = (event) => {
             event.preventDefault();
-            if (window.confirm(i18n.commentDeleteConfirmation)) {
+            if (window.confirm(language.commentDeleteConfirmation)) {
                 let query = '[data-id="' + event.target.dataset.id + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
@@ -434,7 +432,7 @@
         }
         this.handleDestroy = (event) => {
             event.preventDefault();
-            if (window.confirm(i18n.postDeleteConfirmation)) {
+            if (window.confirm(language.postDeleteConfirmation)) {
                 let query = '[data-link="list"]';
                 let element = document.querySelectorAll(query)[0];
                 removeBlogPost(event.target.dataset.id, function(response) {
@@ -461,28 +459,28 @@
             let amount;
             if(time < 1) {
                 amount = time;
-                text = i18n.commentTimeNowText;
+                text = language.commentTimeNow;
             } else if(1 <= time && time < 60) {
                 amount = time;
-                text = i18n.commentTimeSecondsText.replace('%s',amount);
+                text = language.commentTimeSeconds.replace('%s',amount);
             } else if(60 <= time && time < 60 * 60) {
                 amount = Math.floor(time / 60);
-                text = i18n.commentTimeMinutesText.replace('%s',amount);
+                text = language.commentTimeMinutes.replace('%s',amount);
             } else if(60 * 60 <= time && time < 60 * 60 * 24) {
                 amount = Math.floor(time / 60 / 60);
-                text = i18n.commentTimeHoursText.replace('%s',amount);
+                text = language.commentTimeHours.replace('%s',amount);
             } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
                 amount = Math.floor(time / 60 / 60 / 24);
-                text = i18n.commentTimeDaysText.replace('%s',amount);
+                text = language.commentTimeDays.replace('%s',amount);
             } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
                 amount = Math.floor(time / 60 / 60 / 24 / 7);
-                text = i18n.commentTimeWeeksText.replace('%s',amount);
+                text = language.commentTimeWeeks.replace('%s',amount);
             } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30);
-                text = i18n.commentTimeMonthsText.replace('%s',amount);
+                text = language.commentTimeMonths.replace('%s',amount);
             } else if(time >= 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                text = i18n.commentTimeYearsText.replace('%s',amount);
+                text = language.commentTimeYears.replace('%s',amount);
             } else {
                 //Handle errors
             }

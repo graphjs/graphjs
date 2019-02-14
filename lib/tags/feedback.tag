@@ -12,7 +12,7 @@
     </div>
     <div class="graphjs-content" ref="scrollingContent">
         <div class="graphjs-synopsis" if={feedbacks.length <= 0}>
-            {i18n.noFeedbackMessageText}
+            {language.noFeedbackMessage}
         </div>
         <div each={feedback in feedbacks} data-id={feedback} class="graphjs-item" if={feedbacks}>
             <img class="graphjs-author" data-link="profile" data-id={feedbacksData[feedback].author} onclick={handleShow} src={authorsData[feedbacksData[feedback].author].avatar ? downsizeImage(authorsData[feedbacksData[feedback].author].avatar, 50) : 'https://raw.githubusercontent.com/phonetworks/graphjs/master/static/user.png'} if={authorsData.hasOwnProperty(feedbacksData[feedback].author)} />
@@ -61,8 +61,8 @@
                 		</svg>
                 	</label>
                 </fieldset>
-                <textarea ref="composer" placeholder={i18n.feedbackInputPlaceholder}></textarea>
-                <a ref="submit" onclick={handleFeedback}>{i18n.submitButtonText}</a>
+                <textarea ref="composer" placeholder={language.feedbackInputPlaceholder}></textarea>
+                <a ref="submit" onclick={handleFeedback}>{language.submitButton}</a>
                 <div if={!loaded && !blocked} class="graphjs-loader">
                     <div class="graphjs-dots">
                         <span></span>
@@ -70,13 +70,14 @@
                         <span></span>
                     </div>
                 </div>
-                <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
+                <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
             </div>
         </div>
     </div>
     <graphjs-promo properties="top right"></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getFeedback from '../scripts/getFeedback.js';
         import addFeedback from '../scripts/addFeedback.js';
@@ -87,10 +88,7 @@
 
         analytics("feedback");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['feedback'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('feedback', opts);
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         import {downsizeImage} from '../scripts/client.js';
@@ -260,7 +258,7 @@
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
-            if (window.confirm(i18n.feedbackDeleteComfirmationText)) {
+            if (window.confirm(language.feedbackDeleteComfirmation)) {
                 let query = '[data-id="' + event.target.dataset.id + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
