@@ -18,12 +18,16 @@
         import listGroups from '../scripts/listGroups.js';
         import listMembers from '../scripts/listMembers.js';
         import getProfile from '../scripts/getProfile.js';
+        import {downsizeImage} from '../scripts/client.js';
+
 
         let self = this;
 
+        this.downsizeImage = downsizeImage;
         this.identifier = Math.floor(Math.random() * 1000000);
         this.mentionType = opts.mentionType === 'members' ? 'members' : 'users';
         this.placeholder = opts.placeholder || 'Enter text here';
+        this.defaultAvatar = opts.defaultAvatar || window.GraphJSConfig.defaultAvatar;
 
         this.userMention = !(opts.mentionUser === 'disabled');
         this.groupMention = !(opts.mentionGroup === 'disabled');
@@ -47,7 +51,8 @@
                 return '<a class="graphjs-mention">@' + item.original.username + '</a>';
             },
             menuItemTemplate: function (item) {
-                return '<a class="graphjs-option">' + item.string + '</a>';
+                let avatar = item.original.avatar ? downsizeImage(item.original.avatar, 40) : self.defaultAvatar;
+                return '<a class="graphjs-option"><img src="' + avatar + '" />' + item.string + '</a>';
             },
             lookup: 'username',
             fillAttr: 'username',
@@ -138,7 +143,6 @@
         this.on('mount', function() {
             let input = document.getElementById('graphjs-input-' + self.identifier);
             let container = document.getElementById('graphjs-container-' + self.identifier);
-            console.log(container)
             // Add mention options
             self.userMention && self.activeMentionOptions.push({
                 ...self.userMentionOptions,
@@ -148,7 +152,6 @@
                 ...self.groupMentionOptions,
                 menuContainer: container
             });
-            console.log(0, self.activeMentionOptions)
             // Initiate mention function
             self.mention = new Tribute({
                 collection: self.activeMentionOptions
