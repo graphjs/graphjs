@@ -34,7 +34,6 @@
     "riot-tag-loader": "^2.0.0",
     "sanitize-html": "^1.19.2",
     "style-loader": "^0.20.2",
-    "textarea-caret": "^3.1.0",
     "tributejs": "^3.5.3",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^0.6.2",

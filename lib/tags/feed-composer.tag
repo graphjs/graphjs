@@ -9,20 +9,7 @@
 >
     <div class={'graphjs-content' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
         <div class="graphjs-entry">
-            <textarea ref="composer" placeholder="What's on your mind?"></textarea>
-            <graphjs-autocomplete
-                if={autocomplete}
-                type={autocomplete.type}
-                top={'calc(' + autocomplete.position.top + 'px - .5em)'}
-                left={'calc(' + autocomplete.position.left + 'px - 1em)'}
-                width={autocomplete.width + 'px'}
-                closing="on"
-                autoclose="on"
-                autofocus="on"
-                limit="5"
-                max-width="10em;"
-                callback={finalizeAutocomplete}
-            ></graphjs-autocomplete>
+            <graphjs-input-text ref="composer" event-input={() => handleTextInput()}></graphjs-input-text>
             <div class="graphjs-media" if={media.length > 0}>
                 <div each={item in media} class={'graphjs-item graphjs-' + item.resource_type}>
                     <img class="graphjs-thumbnail" src={item.thumbnail_url} />
@@ -60,7 +47,6 @@
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
         import updateStatus from '../scripts/updateStatus.js';
-        import getCaretCoordinates from 'textarea-caret';
         import '../vendor/cloudinary/upload-widget.js';
 
         import {downsizeImage} from '../scripts/client.js';
@@ -81,26 +67,8 @@
 
         this.on('mount', function() {
             let id = GraphJSConfig.id;
-            let text = this.refs.composer;
             let photo = this.refs.addPhoto;
             let video = this.refs.addVideo;
-            text.addEventListener('input', function() {
-                text.style.height = '';
-                text.style.height = text.scrollHeight + 'px';
-                self.message = text.value;
-                self.handleButton();
-            }, false);
-            text.addEventListener('keyup', function(event) {
-                if(event.key === '@' || event.key === '#') {
-                    event.preventDefault();
-                    let caretIndex = event.srcElement.selectionEnd;
-                    let value = event.target.value;
-                    let previousCharacter = value.charAt(caretIndex - 2);
-                    if(caretIndex === 1 || previousCharacter === ' ' || previousCharacter === '\n') {
-                        self.initiateAutocomplete(event.key, caretIndex);
-                    }
-                }
-            });
             photo.addEventListener('click', function() {
                 cloudinary.openUploadWidget({
                     cloud_name: 'graphjs',
@@ -168,6 +136,10 @@
             event.preventDefault();
             showLogin();
         }
+        this.handleTextInput = () => {
+            self.message = this.refs.composer.value();
+            self.handleButton();
+        }
         this.checkMedia = () => {
             let mediaMinimumLimit = 1;
             if(this.media.length >= mediaMinimumLimit) {
@@ -208,7 +180,7 @@
                 });
                 updateStatus(type, message, content, function(response) {
                     if(response.success) {
-                        self.refs.composer.value = '';
+                        self.refs.composer.clear();
                         self.refs.submit.classList.remove('graphjs-loading');
                         self.button = false;
                         self.type = 'text';
@@ -238,36 +210,6 @@
                     });
                     break;
             }
-        }
-        this.initiateAutocomplete = (key, index) => {
-            let width = '150'; // This will be the width of autocomplete box (px)
-            let textbox = this.refs.composer;
-            let caret = getCaretCoordinates(textbox, textbox.selectionEnd);
-            let top = caret.top;
-            let left = textbox.offsetWidth - caret.left > width
-                ? caret.left
-                : caret.left + textbox.offsetWidth - caret.left - width;
-            this.autocomplete = {
-                type: key === '@' ? 'users' : 'groups',
-                index,
-                width,
-                position: {top, left}
-            }
-            this.update();
-        }
-        this.finalizeAutocomplete = (data) => {
-            if(this.autocomplete) {
-                let value = this.refs.composer.value;
-                let index = this.autocomplete.index;
-                let newValue = value.slice(0, index) + data.label + ' ' + value.slice(index, value.length - 1);
-                this.refs.composer.value = newValue;
-                this.refs.composer.focus();
-            }
-            this.cancelAutocomplete();
-        }
-        this.cancelAutocomplete = () => {
-            this.autocomplete = null;
-            this.update();
         }
     </script>
 </graphjs-feed-composer>

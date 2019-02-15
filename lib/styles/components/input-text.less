@@ -17,7 +17,6 @@
         border-color: fade(black, 10%);
         .border-radius(@border-radius-small);
         outline: none;
-        background-color: fade(black, 5%);
         &:empty {
             &:before {
                 content: attr(data-placeholder);
@@ -27,64 +26,6 @@
         &:focus{
             &:before {
                 opacity: .35;
-            }
-        }
-    }
-    .@{prefix}-mention-container {
-        display: inline;
-        width: 0;
-        height: 0;
-        .@{prefix}-options {
-            padding: .25em;
-            ul {
-                overflow: auto;
-                max-height: 9em;
-                .no-margin;
-                .no-padding;
-                .regular-font;
-                border: 1px;
-                border-style: solid;
-                // ThemeOption: border-color: fade(@default-color, 3%);
-                border-color: transparent; // ThemeFix
-                .border-radius(@border-radius-medium);
-                // ThemeOption: background-color: @background-color-contrast;
-                .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
-                list-style: none;
-                border-top-left-radius: 0;
-                border-top-right-radius: 0;
-                li {
-                    height: 1.75em;
-                    max-width: 10em;
-                    padding: 0 .5em;
-                    line-height: 1.75em;
-                    .single-line-text;
-                    list-style: none;
-                    &:hover {
-                        background-color: fade(black, 5%);
-                    }
-                    &:first-child {
-                        box-sizing: content-box;
-                        border-top-width: 2px;
-                        border-top-style: solid;
-                        // ThemeOption: border-top-color: @primary-color;
-                    }
-                    &.@{prefix}-highlighted {
-                        // ThemeOption: background-color: fade(@primary-color, 10%);
-                    }
-                    .@{prefix}-option {
-                        // ThemeOption: color: @text-color-normal;
-                        img {
-                            height: 1.25em;
-                            margin-top: .25em;
-                            margin-left: -.25em;
-                            margin-right: .25em;
-                        }
-                        .@{prefix}-match {
-                            // ThemeOption: color: @text-color-strong;
-                            //.bold-font;
-                        }
-                    }
-                }
             }
         }
     }

@@ -258,6 +258,28 @@
     }
 }
 
+//mention-container.less
+.@{prefix}-mention-container {
+    ul {
+        border-color: fade(@default-color, 3%);
+        background-color: @background-color-contrast;
+        li {
+            &:first-child {
+                border-top-color: @primary-color;
+            }
+            &.@{prefix}-highlighted {
+                background-color: fade(@primary-color, 10%);
+            }
+            .@{prefix}-option {
+                color: @text-color-normal;
+                .@{prefix}-match {
+                    color: @text-color-strong;
+                }
+            }
+        }
+    }
+}
+
 // alert.less
 @{prefix}-alert.@{prefix}-root {
     & > button {
@@ -1032,28 +1054,6 @@
 
 @{prefix}-input-text.@{prefix}-root {
     color: @text-color-normal;
-    .@{prefix}-mention-container {
-        .@{prefix}-options {
-            ul {
-                border-color: fade(@default-color, 3%);
-                background-color: @background-color-contrast;
-                li {
-                    &:first-child {
-                        border-top-color: @primary-color;
-                    }
-                    &.@{prefix}-highlighted {
-                        background-color: fade(@primary-color, 10%);
-                    }
-                    .@{prefix}-option {
-                        color: @text-color-normal;
-                        .@{prefix}-match {
-                            color: @text-color-strong;
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 
 // messages.less

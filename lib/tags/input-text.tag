@@ -1,6 +1,6 @@
 <graphjs-input-text class="graphjs-element graphjs-root">
     <div
-        id={'graphjs-input-' + identifier}
+        ref="input"
         class="graphjs-input"
         contenteditable="true"
         data-placeholder={placeholder}
@@ -11,7 +11,6 @@
             (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
         }
     ></div>
-    <div ref="mentionContainer" class="graphjs-mention-container" id={'graphjs-container-' + identifier}></div>
     <script>
         import Tribute from 'tributejs';
         import getMembers from '../scripts/getMembers.js';
@@ -20,11 +19,9 @@
         import getProfile from '../scripts/getProfile.js';
         import {downsizeImage} from '../scripts/client.js';
 
-
         let self = this;
 
         this.downsizeImage = downsizeImage;
-        this.identifier = Math.floor(Math.random() * 1000000);
         this.mentionType = opts.mentionType === 'members' ? 'members' : 'users';
         this.placeholder = opts.placeholder || 'Enter text here';
         this.defaultAvatar = opts.defaultAvatar || window.GraphJSConfig.defaultAvatar;
@@ -37,7 +34,7 @@
             noMatchTemplate: null,
             requireLeadingSpace: true,
             replaceTextSuffix: '\n',
-            positionMenu: false,
+            positionMenu: true,
             spaceSelectsMatch: false,
             searchOpts: {
                 pre: '<span class="graphjs-match">',
@@ -141,31 +138,53 @@
         }
 
         this.on('mount', function() {
-            let input = document.getElementById('graphjs-input-' + self.identifier);
-            let container = document.getElementById('graphjs-container-' + self.identifier);
+            let input = self.refs.input;
+            // Listen to the events
+            this.handleEvents();
             // Add mention options
-            self.userMention && self.activeMentionOptions.push({
-                ...self.userMentionOptions,
-                menuContainer: container
+            this.userMention && this.activeMentionOptions.push({
+                ...this.userMentionOptions,
+                //menuContainer should be set here
             });
-            self.groupMention && self.activeMentionOptions.push({
-                ...self.groupMentionOptions,
-                menuContainer: container
+            this.groupMention && this.activeMentionOptions.push({
+                ...this.groupMentionOptions,
+                //menuContainer should be set here
             });
             // Initiate mention function
-            self.mention = new Tribute({
-                collection: self.activeMentionOptions
+            this.mention = new Tribute({
+                collection: this.activeMentionOptions
             });
             // Attach mention function to text box
-            self.mention.attach(input);
+            this.mention.attach(input);
         });
+
+        this.value = type => {
+            return type === 'html'
+                ? this.refs.input.innerHTML
+                : this.refs.input.innerText;
+        }
+
+        this.clear = () => {
+            this.refs.input.innerHTML = '';
+        }
 
         this.handleMentionContainer = () => {
             let element = document.querySelector('.tribute-container');
-            if(!self.refs.mentionContainer.contains(element)) {
-                element.classList.add('graphjs-options');
-                self.refs.mentionContainer.appendChild(element);
+            if(!element.classList.contains('graphjs-mention-container')) {
+                element.classList.add('graphjs-mention-container');
+                element.classList.add('graphjs-root');
             }
+        }
+
+        this.handleEvents = () => {
+            Object.keys(opts)
+                .filter(key => key.startsWith('event'))
+                .reduce((data, prefixedEventName) => {
+                    // Get event name
+                    let eventName = prefixedEventName.replace('event', '').toLowerCase();
+                    // Add event listener
+                    self.refs.input.addEventListener(eventName, opts[prefixedEventName]);
+                }, {});
         }
 
         this.handleProfiles = () => {
