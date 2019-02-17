@@ -168,6 +168,10 @@
             this.refs.input.innerHTML = '';
         }
 
+        this.focus = () => {
+            this.refs.input.focus();
+        }
+
         this.handleMentionContainer = () => {
             let element = document.querySelector('.tribute-container');
             if(!element.classList.contains('graphjs-mention-container')) {

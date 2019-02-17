@@ -17,7 +17,7 @@
             </span>
         </div>
         <div class="graphjs-entry">
-            <div if={activity.text} class="graphjs-text">{activity.text}</div>
+            <div ref="text" if={activity.text} class="graphjs-text">{activity.text}</div>
             <div if={activity.urls.length > 0 && activity.type == 'photo'} class="graphjs-media graphjs-photo">
                 <a data-id={activity.id} onclick={handleDisplay}>
                     <img src={getThumbnail(activity.urls[0], 600)} />
@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="graphjs-comment" if={loaded && userId}>
-                <textarea data-id={activity.id} onkeyup={handleComment} placeholder={i18n.commentsInputPlaceholder}></textarea>
+                <graphjs-input-text ref="composer" data-id={activity.id} event-keyup={() => handleComment(event)} placeholder={i18n.commentsInputPlaceholder}></graphjs-input-text>
                 <div if={!loaded} class="graphjs-loader">
                     <div class="graphjs-dots">
                         <span></span>
@@ -77,7 +77,7 @@
                 </div>
             </div>
         </div>
-        <div class="graphjs-comments" if={activity.comments && activity.comments.length > 0}>
+        <div ref="comments" class="graphjs-comments" if={activity.comments && activity.comments.length > 0}>
             <div class={'graphjs-comment' + (activity.commentsData[comment].pseudo ? ' graphjs-pseudo' : '')} id={'comment-' + comment} each={comment in activity.comments} data-id={comment}>
                 <div class="graphjs-credit" if={authorsData.hasOwnProperty(activity.commentsData[comment].author)}>
                     <img data-link="profile" data-id={activity.commentsData[comment].author} onclick={handleShow} src={authorsData[activity.commentsData[comment].author].avatar ? downsizeImage(authorsData[activity.commentsData[comment].author].avatar, 50) : defaultAvatar} />
@@ -90,7 +90,7 @@
                         <a if={!activity.commentsData[comment].pseudo && activity.commentsData[comment].author == userId} onclick={handleRemoveComment} data-id={comment} data-parent={activity.id}>{i18n.commentDeleteButtonText}</a>
                     </span>
                 </div>
-                <p>{activity.commentsData[comment].content}</p>
+                <p class="graphjs-comment-content">{activity.commentsData[comment].content}</p>
             </div>
         </div>
     </div>
@@ -108,6 +108,7 @@
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
         import showDisplay from '../scripts/showDisplay.js';
+        import Autolinker from 'autolinker';
 
         import internationalization from '../i18n';
         let i18n = internationalization[window.GraphJSConfig.language]['comments'];
@@ -124,6 +125,20 @@
         this.id = opts.id;
         this.activity = {};
         this.authorsData = {};
+        this.autolinker = new Autolinker({
+            hashtag: 'twitter',
+            mention: 'twitter',
+            replaceFn : function(match) {
+                switch(match.getType()) {
+                    case 'hashtag' :
+                        var hashtag = match.getHashtag();
+                        return '<a href="https://graphjs.com/">' + hashtag + '</a>';
+                    case 'mention' :
+                        var mention = match.getMention();
+                        return '<a href="http://graphjs.com/">' + mention + '</a>';
+                }
+            }
+        });
         this.reaction = opts.reaction || 'love';
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
         this.boxStyle = opts.box == 'disabled'
@@ -180,6 +195,7 @@
                 }
                 self.loaded = true;
                 self.update();
+                self.activateLinks(self.refs.text);
                 self.handleComments();
             });
         }
@@ -200,6 +216,8 @@
                             }
                         });
                         self.update();
+                        let element = self.refs.comments.querySelector('.graphjs-comment[data-id="' + key + '"] .graphjs-comment-content');
+                        self.activateLinks(element);
                     });
                 }
             });
@@ -237,10 +255,11 @@
         this.handleComment = (event) => {
             if (event.keyCode == 13) {
                 event.preventDefault();
-                let value = event.target.value.replace(/\n+/g, '\n'); // Removes repetitive line breaks
-                if(!event.shiftKey) {
+                let value = event.target.innerText.replace(/\n+/g, '\n'); // Removes repetitive line breaks
+                value = value.trim(); // Removes white space
+                if(!event.shiftKey && value.length > 0) {
                     // Reset input
-                    event.target.value = '';
+                    event.target.innerText = '';
                     // Create pseudo comment
                     let randomNumber = Math.floor(Math.random() * 1000000);
                     let timestamp = (new Date()).getTime();
@@ -271,11 +290,11 @@
                 }
             }
         }
-        this.handleFocus = (event) => {
-            event.preventDefault();
-            let query = 'textarea[data-id="' + event.target.dataset.id + '"]';
-            let element = document.querySelectorAll(query)[0];
-            element && element.focus();
+        this.activateLinks = (element) => {
+            element.innerHTML = this.autolinker.link(element.innerText);
+        }
+        this.handleFocus = () => {
+            this.refs.composer.focus();
         }
         this.handleDisplay = (event) => {
             event.preventDefault();
