@@ -82,12 +82,12 @@
                 <div class="graphjs-credit" if={authorsData.hasOwnProperty(activity.commentsData[comment].author)}>
                     <img data-link="profile" data-id={activity.commentsData[comment].author} onclick={handleShow} src={authorsData[activity.commentsData[comment].author].avatar ? downsizeImage(authorsData[activity.commentsData[comment].author].avatar, 50) : defaultAvatar} />
                     <span>
-                        <b data-link="profile" data-id={activity.commentsData[comment].author} onclick={handleShow}>{authorsData[activity.commentsData[comment].author].username || i18n.unknowUserText}</b>
+                        <b data-link="profile" data-id={activity.commentsData[comment].author} onclick={handleShow}>{authorsData[activity.commentsData[comment].author].username || language.unknowUser}</b>
                         <time data-timestamp={activity.commentsData[comment].createTime}>{handleTime(activity.commentsData[comment].createTime)}</time>
                         <small if={activity.commentsData[comment].pseudo} class="graphjs-separated">Sending...</small>
                         <small if={activity.commentsData[comment].failed} class="graphjs-separated">Couldn't send!</small>
-                        <a hide={true} if={!activity.commentsData[comment].pseudo && activity.commentsData[comment].author == userId} onclick={handleEdit} data-id={comment}>{i18n.commentEditButtonText}</a>
-                        <a if={!activity.commentsData[comment].pseudo && activity.commentsData[comment].author == userId} onclick={handleRemoveComment} data-id={comment} data-parent={activity.id}>{i18n.commentDeleteButtonText}</a>
+                        <a hide={true} if={!activity.commentsData[comment].pseudo && activity.commentsData[comment].author == userId} onclick={handleEdit} data-id={comment}>{language.commentEditButton}</a>
+                        <a if={!activity.commentsData[comment].pseudo && activity.commentsData[comment].author == userId} onclick={handleRemoveComment} data-id={comment} data-parent={activity.id}>{language.commentDeleteButton}</a>
                     </span>
                 </div>
                 <p class="graphjs-comment-content">{activity.commentsData[comment].content}</p>
@@ -95,6 +95,7 @@
         </div>
     </div>
     <script>
+        import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getStatusUpdate from '../scripts/getStatusUpdate.js';
         import removeStatusUpdate from '../scripts/removeStatusUpdate.js';
@@ -111,10 +112,7 @@
         import getId from '../scripts/getId.js';
         import Autolinker from 'autolinker';
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['comments'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('comments', opts);        
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         import {downsizeImage, getThumbnail} from '../scripts/client.js';

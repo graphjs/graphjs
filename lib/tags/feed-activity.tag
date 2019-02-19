@@ -13,6 +13,7 @@
         </div>
     </div>
     <script>
+        import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getStatusUpdates from '../scripts/getStatusUpdates.js';
         import getStatusUpdate from '../scripts/getStatusUpdate.js';
@@ -28,10 +29,7 @@
         import showLogin from '../scripts/showLogin.js';
         import showDisplay from '../scripts/showDisplay.js';
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['comments'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('comments', opts);
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         import {downsizeImage, getThumbnail} from '../scripts/client.js';

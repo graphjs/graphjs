@@ -1,6 +1,6 @@
 <graphjs-profile-activity class={'graphjs-element graphjs-root ' + boxStyle}>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
-        <p if={loaded && (!activity || activity.length <= 0)}>{i18n.noActivityText}</p>
+        <p if={loaded && (!activity || activity.length <= 0)}>{language.noActivity}</p>
         <ul if={activity.length > 0}>
             <li each={item in activity}>
                 <div if={item.type == '_construct'}>
@@ -9,7 +9,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    {i18n.userRegisteredText}
+                    {language.userRegistered}
                 </div>
                 <div if={item.type == 'follow'}>
                     <svg viewBox="0 0 93 78" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -17,7 +17,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    {i18n.followText}
+                    {language.follow}
                     <a data-link="profile" data-id={item.object.id} onclick={opts.targetProfile ? handleTarget : handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'create'}>
@@ -26,7 +26,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    {i18n.createText}
+                    {language.create}
                     <a data-link="group" data-id={item.object.id} onclick={opts.targetGroup ? handleTarget : handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'join'}>
@@ -35,7 +35,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    {i18n.joinText}
+                    {language.join}
                     <a data-link="group" data-id={item.object.id} onclick={opts.targetGroup ? handleTarget : handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'comment'}>
@@ -44,7 +44,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    {i18n.commentText}
+                    {language.comment}
                     <a href={item.object.label}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'start'}>
@@ -53,7 +53,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    {i18n.startText}
+                    {language.start}
                     <a data-link="thread" data-id={item.object.id} onclick={opts.targetForumThread ? handleTarget : handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'reply'}>
@@ -62,7 +62,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    {i18n.replyText}
+                    {language.reply}
                     <a data-link="thread" data-id={item.object.id} onclick={opts.targetForumThread ? handleTarget : handleShow}>{item.object.label}</a>
                 </div>
                 <div if={item.type == 'star'}>
@@ -71,7 +71,7 @@
                     </svg>
                     <time data-timestamp={item.time}>{handleTime(item.time)}</time>
                     <b>{profile.username}</b>
-                    {i18n.starText}
+                    {language.star}
                 </div>
             </li>
         </ul>
@@ -127,10 +127,11 @@
                 </div>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{i18n.loginButtonText}</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
     </div>
     <script>
         import getSession from '../scripts/getSession.js';
+        import language from '../scripts/language.js';
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
         import showForumThread from '../scripts/showForumThread.js';
@@ -139,10 +140,7 @@
         import getActivityToken from '../scripts/getActivityToken.js';
         import stream from 'getstream-pho';
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['profile-activity'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('profile-activity', opts);
 
         this.id = opts.id;
         this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
@@ -292,28 +290,28 @@
             let amount;
             if(time < 1) {
                 amount = time;
-                text = i18n.activityTimeNowText;
+                text = language.activityTimeNow;
             } else if(1 <= time && time < 60) {
                 amount = time;
-                text = i18n.activityTimeSecondsText.replace('%s',amount);
+                text = language.activityTimeSeconds.replace('%s',amount);
             } else if(60 <= time && time < 60 * 60) {
                 amount = Math.floor(time / 60);
-                text = i18n.activityTimeMinutesText.replace('%s',amount);
+                text = language.activityTimeMinutes.replace('%s',amount);
             } else if(60 * 60 <= time && time < 60 * 60 * 24) {
                 amount = Math.floor(time / 60 / 60);
-                text = i18n.activityTimeHoursText.replace('%s',amount);
+                text = language.activityTimeHours.replace('%s',amount);
             } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
                 amount = Math.floor(time / 60 / 60 / 24);
-                text = i18n.activityTimeDaysText.replace('%s',amount);
+                text = language.activityTimeDays.replace('%s',amount);
             } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
                 amount = Math.floor(time / 60 / 60 / 24 / 7);
-                text = i18n.activityTimeWeeksText.replace('%s',amount);
+                text = language.activityTimeWeeks.replace('%s',amount);
             } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30);
-                text = i18n.activityTimeMonthsText.replace('%s',amount);
+                text = language.activityTimeMonths.replace('%s',amount);
             } else if(time >= 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                text = i18n.activityTimeYearsText.replace('%s',amount);
+                text = language.activityTimeYears.replace('%s',amount);
             } else {
                 //Handle errors
             }

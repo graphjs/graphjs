@@ -11,13 +11,13 @@
     </div>
     <div class="graphjs-content">
         <form>
-            <input ref="username" type="text" placeholder={i18n.usernamePlaceholder}/>
-            <input ref="email" type="text" placeholder={i18n.emailPlaceholder}/>
-            <input ref="password" type="password" placeholder={i18n.passwordPlaceholder}/>
-            <input ref="confirmation" type="password" placeholder={i18n.confirmPasswordPlaceholder}/>
-            <button ref="submit" onclick={handleSubmit}>{i18n.submitButtonText}</button>
+            <input ref="username" type="text" placeholder={language.usernamePlaceholder}/>
+            <input ref="email" type="text" placeholder={language.emailPlaceholder}/>
+            <input ref="password" type="password" placeholder={language.passwordPlaceholder}/>
+            <input ref="confirmation" type="password" placeholder={language.confirmPasswordPlaceholder}/>
+            <button ref="submit" onclick={handleSubmit}>{language.submitButton}</button>
             <div class="graphjs-option graphjs-single">
-                <a data-link="login" onclick={opts.minor ? opts.callback : handleLoginBox}>{i18n.loginLinkText}</a>
+                <a data-link="login" onclick={opts.minor ? opts.callback : handleLoginBox}>{language.loginLink}</a>
             </div>
         </form>
     </div>
@@ -30,6 +30,7 @@
     <graphjs-promo properties="bottom right" detach={opts.box === 'disabled'}></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import register from '../scripts/register.js';
         import login from '../scripts/login.js';
         import showAlert from '../scripts/showAlert.js';
@@ -38,10 +39,7 @@
 
         analytics("auth-register");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['auth-register'];
-        i18n = {...i18n,...JSON.parse(JSON.stringify(opts))}
-        this.i18n = i18n;
+        this.language = language('auth-register', opts);
 
         this.boxStyle = opts.box == 'disabled'
             ? 'graphjs-inline graphjs-promo-pad'
@@ -53,7 +51,7 @@
 
         this.checkUsernameMinimumLength = () => {
             let usernameMinimumLengthLimit = 1;
-            let failMessage = i18n.usernameMinLengthErrorText;
+            let failMessage = language.usernameMinLengthError;
             if(this.refs.username.value.length >= usernameMinimumLengthLimit) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -66,7 +64,7 @@
         }
         this.checkUsernameMaximumLength = () => {
             let usernameMaximumLengthLimit = 36;
-            let failMessage = i18n.usernameMaxLengthErrorText.replace('%s',usernameMaximumLengthLimit);
+            let failMessage = language.usernameMaxLengthError.replace('%s',usernameMaximumLengthLimit);
             if(this.refs.username.value.length <= usernameMaximumLengthLimit) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -78,7 +76,7 @@
             }
         }
         this.checkUsernamePattern = () => {
-            let failMessage = i18n.usernamePatternErrorText;
+            let failMessage = language.usernamePatternError;
             let usernamePattern = /^[a-zA-Z0-9-_]+$/;
             if(usernamePattern.test(this.refs.username.value)) {
                 this.refs.username.classList.remove('graphjs-error');
@@ -91,7 +89,7 @@
             }
         }
         this.checkEmailPattern = () => {
-            let failMessage = i18n.emailPatternErrorText;
+            let failMessage = language.emailPatternError;
             let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if(emailPattern.test(this.refs.email.value)) {
                 this.refs.email.classList.remove('graphjs-error');
@@ -105,7 +103,7 @@
         }
         this.checkPasswordMinimumLength = () => {
             let passwordMinimumLengthLimit = 5;
-            let failMessage = i18n.passwordMinLengthErrorText.replace('%s',passwordMinimumLengthLimit);
+            let failMessage = language.passwordMinLengthError.replace('%s',passwordMinimumLengthLimit);
             if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -118,7 +116,7 @@
         }
         this.checkPasswordMaximumLength = () => {
             let passwordMaximumLengthLimit = 255;
-            let failMessage = i18n.passwordMaxLengthErrorText.replace('%s',passwordMaximumLengthLimit);
+            let failMessage = language.passwordMaxLengthError.replace('%s',passwordMaximumLengthLimit);
             if(this.refs.password.value.length <= passwordMaximumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -130,7 +128,7 @@
             }
         }
         this.checkPasswordMatch = () => {
-            let failMessage = i18n.passwordMatchErrorText;
+            let failMessage = language.passwordMatchError;
             if(this.refs.password.value == this.refs.confirmation.value) {
                 this.refs.confirmation.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);

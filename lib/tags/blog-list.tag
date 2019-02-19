@@ -27,7 +27,7 @@
                         <span 
                             data-link="profile"
                             data-id={postsData[matchedPost].author.id} 
-                            data-authorbeforetext={i18n.authorBeforeText}
+                            data-authorbeforetext={language.authorBefore}
                             onclick={handleShow}
                         >
                             {postsData[matchedPost].author.username}
@@ -43,7 +43,7 @@
                 <div class="graphjs-summary">{postsData[matchedPost].summary}</div>
             </a>
             <div class="graphjs-placeholder graphjs-item" if={loaded && matchedPosts.length <= 0}>
-                {i18n.noPostText}
+                {language.noPost}
             </div>
         </div>
         <div class="graphjs-controls" if={loaded && matchedPosts.length > pageLimit}>
@@ -116,6 +116,7 @@
     <graphjs-promo if={loaded} properties="bottom right" detach={opts.box === 'disabled'}></graphjs-promo>
     <script>
         import analytics from '../scripts/analytics.js';
+        import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getBlogPosts from '../scripts/getBlogPosts.js';
         import showBlogComposer from '../scripts/showBlogComposer.js';
@@ -125,10 +126,7 @@
 
         analytics("blog-list");
 
-        import internationalization from '../i18n';
-        let i18n = internationalization[window.GraphJSConfig.language]['blog-list'];
-        i18n = {...i18n,...opts}
-        this.i18n = i18n;
+        this.language = language('blog-list', opts);
         
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;

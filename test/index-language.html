@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Test GraphJS Components</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Auth for session control -->
+        <graphjs-auth></graphjs-auth>
+        <br /><br /><br /><br /><br />
+
+        <!-- Test a single tag here -->
+        <graphjs-auth-login></graphjs-auth-login>
+        <graphjs-auth-login
+            lang-username-placeholder="OVERWRITTEN username placeholder"
+            lang-password-placeholder="OVERWRITTEN password placeholder"
+            lang-submit-button="OVERWRITTEN submit button"
+            lang-register-link="OVERWRITTEN register link"
+            lang-reset-link="OVERWRITTEN reset link"
+            lang-username-length-error="OVERWRITTEN username length error"
+            lang-username-pattern-error="OVERWRITTEN username pattern error"
+            lang-password-error="OVERWRITTEN password error"
+        ></graphjs-auth-login>
+
+        <script src="../dist/graph.js"></script>
+        <script>
+            GraphJS.init("79982844-6a27-4b3b-b77f-419a79be0e10", {
+                host: 'https://graphjs-server-test.herokuapp.com',
+                //host: 'https://gjs-singlesignon.herokuapp.com',
+                language: 'fr-FR',
+                theme: {
+                    primaryColor: 'cornflowerblue',
+                    backgroundColor: 'white',
+                    textColor: '#555'
+                }
+            });
+        </script>
+    </body>
+</html>
