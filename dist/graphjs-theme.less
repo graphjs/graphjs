@@ -597,63 +597,6 @@
 // feed-activity.less
 @{prefix}-feed-activity.@{prefix}-root {
     color: @text-color-normal;
-    .@{prefix}-content {
-        .@{prefix}-activity {
-            .@{prefix}-item {
-                border-color: fade(@default-color, 3%);
-                background-color: @background-color-contrast;
-                .@{prefix}-interaction {
-                    .@{prefix}-synopsis {
-                        & > * {
-                            .@{prefix}-unauthorized {
-                                svg {
-                                    path {
-                                        fill: @text-color-weak !important;
-                                    }
-                                }
-                            }
-                        }
-                        .@{prefix}-rating-indicator {
-                            .@{prefix}-icon {
-                                svg {
-                                    path {
-                                        fill: desaturate(@text-color-weak, 65%);
-                                    }
-                                }
-                            }
-                        }
-                        .@{prefix}-comments-indicator {
-                            .@{prefix}-icon {
-                                svg {
-                                    path {
-                                        fill: desaturate(@text-color-weak, 65%);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                .@{prefix}-comments {
-                    .@{prefix}-comment {
-                        &.@{prefix}-pseudo {
-                            background-color: fade(@primary-color, 15%);
-                        }
-                        .@{prefix}-credit {
-                            span {
-                                color: @text-color-normal;
-                            }
-                        }
-                        p {
-                            &.@{prefix}-editable {
-                                border-color: fade(@default-color, 15%);
-                                background-color: @background-color-contrast;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 
 // feed-composer.less

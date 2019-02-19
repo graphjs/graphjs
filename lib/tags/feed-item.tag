@@ -108,6 +108,7 @@
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
         import showDisplay from '../scripts/showDisplay.js';
+        import getId from '../scripts/getId.js';
         import Autolinker from 'autolinker';
 
         import internationalization from '../i18n';
@@ -129,13 +130,16 @@
             hashtag: 'twitter',
             mention: 'twitter',
             replaceFn : function(match) {
+                let reference = 'graphjs-autolink-' + Math.floor(Math.random() * 1000000);
                 switch(match.getType()) {
-                    case 'hashtag' :
-                        var hashtag = match.getHashtag();
-                        return '<a href="https://graphjs.com/">' + hashtag + '</a>';
                     case 'mention' :
                         var mention = match.getMention();
-                        return '<a href="http://graphjs.com/">' + mention + '</a>';
+                        self.activateLink(reference, mention);
+                        return '<a id="' + reference + '" data-link="profile">@' + mention + '</a>';
+                    case 'hashtag' :
+                        var hashtag = match.getMatchedText().substr(1).replace(/_/g, ' ');
+                        self.activateLink(reference, hashtag);
+                        return '<a id="' + reference + '" data-link="group">#' + hashtag + '</a>';
                 }
             }
         });
@@ -174,30 +178,46 @@
             });
         }
         this.handleContent = (callback) => {
-            getStatusUpdate(self.id, response => {
-                if(response.success) {
-                    self.activity = response.update;
-                    self.activity.commentsData = {}
-                    self.activity.upvoted = false;
-                    self.activity.upvotes = 0;
-                    getUpvote(self.id, response => {
-                        if(response.success) {
-                            self.activity.upvoted = response.starred;
-                            self.activity.upvotes = response.count;
-                        }
-                    });
-                    getProfile(self.activity.author.id, response => {
-                        if(response.success) {
-                            self.authorsData[self.activity.author.id] = response.profile;
-                        }
-                        self.update();
-                    });
+            if(opts.activity) {
+                self.activity = {
+                    id: opts.activity.id,
+                    type: opts.activity.type,
+                    text: opts.activity.text,
+                    timestamp: opts.activity.timestamp,
+                    urls: opts.activity.urls,
+                    author: opts.activity.author
                 }
-                self.loaded = true;
-                self.update();
-                self.activateLinks(self.refs.text);
-                self.handleComments();
+                self.handleDetails();
+            } else {
+                getStatusUpdate(self.id, response => {
+                    if(response.success) {
+                        self.activity = response.update;
+                        self.handleDetails();
+                    }
+                });
+            }
+        }
+        this.handleDetails = () => {
+            self.activity.commentsData = {}
+            self.activity.upvoted = false;
+            self.activity.upvotes = 0;
+            getUpvote(self.id, response => {
+                if(response.success) {
+                    self.activity.upvoted = response.starred;
+                    self.activity.upvotes = response.count;
+                }
             });
+            getProfile(self.activity.author.id, response => {
+                if(response.success) {
+                    self.authorsData[self.activity.author.id] = response.profile;
+                }
+                self.update();
+            });
+
+            self.loaded = true;
+            self.update();
+            self.activateLinks(self.refs.text);
+            self.handleComments();
         }
         this.handleComments = () => {
             getStatusUpdateComments(self.id, function(response) {
@@ -290,8 +310,31 @@
                 }
             }
         }
-        this.activateLinks = (element) => {
-            element.innerHTML = this.autolinker.link(element.innerText);
+        this.activateLinks = element => {
+            if(element) element.innerHTML = this.autolinker.link(element.innerText);
+        }
+        this.activateLink = (reference, text) => {
+            getId(text, (response) => {
+                if(response.success) {
+                    let element = document.getElementById(reference);
+                    element.dataset.id = response.id;
+                    let type = element.dataset.link;
+                    if(type === 'profile') {
+                        element.onclick = opts.targetProfile ? self.handleTarget : self.handleShow;
+                    } else if(type === 'group') {
+                        element.onclick = opts.targetGroup ? self.handleTarget : self.handleShow;
+                    }
+                }
+            })
+        }
+        this.handleLinkId = async id => {
+            return await getId(id, function(response) {
+                if(response.success) {
+                    return response.id;
+                } else {
+                    return '';
+                }
+            });
         }
         this.handleFocus = () => {
             this.refs.composer.focus();
@@ -345,11 +388,31 @@
                 self.update();
             }
         }
-        this.handleShow = (event) => {
+        this.handleTarget = event => {
+            event.preventDefault();
+            let dataset = event.target.dataset;
+            let target;
+            switch(dataset.link) {
+                case 'profile':
+                    target = opts.targetProfile.replace('[[id]]', dataset.id);
+                    break;
+                case 'group':
+                    target = opts.targetGroup.replace('[[id]]', dataset.id);
+                    break;
+            }
+            if(target) document.location.href = target;
+        }
+        this.handleShow = event => {
             let dataset = event.target.dataset;
             switch(dataset.link) {
                 case 'profile':
                     showProfile({
+                        id: dataset.id,
+                        scroll: true
+                    });
+                    break;
+                case 'group':
+                    showGroup({
                         id: dataset.id,
                         scroll: true
                     });

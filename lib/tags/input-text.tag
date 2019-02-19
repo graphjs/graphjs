@@ -105,7 +105,7 @@
             ...this.commonMentionOptions,
             trigger: '#',
             selectTemplate: function(item) {
-                return '<a class="graphjs-mention">#' + item.original.title + '</a>';
+                return '<a class="graphjs-mention">#' + item.original.title.replace(/ /g, '_') + '</a>';
             },
             menuItemTemplate: function(item) {
                 return '<a class="graphjs-option">' + item.string + '</a>';
