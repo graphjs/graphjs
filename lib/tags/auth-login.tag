@@ -2,7 +2,7 @@
     class={'graphjs-element graphjs-root ' + boxStyle + (checked ? ' graphjs-checked' : '')}
 >
     <div class="graphjs-header" if={opts.title}>
-        <div class="graphjs-title">{language.title}</div>
+        <div class="graphjs-title">{opts.title}</div>
     </div>
     <div class="graphjs-warning" if={failMessages.length > 0}>
         <ul if={failMessages.length > 0} class="graphjs-fail">
