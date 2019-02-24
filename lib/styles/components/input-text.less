@@ -1,0 +1,34 @@
+@prefix: graphjs;
+
+@{prefix}-input-text.@{prefix}-root {
+    display: block;
+    // ThemeOption: color: @text-color-normal;
+    .@{prefix}-input {
+        overflow: auto;
+        display: block;
+        width: 100%;
+        min-height: 2.5em;
+        max-height: 7.5em;
+        padding: .75em 1em;
+        .regular-font;
+        font-size: @font-size-default;
+        line-height: @font-size-default;
+        border-width: 1px;
+        border-style: solid;
+        border-color: fade(black, 10%);
+        .border-radius(@border-radius-small);
+        outline: none;
+        &:empty {
+            &:before {
+                content: attr(data-placeholder);
+                opacity: .65;
+            }
+        }
+        &:focus{
+            &:before {
+                opacity: .35;
+            }
+        }
+    }
+}
+

@@ -9,7 +9,7 @@
 >
     <div class={'graphjs-content' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
         <div class="graphjs-entry">
-            <textarea ref="composer" placeholder="What's on your mind?"></textarea>
+            <graphjs-input-text ref="composer" event-input={() => handleTextInput()}></graphjs-input-text>
             <div class="graphjs-media" if={media.length > 0}>
                 <div each={item in media} class={'graphjs-item graphjs-' + item.resource_type}>
                     <img class="graphjs-thumbnail" src={item.thumbnail_url} />
@@ -52,7 +52,9 @@
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
-        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
+        let self = this;
+
+        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline graphjs-overflown' : 'graphjs-box graphjs-overflown';
         this.blocked = false;
         this.button = false;
         this.type = 'text';
@@ -64,18 +66,10 @@
         });
 
         this.on('mount', function() {
-            let self = this;
             let id = GraphJSConfig.id;
-            let text = this.refs.composer;
             let photo = this.refs.addPhoto;
             let video = this.refs.addVideo;
-            text.addEventListener("input", function() {
-                text.style.height = "";
-                text.style.height = text.scrollHeight + "px";
-                self.message = text.value;
-                self.handleButton();
-            }, false);
-            photo.addEventListener("click", function() {
+            photo.addEventListener('click', function() {
                 cloudinary.openUploadWidget({
                     cloud_name: 'graphjs',
                     upload_preset: 'n69lnkqb',
@@ -96,7 +90,7 @@
                     }
                 });
             }, false);
-            video.addEventListener("click", function() {
+            video.addEventListener('click', function() {
                 cloudinary.openUploadWidget({
                     cloud_name: 'graphjs',
                     upload_preset: 'wsvzsotw',
@@ -126,7 +120,6 @@
             this.handleUser();
         }
         this.handleUser = () => {
-            let self = this;
             getSession(function(response) {
                 if(response.success) {
                     self.userId = response.id;
@@ -142,6 +135,10 @@
         this.handleBlock = (event) => {
             event.preventDefault();
             showLogin();
+        }
+        this.handleTextInput = () => {
+            self.message = this.refs.composer.value();
+            self.handleButton();
         }
         this.checkMedia = () => {
             let mediaMinimumLimit = 1;
@@ -167,12 +164,11 @@
             } else {
                 this.button = false;
                 this.update();
-                this.refs.submit.setAttribute('disabled', 'disabled');
+                this.refs.submit && this.refs.submit.setAttribute('disabled', 'disabled');
             }
             this.update();
         }
         this.handleSubmit = (event) => {
-            let self = this;
             self.failMessages = [];
             self.refs.submit.classList.add('graphjs-loading');
             if(self.checkMessage() || self.checkMedia()) {
@@ -184,7 +180,7 @@
                 });
                 updateStatus(type, message, content, function(response) {
                     if(response.success) {
-                        self.refs.composer.value = '';
+                        self.refs.composer.clear();
                         self.refs.submit.classList.remove('graphjs-loading');
                         self.button = false;
                         self.type = 'text';
@@ -205,7 +201,6 @@
             }
         }
         this.handleShow = (event) => {
-            let self = this;
             let dataset = event.target.dataset;
             switch(dataset.link) {
                 case 'profile':

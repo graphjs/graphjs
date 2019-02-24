@@ -258,6 +258,28 @@
     }
 }
 
+//mention-container.less
+.@{prefix}-mention-container {
+    ul {
+        border-color: fade(@default-color, 3%);
+        background-color: @background-color-contrast;
+        li {
+            &:first-child {
+                border-top-color: @primary-color;
+            }
+            &.@{prefix}-highlighted {
+                background-color: fade(@primary-color, 10%);
+            }
+            .@{prefix}-option {
+                color: @text-color-normal;
+                .@{prefix}-match {
+                    color: @text-color-strong;
+                }
+            }
+        }
+    }
+}
+
 // alert.less
 @{prefix}-alert.@{prefix}-root {
     & > button {
@@ -333,6 +355,16 @@
                     }
                 }
             }
+        }
+    }
+}
+
+// autocomplete.less
+@{prefix}-autocomplete.@{prefix}-root {
+    color: @text-color-normal;
+    .@{prefix}-content {
+        .@{prefix}-input {
+            background-color: @primary-color;
         }
     }
 }
@@ -565,63 +597,6 @@
 // feed-activity.less
 @{prefix}-feed-activity.@{prefix}-root {
     color: @text-color-normal;
-    .@{prefix}-content {
-        .@{prefix}-activity {
-            .@{prefix}-item {
-                border-color: fade(@default-color, 3%);
-                background-color: @background-color-contrast;
-                .@{prefix}-interaction {
-                    .@{prefix}-synopsis {
-                        & > * {
-                            .@{prefix}-unauthorized {
-                                svg {
-                                    path {
-                                        fill: @text-color-weak !important;
-                                    }
-                                }
-                            }
-                        }
-                        .@{prefix}-rating-indicator {
-                            .@{prefix}-icon {
-                                svg {
-                                    path {
-                                        fill: desaturate(@text-color-weak, 65%);
-                                    }
-                                }
-                            }
-                        }
-                        .@{prefix}-comments-indicator {
-                            .@{prefix}-icon {
-                                svg {
-                                    path {
-                                        fill: desaturate(@text-color-weak, 65%);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                .@{prefix}-comments {
-                    .@{prefix}-comment {
-                        &.@{prefix}-pseudo {
-                            background-color: fade(@primary-color, 15%);
-                        }
-                        .@{prefix}-credit {
-                            span {
-                                color: @text-color-normal;
-                            }
-                        }
-                        p {
-                            &.@{prefix}-editable {
-                                border-color: fade(@default-color, 15%);
-                                background-color: @background-color-contrast;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 
 // feed-composer.less
@@ -629,6 +604,9 @@
     color: @text-color-normal;
     &.@{prefix}-box {
       .@{prefix}-content {
+          @{prefix}-input-text {
+              background-color: @background-color-contrast;
+          }
           .@{prefix}-options {
               background-color: @background-color-contrast;
           }
@@ -1018,6 +996,10 @@
             }
         }
     }
+}
+
+@{prefix}-input-text.@{prefix}-root {
+    color: @text-color-normal;
 }
 
 // messages.less
