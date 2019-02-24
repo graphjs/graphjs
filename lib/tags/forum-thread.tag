@@ -180,7 +180,7 @@
             let self = this;
             self.id && getThread(self.id, function(response) {
                 if(response.success) {
-                    language.title = response.title;
+                    this.language.title = response.title;
                     self.title = response.title;
                     self.entries = response.messages;
                     self.update();
@@ -263,7 +263,7 @@
             if(textBox.hasAttribute('contenteditable')) {
                 textBox.removeAttribute('contenteditable');
                 textBox.classList.remove('graphjs-editable');
-                event.target.innerText = language.threadEditButton;
+                event.target.innerText = this.language.threadEditButton;
                 if(textBox.innerText != '') {
                     editReply(event.target.dataset.id, textBox.innerText, function(response) {
                         if(response.success) {
@@ -276,14 +276,14 @@
             } else {
                 textBox.contentEditable = true;
                 textBox.focus();
-                event.target.innerText = language.threadSaveButton;
+                event.target.innerText = this.language.threadSaveButton;
                 textBox.classList.add('graphjs-editable');
             }
         }
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
-            if (window.confirm(language.replyDeleteConfirmation)) {
+            if (window.confirm(this.language.replyDeleteConfirmation)) {
                 let query = '[data-id="' + event.target.dataset.id + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
@@ -300,7 +300,7 @@
         this.handleDestroy = (event) => {
             event.preventDefault();
             let self = this;
-            if (window.confirm(language.threadDeleteConfirmation)) {
+            if (window.confirm(this.language.threadDeleteConfirmation)) {
                 let query = '[data-link="list"]';
                 let element = document.querySelectorAll(query)[0];
                 removeReply(event.target.dataset.id, function(response) {
@@ -350,28 +350,28 @@
             let amount;
             if(time < 1) {
                 amount = time;
-                text = language.commentTimeNow;
+                text = this.language.commentTimeNow;
             } else if(1 <= time && time < 60) {
                 amount = time;
-                text = language.commentTimeSeconds.replace('%s',amount);
+                text = this.language.commentTimeSeconds.replace('%s',amount);
             } else if(60 <= time && time < 60 * 60) {
                 amount = Math.floor(time / 60);
-                text = language.commentTimeMinutes.replace('%s',amount);
+                text = this.language.commentTimeMinutes.replace('%s',amount);
             } else if(60 * 60 <= time && time < 60 * 60 * 24) {
                 amount = Math.floor(time / 60 / 60);
-                text = language.commentTimeHours.replace('%s',amount);
+                text = this.language.commentTimeHours.replace('%s',amount);
             } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
                 amount = Math.floor(time / 60 / 60 / 24);
-                text = language.commentTimeDays.replace('%s',amount);
+                text = this.language.commentTimeDays.replace('%s',amount);
             } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
                 amount = Math.floor(time / 60 / 60 / 24 / 7);
-                text = language.commentTimeWeeks.replace('%s',amount);
+                text = this.language.commentTimeWeeks.replace('%s',amount);
             } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30);
-                text = language.commentTimeMonths.replace('%s',amount);
+                text = this.language.commentTimeMonths.replace('%s',amount);
             } else if(time >= 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                text = language.commentTimeYears.replace('%s',amount);
+                text = this.language.commentTimeYears.replace('%s',amount);
             } else {
                 //Handle errors
             }

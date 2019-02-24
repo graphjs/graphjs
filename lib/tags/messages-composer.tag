@@ -166,7 +166,7 @@
             });
         }
         this.checkEmailPattern = () => {
-            let failMessage = language.emailPatternError;
+            let failMessage = this.language.emailPatternError;
             let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if(emailPattern.test(this.refs.email.value)) {
                 this.refs.email.classList.remove('graphjs-error');

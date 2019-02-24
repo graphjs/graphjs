@@ -67,7 +67,7 @@
         this.handleRegisterBox = () => showRegister();
         //Step 1: provideEmail
         this.checkEmailPattern = () => {
-            let failMessage = language.emailPatternError;
+            let failMessage = this.language.emailPatternError;
             let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if(emailPattern.test(this.refs.email.value)) {
                 this.refs.email.classList.remove('graphjs-error');
@@ -131,7 +131,7 @@
         this.checkCodeCharacterLength = () => {
             let self = this;
             let characters = Array.from(self.refs.code.children);
-            let failMessage = language.checkCodeError.replace('%s',self.codeCharacterCount)
+            let failMessage = this.language.checkCodeError.replace('%s',self.codeCharacterCount)
             let result = true;
             characters.forEach(function(item) {
                 if(item.value.length != 1) {
@@ -218,7 +218,7 @@
         //Step 3: updatePassword
         this.checkPasswordMinimumLength = () => {
             let passwordMinimumLengthLimit = 5;
-            let failMessage = language.passwordMinLengthError.replace('%s',passwordMinimumLengthLimit);
+            let failMessage = this.language.passwordMinLengthError.replace('%s',passwordMinimumLengthLimit);
             if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -231,7 +231,7 @@
         }
         this.checkPasswordMaximumLength = () => {
             let passwordMaximumLengthLimit = 255;
-            let failMessage = language.passwordMaxLengthError.replace('%s',passwordMaximumLengthLimit);;
+            let failMessage = this.language.passwordMaxLengthError.replace('%s',passwordMaximumLengthLimit);;
             if(this.refs.password.value.length <= passwordMaximumLengthLimit) {
                 this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -243,7 +243,7 @@
             }
         }
         this.checkPasswordMatch = () => {
-            let failMessage = language.passwordMatchError;
+            let failMessage = this.language.passwordMatchError;
             if(this.refs.password.value == this.refs.confirmation.value) {
                 this.refs.confirmation.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);

@@ -149,7 +149,7 @@
                 });
             } else {
                 // New Post
-                startBlogPost(language.dummyBlogTitle, language.dummyBlogContent, function(response) {
+                startBlogPost(this.language.dummyBlogTitle, this.language.dummyBlogContent, function(response) {
                     if(response.success) {
                         self.id = response.id;
                         self.createTime = loggedTime;
@@ -216,7 +216,7 @@
                         icon: icons.link,
                         title: 'Link',
                         result: () => {
-                            let url = prompt(language.linkPrompt);
+                            let url = prompt(this.language.linkPrompt);
                             if(url) pell.exec('createLink', url);
                         }
                     },
@@ -237,7 +237,7 @@
                         icon: icons.image,
                         title: 'Image',
                         result: () => {
-                            let url = prompt(language.imagePrompt);
+                            let url = prompt(this.language.imagePrompt);
                             if(url) pell.exec('insertImage', url);
                         }
                     }
@@ -325,7 +325,7 @@
             if(this.validateForm) {
                 if(event) {
                     event.currentTarget.setAttribute('disabled', 'disabled');
-                    event.currentTarget.innerHTML = language.saveProgess;
+                    event.currentTarget.innerHTML = this.language.saveProgess;
                 }
                 editBlogPost(self.id, self.title, self.body, function(response) {
                     if(response.success) {
@@ -334,10 +334,10 @@
                     } else {
                         if(link) {
                             link.setAttribute('disabled', 'disabled');
-                            link.innerHTML = language.saveError;
+                            link.innerHTML = this.language.saveError;
                             setTimeout(function() {
                                 link.removeAttribute('disabled');
-                                link.innerHTML = language.saveLink;
+                                link.innerHTML = this.language.saveLink;
                             }, 2500);
                         }
                     }
@@ -360,7 +360,7 @@
         this.publish = (event) => {
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
-            link.innerHTML = language.publishProgress;
+            link.innerHTML = this.language.publishProgress;
             publishBlogPost(self.id, function(response) {
                 if(response.success) {
                     if(opts.minor) {
@@ -378,10 +378,10 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = language.publishError;
+                        link.innerHTML = this.language.publishError;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
-                            link.innerHTML = language.publishLink;
+                            link.innerHTML = this.language.publishLink;
                         }, 2500);
                     }
                 }
@@ -390,7 +390,7 @@
         this.unpublish = (event) => {
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
-            link.innerHTML = language.unpublishProgress;
+            link.innerHTML = this.language.unpublishProgress;
             unpublishBlogPost(self.id, function(response) {
                 if(response.success) {
                     self.published = false;
@@ -398,7 +398,7 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = language.unpublishError;
+                        link.innerHTML = this.language.unpublishError;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
                             link.innerHTML = 'unpublishLink';
@@ -418,7 +418,7 @@
             }
         }
         this.checkTitle = () => {
-            let warningMessage = language.titleLengthError;
+            let warningMessage = this.language.titleLengthError;
             if(this.refs.title.value.length >= 1) {
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
                 return true;
@@ -428,7 +428,7 @@
             }
         }
         this.checkTextBody = () => {
-            let warningMessage = language.postLengthError;
+            let warningMessage = this.language.postLengthError;
             let form = self.refs.form;
             let body = form.querySelector('div.graphjs-body');
             if(body.innerHTML.length >= 1) {

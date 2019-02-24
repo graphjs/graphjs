@@ -282,33 +282,33 @@
                     let amount;
                     if(time < 1) {
                         amount = time;
-                        text = language.messageTimeNow;
+                        text = this.language.messageTimeNow;
                     } else if(1 <= time && time < 60) {
                         amount = time;
-                        text = language.messageTimeSeconds.replace('%s',amount);
+                        text = this.language.messageTimeSeconds.replace('%s',amount);
                     } else if(60 <= time && time < 60 * 60) {
                         amount = Math.floor(time / 60);
-                        text = language.messageTimeMinutes.replace('%s',amount);
+                        text = this.language.messageTimeMinutes.replace('%s',amount);
                     } else if(60 * 60 <= time && time < 60 * 60 * 24) {
                         amount = Math.floor(time / 60 / 60);
-                        text = language.messageTimeHours.replace('%s',amount);
+                        text = this.language.messageTimeHours.replace('%s',amount);
                     } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
                         amount = Math.floor(time / 60 / 60 / 24);
-                        text = language.messageTimeDays.replace('%s',amount);
+                        text = this.language.messageTimeDays.replace('%s',amount);
                     } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
                         amount = Math.floor(time / 60 / 60 / 24 / 7);
-                        text = language.messageTimeWeeks.replace('%s',amount);
+                        text = this.language.messageTimeWeeks.replace('%s',amount);
                     } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
                         amount = Math.floor(time / 60 / 60 / 24 / 30);
-                        text = language.messageTimeMonths.replace('%s',amount);
+                        text = this.language.messageTimeMonths.replace('%s',amount);
                     } else if(time >= 60 * 60 * 24 * 30 * 12) {
                         amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                        text = language.messageTimeYears.replace('%s',amount);
+                        text = this.language.messageTimeYears.replace('%s',amount);
                     } else {
                         //Handle errors
                     }
                 } else {
-                    text = language.failError;
+                    text = this.language.failError;
                     item.classList.add('graphjs-error');
                 }
                 item.innerHTML = text;

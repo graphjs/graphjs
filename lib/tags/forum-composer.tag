@@ -90,7 +90,7 @@
             });
         }
         this.checkTitle = () => {
-            let warningMessage = language.titleWarning;
+            let warningMessage = this.language.titleWarning;
             if(this.refs.title.value.length >= 1) {
                 this.refs.title.classList.remove('graphjs-error');
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
@@ -102,7 +102,7 @@
             }
         }
         this.checkTextBody = () => {
-            let warningMessage = language.textWarning;
+            let warningMessage = this.language.textWarning;
             if(this.refs.body.value.length >= 1) {
                 this.refs.body.classList.remove('graphjs-error');
                 this.warningMessages.includes(warningMessage) && this.warningMessages.splice(this.warningMessages.indexOf(warningMessage), 1);
@@ -151,7 +151,7 @@
                         self.refs.submit.classList.remove('graphjs-loading');
                         self.update();
                         if(response.reason)
-                            window.alert(language.serverError.replace('%s',response.reason));
+                            window.alert(this.language.serverError.replace('%s',response.reason));
                         //Handle error
                     }
                 }
