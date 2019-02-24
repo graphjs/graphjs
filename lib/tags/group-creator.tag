@@ -41,7 +41,7 @@
 
         this.checkTitleMinimumLength = () => {
             let titleMinimumLengthLimit = 2;
-            let failMessage = language.titleMinLengthError.replace("%s",titleMinimumLengthLimit);
+            let failMessage = this.language.titleMinLengthError.replace("%s",titleMinimumLengthLimit);
             if(this.refs.title.value.length >= titleMinimumLengthLimit) {
                 this.refs.title.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -54,7 +54,7 @@
         }
         this.checkTitleMaximumLength = () => {
             let titleMaximumLengthLimit = 80;
-            let failMessage = language.titleMaxLengthError.replace("%s",titleMaximumLengthLimit);
+            let failMessage = this.language.titleMaxLengthError.replace("%s",titleMaximumLengthLimit);
             if(this.refs.title.value.length <= titleMaximumLengthLimit) {
                 this.refs.title.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -67,7 +67,7 @@
         }
         this.checkDescriptionMinimumLength = () => {
             let descriptionMinimumLengthLimit = 10;
-            let failMessage = language.descriptionMinLengthError.replace("%s",descriptionMinimumLengthLimit);
+            let failMessage = this.language.descriptionMinLengthError.replace("%s",descriptionMinimumLengthLimit);
             if(this.refs.description.value.length >= descriptionMinimumLengthLimit) {
                 this.refs.description.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -80,7 +80,7 @@
         }
         this.checkDescriptionMaximumLength = () => {
             let descriptionMaximumLengthLimit = 255;
-            let failMessage = language.descriptionMaxLengthError.replace("%s",descriptionMaximumLengthLimit);
+            let failMessage = this.language.descriptionMaxLengthError.replace("%s",descriptionMaximumLengthLimit);
             if(this.refs.description.value.length <= descriptionMaximumLengthLimit) {
                 this.refs.description.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -121,8 +121,8 @@
                     title,
                     description,
                     function(response) {
-                        let failMessage = language.failMessage;
-                        let successMessage = language.successMessage;
+                        let failMessage = this.language.failMessage;
+                        let successMessage = this.language.successMessage;
                         if(response.success) {
                             self.refs.title.classList.remove('graphjs-error');
                             self.refs.title.classList.add('graphjs-success');

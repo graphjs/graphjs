@@ -262,7 +262,7 @@
         this.publish = (event) => {
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
-            link.innerHTML = language.publishProgress;
+            link.innerHTML = this.language.publishProgress;
             publishBlogPost(self.id, function(response) {
                 if(response.success) {
                     self.published = true;
@@ -270,10 +270,10 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = language.publishError;
+                        link.innerHTML = this.language.publishError;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
-                            link.innerHTML = language.publishLink;
+                            link.innerHTML = this.language.publishLink;
                         }, 2500);
                     }
                 }
@@ -282,7 +282,7 @@
         this.unpublish = (event) => {
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
-            link.innerHTML = language.unpublishProgress;
+            link.innerHTML = this.language.unpublishProgress;
             unpublishBlogPost(self.id, function(response) {
                 if(response.success) {
                     self.published = false;
@@ -290,10 +290,10 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = language.unpublishError;
+                        link.innerHTML = this.language.unpublishError;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
-                            link.innerHTML = language.unpublishLink;
+                            link.innerHTML = this.language.unpublishLink;
                         }, 2500);
                     }
                 }
@@ -301,9 +301,9 @@
         }
         this.delete = (event) => {
             let link = event.currentTarget;
-            if (window.confirm(language.deleteConfirmation)) {
+            if (window.confirm(this.language.deleteConfirmation)) {
                 link.setAttribute('disabled', 'disabled');
-                link.innerHTML = language.deleteProgress;
+                link.innerHTML = this.language.deleteProgress;
                 removeBlogPost(self.id, function(response) {
                     if(response.success) {
                         self.notExisting = true;
@@ -314,10 +314,10 @@
                     } else {
                         if(link) {
                             link.setAttribute('disabled', 'disabled');
-                            link.innerHTML = language.deleteError;
+                            link.innerHTML = this.language.deleteError;
                             setTimeout(function() {
                                 link.removeAttribute('disabled');
-                                link.innerHTML = language.deleteLink;
+                                link.innerHTML = this.language.deleteLink;
                             }, 2500);
                         }
                     }
@@ -397,7 +397,7 @@
             if(textBox.hasAttribute('contenteditable')) {
                 textBox.removeAttribute('contenteditable');
                 textBox.classList.remove('graphjs-editable');
-                event.target.innerText = language.editLinkText;
+                event.target.innerText = this.language.editLinkText;
                 if(textBox.innerText != '') {
                     editBlogComment(event.target.dataset.id, textBox.innerText, function(response) {
                         if(response.success) {
@@ -410,13 +410,13 @@
             } else {
                 textBox.contentEditable = true;
                 textBox.focus();
-                event.target.innerText = language.saveLink;
+                event.target.innerText = this.language.saveLink;
                 textBox.classList.add('graphjs-editable');
             }
         }
         this.handleRemove = (event) => {
             event.preventDefault();
-            if (window.confirm(language.commentDeleteConfirmation)) {
+            if (window.confirm(this.language.commentDeleteConfirmation)) {
                 let query = '[data-id="' + event.target.dataset.id + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
@@ -432,7 +432,7 @@
         }
         this.handleDestroy = (event) => {
             event.preventDefault();
-            if (window.confirm(language.postDeleteConfirmation)) {
+            if (window.confirm(this.language.postDeleteConfirmation)) {
                 let query = '[data-link="list"]';
                 let element = document.querySelectorAll(query)[0];
                 removeBlogPost(event.target.dataset.id, function(response) {
@@ -459,28 +459,28 @@
             let amount;
             if(time < 1) {
                 amount = time;
-                text = language.commentTimeNow;
+                text = this.language.commentTimeNow;
             } else if(1 <= time && time < 60) {
                 amount = time;
-                text = language.commentTimeSeconds.replace('%s',amount);
+                text = this.language.commentTimeSeconds.replace('%s',amount);
             } else if(60 <= time && time < 60 * 60) {
                 amount = Math.floor(time / 60);
-                text = language.commentTimeMinutes.replace('%s',amount);
+                text = this.language.commentTimeMinutes.replace('%s',amount);
             } else if(60 * 60 <= time && time < 60 * 60 * 24) {
                 amount = Math.floor(time / 60 / 60);
-                text = language.commentTimeHours.replace('%s',amount);
+                text = this.language.commentTimeHours.replace('%s',amount);
             } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
                 amount = Math.floor(time / 60 / 60 / 24);
-                text = language.commentTimeDays.replace('%s',amount);
+                text = this.language.commentTimeDays.replace('%s',amount);
             } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
                 amount = Math.floor(time / 60 / 60 / 24 / 7);
-                text = language.commentTimeWeeks.replace('%s',amount);
+                text = this.language.commentTimeWeeks.replace('%s',amount);
             } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30);
-                text = language.commentTimeMonths.replace('%s',amount);
+                text = this.language.commentTimeMonths.replace('%s',amount);
             } else if(time >= 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                text = language.commentTimeYears.replace('%s',amount);
+                text = this.language.commentTimeYears.replace('%s',amount);
             } else {
                 //Handle errors
             }

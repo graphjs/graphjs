@@ -63,8 +63,8 @@
                     theme: 'minimal'
                 },
                 function(error, result) {
-                    let failMessage = language.failMessage;
-                    let successMessage = language.successMessage;
+                    let failMessage = this.language.failMessage;
+                    let successMessage = this.language.successMessage;
                     if(result) {
                         setAvatar(result[0].url, function(response) {
                             if(response.success) {
@@ -122,7 +122,7 @@
         }
         this.checkUsernameMinimumLength = () => {
             let usernameMinimumLengthLimit = 1;
-            let failMessage = language.usernameMinLengthError;
+            let failMessage = this.language.usernameMinLengthError;
             if(this.refs.username.value.length >= usernameMinimumLengthLimit) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -135,7 +135,7 @@
         }
         this.checkUsernameMaximumLength = () => {
             let usernameMaximumLengthLimit = 36;
-            let failMessage = language.usernameMaxLengthError.replace("%s",usernameMaximumLengthLimit);
+            let failMessage = this.language.usernameMaxLengthError.replace("%s",usernameMaximumLengthLimit);
             if(this.refs.username.value.length <= usernameMaximumLengthLimit) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -147,7 +147,7 @@
             }
         }
         this.checkUsernamePattern = () => {
-            let failMessage = language.usernamePatternError;
+            let failMessage = this.language.usernamePatternError;
             let usernamePattern = /^[a-zA-Z0-9-_]+$/;
             if(usernamePattern.test(this.refs.username.value)) {
                 this.refs.username.classList.remove('graphjs-error');
@@ -160,7 +160,7 @@
             }
         }
         this.checkEmailPattern = () => {
-            let failMessage = language.emailPatternError;
+            let failMessage = this.language.emailPatternError;
             let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if(emailPattern.test(this.refs.email.value)) {
                 this.refs.email.classList.remove('graphjs-error');
@@ -174,7 +174,7 @@
         }
         this.checkBioMaximumLength = () => {
             let bioMaximumLengthLimit = 255;
-            let failMessage = language.bioMaxError.replace("%s",bioMaximumLengthLimit);
+            let failMessage = this.language.bioMaxError.replace("%s",bioMaximumLengthLimit);
             if(this.refs.bio.value.length <= bioMaximumLengthLimit) {
                 this.refs.bio.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -186,7 +186,7 @@
             }
         }
         this.checkBirthdayFormat = () => {
-            let failMessage = language.birthdayFormatError;
+            let failMessage = this.language.birthdayFormatError;
             let birthdayPattern = /^\d{2}\/\d{2}\/\d{4}$/;
             if(birthdayPattern.test(this.refs.birthday.value)) {
                 this.refs.birthday.classList.remove('graphjs-error');
@@ -200,7 +200,7 @@
         }
         this.checkBirthdayLimit = () => {
             let birthdayLimit = 13;
-            let failMessage = language.birthdayLimitError.replace("%s",birthdayLimit);
+            let failMessage = this.language.birthdayLimitError.replace("%s",birthdayLimit);
             let birthYear = parseInt(this.refs.birthday.value.split('/')[2]);
             if(((new Date()).getFullYear() - birthYear) >= birthdayLimit) {
                 this.refs.birthday.classList.remove('graphjs-error');
@@ -214,7 +214,7 @@
         }
         this.checkPasswordMinimumLength = () => {
             let passwordMinimumLengthLimit = 5;
-            let failMessage = language.passwordMinLengthError.replace("%s",passwordMinimumLengthLimit);
+            let failMessage = this.language.passwordMinLengthError.replace("%s",passwordMinimumLengthLimit);
             if(this.refs.password.value.length >= passwordMinimumLengthLimit) {
                 //this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -227,7 +227,7 @@
         }
         this.checkPasswordMaximumLength = () => {
             let passwordMaximumLengthLimit = 255;
-            let failMessage = language.passwordMaxLengthError.replace("%s",passwordMaximumLengthLimit);;
+            let failMessage = this.language.passwordMaxLengthError.replace("%s",passwordMaximumLengthLimit);;
             if(this.refs.password.value.length <= passwordMaximumLengthLimit) {
                 //this.refs.password.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
@@ -239,7 +239,7 @@
             }
         }
         this.checkPasswordMatch = () => {
-            let failMessage = language.passwordMatchError;
+            let failMessage = this.language.passwordMatchError;
             if(this.refs.password.value == this.refs.confirmation.value) {
                 this.refs.password.classList.remove('graphjs-error');
                 this.refs.confirmation.classList.remove('graphjs-error');
@@ -302,8 +302,8 @@
                     setUsername(
                         username,
                         function(response) {
-                            let failMessage = language.usernameFailMessage;
-                            let successMessage = language.usernameSuccessMessage;
+                            let failMessage = this.language.usernameFailMessage;
+                            let successMessage = this.language.usernameSuccessMessage;
                             if(response.success) {
                                 self.profile.username = username;
                                 self.refs.username.classList.remove('graphjs-error');
@@ -324,8 +324,8 @@
                         }
                     );
                 } else {
-                    let failMessage = language.usernameFailMessage;
-                    let successMessage = language.usernameSuccessMessage;
+                    let failMessage = this.language.usernameFailMessage;
+                    let successMessage = this.language.usernameSuccessMessage;
                     self.refs.username.classList.remove('graphjs-error');
                     self.refs.username.classList.add('graphjs-success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
@@ -337,8 +337,8 @@
                     setEmail(
                         email,
                         function(response) {
-                            let failMessage = language.emailFailMessage;
-                            let successMessage = language.emailSuccessMessage;
+                            let failMessage = this.language.emailFailMessage;
+                            let successMessage = this.language.emailSuccessMessage;
                             if(response.success) {
                                 self.profile.email = email;
                                 self.refs.email.classList.remove('graphjs-error');
@@ -359,8 +359,8 @@
                         }
                     );
                 } else {
-                    let failMessage = language.emailFailMessage;
-                    let successMessage = language.emailSuccessMessage;
+                    let failMessage = this.language.emailFailMessage;
+                    let successMessage = this.language.emailSuccessMessage;
                     self.refs.email.classList.remove('graphjs-error');
                     self.refs.email.classList.add('graphjs-success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
@@ -371,8 +371,8 @@
                 setBio(
                     bio,
                     function(response) {
-                        let failMessage = language.bioFailMessage;
-                        let successMessage = language.bioSuccessMessage;
+                        let failMessage = this.language.bioFailMessage;
+                        let successMessage = this.language.bioSuccessMessage;
                         if(response.success) {
                             self.profile.about = bio;
                             self.refs.bio.classList.remove('graphjs-error');
@@ -395,8 +395,8 @@
                 setBirthday(
             		birthday,
                     function(response) {
-                        let failMessage = language.birthdayFailMessage;
-                        let successMessage = language.birthdaySuccessMessage;
+                        let failMessage = this.language.birthdayFailMessage;
+                        let successMessage = this.language.birthdaySuccessMessage;
                         if(response.success) {
                             self.profile.birthday = birthday;
                             self.refs.birthday.classList.remove('graphjs-error');
@@ -431,8 +431,8 @@
                 setPassword(
                     password,
                     function(response) {
-                        let failMessage = language.passwordFailMessage;
-                        let successMessage = language.passwordSuccessMessage;
+                        let failMessage = this.language.passwordFailMessage;
+                        let successMessage = this.language.passwordSuccessMessage;
                         if(response.success) {
                             self.profile.password = password;
                             self.refs.password.classList.remove('graphjs-error');

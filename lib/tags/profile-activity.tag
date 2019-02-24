@@ -290,28 +290,28 @@
             let amount;
             if(time < 1) {
                 amount = time;
-                text = language.activityTimeNow;
+                text = this.language.activityTimeNow;
             } else if(1 <= time && time < 60) {
                 amount = time;
-                text = language.activityTimeSeconds.replace('%s',amount);
+                text = this.language.activityTimeSeconds.replace('%s',amount);
             } else if(60 <= time && time < 60 * 60) {
                 amount = Math.floor(time / 60);
-                text = language.activityTimeMinutes.replace('%s',amount);
+                text = this.language.activityTimeMinutes.replace('%s',amount);
             } else if(60 * 60 <= time && time < 60 * 60 * 24) {
                 amount = Math.floor(time / 60 / 60);
-                text = language.activityTimeHours.replace('%s',amount);
+                text = this.language.activityTimeHours.replace('%s',amount);
             } else if(60 * 60 * 24 <= time && time < 60 * 60 * 24 * 7) {
                 amount = Math.floor(time / 60 / 60 / 24);
-                text = language.activityTimeDays.replace('%s',amount);
+                text = this.language.activityTimeDays.replace('%s',amount);
             } else if(60 * 60 * 24 * 7 <= time && time < 60 * 60 * 24 * 30) {
                 amount = Math.floor(time / 60 / 60 / 24 / 7);
-                text = language.activityTimeWeeks.replace('%s',amount);
+                text = this.language.activityTimeWeeks.replace('%s',amount);
             } else if(60 * 60 * 24 * 30 <= time && time < 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30);
-                text = language.activityTimeMonths.replace('%s',amount);
+                text = this.language.activityTimeMonths.replace('%s',amount);
             } else if(time >= 60 * 60 * 24 * 30 * 12) {
                 amount = Math.floor(time / 60 / 60 / 24 / 30 / 12);
-                text = language.activityTimeYears.replace('%s',amount);
+                text = this.language.activityTimeYears.replace('%s',amount);
             } else {
                 //Handle errors
             }

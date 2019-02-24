@@ -185,7 +185,7 @@
         this.handleRemove = (event) => {
             event.preventDefault();
             let self = this;
-            if (window.confirm(language.removeConfirmation)) {
+            if (window.confirm(this.language.removeConfirmation)) {
                 event.target.parentNode.parentNode.removeChild(event.target.parentNode);
                 removeStar(event.target.dataset.id, function(response) {
                     if(response.success) {
