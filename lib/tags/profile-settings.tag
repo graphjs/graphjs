@@ -63,8 +63,8 @@
                     theme: 'minimal'
                 },
                 function(error, result) {
-                    let failMessage = this.language.failMessage;
-                    let successMessage = this.language.successMessage;
+                    let failMessage = self.language.failMessage;
+                    let successMessage = self.language.successMessage;
                     if(result) {
                         setAvatar(result[0].url, function(response) {
                             if(response.success) {
