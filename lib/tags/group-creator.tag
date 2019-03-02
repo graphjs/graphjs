@@ -121,8 +121,8 @@
                     title,
                     description,
                     function(response) {
-                        let failMessage = this.language.failMessage;
-                        let successMessage = this.language.successMessage;
+                        let failMessage = self.language.failMessage;
+                        let successMessage = self.language.successMessage;
                         if(response.success) {
                             self.refs.title.classList.remove('graphjs-error');
                             self.refs.title.classList.add('graphjs-success');
