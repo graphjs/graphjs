@@ -35,6 +35,7 @@
         import setPassword from '../scripts/setPassword.js';
         import setUsername from '../scripts/setUsername.js';
         import showAlert from '../scripts/showAlert.js';
+        import showFileUpload from '../scripts/showFileUpload.js';
         import '../vendor/cloudinary/upload-widget.js';
 
         this.language = language('profile-settings', opts);
@@ -53,7 +54,7 @@
         this.on('mount', function() {
             let self = this;
             this.refs.uploadWidget.addEventListener("click", function() {
-                cloudinary.openUploadWidget({
+                /* cloudinary.openUploadWidget({
                     cloud_name: 'graphjs',
                     upload_preset: 'baafngba',
                     multiple: false,
@@ -86,6 +87,10 @@
                         self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
                         self.update();
                     }
+                });*/
+                
+                showFileUpload({
+                    type:"profile-settings"
                 });
             }, false);
         });
