@@ -164,7 +164,7 @@
                 }
                 else {
                     if(response.reason && response.reason == 'Invalid ID') {
-                        self.refs.blockageButton.innerText = this.language.error;
+                        self.refs.blockageButton.innerText = self.language.error + " (" + response.reason + ")";
                         self.invalid = true;
                     }
                     self.blocked = true;
