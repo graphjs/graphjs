@@ -33,7 +33,7 @@
                 </li>
             </ul>
         </form>
-        <p if={!editable}>You don't have permission to write/edit this post.</p>
+        <p if={!editable}>{language.noPermissionToEdit}</p>
         <div if={!loaded && !blocked} class="graphjs-loader">
             <div class="graphjs-dots">
                 <span></span>
