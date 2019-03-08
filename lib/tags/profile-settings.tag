@@ -24,6 +24,7 @@
         </form>
     </div>
     <script>
+        import * as FilePond from 'filepond';
         import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
@@ -89,6 +90,45 @@
                     }
                 });*/
                 
+                FilePond.setOptions({
+                    server: {
+                        url:window.GraphJSConfig.host,
+                        process: {
+                            url:'/uploadFile',
+                            withCredentials: true,
+                            onload:function(result){
+                                console.log(result);
+                                let failMessage = self.language.failMessage;
+                                let successMessage = self.language.successMessage;
+                                if(result.success) {
+                                    setAvatar(result.urls[0], function(response) {
+                                        if(response.success) {
+                                            self.profile.avatar = result.urls[0];
+                                            self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
+                                            self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                                            self.update();
+                                            self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
+                                        } else {
+                                            self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
+                                            self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                                            self.update();
+                                        }
+                                    });
+                                    self.update();
+                                }
+                            },
+                            onerror:function(error){
+                                let failMessage = self.language.failMessage;
+                                let successMessage = self.language.successMessage;
+                                if(error) {
+                                    self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
+                                    self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                                    self.update();
+                                }
+                            }
+                        }
+                    }
+                });
                 showFileUpload({
                     type:"profile-settings"
                 });

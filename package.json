@@ -24,6 +24,7 @@
     "css-loader": "^0.28.10",
     "file-loader": "^1.1.11",
     "filepond": "^4.2.0",
+    "filepond-plugin-image-preview": "^4.0.3",
     "fs": "0.0.1-security",
     "getstream-pho": "^4.0.2",
     "jsonp": "^0.2.1",
