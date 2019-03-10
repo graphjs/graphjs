@@ -13,7 +13,7 @@
             <div class="graphjs-media" if={media.length > 0}>
                 <div each={item in media} class={'graphjs-item graphjs-' + item.resource_type}>
                     <img if={item.resource_type == 'photo' } class="graphjs-thumbnail" src={item.url} />
-                    <video if={item.resource_type == 'video' } width="100%" height="340" controls>
+                    <video if={item.resource_type == 'video' } height="340" controls>
                       <source src={item.url}/>
                       Your browser does not support the video tag.
                     </video>
