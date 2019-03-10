@@ -8,8 +8,6 @@
                ref="fileUpload"
                class="filepond"
                name="filepond"
-               multiple
-               data-max-file-size="3MB"
                data-max-files="1" 
             />
             <graphjs-promo if={loaded} properties="bottom right" detach={opts.box === 'disabled'}></graphjs-promo>
@@ -18,7 +16,9 @@
     <script>
         import * as FilePond from 'filepond';
         import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-        
+        import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+        import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+
         this.boxStyle = opts.box == 'disabled'
             ? 'graphjs-inline graphjs-promo-pad'
             : 'graphjs-box';
@@ -26,10 +26,18 @@
         const self = this;
         this.on('mount', function() {
             FilePond.registerPlugin(
-                FilePondPluginImagePreview
+                FilePondPluginImagePreview,
+                FilePondPluginFileValidateType,
+                FilePondPluginFileValidateSize
             );
             var pond = FilePond.create(
-            	this.refs.fileUpload
+            	this.refs.fileUpload,
+            	{
+                   acceptedFileTypes: [(opts.accept ? opts.accept : "image/*")],
+                   allowFileTypeValidation: true,
+                   allowFileSizeValidation: true,
+                   maxFileSize: (opts.maxfilesize ? opts.maxfilesize : "5MB")
+            	}
             );
         });
     </script>

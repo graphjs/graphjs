@@ -24,6 +24,8 @@
     "css-loader": "^0.28.10",
     "file-loader": "^1.1.11",
     "filepond": "^4.2.0",
+    "filepond-plugin-file-validate-size": "^2.1.1",
+    "filepond-plugin-file-validate-type": "^1.2.2",
     "filepond-plugin-image-preview": "^4.0.3",
     "fs": "0.0.1-security",
     "getstream-pho": "^4.0.2",

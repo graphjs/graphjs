@@ -37,8 +37,8 @@
         import setUsername from '../scripts/setUsername.js';
         import showAlert from '../scripts/showAlert.js';
         import showFileUpload from '../scripts/showFileUpload.js';
-        import '../vendor/cloudinary/upload-widget.js';
-
+        import hideOverlay from '../scripts/hideOverlay.js';
+        
         this.language = language('profile-settings', opts);
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
@@ -55,41 +55,6 @@
         this.on('mount', function() {
             let self = this;
             this.refs.uploadWidget.addEventListener("click", function() {
-                /* cloudinary.openUploadWidget({
-                    cloud_name: 'graphjs',
-                    upload_preset: 'baafngba',
-                    multiple: false,
-                    cropping: 'server',
-                    cropping_aspect_ratio: 1,
-                    cropping_coordinates_mode: 'custom',
-                    theme: 'minimal'
-                },
-                function(error, result) {
-                    let failMessage = self.language.failMessage;
-                    let successMessage = self.language.successMessage;
-                    if(result) {
-                        setAvatar(result[0].url, function(response) {
-                            if(response.success) {
-                                self.profile.avatar = result[0].url;
-                                self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
-                                self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
-                                self.update();
-                                self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
-                            } else {
-                                self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
-                                self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
-                                self.update();
-                            }
-                        });
-                        self.update();
-                    }
-                    if(error) {
-                        self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
-                        self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
-                        self.update();
-                    }
-                });*/
-                
                 FilePond.setOptions({
                     server: {
                         url:window.GraphJSConfig.host,
@@ -97,7 +62,7 @@
                             url:'/uploadFile',
                             withCredentials: true,
                             onload:function(result){
-                                console.log(result);
+                                result = JSON.parse(result);
                                 let failMessage = self.language.failMessage;
                                 let successMessage = self.language.successMessage;
                                 if(result.success) {
@@ -106,23 +71,16 @@
                                             self.profile.avatar = result.urls[0];
                                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                                            hideOverlay();
                                             self.update();
                                             self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
                                         } else {
                                             self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                             self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                                            hideOverlay();
                                             self.update();
                                         }
                                     });
-                                    self.update();
-                                }
-                            },
-                            onerror:function(error){
-                                let failMessage = self.language.failMessage;
-                                let successMessage = self.language.successMessage;
-                                if(error) {
-                                    self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
-                                    self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
                                     self.update();
                                 }
                             }
@@ -130,7 +88,9 @@
                     }
                 });
                 showFileUpload({
-                    type:"profile-settings"
+                    type:"profile-settings",
+                    accept:"image/*",
+                    maxfilesize:"2MB"
                 });
             }, false);
         });
