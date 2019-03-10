@@ -12,7 +12,11 @@
             <graphjs-input-text ref="composer" event-input={() => handleTextInput()}></graphjs-input-text>
             <div class="graphjs-media" if={media.length > 0}>
                 <div each={item in media} class={'graphjs-item graphjs-' + item.resource_type}>
-                    <img class="graphjs-thumbnail" src={item.thumbnail_url} />
+                    <img if={item.resource_type == 'photo' } class="graphjs-thumbnail" src={item.url} />
+                    <video if={item.resource_type == 'video' } width="100%" height="340" controls>
+                      <source src={item.url}/>
+                      Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
         </div>
@@ -42,11 +46,14 @@
     </div>
     <graphjs-promo if={loaded} properties="top right"></graphjs-promo>
     <script>
+        import * as FilePond from 'filepond';
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
         import updateStatus from '../scripts/updateStatus.js';
+        import showFileUpload from '../scripts/showFileUpload.js';
+        import hideOverlay from '../scripts/hideOverlay.js';
         import '../vendor/cloudinary/upload-widget.js';
 
         import {downsizeImage} from '../scripts/client.js';
@@ -70,46 +77,68 @@
             let photo = this.refs.addPhoto;
             let video = this.refs.addVideo;
             photo.addEventListener('click', function() {
-                cloudinary.openUploadWidget({
-                    cloud_name: 'graphjs',
-                    upload_preset: 'n69lnkqb',
-                    multiple: true,
-                    resource_type: 'image',
-                    folder: id + '/users/' + self.userId + '/photos',
-                    theme: 'minimal'
-                },
-                function(error, result) {
-                    if(result) {
-                        self.media = self.media.concat(result);
-                        self.type = 'photo';
-                        video.classList.add('disabled');
-                        self.handleButton();
+                FilePond.setOptions({
+                    server: {
+                        url:window.GraphJSConfig.host,
+                        process: {
+                            url:'/uploadFile',
+                            withCredentials: true,
+                            onload:function(result){
+                                result = JSON.parse(result);
+                                 if(result.success) {
+                                    var urls = result.urls.map(function(url){
+                                        return {
+                                            resource_type: 'photo',
+                                            url
+                                        };
+                                    });
+                                    self.media = self.media.concat(urls);
+                                    self.type = 'photo';
+                                    video.classList.add('disabled');
+                                    hideOverlay();
+                                    self.handleButton();
+                                }
+                            }
+                        }
                     }
-                    if(error) {
-                        // Handle error
-                    }
+                });
+                showFileUpload({
+                    type:"feed-composer",
+                    accept:"image/*",
+                    maxfilesize:"2MB"
                 });
             }, false);
             video.addEventListener('click', function() {
-                cloudinary.openUploadWidget({
-                    cloud_name: 'graphjs',
-                    upload_preset: 'wsvzsotw',
-                    multiple: false,
-                    resource_type: 'video',
-                    folder: id + '/users/' + self.userId + '/videos',
-                    theme: 'minimal'
-                },
-                function(error, result) {
-                    if(result) {
-                        self.media = result;
-                        self.type = 'video';
-                        photo.classList.add('disabled');
-                        video.classList.add('disabled');
-                        self.handleButton();
+                   FilePond.setOptions({
+                    server: {
+                        url:window.GraphJSConfig.host,
+                        process: {
+                            url:'/uploadFile',
+                            withCredentials: true,
+                            onload:function(result){
+                                result = JSON.parse(result);
+                                 if(result.success) {
+                                    var urls = result.urls.map(function(url){
+                                        return {
+                                            resource_type: 'video',
+                                            url
+                                        };
+                                    });
+                                    self.media = urls;
+                                    self.type = 'video';
+                                    photo.classList.add('disabled');
+                                    video.classList.add('disabled');
+                                    hideOverlay();
+                                    self.handleButton();
+                                }
+                            }
+                        }
                     }
-                    if(error) {
-                        // Handle error
-                    }
+                });
+                showFileUpload({
+                    type:"feed-composer",
+                    accept:".mp4,.x-m4v,video/*",
+                    maxfilesize:"20MB"
                 });
             }, false);
         });

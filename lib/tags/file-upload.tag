@@ -8,7 +8,6 @@
                ref="fileUpload"
                class="filepond"
                name="filepond"
-               data-max-files="1" 
             />
             <graphjs-promo if={loaded} properties="bottom right" detach={opts.box === 'disabled'}></graphjs-promo>
         </div>
@@ -33,10 +32,12 @@
             var pond = FilePond.create(
             	this.refs.fileUpload,
             	{
-                   acceptedFileTypes: [(opts.accept ? opts.accept : "image/*")],
+                   acceptedFileTypes: (opts.accept ? opts.accept.split(",") : "image/*"),
                    allowFileTypeValidation: true,
                    allowFileSizeValidation: true,
-                   maxFileSize: (opts.maxfilesize ? opts.maxfilesize : "5MB")
+                   maxFileSize: (opts.maxfilesize ? opts.maxfilesize : "5MB"),
+                   maxFiles: "1",
+                   allowMultiple: false 
             	}
             );
         });
