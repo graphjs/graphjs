@@ -51,57 +51,64 @@
             this.handleAuthorization();
         });
         this.on('mount', function() {
-            let self = this;
-            this.refs.uploadWidget.addEventListener("click", function() {
-                cloudinary.openUploadWidget({
-                    cloud_name: 'graphjs',
-                    upload_preset: 'baafngba',
-                    multiple: false,
-                    cropping: 'server',
-                    cropping_aspect_ratio: 1,
-                    cropping_coordinates_mode: 'custom',
-                    theme: 'minimal'
-                },
-                function(error, result) {
-                    let failMessage = self.language.failMessage;
-                    let successMessage = self.language.successMessage;
-                    if(result) {
-                        setAvatar(result[0].url, function(response) {
-                            if(response.success) {
-                                self.profile.avatar = result[0].url;
-                                self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
-                                self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
-                                self.update();
-                                self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
-                            } else {
-                                self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
-                                self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
-                                self.update();
-                            }
-                        });
-                        self.update();
-                    }
-                    if(error) {
-                        self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
-                        self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
-                        self.update();
-                    }
-                });
-            }, false);
+            this.authorized && this.handleAvatarUpload();
         });
-
         this.handleAuthorization = () => {
             let self = this;
             getSession(response => {
                 if(response.success) {
                     if(response.id) {
                         self.authorized = true;
+                        self.update();
                         self.handleInformation(response.id);
+                        self.handleAvatarUpload();
                     }
                 }
             });
         }
-
+        this.handleAvatarUpload = () => {
+            if(this.refs.uploadWidget) {
+                this.refs.uploadWidget.addEventListener("click", function() {
+                    let self = this;
+                    cloudinary.openUploadWidget(
+                        {
+                            cloud_name: 'graphjs',
+                            upload_preset: 'baafngba',
+                            multiple: false,
+                            cropping: 'server',
+                            cropping_aspect_ratio: 1,
+                            cropping_coordinates_mode: 'custom',
+                            theme: 'minimal'
+                        },
+                        function(error, result) {
+                            let failMessage = self.language.failMessage;
+                            let successMessage = self.language.successMessage;
+                            if(result) {
+                                setAvatar(result[0].url, function(response) {
+                                    if(response.success) {
+                                        self.profile.avatar = result[0].url;
+                                        self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
+                                        self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                                        self.update();
+                                        self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
+                                    } else {
+                                        self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
+                                        self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                                        self.update();
+                                    }
+                                });
+                                self.update();
+                            }
+                            if(error) {
+                                self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
+                                self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                                self.update();
+                            }
+                        }
+                    );
+                }, false);
+            }
+        }
         this.handleInformation = (id) => {
             let self = this;
             getProfile(id, function(response) {

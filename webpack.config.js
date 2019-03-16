@@ -1,9 +1,17 @@
 const path = require('path');
 const webpack = require('webpack');
 const CompressionPlugin = require("compression-webpack-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin')
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 
-module.exports = {
+const mode = process.env.NODE_ENV || 'development';
+
+const SpeedMeasure = new SpeedMeasurePlugin({
+    disabled: mode === 'production'
+});
+
+module.exports = SpeedMeasure.wrap({
+    mode,
     entry: {
         graph: './lib/app.js'
     },
@@ -50,10 +58,37 @@ module.exports = {
         ]
     },
     plugins: [
-        new UglifyJsPlugin(),
-        //new webpack.optimize.AggressiveMergingPlugin(),
+        new webpack.optimize.AggressiveMergingPlugin(),
         new CompressionPlugin({
             algorithm: 'gzip'
         })
-    ]
-}
+    ],
+    optimization: {
+        nodeEnv: mode,
+        minimizer: [
+            new TerserPlugin({
+                terserOptions: {
+                    parallel: true,
+                    warnings: false,
+                    output: {
+                        comments: false
+                    },
+                },
+            })
+        ]
+    },
+    watchOptions: {
+        ignored: /node_modules/
+    },
+    devServer: {
+        host: 'localhost',
+        port: 8080,
+        publicPath: '/',
+        contentBase: './',
+        hot: false,
+        inline: false,
+        progress: false,
+        open: true,
+        openPage: '../test'
+    }
+})
