@@ -76,9 +76,7 @@
                     }
                 });
                 showFileUpload({
-                    type:"group-settings",
-                    accept:"image/*",
-                    maxfilesize:"2MB"
+                    type:"photo"
                 });
             }, false);
         });

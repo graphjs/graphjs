@@ -89,9 +89,7 @@
                     }
                 });
                 showFileUpload({
-                    type:"profile-settings",
-                    accept:"image/*",
-                    maxfilesize:"2MB"
+                    type:"photo"
                 });
             }, false);
         });

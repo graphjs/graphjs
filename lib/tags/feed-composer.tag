@@ -10,7 +10,8 @@
     <div class={'graphjs-content' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
         <div class="graphjs-entry">
             <graphjs-input-text ref="composer" event-input={() => handleTextInput()}></graphjs-input-text>
-            <div class="graphjs-media" if={media.length > 0}>
+            <div class="graphjs-media" if={media.length >= 0}>
+                
                 <div each={item in media} class={'graphjs-item graphjs-' + item.resource_type}>
                     <img if={item.resource_type == 'photo' } class="graphjs-thumbnail" src={item.url} />
                     <video if={item.resource_type == 'video' } height="340" controls>
@@ -32,6 +33,12 @@
                     <path transform="translate(-3.000000, 0.000000)" d="M12,18 C5,18 3,16 3,9 C3,2 5,0 12,0 C19,0 21,2 21,9 C21,16 19,18 12,18 Z M12,2 C6.111,2 5,3.113 5,9 C5,14.887 6.113,16 12,16 C17.887,16 19,14.888 19,9 C19,3.112 17.89,2 12,2 Z M10,6.00525 L15.25,9 L10,12 L10,6 L10,6.00525 Z" />
                 </svg>
                 Upload Video
+            </a>
+            <a ref="addFile">
+                <svg viewBox="0 0 18 18">
+                    <path transform="translate(-3.000000, 0.000000)" d="M12,18 C5,18 3,16 3,9 C3,2 5,0 12,0 C19,0 21,2 21,9 C21,16 19,18 12,18 Z M12,2 C6.111,2 5,3.113 5,9 C5,14.887 6.113,16 12,16 C17.887,16 19,14.888 19,9 C19,3.112 17.89,2 12,2 Z M10,6.00525 L15.25,9 L10,12 L10,6 L10,6.00525 Z" />
+                </svg>
+                Add File
             </a>
             <button ref="submit" if={button} onClick={handleSubmit} disabled="disabled">Post</button>
         </div>
@@ -76,73 +83,46 @@
             let id = GraphJSConfig.id;
             let photo = this.refs.addPhoto;
             let video = this.refs.addVideo;
+            let file = this.refs.addFile;
             photo.addEventListener('click', function() {
-                FilePond.setOptions({
-                    server: {
-                        url:window.GraphJSConfig.host,
-                        process: {
-                            url:'/uploadFile',
-                            withCredentials: true,
-                            onload:function(result){
-                                result = JSON.parse(result);
-                                 if(result.success) {
-                                    var urls = result.urls.map(function(url){
-                                        return {
-                                            resource_type: 'photo',
-                                            url
-                                        };
-                                    });
-                                    self.media = self.media.concat(urls);
-                                    self.type = 'photo';
-                                    video.classList.add('disabled');
-                                    hideOverlay();
-                                    self.handleButton();
-                                }
-                            }
-                        }
-                    }
-                });
-                showFileUpload({
-                    type:"feed-composer",
-                    accept:"image/*",
-                    maxfilesize:"2MB"
-                });
+                self.filepond('photo');
             }, false);
             video.addEventListener('click', function() {
-                   FilePond.setOptions({
-                    server: {
-                        url:window.GraphJSConfig.host,
-                        process: {
-                            url:'/uploadFile',
-                            withCredentials: true,
-                            onload:function(result){
-                                result = JSON.parse(result);
-                                 if(result.success) {
-                                    var urls = result.urls.map(function(url){
-                                        return {
-                                            resource_type: 'video',
-                                            url
-                                        };
-                                    });
-                                    self.media = urls;
-                                    self.type = 'video';
-                                    photo.classList.add('disabled');
-                                    video.classList.add('disabled');
-                                    hideOverlay();
-                                    self.handleButton();
-                                }
+                self.filepond('video');
+            }, false);
+            file.addEventListener('click', function() {
+                self.filepond('file');
+            }, false);
+        });
+        this.filepond = (type) => {
+            FilePond.setOptions({
+                server: {
+                    url:window.GraphJSConfig.host,
+                    process: {
+                        url:'/uploadFile',
+                        withCredentials: true,
+                        onload:function(result){
+                            result = JSON.parse(result);
+                             if(result.success) {
+                                var urls = result.urls.map(function(url){
+                                    return {
+                                        resource_type: type,
+                                        url
+                                    };
+                                });
+                                self.media = urls;
+                                self.type = type;
+                                hideOverlay();
+                                self.handleButton();
                             }
                         }
                     }
-                });
-                showFileUpload({
-                    type:"feed-composer",
-                    accept:".mp4,.x-m4v,video/*",
-                    maxfilesize:"20MB"
-                });
-            }, false);
-        });
-
+                }
+            });
+            showFileUpload({
+                type
+            });
+        }
         this.restart = () => {
             this.blocked = false;
             this.update();
