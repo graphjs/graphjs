@@ -20,20 +20,28 @@
             <div ref="text" if={activity.text} class="graphjs-text">{activity.text}</div>
             <div if={activity.urls.length > 0 && activity.type == 'photo'} class="graphjs-media graphjs-photo">
                 <a data-id={activity.id} onclick={handleDisplay}>
-                    <img src={getThumbnail(activity.urls[0], 600)} />
+                    <img src={(activity.urls[0])} />
                 </a>
             </div>
             <div if={activity.urls.length > 0 && activity.type == 'video'} class="graphjs-media graphjs-video">
-                <a data-id={activity.id} onclick={handleDisplay}>
-                    <svg viewBox="20 13 67 74">
-                        <path d="M82.8,43.5l-50.5-29C27.3,11.7,21,15.3,21,21V79c0,5.8,6.3,9.3,11.3,6.5l50.5-29C87.8,53.6,87.8,46.4,82.8,43.5z"/>
-                    </svg>
-                    <img src={getThumbnail(activity.urls[0], 600)} />
-                </a>
+                
+                <video data-id={activity.id} height="340" controls>
+                      <source src={activity.urls[0]}/>
+                      Your browser does not support the video tag.
+                </video>
+            </div>
+            <div if={activity.urls.length > 0 && activity.type == 'file'} class="graphjs-media graphjs-file">
+                <div each={url in activity.urls}>
+                <iframe
+                    src={"https://docs.google.com/viewer?url="+ url + "&embedded=true"} 
+                    style="width:600px; height:500px;" 
+                    frameborder="0"
+                ></iframe>
+                </div>
             </div>
             <div if={activity.urls.length > 0 && activity.type == 'photoAlbum'} class="graphjs-media graphjs-photoalbum">
                 <a each={url, index in activity.urls} data-id={activity.id} data-index={index} onclick={handleDisplay}>
-                    <div class="graphjs-container" style={'background-image: url(' + getThumbnail(url, 200) + ');'}></div>
+                    <div class="graphjs-container" style={'background-image: url(' +url+ ');'}></div>
                 </a>
             </div>
         </div>
