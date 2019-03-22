@@ -262,7 +262,7 @@
         this.publish = (event) => {
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
-            link.innerHTML = this.language.publishProgress;
+            link.innerHTML = self.language.publishProgress;
             publishBlogPost(self.id, function(response) {
                 if(response.success) {
                     self.published = true;
@@ -270,10 +270,10 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = this.language.publishError;
+                        link.innerHTML = self.language.publishError;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
-                            link.innerHTML = this.language.publishLink;
+                            link.innerHTML = self.language.publishLink;
                         }, 2500);
                     }
                 }
@@ -290,10 +290,10 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = this.language.unpublishError;
+                        link.innerHTML = self.language.unpublishError;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
-                            link.innerHTML = this.language.unpublishLink;
+                            link.innerHTML = self.language.unpublishLink;
                         }, 2500);
                     }
                 }
@@ -314,10 +314,10 @@
                     } else {
                         if(link) {
                             link.setAttribute('disabled', 'disabled');
-                            link.innerHTML = this.language.deleteError;
+                            link.innerHTML = self.language.deleteError;
                             setTimeout(function() {
                                 link.removeAttribute('disabled');
-                                link.innerHTML = this.language.deleteLink;
+                                link.innerHTML = self.language.deleteLink;
                             }, 2500);
                         }
                     }

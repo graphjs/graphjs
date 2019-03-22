@@ -216,7 +216,7 @@
                         icon: icons.link,
                         title: 'Link',
                         result: () => {
-                            let url = prompt(this.language.linkPrompt);
+                            let url = prompt(self.language.linkPrompt);
                             if(url) pell.exec('createLink', url);
                         }
                     },
@@ -237,7 +237,7 @@
                         icon: icons.image,
                         title: 'Image',
                         result: () => {
-                            let url = prompt(this.language.imagePrompt);
+                            let url = prompt(self.language.imagePrompt);
                             if(url) pell.exec('insertImage', url);
                         }
                     }
@@ -325,7 +325,7 @@
             if(this.validateForm) {
                 if(event) {
                     event.currentTarget.setAttribute('disabled', 'disabled');
-                    event.currentTarget.innerHTML = this.language.saveProgess;
+                    event.currentTarget.innerHTML = self.language.saveProgess;
                 }
                 editBlogPost(self.id, self.title, self.body, function(response) {
                     if(response.success) {
@@ -334,10 +334,10 @@
                     } else {
                         if(link) {
                             link.setAttribute('disabled', 'disabled');
-                            link.innerHTML = this.language.saveError;
+                            link.innerHTML = self.language.saveError;
                             setTimeout(function() {
                                 link.removeAttribute('disabled');
-                                link.innerHTML = this.language.saveLink;
+                                link.innerHTML = self.language.saveLink;
                             }, 2500);
                         }
                     }
@@ -360,7 +360,7 @@
         this.publish = (event) => {
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
-            link.innerHTML = this.language.publishProgress;
+            link.innerHTML = self.language.publishProgress;
             publishBlogPost(self.id, function(response) {
                 if(response.success) {
                     if(opts.minor) {
@@ -378,10 +378,10 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = this.language.publishError;
+                        link.innerHTML = self.language.publishError;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
-                            link.innerHTML = this.language.publishLink;
+                            link.innerHTML = self.language.publishLink;
                         }, 2500);
                     }
                 }
@@ -390,7 +390,7 @@
         this.unpublish = (event) => {
             let link = event.currentTarget;
             link.setAttribute('disabled', 'disabled');
-            link.innerHTML = this.language.unpublishProgress;
+            link.innerHTML = self.language.unpublishProgress;
             unpublishBlogPost(self.id, function(response) {
                 if(response.success) {
                     self.published = false;
@@ -398,7 +398,7 @@
                 } else {
                     if(link) {
                         link.setAttribute('disabled', 'disabled');
-                        link.innerHTML = this.language.unpublishError;
+                        link.innerHTML = self.language.unpublishError;
                         setTimeout(function() {
                             link.removeAttribute('disabled');
                             link.innerHTML = 'unpublishLink';

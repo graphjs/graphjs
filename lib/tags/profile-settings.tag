@@ -309,8 +309,8 @@
                     setUsername(
                         username,
                         function(response) {
-                            let failMessage = this.language.usernameFailMessage;
-                            let successMessage = this.language.usernameSuccessMessage;
+                            let failMessage = self.language.usernameFailMessage;
+                            let successMessage = self.language.usernameSuccessMessage;
                             if(response.success) {
                                 self.profile.username = username;
                                 self.refs.username.classList.remove('graphjs-error');
@@ -331,8 +331,8 @@
                         }
                     );
                 } else {
-                    let failMessage = this.language.usernameFailMessage;
-                    let successMessage = this.language.usernameSuccessMessage;
+                    let failMessage = self.language.usernameFailMessage;
+                    let successMessage = self.language.usernameSuccessMessage;
                     self.refs.username.classList.remove('graphjs-error');
                     self.refs.username.classList.add('graphjs-success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
@@ -344,8 +344,8 @@
                     setEmail(
                         email,
                         function(response) {
-                            let failMessage = this.language.emailFailMessage;
-                            let successMessage = this.language.emailSuccessMessage;
+                            let failMessage = self.language.emailFailMessage;
+                            let successMessage = self.language.emailSuccessMessage;
                             if(response.success) {
                                 self.profile.email = email;
                                 self.refs.email.classList.remove('graphjs-error');
@@ -366,8 +366,8 @@
                         }
                     );
                 } else {
-                    let failMessage = this.language.emailFailMessage;
-                    let successMessage = this.language.emailSuccessMessage;
+                    let failMessage = self.language.emailFailMessage;
+                    let successMessage = self.language.emailSuccessMessage;
                     self.refs.email.classList.remove('graphjs-error');
                     self.refs.email.classList.add('graphjs-success');
                     self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
@@ -378,8 +378,8 @@
                 setBio(
                     bio,
                     function(response) {
-                        let failMessage = this.language.bioFailMessage;
-                        let successMessage = this.language.bioSuccessMessage;
+                        let failMessage = self.language.bioFailMessage;
+                        let successMessage = self.language.bioSuccessMessage;
                         if(response.success) {
                             self.profile.about = bio;
                             self.refs.bio.classList.remove('graphjs-error');
@@ -402,8 +402,8 @@
                 setBirthday(
             		birthday,
                     function(response) {
-                        let failMessage = this.language.birthdayFailMessage;
-                        let successMessage = this.language.birthdaySuccessMessage;
+                        let failMessage = self.language.birthdayFailMessage;
+                        let successMessage = self.language.birthdaySuccessMessage;
                         if(response.success) {
                             self.profile.birthday = birthday;
                             self.refs.birthday.classList.remove('graphjs-error');
@@ -438,8 +438,8 @@
                 setPassword(
                     password,
                     function(response) {
-                        let failMessage = this.language.passwordFailMessage;
-                        let successMessage = this.language.passwordSuccessMessage;
+                        let failMessage = self.language.passwordFailMessage;
+                        let successMessage = self.language.passwordSuccessMessage;
                         if(response.success) {
                             self.profile.password = password;
                             self.refs.password.classList.remove('graphjs-error');

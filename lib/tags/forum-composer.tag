@@ -151,7 +151,7 @@
                         self.refs.submit.classList.remove('graphjs-loading');
                         self.update();
                         if(response.reason)
-                            window.alert(this.language.serverError.replace('%s',response.reason));
+                            window.alert(self.language.serverError.replace('%s',response.reason));
                         //Handle error
                     }
                 }
