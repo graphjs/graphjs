@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@types/nanoevents": "^1.0.0",
-    "autolinker": "^3.0.0",
+    "autolinker": "^3.0.5",
     "axios": "0.17.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -23,10 +23,10 @@
     "compression-webpack-plugin": "^1.1.11",
     "css-loader": "^0.28.10",
     "file-loader": "^1.1.11",
-    "filepond": "^4.2.0",
-    "filepond-plugin-file-validate-size": "^2.1.1",
-    "filepond-plugin-file-validate-type": "^1.2.2",
-    "filepond-plugin-image-preview": "^4.0.3",
+    "filepond": "^4.3.3",
+    "filepond-plugin-file-validate-size": "^2.1.2",
+    "filepond-plugin-file-validate-type": "^1.2.3",
+    "filepond-plugin-image-preview": "^4.0.4",
     "fs": "0.0.1-security",
     "getstream-pho": "^4.0.2",
     "jsonp": "^0.2.1",
@@ -35,7 +35,7 @@
     "pell": "^1.0.4",
     "riot": "^3.13.2",
     "sanitize-html": "^1.19.2",
-    "tributejs": "^3.5.3",
+    "tributejs": "^3.6.0",
     "webpack": "^4.29.6"
   },
   "devDependencies": {

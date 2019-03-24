@@ -75,7 +75,7 @@
                 </div>
             </div>
             <div class="graphjs-comment" if={loaded && userId}>
-                <graphjs-input-text ref="composer" data-id={activity.id} event-keyup={() => handleComment(event)} placeholder={i18n.commentsInputPlaceholder}></graphjs-input-text>
+                <graphjs-input-text ref="composer" data-id={activity.id} event-keyup={() => handleComment(event)} placeholder={language.commentsInputPlaceholder}></graphjs-input-text>
                 <div if={!loaded} class="graphjs-loader">
                     <div class="graphjs-dots">
                         <span></span>
