@@ -30,7 +30,6 @@
         import showGroup from '../scripts/showGroup.js';
         import hideOverlay from '../scripts/hideOverlay.js';
         import showAlert from '../scripts/showAlert.js';
-        import '../vendor/cloudinary/upload-widget.js';
 
         this.language = language('group-creator', opts);        
 

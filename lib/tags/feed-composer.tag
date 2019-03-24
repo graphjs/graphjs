@@ -10,9 +10,22 @@
     <div class={'graphjs-content' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
         <div class="graphjs-entry">
             <graphjs-input-text ref="composer" event-input={() => handleTextInput()}></graphjs-input-text>
+
             <div class="graphjs-media" if={media.length > 0}>
+                
                 <div each={item in media} class={'graphjs-item graphjs-' + item.resource_type}>
-                    <img class="graphjs-thumbnail" src={item.thumbnail_url} />
+                    <img if={item.resource_type == 'photo' } class="graphjs-thumbnail" src={item.url} />
+                    <video if={item.resource_type == 'video' } height="340" controls>
+                      <source src={item.url}/>
+                      Your browser does not support the video tag.
+                    </video>
+                    <iframe
+                        if={item.resource_type == 'file' } 
+                        src={"https://docs.google.com/viewer?url="+ item.url + "&embedded=true"} 
+                        style="width:600px; height:500px;" 
+                        frameborder="0"
+                    ></iframe>
+                    
                 </div>
             </div>
         </div>
@@ -29,6 +42,11 @@
                 </svg>
                 Upload Video
             </a>
+            <a ref="addFile">
+                <svg viewBox="0 0 18 18">
+                    <path transform="translate(-3.000000, 0.000000)" d="M 3.1875 2.089844 L 3.1875 16.726562 L 14.875 16.726562 L 14.875 5.535156 L 11.375 2.089844 Z M 4.25 3.136719 L 10.625 3.136719 L 10.625 6.273438 L 13.8125 6.273438 L 13.8125 15.683594 L 4.25 15.683594 Z M 11.6875 3.875 L 13.0625 5.226562 L 11.6875 5.226562 Z M 5.84375 5.226562 L 5.84375 6.273438 L 9.03125 6.273438 L 9.03125 5.226562 Z M 5.84375 7.839844 L 5.84375 8.886719 L 12.21875 8.886719 L 12.21875 7.839844 Z M 5.84375 10.453125 L 5.84375 11.5 L 12.21875 11.5 L 12.21875 10.453125 Z M 5.84375 13.066406 L 5.84375 14.113281 L 12.21875 14.113281 L 12.21875 13.066406 Z M 5.84375 13.066406 " />
+                </svg>Add File
+            </a>
             <button ref="submit" if={button} onClick={handleSubmit} disabled="disabled">Post</button>
         </div>
         <div if={!loaded && !blocked} class="graphjs-inline graphjs-loader">
@@ -42,11 +60,14 @@
     </div>
     <graphjs-promo if={loaded} properties="top right"></graphjs-promo>
     <script>
+        import * as FilePond from 'filepond';
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
         import updateStatus from '../scripts/updateStatus.js';
+        import showFileUpload from '../scripts/showFileUpload.js';
+        import hideOverlay from '../scripts/hideOverlay.js';
         import '../vendor/cloudinary/upload-widget.js';
 
         import {downsizeImage} from '../scripts/client.js';
@@ -69,51 +90,59 @@
             let id = GraphJSConfig.id;
             let photo = this.refs.addPhoto;
             let video = this.refs.addVideo;
+            let file = this.refs.addFile;
             photo.addEventListener('click', function() {
-                cloudinary.openUploadWidget({
-                    cloud_name: 'graphjs',
-                    upload_preset: 'n69lnkqb',
-                    multiple: true,
-                    resource_type: 'image',
-                    folder: id + '/users/' + self.userId + '/photos',
-                    theme: 'minimal'
-                },
-                function(error, result) {
-                    if(result) {
-                        self.media = self.media.concat(result);
-                        self.type = 'photo';
-                        video.classList.add('disabled');
-                        self.handleButton();
-                    }
-                    if(error) {
-                        // Handle error
-                    }
-                });
+                self.filepond('photo');
             }, false);
             video.addEventListener('click', function() {
-                cloudinary.openUploadWidget({
-                    cloud_name: 'graphjs',
-                    upload_preset: 'wsvzsotw',
-                    multiple: false,
-                    resource_type: 'video',
-                    folder: id + '/users/' + self.userId + '/videos',
-                    theme: 'minimal'
-                },
-                function(error, result) {
-                    if(result) {
-                        self.media = result;
-                        self.type = 'video';
-                        photo.classList.add('disabled');
-                        video.classList.add('disabled');
-                        self.handleButton();
-                    }
-                    if(error) {
-                        // Handle error
-                    }
-                });
+                self.filepond('video');
+            }, false);
+            file.addEventListener('click', function() {
+                self.filepond('file');
             }, false);
         });
-
+        this.filepond = (type) => {
+            FilePond.setOptions({
+                server: {
+                    url:window.GraphJSConfig.host,
+                    process: {
+                        url:'/uploadFile',
+                        withCredentials: true,
+                        onload:function(result){
+                            let photo = self.refs.addPhoto;
+                            let video = self.refs.addVideo;
+                            let file = self.refs.addFile;
+                            result = JSON.parse(result);
+                             if(result.success) {
+                                video.classList.add('disabled');
+                                photo.classList.add('disabled');
+                                file.classList.add('disabled');
+                                if(type === 'photo'){
+                                    photo.classList.remove('disabled');
+                                } else if(type === 'file'){
+                                    file.classList.remove('disabled');
+                                }
+                                var urls = result.urls.map(function(url){
+                                    return {
+                                        resource_type: type,
+                                        url
+                                    };
+                                });
+                                self.media = self.media.concat(urls);
+                                self.type = type;
+                                hideOverlay();
+                                self.handleButton();
+                            } else {
+                                hideOverlay();
+                            }
+                        }
+                    }
+                }
+            });
+            showFileUpload({
+                type
+            });
+        }
         this.restart = () => {
             this.blocked = false;
             this.update();
@@ -172,7 +201,7 @@
             self.failMessages = [];
             self.refs.submit.classList.add('graphjs-loading');
             if(self.checkMessage() || self.checkMedia()) {
-                let type = self.type + (self.media.length > 1 ? 'Album' : '');
+                let type = self.type + ((self.type === "photo" && self.media.length) > 1 ? 'Album' : '');
                 let message = self.message;
                 let content = [];
                 self.media.forEach(item => {

@@ -52,6 +52,15 @@ module.exports = SpeedMeasure.wrap({
                 ]
             },
             {
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: "style-loader"
+                    }, {
+                        loader: "css-loader"
+                    }]
+            },
+            {
                 test: /\.(jpg|png|gif|woff|svg)$/,
                 use: 'url-loader?limit=100000'
             }

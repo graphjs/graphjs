@@ -15,14 +15,16 @@
         </form>
     </div>
     <script>
+        import * as FilePond from 'filepond';
         import language from '../scripts/language.js';
         import getGroup from '../scripts/getGroup.js';
         import setGroupCover from '../scripts/setGroupCover.js';
         import setGroupTitle from '../scripts/setGroupTitle.js';
         import setGroupDescription from '../scripts/setGroupDescription.js';
         import showAlert from '../scripts/showAlert.js';
-        import '../vendor/cloudinary/upload-widget.js';
-
+        import showFileUpload from '../scripts/showFileUpload.js';
+        import hideOverlay from '../scripts/hideOverlay.js';
+        
         this.language = language('group-settings', opts);
         
         import {downsizeImage} from '../scripts/client.js';
@@ -39,41 +41,42 @@
         this.on('mount', function() {
             let self = this;
             this.refs.uploadWidget.addEventListener("click", function() {
-                cloudinary.openUploadWidget({
-                    cloud_name: 'graphjs',
-                    upload_preset: 't8vl6sxm',
-                    multiple: false,
-                    cropping: 'server',
-                    cropping_aspect_ratio: 16 / 9,
-                    cropping_coordinates_mode: 'custom',
-                    theme: 'minimal'
-                },
-                function(error, result) {
-                    let failMessage = self.language.failMessage;
-                    let successMessage = self.language.successMessage;
-                    if(result) {
-                        setGroupCover(self.id, result[0].url, function(response) {
-                            if(response.success) {
-                                self.group.cover = result[0].url;
-                                self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
-                                self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
-                                self.update();
-                                if(self.parent && self.parent.tags.hasOwnProperty('graphjs-group-header')) {
-                                    self.parent.tags['graphjs-group-header'].updateInformation();
+                FilePond.setOptions({
+                    server: {
+                        url:window.GraphJSConfig.host,
+                        process: {
+                            url:'/uploadFile',
+                            withCredentials: true,
+                            onload:function(result){
+                                result = JSON.parse(result);
+                                let failMessage = self.language.failMessage;
+                                let successMessage = self.language.successMessage;
+                                if(result.success) {
+                                    setGroupCover(self.id, result.urls[0], function(response) {
+                                        if(response.success) {
+                                            self.group.cover = result.urls[0];
+                                            self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
+                                            self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                                            hideOverlay();
+                                            self.update();
+                                            if(self.parent && self.parent.tags.hasOwnProperty('graphjs-group-header')) {
+                                                self.parent.tags['graphjs-group-header'].updateInformation();
+                                            }
+                                        } else {
+                                            self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
+                                            self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                                            hideOverlay();
+                                            self.update();
+                                        }
+                                    });
+                                    self.update();
                                 }
-                            } else {
-                                self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
-                                self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
-                                self.update();
                             }
-                        });
-                        self.update();
+                        }
                     }
-                    if(error) {
-                        self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
-                        self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
-                        self.update();
-                    }
+                });
+                showFileUpload({
+                    type:"photo"
                 });
             }, false);
         });

@@ -24,6 +24,7 @@
         </form>
     </div>
     <script>
+        import * as FilePond from 'filepond';
         import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
@@ -35,8 +36,9 @@
         import setPassword from '../scripts/setPassword.js';
         import setUsername from '../scripts/setUsername.js';
         import showAlert from '../scripts/showAlert.js';
-        import '../vendor/cloudinary/upload-widget.js';
-
+        import showFileUpload from '../scripts/showFileUpload.js';
+        import hideOverlay from '../scripts/hideOverlay.js';
+        
         this.language = language('profile-settings', opts);
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
@@ -52,6 +54,44 @@
         });
         this.on('mount', function() {
             this.authorized && this.handleAvatarUpload();
+            let self = this;
+            this.refs.uploadWidget.addEventListener("click", function() {
+                FilePond.setOptions({
+                    server: {
+                        url:window.GraphJSConfig.host,
+                        process: {
+                            url:'/uploadFile',
+                            withCredentials: true,
+                            onload:function(result){
+                                result = JSON.parse(result);
+                                let failMessage = self.language.failMessage;
+                                let successMessage = self.language.successMessage;
+                                if(result.success) {
+                                    setAvatar(result.urls[0], function(response) {
+                                        if(response.success) {
+                                            self.profile.avatar = result.urls[0];
+                                            self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
+                                            self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
+                                            hideOverlay();
+                                            self.update();
+                                            self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
+                                        } else {
+                                            self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
+                                            self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
+                                            hideOverlay();
+                                            self.update();
+                                        }
+                                    });
+                                    self.update();
+                                }
+                            }
+                        }
+                    }
+                });
+                showFileUpload({
+                    type:"photo"
+                });
+            }, false);
         });
         this.handleAuthorization = () => {
             let self = this;
