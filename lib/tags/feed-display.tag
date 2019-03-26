@@ -25,27 +25,31 @@
         <div class="graphjs-display">
             <div class="graphjs-container">
                 <div class="graphjs-media">
-                    <div if={data.type == 'photo'} class="graphjs-photo">
+                    <div if={data.type === 'photo'} class="graphjs-photo">
                         <img src={data.urls[0]} />
                     </div>
-                    <div if={data.type == 'video'} class="graphjs-video">
-                        <video poster={getThumbnail(data.urls[0], 1000)} controls>
+                    <div if={data.type === 'video'} class="graphjs-video">
+                        <video poster="https://phonetworks.s3.us-west-2.amazonaws.com///4efc45650a8cb452a2c96f8d6e1fd8cb-1553626966-5c9a77566d792.png" controls autoplay>
                             <source src={data.urls[0]} type="video/mp4">
                         </video>
                     </div>
-                    <div if={data.type == 'photoAlbum'} class="graphjs-photoalbum">
+                    <div if={data.type === 'document'} class="graphjs-photo">
+                        <iframe src={'https://docs.google.com/viewer?url=' + data.urls[0] + '&embedded=true'} frameborder="0"></iframe>
+                    </div>
+                    <div if={data.type === 'photoAlbum' || data.type === 'documentSet'} class={'graphjs-multiple graphjs-' + data.type}>
                         <a if={data.urls.length > 0} class="graphjs-left" data-direction="previous" onclick={changeMedia}>
                             <svg viewBox="0 0 176 294" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <path d="M170.694,5.755 C163.932,-1.532 152.544,-1.956 145.256,4.806 L6.256,133.806 C2.586,137.212 0.501,141.993 0.501,147 C0.501,152.007 2.586,156.788 6.256,160.194 L145.256,289.194 C148.722,292.41 153.114,294 157.496,294 C162.329,294 167.148,292.066 170.694,288.245 C177.456,280.958 177.031,269.569 169.745,262.807 L44.961,147 L169.745,31.194 C177.031,24.431 177.456,13.042 170.694,5.755 Z" />
                             </svg>
                         </a>
-                        <img src={data.urls[index]} />
+                        <img if={data.type === 'photoAlbum'} src={data.urls[index]} />
+                        <iframe if={data.type === 'documentSet'} src={'https://docs.google.com/viewer?url=' + data.urls[index] + '&embedded=true'} frameborder="0"></iframe>
                         <a if={data.urls.length > 0} class="graphjs-right" data-direction="next" onclick={changeMedia}>
                             <svg viewBox="0 0 176 294" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <path d="M5.307,288.245 C8.854,292.067 13.672,294.001 18.504,294 C22.886,294 27.279,292.409 30.744,289.194 L169.744,160.194 C173.414,156.788 175.5,152.007 175.5,147 C175.5,141.993 173.414,137.212 169.744,133.806 L30.744,4.806 C23.46,-1.955 12.068,-1.532 5.306,5.755 C-1.457,13.042 -1.032,24.431 6.255,31.193 L131.039,147 L6.256,262.806 C-1.031,269.569 -1.456,280.958 5.307,288.245 Z" />
                             </svg>
                         </a>
-                  </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,10 +102,7 @@
         this.changeMedia = (event) => {
             event.preventDefault();
             let direction = event.target.dataset.direction;
-            this.index = (direction == 'next'
-                ? this.index + 1
-                : this.index - 1
-            ) % this.data.urls.length;
+            this.index = ((direction === 'next' ? this.index + 1 : this.index - 1) + this.data.urls.length) % this.data.urls.length;
             this.update();
         }
         this.handleExit = (event) => {

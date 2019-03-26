@@ -29,6 +29,11 @@
                 width: 100%;
                 margin-bottom: 0.5em;
             }
+            .@{prefix}-title {
+                // ThemeOption: color: @primary-color;
+                font-size: 1.35em;
+                margin-bottom: .65em;
+            }
             .@{prefix}-text {
                 white-space: pre;
             }
@@ -90,6 +95,59 @@
                             background-position: center top;
                             background-repeat: no-repeat;
                             background-size: cover;
+                        }
+                    }
+                }
+                &.@{prefix}-document {
+                    a {
+                        position: relative;
+                        width: 100%;
+                        height: 3em;
+                        margin-bottom: .5em;
+                        padding: calc(.5em - 1px);
+                        padding-left: calc(3em - 1px);
+                        .single-line-text;
+                        text-align: left;
+                        border-width: 1px;
+                        border-style: solid;
+                        // ThemeOption: border-color: fade(@primary-color, 20%);
+                        .border-radius(@border-radius-medium);
+                        // ThemeOption: background-color: fade(@primary-color, 10%);
+                        .transition(all .35s ease);
+                        &:hover {
+                            // ThemeOption: border-color: fade(@primary-color, 50%);
+                            // ThemeOption: background-color: fade(@primary-color, 25%);
+                            svg {
+                                path {
+                                    // ThemeOption: fill: @primary-color;
+                                }
+                            }
+                            b {
+                                // ThemeOption: color: @primary-color;
+                            }
+                        }
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                        svg {
+                            position: absolute;
+                            left: .5em;
+                            height: 2em;
+                            path {
+                                // ThemeOption: fill: fade(@primary-color, 85%);
+                                .transition(fill .35s ease);
+                            }
+                        }
+                        b {
+                            display: block;
+                            // ThemeOption: color: fade(@primary-color, 85%);
+                            font-size: .85em;
+                            line-height: 1.25em;
+                            .transition(color .35s ease);
+                        }
+                        span {
+                            display: block;
+                            font-size: .75em;
                         }
                     }
                 }

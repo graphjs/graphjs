@@ -1,0 +1,60 @@
+.filepond--root {
+    font-size: 1.2em;
+    border-width: 1px;
+    border-style: dashed;
+    border-color: fade(black, 15%);
+    .border-radius(@border-radius-small);
+    background-color: fade(black, 2.5%);
+    .transition(background-color 1s ease);
+    &:hover {
+        background-color: fade(black, 5%);
+    }
+    .filepond--drop-label {
+        color: #888888 !important;
+    }
+    .filepond--panel-root {
+        border: none !important;
+        background-color: transparent !important;
+    }
+    .filepond--item {
+        list-style: none;
+        .filepond--item-panel {
+            background-color: rgb(111, 135, 159) !important;
+        }
+        &[data-filepond-item-state='processing-complete'] {
+            .filepond--file {
+                .filepond--file-status-main {
+                    color: @success-color !important;
+                }
+            }
+        }
+        &[data-filepond-item-state*='invalid'], &[data-filepond-item-state*='error'] {
+            .filepond--file {
+                .filepond--file-status-main {
+                    color: @danger-color !important;
+                }
+            }
+        }
+        .filepond--file {
+            * {
+                color: white;
+            }
+            .filepond--file-status {
+                margin-right: 0 !important;
+            }
+            .filepond--file-action-button {
+                display: none !important;
+                z-index: 1 !important;
+                &:hover {
+                    background-color: fade(black, 5%);
+                    .border-radius(@border-radius-full);
+                }
+            }
+            .filepond--process-indicator, .filepond--progress-indicator, .filepond--load-indicator {
+                display: none !important;
+            }
+
+
+        }
+    }
+}

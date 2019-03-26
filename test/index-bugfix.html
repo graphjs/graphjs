@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Test GraphJS Components</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Auth for session control -->
+        <graphjs-auth></graphjs-auth>
+        <br /><br /><br /><br /><br />
+
+        <graphjs-feed-composer></graphjs-feed-composer>
+        <graphjs-feed-item id="56a6a9ea75d739c3172620ec554855be"></graphjs-feed-item>
+
+        <script src="/dist/graph.js"></script>
+        <script>
+            GraphJS.init("79982844-6a27-4b3b-b77f-419a79be0e10", {
+                host: 'https://graphjs-server-test.herokuapp.com',
+                language: 'tr-TR',
+                //host: 'https://gjs-singlesignon.herokuapp.com',
+                theme: {
+                    primaryColor: 'cornflowerblue',
+                    backgroundColor: 'white',
+                    textColor: '#555'
+                }
+            });
+        </script>
+    </body>
+</html>
