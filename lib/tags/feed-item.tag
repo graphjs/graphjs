@@ -8,7 +8,7 @@
     }
 >
     <div class="graphjs-content">
-        <div class="graphjs-credit" if={authorsData.hasOwnProperty(activity.author.id)}>
+        <div class="graphjs-credit" if={activity.author && authorsData.hasOwnProperty(activity.author.id)}>
             <img data-link="profile" data-id={activity.author.id} onclick={handleShow} src={authorsData[activity.author.id].avatar ? downsizeImage(authorsData[activity.author.id].avatar, 50) : defaultAvatar} />
             <span>
                 <b data-link="profile" data-id={activity.author.id} onclick={handleShow}>{authorsData[activity.author.id].username || 'Unknown User'}</b>
@@ -17,31 +17,33 @@
             </span>
         </div>
         <div class="graphjs-entry">
+            <h1 ref="title" if={activity.title} class="graphjs-title">{activity.title}</h1>
             <div ref="text" if={activity.text} class="graphjs-text">{activity.text}</div>
-            <div if={activity.urls.length > 0 && activity.type == 'photo'} class="graphjs-media graphjs-photo">
-                <a data-id={activity.id} onclick={handleDisplay}>
+            <div if={activity.urls && activity.urls.length > 0 && activity.type == 'photo'} class="graphjs-media graphjs-photo">
+                <a data-id={activity.id} data-index={0} onclick={handleDisplay}>
                     <img src={(activity.urls[0])} />
                 </a>
             </div>
-            <div if={activity.urls.length > 0 && activity.type == 'video'} class="graphjs-media graphjs-video">
-                
-                <video data-id={activity.id} height="340" controls>
-                      <source src={activity.urls[0]}/>
-                      Your browser does not support the video tag.
-                </video>
-            </div>
-            <div if={activity.urls.length > 0 && activity.type == 'file'} class="graphjs-media graphjs-file">
-                <div each={url in activity.urls}>
-                <iframe
-                    src={"https://docs.google.com/viewer?url="+ url + "&embedded=true"} 
-                    style="width:600px; height:500px;" 
-                    frameborder="0"
-                ></iframe>
-                </div>
-            </div>
-            <div if={activity.urls.length > 0 && activity.type == 'photoAlbum'} class="graphjs-media graphjs-photoalbum">
+            <div if={activity.urls && activity.urls.length > 0 && activity.type === 'photoAlbum'} class="graphjs-media graphjs-photoalbum">
                 <a each={url, index in activity.urls} data-id={activity.id} data-index={index} onclick={handleDisplay}>
-                    <div class="graphjs-container" style={'background-image: url(' +url+ ');'}></div>
+                    <div class="graphjs-container" style={'background-image: url(' + url + ');'}></div>
+                </a>
+            </div>
+            <div if={activity.urls && activity.urls.length > 0 && activity.type === 'video'} class="graphjs-media graphjs-video">
+                <a data-id={activity.id} data-index={0} onclick={handleDisplay}>
+                    <svg viewBox="20 13 67 74">
+                        <path d="M82.8,43.5l-50.5-29C27.3,11.7,21,15.3,21,21V79c0,5.8,6.3,9.3,11.3,6.5l50.5-29C87.8,53.6,87.8,46.4,82.8,43.5z"/>
+                    </svg>
+                    <img src={activity.cover || 'https://phonetworks.s3.us-west-2.amazonaws.com///4efc45650a8cb452a2c96f8d6e1fd8cb-1553626966-5c9a77566d792.png'} />
+                </a>
+            </div>
+            <div if={activity.urls && activity.urls.length > 0 && (activity.type === 'document' || activity.type === 'documentSet')} class="graphjs-media graphjs-document">
+                <a each={url, index in activity.urls} data-id={activity.id} data-index={index} onclick={handleDisplay}>
+                    <svg viewBox="0 0 14 16">
+                        <path d="M10.0053333,0 L0,0 L0,16 L14,16 L14,4 L10.0053333,0 Z M12.0053333,14 L2,14 L2,2 L9.00266667,2 L9.00266667,4.99733333 L12.0053333,4.99733333 L12.0053333,14 Z"></path>
+                    </svg>
+                    <b>Unnamed File</b>
+                    <span>Size unknown</span>
                 </a>
             </div>
         </div>
@@ -120,7 +122,7 @@
         import getId from '../scripts/getId.js';
         import Autolinker from 'autolinker';
 
-        this.language = language('comments', opts);        
+        this.language = language('comments', opts);
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
         import {downsizeImage, getThumbnail} from '../scripts/client.js';

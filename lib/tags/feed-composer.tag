@@ -10,44 +10,47 @@
     <div class={'graphjs-content' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
         <div class="graphjs-entry">
             <graphjs-input-text ref="composer" event-input={() => handleTextInput()}></graphjs-input-text>
-
-            <div class="graphjs-media" if={media.length > 0}>
-                
-                <div each={item in media} class={'graphjs-item graphjs-' + item.resource_type}>
-                    <img if={item.resource_type == 'photo' } class="graphjs-thumbnail" src={item.url} />
-                    <video if={item.resource_type == 'video' } height="340" controls>
-                      <source src={item.url}/>
-                      Your browser does not support the video tag.
-                    </video>
-                    <iframe
-                        if={item.resource_type == 'file' } 
-                        src={"https://docs.google.com/viewer?url="+ item.url + "&embedded=true"} 
-                        style="width:600px; height:500px;" 
-                        frameborder="0"
-                    ></iframe>
-                    
+            <graphjs-input-file
+                type={type}
+                if={uploadable && type !== 'text' && !(type === 'video' && media.length > 0)}
+                callback-success={handleUploadSuccess}
+                callback-fail={handleUploadFail}
+                callback-finish={handleUploadFinish}>
+            </graphjs-input-file>
+        </div>
+        <div class="graphjs-media" if={media.length > 0}>
+            <div each={item in media} class={'graphjs-item graphjs-' + item.type}>
+                <div if={item.type === 'photo'} style={'background-image: url(' + item.url + ');'}></div>
+                <img if={item.type === 'video'} src={item.cover || 'https://phonetworks.s3.us-west-2.amazonaws.com///4efc45650a8cb452a2c96f8d6e1fd8cb-1553626966-5c9a77566d792.png'} />
+                <div if={item.type === 'document'}>
+                    <svg viewBox="0 0 14 16">
+                        <path d="M10.0053333,0 L0,0 L0,16 L14,16 L14,4 L10.0053333,0 Z M12.0053333,14 L2,14 L2,2 L9.00266667,2 L9.00266667,4.99733333 L12.0053333,4.99733333 L12.0053333,14 Z"></path>
+                    </svg>
+                    <b>{item.original_filename}</b>
+                    <span>{item.human_filesize}</span>
                 </div>
             </div>
         </div>
         <div class="graphjs-options">
-            <a ref="addPhoto">
+            <a ref="addPhoto" onclick={() => activateFileUpload('photo')}>
                 <svg viewBox="0 0 18 18">
-                    <path transform="translate(-3.000000, 0.000000)" d="M12,18 C5,18 3,15.995 3,9 C3,2.005 5,0 12,0 C19,0 21,2.005 21,9 C21,15.995 19,18 12,18 Z M12,2 C6.111,2 5,3.112 5,9 C4.988,9.211 4.981,9.458 4.981,9.707 C4.981,11.049 5.182,12.345 5.557,13.564 L8,11 L10,13 L15,8 L18.85,11.853 C18.947,11.089 19.002,10.204 19.002,9.306 C19.002,9.198 19.001,9.091 19,8.983 C19,3.11 17.89,1.999 12,1.999 L12,2 Z M8.5,7 C7.672,7 7,6.328 7,5.5 C7,4.672 7.672,4 8.5,4 C9.328,4 10,4.672 10,5.5 C10,6.328 9.328,7 8.5,7 Z" />
+                    <path d="M9,18 C2,18 0,15.995 0,9 C0,2.005 2,0 9,0 C16,0 18,2.005 18,9 C18,15.995 16,18 9,18 Z M9,2 C3.111,2 2,3.112 2,9 C1.988,9.211 1.981,9.458 1.981,9.707 C1.981,11.049 2.182,12.345 2.557,13.564 L5,11 L7,13 L12,8 L15.85,11.853 C15.947,11.089 16.002,10.204 16.002,9.306 C16.002,9.198 16.001,9.091 16,8.983 C16,3.11 14.89,1.999 9,1.999 L9,2 Z M5.5,7 C4.672,7 4,6.328 4,5.5 C4,4.672 4.672,4 5.5,4 C6.328,4 7,4.672 7,5.5 C7,6.328 6.328,7 5.5,7 Z"></path>
                 </svg>
-                Add Photos
+                <span>Photo</span>
             </a>
-            <a ref="addVideo">
+            <a ref="addVideo" onclick={() => activateFileUpload('video')}>
                 <svg viewBox="0 0 18 18">
-                    <path transform="translate(-3.000000, 0.000000)" d="M12,18 C5,18 3,16 3,9 C3,2 5,0 12,0 C19,0 21,2 21,9 C21,16 19,18 12,18 Z M12,2 C6.111,2 5,3.113 5,9 C5,14.887 6.113,16 12,16 C17.887,16 19,14.888 19,9 C19,3.112 17.89,2 12,2 Z M10,6.00525 L15.25,9 L10,12 L10,6 L10,6.00525 Z" />
+                    <path d="M9,18 C2,18 0,16 0,9 C0,2 2,0 9,0 C16,0 18,2 18,9 C18,16 16,18 9,18 Z M9,2 C3.111,2 2,3.113 2,9 C2,14.887 3.113,16 9,16 C14.887,16 16,14.888 16,9 C16,3.112 14.89,2 9,2 Z M7,6.00525 L12.25,9 L7,12 L7,6 L7,6.00525 Z"></path>
                 </svg>
-                Upload Video
+                <span>Video</span>
             </a>
-            <a ref="addFile">
-                <svg viewBox="0 0 18 18">
-                    <path transform="translate(-3.000000, 0.000000)" d="M 3.1875 2.089844 L 3.1875 16.726562 L 14.875 16.726562 L 14.875 5.535156 L 11.375 2.089844 Z M 4.25 3.136719 L 10.625 3.136719 L 10.625 6.273438 L 13.8125 6.273438 L 13.8125 15.683594 L 4.25 15.683594 Z M 11.6875 3.875 L 13.0625 5.226562 L 11.6875 5.226562 Z M 5.84375 5.226562 L 5.84375 6.273438 L 9.03125 6.273438 L 9.03125 5.226562 Z M 5.84375 7.839844 L 5.84375 8.886719 L 12.21875 8.886719 L 12.21875 7.839844 Z M 5.84375 10.453125 L 5.84375 11.5 L 12.21875 11.5 L 12.21875 10.453125 Z M 5.84375 13.066406 L 5.84375 14.113281 L 12.21875 14.113281 L 12.21875 13.066406 Z M 5.84375 13.066406 " />
-                </svg>Add File
+            <a ref="addDocument" onclick={() => activateFileUpload('document')}>
+                <svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path d="M6,10 L12,10 C12.5522847,10 13,10.4477153 13,11 C13,11.5522847 12.5522847,12 12,12 L6,12 C5.44771525,12 5,11.5522847 5,11 C5,10.4477153 5.44771525,10 6,10 Z M6,6 L12,6 C12.5522847,6 13,6.44771525 13,7 C13,7.55228475 12.5522847,8 12,8 L6,8 C5.44771525,8 5,7.55228475 5,7 C5,6.44771525 5.44771525,6 6,6 Z M9,18 C2,18 0,16 0,9 C0,2 2,0 9,0 C16,0 18,2 18,9 C18,16 16,18 9,18 Z M9,2 C3.111,2 2,3.113 2,9 C2,14.887 3.113,16 9,16 C14.887,16 16,14.888 16,9 C16,3.112 14.89,2 9,2 Z"></path>
+                </svg>
+                <span>Document</span>
             </a>
-            <button ref="submit" if={button} onClick={handleSubmit} disabled="disabled">Post</button>
+            <button ref="submit" onClick={handleSubmit} if={button} disabled="disabled">Post</button>
         </div>
         <div if={!loaded && !blocked} class="graphjs-inline graphjs-loader">
             <div class="graphjs-dots">
@@ -60,7 +63,6 @@
     </div>
     <graphjs-promo if={loaded} properties="top right"></graphjs-promo>
     <script>
-        import * as FilePond from 'filepond';
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
@@ -73,75 +75,22 @@
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
-        let self = this;
-
         this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline graphjs-overflown' : 'graphjs-box graphjs-overflown';
         this.blocked = false;
-        this.button = false;
+        this.uploadable = false;
         this.type = 'text';
         this.message = '';
         this.media = [];
+        this.button = false;
 
-        this.on('before-mount', function() {
+        this.on('before-mount', () => {
             this.handleUser();
         });
 
-        this.on('mount', function() {
-            let id = GraphJSConfig.id;
-            let photo = this.refs.addPhoto;
-            let video = this.refs.addVideo;
-            let file = this.refs.addFile;
-            photo.addEventListener('click', function() {
-                self.filepond('photo');
-            }, false);
-            video.addEventListener('click', function() {
-                self.filepond('video');
-            }, false);
-            file.addEventListener('click', function() {
-                self.filepond('file');
-            }, false);
-        });
-        this.filepond = (type) => {
-            FilePond.setOptions({
-                server: {
-                    url:window.GraphJSConfig.host,
-                    process: {
-                        url:'/uploadFile',
-                        withCredentials: true,
-                        onload:function(result){
-                            let photo = self.refs.addPhoto;
-                            let video = self.refs.addVideo;
-                            let file = self.refs.addFile;
-                            result = JSON.parse(result);
-                             if(result.success) {
-                                video.classList.add('disabled');
-                                photo.classList.add('disabled');
-                                file.classList.add('disabled');
-                                if(type === 'photo'){
-                                    photo.classList.remove('disabled');
-                                } else if(type === 'file'){
-                                    file.classList.remove('disabled');
-                                }
-                                var urls = result.urls.map(function(url){
-                                    return {
-                                        resource_type: type,
-                                        url
-                                    };
-                                });
-                                self.media = self.media.concat(urls);
-                                self.type = type;
-                                hideOverlay();
-                                self.handleButton();
-                            } else {
-                                hideOverlay();
-                            }
-                        }
-                    }
-                }
-            });
-            showFileUpload({
-                type
-            });
+        this.activateFileUpload = type => {
+            this.type = type;
+            this.uploadable = true;
+            this.update();
         }
         this.restart = () => {
             this.blocked = false;
@@ -149,14 +98,14 @@
             this.handleUser();
         }
         this.handleUser = () => {
-            getSession(function(response) {
+            getSession((response) => {
                 if(response.success) {
-                    self.userId = response.id;
-                    self.update();
+                    this.userId = response.id;
+                    this.update();
                 } else {
-                    self.loaded = false;
-                    self.blocked = true;
-                    self.update();
+                    this.loaded = false;
+                    this.blocked = true;
+                    this.update();
                     //Handle errors
                 }
             });
@@ -166,8 +115,29 @@
             showLogin();
         }
         this.handleTextInput = () => {
-            self.message = this.refs.composer.value();
-            self.handleButton();
+            this.message = this.refs.composer.value();
+            this.handleButton();
+        }
+        this.handleUploadSuccess = uploads => {
+            // Only 1 video is accepted
+            this.refs.addVideo.classList.add('disabled');
+            // Multiple photos/documents are accepted
+            this.type !== 'photo' && this.refs.addPhoto.classList.add('disabled');
+            this.type !== 'document' && this.refs.addDocument.classList.add('disabled');
+            uploads = uploads.map(upload => ({
+                type: this.type,
+                ...upload
+            }));
+            this.media = this.media.concat(uploads);
+        }
+        this.handleUploadFinish = () => {
+            this.uploadable = false;
+            this.update();
+            this.handleButton();
+        }
+        this.handleUploadFail = response => {
+            console.log('Error:', response)
+            alert('There is an error occured during upload.');
         }
         this.checkMedia = () => {
             let mediaMinimumLimit = 1;
@@ -195,36 +165,40 @@
                 this.update();
                 this.refs.submit && this.refs.submit.setAttribute('disabled', 'disabled');
             }
-            this.update();
         }
         this.handleSubmit = (event) => {
-            self.failMessages = [];
-            self.refs.submit.classList.add('graphjs-loading');
-            if(self.checkMessage() || self.checkMedia()) {
-                let type = self.type + ((self.type === "photo" && self.media.length) > 1 ? 'Album' : '');
-                let message = self.message;
+            this.failMessages = [];
+            this.refs.submit.classList.add('graphjs-loading');
+            if(this.checkMessage() || this.checkMedia()) {
+                let type = this.type;
+                if(this.media.length > 1) {
+                    type += this.type === 'photo' ? 'Album' : '';
+                    type += this.type === 'document' ? 'Set' : '';
+                }
+                let message = this.message;
                 let content = [];
-                self.media.forEach(item => {
+                this.media.forEach(item => {
                     content.push(item.url);
                 });
-                updateStatus(type, message, content, function(response) {
+                updateStatus(type, message, content, (response) => {
                     if(response.success) {
-                        self.refs.composer.clear();
-                        self.refs.submit.classList.remove('graphjs-loading');
-                        self.button = false;
-                        self.type = 'text';
-                        self.message = '';
-                        self.media = [];
-                        self.update();
-                        self.refs.addPhoto.classList.remove('disabled');
-                        self.refs.addVideo.classList.remove('disabled');
+                        this.refs.composer.clear();
+                        this.refs.submit.classList.remove('graphjs-loading');
+                        this.type = 'text';
+                        this.message = '';
+                        this.media = [];
+                        this.update();
+                        this.handleButton();
+                        this.refs.addPhoto.classList.remove('disabled');
+                        this.refs.addVideo.classList.remove('disabled');
+                        this.refs.addDocument.classList.remove('disabled');
                         opts.push(response.id);
                     } else {
                         let failMessage = response.reason || 'Posting failed!';
-                        self.failMessages = [];
-                        self.failMessages.push(failMessage);
-                        self.refs.submit.classList.remove('graphjs-loading');
-                        self.update();
+                        this.failMessages = [];
+                        this.failMessages.push(failMessage);
+                        this.refs.submit.classList.remove('graphjs-loading');
+                        this.update();
                     }
                 });
             }

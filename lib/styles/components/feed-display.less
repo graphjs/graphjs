@@ -63,7 +63,7 @@
                         .flex;
                         .align-items(center);
                         height: calc(100vh - 3em);
-                        &.@{prefix}-photoalbum {
+                        &.@{prefix}-multiple {
                             position: relative;
                             max-width: 100%;
                             margin: 0 auto;
@@ -90,10 +90,14 @@
                                 }
                             }
                         }
-                        & > img, video {
+                        & > img, video, iframe {
                             max-width: 100%;
                             max-height: 100%;
                             margin: 0 auto;
+                        }
+                        & > iframe {
+                            width: 100%;
+                            height: 100%;
                         }
                     }
                 }

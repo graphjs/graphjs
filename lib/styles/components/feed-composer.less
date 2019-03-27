@@ -37,45 +37,80 @@
             @{prefix}-input-text {
                 // ThemeOption: background-color: @background-color-contrast;
             }
-            .@{prefix}-media {
-                margin-top: .5em;
-                .flex;
-                .justify-content(flex-start);
-                .flex-wrap(wrap);
-                .@{prefix}-item {
-                    text-align: center;
-                    background-color: fade(black, 2.5%);
-                    &.@{prefix}-image{
-                        margin-top: 2%;
-                        margin-right: 2%;
-                        width: 15%;
-                        height: 15%;
-                        &:nth-child(6n) {
-                            margin-right: 0;
-                        }
-                        img {
-                            max-width: 100%;
-                            width: 100%;
-                            height: 100%;
-                        }
+        }
+        .@{prefix}-media {
+            .flex;
+            .justify-content(center);
+            .flex-wrap(wrap);
+            margin-top: 1.5em;
+            .@{prefix}-item {
+                overflow: hidden;
+                text-align: center;
+                .border-radius(@border-radius-small);
+                // ThemeOption: background-color: @background-color-contrast;
+                &.@{prefix}-photo {
+                    margin-right: 1em;
+                    margin-bottom: 1em;
+                    width: 8em;
+                    height: 8em;
+                    &:last-child {
+                        margin-right: 0;
                     }
-                    &.@{prefix}-photo {
-                        img {
-                            width:100%;
-                        }
-                    }
-                    &.@{prefix}-video {
+                    div {
                         width: 100%;
-                        height: auto;
-                        max-height: 15em;
-                        margin-top: 2%;
-                        video {
-                            width: 100%%;
-                            height: 100%;
+                        height: 100%;
+                        background-position: center top;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                    }
+                }
+                &.@{prefix}-video {
+                    width: 100%;
+                    height: auto;
+                    max-width: 24em;
+                    max-height: 13.5em;
+                    img {
+                          width: auto;
+                          height: auto;
+                          max-width: 100%;
+                          max-height: 100%;
+                    }
+                }
+                &.@{prefix}-document {
+                    margin-right: 1em;
+                    margin-bottom: 1em;
+                    width: 12em;
+                    height: 3em;
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                    div {
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+                        max-width: 100%;
+                        max-height: 100%;
+                        padding: .5em;
+                        padding-left: 3em;
+                        .single-line-text;
+                        text-align: left;
+                        svg {
+                            position: absolute;
+                            left: .5em;
+                            height: 2em;
+                            path {
+                                // ThemeOption: fill: @primary-color;
+                            }
+                        }
+                        b {
+                            font-size: .85em;
+                            line-height: 1.25em;
+                        }
+                        span {
+                            font-size: .75em;
                         }
                     }
                 }
-
             }
         }
         .@{prefix}-options {
@@ -92,6 +127,7 @@
                 width: auto;
             }
             a {
+                .flex();
                 float: left;
                 margin-left: 1em;
                 padding: .65em 0;
@@ -106,8 +142,13 @@
                 svg {
                     width: 1.2em;
                     height: 1.2em;
-                    margin-right: .25em;
+                    margin-right: .3em;
                     vertical-align: top;
+                }
+                span {
+                  color: inherit;
+                  font-weight: inherit;
+                  line-height: 1.1em; // .1em less than the parent
                 }
             }
             button {

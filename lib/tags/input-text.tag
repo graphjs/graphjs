@@ -13,6 +13,7 @@
     ></div>
     <script>
         import Tribute from 'tributejs';
+        import sanitizeHTML from 'sanitize-html';
         import getMembers from '../scripts/getMembers.js';
         import listGroups from '../scripts/listGroups.js';
         import listMembers from '../scripts/listMembers.js';
@@ -141,6 +142,8 @@
             let input = self.refs.input;
             // Listen to the events
             this.handleEvents();
+            // Add paste event listener
+            this.refs.input.addEventListener('paste', (event) => this.sanitizeHTML(event));
             // Add mention options
             this.userMention && this.activeMentionOptions.push({
                 ...this.userMentionOptions,
@@ -170,6 +173,31 @@
 
         this.focus = () => {
             this.refs.input.focus();
+        }
+
+        this.sanitizeHTML = (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            let copied = event.clipboardData || window.clipboardData;
+            let paste = copied.getData('text/html') || copied.getData('text');
+            if(copied.types.indexOf('text/html') !== -1) {
+                paste = sanitizeHTML(paste, {
+                    allowedTags: ['br'],
+                    selfClosing: ['br']
+                });
+                paste.replace(/&nbsp;/g, ' ');
+            }
+            let selection = window.getSelection();
+            if (!selection.rangeCount) return false;
+            let element = document.createElement('span');
+            element.innerHTML = paste;
+            let range = selection.getRangeAt(0);
+            range.insertNode(element);
+            range = range.cloneRange();
+            range.selectNodeContents(element);
+            range.collapse(false);
+            selection.removeAllRanges();
+            selection.addRange(range);
         }
 
         this.handleMentionContainer = () => {

@@ -19,14 +19,14 @@
                 data-link="post"
                 data-id={matchedPost}
                 onclick={!opts.minor && handleShow}
-                href={opts.minor && '#' + postsData[matchedPost].title.replace(' ', '_') + '-' + matchedPost + '-GJS'}
+                href={opts.minor && getPermanentLink(matchedPost)}
             >
                 <h1 class="graphjs-title">{postsData[matchedPost].title}<small if={postsData[matchedPost].isDraft}><b>Draft</b></small></h1>
                 <ul class="graphjs-information">
                     <li class="graphjs-author">
-                        <span 
+                        <span
                             data-link="profile"
-                            data-id={postsData[matchedPost].author.id} 
+                            data-id={postsData[matchedPost].author.id}
                             data-authorbeforetext={language.authorBefore}
                             onclick={handleShow}
                         >
@@ -127,7 +127,7 @@
         analytics("blog-list");
 
         this.language = language('blog-list', opts);
-        
+
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
@@ -186,8 +186,8 @@
                             title: post.title,
                             author: post.author,
                             timestamp: post.publish_time,
-                            published: post.publish_time !== "0",
-                            isDraft: (self.userId && post.author && self.userId === post.author.id && post.is_draft),
+                            published: post.publish_time !== '0',
+                            isDraft: self.userId && post.author && (self.userId === post.author.id) && post.is_draft,
                             summary: index >= 3
                                 ? ''
                                 : post.summary
@@ -218,6 +218,13 @@
             } else {
                 opts.callback(properties);
             }
+        }
+        this.getPermanentLink = (id) => {
+            let hash = '';
+            let post = this.postsData[id];
+            if(!post || !post.title) return;
+            hash = '#' + post.title.split(' ').join('_')  + '-' + id + '-GJS';
+            return window.location.href.split('#')[0] + hash;
         }
         this.handleShow = (event) => {
             event.preventDefault();

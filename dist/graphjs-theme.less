@@ -613,6 +613,25 @@
       }
     }
     .@{prefix}-content {
+        .@{prefix}-entry {
+            @{prefix}-input-text {
+                background-color: @background-color-contrast;
+            }
+        }
+        .@{prefix}-media {
+            .@{prefix}-item {
+                background-color: @background-color-contrast;
+                &.@{prefix}-document {
+                    div {
+                        svg {
+                            path {
+                                fill: @primary-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         .@{prefix}-options {
             a {
                 .text-color-states(@text-color-strong);
@@ -648,7 +667,7 @@
             .@{prefix}-container {
                 .@{prefix}-media {
                     & > * {
-                        &.@{prefix}-photoalbum {
+                        &.@{prefix}-multiple {
                             & > a {
                                 .icon-color-states(@primary-color);
                             }
@@ -666,6 +685,39 @@
     .@{prefix}-content {
         border-color: fade(@default-color, 3%);
         background-color: @background-color-contrast;
+        .@{prefix}-entry {
+            .@{prefix}-title {
+                color: @primary-color;
+            }
+            .@{prefix}-media {
+                &.@{prefix}-document {
+                    a {
+                        border-color: fade(@primary-color, 20%);
+                        background-color: fade(@primary-color, 10%);
+                        &:hover {
+                            border-color: fade(@primary-color, 50%);
+                            background-color: fade(@primary-color, 25%);
+                            svg {
+                                path {
+                                    fill: @primary-color;
+                                }
+                            }
+                            b {
+                                color: @primary-color;
+                            }
+                        }
+                        svg {
+                            path {
+                                fill: fade(@primary-color, 85%);
+                            }
+                        }
+                        b {
+                            color: fade(@primary-color, 85%);
+                        }
+                    }
+                }
+            }
+        }
         .@{prefix}-interaction {
             .@{prefix}-synopsis {
                 & > * {
