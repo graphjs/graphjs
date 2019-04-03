@@ -180,7 +180,7 @@
             let self = this;
             self.id && getThread(self.id, function(response) {
                 if(response.success) {
-                    this.language.title = response.title;
+                    self.language.title = response.title;
                     self.title = response.title;
                     self.entries = response.messages;
                     self.update();
@@ -265,9 +265,9 @@
                 textBox.classList.remove('graphjs-editable');
                 event.target.innerText = this.language.threadEditButton;
                 if(textBox.innerText != '') {
-                    editReply(event.target.dataset.id, textBox.innerText, function(response) {
+                    editReply(event.target.dataset.id, textBox.innerText, (response) => {
                         if(response.success) {
-                            self.handleContent();
+                            this.handleContent();
                         } else {
                             //Handle error
                         }
