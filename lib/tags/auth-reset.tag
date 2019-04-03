@@ -28,8 +28,8 @@
         <form class="graphjs-code" if={next == 'updatePassword'}>
             <b>{language.stepThreeHeader}</b>
             <p>{language.stepThree}</p>
-            <input ref="password" type="password" placeholder={language.passwordPlaceholder} />
-            <input ref="confirmation" type="password" placeholder={language.confirmPasswordPlaceholder} />
+            <input ref="password" type="password" placeholder={language.passwordPlaceholder} autocomplete="off" />
+            <input ref="confirmation" type="password" placeholder={language.confirmPasswordPlaceholder} autocomplete="off" />
             <button ref="submitPassword" onclick={handlePasswordSubmit}>{language.submitPasswordButton}</button>
         </form>
     </div>

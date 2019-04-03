@@ -11,10 +11,10 @@
     </div>
     <div class="graphjs-content">
         <form>
-            <input ref="username" type="text" placeholder={language.usernamePlaceholder}/>
-            <input ref="email" type="text" placeholder={language.emailPlaceholder}/>
-            <input ref="password" type="password" placeholder={language.passwordPlaceholder}/>
-            <input ref="confirmation" type="password" placeholder={language.confirmPasswordPlaceholder}/>
+            <input ref="username" type="text" placeholder={language.usernamePlaceholder} />
+            <input ref="email" type="text" placeholder={language.emailPlaceholder} />
+            <input ref="password" type="password" placeholder={language.passwordPlaceholder} autocomplete="off" />
+            <input ref="confirmation" type="password" placeholder={language.confirmPasswordPlaceholder} autocomplete="off" />
             <button ref="submit" onclick={handleSubmit}>{language.submitButton}</button>
             <div class="graphjs-option graphjs-single">
                 <a data-link="login" onclick={opts.minor ? opts.callback : handleLoginBox}>{language.loginLink}</a>

@@ -12,7 +12,7 @@
     <div class="graphjs-content">
         <form>
             <input ref="username" type="text" placeholder={language.usernamePlaceholder} />
-            <input ref="password" type="password" placeholder={language.passwordPlaceholder}/>
+            <input ref="password" type="password" placeholder={language.passwordPlaceholder} autocomplete="on" />
             <button ref="submit" onclick={handleSubmit}>{language.submitButton}</button>
             <div class="graphjs-option graphjs-double">
                 <a data-link="register" onclick={opts.minor ? opts.callback : handleRegisterBox}>{language.registerLink}</a>
