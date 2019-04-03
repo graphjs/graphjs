@@ -603,14 +603,11 @@
 @{prefix}-feed-composer.@{prefix}-root {
     color: @text-color-normal;
     &.@{prefix}-box {
-      .@{prefix}-content {
-          @{prefix}-input-text {
-              background-color: @background-color-contrast;
-          }
-          .@{prefix}-options {
-              background-color: @background-color-contrast;
-          }
-      }
+        .@{prefix}-content {
+            .@{prefix}-options {
+                background-color: tint(@background-color-contrast, 5%);
+            }
+        }
     }
     .@{prefix}-content {
         .@{prefix}-entry {
@@ -1052,6 +1049,9 @@
 
 @{prefix}-input-text.@{prefix}-root {
     color: @text-color-normal;
+    .@{prefix}-input {
+        background-color: @input-color;
+    }
 }
 
 // messages.less
