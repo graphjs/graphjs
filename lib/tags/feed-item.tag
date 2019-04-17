@@ -34,7 +34,7 @@
                     <svg viewBox="20 13 67 74">
                         <path d="M82.8,43.5l-50.5-29C27.3,11.7,21,15.3,21,21V79c0,5.8,6.3,9.3,11.3,6.5l50.5-29C87.8,53.6,87.8,46.4,82.8,43.5z"/>
                     </svg>
-                    <img src={activity.cover || 'https://phonetworks.s3.us-west-2.amazonaws.com///4efc45650a8cb452a2c96f8d6e1fd8cb-1553626966-5c9a77566d792.png'} />
+                    <img src={activity.preview_url || 'https://phonetworks.s3.us-west-2.amazonaws.com///4efc45650a8cb452a2c96f8d6e1fd8cb-1553626966-5c9a77566d792.png'} />
                 </a>
             </div>
             <div if={activity.urls && activity.urls.length > 0 && (activity.type === 'document' || activity.type === 'documentSet')} class="graphjs-media graphjs-document">
@@ -193,7 +193,8 @@
                     text: opts.activity.text,
                     timestamp: opts.activity.timestamp,
                     urls: opts.activity.urls,
-                    author: opts.activity.author
+                    author: opts.activity.author,
+                    preview_url: opts.activity.preview_url,
                 }
                 self.handleDetails();
             } else {
