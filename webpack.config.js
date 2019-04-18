@@ -70,6 +70,9 @@ module.exports = SpeedMeasure.wrap({
         new webpack.optimize.AggressiveMergingPlugin(),
         new CompressionPlugin({
             algorithm: 'gzip'
+        }),
+        new webpack.DefinePlugin({
+          'REQUIRED_MODULES': JSON.stringify(process.env.REQUIRED_MODULES ? process.env.REQUIRED_MODULES.toLowerCase() : 'all' )
         })
     ],
     optimization: {

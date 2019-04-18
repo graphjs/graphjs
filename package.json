@@ -10,8 +10,8 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "build": "webpack --optimize-minimize --mode production",
-    "watch": "concurrently 'webpack --watch' 'webpack-dev-server'"
+    "watch": "concurrently 'webpack --watch' 'webpack-dev-server'",
+    "build": "cross-env REQUIRED_MODULES=$MODULES webpack --optimize-minimize --mode production"
   },
   "dependencies": {
     "@types/nanoevents": "^1.0.0",
@@ -40,11 +40,13 @@
   },
   "devDependencies": {
     "babel-loader": "^7.1.2",
+    "babel-plugin-dynamic-import-webpack": "^1.1.0",
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-es2015-riot": "^1.1.0",
     "compression-webpack-plugin": "^1.1.11",
     "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
     "css-loader": "^0.28.10",
     "file-loader": "^1.1.11",
     "less-loader": "^4.0.5",
