@@ -31,10 +31,12 @@ module.exports = {
     encode: function (parsed) {
         var content = parsed.content;
         var metadata = parsed.metadata;
-        var metastr = metadata.map(function (meta) {
+        var metastr = metadata.filter(function (meta) {
+            return ['string', 'number'].indexOf(typeof meta.value) >= 0;
+        }).map(function (meta) {
             var type = meta.type;
             var key = meta.key.replace(/\\/g, '\\\\').replace(/\{/g, '\\{').replace(/\}/g, '\\}');
-            var value = meta.value.replace(/\\/g, '\\\\').replace(/\{/g, '\\{').replace(/\}/g, '\\}');
+            var value = ('' + meta.value).replace(/\\/g, '\\\\').replace(/\{/g, '\\{').replace(/\}/g, '\\}');
             return `[metadata](type=${type};key={${key}};value={${value}})`;
         }).join('\n');
         content = content ? content : '';

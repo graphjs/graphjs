@@ -179,15 +179,15 @@
                 let content = [];
                 let metas = [];
                 this.media.forEach(item => {
-                    let {url, ...meta} = item;
+                    let {url, type, ...meta} = item;
                     content.push(url);
-                    let metaItem = {};
                     for (let key in meta) {
+                        let metaItem = {};
                         metaItem.type = key;
                         metaItem.key = url;
                         metaItem.value = meta[key];
+                        metas.push(metaItem);
                     }
-                    metas.push(metaItem);
                 });
                 updateStatus(type, message, content, metas, (response) => {
                     if(response.success) {
