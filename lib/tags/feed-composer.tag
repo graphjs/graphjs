@@ -21,7 +21,7 @@
         <div class="graphjs-media" if={media.length > 0}>
             <div each={item in media} class={'graphjs-item graphjs-' + item.type}>
                 <div if={item.type === 'photo'} style={'background-image: url(' + item.url + ');'}></div>
-                <img if={item.type === 'video'} src={item.cover || 'https://phonetworks.s3.us-west-2.amazonaws.com///4efc45650a8cb452a2c96f8d6e1fd8cb-1553626966-5c9a77566d792.png'} />
+                <img if={item.type === 'video'} src={item.preview_url || 'https://phonetworks.s3.us-west-2.amazonaws.com///4efc45650a8cb452a2c96f8d6e1fd8cb-1553626966-5c9a77566d792.png'} />
                 <div if={item.type === 'document'}>
                     <svg viewBox="0 0 14 16">
                         <path d="M10.0053333,0 L0,0 L0,16 L14,16 L14,4 L10.0053333,0 Z M12.0053333,14 L2,14 L2,2 L9.00266667,2 L9.00266667,4.99733333 L12.0053333,4.99733333 L12.0053333,14 Z"></path>
@@ -177,10 +177,19 @@
                 }
                 let message = this.message;
                 let content = [];
+                let metas = [];
                 this.media.forEach(item => {
-                    content.push(item.url);
+                    let {url, type, ...meta} = item;
+                    content.push(url);
+                    for (let key in meta) {
+                        let metaItem = {};
+                        metaItem.type = key;
+                        metaItem.key = url;
+                        metaItem.value = meta[key];
+                        metas.push(metaItem);
+                    }
                 });
-                updateStatus(type, message, content, (response) => {
+                updateStatus(type, message, content, metas, (response) => {
                     if(response.success) {
                         this.refs.composer.clear();
                         this.refs.submit.classList.remove('graphjs-loading');
