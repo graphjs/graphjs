@@ -33,7 +33,7 @@ GraphJS.init("{{YOUR-PUBLIC-ID}}", {
         host:  "{{URL-OF-GRAPHJS-INSTANCE}}",
         theme: "{{YOUR-THEME-PREFERENCE}}",
         color: "{{YOUR-COLOR-PREFERENCE}}",
-        language: "{{YOUR-LANGUAGE-OF-CHOICE}},
+        language: "{{YOUR-LANGUAGE-OF-CHOICE}}",
         defaultAvatar: "{{URL-TO-YOUR-DEFAULT-AVATAR}}"
 })
 </script>
