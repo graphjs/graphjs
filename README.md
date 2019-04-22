@@ -45,7 +45,7 @@ your browser.
 
 ## Translations
 
-Translation files can be found in the directory [/lib/languages](https://github.com/phonetworks/graphjs/tree/master/lib/languages). They are standard json files. Please make a pull request on our Github repo for us to include your contributions in the master branch.
+Translation files can be found in the directory [/lib/language](https://github.com/phonetworks/graphjs/tree/master/lib/language). They are standard json files. Please make a pull request on our Github repo for us to include your contributions in the master branch.
 
 To fetch the latest translations, run `git submodule foreach 'git pull origin master'`
 
