@@ -6,7 +6,7 @@
     </div>
     <div if={authorized} class="graphjs-content">
         <a ref="uploadWidget" class="graphjs-avatar" data-changeavatartextlineone={language.changeAvatarLineOne} data-changeavatartextlinetwo={language.changeAvatarLineTwo}>
-            <img src={profile && profile.avatar ? downsizeImage(profile.avatar, 160) : defaultAvatar} />
+            <img src={profile ? (profile.avatar ? downsizeImage(profile.avatar, 160) : (defaultAvatar == "gravatar" ? gravatar.url(profile.email, {d: 'retro', s: '160'}, true) : defaultAvatar)) : defaultAvatar} />
         </a>
         <h2>{language.profileTitle}</h2>
         <form>
@@ -44,6 +44,9 @@
 
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
+
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
 
         this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.failMessages = [];

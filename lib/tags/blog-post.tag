@@ -81,7 +81,7 @@
             </div>
             <div each={comment, index in comments} data-id={comment.id} class="graphjs-item">
                 <div class="graphjs-credit" if={authorsData.hasOwnProperty(comment.author)}>
-                    <img data-link="profile" data-id={comment.author} onclick={handleShow} src={authorsData[comment.author].avatar ? downsizeImage(authorsData[comment.author].avatar, 50) : defaultAvatar} />
+                    <img data-link="profile" data-id={comment.author} onclick={handleShow} src={authorsData[comment.author].avatar ? downsizeImage(authorsData[comment.author].avatar, 50) : (defaultAvatar == "gravatar" ? gravatar.url(authorsData[comment.author].email, {s: '50', d: 'retro'}, true) : defaultAvatar)} />
                     <span>
                         <b data-link="profile" data-id={comment.author} onclick={handleShow}>{authorsData[comment.author].username || 'Unknown User'}</b>
                         <time data-timestamp={comment.timestamp}>{handleTime(comment.createTime)}</time>
@@ -132,6 +132,9 @@
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
         import showBlogList from '../scripts/showBlogList.js';
+
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
 
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 

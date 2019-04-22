@@ -35,7 +35,7 @@
             if={loaded && data && matchedItems.length > 0}
             style={opts.limit ? 'max-height: calc((' + limit + ' * 2em) + .5em);' : ''}>
             <a each={matchedItem in matchedItems} class="graphjs-item" data-id={matchedItem} data-label={data[matchedItem].label} onclick={handleCallback}>
-                <img if={type === 'users' || type === 'members'} src={data[matchedItem].image ? downsizeImage(data[matchedItem].image, 40) : defaultAvatar} />
+                <img if={type === 'users' || type === 'members'} src={data[matchedItem].image ? downsizeImage(data[matchedItem].image, 40) : defaultAvatar} /> <!-- gravatar todo -->
                 <b>{data[matchedItem].label}</b>
             </a>
         </div>
@@ -47,6 +47,9 @@
         import listMembers from '../scripts/listMembers.js';
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
+
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
 
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;

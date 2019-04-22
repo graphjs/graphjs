@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class={'graphjs-item graphjs-feedback'}>
-            <img class="graphjs-author" src={profile ? downsizeImage(profile.avatar, 50) : defaultAvatar} />
+            <img class="graphjs-author" src={profile ? downsizeImage(profile.avatar, 50) : (defaultAvatar == "gravatar" ? gravatar.url(profile.email, {s: '50', d: 'retro'}, true): defaultAvatar)} />
             <div class={'graphjs-memo' + (blocked ? ' graphjs-loading graphjs-blocked' : '')}>
                 <fieldset class="rating">
                 	<input id="rate-5" type="radio" name="rating" value={5}>
@@ -85,6 +85,9 @@
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
+
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
 
         analytics("feedback");
 

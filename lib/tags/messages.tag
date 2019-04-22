@@ -17,7 +17,7 @@
             <input ref="searchForPartners" onkeyup={handleFilter} class={!newMessageOption ? 'graphjs-hidden' : ''} type="text" placeholder={language.nameSearchPlaceholder} />
             <div class="graphjs-suggestions" if={newMessageOption && matchedPartners.length > 0}>
                 <a each={matchedPartner in matchedPartners} data-id={matchedPartner.id} onclick={handleNewPartner}>
-                    <img src={matchedPartner.avatar ? downsizeImage(matchedPartner.avatar, 40) : defaultAvatar} />
+                    <img src={matchedPartner.avatar ? downsizeImage(matchedPartner.avatar, 40) : (defaultAvatar=="gravatar" ? gravatar.url(matchedPartner.email, {s: '40', d: 'retro'}, true) : defaultAvatar)} />
                     <b>{matchedPartner.username}</b>
                 </a>
             </div>
@@ -153,6 +153,9 @@
         import sendMessage from '../scripts/sendMessage.js';
         import getMembers from '../scripts/getMembers.js';
         import showLogin from '../scripts/showLogin.js';
+
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
 
         analytics("messages");
 
@@ -385,7 +388,8 @@
                         let item = {
                             id: member,
                             username: response.members[member].username,
-                            avatar: response.members[member].avatar
+                            avatar: response.members[member].avatar,
+                            email: response.members[member].email
                         }
                         self.possiblePartners.push(item);
                     }
@@ -414,6 +418,7 @@
                 partner: partner,
                 avatar: data.avatar,
                 username: data.username,
+                email: data.email,
                 message: message,
                 is_read: true
             };

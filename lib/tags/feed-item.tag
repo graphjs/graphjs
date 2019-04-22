@@ -9,7 +9,7 @@
 >
     <div class="graphjs-content">
         <div class="graphjs-credit" if={activity.author && authorsData.hasOwnProperty(activity.author.id)}>
-            <img data-link="profile" data-id={activity.author.id} onclick={handleShow} src={authorsData[activity.author.id].avatar ? downsizeImage(authorsData[activity.author.id].avatar, 50) : defaultAvatar} />
+            <img data-link="profile" data-id={activity.author.id} onclick={handleShow} src={authorsData[activity.author.id].avatar ? downsizeImage(authorsData[activity.author.id].avatar, 50) : (defaultAvatar=="gravatar" ? gravatar.url(authorsData[activity.author.id].email, {s: '50', d: 'retro'}, true) : defaultAvatar)} />
             <span>
                 <b data-link="profile" data-id={activity.author.id} onclick={handleShow}>{authorsData[activity.author.id].username || 'Unknown User'}</b>
                 <time data-timestamp={activity.timestamp}>{handleTime(activity.timestamp)}</time>
@@ -90,7 +90,7 @@
         <div ref="comments" class="graphjs-comments" if={activity.comments && activity.comments.length > 0}>
             <div class={'graphjs-comment' + (activity.commentsData[comment].pseudo ? ' graphjs-pseudo' : '')} id={'comment-' + comment} each={comment in activity.comments} data-id={comment}>
                 <div class="graphjs-credit" if={authorsData.hasOwnProperty(activity.commentsData[comment].author)}>
-                    <img data-link="profile" data-id={activity.commentsData[comment].author} onclick={handleShow} src={authorsData[activity.commentsData[comment].author].avatar ? downsizeImage(authorsData[activity.commentsData[comment].author].avatar, 50) : defaultAvatar} />
+                    <img data-link="profile" data-id={activity.commentsData[comment].author} onclick={handleShow} src={authorsData[activity.commentsData[comment].author].avatar ? downsizeImage(authorsData[activity.commentsData[comment].author].avatar, 50) : (defaultAvatar == "gravatar" ? authorsData[activity.commentsData[comment].author].email : defaultAvatar)} />
                     <span>
                         <b data-link="profile" data-id={activity.commentsData[comment].author} onclick={handleShow}>{authorsData[activity.commentsData[comment].author].username || language.unknowUser}</b>
                         <time data-timestamp={activity.commentsData[comment].createTime}>{handleTime(activity.commentsData[comment].createTime)}</time>
@@ -121,6 +121,9 @@
         import showDisplay from '../scripts/showDisplay.js';
         import getId from '../scripts/getId.js';
         import Autolinker from 'autolinker';
+
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
 
         this.language = language('comments', opts);
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
