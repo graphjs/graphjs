@@ -4,7 +4,7 @@
         <a>{group.title}</a>
         <p>{group.description}</p>
         <div class="graphjs-members" if={avatars}>
-            <img each={avatar in avatars} src={avatar ? downsizeImage(avatar, 30) : defaultAvatar} />
+            <img each={avatar in avatars} src={avatar ? downsizeImage(avatar, 30) : (defaultAvatar == "gravatar" ? window.GraphJSDefaultAvatar : defaultAvatar)} />
             <span if={members && members.length >= 5}>
                 <small>{'+' + (members.length - 4)}</small>
             </span>

@@ -32,7 +32,7 @@
         </div>
         <div each={comment in comments} data-id={comment} class="graphjs-item">
             <div class="graphjs-credit" if={authorsData.hasOwnProperty(commentsData[comment].author)}>
-                <img data-link="profile" data-id={commentsData[comment].author} onclick={handleShow} src={authorsData[commentsData[comment].author].avatar ? downsizeImage(authorsData[commentsData[comment].author].avatar, 50) : defaultAvatar} />
+                <img data-link="profile" data-id={commentsData[comment].author} onclick={handleShow} src={authorsData[commentsData[comment].author].avatar ? downsizeImage(authorsData[commentsData[comment].author].avatar, 50) : (defaultAvatar == "gravatar" ? gravatar.url(authorsData[commentsData[comment].author].email, {s: '50', d: 'retro'}, true) : defaultAvatar)} />
                 <span>
                     <b data-link="profile" data-id={commentsData[comment].author} onclick={handleShow}>{authorsData[commentsData[comment].author].username || language.unknowUser}</b>
                     <time data-timestamp={commentsData[comment].createTime}>{handleTime(commentsData[comment].createTime)}</time>
@@ -55,6 +55,9 @@
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
+
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
 
         analytics("comments");
 
