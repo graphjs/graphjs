@@ -8,6 +8,16 @@
     }
 >
     <div class="graphjs-content">
+        <div class={'graphjs-activity' + (loaded ? '' : ' graphjs-loading')}>
+            <div class="graphjs-loader">
+                <div class="graphjs-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <button onclick={() => restart()}>Load more</button>
+        </div>
         <div class="graphjs-activity" if={activity.length > 0}>
             <graphjs-feed-item each={item in activity} id={item.id} activity={item}></graphjs-feed-item>
         </div>
@@ -74,6 +84,7 @@
             });
         }
         this.handleContent = (callback) => {
+            this.loaded = false;
             getStatusUpdates(self.offset, self.count, function(response) {
                 if(response.success) {
                     self.activity = response.updates.reverse();
