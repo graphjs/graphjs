@@ -42,6 +42,8 @@
         this.authorsData = {};
         this.reaction = opts.reaction || 'love';
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
+        this.offset = opts.offset ? opts.offset : 0;
+        this.count = opts.count ? opts.count : 20;
 
         this.on('before-mount', function() {
             this.handleUser();
@@ -72,7 +74,7 @@
             });
         }
         this.handleContent = (callback) => {
-            getStatusUpdates(function(response) {
+            getStatusUpdates(self.offset, self.count, function(response) {
                 if(response.success) {
                     self.activity = response.updates.reverse();
                     self.activity.forEach(activity => {

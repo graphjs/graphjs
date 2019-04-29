@@ -15,6 +15,8 @@
     <graphjs-feed-activity
         minor={true}
         box={opts.box}
+        offset={opts.offset}
+        count={opts.count}
     />
     <script>
         import './feed-composer.tag';

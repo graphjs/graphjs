@@ -17,8 +17,8 @@
 
         <graphjs-auth></graphjs-auth>
         <br /><br /><hr /><br /><br />
-        <!--<graphjs-feed max-width="600px;"></graphjs-feed>-->
-
+        <graphjs-feed max-width="600px;" count="20"></graphjs-feed>
+<!--
         <graphjs-feed-composer id=""></graphjs-feed-composer>
         <h1>Single Feed Item</h1>
         <br /><br />
@@ -39,16 +39,29 @@
         <graphjs-feed-activity></graphjs-feed-activity>
         -->
 
-
+    -->
         <!-- Test Tags finish here -->
         <script src="/dist/graph.js"></script>
         <script>
+                GraphJS.init('194C2423-1B19-4D7C-A552-615ADC4A4B23', {
+        host: 'https://gj24231b194d7ca552615adc4a4b23.herokuapp.com',
+        
+        theme: {
+            primaryColor: '6F879F',
+            textColor: 'rgb(63, 95, 127)',
+            backgroundColor: 'white'
+        }
+    });
+    /*
+
+
             GraphJS.init("79982844-6a27-4b3b-b77f-419a79be0e10", {
                 host: 'https://graphjs-server-test.herokuapp.com',
                 //host: "https://gjs-singlesignon.herokuapp.com",
                 theme: 'dark',
                 defaultAvatar: 'gravatar'
             });
+            */
         </script>
     </body>
 </html>
