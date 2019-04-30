@@ -11,6 +11,16 @@
         <div class="graphjs-activity" if={activity.length > 0}>
             <graphjs-feed-item each={item in activity} id={item.id} activity={item}></graphjs-feed-item>
         </div>
+        <div class={'graphjs-activity' + (loaded ? '' : ' graphjs-loading')}>
+            <div class="graphjs-loader">
+                <div class="graphjs-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <button onclick={() => loadMore()}>Load more</button>
+        </div>
     </div>
     <script>
         import language from '../scripts/language.js';
@@ -44,6 +54,7 @@
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
         this.offset = opts.offset ? opts.offset : 0;
         this.count = opts.count ? opts.count : 20;
+        this.page = 0;
 
         this.on('before-mount', function() {
             this.handleUser();
@@ -73,7 +84,43 @@
                 }
             });
         }
+        this.loadMore = () => {
+            self.page++;
+            // @todo fix
+            //let new_offset = parseInt(self.offset) + (parseInt(self.page)*parseIntself.count));
+            let new_offset = self.offset; 
+            let new_count = parseInt(self.count) + (parseInt(self.page) * parseInt(self.count));
+            getStatusUpdates(new_offset, new_count, function(response) {
+                if(response.success) {
+                    self.activity = response.updates.reverse();
+                    self.activity.forEach(activity => {
+                        activity.commentsData = {}
+                        activity.upvoted = false;
+                        activity.upvotes = 0;
+                        getUpvote(activity.id, function(response) {
+                            if(response.success) {
+                                activity.upvoted = response.starred;
+                                activity.upvotes = response.count;
+                            }
+                        });
+                        self.update();
+                    });
+                    for(let item of self.activity) {
+                        getProfile(item.author.id, function(response) {
+                            if(response.success) {
+                                self.authorsData[item.author.id] = response.profile;
+                            }
+                            self.update();
+                        });
+                    }
+                }
+                self.loaded = true;
+                self.update();
+                self.handleComments();
+            });
+        }
         this.handleContent = (callback) => {
+            this.loaded = false;
             getStatusUpdates(self.offset, self.count, function(response) {
                 if(response.success) {
                     self.activity = response.updates.reverse();
