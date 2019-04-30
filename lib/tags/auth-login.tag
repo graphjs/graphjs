@@ -11,7 +11,7 @@
     </div>
     <div class="graphjs-content">
         <form>
-            <input ref="username" type="text" placeholder={language.usernamePlaceholder} />
+            <input ref="username" type="text" placeholder={language.usernamePlaceholder} autofocus />
             <input ref="password" type="password" placeholder={language.passwordPlaceholder} autocomplete="on" />
             <button ref="submit" onclick={handleSubmit}>{language.submitButton}</button>
             <div class="graphjs-option graphjs-double">
@@ -161,5 +161,7 @@
                 );
             }
         }
+
+        this.on('mount', () => this.refs.username.focus());
     </script>
 </graphjs-auth-login>
