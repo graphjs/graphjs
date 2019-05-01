@@ -19,7 +19,7 @@
                     <span></span>
                 </div>
             </div>
-            <button onclick={() => loadMore()}>Load more</button>
+            <button class="graphjs-secondary-btn" onclick={() => loadMore()}>Load more</button>
         </div>
     </div>
     <script>
