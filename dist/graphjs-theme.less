@@ -258,6 +258,19 @@
     }
 }
 
+.@{prefix}-root {
+    .@{prefix}-secondary-btn {
+        color: @text-color-weak;
+        border-color: @text-color-weak;
+        background-color: @background-color-shade;
+        &:hover {
+            color: @text-color-normal;
+            border-color: @text-color-normal;
+            background-color: @background-color-contrast;
+        }
+    }
+}
+
 //mention-container.less
 .@{prefix}-mention-container {
     ul {
