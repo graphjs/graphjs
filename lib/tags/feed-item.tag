@@ -46,7 +46,7 @@
                     <span>Size unknown</span>
                 </a>
             </div>
-            <div each={i in new Array(1)} if={activity.urls && activity.urls.length > 0 && (activity.type === 'embend')} class="graphjs-media graphjs-embend">
+            <div each={i in new Array(1)} if={activity.urls && activity.urls.length > 0 && (activity.type === 'embed')} class="graphjs-media graphjs-embed">
                 <raw>
                   <span></span>
                   this.innerHTML.root = activity.urls && activity.urls[0]

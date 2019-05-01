@@ -12,14 +12,14 @@
             <graphjs-input-text ref="composer" event-input={() => handleTextInput()}></graphjs-input-text>
             <graphjs-input-file
                 type={type}
-                if={uploadable && (type !== 'text' && type !== 'embend') && !(type === 'video' && media.length > 0)}
+                if={uploadable && (type !== 'text' && type !== 'embed') && !(type === 'video' && media.length > 0)}
                 callback-success={handleUploadSuccess}
                 callback-fail={handleUploadFail}
                 callback-finish={handleUploadFinish}>
             </graphjs-input-file>
-            <div class="graphjs-embend" if={uploadable && type=="embend"}>
-                <textarea ref="embendedcode" placeholder="Enter your embend code here"/>
-                <button onclick={embendCode}>Embend</submit>
+            <div class="graphjs-embed" if={uploadable && type=="embed"}>
+                <textarea ref="embededcode" placeholder="Enter your embed code here"/>
+                <button onclick={embedCode}>embed</submit>
             </div>
         </div>
         <div class="graphjs-media" if={media.length > 0}>
@@ -33,7 +33,7 @@
                     <b>{item.original_filename}</b>
                     <span>{item.human_filesize}</span>
                 </div>
-                <div if={item.type === 'embend'}>
+                <div if={item.type === 'embed'}>
                     <raw>
                       <span></span>
                       
@@ -62,8 +62,8 @@
                 </svg>
                 <span>Document</span>
             </a>
-            <a ref="addEmbend" onclick={() => activateFileUpload('embend')}>
-                <span> Embend</span>
+            <a ref="addembed" onclick={() => activateFileUpload('embed')}>
+                <span> Embed</span>
             </a>
             <button ref="submit" onClick={handleSubmit} if={button} disabled="disabled">Post</button>
         </div>
@@ -107,18 +107,18 @@
             this.uploadable = true;
             this.update();
         }
-        this.embendCode = () => {
+        this.embedCode = () => {
             const self = this;
-            if(!self.refs.embendedcode.value || self.refs.embendedcode.value.indexOf('iframe') == -1){
-                alert("Please enter valid Embended Code");
+            if(!self.refs.embededcode.value || self.refs.embededcode.value.indexOf('iframe') == -1){
+                alert("Please enter valid embeded Code");
                 return;
             }
             const uploads = [{
                 type: self.type,
-                url: self.refs.embendedcode.value.replace(/(\r\n|\n|\r)/gm, "").replace(/\(|\)/gm,"")
+                url: self.refs.embededcode.value.replace(/(\r\n|\n|\r)/gm, "").replace(/\(|\)/gm,"")
             }];
             this.media = this.media.concat(uploads);
-            this.refs.addEmbend.classList.add('disabled');
+            this.refs.addembed.classList.add('disabled');
             this.handleUploadFinish();
         }
         this.restart = () => {
@@ -153,7 +153,7 @@
             // Multiple photos/documents are accepted
             this.type !== 'photo' && this.refs.addPhoto.classList.add('disabled');
             this.type !== 'document' && this.refs.addDocument.classList.add('disabled');
-            this.type !== 'embend' && this.refs.addEmbend.classList.add('disabled');
+            this.type !== 'embed' && this.refs.addembed.classList.add('disabled');
             uploads = uploads.map(upload => ({
                 type: this.type,
                 ...upload
@@ -231,7 +231,7 @@
                         this.refs.addPhoto.classList.remove('disabled');
                         this.refs.addVideo.classList.remove('disabled');
                         this.refs.addDocument.classList.remove('disabled');
-                        this.refs.addEmbend.classList.remove('disabled');
+                        this.refs.addembed.classList.remove('disabled');
                         opts.push(response.id);
                     } else {
                         let failMessage = response.reason || 'Posting failed!';
