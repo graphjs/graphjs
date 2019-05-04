@@ -8,7 +8,7 @@
         <div class={'graphjs-list' + (opts.minor ? ' graphjs-scrolling' : '')} if={loaded}>
             <div each={item in notifications} if={item && notifications.length > 0} class="graphjs-item">
                 <a if={item.label === 'FollowNotification'} data-link="profile" data-id={item.actor.id} onclick={opts.targetProfile ? handleTarget : handleShow}>
-                    <img class="graphjs-avatar" src={item.actor.avatar ? downsizeImage(item.actor.avatar, 50) : defaultAvatar} />
+                    <img class="graphjs-avatar" src={item.actor.avatar ? downsizeImage(item.actor.avatar, 50) : ( defaultAvatar == "gravatar" ? gravatar.url(item.actor.email, {s: '50', d: 'retro'}, true) : defaultAvatar )} />
                     <div class="graphjs-text">
                         <p>
                             <b>{item.actor.username}</b> followed you.
@@ -59,6 +59,9 @@
         import showProfile from '../scripts/showProfile.js';
         import showFeedItem from '../scripts/showFeedItem.js';
         import showMessages from '../scripts/showMessages.js';
+
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
 
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 

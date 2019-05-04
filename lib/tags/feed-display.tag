@@ -10,7 +10,7 @@
     <div class="graphjs-content">
         <div class="graphjs-information">
             <div class="graphjs-credit" if={profile}>
-                <img data-link="profile" data-id={profile.id} onclick={handleShow} src={profile.avatar ? downsizeImage(profile.avatar, 50) : defaultAvatar} />
+                <img data-link="profile" data-id={profile.id} onclick={handleShow} src={profile.avatar ? downsizeImage(profile.avatar, 50) : (defaultAvatar == "gravatar" ? gravatar.url(profile.email, {s: '50', d: 'retro'}, true) : defaultAvatar)} />
                 <span>
                     <b data-link="profile" data-id={profile.id} onclick={handleShow}>{profile.username || 'Unknown User'}</b>
                     <time data-timestamp={data.timestamp}>{handleTime(data.timestamp)}</time>
@@ -57,6 +57,9 @@
     <graphjs-promo if={loaded} properties="bottom right"></graphjs-promo>
     <script>
         import getProfile from '../scripts/getProfile.js';
+
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
 
         import {downsizeImage, getThumbnail} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;

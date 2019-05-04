@@ -20,7 +20,7 @@
         </svg>
     </a>
     <a class="graphjs-information" data-link="profile" data-id={id} onclick={target ? handleTarget : handleShow} if={loaded && profile}>
-        <img src={profile.avatar || defaultAvatar} />
+        <img src={profile.avatar || (defaultAvatar == "gravatar" ? gravatar.url(profile.email, {d: 'retro'}, true) : defaultAvatar)} />
         <b class="graphjs-title">{profile.fullName || profile.username}</b>
         <p class="graphjs-description">{profile.about}</p>
     </a>
@@ -46,6 +46,9 @@
         import showMessagesComposer from '../scripts/showMessagesComposer.js';
         import getSession from '../scripts/getSession.js';
         import getFollowing from '../scripts/getFollowing.js';
+
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
 
         analytics("profile-card");
 

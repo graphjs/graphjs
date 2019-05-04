@@ -46,7 +46,7 @@
                     {threadsData[matchedThread] && handleTime(threadsData[matchedThread].timestamp)}
                 </time>
                 <div class="graphjs-contributors" if={threadsData[matchedThread].contributors}>
-                    <img each={contributor, index in threadsData[matchedThread].contributors} src={contributor.avatar ? downsizeImage(contributor.avatar, 30) : defaultAvatar} />
+                    <img each={contributor, index in threadsData[matchedThread].contributors} src={contributor.avatar ? downsizeImage(contributor.avatar, 30) : (defaultAvatar=="gravatar" ? gravatar.url(contributor.email, {s: '30', d: 'retro'}, true) : defaultAvatar)} />
                 </div>
             </a>
             <div class="graphjs-placeholder graphjs-item" if={matchedThreads.length <= 0}>
@@ -166,6 +166,9 @@
 
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
+
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
 
         this.blocked = false;
         this.access = opts.access || 'public';

@@ -29,7 +29,7 @@
                 style={opts.color ? 'color: ' + opts.color + ' !important' : ''}
                 onclick={target ? handleTarget : handleShow}
             >
-                <img src={profile.avatar ? downsizeImage(profile.avatar, 40) : defaultAvatar} />
+                <img src={profile.avatar ? downsizeImage(profile.avatar, 40) : (defaultAvatar == "gravatar" ? gravatar.url(profile.email, {s: '40', d: 'retro'}, true) : defaultAvatar)} />
                 <span
                     style={opts.color ? 'color: ' + opts.color + ' !important' : ''}
                 >{profile.fullname || profile.username}</span>
@@ -57,6 +57,9 @@
         import showLogin from '../scripts/showLogin.js';
         import showRegister from '../scripts/showRegister.js';
         import showProfile from '../scripts/showProfile.js';
+
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
 
         analytics("auth-state");
 

@@ -369,11 +369,11 @@
                             id: self.id
                         });
                     } else {
-                        link.innerHTML = 'Published!';
+                        link.innerHTML = self.language.publishSuccess.replace('%s',self.id);
                         setTimeout(function() {
                             self.published = true;
                             self.update();
-                        }, 500);
+                        }, 5000);
                     }
                 } else {
                     if(link) {

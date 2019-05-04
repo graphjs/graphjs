@@ -52,9 +52,9 @@
                                 let failMessage = self.language.failMessage;
                                 let successMessage = self.language.successMessage;
                                 if(result.success) {
-                                    setGroupCover(self.id, result.urls[0], function(response) {
+                                    setGroupCover(self.id, result.uploads[0].url, function(response) {
                                         if(response.success) {
-                                            self.group.cover = result.urls[0];
+                                            self.group.cover = result.uploads[0].url;
                                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                                             hideOverlay();

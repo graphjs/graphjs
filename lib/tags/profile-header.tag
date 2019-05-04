@@ -20,7 +20,7 @@
         </svg>
     </a>
     <div class="graphjs-information vcard" if={loaded && profile}>
-        <img class="photo" src={profile.avatar ? downsizeImage(profile.avatar, 110) : defaultAvatar} />
+        <img class="photo" src={profile.avatar ? downsizeImage(profile.avatar, 110) : ( defaultAvatar == "gravatar" ? gravatar.url(profile.email, {d: 'retro', s: '110'}, true) : defaultAvatar )} />
         <a class="nickname">{profile.fullName || profile.username}</a>
         <p class="note">{profile.about}</p>
     </div>
@@ -90,6 +90,9 @@
         import showMessagesComposer from '../scripts/showMessagesComposer.js';
         import getSession from '../scripts/getSession.js';
         import getFollowing from '../scripts/getFollowing.js';
+        
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
 
         this.language = language('profile-header', opts);        
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;

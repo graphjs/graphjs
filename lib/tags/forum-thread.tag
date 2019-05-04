@@ -26,7 +26,7 @@
             <div class="graphjs-replies">
                 <div each={entry, index in entries} data-id={entry.id} class="graphjs-item">
                     <div class="graphjs-credit" if={authorsData.hasOwnProperty(entry.author)}>
-                        <img data-link="profile" data-id={entry.author} onclick={handleShow} src={authorsData[entry.author].avatar ? downsizeImage(authorsData[entry.author].avatar, 50) : defaultAvatar} />
+                        <img data-link="profile" data-id={entry.author} onclick={handleShow} src={authorsData[entry.author].avatar ? downsizeImage(authorsData[entry.author].avatar, 50) : (defaultAvatar=="gravatar" ? gravatar.url(authorsData[entry.author].email, {s: '50', d: 'retro'}, true): defaultAvatar)} />
                         <span>
                             <b data-link="profile" data-id={entry.author} onclick={handleShow}>{authorsData[entry.author].username || language.unknowUser}</b>
                             <time data-timestamp={entry.timestamp}>{handleTime(entry.timestamp)}</time>
@@ -121,6 +121,9 @@
         import getProfile from '../scripts/getProfile.js';
         import showProfile from '../scripts/showProfile.js';
         import showLogin from '../scripts/showLogin.js';
+
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
 
         analytics("forum-thread");
 

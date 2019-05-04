@@ -9,7 +9,7 @@
 >
     <div class="graphjs-content">
         <div class="graphjs-credit" if={activity.author && authorsData.hasOwnProperty(activity.author.id)}>
-            <img data-link="profile" data-id={activity.author.id} onclick={handleShow} src={authorsData[activity.author.id].avatar ? downsizeImage(authorsData[activity.author.id].avatar, 50) : defaultAvatar} />
+            <img data-link="profile" data-id={activity.author.id} onclick={handleShow} src={authorsData[activity.author.id].avatar ? downsizeImage(authorsData[activity.author.id].avatar, 50) : (defaultAvatar=="gravatar" ? gravatar.url(authorsData[activity.author.id].email, {s: '50', d: 'retro'}, true) : defaultAvatar)} />
             <span>
                 <b data-link="profile" data-id={activity.author.id} onclick={handleShow}>{authorsData[activity.author.id].username || 'Unknown User'}</b>
                 <time data-timestamp={activity.timestamp}>{handleTime(activity.timestamp)}</time>
@@ -34,7 +34,7 @@
                     <svg viewBox="20 13 67 74">
                         <path d="M82.8,43.5l-50.5-29C27.3,11.7,21,15.3,21,21V79c0,5.8,6.3,9.3,11.3,6.5l50.5-29C87.8,53.6,87.8,46.4,82.8,43.5z"/>
                     </svg>
-                    <img src={activity.cover || 'https://phonetworks.s3.us-west-2.amazonaws.com///4efc45650a8cb452a2c96f8d6e1fd8cb-1553626966-5c9a77566d792.png'} />
+                    <img src={activity.preview_url || 'https://phonetworks.s3.us-west-2.amazonaws.com///4efc45650a8cb452a2c96f8d6e1fd8cb-1553626966-5c9a77566d792.png'} />
                 </a>
             </div>
             <div if={activity.urls && activity.urls.length > 0 && (activity.type === 'document' || activity.type === 'documentSet')} class="graphjs-media graphjs-document">
@@ -90,7 +90,7 @@
         <div ref="comments" class="graphjs-comments" if={activity.comments && activity.comments.length > 0}>
             <div class={'graphjs-comment' + (activity.commentsData[comment].pseudo ? ' graphjs-pseudo' : '')} id={'comment-' + comment} each={comment in activity.comments} data-id={comment}>
                 <div class="graphjs-credit" if={authorsData.hasOwnProperty(activity.commentsData[comment].author)}>
-                    <img data-link="profile" data-id={activity.commentsData[comment].author} onclick={handleShow} src={authorsData[activity.commentsData[comment].author].avatar ? downsizeImage(authorsData[activity.commentsData[comment].author].avatar, 50) : defaultAvatar} />
+                    <img data-link="profile" data-id={activity.commentsData[comment].author} onclick={handleShow} src={authorsData[activity.commentsData[comment].author].avatar ? downsizeImage(authorsData[activity.commentsData[comment].author].avatar, 50) : (defaultAvatar == "gravatar" ? authorsData[activity.commentsData[comment].author].email : defaultAvatar)} />
                     <span>
                         <b data-link="profile" data-id={activity.commentsData[comment].author} onclick={handleShow}>{authorsData[activity.commentsData[comment].author].username || language.unknowUser}</b>
                         <time data-timestamp={activity.commentsData[comment].createTime}>{handleTime(activity.commentsData[comment].createTime)}</time>
@@ -121,6 +121,9 @@
         import showDisplay from '../scripts/showDisplay.js';
         import getId from '../scripts/getId.js';
         import Autolinker from 'autolinker';
+
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
 
         this.language = language('comments', opts);
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
@@ -193,7 +196,8 @@
                     text: opts.activity.text,
                     timestamp: opts.activity.timestamp,
                     urls: opts.activity.urls,
-                    author: opts.activity.author
+                    author: opts.activity.author,
+                    preview_url: opts.activity.preview_url,
                 }
                 self.handleDetails();
             } else {

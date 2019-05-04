@@ -6,7 +6,7 @@
     </div>
     <div if={authorized} class="graphjs-content">
         <a ref="uploadWidget" class="graphjs-avatar" data-changeavatartextlineone={language.changeAvatarLineOne} data-changeavatartextlinetwo={language.changeAvatarLineTwo}>
-            <img src={profile && profile.avatar ? downsizeImage(profile.avatar, 160) : defaultAvatar} />
+            <img src={profile ? (profile.avatar ? downsizeImage(profile.avatar, 160) : (defaultAvatar == "gravatar" ? gravatar.url(profile.email, {d: 'retro', s: '160'}, true) : defaultAvatar)) : defaultAvatar} />
         </a>
         <h2>{language.profileTitle}</h2>
         <form>
@@ -45,6 +45,9 @@
         import {downsizeImage} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
 
+        import gravatar from 'gravatar';
+        this.gravatar = gravatar;
+
         this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.failMessages = [];
         this.successMessages = [];
@@ -53,7 +56,8 @@
             this.handleAuthorization();
         });
         this.on('mount', function() {
-            this.authorized && this.handleAvatarUpload();
+            this.authorized 
+            // && this.handleAvatarUpload();
             let self = this;
             this.refs.uploadWidget.addEventListener("click", function() {
                 FilePond.setOptions({
@@ -67,9 +71,9 @@
                                 let failMessage = self.language.failMessage;
                                 let successMessage = self.language.successMessage;
                                 if(result.success) {
-                                    setAvatar(result.urls[0], function(response) {
+                                    setAvatar(result.uploads[0].url, function(response) {
                                         if(response.success) {
-                                            self.profile.avatar = result.urls[0];
+                                            self.profile.avatar = result.uploads[0].url;
                                             self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
                                             self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
                                             hideOverlay();
@@ -101,12 +105,11 @@
                         self.authorized = true;
                         self.update();
                         self.handleInformation(response.id);
-                        self.handleAvatarUpload();
                     }
                 }
             });
         }
-        this.handleAvatarUpload = () => {
+        /*this.handleAvatarUpload = () => {
             if(this.refs.uploadWidget) {
                 this.refs.uploadWidget.addEventListener("click", function() {
                     let self = this;
@@ -148,7 +151,7 @@
                     );
                 }, false);
             }
-        }
+        }*/
         this.handleInformation = (id) => {
             let self = this;
             getProfile(id, function(response) {

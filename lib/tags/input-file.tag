@@ -18,9 +18,6 @@
         this.on('mount', () => {
             this.setUploader();
         });
-        this.on('update', () => {
-            this.setUploader();
-        });
 
         this.setUploader = () => {
             this.uploader && destroy(this.refs.input);
