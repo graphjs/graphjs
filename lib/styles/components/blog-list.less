@@ -48,18 +48,17 @@
                 display: inline-block;
                 width: 100%;
                 height: auto;
-                margin-bottom: 1.5em;
+                margin-bottom: 2em;
+                font-size: 1.2em;
                 // ThemeOption: color: @text-color-normal;
                 cursor: pointer;
                 &:first-child {
-                    font-size: 1.2em;
                     .@{prefix}-summary {
                         display: inline-block;
                     }
                 }
                 &:nth-child(2), &:nth-child(3) {
                     width: calc((100% - 1.5em) / 2);
-                    font-size: 1.1em;
                     .@{prefix}-summary {
                         display: inline-block;
                     }
@@ -104,11 +103,11 @@
                     width: 100%;
                     margin-top: .25em;
                     // ThemeOption: color: @text-color-weak;
-                    font-size: .9em;
+                    font-size: .75em;
                     & > * {
                         display: inline;
                         float: none;
-                        line-height: 1em;
+                        line-height: 1.2em;
                         &:first-child {
                             &::before {
                                 display: none !important;
@@ -125,7 +124,7 @@
                     }
                     .@{prefix}-author {
                         span {
-                            .bold-font;
+                            .heavy-font;
                             &::before {
                                 content: attr(data-authorbeforetext);
                                 display: inline;
@@ -143,7 +142,7 @@
                 .@{prefix}-summary {
                     display: none;
                     width: 100%;
-                    margin-top: 1em;
+                    margin-top: .5em;
                     // ThemeOption: color: @text-color-normal;
                     font-size: 1.1em;
                     line-height: 1.5em;
@@ -170,7 +169,6 @@
                 }
                 &:nth-child(2), &:nth-child(3) {
                     width: calc((100% - (1.5em * 1.1)) / 2);
-                    font-size: 1.1em;
                     .@{prefix}-title {
                         width: 100%;
                     }
@@ -195,6 +193,7 @@
                     height: .8em;
                     margin-top: .3em;
                     padding: 0;
+                    vertical-align: bottom;
                     .border-radius(calc(.8em / 2));
                 }
                 .@{prefix}-summary {
