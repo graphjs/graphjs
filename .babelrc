@@ -1,4 +1,4 @@
 {
   "presets": [ "es2015-riot" ],
-  "plugins": ["transform-es2015-destructuring", "transform-object-rest-spread"]
+  "plugins": ["transform-es2015-destructuring", "transform-object-rest-spread","syntax-dynamic-import"]
 }

@@ -70,7 +70,10 @@ module.exports = SpeedMeasure.wrap({
         new webpack.optimize.AggressiveMergingPlugin(),
         new CompressionPlugin({
             algorithm: 'gzip'
-        })
+        }),
+        /*new webpack.DefinePlugin({
+            'process.env.modules': JSON.stringify(process.env.modules)
+        })*/
     ],
     optimization: {
         nodeEnv: mode,
@@ -99,5 +102,6 @@ module.exports = SpeedMeasure.wrap({
         progress: false,
         open: true,
         openPage: '../test'
-    }
+    },
+    /*watch: true*/
 })
