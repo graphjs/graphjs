@@ -36,6 +36,7 @@
         import showAlert from '../scripts/showAlert.js';
         import showLogin from '../scripts/showLogin.js';
         import hideOverlay from '../scripts/hideOverlay.js';
+        import checkUsernamePattern from '../scripts/utils/checkUsernamePattern.js';
 
         analytics("auth-register");
 
@@ -66,19 +67,6 @@
             let usernameMaximumLengthLimit = 36;
             let failMessage = this.language.usernameMaxLengthError.replace('%s',usernameMaximumLengthLimit);
             if(this.refs.username.value.length <= usernameMaximumLengthLimit) {
-                this.refs.username.classList.remove('graphjs-error');
-                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
-                return true;
-            } else {
-                this.refs.username.classList.add('graphjs-error');
-                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
-                return false;
-            }
-        }
-        this.checkUsernamePattern = () => {
-            let failMessage = this.language.usernamePatternError;
-            let usernamePattern = /^[a-zA-Z0-9-_]+$/;
-            if(usernamePattern.test(this.refs.username.value)) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
@@ -142,7 +130,7 @@
         this.validateInformation = () => {
             let validUsernameMinimumLength = this.checkUsernameMinimumLength();
             let validUsernameMaximumLength = this.checkUsernameMaximumLength();
-            let validUsernamePattern = this.checkUsernamePattern();
+            let validUsernamePattern = checkUsernamePattern(this);
             let validEmailPattern = this.checkEmailPattern();
             let validPasswordMinimumLength = this.checkPasswordMinimumLength();
             let validPasswordMaximumLength = this.checkPasswordMaximumLength();

@@ -35,7 +35,7 @@
         import showRegister from '../scripts/showRegister.js';
         import showReset from '../scripts/showReset.js';
         import hideOverlay from '../scripts/hideOverlay.js';
-
+        import checkUsernamePattern from '../scripts/utils/checkUsernamePattern.js';
         analytics('auth-login');
 
         this.language = language('auth-login', opts);
@@ -62,19 +62,6 @@
                 return false;
             }
         }
-        this.checkUsernamePattern = () => {
-            let failMessage = this.language.usernamePatternError;
-            let usernamePattern = /^[a-zA-Z0-9-_]+$/;
-            if(usernamePattern.test(this.refs.username.value)) {
-                this.refs.username.classList.remove('graphjs-error');
-                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
-                return true;
-            } else {
-                this.refs.username.classList.add('graphjs-error');
-                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
-                return false;
-            }
-        }
         this.checkPasswordMinimumLength = () => {
             let passwordMinimumLengthLimit = 5;
             let failMessage = this.language.passwordError.replace('%s',passwordMinimumLengthLimit);
@@ -91,7 +78,7 @@
         }
         this.validateInformation = () => {
             let validUsernameMinimumLength = this.checkUsernameMinimumLength();
-            let validUsernamePattern = this.checkUsernamePattern();
+            let validUsernamePattern = checkUsernamePattern(this);
             let validPasswordMinimumLength = this.checkPasswordMinimumLength();
             if(
                 validUsernameMinimumLength && validUsernamePattern && // Username
