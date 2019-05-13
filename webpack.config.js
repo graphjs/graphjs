@@ -18,6 +18,7 @@ module.exports = SpeedMeasure.wrap({
     output: {
         path: __dirname + "/dist",
         filename: "[name].js",
+        chunkFilename: "[name].js",
     },
     devtool: 'inline-source-map',
     module: {
@@ -87,7 +88,7 @@ module.exports = SpeedMeasure.wrap({
                     },
                 },
             })
-        ]
+        ],
     },
     watchOptions: {
         ignored: /node_modules/
