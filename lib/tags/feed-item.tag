@@ -23,7 +23,7 @@
                   each={i in activity.text.split(/\[embed\]|\[\/embed\]/)}
                 >
                     <div if={!activity.text.match(embedRegex) || (activity.embedRegexList.indexOf(i.trim()) == -1)}>
-                       {i}
+                       {i.linkify()}
                     </div>
                     <div if={activity.text.match(embedRegex) && (activity.embedRegexList.indexOf(i.trim()) != -1)}>
                        <raw>
@@ -506,5 +506,25 @@
             'November',
             'December'
         ];
+
+        // https://stackoverflow.com/posts/7123542/revisions
+        if(!String.linkify) {
+            String.prototype.linkify = function() {
+
+                // http://, https://, ftp://
+                var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
+
+                // www. sans http:// or https://
+                var pseudoUrlPattern = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+
+                // Email addresses
+                var emailAddressPattern = /[\w.]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,6})+/gim;
+
+                return this
+                    .replace(urlPattern, '<a href="$&">$&</a>')
+                    .replace(pseudoUrlPattern, '$1<a href="http://$2">$2</a>')
+                    .replace(emailAddressPattern, '<a href="mailto:$&">$&</a>');
+            };
+        }
     </script>
 </graphjs-feed-item>
