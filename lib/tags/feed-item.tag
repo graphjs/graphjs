@@ -23,14 +23,23 @@
                 <div 
                   each={i in activity.text.split(/\[embed\]|\[\/embed\]/)}
                 >
-                    <div if={!activity.text.match(embedRegex) || (activity.embedRegexList.indexOf(i.trim()) == -1)}>
-                       {i.linkify()}
+                    <div if={!i.checkMarkDownPattern(activity)}>
+                       {i}
                     </div>
-                    <div if={activity.text.match(embedRegex) && (activity.embedRegexList.indexOf(i.trim()) != -1)}>
+                    <div if={activity.embedRegexList.indexOf(i.trim()) != -1}>
                        <raw>
                           <span></span>
                           this.innerHTML.root = i && i;
                           this.on('update', function(){ this.root.innerHTML = i && i;});
+                        </raw>
+                    </div>
+                    <div if={i.checkMarkDownPattern(activity)}>
+                       <raw>
+                          <span></span>
+                          this.innerHTML.root = i && i.linkify();
+                          this.on('update', function(){ 
+                            this.root.innerHTML = i && i.linkify();
+                          });
                         </raw>
                     </div>
                 </div>
@@ -509,22 +518,39 @@
         ];
 
         // https://stackoverflow.com/posts/7123542/revisions
+        // http://, https://, ftp://
+        var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
+
+        // www. sans http:// or https://
+        var pseudoUrlPattern = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+        
+        // Email addresses
+        var emailAddressPattern = /[\w.]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,6})+/gim;
+        
+        // Youtube https://stackoverflow.com/a/21767071/5916893
+        var youTubePattern = /(?:http|https:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([^<]+)/g; 
+        var youtubeEmbed = '<iframe width="640" height="360" src="https://www.youtube.com/embed/$1?modestbranding=1&rel=0&wmode=transparent&theme=light&color=white" frameborder="0" allowfullscreen></iframe>';
+
         if(!String.linkify) {
             String.prototype.linkify = function() {
-
-                // http://, https://, ftp://
-                var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
-
-                // www. sans http:// or https://
-                var pseudoUrlPattern = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
-
-                // Email addresses
-                var emailAddressPattern = /[\w.]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,6})+/gim;
-
+                if(this.match(youTubePattern)){
+                    return this.replace(youTubePattern, youtubeEmbed);
+                }
                 return this
                     .replace(urlPattern, '<a href="$&">$&</a>')
                     .replace(pseudoUrlPattern, '$1<a href="http://$2">$2</a>')
                     .replace(emailAddressPattern, '<a href="mailto:$&">$&</a>');
+            };
+        }
+        if(!String.checkMarkDownPattern){
+            String.prototype.checkMarkDownPattern = function(activity) {
+                return (
+                        this.match(youTubePattern) ||
+                        this.match(urlPattern) || 
+                        this.match(pseudoUrlPattern) ||
+                        this.match(emailAddressPattern)
+                    )
+                    && activity.embedRegexList.indexOf(this.trim()) == -1;
             };
         }
     </script>
