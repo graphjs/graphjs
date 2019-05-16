@@ -6,6 +6,7 @@
         (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
         (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
     }
+    data-id={activity.id}
 >
     <div class="graphjs-content">
         <div class="graphjs-credit" if={activity.author && authorsData.hasOwnProperty(activity.author.id)}>
@@ -384,7 +385,7 @@
         this.handleRemove = (event) => {
             event.preventDefault();
             if (window.confirm('Are you sure to delete this item?')) {
-                let query = '[data-id="' + event.target.dataset.id + '"]';
+                let query = '[data-id="' + event.target.getAttribute('data-id') + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
                 self.update();

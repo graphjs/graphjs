@@ -115,7 +115,7 @@
             showLogin();
         }
         this.handleTextInput = () => {
-            this.message = this.refs.composer.value();
+            this.message = this.refs.composer.value().replace(/&nbsp;/g, ' ');
             this.handleButton();
         }
         this.handleUploadSuccess = uploads => {
