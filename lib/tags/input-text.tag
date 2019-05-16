@@ -176,11 +176,17 @@
         }
 
         this.sanitizeHTML = (event) => {
-            event.preventDefault();
+            //event.preventDefault();
             event.stopPropagation();
             let copied = event.clipboardData || window.clipboardData;
             let paste = copied.getData('text/html') || copied.getData('text');
             if(copied.types.indexOf('text/html') !== -1) {
+                paste = sanitizeHTML(paste, {
+                    allowedTags: ['br'],
+                    selfClosing: ['br']
+                });
+                paste.replace(/&nbsp;/g, ' ');
+            } else if(paste.indexOf('iframe') !== -1) {
                 paste = sanitizeHTML(paste, {
                     allowedTags: ['br'],
                     selfClosing: ['br']

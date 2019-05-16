@@ -18,7 +18,22 @@
         </div>
         <div class="graphjs-entry">
             <h1 ref="title" if={activity.title} class="graphjs-title">{activity.title}</h1>
-            <div ref="text" if={activity.text} class="graphjs-text">{activity.text}</div>
+            <div ref="text" if={activity.text} class="graphjs-text">
+                <div 
+                  each={i in activity.text.split(/\[embed\]|\[\/embed\]/)}
+                >
+                    <div if={!activity.text.match(embedRegex) || (activity.embedRegexList.indexOf(i.trim()) == -1)}>
+                       {i}
+                    </div>
+                    <div if={activity.text.match(embedRegex) && (activity.embedRegexList.indexOf(i.trim()) != -1)}>
+                       <raw>
+                          <span></span>
+                          this.innerHTML.root = i && i;
+                          this.on('update', function(){ this.root.innerHTML = i && i;});
+                        </raw>
+                    </div>
+                </div>
+            </div>
             <div if={activity.urls && activity.urls.length > 0 && activity.type == 'photo'} class="graphjs-media graphjs-photo">
                 <a data-id={activity.id} data-index={0} onclick={handleDisplay}>
                     <img src={(activity.urls[0])} />
@@ -131,6 +146,7 @@
         import {downsizeImage, getThumbnail} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
         this.getThumbnail = getThumbnail;
+        this.embedRegex = new RegExp('(?<=\\[embed\\]\\s*).*?(?=\\s*\\[\\/embed\\])','gs');
 
         let self = this;
         this.blocked = false;
@@ -198,6 +214,9 @@
                     urls: opts.activity.urls,
                     author: opts.activity.author,
                     preview_url: opts.activity.preview_url,
+                    embedRegexList: opts.activity.text.match(self.embedRegex) ? opts.activity.text.match(self.embedRegex).map(function(a) { 
+                        return a.trim();
+                    }) : []
                 }
                 self.handleDetails();
             } else {
