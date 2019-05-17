@@ -533,7 +533,7 @@
         
         // Youtube https://stackoverflow.com/a/21767071/5916893
         var youTubePattern = /(?:http|https:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([^<]+)/g; 
-        var youtubeEmbed = '<iframe width="640" height="360" src="https://www.youtube.com/embed/$1?modestbranding=1&rel=0&wmode=transparent&theme=light&color=white" frameborder="0" allowfullscreen style="width:560px;height:315px;max-width:100%"></iframe>';
+        var youtubeEmbed = '<iframe width="560" height="315" src="https://www.youtube.com/embed/$1?modestbranding=1&rel=0&wmode=transparent&theme=light&color=white" frameborder="0" allowfullscreen class="graphjs-embed-iframe"></iframe>';
 
         if(!String.linkify) {
             String.prototype.linkify = function() {
