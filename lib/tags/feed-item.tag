@@ -26,17 +26,21 @@
                     <div if={!i.checkMarkDownPattern(activity)}>
                        {i}
                     </div>
-                    <div if={activity.embedRegexList.indexOf(i.trim()) != -1}>
-                       <raw>
-                          <span></span>
-                          this.innerHTML.root = i && i;
-                          this.on('update', function(){ this.root.innerHTML = i && i;});
+                    <div if={activity.embedRegexList.indexOf(i.trim()) != -1} >
+                        <raw>
+                            <span></span>
+                            this.root.innerHTML = i && i;
+                            this.root.classList.add('graphjs-embed-iframe');
+                            this.on('update', function(){
+                                this.root.innerHTML = i && i; 
+                                this.root.classList.add('graphjs-embed-iframe');
+                            });
                         </raw>
                     </div>
-                    <div if={i.checkMarkDownPattern(activity)} class="graphjs-youtube-embed">
-                       <raw>
+                    <div if={i.checkMarkDownPattern(activity)}>
+                        <raw>
                           <span></span>
-                          this.innerHTML.root = i && i.linkify();
+                          this.root.innerHTML = i && i.linkify();
                           this.on('update', function(){ 
                             this.root.innerHTML = i && i.linkify();
                           });
