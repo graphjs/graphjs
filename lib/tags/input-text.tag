@@ -202,6 +202,7 @@
             range.collapse(false);
             selection.removeAllRanges();
             selection.addRange(range);
+            opts.eventInput();
         }
 
         this.handleMentionContainer = () => {
