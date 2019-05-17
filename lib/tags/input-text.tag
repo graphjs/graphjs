@@ -176,21 +176,25 @@
         }
 
         this.sanitizeHTML = (event) => {
-            event.preventDefault();
-            event.stopPropagation();
             let copied = event.clipboardData || window.clipboardData;
             let paste = copied.getData('text/html') || copied.getData('text');
             if(copied.types.indexOf('text/html') !== -1) {
+                event.preventDefault();
+                event.stopPropagation();
                 paste = sanitizeHTML(paste, {
                     allowedTags: ['br'],
                     selfClosing: ['br']
                 });
-                paste.replace(/&nbsp;/g, ' ');
+            } else if(paste.indexOf('iframe') !== -1) {
+                return;
             }
+            event.preventDefault();
+            event.stopPropagation();
+            paste = paste.replace(/&nbsp;/g, ' ');
             let selection = window.getSelection();
             if (!selection.rangeCount) return false;
             let element = document.createElement('span');
-            element.innerHTML = paste;
+            element.textContent = paste;
             let range = selection.getRangeAt(0);
             range.insertNode(element);
             range = range.cloneRange();
@@ -198,6 +202,9 @@
             range.collapse(false);
             selection.removeAllRanges();
             selection.addRange(range);
+            if (opts.eventInput) {
+                opts.eventInput();
+            }
         }
 
         this.handleMentionContainer = () => {

@@ -6,6 +6,7 @@
         (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
         (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
     }
+    data-id={activity.id}
 >
     <div class="graphjs-content">
         <div class="graphjs-credit" if={activity.author && authorsData.hasOwnProperty(activity.author.id)}>
@@ -18,7 +19,35 @@
         </div>
         <div class="graphjs-entry">
             <h1 ref="title" if={activity.title} class="graphjs-title">{activity.title}</h1>
-            <div ref="text" if={activity.text} class="graphjs-text">{activity.text}</div>
+            <div ref="text" if={activity.text} class="graphjs-text">
+                <div 
+                  each={i in activity.text.split(/\[embed\]|\[\/embed\]/)}
+                >
+                    <div if={!i.checkMarkDownPattern(activity)}>
+                       {i}
+                    </div>
+                    <div if={activity.embedRegexList.indexOf(i.trim()) != -1} >
+                        <raw>
+                            <span></span>
+                            this.root.innerHTML = i && i;
+                            this.root.classList.add('graphjs-embed-iframe');
+                            this.on('update', function(){
+                                this.root.innerHTML = i && i; 
+                                this.root.classList.add('graphjs-embed-iframe');
+                            });
+                        </raw>
+                    </div>
+                    <div if={i.checkMarkDownPattern(activity)}>
+                        <raw>
+                          <span></span>
+                          this.root.innerHTML = i && i.linkify();
+                          this.on('update', function(){ 
+                            this.root.innerHTML = i && i.linkify();
+                          });
+                        </raw>
+                    </div>
+                </div>
+            </div>
             <div if={activity.urls && activity.urls.length > 0 && activity.type == 'photo'} class="graphjs-media graphjs-photo">
                 <a data-id={activity.id} data-index={0} onclick={handleDisplay}>
                     <img src={(activity.urls[0])} />
@@ -131,6 +160,7 @@
         import {downsizeImage, getThumbnail} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
         this.getThumbnail = getThumbnail;
+        this.embedRegex = new RegExp('(?<=\\[embed\\]\\s*).*?(?=\\s*\\[\\/embed\\])','gs');
 
         let self = this;
         this.blocked = false;
@@ -198,6 +228,9 @@
                     urls: opts.activity.urls,
                     author: opts.activity.author,
                     preview_url: opts.activity.preview_url,
+                    embedRegexList: opts.activity.text.match(self.embedRegex) ? opts.activity.text.match(self.embedRegex).map(function(a) { 
+                        return a.trim();
+                    }) : []
                 }
                 self.handleDetails();
             } else {
@@ -365,7 +398,7 @@
         this.handleRemove = (event) => {
             event.preventDefault();
             if (window.confirm('Are you sure to delete this item?')) {
-                let query = '[data-id="' + event.target.dataset.id + '"]';
+                let query = '[data-id="' + event.target.getAttribute('data-id') + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
                 self.update();
@@ -487,5 +520,42 @@
             'November',
             'December'
         ];
+
+        // https://stackoverflow.com/posts/7123542/revisions
+        // http://, https://, ftp://
+        var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
+
+        // www. sans http:// or https://
+        var pseudoUrlPattern = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+        
+        // Email addresses
+        var emailAddressPattern = /[\w.]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,6})+/gim;
+        
+        // Youtube https://stackoverflow.com/a/21767071/5916893
+        var youTubePattern = /(?:http|https:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([^<]+)/g; 
+        var youtubeEmbed = '<iframe width="560" height="315" src="https://www.youtube.com/embed/$1?modestbranding=1&rel=0&wmode=transparent&theme=light&color=white" frameborder="0" allowfullscreen class="graphjs-embed-iframe"></iframe>';
+
+        if(!String.linkify) {
+            String.prototype.linkify = function() {
+                if(this.match(youTubePattern)){
+                    return this.replace(youTubePattern, youtubeEmbed);
+                }
+                return this
+                    .replace(urlPattern, '<a href="$&">$&</a>')
+                    .replace(pseudoUrlPattern, '$1<a href="http://$2">$2</a>')
+                    .replace(emailAddressPattern, '<a href="mailto:$&">$&</a>');
+            };
+        }
+        if(!String.checkMarkDownPattern){
+            String.prototype.checkMarkDownPattern = function(activity) {
+                return (
+                        this.match(youTubePattern) ||
+                        this.match(urlPattern) || 
+                        this.match(pseudoUrlPattern) ||
+                        this.match(emailAddressPattern)
+                    )
+                    && activity.embedRegexList.indexOf(this.trim()) == -1;
+            };
+        }
     </script>
 </graphjs-feed-item>
