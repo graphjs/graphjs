@@ -14,9 +14,15 @@
         // ThemeOption: border-color: fade(@default-color, 3%);
         border-color: transparent; // ThemeFix
         // ThemeOption: background-color: @background-color-contrast;
-        .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
-        &:hover, &:active, &:focus {
-            .box-shadow(e("0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)"));
+        .box-shadow(
+            e('0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)')
+        );
+        &:hover,
+        &:active,
+        &:focus {
+            .box-shadow(
+                e('0 0 15px 0 fade(black, 5%), 0 2px 1px 0px fade(black, 7.5%)')
+            );
         }
         & > .@{prefix}-credit {
             .credit-metrics(2.5em);
@@ -32,12 +38,29 @@
             .@{prefix}-title {
                 // ThemeOption: color: @primary-color;
                 font-size: 1.35em;
-                margin-bottom: .65em;
+                margin-bottom: 0.65em;
             }
-            .@{prefix}-text *{
+
+            .@{prefix}-youtube-embed {
+                position: relative;
+                padding-bottom: 56.25%;
+                padding-top: 2em;
+                height: 0;
+                overflow: hidden;
+
+                iframe {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            }
+
+            .@{prefix}-text * {
                 white-space: pre-line;
                 iframe {
-                    display:block;
+                    display: block;
                 }
             }
             .@{prefix}-media {
@@ -106,8 +129,8 @@
                         position: relative;
                         width: 100%;
                         height: 3em;
-                        margin-bottom: .5em;
-                        padding: calc(.5em - 1px);
+                        margin-bottom: 0.5em;
+                        padding: calc(0.5em - 1px);
                         padding-left: calc(3em - 1px);
                         .single-line-text;
                         text-align: left;
@@ -116,7 +139,7 @@
                         // ThemeOption: border-color: fade(@primary-color, 20%);
                         .border-radius(@border-radius-medium);
                         // ThemeOption: background-color: fade(@primary-color, 10%);
-                        .transition(all .35s ease);
+                        .transition(all 0.35s ease);
                         &:hover {
                             // ThemeOption: border-color: fade(@primary-color, 50%);
                             // ThemeOption: background-color: fade(@primary-color, 25%);
@@ -134,23 +157,23 @@
                         }
                         svg {
                             position: absolute;
-                            left: .5em;
+                            left: 0.5em;
                             height: 2em;
                             path {
                                 // ThemeOption: fill: fade(@primary-color, 85%);
-                                .transition(fill .35s ease);
+                                .transition(fill 0.35s ease);
                             }
                         }
                         b {
                             display: block;
                             // ThemeOption: color: fade(@primary-color, 85%);
-                            font-size: .85em;
+                            font-size: 0.85em;
                             line-height: 1.25em;
-                            .transition(color .35s ease);
+                            .transition(color 0.35s ease);
                         }
                         span {
                             display: block;
-                            font-size: .75em;
+                            font-size: 0.75em;
                         }
                     }
                 }
@@ -162,7 +185,7 @@
         .@{prefix}-interaction {
             padding-top: 0;
             .@{prefix}-synopsis {
-                padding-left: .5em;
+                padding-left: 0.5em;
                 border-top: 1px solid fade(black, 5%);
                 & > * {
                     display: inline-block;
@@ -170,7 +193,7 @@
                     height: 2.5em;
                     line-height: 2.5em;
                     & > span {
-                        font-size: .85em;
+                        font-size: 0.85em;
                         vertical-align: top;
                     }
                     .@{prefix}-unauthorized {
@@ -293,9 +316,9 @@
                     margin-top: 0;
                     .@{prefix}-input {
                         background-color: fade(black, 5%);
-                        .transition(all .25s ease);
+                        .transition(all 0.25s ease);
                         &:focus {
-                            .box-shadow(inset 0 0 .5em 0 fade(black, 5%));
+                            .box-shadow(inset 0 0 0.5em 0 fade(black, 5%));
                         }
                     }
                 }
@@ -305,11 +328,11 @@
             border-top: 1px solid fade(black, 5%);
             background-color: fade(black, 5%);
             .@{prefix}-comment {
-                margin-bottom: .25em;
+                margin-bottom: 0.25em;
                 padding: 1em;
                 padding-bottom: 0;
                 &:last-child {
-                  margin-bottom: 0;
+                    margin-bottom: 0;
                     padding-bottom: 1em;
                 }
                 &.@{prefix}-pseudo {
@@ -317,7 +340,7 @@
                 }
                 .@{prefix}-credit {
                     .credit-metrics(2.5em);
-                    margin-bottom: .25em;
+                    margin-bottom: 0.25em;
                     img {
                         cursor: pointer;
                     }
@@ -331,11 +354,11 @@
                 p {
                     margin-left: 3.6em;
                     .regular-font;
-                    font-size: .95em;
+                    font-size: 0.95em;
                     line-height: 150%;
                     white-space: pre-wrap;
                     &.@{prefix}-editable {
-                        padding: .75em 1em;
+                        padding: 0.75em 1em;
                         border-width: 1px;
                         border-style: dashed;
                         // ThemeOption: border-color: fade(@default-color, 15%);

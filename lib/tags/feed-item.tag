@@ -33,7 +33,7 @@
                           this.on('update', function(){ this.root.innerHTML = i && i;});
                         </raw>
                     </div>
-                    <div if={i.checkMarkDownPattern(activity)}>
+                    <div if={i.checkMarkDownPattern(activity)} class="graphjs-youtube-embed">
                        <raw>
                           <span></span>
                           this.innerHTML.root = i && i.linkify();
