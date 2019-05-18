@@ -53,6 +53,32 @@ Translation files can be found in the directory [/lib/language](https://github.c
 
 To fetch the latest translations, run `git submodule foreach 'git pull origin master'`
 
+## Conditional Building
+
+If you're only using a certain parts of the Graph.js library, then the full compiled edition may be too bloated/heavy for your goals. As of version 1.18, Graph.js comes with a new feature that allows you to build a graph.js file with only the modules that you'd need. To achieve this, build it as follows:
+
+`modules=authentication,feed npm run build`
+
+where modules can be one or a combination of:
+
+* activity
+* authentication
+* blog
+* comments
+* feed
+* forum
+* groups
+* members
+* messages
+* notifications
+* profile
+* show
+* star
+* private
+* stripe
+
+Obviously, less modules you use, lighter the library becomes.
+
 ## Tips & Tricks
 
 * JS: it's the ```restart``` call which ensures that the "widget" is updated once the session status changes. See: private-content.tag for more information.
