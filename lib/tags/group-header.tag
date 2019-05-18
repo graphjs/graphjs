@@ -81,7 +81,7 @@
         this.downsizeImage = downsizeImage;
 
         this.id = opts.id;
-        this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
+        this.boxStyle = (opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box');
         this.userId = undefined;
         this.blocked = true;
 
