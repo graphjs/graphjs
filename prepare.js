@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 const  fileName =  './lib/tagsImports.js';
+const styleSheetFileName = './lib/styles/stylesImports.less';
 
 const modulesAvailable = [
 		"blog",
@@ -36,7 +37,7 @@ const import_tags={
 	],
 	feedback : [
 		"feedback"
-	]
+	],
     forum: [
     	"forum",
 		"forum-list",
@@ -115,7 +116,8 @@ const import_scripts={
 		"updateStatus",
 		"removeStatusUpdate",
         "showFeedItem",
-    ],
+	],
+	feedback:[],
     forum: [
         "getThread",
 		"getThreads",
@@ -195,39 +197,108 @@ const import_scripts={
     ],
 };
 
+const import_styles = {
+    blog : [
+        "blog",
+        "blog-composer",
+		"blog-list",
+		"blog-post",
+	],
+	comments : [
+		"comments"
+	],
+	feed : [
+		"feed",
+		"feed-activity",
+		"feed-composer",
+		"feed-display",
+		"feed-item"
+	],
+	feedback:[
+		'feedback'
+	],
+	forum:[
+		"forum",
+		"forum-list",
+		"forum-thread",
+		"forum-composer"
+	],
+	groups:[
+		"group",
+		"group-card",
+		"group-creator",
+		"group-header",
+		"group-settings",
+	],
+	messages: [
+		"messages",
+		"messages-composer"
+	],
+	notifications: [
+		"notifications",
+		"notifications-button",
+		"notifications-list"
+	],
+	private: [
+		"private-content"
+	],
+	profile: [
+		"profile",
+		"profile-card",
+		"profile-header",
+		"profile-activity",
+		"profile-settings"
+	],
+	star: [
+		"star-list",
+		"star-button"
+	]
+}
+
 if(process.env.modules && process.env.modules !== "all"){
     requiredModules = modulesAvailable.filter(value => -1 !== process.env.modules.split(',').indexOf(value))
 } else {
     requiredModules = modulesAvailable;
 }
 
-let importOnly = `// These are dynamically imported .. Please check prepare.js in root folder\n`
-
+let importOnly = `// These are dynamically imported .. Please check prepare.js in root folder\n`;
+let importStyles = `// These are dynamically imported .. Please check prepare.js in root folder\n`;
 let importModules = "";
 let importScripts = "";
 let graphJSObj=`\n\export default {`;
 
 requiredModules.forEach(
     item_group => {
+		// tags
         importModules += `\n// ${item_group}\n`;
         import_tags[item_group].forEach(
             single_tag => importModules += `import './tags/${single_tag}.tag';\n`
 		);
 		
+		// scripts
 		importScripts += `\n// ${item_group}\n`;
 		graphJSObj += `\n    // ${item_group}\n    `;
-		import_scripts[`${item_group}`].map(
+		import_scripts[`${item_group}`] && import_scripts[`${item_group}`].forEach(
             single_script => {
 				importScripts += `import ${single_script} from './scripts/${single_script}.js';\n`;
 				graphJSObj += `${single_script}, `;
             }
-        )
+		)
+		
+		//styles
+		importStyles += `\n// ${item_group}\n`;
+        import_styles[item_group] && import_styles[item_group].forEach(
+            single_tag => importStyles += `@import 'components/${single_tag}.less';\n`
+		);
+		
     }
 );
 graphJSObj += "\n}"
 
 importOnly = importModules + importScripts + graphJSObj;
 writeToFile(fileName,importOnly);
+writeToFile(styleSheetFileName,importStyles);
+
 console.log(`Ready to build modules - ${requiredModules.join(", ")}\n\n`);
 
 function checkForFile(fileName,callback) {
