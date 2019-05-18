@@ -3,34 +3,22 @@ const fs = require('fs');
 const  fileName =  './lib/tagsImports.js';
 
 const modulesAvailable = [
-		"activity",
-		"authentication",
 		"blog",
 		"comments",
         "feed",
+		"feedback",
 		"forum",
 		"groups",
 		"members",
 		"messages",
 		"notifications",
 		"profile",
-		"show",
 		"star",
 		"private",
 		"stripe"
 ];
 
 const import_tags={
-	activity: [
-
-	],
-    authentication: [
-    	"auth",
-		"auth-state",
-		"auth-login",
-		"auth-register",
-		"auth-reset"
-	],
     blog: [
     	"blog",
 		"blog-list",
@@ -45,7 +33,10 @@ const import_tags={
         "feed-composer",
         "feed-display",
         "feed-item"
-    ],
+	],
+	feedback : [
+		"feedback"
+	]
     forum: [
     	"forum",
 		"forum-list",
@@ -76,7 +67,7 @@ const import_tags={
 	],
     profile: [
 		"profile",
-		"profile-cards",
+		"profile-card",
 		"profile-header",
 		"profile-activity",
 		"profile-followers",
@@ -85,7 +76,6 @@ const import_tags={
 		"profile-settings",
 		"profile-list"
 	],
-    show: [],
     star: [
     	"star-button",
 		"star-list"
@@ -96,6 +86,115 @@ const import_tags={
     stripe: [],
 };
 
+const import_scripts={
+    blog: [
+        "commentBlogPost",
+		"editBlogPost",
+		"editBlogComment",
+		"getBlogComments",
+		"getBlogPost",
+		"getBlogPosts",
+		"removeBlogPost",
+		"removeBlogComment",
+		"startBlogPost",
+		"unpublishBlogPost",
+        "showBlog",
+        "showBlogComposer",
+        "showBlogList",
+        "showBlogPost",
+    ],
+    comments: [
+        "addComment",
+		"getComments",
+		"removeComment",
+        "showComments",
+    ],
+    feed: [
+        "getStatusUpdates",
+        "getStatusUpdate",
+		"updateStatus",
+		"removeStatusUpdate",
+        "showFeedItem",
+    ],
+    forum: [
+        "getThread",
+		"getThreads",
+		"removeReply",
+		"replyThread",
+		"startThread",
+        "showForum",
+        "showForumComposer",
+        "showForumList",
+        "showForumThread",
+    ],
+    groups: [
+        "createGroup",
+        "getGroup",
+        "joinGroup",
+        "leaveGroup",
+        "listGroups",
+        "listMembers",
+        "setGroupCover",
+        "setGroupDescription",
+		"setGroupTitle",
+        "showGroup",
+        "showGroupCreator",
+    ],
+    members: [
+		"follow",
+		"getFollowers",
+		"getFollowing",
+		"getMembers",
+		"unfollow",
+    ],
+    messages: [
+        "countUnreadMessages",
+        "getConversation",
+		"getConversations",
+		"getInbox",
+		"getMessage",
+		"getOutbox",
+		"sendAnonymousMessage",
+		"sendMessage",
+        "showMessages",
+        "showMessagesComposer",
+    ],
+    notifications: [
+        "getNotifications",
+        "showNotificationsList",
+    ],
+    profile: [
+        "getProfile",
+        "listMemberships",
+        "setAvatar",
+        "setBio",
+        "setBirthday",
+        "setEmail",
+        "setPassword",
+        "setProfile",
+        "setUsername",
+        "showProfile",
+    ],
+    star: [
+        "star",
+        "getStar",
+		"getStars",
+		"getUserStars",
+		"removeStar",
+    ],
+    private: [
+        "getPrivateContent",
+		"removePrivateContent",
+		"editPrivateContent",
+		"addPrivateContent",
+    ],
+    stripe: [
+		"createSubscription",
+		"checkSubscription",
+		"tokenLogin",
+    ],
+};
+
 if(process.env.modules && process.env.modules !== "all"){
     requiredModules = modulesAvailable.filter(value => -1 !== process.env.modules.split(',').indexOf(value))
 } else {
@@ -104,16 +203,30 @@ if(process.env.modules && process.env.modules !== "all"){
 
 let importOnly = `// These are dynamically imported .. Please check prepare.js in root folder\n`
 
+let importModules = "";
+let importScripts = "";
+let graphJSObj=`\n\export default {`;
+
 requiredModules.forEach(
     item_group => {
-        importOnly += `\n// ${item_group}\n`;
+        importModules += `\n// ${item_group}\n`;
         import_tags[item_group].forEach(
-            single_tag => importOnly += `import './tags/${single_tag}.tag';\n`
-        );
+            single_tag => importModules += `import './tags/${single_tag}.tag';\n`
+		);
+		
+		importScripts += `\n// ${item_group}\n`;
+		graphJSObj += `\n    // ${item_group}\n    `;
+		import_scripts[`${item_group}`].map(
+            single_script => {
+				importScripts += `import ${single_script} from './scripts/${single_script}.js';\n`;
+				graphJSObj += `${single_script}, `;
+            }
+        )
     }
 );
+graphJSObj += "\n}"
 
-
+importOnly = importModules + importScripts + graphJSObj;
 writeToFile(fileName,importOnly);
 console.log(`Ready to build modules - ${requiredModules.join(", ")}\n\n`);
 
