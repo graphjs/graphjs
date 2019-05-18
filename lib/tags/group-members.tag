@@ -1,4 +1,4 @@
-<graphjs-group-members class={'graphjs-element graphjs-root graphjs-wallet' + (loaded && empty ? : ' graphjs-box' : '')}>
+<graphjs-group-members class={'graphjs-element graphjs-root graphjs-wallet' + (loaded && (empty ? ' graphjs-box' : ''))}>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '')}>
         <p if={loaded && empty}>{language.noMembers}</p>
         <graphjs-profile-card each={id in list} id={id}></graphjs-profile-card>
