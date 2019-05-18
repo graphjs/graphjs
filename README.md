@@ -62,7 +62,6 @@ If you're only using a certain parts of the Graph.js library, then the full comp
 where modules can be one or a combination of:
 
 * activity
-* authentication
 * blog
 * comments
 * feed
@@ -72,12 +71,11 @@ where modules can be one or a combination of:
 * messages
 * notifications
 * profile
-* show
 * star
 * private
 * stripe
 
-Obviously, less modules you use, lighter the library becomes.
+Obviously, less modules you use, lighter the library becomes. Authentication is a common module that's always included.
 
 ## Tips & Tricks
 
