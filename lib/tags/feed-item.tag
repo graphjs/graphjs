@@ -40,10 +40,12 @@
                     <div if={i.checkMarkDownPattern(activity)}>
                         <raw>
                           <span></span>
-                          this.root.innerHTML = i && i.linkify();
-                          this.on('update', function(){ 
                             this.root.innerHTML = i && i.linkify();
-                          });
+                            this.root.innerHTML.indexOf('</iframe>') > -1 && this.root.classList.add('graphjs-embed-iframe');
+                            this.on('update', function(){ 
+                                this.root.innerHTML = i && i.linkify();
+                                this.root.innerHTML.indexOf('</iframe>') > -1 && this.root.classList.add('graphjs-embed-iframe');
+                            });
                         </raw>
                     </div>
                 </div>
@@ -533,7 +535,7 @@
         
         // Youtube https://stackoverflow.com/a/21767071/5916893
         var youTubePattern = /(?:http|https:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([^<]+)/g; 
-        var youtubeEmbed = '<iframe width="560" height="315" src="https://www.youtube.com/embed/$1?modestbranding=1&rel=0&wmode=transparent&theme=light&color=white" frameborder="0" allowfullscreen class="graphjs-embed-iframe"></iframe>';
+        var youtubeEmbed = '<iframe width="560" height="315" src="https://www.youtube.com/embed/$1?modestbranding=1&rel=0&wmode=transparent&theme=light&color=white" frameborder="0" allowfullscreen></iframe>';
 
         if(!String.linkify) {
             String.prototype.linkify = function() {
