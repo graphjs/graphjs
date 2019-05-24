@@ -8,7 +8,7 @@ GraphJS depends on [Riot.js](https://riot.js.org/).
 
 Make sure you have [npm](https://www.npmjs.com/) installed. Simply type in:
 
-```
+```sh
 npm install # to install Riot.js and other dependencies
 npm run build # to form graph.js file
 ```
