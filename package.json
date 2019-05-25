@@ -10,8 +10,9 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "build": "webpack --optimize-minimize --mode production",
-    "watch": "concurrently 'webpack --watch' 'webpack-dev-server'"
+    "build": "npm run prepare-build && webpack --optimize-minimize --mode production",
+    "watch": "concurrently 'webpack --watch' 'webpack-dev-server'",
+    "prepare-build": "node prepare.js"
   },
   "dependencies": {
     "@types/nanoevents": "^1.0.0",
