@@ -140,7 +140,8 @@ const import_scripts={
         "setGroupDescription",
 		"setGroupTitle",
         "showGroup",
-        "showGroupCreator",
+		"showGroupCreator",
+		"deleteGroup"
     ],
     members: [
 		"follow",
