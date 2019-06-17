@@ -86,7 +86,7 @@
                 server: {
                     url: window.GraphJSConfig.host,
                     process: {
-                        url: '/uploadFile',
+                        url:'/uploadFile?public_id=' + window.GraphJSConfig.id,
                         withCredentials: true,
                         onload: response => {
                             response = JSON.parse(response);
