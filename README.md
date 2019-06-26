@@ -35,7 +35,7 @@ Example:
 </body>
 ```
 The `init` function comes with multiple options:
-* **host**: a URL pointing to your instance of [GraphJS-Server](https://github.com/phonetworks/graphjs-server)
+* **host**: a URL pointing to your instance of [GraphJS-Server](https://github.com/phonetworks/graphjs-server) that's either installed on-premise (c/o https://youtu.be/K7bWKlT0k_g for an instructional video) or one that is hosted by https://graphjs.com (in which case the URL would be provided to you in the control panel)
 * **theme**: either 'light' or 'dark'
 * **color**: a string representing any color of your preference in HEX format
 * **language**: current available options are en-US (English), fr-FR (French) in beta and tr-TR (Turkish). For more translations and languages, see Translations section below.
