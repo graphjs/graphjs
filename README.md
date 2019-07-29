@@ -88,6 +88,36 @@ Obviously, less modules you use, lighter the library becomes. Authentication is 
 * CSS: all tags to start with .graphjs-element. There is also .graphjs-root which is not CSS neutral.
 * CSS: .graphjs-wallet for lists
 
+## Contributors
+
+### Code Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/phonetworks/graphjs/graphs/contributors"><img src="https://opencollective.com/risg/contributors.svg?width=890&button=false" /></a>
+
+### Financial Contributors
+
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/risg/contribute)]
+
+#### Individuals
+
+<a href="https://opencollective.com/risg"><img src="https://opencollective.com/risg/individuals.svg?width=890"></a>
+
+#### Organizations
+
+Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/risg/contribute)]
+
+<a href="https://opencollective.com/risg/organization/0/website"><img src="https://opencollective.com/risg/organization/0/avatar.svg"></a>
+<a href="https://opencollective.com/risg/organization/1/website"><img src="https://opencollective.com/risg/organization/1/avatar.svg"></a>
+<a href="https://opencollective.com/risg/organization/2/website"><img src="https://opencollective.com/risg/organization/2/avatar.svg"></a>
+<a href="https://opencollective.com/risg/organization/3/website"><img src="https://opencollective.com/risg/organization/3/avatar.svg"></a>
+<a href="https://opencollective.com/risg/organization/4/website"><img src="https://opencollective.com/risg/organization/4/avatar.svg"></a>
+<a href="https://opencollective.com/risg/organization/5/website"><img src="https://opencollective.com/risg/organization/5/avatar.svg"></a>
+<a href="https://opencollective.com/risg/organization/6/website"><img src="https://opencollective.com/risg/organization/6/avatar.svg"></a>
+<a href="https://opencollective.com/risg/organization/7/website"><img src="https://opencollective.com/risg/organization/7/avatar.svg"></a>
+<a href="https://opencollective.com/risg/organization/8/website"><img src="https://opencollective.com/risg/organization/8/avatar.svg"></a>
+<a href="https://opencollective.com/risg/organization/9/website"><img src="https://opencollective.com/risg/organization/9/avatar.svg"></a>
+
 ## License
 
 GNU Affero General Public License v3.0, see [LICENSE](https://github.com/phonetworks/graphjs/blob/master/LICENSE).
