@@ -39,6 +39,7 @@
     "pell": "^1.0.4",
     "riot": "^3.13.2",
     "sanitize-html": "^1.19.2",
+    "tiny-date-picker": "^3.2.8",
     "tributejs": "^3.6.0",
     "webpack": "^4.30.0"
   },

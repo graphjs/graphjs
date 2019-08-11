@@ -25,6 +25,7 @@
     </div>
     <script>
         import * as FilePond from 'filepond';
+        import TinyDatePicker from 'tiny-date-picker';
         import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
@@ -59,6 +60,34 @@
             this.authorized 
             // && this.handleAvatarUpload();
             let self = this;
+            TinyDatePicker(this.refs.birthday, {
+                lang: {
+                    days: [
+                        self.language.daySun, 
+                        self.language.dayMon, 
+                        self.language.dayTue, 
+                        self.language.dayWed, 
+                        self.language.dayThu, 
+                        self.language.dayFri, 
+                        self.language.daySat
+                    ],
+                    months: [
+                        self.language.monthJanuary,
+                        self.language.monthFebruary,
+                        self.language.monthMarch,
+                        self.language.monthApril,
+                        self.language.monthMay,
+                        self.language.monthJune,
+                        self.language.monthJuly,
+                        self.language.monthAugust,
+                        self.language.monthSeptember,
+                        self.language.monthOctober,
+                        self.language.monthNovember,
+                        self.language.monthDecember,
+                    ]
+                },
+                max:new Date().toDateString()
+            });
             this.refs.uploadWidget.addEventListener("click", function() {
                 FilePond.setOptions({
                     server: {
