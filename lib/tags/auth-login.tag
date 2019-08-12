@@ -64,7 +64,8 @@
         }
         this.checkUsernamePattern = () => {
             let failMessage = this.language.usernamePatternError;
-            let usernamePattern = /^[a-zA-Z0-9-_]+$/;
+            // let usernamePattern = /^[a-zA-Z0-9-_]+$/;
+            let usernamePattern = /^[a-zA-Z0-9-_@\.]+$/; // we now let email pattern as well.
             if(usernamePattern.test(this.refs.username.value)) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
