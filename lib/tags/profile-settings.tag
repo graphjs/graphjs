@@ -25,6 +25,7 @@
     </div>
     <script>
         import * as FilePond from 'filepond';
+        import TinyDatePicker from 'tiny-date-picker';
         import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
@@ -59,6 +60,37 @@
             this.authorized 
             // && this.handleAvatarUpload();
             let self = this;
+            TinyDatePicker(this.refs.birthday, {
+                lang: {
+                    days: [
+                        self.language.daySun, 
+                        self.language.dayMon, 
+                        self.language.dayTue, 
+                        self.language.dayWed, 
+                        self.language.dayThu, 
+                        self.language.dayFri, 
+                        self.language.daySat
+                    ],
+                    months: [
+                        self.language.monthJanuary,
+                        self.language.monthFebruary,
+                        self.language.monthMarch,
+                        self.language.monthApril,
+                        self.language.monthMay,
+                        self.language.monthJune,
+                        self.language.monthJuly,
+                        self.language.monthAugust,
+                        self.language.monthSeptember,
+                        self.language.monthOctober,
+                        self.language.monthNovember,
+                        self.language.monthDecember,
+                    ]
+                },
+                max:new Date().toDateString(),
+                format(date) {
+                    return self.formateBirthday(date);
+                },
+            });
             this.refs.uploadWidget.addEventListener("click", function() {
                 FilePond.setOptions({
                     server: {
@@ -152,18 +184,21 @@
                 }, false);
             }
         }*/
+        this.formateBirthday = (birthday) => {
+            let timestamp = new Date(birthday);
+            let month = timestamp.getMonth() + 1;
+            if(month < 10) month = '0' + month;
+            let day = timestamp.getDate();
+            if(day < 10) day = '0' + day;
+            let year = timestamp.getFullYear();
+            return month + '/' + day + '/' + year;   
+        }
         this.handleInformation = (id) => {
             let self = this;
             getProfile(id, function(response) {
                 if(response.success) {
                     self.profile = response.profile;
-                    let timestamp = new Date(response.profile.birthday * 1000);
-                    let month = timestamp.getMonth() + 1;
-                    if(month < 10) month = '0' + month;
-                    let day = timestamp.getDate();
-                    if(day < 10) day = '0' + day;
-                    let year = timestamp.getFullYear();
-                    self.profile.birthday = month + '/' + day + '/' + year;
+                    self.profile.birthday = self.formateBirthday(response.profile.birthday * 1000);                    
                     self.update();
                 } else {
                     //Handle errors
