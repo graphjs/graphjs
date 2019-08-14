@@ -257,23 +257,25 @@ const import_styles = {
 }
 
 if(process.env.modules && process.env.modules !== "all"){
-    requiredModules = modulesAvailable.filter(value => -1 !== process.env.modules.split(',').indexOf(value))
-} 
-else if(process.env.modules && process.env.modules == "groupsv2"){
-	/*
-	 * shortcut of 
-	 * modules=profile,messages,notifications,feed,members,comments,blog npm run build
-	 * cp dist/graph.js* ../grou-ps-v2/site/vendor/graphjs/
-	 */
-    requiredModules = [
-		"profile", 
-		"messages",
-		"notifications",
-		"feed", 
-		"members", 
-		"comments",
-		"blog"
-	];
+	if(process.env.modules == "groupsv2"){
+		/*
+		 * shortcut of 
+		 * modules=profile,messages,notifications,feed,members,comments,blog npm run build
+		 * cp dist/graph.js* ../grou-ps-v2/site/vendor/graphjs/
+		 */
+		requiredModules = [
+			"profile", 
+			"messages",
+			"notifications",
+			"feed", 
+			"members", 
+			"comments",
+			"blog"
+		];
+	} 
+	else {
+		requiredModules = modulesAvailable.filter(value => -1 !== process.env.modules.split(',').indexOf(value))
+	}
 } 
 else {
     requiredModules = modulesAvailable;

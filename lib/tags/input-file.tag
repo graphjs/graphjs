@@ -103,6 +103,20 @@
                     }
                 }
             });
+            this.uploader.on('addfilestart', () => {
+                console.log("add file started");
+                this.parent.button = false;
+            });
+            this.uploader.on('addfile', (error, file) => {
+                if (error) {
+                    console.log("add file error");
+                    this.parent.button = true;
+                }
+            });
+            this.uploader.on('processfile', () => {
+                console.log("processfile complete");
+                this.parent.button = true;
+            });
         }
     </script>
 </graphjs-input-file>
