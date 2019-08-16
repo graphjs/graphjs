@@ -4,6 +4,8 @@ logs
 npm-debug.log*
 .DS_Store
 package-lock.json
+vendor
+.env
 
 dist/graph.js
 dist/graph.js.gz
