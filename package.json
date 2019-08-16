@@ -9,8 +9,14 @@
   "engines": {
     "node": ">=4.0.0"
   },
+  "size-limit": [
+    {
+      "path": "dist/graph.js"
+    }
+  ],
   "scripts": {
     "build": "npm run prepare-build && webpack --optimize-minimize --mode production",
+    "size": "size-limit",
     "watch": "concurrently 'webpack --watch' 'webpack-dev-server'",
     "prepare-build": "node prepare.js",
     "postinstall": "opencollective-postinstall || true"
@@ -44,6 +50,7 @@
     "webpack": "^4.30.0"
   },
   "devDependencies": {
+    "@size-limit/preset-big-lib": "^2.0.2",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
