@@ -1,4 +1,5 @@
 ## 1.20
 
-* added afterRegister, beforeLogin, beforeLogout, beforeRegister signals
-* added size-limit lib
+* Added afterRegister, beforeLogin, beforeLogout, beforeRegister signals
+* Events may now return response.data too
+* Added size-limit lib
