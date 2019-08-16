@@ -18,7 +18,7 @@
         </form>
         <div if={!showChangePassword}>
             <p>&nbsp;</p>
-            <p><a href="#" onclick={handleChangePasswordDisplayClick}>Change Password?</a></p>
+            <p><a href="javascript:void(0)" onclick={handleChangePasswordDisplayClick}>Change Password?</a></p>
         </div>
         <form if={showChangePassword}>
             <h2>{language.passwordTitle}</h2>
