@@ -261,7 +261,8 @@ if(process.env.modules && process.env.modules !== "all"){
 		/*
 		 * shortcut of 
 		 * modules=profile,messages,notifications,feed,members,comments,blog npm run build
-		 * cp dist/graph.js* ../grou-ps-v2/site/vendor/graphjs/
+		 * NEWVERSION=1.20 && modules=groupsv2 npm run build && cp dist/graph.js* ../grou-ps-v2/site/vendor/graphjs/ && cd ../grou-ps-v2 && git commit -am $NEWVERSION && git tag graphjs-$NEWVERSION && git push
+		 * NEWVERSION=1.20 && modules=all npm run build && mkdir ../graphjs-website/app/dist/$NEWVERSION && cp dist/graph.js* ../graphjs-website/app/dist/$NEWVERSION && cd ../graphjs-website && git add app/dist/$NEWVERSION && git commit -am $NEWVERSION && git tag graphjs-$NEWVERSION && git push && git push --tags
 		 */
 		requiredModules = [
 			"profile", 
