@@ -16,8 +16,12 @@
             <input ref="birthday" type="text" placeholder={language.birthdayPlaceholder} value={profile ? profile.birthday : ''} />
             <button ref="submitProfile" onclick={handleProfileSubmit}>{language.submitButton}</button>
         </form>
-        <h2>{language.passwordTitle}</h2>
-        <form>
+        <div if={!showChangePassword}>
+            <p>&nbsp;</p>
+            <p><a href="#" onclick={handleChangePasswordDisplayClick}>Change Password?</a></p>
+        </div>
+        <form if={showChangePassword}>
+            <h2>{language.passwordTitle}</h2>
             <input ref="password" type="password" placeholder={language.passwordPlaceholder} autocomplete="off" />
             <input ref="confirmation" type="password" placeholder={language.confirmationPlaceholder} autocomplete="off" />
             <button ref="submitPassword" onclick={handlePasswordSubmit}>{language.passwordSubmitButton}</button>
@@ -40,6 +44,7 @@
         import showFileUpload from '../scripts/showFileUpload.js';
         import hideOverlay from '../scripts/hideOverlay.js';
         
+        this.showChangePassword = false;
         this.language = language('profile-settings', opts);
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
@@ -140,6 +145,9 @@
                     }
                 }
             });
+        }
+        this.handleChangePasswordDisplayClick = () => {
+            this.showChangePassword = true;
         }
         /*this.handleAvatarUpload = () => {
             if(this.refs.uploadWidget) {

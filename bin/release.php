@@ -27,4 +27,6 @@ exec($groupsv2_op);
 $graphjs_website_op = "cd {$me} && NEWVERSION={$version} && modules=all npm run build && mkdir {$graphjs_website_path}/app/dist/\$NEWVERSION && cp {$dist_dir}/graph.js* {$graphjs_website_path}/app/dist/\$NEWVERSION && cd {$graphjs_website_path} && git add app/dist/\$NEWVERSION && git commit -am \$NEWVERSION && git tag graphjs-\$NEWVERSION && git push && git push --tags";
 exec($graphjs_website_op);
 
+exec("cd {$me} && git commit -am {$version} && git tag {$version} && git push && git push --tags");
+
 echo "Complete...\n";
