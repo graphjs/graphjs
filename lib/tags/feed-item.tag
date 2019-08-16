@@ -8,12 +8,13 @@
     }
     data-id={activity.id}
 >
+    <dialog if={opts.link} id="link-for-{activity.id}">{opts.link}{activity.id}</dialog>
     <div class="graphjs-content">
         <div class="graphjs-credit" if={activity.author && authorsData.hasOwnProperty(activity.author.id)}>
             <img data-link="profile" data-id={activity.author.id} onclick={handleShow} src={authorsData[activity.author.id].avatar ? downsizeImage(authorsData[activity.author.id].avatar, 50) : (defaultAvatar=="gravatar" ? gravatar.url(authorsData[activity.author.id].email, {s: '50', d: 'retro'}, true) : defaultAvatar)} />
             <span>
                 <b data-link="profile" data-id={activity.author.id} onclick={handleShow}>{authorsData[activity.author.id].username || 'Unknown User'}</b>
-                <time data-timestamp={activity.timestamp}>{handleTime(activity.timestamp)}</time>
+                <time onclick={handleTimeClick} data-timestamp={activity.timestamp} data-id={activity.id}>{handleTime(activity.timestamp)}</time>
                 <a if={activity.author.id == userId} onclick={handleRemove} data-id={activity.id}>Delete</a>
             </span>
         </div>
@@ -165,6 +166,7 @@
         this.embedRegex = new RegExp('(?<=\\[embed\\]\\s*).*?(?=\\s*\\[\\/embed\\])','gs');
 
         let self = this;
+        this.linkTemplate = opts.link;
         this.blocked = false;
         this.id = opts.id;
         this.activity = {};
@@ -396,6 +398,15 @@
         this.handleBlock = (event) => {
             event.preventDefault();
             showLogin();
+        }
+        this.handleTimeClick = (event) => {
+            event.preventDefault();
+            console.log(self.linkTemplate);
+            if(!self.linkTemplate)
+                return;
+            let linkId = event.target.getAttribute('data-id');
+            console.log(linkId);
+            document.getElementById('link-for-'+linkId).showModal();
         }
         this.handleRemove = (event) => {
             event.preventDefault();

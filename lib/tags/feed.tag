@@ -17,6 +17,7 @@
         box={opts.box}
         offset={opts.offset}
         count={opts.count}
+        item-link={opts.itemLink}
     />
     <script>
         import './feed-composer.tag';

@@ -9,7 +9,7 @@
 >
     <div class="graphjs-content">
         <div class="graphjs-activity" if={activity.length > 0}>
-            <graphjs-feed-item each={item in activity} id={item.id} activity={item}></graphjs-feed-item>
+            <graphjs-feed-item each={item in activity} id={item.id} link={opts.itemLink} activity={item}></graphjs-feed-item>
         </div>
         <div class={'graphjs-activity' + (loaded ? '' : ' graphjs-loading')}>
             <div class="graphjs-loader">
