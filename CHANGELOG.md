@@ -7,3 +7,6 @@
 ## 1.21
 * PHP release tool added
 * Change Password is optional
+
+## 1.22
+* in feed, when date clicked it shows the link
