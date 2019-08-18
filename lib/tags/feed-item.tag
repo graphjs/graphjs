@@ -289,7 +289,9 @@
             event.preventDefault();
             let id = event.target.dataset.id;
             let address = window.location.protocol + "//" + window.location.host + this.linkTemplate + id;
-            window.alert(address);
+            let dialog = document.getElementsByTagName("dialog")[0];
+            dialog.innerText = address;
+            dialog.showModal();
         }
         this.handleComments = () => {
             getStatusUpdateComments(self.id, function(response) {
