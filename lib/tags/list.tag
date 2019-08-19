@@ -14,7 +14,7 @@
         <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
         <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
         <graphjs-group-card if={content == 'groups' && list.length == 0}></graphjs-group-card>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to display content</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Log in to display content</button>
     </div>
     <script>
         import getMembers from '../scripts/getMembers.js';
