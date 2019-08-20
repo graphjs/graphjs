@@ -271,7 +271,10 @@ if(process.env.modules && process.env.modules !== "all"){
 			"feed", 
 			"members", 
 			"comments",
-			"blog"
+			"blog",
+			"groups",
+			"forum",
+			"star"
 		];
 	} 
 	else {
