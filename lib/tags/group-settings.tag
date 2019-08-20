@@ -84,7 +84,7 @@
         this.handleInformation = (id) => {
             let self = this;
             getGroup(id, function(response) {
-                if(response.success) {
+                if(response.success && !response.pending) {
                     self.group = response.group;
                     self.update();
                 } else {

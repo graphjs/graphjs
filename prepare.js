@@ -257,7 +257,7 @@ const import_styles = {
 }
 
 if(process.env.modules && process.env.modules !== "all"){
-	if(process.env.modules == "groupsv2"){
+	if(process.env.modules == "groupsv2") {
 		/*
 		 * shortcut of 
 		 * modules=profile,messages,notifications,feed,members,comments,blog npm run build

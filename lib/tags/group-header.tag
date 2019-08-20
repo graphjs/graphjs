@@ -97,7 +97,7 @@
         this.handleUser = () => {
             let self = this;
             getSession(function(response) {
-                if(response.success) {
+                if(response.success && !response.pending) {
                     self.userId = response.id;
                     self.update();
                 } else {
