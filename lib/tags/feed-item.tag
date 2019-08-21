@@ -13,7 +13,7 @@
             <img data-link="profile" data-id={activity.author.id} onclick={handleShow} src={authorsData[activity.author.id].avatar ? downsizeImage(authorsData[activity.author.id].avatar, 50) : (defaultAvatar=="gravatar" ? gravatar.url(authorsData[activity.author.id].email, {s: '50', d: 'retro'}, true) : defaultAvatar)} />
             <span>
                 <b data-link="profile" data-id={activity.author.id} onclick={handleShow}>{authorsData[activity.author.id].username || 'Unknown User'}</b>
-                <time data-timestamp={activity.timestamp} onclick={handleShareClick} data-id={activity.id}>{handleTime(activity.timestamp)}</time>
+                <time ref="timestamp" data-timestamp={activity.timestamp} onclick={handleShareClick} data-id={activity.id}>{handleTime(activity.timestamp)}</time>
                 <a if={activity.author.id == userId} onclick={handleRemove} data-id={activity.id}>Delete</a>
             </span>
         </div>
@@ -285,7 +285,7 @@
         }
         this.handleShareClick = (event) => {
             event.preventDefault();
-            let id = event.target.dataset.id;
+            let id = this.refs.timestamp.getAttribute('data-id');
             let address = window.location.protocol + "//" + window.location.host + this.linkTemplate + id;
             if(window.jQuery) {
                 $("#modal-text").text(address);
