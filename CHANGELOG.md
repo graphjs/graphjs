@@ -10,3 +10,6 @@
 
 ## 1.22
 * in feed, when date clicked it shows the link
+
+## 1.24
+Forum pagination implemented in graphjs
