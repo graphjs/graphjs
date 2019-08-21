@@ -22,3 +22,6 @@ Embed code in feed
 ## 1.28
 Will use jQuery modal in feed share
 Added share button
+
+## 1.29
+share indicator always shown
