@@ -62,7 +62,7 @@
                 </svg>
                 <span>Document</span>
             </a>
-            <a ref="addembed" onclick={() => activateFileUpload('embed')}>
+            <a if={} ref="addembed" onclick={() => activateFileUpload('embed')}>
                 <span> Embed</span>
             </a>
             <button ref="submit" onClick={handleSubmit} if={button} disabled="disabled">Post</button>
@@ -97,6 +97,7 @@
         this.message = '';
         this.media = [];
         this.button = false;
+        this.showEmbed = false; // because it may be dangerous, only "admin" will see it.
 
         this.on('before-mount', () => {
             this.handleUser();
@@ -130,6 +131,9 @@
             getSession((response) => {
                 if(response.success) {
                     this.userId = response.id;
+                    if(response.username && response.username=="admin") {
+                        this.showEmbed = true;
+                    }
                     this.update();
                 } else {
                     this.loaded = false;
