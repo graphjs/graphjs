@@ -1,3 +1,5 @@
+Please note, if it's not in the changelog after 1.20, it must be a bugfix release.
+
 ## 1.20
 
 * Added afterRegister, beforeLogin, beforeLogout, beforeRegister signals
