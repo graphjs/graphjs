@@ -131,7 +131,7 @@
             getSession((response) => {
                 if(response.success) {
                     this.userId = response.id;
-                    if(response.username && response.username=="admin") {
+                    if(response.nickname && response.nickname=="admin") {
                         this.showEmbed = true;
                     }
                     this.update();
