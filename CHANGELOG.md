@@ -13,3 +13,6 @@
 
 ## 1.24
 Forum pagination implemented in graphjs
+
+## 1.25
+Embed code in feed
