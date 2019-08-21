@@ -47,6 +47,7 @@
         this.getThumbnail = getThumbnail;
 
         let self = this;
+        this.itemLinkTemplate = opts.itemLinkTemplate;
         this.blocked = false;
         this.activity = [];
         this.authorsData = {};

@@ -213,12 +213,7 @@
                     };
                     self.published = !response.blog.is_draft;
                     self.loaded = true;
-                    getProfile(self.userId, function(response) {
-                        if(response.success) {
-                            self.authorized = response.profile.is_editor;
-                        }
-                        self.update();
-                    });
+                    self.authorized = (self.userId==self.author.id);
                     self.update();
                     self.handleRender();
                     let time = response.blog.is_draft ? response.blog.last_edit : response.blog.publish_time;

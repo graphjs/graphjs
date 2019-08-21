@@ -6,19 +6,50 @@
         (opts.minHeight ? 'min-height: ' + opts.minHeight + '; ' : '') +
         (opts.maxHeight ? 'max-height: ' + opts.maxHeight + '; ' : '')
     }
+    data-id={activity.id}
 >
     <div class="graphjs-content">
         <div class="graphjs-credit" if={activity.author && authorsData.hasOwnProperty(activity.author.id)}>
             <img data-link="profile" data-id={activity.author.id} onclick={handleShow} src={authorsData[activity.author.id].avatar ? downsizeImage(authorsData[activity.author.id].avatar, 50) : (defaultAvatar=="gravatar" ? gravatar.url(authorsData[activity.author.id].email, {s: '50', d: 'retro'}, true) : defaultAvatar)} />
             <span>
                 <b data-link="profile" data-id={activity.author.id} onclick={handleShow}>{authorsData[activity.author.id].username || 'Unknown User'}</b>
-                <time data-timestamp={activity.timestamp}>{handleTime(activity.timestamp)}</time>
+                <time data-timestamp={activity.timestamp} onclick={handleShareClick} data-id={activity.id}>{handleTime(activity.timestamp)}</time>
                 <a if={activity.author.id == userId} onclick={handleRemove} data-id={activity.id}>Delete</a>
             </span>
         </div>
         <div class="graphjs-entry">
             <h1 ref="title" if={activity.title} class="graphjs-title">{activity.title}</h1>
-            <div ref="text" if={activity.text} class="graphjs-text">{activity.text}</div>
+            <div ref="text" if={activity.text} class="graphjs-text">
+                <div 
+                  each={i in activity.text.split(/\[embed\]|\[\/embed\]/)}
+                >
+                    <div if={!i.checkMarkDownPattern(activity)}>
+                       {i}
+                    </div>
+                    <div if={activity.embedRegexList.indexOf(i.trim()) != -1} >
+                        <raw>
+                            <span></span>
+                            this.root.innerHTML = i && i;
+                            this.root.classList.add('graphjs-embed-iframe');
+                            this.on('update', function(){
+                                this.root.innerHTML = i && i; 
+                                this.root.classList.add('graphjs-embed-iframe');
+                            });
+                        </raw>
+                    </div>
+                    <div if={i.checkMarkDownPattern(activity)}>
+                        <raw>
+                          <span></span>
+                            this.root.innerHTML = i && i.linkify();
+                            this.root.innerHTML.indexOf('</iframe>') > -1 && this.root.classList.add('graphjs-embed-iframe');
+                            this.on('update', function(){ 
+                                this.root.innerHTML = i && i.linkify();
+                                this.root.innerHTML.indexOf('</iframe>') > -1 && this.root.classList.add('graphjs-embed-iframe');
+                            });
+                        </raw>
+                    </div>
+                </div>
+            </div>
             <div if={activity.urls && activity.urls.length > 0 && activity.type == 'photo'} class="graphjs-media graphjs-photo">
                 <a data-id={activity.id} data-index={0} onclick={handleDisplay}>
                     <img src={(activity.urls[0])} />
@@ -82,6 +113,24 @@
                     <span class="graphjs-counter">{activity.comments.length}</span>
                     <span if={activity.busy}>Sending...</span>
                 </div>
+                <!--
+                <div class="graphjs-share-indicator">
+                    <a class={'graphjs-icon ' + (userId ? 'graphjs-authorized' : 'graphjs-unauthorized')} data-id={activity.id} onclick={handleShareClick}>
+                    
+                    <!--
+                        <svg viewBox="0 0 80 80">
+                            <path d="M19.3 49.7 29 73.9 41.6 61.3 63.2 78.5 78.9 11.2 0.8 42.5ZM13.2 42.4 50.4 27.5 20.8 45.4ZM57.1 28.8 32.4 51.4 29.4 62.6 23.9 48.9Zm-22.9 33.4 1.5-5.6 2.3 1.8zM60.4 70.4 37.9 52.5 71.8 21.6Zm0 0" stroke-width="0.2"/>
+                        </svg>
+                    --> 
+                <!--
+                        <svg viewBox="0 -22 512 511" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m512 233.820312-212.777344-233.320312v139.203125h-45.238281c-140.273437 0-253.984375 113.710937-253.984375 253.984375v73.769531l20.09375-22.019531c68.316406-74.851562 164.980469-117.5 266.324219-117.5h12.804687v139.203125zm0 0"/>
+                        </svg>
+                        
+                    </a>
+                    <span></span>
+                </div>
+                -->
             </div>
             <div class="graphjs-comment" if={loaded && userId}>
                 <graphjs-input-text ref="composer" data-id={activity.id} event-keyup={() => handleComment(event)} placeholder={language.commentsInputPlaceholder}></graphjs-input-text>
@@ -138,8 +187,10 @@
         import {downsizeImage, getThumbnail} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
         this.getThumbnail = getThumbnail;
+        this.embedRegex = new RegExp('(?<=\\[embed\\]\\s*).*?(?=\\s*\\[\\/embed\\])','gs');
 
         let self = this;
+        this.linkTemplate= this.parent.itemLinkTemplate;
         this.blocked = false;
         this.id = opts.id;
         this.activity = {};
@@ -205,6 +256,9 @@
                     urls: opts.activity.urls,
                     author: opts.activity.author,
                     preview_url: opts.activity.preview_url,
+                    embedRegexList: opts.activity.text.match(self.embedRegex) ? opts.activity.text.match(self.embedRegex).map(function(a) { 
+                        return a.trim();
+                    }) : []
                 }
                 console.log(self.activity);
                 self.handleDetails();
@@ -238,6 +292,14 @@
             self.update();
             self.activateLinks(self.refs.text);
             self.handleComments();
+        }
+        this.handleShareClick = (event) => {
+            event.preventDefault();
+            let id = event.target.dataset.id;
+            let address = window.location.protocol + "//" + window.location.host + this.linkTemplate + id;
+            let dialog = document.getElementsByTagName("dialog")[0];
+            dialog.innerText = address;
+            dialog.showModal();
         }
         this.handleComments = () => {
             getStatusUpdateComments(self.id, function(response) {
@@ -373,7 +435,7 @@
         this.handleRemove = (event) => {
             event.preventDefault();
             if (window.confirm('Are you sure to delete this item?')) {
-                let query = '[data-id="' + event.target.dataset.id + '"]';
+                let query = '[data-id="' + event.target.getAttribute('data-id') + '"]';
                 let element = document.querySelectorAll(query)[0];
                 element.parentNode.removeChild(element);
                 self.update();
@@ -495,5 +557,42 @@
             'November',
             'December'
         ];
+
+        // https://stackoverflow.com/posts/7123542/revisions
+        // http://, https://, ftp://
+        var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
+
+        // www. sans http:// or https://
+        var pseudoUrlPattern = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+        
+        // Email addresses
+        var emailAddressPattern = /[\w.]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,6})+/gim;
+        
+        // Youtube https://stackoverflow.com/a/21767071/5916893
+        var youTubePattern = /(?:http|https:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([^<]+)/g; 
+        var youtubeEmbed = '<iframe width="560" height="315" src="https://www.youtube.com/embed/$1?modestbranding=1&rel=0&wmode=transparent&theme=light&color=white" frameborder="0" allowfullscreen></iframe>';
+
+        if(!String.linkify) {
+            String.prototype.linkify = function() {
+                if(this.match(youTubePattern)){
+                    return this.replace(youTubePattern, youtubeEmbed);
+                }
+                return this
+                    .replace(urlPattern, '<a href="$&">$&</a>')
+                    .replace(pseudoUrlPattern, '$1<a href="http://$2">$2</a>')
+                    .replace(emailAddressPattern, '<a href="mailto:$&">$&</a>');
+            };
+        }
+        if(!String.checkMarkDownPattern){
+            String.prototype.checkMarkDownPattern = function(activity) {
+                return (
+                        this.match(youTubePattern) ||
+                        this.match(urlPattern) || 
+                        this.match(pseudoUrlPattern) ||
+                        this.match(emailAddressPattern)
+                    )
+                    && activity.embedRegexList.indexOf(this.trim()) == -1;
+            };
+        }
     </script>
 </graphjs-feed-item>

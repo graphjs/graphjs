@@ -74,7 +74,7 @@
                 <span></span>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to post updates</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Log in to post updates</button>
     </div>
     <graphjs-promo if={loaded} properties="top right"></graphjs-promo>
     <script>
@@ -144,7 +144,7 @@
             showLogin();
         }
         this.handleTextInput = () => {
-            this.message = this.refs.composer.value();
+            this.message = this.refs.composer.value().replace(/&nbsp;/g, ' ');
             this.handleButton();
         }
         this.handleUploadSuccess = uploads => {

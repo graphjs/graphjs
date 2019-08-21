@@ -9,14 +9,22 @@
   "engines": {
     "node": ">=4.0.0"
   },
+  "size-limit": [
+    {
+      "path": "dist/graph.js"
+    }
+  ],
   "scripts": {
-    "build": "webpack --optimize-minimize --mode production",
-    "watch": "concurrently 'webpack --watch' 'webpack-dev-server'"
+    "build": "npm run prepare-build && webpack --optimize-minimize --mode production",
+    "size": "size-limit",
+    "watch": "concurrently 'webpack --watch' 'webpack-dev-server'",
+    "prepare-build": "node prepare.js",
+    "postinstall": "opencollective-postinstall || true"
   },
   "dependencies": {
     "@types/nanoevents": "^1.0.0",
     "autolinker": "^3.0.5",
-    "axios": "0.17.1",
+    "axios": "0.18.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015-riot": "^1.1.0",
@@ -33,13 +41,16 @@
     "jsonp": "^0.2.1",
     "less": "^3.9.0",
     "nanoevents": "^1.0.5",
+    "opencollective-postinstall": "^2.0.2",
     "pell": "^1.0.4",
     "riot": "^3.13.2",
     "sanitize-html": "^1.19.2",
+    "tiny-date-picker": "^3.2.8",
     "tributejs": "^3.6.0",
     "webpack": "^4.30.0"
   },
   "devDependencies": {
+    "@size-limit/preset-big-lib": "^2.0.2",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -58,5 +69,9 @@
     "url-loader": "^0.6.2",
     "webpack-cli": "^3.3.1",
     "webpack-dev-server": "^3.3.1"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/risg"
   }
 }

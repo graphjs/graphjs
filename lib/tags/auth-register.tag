@@ -206,7 +206,7 @@
                                         self.refs.submit.classList.remove('graphjs-loading');
                                         showAlert({
                                             'title': 'Register Successful!',
-                                            'message': 'Please login to continue.',
+                                            'message': 'Please log in to continue.',
                                             'affirmative': 'Login',
                                             'negative': 'Cancel',
                                             'show': 'login'

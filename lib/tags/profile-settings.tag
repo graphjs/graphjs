@@ -16,8 +16,12 @@
             <input ref="birthday" type="text" placeholder={language.birthdayPlaceholder} value={profile ? profile.birthday : ''} />
             <button ref="submitProfile" onclick={handleProfileSubmit}>{language.submitButton}</button>
         </form>
-        <h2>{language.passwordTitle}</h2>
-        <form>
+        <div if={!showChangePassword}>
+            <p>&nbsp;</p>
+            <p><a href="javascript:void(0)" onclick={handleChangePasswordDisplayClick}>Change Password?</a></p>
+        </div>
+        <form if={showChangePassword}>
+            <h2>{language.passwordTitle}</h2>
             <input ref="password" type="password" placeholder={language.passwordPlaceholder} autocomplete="off" />
             <input ref="confirmation" type="password" placeholder={language.confirmationPlaceholder} autocomplete="off" />
             <button ref="submitPassword" onclick={handlePasswordSubmit}>{language.passwordSubmitButton}</button>
@@ -25,6 +29,7 @@
     </div>
     <script>
         import * as FilePond from 'filepond';
+        import TinyDatePicker from 'tiny-date-picker';
         import language from '../scripts/language.js';
         import getSession from '../scripts/getSession.js';
         import getProfile from '../scripts/getProfile.js';
@@ -39,6 +44,7 @@
         import showFileUpload from '../scripts/showFileUpload.js';
         import hideOverlay from '../scripts/hideOverlay.js';
         
+        this.showChangePassword = false;
         this.language = language('profile-settings', opts);
         this.defaultAvatar = opts.defaultAvatar ? opts.defaultAvatar : window.GraphJSConfig.defaultAvatar;
 
@@ -59,12 +65,43 @@
             this.authorized 
             // && this.handleAvatarUpload();
             let self = this;
+            TinyDatePicker(this.refs.birthday, {
+                lang: {
+                    days: [
+                        self.language.daySun, 
+                        self.language.dayMon, 
+                        self.language.dayTue, 
+                        self.language.dayWed, 
+                        self.language.dayThu, 
+                        self.language.dayFri, 
+                        self.language.daySat
+                    ],
+                    months: [
+                        self.language.monthJanuary,
+                        self.language.monthFebruary,
+                        self.language.monthMarch,
+                        self.language.monthApril,
+                        self.language.monthMay,
+                        self.language.monthJune,
+                        self.language.monthJuly,
+                        self.language.monthAugust,
+                        self.language.monthSeptember,
+                        self.language.monthOctober,
+                        self.language.monthNovember,
+                        self.language.monthDecember,
+                    ]
+                },
+                max:new Date().toDateString(),
+                format(date) {
+                    return self.formateBirthday(date);
+                },
+            });
             this.refs.uploadWidget.addEventListener("click", function() {
                 FilePond.setOptions({
                     server: {
                         url:window.GraphJSConfig.host,
                         process: {
-                            url:'/uploadFile',
+                            url:'/uploadFile?public_id=' + window.GraphJSConfig.id,
                             withCredentials: true,
                             onload:function(result){
                                 result = JSON.parse(result);
@@ -109,6 +146,9 @@
                 }
             });
         }
+        this.handleChangePasswordDisplayClick = () => {
+            this.showChangePassword = true;
+        }
         /*this.handleAvatarUpload = () => {
             if(this.refs.uploadWidget) {
                 this.refs.uploadWidget.addEventListener("click", function() {
@@ -152,18 +192,21 @@
                 }, false);
             }
         }*/
+        this.formateBirthday = (birthday) => {
+            let timestamp = new Date(birthday);
+            let month = timestamp.getMonth() + 1;
+            if(month < 10) month = '0' + month;
+            let day = timestamp.getDate();
+            if(day < 10) day = '0' + day;
+            let year = timestamp.getFullYear();
+            return month + '/' + day + '/' + year;   
+        }
         this.handleInformation = (id) => {
             let self = this;
             getProfile(id, function(response) {
                 if(response.success) {
                     self.profile = response.profile;
-                    let timestamp = new Date(response.profile.birthday * 1000);
-                    let month = timestamp.getMonth() + 1;
-                    if(month < 10) month = '0' + month;
-                    let day = timestamp.getDate();
-                    if(day < 10) day = '0' + day;
-                    let year = timestamp.getFullYear();
-                    self.profile.birthday = month + '/' + day + '/' + year;
+                    self.profile.birthday = self.formateBirthday(response.profile.birthday * 1000);                    
                     self.update();
                 } else {
                     //Handle errors
