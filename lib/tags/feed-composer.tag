@@ -62,7 +62,7 @@
                 </svg>
                 <span>Document</span>
             </a>
-            <a if={} ref="addembed" onclick={() => activateFileUpload('embed')}>
+            <a if={showEmbed} ref="addembed" onclick={() => activateFileUpload('embed')}>
                 <span> Embed</span>
             </a>
             <button ref="submit" onClick={handleSubmit} if={button} disabled="disabled">Post</button>
@@ -131,7 +131,7 @@
             getSession((response) => {
                 if(response.success) {
                     this.userId = response.id;
-                    if(response.admin) {
+                    if(response.username=="admin") {
                         this.showEmbed = true;
                     }
                     this.update();
