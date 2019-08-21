@@ -18,3 +18,7 @@ Forum pagination implemented in graphjs
 
 ## 1.25
 Embed code in feed
+
+## 1.28
+Will use jQuery modal in feed share
+Added share button

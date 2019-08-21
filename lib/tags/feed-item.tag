@@ -113,24 +113,14 @@
                     <span class="graphjs-counter">{activity.comments.length}</span>
                     <span if={activity.busy}>Sending...</span>
                 </div>
-                <!--
+                
                 <div class="graphjs-share-indicator">
                     <a class={'graphjs-icon ' + (userId ? 'graphjs-authorized' : 'graphjs-unauthorized')} data-id={activity.id} onclick={handleShareClick}>
-                    
-                    <!--
-                        <svg viewBox="0 0 80 80">
-                            <path d="M19.3 49.7 29 73.9 41.6 61.3 63.2 78.5 78.9 11.2 0.8 42.5ZM13.2 42.4 50.4 27.5 20.8 45.4ZM57.1 28.8 32.4 51.4 29.4 62.6 23.9 48.9Zm-22.9 33.4 1.5-5.6 2.3 1.8zM60.4 70.4 37.9 52.5 71.8 21.6Zm0 0" stroke-width="0.2"/>
-                        </svg>
-                    --> 
-                <!--
-                        <svg viewBox="0 -22 512 511" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 22 512 511" xmlns="http://www.w3.org/2000/svg">
                             <path d="m512 233.820312-212.777344-233.320312v139.203125h-45.238281c-140.273437 0-253.984375 113.710937-253.984375 253.984375v73.769531l20.09375-22.019531c68.316406-74.851562 164.980469-117.5 266.324219-117.5h12.804687v139.203125zm0 0"/>
                         </svg>
-                        
                     </a>
-                    <span></span>
                 </div>
-                -->
             </div>
             <div class="graphjs-comment" if={loaded && userId}>
                 <graphjs-input-text ref="composer" data-id={activity.id} event-keyup={() => handleComment(event)} placeholder={language.commentsInputPlaceholder}></graphjs-input-text>
@@ -297,9 +287,13 @@
             event.preventDefault();
             let id = event.target.dataset.id;
             let address = window.location.protocol + "//" + window.location.host + this.linkTemplate + id;
-            let dialog = document.getElementsByTagName("dialog")[0];
-            dialog.innerText = address;
-            dialog.showModal();
+            if(window.jQuery) {
+                $("#modal-text").text(address);
+                $(".modal").modal()
+            }
+            else {
+                window.alert("Share: "+address);
+            }
         }
         this.handleComments = () => {
             getStatusUpdateComments(self.id, function(response) {
