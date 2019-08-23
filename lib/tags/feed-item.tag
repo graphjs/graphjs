@@ -77,13 +77,6 @@
                     <span>Size unknown</span>
                 </a>
             </div>
-            <div each={i in new Array(1)} if={activity.urls && activity.urls.length > 0 && (activity.type === 'embed')} class="graphjs-media graphjs-embed">
-                <raw>
-                  <span></span>
-                  this.innerHTML.root = activity.urls && activity.urls[0]
-                  this.on('update', function(){ this.root.innerHTML = activity.urls && activity.urls[0] });
-                </raw>
-            </div>
         </div>
         <div class="graphjs-interaction">
             <div class="graphjs-synopsis">
@@ -250,7 +243,6 @@
                         return a.trim();
                     }) : []
                 }
-                console.log(self.activity);
                 self.handleDetails();
             } else {
                 getStatusUpdate(self.id, response => {

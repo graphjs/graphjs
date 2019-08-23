@@ -12,15 +12,10 @@
             <graphjs-input-text ref="composer" event-input={() => handleTextInput()}></graphjs-input-text>
             <graphjs-input-file
                 type={type}
-                if={uploadable && (type !== 'text' && type !== 'embed') && !(type === 'video' && media.length > 0)}
                 callback-success={handleUploadSuccess}
                 callback-fail={handleUploadFail}
                 callback-finish={handleUploadFinish}>
             </graphjs-input-file>
-            <div class="graphjs-embed" if={uploadable && type=="embed"}>
-                <textarea ref="embededcode" placeholder="Enter your embed code here"/>
-                <button onclick={embedCode}>embed</submit>
-            </div>
         </div>
         <div class="graphjs-media" if={media.length > 0}>
             <div each={item in media} class={'graphjs-item graphjs-' + item.type}>
@@ -32,14 +27,6 @@
                     </svg>
                     <b>{item.original_filename}</b>
                     <span>{item.human_filesize}</span>
-                </div>
-                <div if={item.type === 'embed'}>
-                    <raw>
-                      <span></span>
-                      
-                      this.innerHTML.root = item && item.url
-                      this.on('update', function(){ this.root.innerHTML = item &&  item.url });
-                    </raw>
                 </div>
             </div>
         </div>
@@ -61,9 +48,6 @@
                     <path d="M6,10 L12,10 C12.5522847,10 13,10.4477153 13,11 C13,11.5522847 12.5522847,12 12,12 L6,12 C5.44771525,12 5,11.5522847 5,11 C5,10.4477153 5.44771525,10 6,10 Z M6,6 L12,6 C12.5522847,6 13,6.44771525 13,7 C13,7.55228475 12.5522847,8 12,8 L6,8 C5.44771525,8 5,7.55228475 5,7 C5,6.44771525 5.44771525,6 6,6 Z M9,18 C2,18 0,16 0,9 C0,2 2,0 9,0 C16,0 18,2 18,9 C18,16 16,18 9,18 Z M9,2 C3.111,2 2,3.113 2,9 C2,14.887 3.113,16 9,16 C14.887,16 16,14.888 16,9 C16,3.112 14.89,2 9,2 Z"></path>
                 </svg>
                 <span>Document</span>
-            </a>
-            <a if={showEmbed} ref="addEmbed" onclick={() => activateFileUpload('embed')}>
-                <span> Embed</span>
             </a>
             <button ref="submit" onClick={handleSubmit} if={button} disabled="disabled">Post</button>
         </div>
@@ -97,7 +81,6 @@
         this.message = '';
         this.media = [];
         this.button = false;
-        this.showEmbed = false; // because it may be dangerous, only "admin" will see it.
 
         this.on('before-mount', () => {
             this.handleUser();
@@ -108,21 +91,6 @@
             this.uploadable = true;
             this.update();
         }
-        this.embedCode = () => {
-            const self = this;
-            if(!self.refs.embededcode.value || self.refs.embededcode.value.indexOf('iframe') == -1){
-                alert("Please enter valid embeded Code");
-                return;
-            }
-            const uploads = [{
-                type: self.type,
-                url: self.refs.embededcode.value.replace(/(\r\n|\n|\r)/gm, "").replace(/\(|\)/gm,"")
-            }];
-            this.media = this.media.concat(uploads);
-            if(this.showEmbed) 
-                this.refs.addEmbed.classList.add('disabled');
-            this.handleUploadFinish();
-        }
         this.restart = () => {
             this.blocked = false;
             this.update();
@@ -132,9 +100,6 @@
             getSession((response) => {
                 if(response.success) {
                     this.userId = response.id;
-                    if(response.username=="admin") {
-                        this.showEmbed = true;
-                    }
                     this.update();
                 } else {
                     this.loaded = false;
@@ -158,8 +123,6 @@
             // Multiple photos/documents are accepted
             this.type !== 'photo' && this.refs.addPhoto.classList.add('disabled');
             this.type !== 'document' && this.refs.addDocument.classList.add('disabled');
-            if(this.showEmbed)
-                this.type !== 'embed' && this.refs.addEmbed.classList.add('disabled');
             uploads = uploads.map(upload => ({
                 type: this.type,
                 ...upload
@@ -237,8 +200,6 @@
                         this.refs.addPhoto.classList.remove('disabled');
                         this.refs.addVideo.classList.remove('disabled');
                         this.refs.addDocument.classList.remove('disabled');
-                        if(this.showEmbed)
-                            this.refs.addEmbed.classList.remove('disabled');
                         opts.push(response.id);
                     } else {
                         let failMessage = response.reason || 'Posting failed!';
