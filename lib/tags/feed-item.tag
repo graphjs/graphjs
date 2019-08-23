@@ -280,7 +280,7 @@
             let id = this.refs.timestamp.getAttribute('data-id');
             let address = window.location.protocol + "//" + window.location.host + this.linkTemplate + id;
             if(window.jQuery) {
-                $("#modal-text").text(address);
+                $("#modal-text").html("<a href=\""+address+"\" target=\"_blank\">"+address+"</a>");
                 $(".modal").modal()
             }
             else {

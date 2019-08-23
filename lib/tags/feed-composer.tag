@@ -11,6 +11,7 @@
         <div class="graphjs-entry">
             <graphjs-input-text ref="composer" event-input={() => handleTextInput()}></graphjs-input-text>
             <graphjs-input-file
+                if={uploadable && (type !== 'text') && !(type === 'video' && media.length > 0)}
                 type={type}
                 callback-success={handleUploadSuccess}
                 callback-fail={handleUploadFail}
