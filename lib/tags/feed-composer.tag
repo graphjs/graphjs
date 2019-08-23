@@ -119,7 +119,7 @@
                 url: self.refs.embededcode.value.replace(/(\r\n|\n|\r)/gm, "").replace(/\(|\)/gm,"")
             }];
             this.media = this.media.concat(uploads);
-            if(this.refs.addEmbed) 
+            if(this.showEmbed) 
                 this.refs.addEmbed.classList.add('disabled');
             this.handleUploadFinish();
         }
@@ -158,7 +158,7 @@
             // Multiple photos/documents are accepted
             this.type !== 'photo' && this.refs.addPhoto.classList.add('disabled');
             this.type !== 'document' && this.refs.addDocument.classList.add('disabled');
-            if(this.refs.addEmbed)
+            if(this.showEmbed)
                 this.type !== 'embed' && this.refs.addEmbed.classList.add('disabled');
             uploads = uploads.map(upload => ({
                 type: this.type,
@@ -237,7 +237,8 @@
                         this.refs.addPhoto.classList.remove('disabled');
                         this.refs.addVideo.classList.remove('disabled');
                         this.refs.addDocument.classList.remove('disabled');
-                        this.refs.addEmbed.classList.remove('disabled');
+                        if(this.showEmbed)
+                            this.refs.addEmbed.classList.remove('disabled');
                         opts.push(response.id);
                     } else {
                         let failMessage = response.reason || 'Posting failed!';
