@@ -62,7 +62,7 @@
                 </svg>
                 <span>Document</span>
             </a>
-            <a if={showEmbed} ref="addembed" onclick={() => activateFileUpload('embed')}>
+            <a if={showEmbed} ref="addEmbed" onclick={() => activateFileUpload('embed')}>
                 <span> Embed</span>
             </a>
             <button ref="submit" onClick={handleSubmit} if={button} disabled="disabled">Post</button>
@@ -119,7 +119,8 @@
                 url: self.refs.embededcode.value.replace(/(\r\n|\n|\r)/gm, "").replace(/\(|\)/gm,"")
             }];
             this.media = this.media.concat(uploads);
-            this.refs.addembed.classList.add('disabled');
+            if(this.refs.addEmbed) 
+                this.refs.addEmbed.classList.add('disabled');
             this.handleUploadFinish();
         }
         this.restart = () => {
@@ -157,7 +158,8 @@
             // Multiple photos/documents are accepted
             this.type !== 'photo' && this.refs.addPhoto.classList.add('disabled');
             this.type !== 'document' && this.refs.addDocument.classList.add('disabled');
-            this.type !== 'embed' && this.refs.addembed.classList.add('disabled');
+            if(this.refs.addEmbed)
+                this.type !== 'embed' && this.refs.addEmbed.classList.add('disabled');
             uploads = uploads.map(upload => ({
                 type: this.type,
                 ...upload
@@ -235,7 +237,7 @@
                         this.refs.addPhoto.classList.remove('disabled');
                         this.refs.addVideo.classList.remove('disabled');
                         this.refs.addDocument.classList.remove('disabled');
-                        this.refs.addembed.classList.remove('disabled');
+                        this.refs.addEmbed.classList.remove('disabled');
                         opts.push(response.id);
                     } else {
                         let failMessage = response.reason || 'Posting failed!';
