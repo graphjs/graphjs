@@ -25,3 +25,6 @@ Added share button
 
 ## 1.29
 share indicator always shown
+
+## 1.35 
+show inactive instance warning with grou.ps feeds
