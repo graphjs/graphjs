@@ -421,13 +421,16 @@
         this.handleRemove = (event) => {
             event.preventDefault();
             if (window.confirm('Are you sure to delete this item?')) {
-                let query = '[data-id="' + event.target.getAttribute('data-id') + '"]';
+                const activityID = event.target.getAttribute('data-id');
+                let query = '[data-id="' + activityID + '"]';
                 let element = document.querySelectorAll(query)[0];
-                element.parentNode.removeChild(element);
+                element.classList.add('graphjs-loading');
                 self.update();
                 removeStatusUpdate(event.target.dataset.id, response => {
+                    element.classList.remove('graphjs-loading');
                     if(response.success) {
-                        self.handleContent();
+                        opts.remove(activityID);
+                        self.update();
                     } else {
                         //Handle error
                     }
