@@ -13,9 +13,9 @@
         <form>
             <input ref="username" type="text" placeholder={language.usernamePlaceholder} autofocus/>
             <input ref="email" type="text" placeholder={language.emailPlaceholder} />
-            <input if={(customQuestion1!="")} ref="custom1" type="text" />
-            <input if={(customQuestion2!="")} ref="custom2" type="text" />
-            <input if={(customQuestion3!="")} ref="custom3" type="text" />
+            <input if={customQuestion1} ref="customQuestion1" type="text" placeholder={customQuestion1}/>
+            <input if={customQuestion2} ref="customQuestion2" type="text" placeholder={customQuestion2}/>
+            <input if={customQuestion3} ref="customQuestion3" type="text" placeholder={customQuestion3}/>
             <input ref="password" type="password" placeholder={language.passwordPlaceholder} autocomplete="off" />
             <input ref="confirmation" type="password" placeholder={language.confirmPasswordPlaceholder} autocomplete="off" />
             <button ref="submit" onclick={handleSubmit}>{language.submitButton}</button>
@@ -39,6 +39,7 @@
         import showAlert from '../scripts/showAlert.js';
         import showLogin from '../scripts/showLogin.js';
         import hideOverlay from '../scripts/hideOverlay.js';
+        import getCustomFields from '../scripts/getCustomFields.js';
 
         analytics("auth-register");
 
@@ -60,28 +61,20 @@
         this.customQuestion1Must = false;
 
         this.on('before-mount', function() {
-            this.handleUser();
+            this.handleCustomFields();
         });
-        this.handleUser = () => {
+        this.handleCustomFields = () => {
             let self=this;
             getCustomFields(function(response) {
                 if(response.success) {
-                    if(response.custom_field1!="") {
-                        self.customQuestion1 = response.custom_field1;
-                    }
-                    if(response.custom_field2!="") {
-                        self.customQuestion2 = response.custom_field2;
-                    }
-                    if(response.custom_field3!="") {
-                        self.customQuestion3 = response.custom_field3;
-                    }
-                    self.update();
-                    self.handleContent();
-                } else {
-                    self.blocked = false;
-                    self.update();
-                    self.handleContent();
+                    self.customQuestion1 = response.custom_field1;
+                    self.customQuestion2 = response.custom_field2;
+                    self.customQuestion3 = response.custom_field3;
+                    self.customQuestion1Must = !!response.custom_field1_must;
+                    self.customQuestion2Must = !!response.custom_field2_must;
+                    self.customQuestion3Must = !!response.custom_field3_must;
                 }
+                self.update();
             });
         }
 
@@ -123,6 +116,34 @@
                 this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
                 return false;
             }
+        }
+        this.checkCustomQuestions = () => {
+            const failMessage = this.language.customQuestionError;
+            const customQ1FailMessage = failMessage.replace('%s','1');
+            const customQ2FailMessage = failMessage.replace('%s','2');
+            const customQ3FailMessage = failMessage.replace('%s','3');
+            this.refs.customQuestion1 && this.refs.customQuestion1.classList.remove('graphjs-error');
+            this.refs.customQuestion2 && this.refs.customQuestion2.classList.remove('graphjs-error');
+            this.refs.customQuestion3 && this.refs.customQuestion3.classList.remove('graphjs-error');
+            this.failMessages.includes(customQ1FailMessage) && this.failMessages.splice(this.failMessages.indexOf(customQ1FailMessage), 1);
+            this.failMessages.includes(customQ2FailMessage) && this.failMessages.splice(this.failMessages.indexOf(customQ2FailMessage), 1);
+            this.failMessages.includes(customQ3FailMessage) && this.failMessages.splice(this.failMessages.indexOf(customQ3FailMessage), 1);
+            if(this.customQuestion1Must && this.refs.customQuestion1 && this.refs.customQuestion1.value.trim() === "") {
+                this.refs.customQuestion1.classList.add('graphjs-error');
+                this.failMessages.push(customQ1FailMessage);
+                return false;
+            }
+            if(this.customQuestion2Must && this.refs.customQuestion1 && !this.refs.customQuestion2.value.trim() === "") {
+                this.refs.customQuestion2.classList.add('graphjs-error');
+                this.failMessages.push(customQ2FailMessage);
+                return false;
+            }
+            if(this.customQuestion3Must && this.refs.customQuestion1 && !this.refs.customQuestion3.value.trim() !== "") {
+                this.refs.customQuestion3.classList.add('graphjs-error');
+                this.failMessages.push(customQ3FailMessage);
+                return false;
+            }
+            return true;
         }
         this.checkEmailPattern = () => {
             let failMessage = this.language.emailPatternError;
@@ -180,12 +201,14 @@
             let validUsernameMaximumLength = this.checkUsernameMaximumLength();
             let validUsernamePattern = this.checkUsernamePattern();
             let validEmailPattern = this.checkEmailPattern();
+            let validCustomQuestions = this.checkCustomQuestions();
             let validPasswordMinimumLength = this.checkPasswordMinimumLength();
             let validPasswordMaximumLength = this.checkPasswordMaximumLength();
             let validPasswordMatch = this.checkPasswordMatch();
             if(
                 validUsernameMinimumLength && validUsernameMaximumLength && validUsernamePattern && // Username
                 validEmailPattern && // Email
+                validCustomQuestions && // custom questions
                 validPasswordMinimumLength && validPasswordMaximumLength && validPasswordMatch // Password
             ) {
                 return true;
@@ -201,6 +224,9 @@
             let username = self.refs.username.value;
             let email = self.refs.email.value;
             let password = self.refs.password.value;
+            let customQuestion1 = self.refs.customQuestion1 ? self.refs.customQuestion1.value : "";
+            let customQuestion2 = self.refs.customQuestion2 ? self.refs.customQuestion2.value : "";
+            let customQuestion3 = self.refs.customQuestion3 ? self.refs.customQuestion3.value : "";
             self.refs.username.className = '';
             self.refs.email.className = '';
             self.refs.password.className = '';
@@ -210,6 +236,9 @@
             		username,
             		email,
             		password,
+                    customQuestion1,
+                    customQuestion2,
+                    customQuestion3,
                     function(response) {
                         if(response.success) {
                             //Auto-Login
@@ -258,6 +287,9 @@
                             self.refs.email.className = 'graphjs-error';
                             self.refs.password.className = 'graphjs-error';
                             self.refs.confirmation.className = 'graphjs-error';
+                            self.refs.customQuestion1 && self.refs.customQuestion1.classList.add('graphjs-error');
+                            self.refs.customQuestion2 && self.refs.customQuestion2.classList.add('graphjs-error');
+                            self.refs.customQuestion3 && self.refs.customQuestion3.classList.add('graphjs-error');
                             self.refs.submit.classList.remove('graphjs-loading');
                             self.update();
                         }
