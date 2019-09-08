@@ -13,6 +13,9 @@
         <form>
             <input ref="username" type="text" placeholder={language.usernamePlaceholder} autofocus/>
             <input ref="email" type="text" placeholder={language.emailPlaceholder} />
+            <input if={(customQuestion1!="")} ref="custom1" type="text" />
+            <input if={(customQuestion2!="")} ref="custom2" type="text" />
+            <input if={(customQuestion3!="")} ref="custom3" type="text" />
             <input ref="password" type="password" placeholder={language.passwordPlaceholder} autocomplete="off" />
             <input ref="confirmation" type="password" placeholder={language.confirmPasswordPlaceholder} autocomplete="off" />
             <button ref="submit" onclick={handleSubmit}>{language.submitButton}</button>
@@ -48,6 +51,39 @@
         this.handleLoginBox = () => showLogin();
 
         this.failMessages = [];
+
+        this.customQuestion1 = "";
+        this.customQuestion1Must = false;
+        this.customQuestion2 = "";
+        this.customQuestion1Must = false;
+        this.customQuestion3 = "";
+        this.customQuestion1Must = false;
+
+        this.on('before-mount', function() {
+            this.handleUser();
+        });
+        this.handleUser = () => {
+            let self=this;
+            getCustomFields(function(response) {
+                if(response.success) {
+                    if(response.custom_field1!="") {
+                        self.customQuestion1 = response.custom_field1;
+                    }
+                    if(response.custom_field2!="") {
+                        self.customQuestion2 = response.custom_field2;
+                    }
+                    if(response.custom_field3!="") {
+                        self.customQuestion3 = response.custom_field3;
+                    }
+                    self.update();
+                    self.handleContent();
+                } else {
+                    self.blocked = false;
+                    self.update();
+                    self.handleContent();
+                }
+            });
+        }
 
         this.checkUsernameMinimumLength = () => {
             let usernameMinimumLengthLimit = 1;
