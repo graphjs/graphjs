@@ -43,6 +43,7 @@
         import showAlert from '../scripts/showAlert.js';
         import showFileUpload from '../scripts/showFileUpload.js';
         import hideOverlay from '../scripts/hideOverlay.js';
+        import checkUsernamePattern from '../scripts/utils/checkUsernamePattern.js';
         
         this.showChangePassword = false;
         this.language = language('profile-settings', opts);
@@ -146,52 +147,10 @@
                 }
             });
         }
+
         this.handleChangePasswordDisplayClick = () => {
             this.showChangePassword = true;
         }
-        /*this.handleAvatarUpload = () => {
-            if(this.refs.uploadWidget) {
-                this.refs.uploadWidget.addEventListener("click", function() {
-                    let self = this;
-                    cloudinary.openUploadWidget(
-                        {
-                            cloud_name: 'graphjs',
-                            upload_preset: 'baafngba',
-                            multiple: false,
-                            cropping: 'server',
-                            cropping_aspect_ratio: 1,
-                            cropping_coordinates_mode: 'custom',
-                            theme: 'minimal'
-                        },
-                        function(error, result) {
-                            let failMessage = self.language.failMessage;
-                            let successMessage = self.language.successMessage;
-                            if(result) {
-                                setAvatar(result[0].url, function(response) {
-                                    if(response.success) {
-                                        self.profile.avatar = result[0].url;
-                                        self.failMessages.includes(failMessage) && self.failMessages.splice(self.failMessages.indexOf(failMessage), 1);
-                                        self.successMessages.includes(successMessage) || self.successMessages.push(successMessage);
-                                        self.update();
-                                        self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
-                                    } else {
-                                        self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
-                                        self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
-                                        self.update();
-                                    }
-                                });
-                                self.update();
-                            }
-                            if(error) {
-                                self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
-                                self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
-                                self.update();
-                            }
-                        }
-                    );
-                }, false);
-            }
-        }*/
         this.formateBirthday = (birthday) => {
             let timestamp = new Date(birthday);
             let month = timestamp.getMonth() + 1;
@@ -230,19 +189,6 @@
             let usernameMaximumLengthLimit = 36;
             let failMessage = this.language.usernameMaxLengthError.replace("%s",usernameMaximumLengthLimit);
             if(this.refs.username.value.length <= usernameMaximumLengthLimit) {
-                this.refs.username.classList.remove('graphjs-error');
-                this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
-                return true;
-            } else {
-                this.refs.username.classList.add('graphjs-error');
-                this.failMessages.includes(failMessage) || this.failMessages.push(failMessage);
-                return false;
-            }
-        }
-        this.checkUsernamePattern = () => {
-            let failMessage = this.language.usernamePatternError;
-            let usernamePattern = /^[a-zA-Z0-9-_]+$/;
-            if(usernamePattern.test(this.refs.username.value)) {
                 this.refs.username.classList.remove('graphjs-error');
                 this.failMessages.includes(failMessage) && this.failMessages.splice(this.failMessages.indexOf(failMessage), 1);
                 return true;
@@ -348,7 +294,7 @@
         this.validateProfile = () => {
             let validUsernameMinimumLength = this.checkUsernameMinimumLength();
             let validUsernameMaximumLength = this.checkUsernameMaximumLength();
-            let validUsernamePattern = this.checkUsernamePattern();
+            let validUsernamePattern = checkUsernamePattern(this);
             let validEmailPattern = this.checkEmailPattern();
             let validBioMaximumLength = this.checkBioMaximumLength();
             let validBirthdayFormat = this.checkBirthdayFormat();
