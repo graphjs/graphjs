@@ -38,8 +38,10 @@
         import login from '../scripts/login.js';
         import showAlert from '../scripts/showAlert.js';
         import showLogin from '../scripts/showLogin.js';
+        import showVerify from '../scripts/showVerify.js';
         import hideOverlay from '../scripts/hideOverlay.js';
         import getCustomFields from '../scripts/getCustomFields.js';
+        
 
         analytics("auth-register");
 
@@ -241,6 +243,39 @@
                     customQuestion3,
                     function(response) {
                         if(response.success) {
+                            if(response.pending_moderation) {
+                                self.refs.submit.classList.remove('graphjs-loading');
+                                if(opts.minor) {
+                                    opts.callback();
+                                    opts.refresh();
+                                } else {
+                                    hideOverlay();
+                                }
+                                showAlert({
+                                    'title': 'Pending Membership',
+                                    'message': 'Please wait while your request is reviewed by the moderators.',
+                                });
+                                Array.from(document.getElementsByTagName('graphjs-auth-register')).forEach((item) => {
+                                            item.style.display="none";
+                                        });
+                                return;
+                            }
+                            if(response.id && response.pending_verification) {
+                                self.refs.submit.classList.remove('graphjs-loading');
+                                if(opts.minor) {
+                                    opts.callback();
+                                    opts.refresh();
+                                } else {
+                                    hideOverlay();
+                                }
+                                showVerify({
+                                    'id': response.id
+                                });
+                                Array.from(document.getElementsByTagName('graphjs-auth-register')).forEach((item) => {
+                                            item.style.display="none";
+                                        });
+                                return;
+                            }
                             //Auto-Login
                             login(
                                 username,

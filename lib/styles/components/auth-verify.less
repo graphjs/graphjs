@@ -1,0 +1,42 @@
+@prefix: graphjs;
+
+// @todo same as auth-reset
+@{prefix}-auth-verify.@{prefix}-root {
+    display: block;
+    width: 22.5em;
+    // ThemeOption: color: @text-color-normal;
+    &.@{prefix}-inline {
+        .@{prefix}-header {
+            border-color: transparent;
+        }
+    }
+    .@{prefix}-content {
+        form {
+            button {
+                font-size: 1em;
+            }
+            b {
+                display: block;
+                // ThemeOption: color: @text-color-strong;
+            }
+            p {
+                margin-bottom: 1em !important;
+                // ThemeOption: color: @text-color-normal;
+                line-height: 150%;
+            }
+            div {
+                display: flex;
+                input, input[type] {
+                    flex-grow: 1;
+                    padding-left: 0;
+                    padding-right: 0;
+                    text-align: center;
+                    margin-right: .5em;
+                    &:last-of-type {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}

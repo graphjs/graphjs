@@ -42,11 +42,22 @@
         refresh={refreshState}
         if={active == 'reset'}
     />
+    <graphjs-auth-verify
+        minor={true}
+        title={opts.title}
+        callback={changeProperties}
+        style={(position == 'topleft' || position == 'topright')
+            ? 'top: calc(' + height + ' + 1em);'
+            : 'top: -1em'}
+        refresh={refreshState}
+        if={active == 'verify'}
+    />
     <script>
         import './auth-state.tag';
         import './auth-login.tag';
         import './auth-register.tag';
         import './auth-reset.tag';
+        import './auth-verify.tag';
 
         this.active = opts.default || undefined;
         this.height = opts.height || '50px';
