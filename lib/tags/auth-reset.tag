@@ -21,7 +21,7 @@
             <b>{language.stepTwoHeader}</b>
             <p>{language.stepTwo}</p>
             <div ref="code">
-                <input each={item in Array(codeCharacterCount)} onkeyup={handleCodeInput} type="text" maxlength="1" />
+                <input each={item in Array(codeCharacterCount)} oninput={handleCodeInput} onkeyup={handleCodeInputKeyUp} type="text" />
             </div>
             <button ref="submitCode" onclick={handleCodeSubmit}>{language.submitCodeButton}</button>
         </form>
@@ -120,12 +120,22 @@
         }
         //Step 2: verifyCode
         this.handleCodeInput = (event) => {
-            if(event.keyCode != 46 && event.keyCode != 8) {
-                if(!isNaN(parseInt(event.target.value))) {
-                    event.target.nextElementSibling && event.target.nextElementSibling.focus();
-                } else {
-                    event.target.value = '';
-                }
+            if(!isNaN(parseInt(event.target.value))) {
+                let currentElement = event.target;
+                currentElement.value.split('').forEach((char) => {
+                    if(!isNaN(parseInt(char))) {
+                        currentElement.value = char;
+                        currentElement = currentElement.nextElementSibling;
+                        currentElement && currentElement.focus();
+                    }
+                });
+            } else {
+                event.target.value = '';
+            }
+        }
+        this.handleCodeInputKeyUp = (e) => {
+            if(event.keyCode == 8 && event.target.value == '') {
+               event.target.previousElementSibling && event.target.previousElementSibling.focus();
             }
         }
         this.checkCodeCharacterLength = () => {

@@ -11,8 +11,8 @@
         <div class="graphjs-entry">
             <graphjs-input-text ref="composer" event-input={() => handleTextInput()}></graphjs-input-text>
             <graphjs-input-file
+                if={uploadable && (type !== 'text') && !(type === 'video' && media.length > 0)}
                 type={type}
-                if={uploadable && type !== 'text' && !(type === 'video' && media.length > 0)}
                 callback-success={handleUploadSuccess}
                 callback-fail={handleUploadFail}
                 callback-finish={handleUploadFinish}>
@@ -59,7 +59,7 @@
                 <span></span>
             </div>
         </div>
-        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Login to post updates</button>
+        <button if={blocked} onclick={handleBlock} class="graphjs-blockage">Log in to post updates</button>
     </div>
     <graphjs-promo if={loaded} properties="top right"></graphjs-promo>
     <script>

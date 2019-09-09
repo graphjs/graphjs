@@ -9,7 +9,7 @@
 >
     <div class="graphjs-content">
         <div class="graphjs-activity" if={activity.length > 0}>
-            <graphjs-feed-item each={item in activity} id={item.id} activity={item}></graphjs-feed-item>
+            <graphjs-feed-item each={item in activity} id={item.id} activity={item} remove={handleRemoveContent}></graphjs-feed-item>
         </div>
         <div class={'graphjs-activity' + (loaded ? '' : ' graphjs-loading')}>
             <div class="graphjs-loader">
@@ -47,6 +47,7 @@
         this.getThumbnail = getThumbnail;
 
         let self = this;
+        this.itemLinkTemplate = opts.itemLinkTemplate;
         this.blocked = false;
         this.activity = [];
         this.authorsData = {};
@@ -179,7 +180,7 @@
         this.handleNewContent = (id) => {
             getStatusUpdate(id, function(response) {
                 if(response.success) {
-                  let newItem = response.update;
+                    let newItem = response.update;
                     self.activity = [
                       newItem,
                       ...self.activity
@@ -194,6 +195,11 @@
                 }
                 self.update();
             });
+        }
+        this.handleRemoveContent = (id) => {
+            const removedItemIndex = self.activity.findIndex(x => x.id === id);
+            self.activity.splice(removedItemIndex, 1);
+            self.update();
         }
         this.handleUpvote = (event) => {
             event.preventDefault();
@@ -284,22 +290,6 @@
         this.handleBlock = (event) => {
             event.preventDefault();
             showLogin();
-        }
-        this.handleRemove = (event) => {
-            event.preventDefault();
-            if (window.confirm('Are you sure to delete this item?')) {
-                let query = '[data-id="' + event.target.dataset.id + '"]';
-                let element = document.querySelectorAll(query)[0];
-                element.parentNode.removeChild(element);
-                self.update();
-                removeStatusUpdate(event.target.dataset.id, function(response) {
-                    if(response.success) {
-                        self.handleContent();
-                    } else {
-                        //Handle error
-                    }
-                });
-            }
         }
         this.handleRemoveComment = (event) => {
             event.preventDefault();

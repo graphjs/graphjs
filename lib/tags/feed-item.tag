@@ -13,7 +13,7 @@
             <img data-link="profile" data-id={activity.author.id} onclick={handleShow} src={authorsData[activity.author.id].avatar ? downsizeImage(authorsData[activity.author.id].avatar, 50) : (defaultAvatar=="gravatar" ? gravatar.url(authorsData[activity.author.id].email, {s: '50', d: 'retro'}, true) : defaultAvatar)} />
             <span>
                 <b data-link="profile" data-id={activity.author.id} onclick={handleShow}>{authorsData[activity.author.id].username || 'Unknown User'}</b>
-                <time data-timestamp={activity.timestamp}>{handleTime(activity.timestamp)}</time>
+                <time ref="timestamp" data-timestamp={activity.timestamp} onclick={handleShareClick} data-id={activity.id}>{handleTime(activity.timestamp)}</time>
                 <a if={activity.author.id == userId} onclick={handleRemove} data-id={activity.id}>Delete</a>
             </span>
         </div>
@@ -40,10 +40,12 @@
                     <div if={i.checkMarkDownPattern(activity)}>
                         <raw>
                           <span></span>
-                          this.root.innerHTML = i && i.linkify();
-                          this.on('update', function(){ 
                             this.root.innerHTML = i && i.linkify();
-                          });
+                            this.root.innerHTML.indexOf('</iframe>') > -1 && this.root.classList.add('graphjs-embed-iframe');
+                            this.on('update', function(){ 
+                                this.root.innerHTML = i && i.linkify();
+                                this.root.innerHTML.indexOf('</iframe>') > -1 && this.root.classList.add('graphjs-embed-iframe');
+                            });
                         </raw>
                     </div>
                 </div>
@@ -104,6 +106,14 @@
                     <span class="graphjs-counter">{activity.comments.length}</span>
                     <span if={activity.busy}>Sending...</span>
                 </div>
+                
+                <div class="graphjs-share-indicator">
+                    <a class="graphjs-icon graphjs-authorized" data-id={activity.id} onclick={handleShareClick}>
+                        <svg viewBox="0 22 512 511" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m512 233.820312-212.777344-233.320312v139.203125h-45.238281c-140.273437 0-253.984375 113.710937-253.984375 253.984375v73.769531l20.09375-22.019531c68.316406-74.851562 164.980469-117.5 266.324219-117.5h12.804687v139.203125zm0 0"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
             <div class="graphjs-comment" if={loaded && userId}>
                 <graphjs-input-text ref="composer" data-id={activity.id} event-keyup={() => handleComment(event)} placeholder={language.commentsInputPlaceholder}></graphjs-input-text>
@@ -163,6 +173,7 @@
         this.embedRegex = new RegExp('(?<=\\[embed\\]\\s*).*?(?=\\s*\\[\\/embed\\])','gs');
 
         let self = this;
+        this.linkTemplate= this.parent.itemLinkTemplate;
         this.blocked = false;
         this.id = opts.id;
         this.activity = {};
@@ -263,6 +274,18 @@
             self.update();
             self.activateLinks(self.refs.text);
             self.handleComments();
+        }
+        this.handleShareClick = (event) => {
+            event.preventDefault();
+            let id = this.refs.timestamp.getAttribute('data-id');
+            let address = window.location.protocol + "//" + window.location.host + this.linkTemplate + id;
+            if(window.jQuery) {
+                $("#modal-text").html("<a href=\""+address+"\" target=\"_blank\">"+address+"</a>");
+                $(".modal").modal()
+            }
+            else {
+                window.alert("Share: "+address);
+            }
         }
         this.handleComments = () => {
             getStatusUpdateComments(self.id, function(response) {
@@ -398,13 +421,16 @@
         this.handleRemove = (event) => {
             event.preventDefault();
             if (window.confirm('Are you sure to delete this item?')) {
-                let query = '[data-id="' + event.target.getAttribute('data-id') + '"]';
+                const activityID = event.target.getAttribute('data-id');
+                let query = '[data-id="' + activityID + '"]';
                 let element = document.querySelectorAll(query)[0];
-                element.parentNode.removeChild(element);
+                element.classList.add('graphjs-loading');
                 self.update();
                 removeStatusUpdate(event.target.dataset.id, response => {
+                    element.classList.remove('graphjs-loading');
                     if(response.success) {
-                        self.handleContent();
+                        opts.remove(activityID);
+                        self.update();
                     } else {
                         //Handle error
                     }
@@ -533,7 +559,7 @@
         
         // Youtube https://stackoverflow.com/a/21767071/5916893
         var youTubePattern = /(?:http|https:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([^<]+)/g; 
-        var youtubeEmbed = '<iframe width="560" height="315" src="https://www.youtube.com/embed/$1?modestbranding=1&rel=0&wmode=transparent&theme=light&color=white" frameborder="0" allowfullscreen class="graphjs-embed-iframe"></iframe>';
+        var youtubeEmbed = '<iframe width="560" height="315" src="https://www.youtube.com/embed/$1?modestbranding=1&rel=0&wmode=transparent&theme=light&color=white" frameborder="0" allowfullscreen></iframe>';
 
         if(!String.linkify) {
             String.prototype.linkify = function() {
