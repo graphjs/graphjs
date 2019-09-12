@@ -28,3 +28,8 @@ share indicator always shown
 
 ## 1.35 
 show inactive instance warning with grou.ps feeds
+
+## 2.0
+list-private-contents function added
+login/register with custom-fields 
+login/register with moderation/verification queue
