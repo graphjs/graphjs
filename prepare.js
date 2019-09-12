@@ -190,6 +190,7 @@ const import_scripts={
 		"removePrivateContent",
 		"editPrivateContent",
 		"addPrivateContent",
+		"listPrivateContents",
     ],
     stripe: [
 		"createSubscription",
