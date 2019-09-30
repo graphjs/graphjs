@@ -6,6 +6,6 @@ npm-debug.log*
 package-lock.json
 vendor
 .env
-
+build
 dist/graph.js
 dist/graph.js.gz
