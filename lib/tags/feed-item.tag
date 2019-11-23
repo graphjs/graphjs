@@ -170,7 +170,7 @@
         import {downsizeImage, getThumbnail} from '../scripts/client.js';
         this.downsizeImage = downsizeImage;
         this.getThumbnail = getThumbnail;
-        this.embedRegex = new RegExp('(?<=\\[embed\\]\\s*).*?(?=\\s*\\[\\/embed\\])','gs');
+        this.embedRegex = new RegExp('(<=\\[embed\\]\\s*).*?(?=\\s*\\[\\/embed\\])','gi');
 
         let self = this;
         this.linkTemplate= this.parent.itemLinkTemplate;
