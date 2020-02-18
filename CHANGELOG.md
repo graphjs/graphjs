@@ -33,3 +33,6 @@ show inactive instance warning with grou.ps feeds
 list-private-contents function added
 login/register with custom-fields 
 login/register with moderation/verification queue
+
+## 2.6
+auto-focus="off" for auth-login and auth-register tags

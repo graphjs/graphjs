@@ -149,6 +149,7 @@
             }
         }
 
-        this.on('mount', () => this.refs.username.focus());
+        if(!opts.autoFocus||opts.autoFocus!="off")
+            this.on('mount', () => this.refs.username.focus());
     </script>
 </graphjs-auth-login>
