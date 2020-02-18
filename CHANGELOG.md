@@ -39,3 +39,6 @@ auto-focus="off" for auth-login and auth-register tags
 
 ## 2.8
 star-button hide-zero="on" (off by default)
+
+## 2.9
+filter-out attribute for Messages

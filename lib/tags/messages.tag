@@ -39,7 +39,7 @@
             <div class="graphjs-conversation" ref="messages">
                 <div class={activeMessages[message].to == userId ? 'graphjs-inbound graphjs-item' : 'graphjs-outbound graphjs-item'} each={message in messages} data-message={message}>
                     <div>
-                        <p>{activeMessages[message].message}</p>
+                        <p>{this.filterOut(activeMessages[message].message)}</p>
                     </div>
                     <time data-timestamp={activeMessages[message].timestamp}></time>
                 </div>
@@ -204,6 +204,12 @@
             this.blocked = false;
             this.update();
             this.handleUser();
+        }
+        this.filterOut = (message) => {
+            if(opts.filterOut=="")
+                return message;
+            var re = new RegExp("\\b("+opts.filterOut+")\\b", "g");
+            return message.replace(re, "...");
         }
         this.handleUser = () => {
             let self = this;
