@@ -36,3 +36,6 @@ login/register with moderation/verification queue
 
 ## 2.6
 auto-focus="off" for auth-login and auth-register tags
+
+## 2.8
+star-button hide-zero="on" (off by default)
