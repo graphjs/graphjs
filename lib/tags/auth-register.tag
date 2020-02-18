@@ -11,7 +11,7 @@
     </div>
     <div class="graphjs-content">
         <form>
-            <input ref="username" type="text" placeholder={language.usernamePlaceholder} autofocus/>
+            <input ref="username" type="text" placeholder={language.usernamePlaceholder} {this.autoFocus ? "autofocus" : ""} />
             <input ref="email" type="text" placeholder={language.emailPlaceholder} />
             <input if={customQuestion1} ref="customQuestion1" type="text" placeholder={customQuestion1}/>
             <input if={customQuestion2} ref="customQuestion2" type="text" placeholder={customQuestion2}/>
@@ -46,6 +46,7 @@
         analytics("auth-register");
 
         this.language = language('auth-register', opts);
+        this.autoFocus = !(opts.autoFocus&&opts.autoFocus=="off");
 
         this.boxStyle = opts.box == 'disabled'
             ? 'graphjs-inline graphjs-promo-pad'
@@ -320,7 +321,7 @@
             }
         }
 
-        if(!opts.autoFocus||opts.autoFocus!="off")
+        if(this.autoFocus)
             this.on('mount', () => this.refs.username.focus());
     </script>
 </graphjs-auth-register>

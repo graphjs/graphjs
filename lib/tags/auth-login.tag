@@ -11,7 +11,7 @@
     </div>
     <div class="graphjs-content">
         <form>
-            <input ref="username" type="text" placeholder={language.usernamePlaceholder} autofocus />
+            <input ref="username" type="text" placeholder={language.usernamePlaceholder} {this.autoFocus ? "autofocus" : ""} />
             <input ref="password" type="password" placeholder={language.passwordPlaceholder} autocomplete="on" />
             <button ref="submit" onclick={handleSubmit}>{language.submitButton}</button>
             <div class="graphjs-option graphjs-double">
@@ -39,6 +39,7 @@
         analytics('auth-login');
 
         this.language = language('auth-login', opts);
+        this.autoFocus = !(opts.autoFocus&&opts.autoFocus=="off");
 
         this.boxStyle = opts.box == 'disabled'
             ? 'graphjs-inline graphjs-promo-pad'
@@ -149,7 +150,7 @@
             }
         }
 
-        if(!opts.autoFocus||opts.autoFocus!="off")
+        if(this.autoFocus)
             this.on('mount', () => this.refs.username.focus());
     </script>
 </graphjs-auth-login>
