@@ -42,3 +42,6 @@ star-button hide-zero="on" (off by default)
 
 ## 2.9
 filter-out attribute for Messages
+
+## 2.10 
+ref attribute for star-button
