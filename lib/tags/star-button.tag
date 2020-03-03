@@ -34,10 +34,11 @@
         this.boxStyle = opts.box == 'disabled' ? 'graphjs-inline' : 'graphjs-box';
         this.count = 0;
         this.hideZero = (opts.hideZero && opts.hideZero == "on")
+        this.ref = opts.href || window.location.href;
 
         this.on('before-mount', function() {
             let self = this;
-            getStar(window.location.href, function(response) {
+            getStar(self.ref, function(response) {
                 if(response.success) {
                     if(response.starred) {
                         self.active = true;
@@ -57,7 +58,7 @@
                 self.count++;
                 self.update();
                 star(
-                    window.location.href,
+                    self.ref,
                     function(response) {
                         if(!response.success) {
                             self.active = false;
@@ -72,7 +73,7 @@
                 self.count--;
                 self.update();
                 removeStar(
-                    window.location.href,
+                    self.ref,
                     function(response) {
                         if(!response.success) {
                             self.active = true;
