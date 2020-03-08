@@ -1,11 +1,11 @@
 {
   "name": "graphjs",
   "version": "",
-  "description": "",
-  "repository": "",
+  "description": "A set of widgets for a meaningfully social web",
+  "repository": "https://github.com/phonetworks/graphjs",
   "main": "webpack.config.js",
-  "author": "",
-  "license": "",
+  "author": "Emre Sokullu",
+  "license": "AGPL-3.0",
   "engines": {
     "node": ">=4.0.0"
   },

@@ -26,6 +26,7 @@
         import getStar from '../scripts/getStar.js';
         import getStars from '../scripts/getStars.js';
         import removeStar from '../scripts/removeStar.js';
+        import getSession from '../scripts/getSession.js';
 
         analytics("star-button");
 
@@ -35,6 +36,7 @@
         this.count = 0;
         this.hideZero = (opts.hideZero && opts.hideZero == "on")
         this.ref = opts.href || window.location.href;
+        this.authenticationText = opts.authenticationText || "Authentication Required";
 
         this.on('before-mount', function() {
             let self = this;
@@ -53,38 +55,45 @@
         this.handleStar = (event) => {
             event.preventDefault();
             let self = this;
-            if(!self.active) {
-                self.active = true;
-                self.count++;
-                self.update();
-                star(
-                    self.ref,
-                    function(response) {
-                        if(!response.success) {
-                            self.active = false;
-                            self.count--;
-                        }
-                        self.count = response.count;
+            getSession(function(response) {
+                if(response.success) {
+                    if(!self.active) {
+                        self.active = true;
+                        self.count++;
                         self.update();
-                    }
-                );
-            } else {
-                self.active = false;
-                self.count--;
-                self.update();
-                removeStar(
-                    self.ref,
-                    function(response) {
-                        if(!response.success) {
-                            self.active = true;
-                            self.count++;
-                        }
-                        self.count = response.count;
+                        star(
+                            self.ref,
+                            function(response) {
+                                if(!response.success) {
+                                    self.active = false;
+                                    self.count--;
+                                }
+                                self.count = response.count || 0;
+                                self.update();
+                            }
+                        );
+                    } else {
+                        self.active = false;
+                        self.count--;
                         self.update();
+                        removeStar(
+                            self.ref,
+                            function(response) {
+                                if(!response.success) {
+                                    self.active = true;
+                                    self.count++;
+                                }
+                                self.count = response.count || 0;
+                                self.update();
+                            }
+                        );
                     }
-                );
-            }
-
+                } else {
+                    GraphJS.showRegister({
+                        title: self.authenticationText
+                    });
+                }
+            });
         }
     </script>
 </graphjs-star-button>
