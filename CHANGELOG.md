@@ -45,3 +45,6 @@ filter-out attribute for Messages
 
 ## 2.10 
 ref attribute for star-button
+
+## 2.11
+star-button shows registration box if not logged in
