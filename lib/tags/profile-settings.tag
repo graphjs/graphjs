@@ -117,6 +117,7 @@
                                             hideOverlay();
                                             self.update();
                                             self.parent.tags.hasOwnProperty('graphjs-profile-header') && self.parent.tags['graphjs-profile-header'].updateInformation();
+                                            window.GraphJS.remountRiotTags('*');
                                         } else {
                                             self.successMessages.includes(successMessage) && self.successMessages.splice(self.successMessages.indexOf(successMessage), 1);
                                             self.failMessages.includes(failMessage) || self.failMessages.push(failMessage);
