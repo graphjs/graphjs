@@ -48,3 +48,7 @@ ref attribute for star-button
 
 ## 2.11
 star-button shows registration box if not logged in
+
+## 2.12
+* remount tags after avatar update
+* authentication-text attribute for graphjs-star-button
