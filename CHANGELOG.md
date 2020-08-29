@@ -55,3 +55,6 @@ star-button shows registration box if not logged in
 
 ## 2.13
 Added cookiejar support, because Chrome Windows giving errors otherwise
+
+## 2.14
+headers : {'Content-Type': 'application/x-www-form-urlencoded'}
