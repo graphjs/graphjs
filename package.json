@@ -24,7 +24,8 @@
   "dependencies": {
     "@types/nanoevents": "^1.0.0",
     "autolinker": "^3.0.5",
-    "axios": "0.18.1",
+    "axios": "^0.18.1",
+    "axios-cookiejar-support": "^1.0.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015-riot": "^1.1.0",
@@ -46,6 +47,7 @@
     "riot": "^3.13.2",
     "sanitize-html": "^1.19.2",
     "tiny-date-picker": "^3.2.8",
+    "tough-cookie": "^4.0.0",
     "tributejs": "^3.6.0",
     "webpack": "^4.30.0"
   },
