@@ -52,3 +52,6 @@ star-button shows registration box if not logged in
 ## 2.12
 * remount tags after avatar update
 * authentication-text attribute for graphjs-star-button
+
+## 2.13
+Added cookiejar support, because Chrome Windows giving errors otherwise
