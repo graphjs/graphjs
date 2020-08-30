@@ -62,3 +62,6 @@ headers : {'Content-Type': 'application/x-www-form-urlencoded'}
 ## 2.15
 * reverted 2.13 and 2.14
 * added samesite=secure to cookies
+
+## 2.16 
+samesite=none in cookies
