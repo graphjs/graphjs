@@ -58,3 +58,7 @@ Added cookiejar support, because Chrome Windows giving errors otherwise
 
 ## 2.14
 headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+
+## 2.15
+* reverted 2.13 and 2.14
+* added samesite=secure to cookies
