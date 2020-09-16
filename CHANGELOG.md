@@ -68,3 +68,6 @@ samesite=none in cookies
 
 ## 2.17 
 added secure to cookies
+
+## 2.18
+added url attribute to graphjs-comments tag (hence showComments function)

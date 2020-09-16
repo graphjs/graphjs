@@ -75,6 +75,7 @@
         this.comments = [];
         this.commentsData = {};
         this.authorsData = {};
+        this.url = opts.url ? opts.url : window.location.href.replace(/\/$/, "");
 
         this.on('before-mount', function() {
             this.handleUser();
@@ -106,7 +107,7 @@
         }
         this.handleContent = (callback) => {
             let self = this;
-            let url = window.location.href.replace(/\/$/, "");
+            let url = self.url;
             getComments(url, function(response) {
                 if(response.success) {
                     self.comments = [];
