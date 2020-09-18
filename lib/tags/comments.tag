@@ -146,7 +146,7 @@
             event.preventDefault();
             let self = this;
             self.refs.submit.classList.add('graphjs-loading');
-            let url = window.location.href.replace(/\/$/, "");
+            let url = self.url;
             addComment(url, self.refs.composer.value, function(response) {
                 if(response.success) {
                     self.refs.submit.classList.remove('graphjs-loading');
