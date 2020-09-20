@@ -27,8 +27,8 @@
             </div>
             <button if={blocked} onclick={handleBlock} class="graphjs-blockage">{language.loginButton}</button>
         </div>
-        <div class="graphjs-synopsis"if={comments.length > 0}>
-            {language.commentCount.replace('%s',comments.length)}
+        <div class="graphjs-synopsis" ref="counter" if={comments.length > 0}>
+            {language.commentCount.replace('%s',commentCount)}
         </div>
         <div each={comment in comments} data-id={comment} class="graphjs-item">
             <div class="graphjs-credit" if={authorsData.hasOwnProperty(commentsData[comment].author)}>
@@ -76,6 +76,7 @@
         this.commentsData = {};
         this.authorsData = {};
         this.url = opts.url ? opts.url : window.location.href.replace(/\/$/, "");
+        this.commentCount = 0;
 
         this.on('before-mount', function() {
             this.handleUser();
@@ -111,10 +112,12 @@
             getComments(url, function(response) {
                 if(response.success) {
                     self.comments = [];
+                    self.commentCount = 0;
                     for(let comment of response.comments) {
                         let key = Object.keys(comment)[0];
                         self.comments.push(key);
                         self.commentsData[key] = comment[key];
+                        self.commentCount++;
                         callback && callback();
                         getProfile(comment[key].author, function(response) {
                             if(response.success) {
@@ -123,6 +126,7 @@
                             self.update();
                         });
                     }
+                    self.updateCounter();
                     self.loaded = true;
                     self.update();
                 } else {
@@ -130,6 +134,9 @@
                 }
             });
             self.update();
+        }
+        this.updateCounter = () => {
+            this.refs.counter = this.language.commentCount.replace('%s',this.commentCount);
         }
         this.handleBlock = (event) => {
             event.preventDefault();
@@ -154,6 +161,7 @@
                         self.refs.scrollingContent.scrollTop = self.refs.scrollingContent.scrollHeight;
                     });
                     self.refs.composer.value = '';
+                    self.commentCount++;
                     self.update();
                 } else {
                     self.refs.submit.classList.remove('graphjs-loading');
@@ -191,11 +199,15 @@
             if (window.confirm(this.language.commentDeleteConfirmation)) {
                 let query = '[data-id="' + event.target.dataset.id + '"]';
                 let element = document.querySelectorAll(query)[0];
-                element.parentNode.removeChild(element);
+                
                 self.update();
                 removeComment(event.target.dataset.id, function(response) {
                     if(response.success) {
-                        self.handleContent();
+                        self.commentCount--;
+                        element.parentNode.removeChild(element);
+                        self.updateCounter();
+                        self.update();
+                        //self.handleContent();
                     } else {
                         //Handle error
                     }
