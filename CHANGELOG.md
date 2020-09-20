@@ -77,3 +77,6 @@ comments tag submit without url argument bug fixed
 
 ## 2.20
 fixed comments tag delete visual bug
+
+## 3.1
+chaining is now possible (star only)
