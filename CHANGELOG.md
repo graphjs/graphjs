@@ -80,3 +80,6 @@ fixed comments tag delete visual bug
 
 ## 3.1
 chaining is now possible (star only)
+
+## 3.2 
+chaining with all functions
