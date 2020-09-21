@@ -43,6 +43,7 @@
     "nanoevents": "^1.0.5",
     "opencollective-postinstall": "^2.0.2",
     "pell": "^1.0.4",
+    "q": "^1.5.1",
     "riot": "^3.13.2",
     "sanitize-html": "^1.19.2",
     "tiny-date-picker": "^3.2.8",
