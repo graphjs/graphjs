@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Test GraphJS Components</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Auth for session control -->
+        <graphjs-comments></graphjs-comments>
+      
+        <script src="/dist/graph.js"></script>
+        <script>
+        GraphJS.init("16D58CF2-FD88-4A49-972B-6F60054BF023", {
+                host: "https://accounts.graphjs.com",
+                theme: "light",
+                color: "#f92f39",
+                language: "english"
+        })
+        </script>
+    </body>
+</html>

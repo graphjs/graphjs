@@ -83,3 +83,6 @@ chaining is now possible (star only)
 
 ## 3.2 
 chaining with all functions
+
+## 3.3
+bugfixes with login logout
