@@ -154,20 +154,28 @@
             let self = this;
             self.refs.submit.classList.add('graphjs-loading');
             let url = self.url;
-            addComment(url, self.refs.composer.value, function(response) {
-                if(response.success) {
-                    self.refs.submit.classList.remove('graphjs-loading');
-                    self.handleContent(function() {
-                        self.refs.scrollingContent.scrollTop = self.refs.scrollingContent.scrollHeight;
-                    });
-                    self.refs.composer.value = '';
-                    self.commentCount++;
-                    self.update();
-                } else {
-                    self.refs.submit.classList.remove('graphjs-loading');
-                    //Handle error
+            addComment(url, self.refs.composer.value)
+            .then(
+                (response) => {
+                    if(response.success) {
+                        self.refs.submit.classList.remove('graphjs-loading');
+                        self.handleContent(function() {
+                            self.refs.scrollingContent.scrollTop = self.refs.scrollingContent.scrollHeight;
+                        });
+                        self.refs.composer.value = '';
+                        self.commentCount++;
+                        self.update();
+                    } else {
+                        self.refs.submit.classList.remove('graphjs-loading');
+                        //Handle error
+                    }
                 }
-            });
+            )
+            .fail(
+                (err) => {
+                    self.refs.submit.classList.remove('graphjs-loading');
+                }
+            );
         }
         this.handleEdit = (event) => {
             event.preventDefault();
