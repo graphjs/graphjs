@@ -86,3 +86,6 @@ chaining with all functions
 
 ## 3.3
 bugfixes with login logout
+
+# 3.4
+bugfix with auth-login after login (delay in state change, taken into account)
