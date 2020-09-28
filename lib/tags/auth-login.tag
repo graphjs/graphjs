@@ -109,9 +109,11 @@
                             self.checked = true;
                             self.refs.submit.classList.remove('graphjs-loading');
                             self.update();
-                            Array.from(document.getElementsByClassName('graphjs-element')).forEach((item) => {
-                                item._tag && item._tag.restart && item._tag.restart();
-                            });
+                            setTimeout(function() {
+                                Array.from(document.getElementsByClassName('graphjs-element')).forEach((item) => {
+                                    item._tag && item._tag.restart && item._tag.restart();
+                                });
+                            }, 500);
                             if(opts.minor) {
                                 opts.callback();
                                 opts.refresh();
