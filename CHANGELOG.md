@@ -89,3 +89,7 @@ bugfixes with login logout
 
 # 3.4
 bugfix with auth-login after login (delay in state change, taken into account)
+
+# 3.5
+bugfix forum title
+forum-list to handle login

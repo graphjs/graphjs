@@ -1,5 +1,5 @@
 <graphjs-forum-list
-    class={'graphjs-root ' + boxStyle}
+    class={'graphjs-element graphjs-root ' + boxStyle}
     style={
         (opts.minWidth ? 'min-width: ' + opts.minWidth + '; ' : '') +
         (opts.maxWidth ? 'max-width: ' + opts.maxWidth + '; ' : '') +
@@ -8,7 +8,7 @@
     }
 >
     <div class="graphjs-header">
-        <div class="graphjs-title">{language.title}</div>
+        <div class="graphjs-title">{opts.title ?? language.title}</div>
     </div>
     <div class={'graphjs-content' + (loaded ? '' : ' graphjs-loading') + (blocked ? ' graphjs-blocked' : '') + (totalThreadsAvailable > pageLimit ? ' graphjs-pagination' : '')}>
         <div class="graphjs-bar" if={loaded}>
